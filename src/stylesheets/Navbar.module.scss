@@ -1,0 +1,27 @@
+.navbarWrapper {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+//   margin-top: -40vh;
+}
+
+.navbarUl{
+    text-decoration: none;
+    list-style: none;
+    padding: 0;
+}
+
+.navbarLi{
+    display: inline;
+    padding: 10px;
+    font-size: 2rem;
+    transition: 0.3s;
+    color: #f5f5dc;
+    &:hover{
+        color: white;
+        background-color: rgba(34, 139, 34, .75);
+        cursor: pointer;
+        border-radius: 5px;
+    }
+}
