@@ -1,27 +1,77 @@
+$primary-light: #f5f5dc;
+
 .navbarWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbarUl {
+  grid-column-start: 2;
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+  margin-top: 1vh;
+}
+
+.navbarLi {
+  display: inline;
+  padding: 5px;
+  margin: 5px;
+  font-size: 2rem;
+  transition: 0.3s;
+  color: $primary-light;
+  &:hover {
+    color: white;
+    background-color: rgba(34, 139, 34, 0.75);
+    cursor: pointer;
+    border-radius: 5px;
+  }
+}
+
+.navbarBtnWrapper {
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
-//   margin-top: -40vh;
-}
-
-.navbarUl{
-    text-decoration: none;
-    list-style: none;
-    padding: 0;
-}
-
-.navbarLi{
-    display: inline;
-    padding: 10px;
-    font-size: 2rem;
+  margin-top: 10px;
+  color: $primary-light;
+  & p {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  & button {
+    font-size: 1.25rem;
+    padding: 2.5px;
     transition: 0.3s;
-    color: #f5f5dc;
-    &:hover{
-        color: white;
-        background-color: rgba(34, 139, 34, .75);
-        cursor: pointer;
-        border-radius: 5px;
+    border: 0;
+    background-color: transparent;
+    color: $primary-light;
+    &:hover {
+      color: white;
+      background-color: rgba(34, 139, 34, 0.75);
+      cursor: pointer;
     }
+  }
 }
+
+
+
+// .navbarLoginWrapper {
+//   color: $primary-light;
+//   padding: 10px;
+//   width: 100%;
+// }
+
+// .navbarLoginForm {
+//   color: $primary-light;
+//   font-size: 1.25rem;
+//   & input {
+//     border-radius: 5px;
+//     font-size: 1.25rem;
+//     width: 25%;
+//   }
+// }
+

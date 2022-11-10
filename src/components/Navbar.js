@@ -15,6 +15,24 @@ const Navbar = () => {
           <li className={style.navbarLi}>About</li>
         </Link>
       </ul>
+
+      <div className={style.navbarLoginWrapper}>
+        {/* <form className={style.navbarLoginForm}>
+            <label htmlFor="email">Email: </label>
+            <input type="text" id="email"/>
+            <label htmlFor="password">Password: </label>
+            <input type="text" id="password"/>
+        </form> */}
+        <div className={style.navbarBtnWrapper}>
+          <Link to="/login">
+            <button className={style.navbarLoginBtn}>Login</button>
+          </Link>
+          <p>OR</p>
+          <Link to="/signup">
+            <button className={style.navbarSignupBtn}>Sign Up</button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
