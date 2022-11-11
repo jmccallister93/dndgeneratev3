@@ -1,11 +1,49 @@
+import { Card } from "primereact/card";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import style from "../stylesheets/Create.module.scss";
 
 const Create = () => {
-    return ( 
-        <div className="create">
-            <Navbar />
-        </div>
-     );
-}
- 
+  const cardNpc = (
+    <Card className={style.createCard}>
+      <h3>NPC Generator</h3>
+      <p>
+        Generate NPC's with the click of a button or customize and hand pick your own!
+      </p>
+    </Card>
+  );
+
+  const cardEquipment = (
+    <Card className={style.createCard}>
+    <h3>Equipment Generator</h3>
+    <p>
+      Generate Equipment with the click of a button or customize and hand pick your own!
+    </p>
+  </Card>
+  )
+
+  const cardMonster = (
+    <Card className={style.createCard}>
+    <h3>Monster Generator</h3>
+    <p>
+      Generate Monsters with the click of a button or customize and hand pick your own!
+    </p>
+  </Card>
+  )
+
+  return (
+    <div className={style.createWrapper}>
+      <Navbar />
+      <h1 className={style.createHeader}>Create</h1>
+      <div className={style.createCardWrapper}>
+        
+        <Link className={style.createLink} to="/npcgen">{cardNpc}</Link>
+        {cardEquipment}
+        {cardMonster}
+        
+    </div>
+    </div>
+  );
+};
+
 export default Create;

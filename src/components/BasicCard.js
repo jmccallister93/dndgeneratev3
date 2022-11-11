@@ -14,7 +14,6 @@ const BasicCard = () => {
         
         
         cardContent.map((t) => {
-            
             setTitle([...t.title])
             setContent(t.content)
         } )      
