@@ -4,17 +4,16 @@ import { Card } from "primereact/card";
 import BasicCard from "../components/BasicCard";
 import supabase from "../config/supabaseClient";
 import { useEffect } from "react";
+import  useFetch  from "../components/useFetch";
 
 const Home = () => {
+  const db = 'test'
   
-
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
-        .from('test')
+        .from(db)
         .select()
-        
-
            
       if (error) {
         console.log(error)
@@ -26,6 +25,7 @@ const Home = () => {
   
     fetchData()
   }, [])
+  
   
   return (
     <div className={style.homeWrapper}>

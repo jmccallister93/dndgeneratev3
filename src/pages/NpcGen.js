@@ -1,47 +1,75 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/NpcGen.module.scss";
 import { Dropdown } from "primereact/dropdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import supabase from "../config/supabaseClient";
 
 const NpcGen = () => {
-  const [race, setRace] = useState("Random");
+  const [race, setRace] = useState(null);
+  const [raceOptions, setRaceOptions] = useState()
   const [sex, setSex] = useState("Random");
   const [align, setAlign] = useState("Random");
+  const [fetchError, setFetchError] = useState(null)
+  const [races, setRaces] = useState(null)
+  
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from('races')
+        .select()
+           
+      if (error) {
+        setFetchError('Could not fetch the data')
+        setRaces(null)
+        console.log(error)
+      }
+      if (data) {
+        setRaces(data)
+        setFetchError(null)
+        setRaceOptions(data.map(r => (
+          {name:r.name, value: r.value}
+          )))
+      }
+    }
 
-  const races = [
-    { name: "Random", value: "Random" },
-    { name: "Aasimar", value: "Aasimar" },
-    { name: "Deep Gnome", value: "Deep Gnome" },
-    { name: "Dragonborn", value: "Dragonborn" },
-    { name: "Duergar", value: "Duergar" },
-    { name: "Drow", value: "Drow" },
-    { name: "Firbolg", value: "Firbolg" },
-    { name: "Genasi", value: "Genasi" },
-    { name: "Gnome", value: "Gnome" },
-    { name: "Golbin", value: "Goblin" },
-    { name: "Goliath", value: "Goliath" },
-    { name: "Half-Elf", value: "Half-Elf" },
-    { name: "Half-Orc", value: "Half-Orc" },
-    { name: "High Elf", value: "High Elf" },
-    { name: "Hill Dwarf", value: "Hill Dwarf" },
-    { name: "Hobgoblin ", value: "Stout Halfling" },
-    { name: "Human", value: "Human" },
-    { name: "Kenku", value: "Kenku" },
-    { name: "Kobold", value: "Kobold" },
-    { name: "Lightfoot Halfling", value: "Lightfoot Halfling" },
-    { name: "Lizardfolk", value: "Lizardfolk" },
-    { name: "Mountain Dwarf", value: "Mountain Dwarf" },
-    { name: "Orc", value: "Orc" },
-    { name: "Tabaxi", value: "Tabaxi" },
-    { name: "Tiefling", value: "Tiefling" },
-    { name: "Triton", value: "Triton" },
-    { name: "Stout Halfling", value: "Stout Halfling" },
-    { name: "Wood Elf", value: "Wood Elf" },
-    { name: "Yuan-Ti", value: "Yuan-Ti" },
-  ];
+    fetchData()
+  }, []) 
+
+  // const races = [
+  //   { name: "Random", value: "Random" },
+  //   { name: "Aasimar", value: "Aasimar" },
+  //   { name: "Deep Gnome", value: "Deep Gnome" },
+  //   { name: "Dragonborn", value: "Dragonborn" },
+  //   { name: "Duergar", value: "Duergar" },
+  //   { name: "Drow", value: "Drow" },
+  //   { name: "Firbolg", value: "Firbolg" },
+  //   { name: "Genasi", value: "Genasi" },
+  //   { name: "Gnome", value: "Gnome" },
+  //   { name: "Golbin", value: "Goblin" },
+  //   { name: "Goliath", value: "Goliath" },
+  //   { name: "Half-Elf", value: "Half-Elf" },
+  //   { name: "Half-Orc", value: "Half-Orc" },
+  //   { name: "High Elf", value: "High Elf" },
+  //   { name: "Hill Dwarf", value: "Hill Dwarf" },
+  //   { name: "Hobgoblin ", value: "Stout Halfling" },
+  //   { name: "Human", value: "Human" },
+  //   { name: "Kenku", value: "Kenku" },
+  //   { name: "Kobold", value: "Kobold" },
+  //   { name: "Lightfoot Halfling", value: "Lightfoot Halfling" },
+  //   { name: "Lizardfolk", value: "Lizardfolk" },
+  //   { name: "Mountain Dwarf", value: "Mountain Dwarf" },
+  //   { name: "Orc", value: "Orc" },
+  //   { name: "Tabaxi", value: "Tabaxi" },
+  //   { name: "Tiefling", value: "Tiefling" },
+  //   { name: "Triton", value: "Triton" },
+  //   { name: "Stout Halfling", value: "Stout Halfling" },
+  //   { name: "Wood Elf", value: "Wood Elf" },
+  //   { name: "Yuan-Ti", value: "Yuan-Ti" },
+  // ];
 
   const sexes = [
     { name: "Random", value: "Random" },
@@ -68,6 +96,10 @@ const NpcGen = () => {
     setAlign(e.value);
   };
 
+  
+  
+    
+
   return (
     <div className={style.npcgenWrapper}>
       <Navbar />
@@ -78,7 +110,7 @@ const NpcGen = () => {
             <Dropdown
               optionLabel="name"
               value={race}
-              options={races}
+              options={raceOptions}
               onChange={onRaceChange}
               placeholder="Random"
             />
@@ -88,7 +120,7 @@ const NpcGen = () => {
             <Dropdown
               optionLabel="name"
               value={sex}
-              options={sexes}
+              options={races}
               onChange={onSexChange}
               placeholder="Random"
             />

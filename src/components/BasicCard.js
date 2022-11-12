@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "../stylesheets/BasicCard.module.scss"
+import supabase from "../config/supabaseClient";
 
 const BasicCard = () => {
     const [title, setTitle] = useState('')
@@ -18,6 +19,7 @@ const BasicCard = () => {
             setContent(t.content)
         } )      
     }, [])
+
 
     return ( 
         <div className={style.basicCardWrapper}>
