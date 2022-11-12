@@ -7,53 +7,53 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 const NpcGen = () => {
-  const [race, setRace] = useState(null);
-  const [sex, setSex] = useState(null);
-  const [align, setAlign] = useState(null);
+  const [race, setRace] = useState("Random");
+  const [sex, setSex] = useState("Random");
+  const [align, setAlign] = useState("Random");
 
   const races = [
-    { name: "Random", value: "random" },
-    { name: "Aasimar", value: "aasimar" },
-    { name: "Deep Gnome", value: "deep gnome" },
-    { name: "Dragonborn", value: "dragonborn" },
-    { name: "Duergar", value: "duergar" },
-    { name: "Drow", value: "drow" },
-    { name: "Firbolg", value: "firbolg" },
-    { name: "Genasi", value: "genasi" },
-    { name: "Gnome", value: "gnome" },
-    { name: "Golbin", value: "goblin" },
-    { name: "Goliath", value: "goliath" },
-    { name: "Half-Elf", value: "half-elf" },
-    { name: "Half-Orc", value: "half-orc" },
-    { name: "High Elf", value: "high elf" },
-    { name: "Hill Dwarf", value: "hill dwarf" },
-    { name: "Hobgoblin ", value: "stout halfling" },
-    { name: "Human", value: "human" },
-    { name: "Kenku", value: "kenku" },
-    { name: "Kobold", value: "kobold" },
-    { name: "Lightfoot Halfling", value: "lightfoot halfling" },
+    { name: "Random", value: "Random" },
+    { name: "Aasimar", value: "Aasimar" },
+    { name: "Deep Gnome", value: "Deep Gnome" },
+    { name: "Dragonborn", value: "Dragonborn" },
+    { name: "Duergar", value: "Duergar" },
+    { name: "Drow", value: "Drow" },
+    { name: "Firbolg", value: "Firbolg" },
+    { name: "Genasi", value: "Genasi" },
+    { name: "Gnome", value: "Gnome" },
+    { name: "Golbin", value: "Goblin" },
+    { name: "Goliath", value: "Goliath" },
+    { name: "Half-Elf", value: "Half-Elf" },
+    { name: "Half-Orc", value: "Half-Orc" },
+    { name: "High Elf", value: "High Elf" },
+    { name: "Hill Dwarf", value: "Hill Dwarf" },
+    { name: "Hobgoblin ", value: "Stout Halfling" },
+    { name: "Human", value: "Human" },
+    { name: "Kenku", value: "Kenku" },
+    { name: "Kobold", value: "Kobold" },
+    { name: "Lightfoot Halfling", value: "Lightfoot Halfling" },
     { name: "Lizardfolk", value: "Lizardfolk" },
-    { name: "Mountain Dwarf", value: "mountain dwarf" },
-    { name: "Orc", value: "orc" },
-    { name: "Tabaxi", value: "tabaxi" },
-    { name: "Tiefling", value: "tiefling" },
-    { name: "Triton", value: "triton" },
-    { name: "Stout Halfling", value: "stout halfling" },
-    { name: "Wood Elf", value: "wood elf" },
-    { name: "Yuan-Ti", value: "yuan-ti" },
+    { name: "Mountain Dwarf", value: "Mountain Dwarf" },
+    { name: "Orc", value: "Orc" },
+    { name: "Tabaxi", value: "Tabaxi" },
+    { name: "Tiefling", value: "Tiefling" },
+    { name: "Triton", value: "Triton" },
+    { name: "Stout Halfling", value: "Stout Halfling" },
+    { name: "Wood Elf", value: "Wood Elf" },
+    { name: "Yuan-Ti", value: "Yuan-Ti" },
   ];
 
   const sexes = [
-    { name: "Random", value: "random" },
-    { name: "Male", value: "male" },
-    { name: "Female", value: "female" },
+    { name: "Random", value: "Random" },
+    { name: "Male", value: "Male" },
+    { name: "Female", value: "Female" },
   ];
 
   const aligns = [
-    { name: "Random", value: "random" },
-    { name: "Good", value: "good" },
-    { name: "Neutral", value: "neutral" },
-    { name: "Evil", value: "evil" },
+    { name: "Random", value: "Random" },
+    { name: "Good", value: "Good" },
+    { name: "Neutral", value: "Neutral" },
+    { name: "Evil", value: "Evil" },
   ];
 
   const onRaceChange = (e) => {
