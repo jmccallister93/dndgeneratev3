@@ -11,3 +11,28 @@ $secondary-grey: #d6e4e5;
   justify-content: center;
 }
 
+.npcgenBody {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.npcgenOptionsWrapper {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(45deg, white, rgba(0, 128, 0, 0.504), white);
+  width: fit-content;
+  padding: 0px;
+  margin: 0;
+  margin-left: 1rem;
+  margin-top: 5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  & div {
+    padding: 10px;
+  }
+}

@@ -12,7 +12,7 @@ const NpcGen = () => {
   const [align, setAlign] = useState(null);
 
   const races = [
-    {name: "Random", value: "random"},
+    { name: "Random", value: "random" },
     { name: "Aasimar", value: "aasimar" },
     { name: "Deep Gnome", value: "deep gnome" },
     { name: "Dragonborn", value: "dragonborn" },
@@ -44,22 +44,22 @@ const NpcGen = () => {
   ];
 
   const sexes = [
-    {name: "Random", value: "random"},
-    {name: "Male", value: "male"},
-    {name:"Female", value: "female"}
-  ]
+    { name: "Random", value: "random" },
+    { name: "Male", value: "male" },
+    { name: "Female", value: "female" },
+  ];
 
-  const aligns =[
-    {name: "Random", value: "random"},
-    {name: "Good", value: "good"},
-    {name: "Neutral", value: "neutral"},
-    {name: "Evil", value: "evil"},
-  ]
+  const aligns = [
+    { name: "Random", value: "random" },
+    { name: "Good", value: "good" },
+    { name: "Neutral", value: "neutral" },
+    { name: "Evil", value: "evil" },
+  ];
 
   const onRaceChange = (e) => {
     setRace(e.value);
   };
-  
+
   const onSexChange = (e) => {
     setSex(e.value);
   };
@@ -71,30 +71,45 @@ const NpcGen = () => {
   return (
     <div className={style.npcgenWrapper}>
       <Navbar />
-      <h1>Race</h1>
-      <Dropdown
-        optionLabel="name"
-        value={race}
-        options={races}
-        onChange={onRaceChange}
-        placeholder="Random"
-      />
-      <h1>Sex</h1>
-      <Dropdown
-        optionLabel="name"
-        value={sex}
-        options={sexes}
-        onChange={onSexChange}
-        placeholder="Random"
-      />
-      <h1>Alignment</h1>
-      <Dropdown
-        optionLabel="name"
-        value={align}
-        options={aligns}
-        onChange={onAlignChange}
-        placeholder="Random"
-      />
+      <div className={style.npcgenBody}>
+        <div className={style.npcgenOptionsWrapper}>
+          <div>
+            <h1>Race</h1>
+            <Dropdown
+              optionLabel="name"
+              value={race}
+              options={races}
+              onChange={onRaceChange}
+              placeholder="Random"
+            />
+          </div>
+          <div>
+            <h1>Sex</h1>
+            <Dropdown
+              optionLabel="name"
+              value={sex}
+              options={sexes}
+              onChange={onSexChange}
+              placeholder="Random"
+            />
+          </div>
+          <div>
+            <h1>Alignment</h1>
+            <Dropdown
+              optionLabel="name"
+              value={align}
+              options={aligns}
+              onChange={onAlignChange}
+              placeholder="Random"
+            />
+          </div>
+        </div>
+        <div className={style.npcgenDisplay}>
+          <h1>{race}</h1>
+          <h1>{sex}</h1>
+          <h1>{align}</h1>
+        </div>
+      </div>
     </div>
   );
 };
