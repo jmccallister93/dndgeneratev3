@@ -345,7 +345,7 @@ const NpcGen = () => {
   const onTalentChange = (e) => {
     setTalent(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (21 - 1) + 1);
+      let r = Math.round(Math.random() * (20 - 1) + 1);
       setTalent(talentOptions[r].name);
     }
   };
@@ -576,9 +576,9 @@ const NpcGen = () => {
     }
 
     if (hook === "") {
-      let v = Math.round(Math.random() * (12 - 1) + 1);
-      let n = Math.round(Math.random() * (12 - 1) + 1);
-      let a = Math.round(Math.random() * (12 - 1) + 1);
+      let v = Math.round(Math.random() * (12 - 1));
+      let n = Math.round(Math.random() * (12 - 1));
+      let a = Math.round(Math.random() * (12 - 1));
       setHook(
         hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
       );
@@ -606,9 +606,43 @@ const NpcGen = () => {
     setHook("");
   };
 
-  const onExport = (e) => {
-    
-  }
+  const npc = {
+    Name: name,
+    Race: race,
+    Sex: sex,
+    Alignment: align,
+    Profession: prof,
+    Feature: feature,
+    Talent: talent,
+    Mannerism: mannerism,
+    Interaction: interaction,
+    Bond: bond,
+    STR: str,
+    DEX: dex,
+    CON: con,
+    INT: int,
+    WIS: wis,
+    CHA: cha,
+    Hook: hook,
+  };
+
+  const onExport = () => {
+    const npcExport = Object.entries(npc)
+      .map(([name, value]) => `${name}: ${value}`)
+      .join("\n");
+
+    // file object
+    const file = new Blob([npcExport], { type: "text/plain" });
+
+    // anchor link
+    const element = document.createElement("a");
+    element.href = URL.createObjectURL(file);
+    element.download = name + ".txt";
+
+    // simulate link click
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  };
 
   return (
     <div className={style.npcgenWrapper}>
@@ -718,16 +752,22 @@ const NpcGen = () => {
         </div>
         <div>
           <div className={style.npcgenBtnWrapper}>
-            <Button
+            <button onClick={onGenerate} className={style.npcgenBtnGen}>
+              Generate
+            </button>
+            {/* <Button
               label="Generate"
-              className={style.npcgenBtnGen}
+              
               onClick={onGenerate}
-            />
-            <Button
+            /> */}
+            <button onClick={onClear} className={style.npcgenBtnClear}>
+              Clear
+            </button>
+            {/* <Button
               label="Clear Fields"
               className={style.npcgenBtn}
               onClick={onClear}
-            />
+            /> */}
           </div>
         </div>
         {/* Main Display */}
@@ -858,13 +898,19 @@ const NpcGen = () => {
             </div>
           </div>
           <div>
-            <Button
+            <button value="download" onClick={onExport} className={style.npcgenBtnGen}>
+              Download
+            </button>
+            {/* <a href={npc} download="Example.txt" target='_blank' rel='noreferrer'>  */}
+            {/* <Button
               label="Export NPC"
               className={style.npcgenBtnExport}
+              value="download"
               onClick={onExport}
-            />
+            > 
+            </Button> */}
+            {/* </a> */}
           </div>
-          
         </div>
       </div>
     </div>
