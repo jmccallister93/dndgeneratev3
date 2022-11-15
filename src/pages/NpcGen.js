@@ -268,16 +268,16 @@ const NpcGen = () => {
   }, []);
 
   const abilityScoreValues = [
-    {name: "Random", value: "Random"},
-    {name: "6 (-2)", value: "6 (-2)"},
-    {name: "8 (-1)", value: "8 (-1)"},
-    {name: "10 (+0)", value: "10 (+0)"},
-    {name: "12 (+1)", value: "12 (+1)"},
-    {name: "14 (+2)", value: "14 (+2)"},
-    {name: "16 (+3)", value: "16 (+3)"},
-    {name: "18 (+4)", value: "18 (+4)"},
-    {name: "20 (+5)", value: "20 (+5)"},
-  ]
+    { id: 1, name: "Random", value: "Random" },
+    { id: 2, name: "6 (-2)", value: "6 (-2)" },
+    { id: 3, name: "8 (-1)", value: "8 (-1)" },
+    { id: 4, name: "10 (+0)", value: "10 (+0)" },
+    { id: 5, name: "12 (+1)", value: "12 (+1)" },
+    { id: 6, name: "14 (+2)", value: "14 (+2)" },
+    { id: 7, name: "16 (+3)", value: "16 (+3)" },
+    { id: 8, name: "18 (+4)", value: "18 (+4)" },
+    { id: 9, name: "20 (+5)", value: "20 (+5)" },
+  ];
 
   const onRaceChange = (e) => {
     setRace(e.value);
@@ -373,6 +373,54 @@ const NpcGen = () => {
       setName(firstName + " " + epiphet_b + noun_b);
     } else {
       setName(firstName + " " + epiphet_b + noun_a);
+    }
+  };
+
+  const onStrChange = (e) => {
+    setStr(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setStr(abilityScoreValues[r].name);
+    }
+  };
+
+  const onDexChange = (e) => {
+    setDex(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setDex(abilityScoreValues[r].name);
+    }
+  };
+
+  const onConChange = (e) => {
+    setCon(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setCon(abilityScoreValues[r].name);
+    }
+  };
+
+  const onIntChange = (e) => {
+    setInt(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setInt(abilityScoreValues[r].name);
+    }
+  };
+
+  const onWisChange = (e) => {
+    setWis(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setWis(abilityScoreValues[r].name);
+    }
+  };
+
+  const onChaChange = (e) => {
+    setCha(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setCha(abilityScoreValues[r].name);
     }
   };
 
@@ -564,26 +612,6 @@ const NpcGen = () => {
               placeholder="Choose Feature"
             />
           </div>
-          {/* <div>
-            <h1>High Ability</h1>
-            <Dropdown
-              optionLabel="name"
-              value={highAbility}
-              options={abilitiesOptions}
-              onChange={onHighAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div> */}
-          {/* <div>
-            <h1>Low Ability</h1>
-            <Dropdown
-              optionLabel="name"
-              value={lowAbility}
-              options={abilitiesOptions}
-              onChange={onLowAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div> */}
           <div>
             <h1>Talent</h1>
             <Dropdown
@@ -695,37 +723,71 @@ const NpcGen = () => {
             <div className={style.npcgenStats}>
               <h1 className={style.npcgenDescHeader}>Stats</h1>
               <div>
-              <div className={style.npcgenDetail}>
+                <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>STR: </h1>
-                  <h1 className={style.npcgenDetailOutput}>
-                    <Dropdown 
-                      optionLabel="name"
-                      value={bond}
-                      options={abilityScoreValues}
-                      // onChange={}
-                      placeholder="Choose Score"
-                    />
-                  </h1>
+                  <h1 className={style.npcgenDetailOutput}>{str}</h1>
+                  <Dropdown
+                    optionLabel="name"
+                    value={str}
+                    options={abilityScoreValues}
+                    onChange={onStrChange}
+                    placeholder="Choose Score"
+                  />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>DEX: </h1>
-                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                  <h1 className={style.npcgenDetailOutput}>{dex}</h1>
+                  <Dropdown
+                    optionLabel="name"
+                    value={dex}
+                    options={abilityScoreValues}
+                    onChange={onDexChange}
+                    placeholder="Choose Score"
+                  />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>CON: </h1>
-                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                  <h1 className={style.npcgenDetailOutput}>{con}</h1>
+                    <Dropdown
+                      optionLabel="name"
+                      value={con}
+                      options={abilityScoreValues}
+                      onChange={onConChange}
+                      placeholder="Choose Score"
+                    />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>INT: </h1>
-                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                  <h1 className={style.npcgenDetailOutput}>{int}</h1>
+                    <Dropdown
+                      optionLabel="name"
+                      value={int}
+                      options={abilityScoreValues}
+                      onChange={onIntChange}
+                      placeholder="Choose Score"
+                    />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>WIS: </h1>
-                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                  <h1 className={style.npcgenDetailOutput}>{wis}</h1>
+                    <Dropdown
+                      optionLabel="name"
+                      value={wis}
+                      options={abilityScoreValues}
+                      onChange={onWisChange}
+                      placeholder="Choose Score"
+                    />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>CHA: </h1>
-                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                  <h1 className={style.npcgenDetailOutput}>{cha}</h1>
+                    <Dropdown
+                      optionLabel="name"
+                      value={cha}
+                      options={abilityScoreValues}
+                      onChange={onChaChange}
+                      placeholder="Choose Score"
+                    />
                 </div>
               </div>
             </div>
