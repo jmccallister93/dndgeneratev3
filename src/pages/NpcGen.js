@@ -57,6 +57,13 @@ const NpcGen = () => {
   const [names, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
 
+  const [str, setStr] = useState("");
+  const [dex, setDex] = useState("");
+  const [con, setCon] = useState("");
+  const [int, setInt] = useState("");
+  const [wis, setWis] = useState("");
+  const [cha, setCha] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("abilities").select();
@@ -260,6 +267,18 @@ const NpcGen = () => {
     fetchData();
   }, []);
 
+  const abilityScoreValues = [
+    {name: "Random", value: "Random"},
+    {name: "6 (-2)", value: "6 (-2)"},
+    {name: "8 (-1)", value: "8 (-1)"},
+    {name: "10 (+0)", value: "10 (+0)"},
+    {name: "12 (+1)", value: "12 (+1)"},
+    {name: "14 (+2)", value: "14 (+2)"},
+    {name: "16 (+3)", value: "16 (+3)"},
+    {name: "18 (+4)", value: "18 (+4)"},
+    {name: "20 (+5)", value: "20 (+5)"},
+  ]
+
   const onRaceChange = (e) => {
     setRace(e.value);
     if (e.value === "Random") {
@@ -300,20 +319,6 @@ const NpcGen = () => {
     }
   };
 
-  const onHighAbilityChange = (e) => {
-    setHighAbility(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (6 - 1) + 1);
-      setHighAbility(abilitiesOptions[r].name);
-    }
-  };
-  const onLowAbilityChange = (e) => {
-    setLowAbility(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (6 - 1) + 1);
-      setLowAbility(abilitiesOptions[r].name);
-    }
-  };
   const onTalentChange = (e) => {
     setTalent(e.value);
     if (e.value === "Random") {
@@ -559,7 +564,7 @@ const NpcGen = () => {
               placeholder="Choose Feature"
             />
           </div>
-          <div>
+          {/* <div>
             <h1>High Ability</h1>
             <Dropdown
               optionLabel="name"
@@ -568,8 +573,8 @@ const NpcGen = () => {
               onChange={onHighAbilityChange}
               placeholder="Choose Ability"
             />
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <h1>Low Ability</h1>
             <Dropdown
               optionLabel="name"
@@ -578,7 +583,7 @@ const NpcGen = () => {
               onChange={onLowAbilityChange}
               placeholder="Choose Ability"
             />
-          </div>
+          </div> */}
           <div>
             <h1>Talent</h1>
             <Dropdown
@@ -634,70 +639,96 @@ const NpcGen = () => {
             />
           </div>
         </div>
+        {/* Main Display */}
         <div className={style.npcgenDisplay}>
-
-          <div className={style.npggenDWrapper}>
-
+          {/* Display Wrapper */}
+          <div className={style.npggenDescWrapper}>
+            {/* Display Desc  */}
             <div className={style.npcgenDesc}>
               <h2 className={style.npcgenDescHeader}>Description</h2>
               <div>
                 <div className={style.npcgenDetail}>
-                  <h1>Name: </h1>
-                  <h1>{name}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Name: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{name}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Race: </h1>
-                  <h1>{race}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Race: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{race}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Sex: </h1>
-                  <h1>{sex}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Sex: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{sex}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Alignment: </h1>
-                  <h1>{align}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Alignment: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{align}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Profession: </h1>
-                  <h1>{prof}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Profession: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{prof}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Feature: </h1>
-                  <h1>{feature}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Feature: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{feature}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Talent: </h1>
-                  <h1>{talent}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Talent: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{talent}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Mannerism: </h1>
-                  <h1>{mannerism}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Mannerism: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{mannerism}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Interaction: </h1>
-                  <h1>{interaction}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Interaction: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{interaction}</h1>
                 </div>
                 <div className={style.npcgenDetail}>
-                  <h1>Bond: </h1>
-                  <h1>{bond}</h1>
+                  <h1 className={style.npcgenDetailTitle}>Bond: </h1>
+                  <h1 className={style.npcgenDetailOutput}>{bond}</h1>
                 </div>
                 {/* <h1>High Ability: {highAbility}</h1>
                 <h1>Low Ability: {lowAbility}</h1> */}
               </div>
             </div>
 
-            <div className={style.npggenStats}>
+            <div className={style.npcgenStats}>
               <h1 className={style.npcgenDescHeader}>Stats</h1>
               <div>
-                <h1>Strength: </h1>
-                <h1>Dexterity: </h1>
-                <h1>Constitution: </h1>
-                <h1>Intellect: </h1>
-                <h1>Wisdom: </h1>
-                <h1>Charisma: </h1>
+              <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailTitle}>STR: </h1>
+                  <h1 className={style.npcgenDetailOutput}>
+                    <Dropdown 
+                      optionLabel="name"
+                      value={bond}
+                      options={abilityScoreValues}
+                      // onChange={}
+                      placeholder="Choose Score"
+                    />
+                  </h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailTitle}>DEX: </h1>
+                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailTitle}>CON: </h1>
+                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailTitle}>INT: </h1>
+                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailTitle}>WIS: </h1>
+                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailTitle}>CHA: </h1>
+                  <h1 className={style.npcgenDetailOutput}>10</h1>
+                </div>
               </div>
             </div>
-            
           </div>
           <div>
             <Button

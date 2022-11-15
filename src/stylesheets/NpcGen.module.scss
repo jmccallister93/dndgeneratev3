@@ -1,7 +1,6 @@
 $primary-grey: #497174;
 $secondary-grey: #d6e4e5;
 
-
 .npcgenWrapper {
   background-color: $primary-grey;
   height: fit-content;
@@ -23,7 +22,7 @@ $secondary-grey: #d6e4e5;
   place-items: center;
 }
 
-.npcgenHeader{
+.npcgenHeader {
   font-size: 3rem;
   color: $secondary-grey;
   margin-top: 2rem;
@@ -49,7 +48,7 @@ $secondary-grey: #d6e4e5;
   }
 }
 
-.npcgenDisplay{
+.npcgenDisplay {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -63,45 +62,68 @@ $secondary-grey: #d6e4e5;
   border-radius: 1rem;
 }
 
-.npggenDWrapper{
+.npggenDescWrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  width: 95vw;
+  
 }
 
-.npcgenDesc{
+.npcgenDesc {
   display: block;
+  
 }
 
-.npcgenDetail{
+.npcgenDetail {
   display: flex;
   padding-right: 1rem;
-  & h1{
-    padding-right: 1rem;
+  justify-content: flex-end;
+  border-bottom: 1px dashed;
+  
+  & h1 {
+    // padding-right: 1rem;
   }
 }
 
-.npcgenStats{
-  display: flex;
+.npcgenDetailTitle {
+  margin-right: auto;
 }
 
-.npcgenDescHeader{
+.npcgenDetailOutput {
+  // margin-right: auto;
+  
+}
+
+.npcgenStats {
+  display: block;
+  border-left: 1px solid black;
+}
+
+.npcgenStatDetail{
+  display: flex;
+  padding-right: 1rem;
+  justify-content: flex-end;
+  border-bottom: 1px dashed;
+}
+
+.npcgenDescHeader {
   font-size: 2.5rem;
   border-bottom: 1px solid black;
   width: fit-content;
 }
 
-.npcgenBtnWrapper{
+.npcgenBtnWrapper {
   margin: 1rem;
 }
 
-.npcgenBtn{
+.npcgenBtn {
   font-size: 2rem;
   background-color: red;
   border-radius: 1rem;
   border: 0px;
 }
 
-.npcgenBtnGen{
+.npcgenBtnGen {
   font-size: 2rem;
   background-color: green;
   border-radius: 1rem;
