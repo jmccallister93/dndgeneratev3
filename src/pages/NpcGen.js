@@ -449,63 +449,63 @@ const NpcGen = () => {
 
   const onGenerate = (e) => {
     if (bond === "") {
-      let r = Math.round(Math.random() * (11 - 1));
-      setBond(bondOptions[r].name);
+      let r = Math.round(Math.random() * (9 - 1));
+      setBond(bondOptions[9].name);
     } else {
       setBond(bond);
     }
 
     if (race === "") {
-      let r = Math.round(Math.random() * (29 - 1));
+      let r = Math.round(Math.random() * (28 - 1));
       setRace(raceOptions[r].name);
     } else {
       setRace(race);
     }
 
     if (sex === "") {
-      let r = Math.round(Math.random() * (2 - 1) + 1);
+      let r = Math.round(Math.random() * (2 - 1));
       setSex(sexOptions[r].name);
     } else {
       setSex(sex);
     }
 
     if (align === "") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
+      let r = Math.round(Math.random() * (9 - 1));
       setAlign(alignOptions[r].name);
     } else {
       setAlign(align);
     }
 
     if (prof === "") {
-      let r = Math.round(Math.random() * (50 - 1) + 1);
+      let r = Math.round(Math.random() * (49 - 1));
       setProf(profOptions[r].name);
     } else {
       setProf(prof);
     }
 
     if (feature === "") {
-      let r = Math.round(Math.random() * (21 - 1) + 1);
+      let r = Math.round(Math.random() * (20 - 1));
       setFeature(featureOptions[r].name);
     } else {
       setFeature(feature);
     }
 
     if (talent === "") {
-      let r = Math.round(Math.random() * (21 - 1) + 1);
+      let r = Math.round(Math.random() * (20 - 1));
       setTalent(talentOptions[r].name);
     } else {
       setTalent(talent);
     }
 
     if (mannerism === "") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
+      let r = Math.round(Math.random() * (20 - 1));
       setMannerism(mannerismOptions[r].name);
     } else {
       setMannerism(mannerism);
     }
 
     if (interaction === "") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
+      let r = Math.round(Math.random() * (12 - 1));
       setInteraction(interactionOptions[r].name);
     } else {
       setInteraction(interaction);
@@ -539,46 +539,46 @@ const NpcGen = () => {
     }
 
     if (str === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setStr(abilityScoreValues[r].name);
     } else {
       setStr(str);
     }
     if (dex === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setDex(abilityScoreValues[r].name);
     } else {
       setDex(dex);
     }
     if (con === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setCon(abilityScoreValues[r].name);
     } else {
       setCon(con);
     }
     if (int === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setInt(abilityScoreValues[r].name);
     } else {
       setInt(int);
     }
     if (wis === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setWis(abilityScoreValues[r].name);
     } else {
       setWis(wis);
     }
     if (cha === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setCha(abilityScoreValues[r].name);
     } else {
       setCha(cha);
     }
 
     if (hook === "") {
-      let v = Math.round(Math.random() * (12 - 1));
-      let n = Math.round(Math.random() * (12 - 1));
-      let a = Math.round(Math.random() * (12 - 1));
+      let v = Math.round(Math.random() * (11 - 1));
+      let n = Math.round(Math.random() * (11 - 1));
+      let a = Math.round(Math.random() * (11 - 1));
       setHook(
         hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
       );
@@ -653,11 +653,9 @@ const NpcGen = () => {
           <div>
             <h1>Name</h1>
             <InputText value={name} onChange={onNameChange} />
-            <Button
-              label="Random?"
-              className={style.npcgenBtnName}
-              onClick={onRandomName}
-            />
+            <button onClick={onRandomName} className={style.npcgenBtnName}>
+              Randomize
+            </button>
           </div>
           <div>
             <h1>Race</h1>
@@ -755,19 +753,9 @@ const NpcGen = () => {
             <button onClick={onGenerate} className={style.npcgenBtnGen}>
               Generate
             </button>
-            {/* <Button
-              label="Generate"
-              
-              onClick={onGenerate}
-            /> */}
             <button onClick={onClear} className={style.npcgenBtnClear}>
               Clear
             </button>
-            {/* <Button
-              label="Clear Fields"
-              className={style.npcgenBtn}
-              onClick={onClear}
-            /> */}
           </div>
         </div>
         {/* Main Display */}
@@ -898,18 +886,13 @@ const NpcGen = () => {
             </div>
           </div>
           <div>
-            <button value="download" onClick={onExport} className={style.npcgenBtnGen}>
-              Download
-            </button>
-            {/* <a href={npc} download="Example.txt" target='_blank' rel='noreferrer'>  */}
-            {/* <Button
-              label="Export NPC"
-              className={style.npcgenBtnExport}
+            <button
               value="download"
               onClick={onExport}
-            > 
-            </Button> */}
-            {/* </a> */}
+              className={style.npcgenBtnGen}
+            >
+              Download
+            </button>
           </div>
         </div>
       </div>
