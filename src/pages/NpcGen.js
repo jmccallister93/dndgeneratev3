@@ -606,6 +606,10 @@ const NpcGen = () => {
     setHook("");
   };
 
+  const onExport = (e) => {
+    
+  }
+
   return (
     <div className={style.npcgenWrapper}>
       <Navbar />
@@ -774,8 +778,6 @@ const NpcGen = () => {
                   <h1 className={style.npcgenDetailTitle}>Bond: </h1>
                   <h1 className={style.npcgenDetailOutput}>{bond}</h1>
                 </div>
-                {/* <h1>High Ability: {highAbility}</h1>
-                <h1>Low Ability: {lowAbility}</h1> */}
               </div>
             </div>
 
@@ -848,7 +850,7 @@ const NpcGen = () => {
                     placeholder="Choose Score"
                   />
                 </div>
-                <h1 className={style.npcgenDescHeader}>Plot</h1>
+                <h1 className={style.npcgenDescHeader}>Plot Hook</h1>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailOutput}>{hook}</h1>
                 </div>
@@ -857,11 +859,12 @@ const NpcGen = () => {
           </div>
           <div>
             <Button
-              label="Clear Fields"
-              className={style.npcgenBtn}
-              onClick={onClear}
+              label="Export NPC"
+              className={style.npcgenBtnExport}
+              onClick={onExport}
             />
           </div>
+          
         </div>
       </div>
     </div>

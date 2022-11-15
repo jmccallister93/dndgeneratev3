@@ -5,6 +5,7 @@ $secondary-grey: #d6e4e5;
   background-color: $primary-grey;
   height: fit-content;
   width: 99vw;
+  height: 100vh;
   display: inline-block;
   text-align: center;
   align-items: center;
@@ -71,6 +72,8 @@ $secondary-grey: #d6e4e5;
 
 .npcgenDesc {
   display: block;
+  justify-self: center;
+  width: 80%;
   
 }
 
@@ -79,6 +82,7 @@ $secondary-grey: #d6e4e5;
   padding-right: 1rem;
   justify-content: flex-end;
   border-bottom: 1px dashed;
+  
   
   & h1 {
     // padding-right: 1rem;
@@ -96,7 +100,8 @@ $secondary-grey: #d6e4e5;
 
 .npcgenStats {
   display: block;
-  border-left: 1px solid black;
+  width: 80%;
+  justify-self: center;
 }
 
 .npcgenStatDetail{
@@ -110,10 +115,15 @@ $secondary-grey: #d6e4e5;
   font-size: 2.5rem;
   border-bottom: 1px solid black;
   width: fit-content;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .npcgenBtnWrapper {
   margin: 1rem;
+  background-color: $secondary-grey;
+  border-radius: 1rem;
+  width: 30vw;
 }
 
 .npcgenBtn {
@@ -121,6 +131,7 @@ $secondary-grey: #d6e4e5;
   background-color: red;
   border-radius: 1rem;
   border: 0px;
+  margin: 1rem;
 }
 
 .npcgenBtnGen {
@@ -128,4 +139,13 @@ $secondary-grey: #d6e4e5;
   background-color: green;
   border-radius: 1rem;
   border: 0px;
+  margin: 1rem;
+}
+
+.npcgenBtnExport{
+  font-size: 2rem;
+  background-color: green;
+  border-radius: 1rem;
+  border: 0px;
+  margin: 1rem;
 }
