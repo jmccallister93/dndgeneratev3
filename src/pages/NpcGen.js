@@ -305,7 +305,7 @@ const NpcGen = () => {
   const onRaceChange = (e) => {
     setRace(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (29 - 1));
+      let r = Math.round(Math.random() * (28 - 1));
       setRace(raceOptions[r].name);
     }
   };
@@ -313,7 +313,7 @@ const NpcGen = () => {
   const onSexChange = (e) => {
     setSex(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (2 - 1) + 1);
+      let r = Math.round(Math.random() * (2 - 1));
       setSex(sexOptions[r].name);
     }
   };
@@ -321,7 +321,7 @@ const NpcGen = () => {
   const onAlignChange = (e) => {
     setAlign(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
+      let r = Math.round(Math.random() * (9 - 1));
       setAlign(alignOptions[r].name);
     }
   };
@@ -329,7 +329,7 @@ const NpcGen = () => {
   const onProfChange = (e) => {
     setProf(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (50 - 1) + 1);
+      let r = Math.round(Math.random() * (49 - 1));
       setProf(profOptions[r].name);
     }
   };
@@ -337,7 +337,7 @@ const NpcGen = () => {
   const onFeatureChange = (e) => {
     setFeature(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (21 - 1) + 1);
+      let r = Math.round(Math.random() * (20 - 1));
       setFeature(featureOptions[r].name);
     }
   };
@@ -345,28 +345,28 @@ const NpcGen = () => {
   const onTalentChange = (e) => {
     setTalent(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
+      let r = Math.round(Math.random() * (20 - 1));
       setTalent(talentOptions[r].name);
     }
   };
   const onMannerismChange = (e) => {
     setMannerism(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
+      let r = Math.round(Math.random() * (20 - 1));
       setMannerism(mannerismOptions[r].name);
     }
   };
   const onInteractionChange = (e) => {
     setInteraction(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
+      let r = Math.round(Math.random() * (11 - 1));
       setInteraction(interactionOptions[r].name);
     }
   };
   const onBondChange = (e) => {
     setBond(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1));
+      let r = Math.round(Math.random() * (9 - 1));
       setBond(bondOptions[r].name);
     }
   };
@@ -402,7 +402,7 @@ const NpcGen = () => {
   const onStrChange = (e) => {
     setStr(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setStr(abilityScoreValues[r].name);
     }
   };
@@ -410,7 +410,7 @@ const NpcGen = () => {
   const onDexChange = (e) => {
     setDex(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setDex(abilityScoreValues[r].name);
     }
   };
@@ -418,7 +418,7 @@ const NpcGen = () => {
   const onConChange = (e) => {
     setCon(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setCon(abilityScoreValues[r].name);
     }
   };
@@ -426,7 +426,7 @@ const NpcGen = () => {
   const onIntChange = (e) => {
     setInt(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setInt(abilityScoreValues[r].name);
     }
   };
@@ -434,7 +434,7 @@ const NpcGen = () => {
   const onWisChange = (e) => {
     setWis(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setWis(abilityScoreValues[r].name);
     }
   };
@@ -442,7 +442,7 @@ const NpcGen = () => {
   const onChaChange = (e) => {
     setCha(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
+      let r = Math.round(Math.random() * (8 - 1));
       setCha(abilityScoreValues[r].name);
     }
   };
