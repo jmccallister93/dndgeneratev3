@@ -450,7 +450,7 @@ const NpcGen = () => {
       setInteraction(interaction);
     }
 
-    if (name === ""){
+    if (name === "") {
       let f = Math.floor(Math.random() * 208);
       let firstName = [nameOptions[f].first_name];
       let eA = Math.floor(Math.random() * 208);
@@ -461,9 +461,9 @@ const NpcGen = () => {
       let noun_a = [nameOptions[nA].noun_a];
       let nB = Math.floor(Math.random() * 208);
       let noun_b = [nameOptions[nB].noun_b];
-  
+
       let random = Math.round(Math.random() * 3);
-  
+
       if (random === 0) {
         setName(firstName + " " + epiphet_a + noun_a);
       } else if (random === 1) {
@@ -474,12 +474,13 @@ const NpcGen = () => {
         setName(firstName + " " + epiphet_b + noun_a);
       }
     } else {
-      setName(name)
+      setName(name);
     }
   };
 
   const onClear = (e) => {
-    setAbilities("");
+    setLowAbility("");
+    setHighAbility("");
     setAlign("");
     setBond("");
     setFeature("");
@@ -497,6 +498,7 @@ const NpcGen = () => {
     <div className={style.npcgenWrapper}>
       <Navbar />
       <div className={style.npcgenBody}>
+        <h1 className={style.npcgenHeader}>NPC Generator</h1>
         <div className={style.npcgenOptionsWrapper}>
           <div>
             <h1>Name</h1>
@@ -617,27 +619,86 @@ const NpcGen = () => {
               placeholder="Choose Bond"
             />
           </div>
-          <div>
+        </div>
+        <div>
+          <div className={style.npcgenBtnWrapper}>
             <Button
               label="Generate"
-              className={style.npcgenBtn}
+              className={style.npcgenBtnGen}
               onClick={onGenerate}
+            />
+            <Button
+              label="Clear Fields"
+              className={style.npcgenBtn}
+              onClick={onClear}
             />
           </div>
         </div>
         <div className={style.npcgenDisplay}>
-          <h1>Name: {name}</h1>
-          <h1>Race: {race}</h1>
-          <h1>Sex: {sex}</h1>
-          <h1>Alignment: {align}</h1>
-          <h1>Profession: {prof}</h1>
-          <h1>Feature: {feature}</h1>
-          <h1>High Ability: {highAbility}</h1>
-          <h1>Low Ability: {lowAbility}</h1>
-          <h1>Talent: {talent}</h1>
-          <h1>Mannerism: {mannerism}</h1>
-          <h1>Interaction: {interaction}</h1>
-          <h1>Bond: {bond}</h1>
+
+          <div className={style.npggenDWrapper}>
+
+            <div className={style.npcgenDesc}>
+              <h2 className={style.npcgenDescHeader}>Description</h2>
+              <div>
+                <div className={style.npcgenDetail}>
+                  <h1>Name: </h1>
+                  <h1>{name}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Race: </h1>
+                  <h1>{race}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Sex: </h1>
+                  <h1>{sex}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Alignment: </h1>
+                  <h1>{align}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Profession: </h1>
+                  <h1>{prof}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Feature: </h1>
+                  <h1>{feature}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Talent: </h1>
+                  <h1>{talent}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Mannerism: </h1>
+                  <h1>{mannerism}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Interaction: </h1>
+                  <h1>{interaction}</h1>
+                </div>
+                <div className={style.npcgenDetail}>
+                  <h1>Bond: </h1>
+                  <h1>{bond}</h1>
+                </div>
+                {/* <h1>High Ability: {highAbility}</h1>
+                <h1>Low Ability: {lowAbility}</h1> */}
+              </div>
+            </div>
+
+            <div className={style.npggenStats}>
+              <h1 className={style.npcgenDescHeader}>Stats</h1>
+              <div>
+                <h1>Strength: </h1>
+                <h1>Dexterity: </h1>
+                <h1>Constitution: </h1>
+                <h1>Intellect: </h1>
+                <h1>Wisdom: </h1>
+                <h1>Charisma: </h1>
+              </div>
+            </div>
+            
+          </div>
           <div>
             <Button
               label="Clear Fields"

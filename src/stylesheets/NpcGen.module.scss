@@ -1,10 +1,11 @@
 $primary-grey: #497174;
 $secondary-grey: #d6e4e5;
 
+
 .npcgenWrapper {
   background-color: $primary-grey;
-  height: 100vh;
-  width: 100vw;
+  height: fit-content;
+  width: 99vw;
   display: inline-block;
   text-align: center;
   align-items: center;
@@ -13,20 +14,26 @@ $secondary-grey: #d6e4e5;
 
 .npcgenBody {
   display: grid;
-  
   margin: 0;
   padding: 0;
-  grid-template-rows: repeat(2, 1fr);
+  // grid-template-rows: repeat(2, 1fr);
   text-align: center;
   align-items: center;
   justify-content: center;
   place-items: center;
 }
 
+.npcgenHeader{
+  font-size: 3rem;
+  color: $secondary-grey;
+  margin-top: 2rem;
+  border-bottom: 1px solid #d6e4e5;
+}
+
 .npcgenOptionsWrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background: linear-gradient(45deg, white, rgba(0, 128, 0, 0.504), white);
+  background-color: $secondary-grey;
   width: fit-content;
   padding: 0px;
   margin: 0;
@@ -46,19 +53,57 @@ $secondary-grey: #d6e4e5;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  background: linear-gradient(45deg, white, rgba(0, 128, 0, 0.504), white);
+  background-color: $secondary-grey;
   width: fit-content;
   padding: 0px;
   margin: 0;
-  text-align: center;
+  text-align: left;
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
 }
 
+.npggenDWrapper{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.npcgenDesc{
+  display: block;
+}
+
+.npcgenDetail{
+  display: flex;
+  padding-right: 1rem;
+  & h1{
+    padding-right: 1rem;
+  }
+}
+
+.npcgenStats{
+  display: flex;
+}
+
+.npcgenDescHeader{
+  font-size: 2.5rem;
+  border-bottom: 1px solid black;
+  width: fit-content;
+}
+
+.npcgenBtnWrapper{
+  margin: 1rem;
+}
+
 .npcgenBtn{
   font-size: 2rem;
   background-color: red;
+  border-radius: 1rem;
+  border: 0px;
+}
+
+.npcgenBtnGen{
+  font-size: 2rem;
+  background-color: green;
   border-radius: 1rem;
   border: 0px;
 }
