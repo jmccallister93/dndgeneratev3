@@ -13,22 +13,25 @@ $secondary-grey: #d6e4e5;
 
 .npcgenBody {
   display: grid;
-  width: fit-content;
-  grid-template-columns: repeat(3, 1fr);
+  
+  margin: 0;
+  padding: 0;
+  grid-template-rows: repeat(2, 1fr);
   text-align: center;
   align-items: center;
   justify-content: center;
+  place-items: center;
 }
 
 .npcgenOptionsWrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   background: linear-gradient(45deg, white, rgba(0, 128, 0, 0.504), white);
   width: fit-content;
   padding: 0px;
   margin: 0;
   margin-left: 1rem;
+  margin-right: 1rem;
   margin-top: 5rem;
   text-align: center;
   align-items: center;
@@ -51,4 +54,11 @@ $secondary-grey: #d6e4e5;
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
+}
+
+.npcgenBtn{
+  font-size: 2rem;
+  background-color: red;
+  border-radius: 1rem;
+  border: 0px;
 }

@@ -1,11 +1,14 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/NpcGen.module.scss";
 import { Dropdown } from "primereact/dropdown";
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 import { useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
+
 
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -34,7 +37,7 @@ const NpcGen = () => {
   const [prof, setProf] = useState();
   const [profs, setProfs] = useState();
   const [profOptions, setProfOptions] = useState();
-  
+
   const [mannerism, setMannerism] = useState();
   const [mannerisms, setMannerisms] = useState();
   const [mannerismOptions, setMannerismOptions] = useState();
@@ -50,6 +53,10 @@ const NpcGen = () => {
   const [talent, setTalent] = useState();
   const [talents, setTalents] = useState();
   const [talentOptions, setTalentOptions] = useState();
+
+  const [name, setName] = useState();
+  const [names, setNames] = useState();
+  const [nameOptions, setNameOptions] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,9 +88,7 @@ const NpcGen = () => {
       if (data) {
         setAligns(data);
         setFetchError(null);
-        setAlignOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
+        setAlignOptions(data.map((r) => ({ name: r.name, value: r.value })));
       }
     };
     fetchData();
@@ -100,9 +105,7 @@ const NpcGen = () => {
       if (data) {
         setBonds(data);
         setFetchError(null);
-        setBondOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
+        setBondOptions(data.map((r) => ({ name: r.name, value: r.value })));
       }
     };
     fetchData();
@@ -119,9 +122,7 @@ const NpcGen = () => {
       if (data) {
         setFeatures(data);
         setFetchError(null);
-        setFeatureOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
+        setFeatureOptions(data.map((r) => ({ name: r.name, value: r.value })));
       }
     };
     fetchData();
@@ -176,14 +177,11 @@ const NpcGen = () => {
       if (data) {
         setProfs(data);
         setFetchError(null);
-        setProfOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
+        setProfOptions(data.map((r) => ({ name: r.name, value: r.value })));
       }
     };
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -206,7 +204,7 @@ const NpcGen = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("sexes").select();
-      
+
       if (error) {
         setFetchError("Could not fetch the data");
         setSex(null);
@@ -214,9 +212,7 @@ const NpcGen = () => {
       }
       if (data) {
         setSexes(data);
-        setSexOptions(
-          data.map((d) => ({ name: d.name, value: d.value }))
-        );
+        setSexOptions(data.map((d) => ({ name: d.name, value: d.value })));
         setFetchError(null);
       }
     };
@@ -234,9 +230,30 @@ const NpcGen = () => {
       if (data) {
         setTalents(data);
         setFetchError(null);
-        setTalentOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
+        setTalentOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("names").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setName(null);
+        console.log(error);
+      }
+      if (data) {
+        setNames(data);
+        setFetchError(null);
+        setNameOptions(data.map((r) => ({ 
+          first_name: r.first_name, 
+          epithet_a: r.epithet_a ,
+          noun_a: r.noun_a,
+          epithet_b: r.epithet_b ,
+          noun_b: r.noun_b,
+        })));
       }
     };
     fetchData();
@@ -244,10 +261,20 @@ const NpcGen = () => {
 
   const onRaceChange = (e) => {
     setRace(e.value);
+    // if (e.value === "Random"){
+    //   getRandomItem(races)
+    // }
   };
+
+  // const getRandomItem = (arr) => {
+  //   let keys = Object.keys(arr)
+  //   console.log(Object.keys(arr))
+  //   return keys = Math.floor(Math.random()*keys.length);
+  // }
 
   const onSexChange = (e) => {
     setSex(e.value);
+    
   };
 
   const onAlignChange = (e) => {
@@ -280,11 +307,51 @@ const NpcGen = () => {
     setBond(e.value);
   };
 
+  const onNameChange = (e) => {
+    setName(e.target.value)
+  }
+  const onRandomName = (e) => {
+    let f = Math.floor(Math.random() * 208)
+    let firstName = [nameOptions[f].first_name]
+    let eA = Math.floor(Math.random() * 208)
+    let epiphet_a = [nameOptions[eA].epithet_a]
+    let eB = Math.floor(Math.random() * 208)
+    let epiphet_b = [nameOptions[eB].epithet_b]
+    let nA = Math.floor(Math.random() * 208)
+    let noun_a = [nameOptions[nA].noun_a]
+    let nB = Math.floor(Math.random() * 208)
+    let noun_b = [nameOptions[nB].noun_b]
+
+    let random = Math.round(Math.random() * 3)
+
+    if (random === 0){
+      setName(firstName + ' ' + epiphet_a+noun_a)
+    } else if (random === 1) {
+      setName(firstName + ' ' + epiphet_a+noun_b)
+    } else if( random === 2) {
+      setName(firstName + ' ' + epiphet_b+noun_b)
+    } else {
+      setName(firstName + ' ' + epiphet_b+noun_a)
+    }
+  }
+
   return (
     <div className={style.npcgenWrapper}>
       <Navbar />
       <div className={style.npcgenBody}>
         <div className={style.npcgenOptionsWrapper}>
+          <div>
+            <h1>Name</h1>
+            <InputText 
+              value={name} 
+              onChange={onNameChange}
+            />
+            <Button
+              label="Random?" 
+              className={style.npcgenBtnName}
+              onClick={onRandomName}
+            />
+          </div>
           <div>
             <h1>Race</h1>
             <Dropdown
@@ -395,8 +462,12 @@ const NpcGen = () => {
               placeholder="Random"
             />
           </div>
+          <div>
+            <Button label="Generate" className={style.npcgenBtn}/>
+          </div>
         </div>
         <div className={style.npcgenDisplay}>
+          <h1>Name: {name}</h1>
           <h1>Race: {race}</h1>
           <h1>Sex: {sex}</h1>
           <h1>Alignment: {align}</h1>
