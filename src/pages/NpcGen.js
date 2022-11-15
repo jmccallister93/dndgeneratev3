@@ -269,20 +269,37 @@ const NpcGen = () => {
 
   const onSexChange = (e) => {
     setSex(e.value);
-    
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (2 - 1) +1)
+      setSex(sexOptions[r].name)
+      console.log(r)
+    }
   };
 
   const onAlignChange = (e) => {
     setAlign(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (9 - 1) +1)
+      setAlign(alignOptions[r].name)
+    }
   };
 
   const onProfChange = (e) => {
     setProf(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (50 - 1) +1)
+      setProf(profOptions[r].name)
+    }
   };
 
   const onFeatureChange = (e) => {
     setFeature(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (21 - 1) +1)
+      setFeature(featureOptions[r].name)
+    }
   };
+
   const onHighAbilityChange = (e) => {
     setHighAbility(e.value);
     if (e.value === "Random"){
@@ -300,12 +317,25 @@ const NpcGen = () => {
   };
   const onTalentChange = (e) => {
     setTalent(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (21 - 1) + 1)
+      setTalent(talentOptions[r].name)
+    }
   };
   const onMannerismChange = (e) => {
     setMannerism(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (11 - 1))
+      setMannerism(mannerismOptions[r].name)
+    }
+
   };
   const onInteractionChange = (e) => {
     setInteraction(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (11 - 1))
+      setInteraction(interactionOptions[r].name)
+    }
   };
   const onBondChange = (e) => {
     setBond(e.value);
@@ -347,6 +377,21 @@ const NpcGen = () => {
     
   }
 
+  const onClear = (e) => {
+    setAbilities(null)
+    setAlign(null)
+    setBond(null)
+    setFeature(null)
+    setProf(null)
+    setName(null)
+    setTalent(null)
+    setRace(null)
+    setSex(null)
+    setMannerism(null)
+    setInteraction(null)
+    setBond(null)
+  }
+
   return (
     <div className={style.npcgenWrapper}>
       <Navbar />
@@ -371,7 +416,7 @@ const NpcGen = () => {
               value={race}
               options={raceOptions}
               onChange={onRaceChange}
-              placeholder="Random"
+              placeholder="Choose Race"
             />
           </div>
           <div>
@@ -381,7 +426,7 @@ const NpcGen = () => {
               value={sex}
               options={sexOptions}
               onChange={onSexChange}
-              placeholder="Random"
+              placeholder="Choose Sex"
             />
           </div>
           <div>
@@ -391,7 +436,7 @@ const NpcGen = () => {
               value={align}
               options={alignOptions}
               onChange={onAlignChange}
-              placeholder="Random"
+              placeholder="Choose Alignment"
             />
           </div>
           <div>
@@ -401,7 +446,7 @@ const NpcGen = () => {
               value={prof}
               options={profOptions}
               onChange={onProfChange}
-              placeholder="Random"
+              placeholder="Choose Profession"
             />
           </div>
           <div>
@@ -411,7 +456,7 @@ const NpcGen = () => {
               value={feature}
               options={featureOptions}
               onChange={onFeatureChange}
-              placeholder="Random"
+              placeholder="Choose Feature"
             />
           </div>
           <div>
@@ -421,7 +466,7 @@ const NpcGen = () => {
               value={highAbility}
               options={abilitiesOptions}
               onChange={onHighAbilityChange}
-              placeholder="Random"
+              placeholder="Choose Ability"
             />
           </div>
           <div>
@@ -431,7 +476,7 @@ const NpcGen = () => {
               value={lowAbility}
               options={abilitiesOptions}
               onChange={onLowAbilityChange}
-              placeholder="Random"
+              placeholder="Choose Ability"
             />
           </div>
           <div>
@@ -441,7 +486,7 @@ const NpcGen = () => {
               value={talent}
               options={talentOptions}
               onChange={onTalentChange}
-              placeholder="Random"
+              placeholder="Choose Talent"
             />
           </div>
           <div>
@@ -451,7 +496,7 @@ const NpcGen = () => {
               value={mannerism}
               options={mannerismOptions}
               onChange={onMannerismChange}
-              placeholder="Random"
+              placeholder="Choose Mannerism"
             />
           </div>
           <div>
@@ -461,7 +506,7 @@ const NpcGen = () => {
               value={interaction}
               options={interactionOptions}
               onChange={onInteractionChange}
-              placeholder="Random"
+              placeholder="Choose Interaction"
             />
           </div>
           <div>
@@ -471,7 +516,7 @@ const NpcGen = () => {
               value={bond}
               options={bondOptions}
               onChange={onBondChange}
-              placeholder="Random"
+              placeholder="Choose Bond"
             />
           </div>
           <div>
@@ -491,6 +536,9 @@ const NpcGen = () => {
           <h1>Mannerism: {mannerism}</h1>
           <h1>Interaction: {interaction}</h1>
           <h1>Bond: {bond}</h1>
+          <div>
+            <Button label="Clear Fields" className={style.npcgenBtn} onClick={onClear}/>
+          </div>
         </div>
       </div>
     </div>
