@@ -12,11 +12,6 @@ import supabase from "../config/supabaseClient";
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
 
-  const [abilities, setAbilities] = useState();
-  const [abilitiesOptions, setAbilitiesOptions] = useState();
-  const [highAbility, setHighAbility] = useState("");
-  const [lowAbility, setLowAbility] = useState("");
-
   const [align, setAlign] = useState("");
   const [aligns, setAligns] = useState();
   const [alignOptions, setAlignOptions] = useState();
@@ -63,25 +58,6 @@ const NpcGen = () => {
   const [int, setInt] = useState("");
   const [wis, setWis] = useState("");
   const [cha, setCha] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("abilities").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setAbilities(null);
-        console.log(error);
-      }
-      if (data) {
-        setAbilities(data);
-        setFetchError(null);
-        setAbilitiesOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -467,21 +443,6 @@ const NpcGen = () => {
       setFeature(feature);
     }
 
-    if (highAbility === "") {
-      let r = Math.round(Math.random() * (6 - 1) + 1);
-      setHighAbility(abilitiesOptions[r].name);
-    } else {
-      setHighAbility(highAbility);
-    }
-
-    if (lowAbility === "") {
-      let r = Math.round(Math.random() * (6 - 1) + 1);
-      console.log(r);
-      setLowAbility(abilitiesOptions[r].name);
-    } else {
-      setLowAbility(lowAbility);
-    }
-
     if (talent === "") {
       let r = Math.round(Math.random() * (21 - 1) + 1);
       setTalent(talentOptions[r].name);
@@ -529,11 +490,47 @@ const NpcGen = () => {
     } else {
       setName(name);
     }
+
+    if (str === "") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setStr(abilityScoreValues[r].name);
+    } else {
+      setStr(str);
+    }
+    if (dex === "") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setDex(abilityScoreValues[r].name);
+    } else {
+      setDex(dex);
+    }
+    if (con === "") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setCon(abilityScoreValues[r].name);
+    } else {
+      setCon(con);
+    }
+    if (int === "") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setInt(abilityScoreValues[r].name);
+    } else {
+      setInt(int);
+    }
+    if (wis === "") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setWis(abilityScoreValues[r].name);
+    } else {
+      setWis(wis);
+    }
+    if (cha === "") {
+      let r = Math.round(Math.random() * (8 - 1) + 1);
+      setCha(abilityScoreValues[r].name);
+    } else {
+      setCha(cha);
+    }
+
   };
 
   const onClear = (e) => {
-    setLowAbility("");
-    setHighAbility("");
     setAlign("");
     setBond("");
     setFeature("");
@@ -545,6 +542,12 @@ const NpcGen = () => {
     setMannerism("");
     setInteraction("");
     setBond("");
+    setStr("")
+    setDex("")
+    setCon("")
+    setInt("")
+    setWis("")
+    setCha("")
   };
 
   return (
