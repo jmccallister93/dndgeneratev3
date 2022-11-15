@@ -59,6 +59,8 @@ const NpcGen = () => {
   const [wis, setWis] = useState("");
   const [cha, setCha] = useState("");
 
+  const [hook, setHook] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("aligns").select();
@@ -253,6 +255,51 @@ const NpcGen = () => {
     { id: 7, name: "16 (+3)", value: "16 (+3)" },
     { id: 8, name: "18 (+4)", value: "18 (+4)" },
     { id: 9, name: "20 (+5)", value: "20 (+5)" },
+  ];
+
+  const hookVerb = [
+    { id: 1, name: "Random", value: "Random" },
+    { id: 2, name: "Lost", value: "Lost" },
+    { id: 3, name: "Found", value: "Found" },
+    { id: 4, name: "Looking for", value: "Looking for" },
+    { id: 5, name: "Wants", value: "Wants" },
+    { id: 6, name: "Heard", value: "Heard" },
+    { id: 7, name: "Needs help with", value: "Needs help with" },
+    { id: 8, name: "Saw", value: "Saw" },
+    { id: 9, name: "Gained", value: "Gained" },
+    { id: 10, name: "Selling", value: "Selling" },
+    { id: 11, name: "Escorting", value: "Escorting" },
+    { id: 12, name: "Guarding", value: "Guarding" },
+  ];
+
+  const hookNoun = [
+    { id: 1, name: "Random", value: "Random" },
+    { id: 2, name: "Animal", value: "Animal" },
+    { id: 3, name: "Trinket", value: "Trinket" },
+    { id: 4, name: "Heirloom", value: "Heirloom" },
+    { id: 5, name: "Powers", value: "Powers" },
+    { id: 6, name: "Vampire", value: "Vampire" },
+    { id: 7, name: "Magic", value: "Magic" },
+    { id: 8, name: "Werewolf", value: "Werewolf" },
+    { id: 9, name: "Food", value: "Food" },
+    { id: 10, name: "Book", value: "Book" },
+    { id: 11, name: "Weapon", value: "Weapon" },
+    { id: 12, name: "Armor", value: "Armor" },
+  ];
+
+  const hookAdjective = [
+    { id: 1, name: "Random", value: "Random" },
+    { id: 2, name: "Pale", value: "Pale" },
+    { id: 3, name: "Freezing", value: "Freezing" },
+    { id: 4, name: "Condemned", value: "Condemned" },
+    { id: 5, name: "Sophisticated", value: "Sophisticated" },
+    { id: 6, name: "Demonic", value: "Demonic" },
+    { id: 7, name: "Angelic", value: "Angelic" },
+    { id: 8, name: "Natural", value: "Natural" },
+    { id: 9, name: "Profuse", value: "Profuse" },
+    { id: 10, name: "wild", value: "Wild" },
+    { id: 11, name: "Unusual", value: "Unusual" },
+    { id: 12, name: "Bizarre", value: "Bizarre" },
   ];
 
   const onRaceChange = (e) => {
@@ -528,6 +575,14 @@ const NpcGen = () => {
       setCha(cha);
     }
 
+    if (hook === "") {
+      let v = Math.round(Math.random() * (12 - 1) + 1);
+      let n = Math.round(Math.random() * (12 - 1) + 1);
+      let a = Math.round(Math.random() * (12 - 1) + 1);
+      setHook(
+        hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
+      );
+    }
   };
 
   const onClear = (e) => {
@@ -542,12 +597,13 @@ const NpcGen = () => {
     setMannerism("");
     setInteraction("");
     setBond("");
-    setStr("")
-    setDex("")
-    setCon("")
-    setInt("")
-    setWis("")
-    setCha("")
+    setStr("");
+    setDex("");
+    setCon("");
+    setInt("");
+    setWis("");
+    setCha("");
+    setHook("");
   };
 
   return (
@@ -751,46 +807,50 @@ const NpcGen = () => {
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>CON: </h1>
                   <h1 className={style.npcgenDetailOutput}>{con}</h1>
-                    <Dropdown
-                      optionLabel="name"
-                      value={con}
-                      options={abilityScoreValues}
-                      onChange={onConChange}
-                      placeholder="Choose Score"
-                    />
+                  <Dropdown
+                    optionLabel="name"
+                    value={con}
+                    options={abilityScoreValues}
+                    onChange={onConChange}
+                    placeholder="Choose Score"
+                  />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>INT: </h1>
                   <h1 className={style.npcgenDetailOutput}>{int}</h1>
-                    <Dropdown
-                      optionLabel="name"
-                      value={int}
-                      options={abilityScoreValues}
-                      onChange={onIntChange}
-                      placeholder="Choose Score"
-                    />
+                  <Dropdown
+                    optionLabel="name"
+                    value={int}
+                    options={abilityScoreValues}
+                    onChange={onIntChange}
+                    placeholder="Choose Score"
+                  />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>WIS: </h1>
                   <h1 className={style.npcgenDetailOutput}>{wis}</h1>
-                    <Dropdown
-                      optionLabel="name"
-                      value={wis}
-                      options={abilityScoreValues}
-                      onChange={onWisChange}
-                      placeholder="Choose Score"
-                    />
+                  <Dropdown
+                    optionLabel="name"
+                    value={wis}
+                    options={abilityScoreValues}
+                    onChange={onWisChange}
+                    placeholder="Choose Score"
+                  />
                 </div>
                 <div className={style.npcgenDetail}>
                   <h1 className={style.npcgenDetailTitle}>CHA: </h1>
                   <h1 className={style.npcgenDetailOutput}>{cha}</h1>
-                    <Dropdown
-                      optionLabel="name"
-                      value={cha}
-                      options={abilityScoreValues}
-                      onChange={onChaChange}
-                      placeholder="Choose Score"
-                    />
+                  <Dropdown
+                    optionLabel="name"
+                    value={cha}
+                    options={abilityScoreValues}
+                    onChange={onChaChange}
+                    placeholder="Choose Score"
+                  />
+                </div>
+                <h1 className={style.npcgenDescHeader}>Plot</h1>
+                <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailOutput}>{hook}</h1>
                 </div>
               </div>
             </div>
