@@ -261,16 +261,11 @@ const NpcGen = () => {
 
   const onRaceChange = (e) => {
     setRace(e.value);
-    // if (e.value === "Random"){
-    //   getRandomItem(races)
-    // }
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (29 - 1))
+      setRace(raceOptions[r].name)
+    }
   };
-
-  // const getRandomItem = (arr) => {
-  //   let keys = Object.keys(arr)
-  //   console.log(Object.keys(arr))
-  //   return keys = Math.floor(Math.random()*keys.length);
-  // }
 
   const onSexChange = (e) => {
     setSex(e.value);
@@ -290,9 +285,18 @@ const NpcGen = () => {
   };
   const onHighAbilityChange = (e) => {
     setHighAbility(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (6 - 1) + 1)
+      console.log(r)
+      setHighAbility(abilitiesOptions[r].name)
+    }
   };
   const onLowAbilityChange = (e) => {
     setLowAbility(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (6 - 1) + 1)
+      setLowAbility(abilitiesOptions[r].name)
+    }
   };
   const onTalentChange = (e) => {
     setTalent(e.value);
@@ -305,6 +309,10 @@ const NpcGen = () => {
   };
   const onBondChange = (e) => {
     setBond(e.value);
+    if (e.value === "Random"){
+      let r = Math.round(Math.random() * (11 - 1))
+      setBond(bondOptions[r].name)
+    }
   };
 
   const onNameChange = (e) => {
@@ -333,6 +341,10 @@ const NpcGen = () => {
     } else {
       setName(firstName + ' ' + epiphet_b+noun_a)
     }
+  }
+
+  const onGenerate = (e) => {
+    
   }
 
   return (
@@ -463,7 +475,7 @@ const NpcGen = () => {
             />
           </div>
           <div>
-            <Button label="Generate" className={style.npcgenBtn}/>
+            <Button label="Generate" className={style.npcgenBtn} onClick={onGenerate}/>
           </div>
         </div>
         <div className={style.npcgenDisplay}>
