@@ -880,6 +880,7 @@ const NpcGen = () => {
                 </div>
                 <h1 className={style.npcgenDescHeader}>Plot Hook</h1>
                 <div className={style.npcgenDetail}>
+                  <h1 className={style.npcgenDetailTitle}>Hook: </h1>
                   <h1 className={style.npcgenDetailOutput}>{hook}</h1>
                 </div>
               </div>

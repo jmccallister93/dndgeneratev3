@@ -1,8 +1,8 @@
-$primary-grey: #497174;
+$primary-grey: #393E46;
 $secondary-grey: #d6e4e5;
 
 .createWrapper {
-  background-color: $primary-grey;
+  background: linear-gradient(135deg, $primary-grey 25%, white);
   height: 100vh;
   width: 100vw;
   display: inline-block;

@@ -2,7 +2,7 @@ $primary-grey: #393E46;
 $secondary-grey: #d6e4e5;
 
 .npcgenWrapper {
-  background-color: $primary-grey;
+  background: linear-gradient(135deg, $primary-grey 25%, white) ;
   height: fit-content;
   width: 99vw;
   height: 100vh;
@@ -10,6 +10,7 @@ $secondary-grey: #d6e4e5;
   text-align: center;
   align-items: center;
   justify-content: center;
+  color: $primary-grey;
 }
 
 .npcgenBody {
