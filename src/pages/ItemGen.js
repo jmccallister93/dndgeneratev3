@@ -7,6 +7,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { FilterMatchMode, FilterOperator } from "primereact/api";
 
 const ItemGen = () => {
   // Set state variables
@@ -58,6 +59,26 @@ const ItemGen = () => {
 
   const [weapon, setWeapon] = useState();
   const [weaponOptions, setWeaponOptions] = useState();
+
+  //Datatable states
+  const [selectedItems, setSelectedItems] = useState(null);
+
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    name: {
+      operator: FilterOperator.AND,
+      constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+    },
+    "weapon.name": {
+      operator: FilterOperator.AND,
+      constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
+    },
+    // 'representative': { value: null, matchMode: FilterMatchMode.IN },
+    // 'date': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+    // 'balance': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+    // 'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+    // 'activity': { value: null, matchMode: FilterMatchMode.BETWEEN }
+  });
 
   //Pull supabase data
   useEffect(() => {
@@ -337,7 +358,7 @@ const ItemGen = () => {
 
   useEffect(() => {
     setAllItems(weaponOptions);
-    console.log(allItems);
+    // console.log(allItems);
   });
 
   return (
@@ -346,11 +367,52 @@ const ItemGen = () => {
       <div className={style.itemgenBody}>
         <h1 className={style.itemgenHeader}>Item Generator</h1>
         <div className={style.itemgenOptionsWrapper}>
-          <DataTable value={allItems}>
-            <Column field="code" header="Code"></Column>
-            <Column field="name" header="Name"></Column>
-            <Column field="cost" header="Cost"></Column>
-            <Column field="type" header="Type"></Column>
+          <DataTable
+            value={allItems}
+            paginator
+            className="p-datatable-customers"
+            header="Weapons"
+            rows={20}
+            dataKey="id"
+            selection={selectedItems}
+            onSelectionChange={(e) => setSelectedItems(e.value)}
+            // filters={filters}
+            // filterDisplay="menu"
+            responsiveLayout="scroll"
+            // globalFilterFields={'name'}
+            emptyMessage="No items found."
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            rowHover
+            resizableColumns
+            reorderableColumns
+            reorderableRows
+          >
+            <Column
+              selectionMode="multiple"
+              selectionAriaLabel="name"
+              headerStyle={{ width: "3em" }}
+            ></Column>
+            <Column
+              field="name"
+              header="Name"
+              sortable
+              filter
+              filterPlaceholder="Search by name"
+            ></Column>
+            <Column
+              field="cost"
+              header="Cost"
+              sortable
+              filter
+              filterPlaceholder="Search by name"
+            ></Column>
+            <Column
+              field="type"
+              header="Type"
+              sortable
+              filter
+              filterPlaceholder="Search by name"
+            ></Column>
           </DataTable>
         </div>
       </div>
