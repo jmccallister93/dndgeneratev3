@@ -64,21 +64,24 @@ const ItemGen = () => {
   const [selectedItems, setSelectedItems] = useState(null);
 
   const [filters, setFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    name: {
-      operator: FilterOperator.AND,
-      constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-    },
-    "weapon.name": {
-      operator: FilterOperator.AND,
-      constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
-    },
-    // 'representative': { value: null, matchMode: FilterMatchMode.IN },
-    // 'date': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
-    // 'balance': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-    // 'status': { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-    // 'activity': { value: null, matchMode: FilterMatchMode.BETWEEN }
+    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+    'name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    'country.name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    'representative': { value: null, matchMode: FilterMatchMode.IN },
+    'status': { value: null, matchMode: FilterMatchMode.EQUALS },
+    'verified': { value: null, matchMode: FilterMatchMode.EQUALS }
   });
+
+  const [globalFilterValue, setGlobalFilterValue] = useState('');
+
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+    _filters['global'].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+}
 
   //Pull supabase data
   useEffect(() => {
@@ -376,10 +379,10 @@ const ItemGen = () => {
             dataKey="id"
             selection={selectedItems}
             onSelectionChange={(e) => setSelectedItems(e.value)}
-            // filters={filters}
-            // filterDisplay="menu"
+            filters={filters}
+            filterDisplay="row"
             responsiveLayout="scroll"
-            // globalFilterFields={'name'}
+            globalFilterFields={['name']}
             emptyMessage="No items found."
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             rowHover
