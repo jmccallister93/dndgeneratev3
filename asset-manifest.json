@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dndgeneratev3/static/css/main.467d6a37.css",
-    "main.js": "/dndgeneratev3/static/js/main.1ab378e3.js",
+    "main.js": "/dndgeneratev3/static/js/main.8902be4a.js",
     "static/media/background-huge.jpg": "/dndgeneratev3/static/media/background-huge.e76d4894ef43a21eb6d6.jpg",
     "static/media/primeicons.svg": "/dndgeneratev3/static/media/primeicons.e1441b135b3ca9ad643c.svg",
     "static/media/primeicons.eot": "/dndgeneratev3/static/media/primeicons.d44157bdfa026dc877af.eot",
@@ -10,10 +10,10 @@
     "static/media/primeicons.woff2": "/dndgeneratev3/static/media/primeicons.78172950b335ccdb94e2.woff2",
     "index.html": "/dndgeneratev3/index.html",
     "main.467d6a37.css.map": "/dndgeneratev3/static/css/main.467d6a37.css.map",
-    "main.1ab378e3.js.map": "/dndgeneratev3/static/js/main.1ab378e3.js.map"
+    "main.8902be4a.js.map": "/dndgeneratev3/static/js/main.8902be4a.js.map"
   },
   "entrypoints": [
     "static/css/main.467d6a37.css",
-    "static/js/main.1ab378e3.js"
+    "static/js/main.8902be4a.js"
   ]
 }
