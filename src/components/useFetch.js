@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import supabase from "../config/supabaseClient";
 
-const useFetch = () => {
+const useFetch = (name) => {
     return ( 
         useEffect(() => {
             const fetchData = async () => {
               const { data, error } = await supabase
-                .from('test')
+                .from(name)
                 .select()
                    
               if (error) {

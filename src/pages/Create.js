@@ -13,9 +13,9 @@ const Create = () => {
     </Card>
   );
 
-  const cardEquipment = (
+  const cardItem = (
     <Card className={style.createCard}>
-    <h3>Equipment Generator</h3>
+    <h3>Item Generator</h3>
     <p>
       Generate Equipment with the click of a button or customize and hand pick your own!
     </p>
@@ -38,8 +38,8 @@ const Create = () => {
       <div className={style.createCardWrapper}>
         
         <Link className={style.createLink} to="/npcgen">{cardNpc}</Link>
-        {cardEquipment}
-        {cardMonster}
+        <Link className={style.createLink} to="/itemgen">{cardItem}</Link>
+        <Link className={style.createLink} to="/monstergen">{cardMonster}</Link>
         
     </div>
     </div>

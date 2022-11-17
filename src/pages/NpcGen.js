@@ -8,6 +8,7 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
+import useFetch from "../components/useFetch";
 
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -893,7 +894,21 @@ const NpcGen = () => {
               onClick={onExport}
               className={style.npcgenBtnGen}
             >
-              Download
+              Export Text
+            </button>
+            <button
+              value="download"
+              onClick={onExport}
+              className={style.npcgenBtnGen}
+            >
+              Export Card
+            </button>
+            <button
+              value="download"
+              onClick={onExport}
+              className={style.npcgenBtnGen}
+            >
+              Add to DB
             </button>
           </div>
         </div>
