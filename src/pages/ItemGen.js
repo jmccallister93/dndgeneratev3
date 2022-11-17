@@ -8,6 +8,7 @@ import "primeicons/primeicons.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { InputText } from 'primereact/inputtext';
 
 const ItemGen = () => {
   // Set state variables
@@ -82,6 +83,19 @@ const ItemGen = () => {
     setFilters(_filters);
     setGlobalFilterValue(value);
 }
+
+const renderHeader = () => {
+    return (
+        <div className="flex justify-content-end">
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
+            </span>
+        </div>
+    )
+}
+
+const header = renderHeader();
 
   //Pull supabase data
   useEffect(() => {
@@ -347,7 +361,7 @@ const ItemGen = () => {
         setWeapon(data);
         setWeaponOptions(
           data.map((r) => ({
-            code: r.id,
+            id: r.id,
             name: r.name,
             value: r.value,
             cost: r.cost,
@@ -374,21 +388,23 @@ const ItemGen = () => {
             value={allItems}
             paginator
             className="p-datatable-customers"
-            header="Weapons"
             rows={20}
             dataKey="id"
             selection={selectedItems}
             onSelectionChange={(e) => setSelectedItems(e.value)}
+            selectionPageOnly
             filters={filters}
             filterDisplay="row"
             responsiveLayout="scroll"
             globalFilterFields={['name']}
+            header={header}
             emptyMessage="No items found."
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             rowHover
             resizableColumns
             reorderableColumns
             reorderableRows
+            
           >
             <Column
               selectionMode="multiple"
