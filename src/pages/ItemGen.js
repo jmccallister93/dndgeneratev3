@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/ItemGen.module.scss";
 import supabase from "../config/supabaseClient";
@@ -8,7 +8,12 @@ import "primeicons/primeicons.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { InputText } from 'primereact/inputtext';
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+import { Tooltip } from "primereact/tooltip";
+import { FileUpload } from "primereact/fileupload";
+import { jsPDF } from "jspdf";
+import { autoTable } from "jspdf-autotable";
 
 const ItemGen = () => {
   // Set state variables
@@ -63,39 +68,130 @@ const ItemGen = () => {
 
   //Datatable states
   const [selectedItems, setSelectedItems] = useState(null);
+  const dt = useRef(null);
 
   const [filters, setFilters] = useState({
-    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
-    'name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    'country.name': { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    'representative': { value: null, matchMode: FilterMatchMode.IN },
-    'status': { value: null, matchMode: FilterMatchMode.EQUALS },
-    'verified': { value: null, matchMode: FilterMatchMode.EQUALS }
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    "country.name": { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    representative: { value: null, matchMode: FilterMatchMode.IN },
+    status: { value: null, matchMode: FilterMatchMode.EQUALS },
+    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
   });
 
-  const [globalFilterValue, setGlobalFilterValue] = useState('');
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
     let _filters = { ...filters };
-    _filters['global'].value = value;
+    _filters["global"].value = value;
 
     setFilters(_filters);
     setGlobalFilterValue(value);
-}
+  };
 
-const renderHeader = () => {
+  const renderHeader = () => {
     return (
-        <div className="flex justify-content-end">
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
-            </span>
-        </div>
-    )
-}
+      <div className="flex justify-content-end">
+        <span className="p-input-icon-left">
+          <i className="pi pi-search" />
+          <InputText
+            value={globalFilterValue}
+            onChange={onGlobalFilterChange}
+            placeholder="Keyword Search"
+          />
+        </span>
+      </div>
+    );
+  };
 
-const header = renderHeader();
+  // const header = renderHeader();
+
+  const exportPdf = () => {
+    import("jspdf").then((jsPDF) => {
+      import("jspdf-autotable").then(() => {
+        const doc = new jsPDF.default(0, 0);
+        doc.autoTable(exportColumns, allItems);
+        doc.save("products.pdf");
+      });
+    });
+  };
+  const cols = [
+    { field: "name", header: "Name" },
+    { field: "cost", header: "Cost" },
+    { field: "type", header: "Type" },
+  ];
+  const exportColumns = cols.map((col) => ({
+    title: col.header,
+    dataKey: col.field,
+  }));
+
+  const exportCSV = (selectionOnly) => {
+    dt.current.exportCSV({ selectionOnly });
+  };
+
+  const exportExcel = () => {
+    import("xlsx").then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(allItems);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+      const excelBuffer = xlsx.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
+      saveAsExcelFile(excelBuffer, "products");
+    });
+  };
+
+  const saveAsExcelFile = (buffer, fileName) => {
+    import("file-saver").then((module) => {
+      if (module && module.default) {
+        let EXCEL_TYPE =
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+        let EXCEL_EXTENSION = ".xlsx";
+        const data = new Blob([buffer], {
+          type: EXCEL_TYPE,
+        });
+
+        module.default.saveAs(
+          data,
+          fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+        );
+      }
+    });
+  };
+
+
+  const header = (
+    <div className="flex align-items-center export-buttons">
+      <Button
+        type="button"
+        icon="pi pi-file"
+        className="mr-2"
+        data-pr-tooltip="CSV"
+      />
+      <Button
+        type="button"
+        icon="pi pi-file-excel"
+        onClick={exportExcel}
+        className="p-button-success mr-2"
+        data-pr-tooltip="XLS"
+      />
+      <Button
+        type="button"
+        icon="pi pi-file-pdf"
+        onClick={exportPdf}
+        className="p-button-warning mr-2"
+        data-pr-tooltip="PDF"
+      />
+      <Button
+        type="button"
+        icon="pi pi-filter"
+        onClick={() => exportCSV(true)}
+        className="p-button-info ml-auto"
+        data-pr-tooltip="Selection Only"
+      />
+    </div>
+  );
 
   //Pull supabase data
   useEffect(() => {
@@ -384,9 +480,12 @@ const header = renderHeader();
       <div className={style.itemgenBody}>
         <h1 className={style.itemgenHeader}>Item Generator</h1>
         <div className={style.itemgenOptionsWrapper}>
+          <Tooltip target=".export-buttons>button" position="bottom" />
           <DataTable
             value={allItems}
-            paginator
+            // paginator
+            scrollable
+            scrollHeight="50vh"
             className="p-datatable-customers"
             rows={20}
             dataKey="id"
@@ -396,7 +495,7 @@ const header = renderHeader();
             filters={filters}
             filterDisplay="row"
             responsiveLayout="scroll"
-            globalFilterFields={['name']}
+            globalFilterFields={["name"]}
             header={header}
             emptyMessage="No items found."
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -404,7 +503,7 @@ const header = renderHeader();
             resizableColumns
             reorderableColumns
             reorderableRows
-            
+            ref={dt}
           >
             <Column
               selectionMode="multiple"
