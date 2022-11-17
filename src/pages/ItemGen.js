@@ -15,6 +15,7 @@ import { Tooltip } from "primereact/tooltip";
 import { FileUpload } from "primereact/fileupload";
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
+import { Dialog } from "primereact/dialog";
 
 const ItemGen = () => {
   // Set state variables
@@ -67,7 +68,7 @@ const ItemGen = () => {
   const [weapon, setWeapon] = useState();
   const [weaponOptions, setWeaponOptions] = useState();
 
-  //Datatable states
+  //Datatable settings
   const [selectedItems, setSelectedItems] = useState(null);
   const dt = useRef(null);
 
@@ -81,6 +82,19 @@ const ItemGen = () => {
   });
 
   const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const [dialogVisible, setDialogVisible] = useState(false);
+
+  const openDialog = () => {
+    setDialogVisible(true);
+  };
+
+  const closeDialog = () => {
+    setDialogVisible(false);
+  };
+
+  const dialogFooterTemplate = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
+  };
 
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
@@ -93,9 +107,9 @@ const ItemGen = () => {
 
   const renderHeader = () => {
     return (
-      <div className="flex justify-content-end">
+      <div>
         <span className="p-input-icon-left">
-          <i className="pi pi-search" />
+          <i className="pi pi-search mr-2" />
           <InputText
             value={globalFilterValue}
             onChange={onGlobalFilterChange}
@@ -188,19 +202,11 @@ const ItemGen = () => {
   );
 
   const showSection = (e) => {
-    console.log("showing")
-  }
+    console.log("showing");
+  };
 
   const header = (
     <div className="flex justify-content-between">
-      <Button 
-       className="surface-300 border-0 text-color"
-       onClick={showSection}
-      >
-        <h3 className="text-4xl">
-          Weapons <i className="pi pi-chevron-down"></i>
-        </h3>
-      </Button>
       {renderHeader()}
     </div>
   );
@@ -457,7 +463,14 @@ const ItemGen = () => {
       if (data) {
         setFetchError(null);
         setVehicle(data);
-        setVehicleOptions(data.map((r) => ({ name: r.name, value: r.value })));
+        setVehicleOptions(
+          data.map((r) => ({
+            name: r.name,
+            value: r.value,
+            cost: r.cost,
+            type: r.type,
+          }))
+        );
       }
     };
     fetchData();
@@ -499,9 +512,90 @@ const ItemGen = () => {
       <div className={style.itemgenBody}>
         <h1 className={style.itemgenHeader}>Item Generator</h1>
         <div className={style.itemgenOptionsWrapper}>
+        <Button className="surface-300 border-0 text-color" onClick={openDialog}>
+        <h3 className="text-4xl">
+          Weapons <i className="pi pi-arrow-up-right"></i>
+        </h3>
+      </Button>
+          <Dialog
+            header="Weapons"
+            visible={dialogVisible}
+            maximizable
+            modal
+            onHide={closeDialog}
+            footer={dialogFooterTemplate}
+          >
+            <Tooltip target=".export-buttons>button" position="bottom" />
+            <DataTable
+              value={weaponOptions}
+              // paginator
+              scrollable
+              scrollHeight="50vh"
+              className="p-datatable-customers"
+              rows={20}
+              dataKey="id"
+              selection={selectedItems}
+              onSelectionChange={(e) => setSelectedItems(e.value)}
+              selectionPageOnly
+              filters={filters}
+              filterDisplay="row"
+              responsiveLayout="scroll"
+              globalFilterFields={["name"]}
+              header={header}
+              footer={footer}
+              emptyMessage="No items found."
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              rowHover
+              resizableColumns
+              reorderableColumns
+              reorderableRows
+              ref={dt}
+            >
+              <Column
+                selectionMode="multiple"
+                selectionAriaLabel="name"
+                headerStyle={{ width: "3em" }}
+              ></Column>
+              <Column
+                field="name"
+                header="Name"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+              <Column
+                field="cost"
+                header="Cost"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+              <Column
+                field="type"
+                header="Type"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+            </DataTable>
+          </Dialog>
+
+        <Button className="surface-300 border-0 text-color" onClick={openDialog}>
+        <h3 className="text-4xl">
+          Vehicles <i className="pi pi-arrow-up-right"></i>
+        </h3>
+      </Button>
+          <Dialog
+            header="Vehicles"
+            visible={dialogVisible}
+            maximizable
+            modal
+            onHide={closeDialog}
+            footer={dialogFooterTemplate}
+          >
           <Tooltip target=".export-buttons>button" position="bottom" />
           <DataTable
-            value={allItems}
+            value={vehicleOptions}
             // paginator
             scrollable
             scrollHeight="50vh"
@@ -552,6 +646,7 @@ const ItemGen = () => {
               filterPlaceholder="Search by name"
             ></Column>
           </DataTable>
+        </Dialog>
         </div>
       </div>
     </div>
