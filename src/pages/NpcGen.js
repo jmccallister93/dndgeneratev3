@@ -1,14 +1,12 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/NpcGen.module.scss";
 import { Dropdown } from "primereact/dropdown";
-import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
-import useFetch from "../components/useFetch";
 
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
