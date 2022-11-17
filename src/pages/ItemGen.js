@@ -5,6 +5,7 @@ import supabase from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import "/node_modules/primeflex/primeflex.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
@@ -105,8 +106,7 @@ const ItemGen = () => {
     );
   };
 
-  // const header = renderHeader();
-
+  //Export Logic
   const exportPdf = () => {
     import("jspdf").then((jsPDF) => {
       import("jspdf-autotable").then(() => {
@@ -160,34 +160,47 @@ const ItemGen = () => {
     });
   };
 
-
-  const header = (
-    <>
-    <div className="flex align-items-center export-buttons">
-        <Button
+  //Export Buttons
+  const exportBtns = (
+    <div className="flex align-items-end export-buttons">
+      <Button
         type="button"
         icon="pi pi-file"
         onClick={() => exportCSV(true)}
-        className="p-button-info ml-auto"
-        data-pr-tooltip="Selection Only"
+        className="p-button-info mr-2 "
+        data-pr-tooltip="Export CSV"
       />
       <Button
         type="button"
         icon="pi pi-file-excel"
         onClick={exportExcel}
         className="p-button-success mr-2"
-        data-pr-tooltip="XLS"
+        data-pr-tooltip="Export XLS"
       />
       <Button
         type="button"
         icon="pi pi-file-pdf"
         onClick={exportPdf}
         className="p-button-warning mr-2"
-        data-pr-tooltip="PDF"
+        data-pr-tooltip="Export PDF"
       />
     </div>
-    {renderHeader()}
-    </>
+  );
+
+  const header = (
+    <div className="flex justify-content-between">
+      <h3 className="text-4xl">
+        Weapons <i class="pi pi-chevron-down"></i>
+      </h3>
+      {renderHeader()}
+    </div>
+  );
+
+  const footer = (
+  <div className="flex align-items-center">
+  <h3 className="text-xl  mr-2">Export</h3>
+  {exportBtns}
+  </div>
   );
 
   //Pull supabase data
@@ -494,6 +507,7 @@ const ItemGen = () => {
             responsiveLayout="scroll"
             globalFilterFields={["name"]}
             header={header}
+            footer={footer}
             emptyMessage="No items found."
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             rowHover
