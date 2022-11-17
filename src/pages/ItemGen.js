@@ -187,20 +187,29 @@ const ItemGen = () => {
     </div>
   );
 
+  const showSection = (e) => {
+    console.log("showing")
+  }
+
   const header = (
     <div className="flex justify-content-between">
-      <h3 className="text-4xl">
-        Weapons <i class="pi pi-chevron-down"></i>
-      </h3>
+      <Button 
+       className="surface-300 border-0 text-color"
+       onClick={showSection}
+      >
+        <h3 className="text-4xl">
+          Weapons <i className="pi pi-chevron-down"></i>
+        </h3>
+      </Button>
       {renderHeader()}
     </div>
   );
 
   const footer = (
-  <div className="flex align-items-center">
-  <h3 className="text-xl  mr-2">Export</h3>
-  {exportBtns}
-  </div>
+    <div className="flex align-items-center">
+      <h3 className="text-xl  mr-2">Export</h3>
+      {exportBtns}
+    </div>
   );
 
   //Pull supabase data
