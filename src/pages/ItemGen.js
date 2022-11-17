@@ -162,12 +162,14 @@ const ItemGen = () => {
 
 
   const header = (
+    <>
     <div className="flex align-items-center export-buttons">
-      <Button
+        <Button
         type="button"
         icon="pi pi-file"
-        className="mr-2"
-        data-pr-tooltip="CSV"
+        onClick={() => exportCSV(true)}
+        className="p-button-info ml-auto"
+        data-pr-tooltip="Selection Only"
       />
       <Button
         type="button"
@@ -183,14 +185,9 @@ const ItemGen = () => {
         className="p-button-warning mr-2"
         data-pr-tooltip="PDF"
       />
-      <Button
-        type="button"
-        icon="pi pi-filter"
-        onClick={() => exportCSV(true)}
-        className="p-button-info ml-auto"
-        data-pr-tooltip="Selection Only"
-      />
     </div>
+    {renderHeader()}
+    </>
   );
 
   //Pull supabase data
