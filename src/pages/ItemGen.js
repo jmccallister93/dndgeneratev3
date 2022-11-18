@@ -18,6 +18,7 @@ import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 import { Dropdown } from "primereact/dropdown";
 import { e } from "mathjs";
+import { InputNumber } from 'primereact/inputnumber';
 
 const ItemGen = () => {
   // Set state variables
@@ -80,6 +81,14 @@ const ItemGen = () => {
   const [rarityOptions, setRarityOptions] = useState();
   const [showRarityInput, setShowRarityInput] = useState(false);
 
+  const [currency, setCurrency] = useState("");
+  const [currencies, setCurrencies] = useState();
+  const [currencyOptions, setCurrencyOptions] = useState();
+  const [showCurrencyInput, setShowCurrencyInput] = useState(false);
+
+  const [currencyValue, setCurrencyValue] = useState();
+
+  const [cost, setCost] = useState("")
   
 
   //Export Logic
@@ -488,6 +497,23 @@ const ItemGen = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("itemsCurrencies").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setCurrency(null);
+        console.log(error);
+      }
+      if (data) {
+        setFetchError(null);
+        setCurrencies(data);
+        setCurrencyOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
 
   //On change events
 
@@ -495,7 +521,7 @@ const ItemGen = () => {
     setType(e.value);
     setShowTypeInput(false)
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (21 - 2) +2);
+      let r = Math.round(Math.random() * (22 - 2) +2);
       setType(typeOptions[r].name);
     }
     if (e.value === "Custom"){
@@ -511,7 +537,7 @@ const ItemGen = () => {
     setRarity(e.value);
     setShowRarityInput(false)
     if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (6 - 2) +2);
+      let r = Math.floor(Math.random() * (7 - 2) +2);
       setRarity(rarityOptions[r].name);
     }
     if (e.value === "Custom"){
@@ -523,6 +549,26 @@ const ItemGen = () => {
     setRarity(e.target.value)
   }
 
+  const onCurrencyChange = (e) => {
+    setCurrency(e.value);
+    setShowCurrencyInput(false)
+    if (e.value === "Random") {
+      let r = Math.floor(Math.random() * (6 - 2) +2);
+      setCurrency(rarityOptions[r].name);
+    }
+    if (e.value === "Custom"){
+        setShowCurrencyInput(true)
+    }
+  };
+
+  const onCurrencyCustom = (e) => {
+    setCurrency(e.target.value)
+  }
+
+  const onCurrencyValueChange = (e) => {
+    setCurrencyValue(e.value)
+  }
+
   return (
     <div className={style.itemgenWrapper}>
       <Navbar />
@@ -531,12 +577,12 @@ const ItemGen = () => {
         <div className={style.itemgenOptionsWrapper}>
           <div>
             <h1>Name</h1>
-            <InputText />
+            <InputText placeholder="Name"/>
             <button className={style.itemgenBtnName}>Randomize</button>
           </div>
           <div>
             <h1>Type</h1>
-            {showTypeInput ? <InputText onChange={onTypeCustom}/> : null}
+            {showTypeInput ? <InputText onChange={onTypeCustom} placeholder="Type"/> : null}
             <Dropdown
               optionLabel="name"
               value={type}
@@ -547,13 +593,25 @@ const ItemGen = () => {
           </div>
           <div>
             <h1>Rarity</h1>
-            {showRarityInput ? <InputText onChange={onRarityCustom}/> : null}
+            {showRarityInput ? <InputText onChange={onRarityCustom} placeholder="Rarity"/> : null}
             <Dropdown
               optionLabel="name"
               value={rarity}
               options={rarityOptions}
               onChange={onRarityChange}
               placeholder="Choose Rarity"
+            />
+          </div>
+          <div>
+            <h1>Value</h1>
+            <InputNumber value={cost} onChange={onCurrencyValueChange} placeholder="Value"/>
+            {showCurrencyInput ? <InputText onChange={onCurrencyCustom} placeholder="Currency"/> : null}
+            <Dropdown
+              optionLabel="name"
+              value={currency}
+              options={currencyOptions}
+              onChange={onCurrencyChange}
+              placeholder="Choose Currency"
             />
           </div>
           
