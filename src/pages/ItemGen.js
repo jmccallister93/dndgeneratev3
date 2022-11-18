@@ -18,7 +18,7 @@ import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 import { Dropdown } from "primereact/dropdown";
 import { e } from "mathjs";
-import { InputNumber } from 'primereact/inputnumber';
+import { InputNumber } from "primereact/inputnumber";
 
 const ItemGen = () => {
   // Set state variables
@@ -88,10 +88,9 @@ const ItemGen = () => {
 
   const [currencyValue, setCurrencyValue] = useState();
 
-  const [cost, setCost] = useState("")
+  const [cost, setCost] = useState("");
 
-  const [weight, setWeight] = useState("")
-  
+  const [weight, setWeight] = useState("");
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -516,64 +515,67 @@ const ItemGen = () => {
     fetchData();
   }, []);
 
-
   //On change events
 
   const onTypeChange = (e) => {
     setType(e.value);
-    setShowTypeInput(false)
+    setShowTypeInput(false);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (22 - 2) +2);
+      let r = Math.round(Math.random() * (22 - 2) + 2);
       setType(typeOptions[r].name);
     }
-    if (e.value === "Custom"){
-        setShowTypeInput(true)
+    if (e.value === "Custom") {
+      setShowTypeInput(true);
     }
   };
 
   const onTypeCustom = (e) => {
-    setType(e.target.value)
-  }
+    setType(e.target.value);
+  };
 
   const onRarityChange = (e) => {
     setRarity(e.value);
-    setShowRarityInput(false)
+    setShowRarityInput(false);
     if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (7 - 2) +2);
+      let r = Math.floor(Math.random() * (7 - 2) + 2);
       setRarity(rarityOptions[r].name);
     }
-    if (e.value === "Custom"){
-        setShowRarityInput(true)
+    if (e.value === "Custom") {
+      setShowRarityInput(true);
     }
   };
 
   const onRarityCustom = (e) => {
-    setRarity(e.target.value)
-  }
+    setRarity(e.target.value);
+  };
 
   const onCurrencyChange = (e) => {
     setCurrency(e.value);
-    setShowCurrencyInput(false)
+    setShowCurrencyInput(false);
     if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (6 - 2) +2);
+      let r = Math.floor(Math.random() * (6 - 2) + 2);
       setCurrency(currencyOptions[r].name);
     }
-    if (e.value === "Custom"){
-        setShowCurrencyInput(true)
+    if (e.value === "Custom") {
+      setShowCurrencyInput(true);
     }
   };
 
   const onCurrencyCustom = (e) => {
-    setCurrency(e.target.value)
-  }
+    setCurrency(e.target.value);
+  };
 
   const onCurrencyValueChange = (e) => {
-    setCurrencyValue(e.value)
-  }
+    setCurrencyValue(e.value);
+  };
 
   useEffect(() => {
-      setCost(currencyValue + " " + currency)
-  },[currencyValue][currency])
+    setCost(currencyValue + " " + currency);
+  }, [currencyValue][currency]);
+
+  const onWeightChange = (e) => {
+    setWeight(e.value);
+  };
 
   return (
     <div className={style.itemgenWrapper}>
@@ -583,12 +585,14 @@ const ItemGen = () => {
         <div className={style.itemgenOptionsWrapper}>
           <div>
             <h1>Name</h1>
-            <InputText placeholder="Name"/>
+            <InputText placeholder="Name" />
             <button className={style.itemgenBtnName}>Randomize</button>
           </div>
           <div>
             <h1>Type</h1>
-            {showTypeInput ? <InputText onChange={onTypeCustom} placeholder="Type"/> : null}
+            {showTypeInput ? (
+              <InputText onChange={onTypeCustom} placeholder="Type" />
+            ) : null}
             <Dropdown
               optionLabel="name"
               value={type}
@@ -599,7 +603,9 @@ const ItemGen = () => {
           </div>
           <div>
             <h1>Rarity</h1>
-            {showRarityInput ? <InputText onChange={onRarityCustom} placeholder="Rarity"/> : null}
+            {showRarityInput ? (
+              <InputText onChange={onRarityCustom} placeholder="Rarity" />
+            ) : null}
             <Dropdown
               optionLabel="name"
               value={rarity}
@@ -610,8 +616,17 @@ const ItemGen = () => {
           </div>
           <div>
             <h1>Value</h1>
-            <InputNumber value={currencyValue} onChange={onCurrencyValueChange} placeholder="Value"/>
-            {showCurrencyInput ? <InputText onChange={onCurrencyCustom} placeholder="Currency"/> : null}
+            <InputNumber
+              value={currencyValue}
+              onChange={onCurrencyValueChange}
+              placeholder="Value"
+              mode="decimal"
+              minFractionDigits={0}
+              maxFractionDigits={2}
+            />
+            {showCurrencyInput ? (
+              <InputText onChange={onCurrencyCustom} placeholder="Currency" />
+            ) : null}
             <Dropdown
               optionLabel="name"
               value={currency}
@@ -620,18 +635,18 @@ const ItemGen = () => {
               placeholder={showTypeInput ? "Currency" : "Choose Currency"}
             />
           </div>
-          {/* <div>
+          <div>
             <h1>Weight</h1>
-            <InputNumber value={cost} onChange={onCurrencyValueChange} placeholder="Weight"/>
-            <Dropdown
-              optionLabel="name"
-              value={currency}
-              options={currencyOptions}
-              onChange={onCurrencyChange}
-              placeholder={showTypeInput ? "Currency" : "Choose Currency"}
+            <InputNumber
+              value={weight}
+              onChange={onWeightChange}
+              placeholder="Weight"
+              mode="decimal"
+              minFractionDigits={0}
+              maxFractionDigits={2}
             />
-          </div> */}
-          {cost}
+            <button className={style.itemgenBtnName}>Randomize</button>
+          </div>
         </div>
       </div>
     </div>
