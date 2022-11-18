@@ -89,6 +89,8 @@ const ItemGen = () => {
   const [currencyValue, setCurrencyValue] = useState();
 
   const [cost, setCost] = useState("")
+
+  const [weight, setWeight] = useState("")
   
 
   //Export Logic
@@ -554,7 +556,7 @@ const ItemGen = () => {
     setShowCurrencyInput(false)
     if (e.value === "Random") {
       let r = Math.floor(Math.random() * (6 - 2) +2);
-      setCurrency(rarityOptions[r].name);
+      setCurrency(currencyOptions[r].name);
     }
     if (e.value === "Custom"){
         setShowCurrencyInput(true)
@@ -568,6 +570,10 @@ const ItemGen = () => {
   const onCurrencyValueChange = (e) => {
     setCurrencyValue(e.value)
   }
+
+  useEffect(() => {
+      setCost(currencyValue + " " + currency)
+  },[currencyValue][currency])
 
   return (
     <div className={style.itemgenWrapper}>
@@ -588,7 +594,7 @@ const ItemGen = () => {
               value={type}
               options={typeOptions}
               onChange={onTypeChange}
-              placeholder="Choose Type"
+              placeholder={showTypeInput ? "Custom" : "Choose Type"}
             />
           </div>
           <div>
@@ -599,22 +605,33 @@ const ItemGen = () => {
               value={rarity}
               options={rarityOptions}
               onChange={onRarityChange}
-              placeholder="Choose Rarity"
+              placeholder={showRarityInput ? "Custom" : "Choose Rarity"}
             />
           </div>
           <div>
             <h1>Value</h1>
-            <InputNumber value={cost} onChange={onCurrencyValueChange} placeholder="Value"/>
+            <InputNumber value={currencyValue} onChange={onCurrencyValueChange} placeholder="Value"/>
             {showCurrencyInput ? <InputText onChange={onCurrencyCustom} placeholder="Currency"/> : null}
             <Dropdown
               optionLabel="name"
               value={currency}
               options={currencyOptions}
               onChange={onCurrencyChange}
-              placeholder="Choose Currency"
+              placeholder={showTypeInput ? "Currency" : "Choose Currency"}
             />
           </div>
-          
+          {/* <div>
+            <h1>Weight</h1>
+            <InputNumber value={cost} onChange={onCurrencyValueChange} placeholder="Weight"/>
+            <Dropdown
+              optionLabel="name"
+              value={currency}
+              options={currencyOptions}
+              onChange={onCurrencyChange}
+              placeholder={showTypeInput ? "Currency" : "Choose Currency"}
+            />
+          </div> */}
+          {cost}
         </div>
       </div>
     </div>
