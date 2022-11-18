@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/ItemGen.module.scss";
+import style from "../stylesheets/ItemCollection.module.scss";
 import supabase from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -17,7 +17,7 @@ import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 
-const ItemGen = () => {
+const ItemCollection = () => {
   // Set state variables
   const [fetchError, setFetchError] = useState(null);
 
@@ -206,7 +206,9 @@ const ItemGen = () => {
   };
 
   const header = (
-    <div className="flex justify-content-between">{renderHeader()}</div>
+    <div className="flex justify-content-between">
+      {renderHeader()}
+    </div>
   );
 
   const footer = (
@@ -505,14 +507,150 @@ const ItemGen = () => {
   });
 
   return (
-    <div className={style.itemgenWrapper}>
+    <div className={style.itemcollectionWrapper}>
       <Navbar />
-      <div className={style.itemgenBody}>
-        <h1 className={style.itemgenHeader}>Item Generator</h1>
-        <div className={style.itemgenOptionsWrapper}></div>
+      <div className={style.itemcollectionBody}>
+        <h1 className={style.itemcollectionHeader}>Item Collection</h1>
+        <div className={style.itemcollectionOptionsWrapper}>
+        <Button className="surface-300 border-0 text-color" onClick={openDialog}>
+        <h3 className="text-4xl">
+          Weapons <i className="pi pi-arrow-up-right"></i>
+        </h3>
+      </Button>
+          <Dialog
+            header="Weapons"
+            visible={dialogVisible}
+            maximizable
+            modal
+            onHide={closeDialog}
+            footer={dialogFooterTemplate}
+          >
+            <Tooltip target=".export-buttons>button" position="bottom" />
+            <DataTable
+              value={weaponOptions}
+              // paginator
+              scrollable
+              scrollHeight="50vh"
+              className="p-datatable-customers"
+              rows={20}
+              dataKey="id"
+              selection={selectedItems}
+              onSelectionChange={(e) => setSelectedItems(e.value)}
+              selectionPageOnly
+              filters={filters}
+              filterDisplay="row"
+              responsiveLayout="scroll"
+              globalFilterFields={["name"]}
+              header={header}
+              footer={footer}
+              emptyMessage="No items found."
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              rowHover
+              resizableColumns
+              reorderableColumns
+              reorderableRows
+              ref={dt}
+            >
+              <Column
+                selectionMode="multiple"
+                selectionAriaLabel="name"
+                headerStyle={{ width: "3em" }}
+              ></Column>
+              <Column
+                field="name"
+                header="Name"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+              <Column
+                field="cost"
+                header="Cost"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+              <Column
+                field="type"
+                header="Type"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+            </DataTable>
+          </Dialog>
+
+        <Button className="surface-300 border-0 text-color" onClick={openDialog}>
+        <h3 className="text-4xl">
+          Vehicles <i className="pi pi-arrow-up-right"></i>
+        </h3>
+      </Button>
+          <Dialog
+            header="Vehicles"
+            visible={dialogVisible}
+            maximizable
+            modal
+            onHide={closeDialog}
+            footer={dialogFooterTemplate}
+          >
+          <Tooltip target=".export-buttons>button" position="bottom" />
+          <DataTable
+            value={vehicleOptions}
+            // paginator
+            scrollable
+            scrollHeight="50vh"
+            className="p-datatable-customers"
+            rows={20}
+            dataKey="id"
+            selection={selectedItems}
+            onSelectionChange={(e) => setSelectedItems(e.value)}
+            selectionPageOnly
+            filters={filters}
+            filterDisplay="row"
+            responsiveLayout="scroll"
+            globalFilterFields={["name"]}
+            header={header}
+            footer={footer}
+            emptyMessage="No items found."
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            rowHover
+            resizableColumns
+            reorderableColumns
+            reorderableRows
+            ref={dt}
+          >
+            <Column
+              selectionMode="multiple"
+              selectionAriaLabel="name"
+              headerStyle={{ width: "3em" }}
+            ></Column>
+            <Column
+              field="name"
+              header="Name"
+              sortable
+              filter
+              filterPlaceholder="Search by name"
+            ></Column>
+            <Column
+              field="cost"
+              header="Cost"
+              sortable
+              filter
+              filterPlaceholder="Search by name"
+            ></Column>
+            <Column
+              field="type"
+              header="Type"
+              sortable
+              filter
+              filterPlaceholder="Search by name"
+            ></Column>
+          </DataTable>
+        </Dialog>
+        </div>
       </div>
     </div>
   );
 };
 
-export default ItemGen;
+export default ItemCollection;

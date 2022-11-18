@@ -1,0 +1,24 @@
+$primary-grey: #393E46;
+$secondary-grey: #d6e4e5;
+
+.itemcollectionWrapper {
+  background: linear-gradient(135deg, $primary-grey 25%, white) ;
+  height: fit-content;
+  width: 99vw;
+  height: 100vh;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: $primary-grey;
+}
+
+.itemcollectionHeader {
+    font-size: 3rem;
+    color: $secondary-grey;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  
+

@@ -1,0 +1,51 @@
+$primary-grey: #393E46;
+$secondary-grey: #d6e4e5;
+
+.collectionWrapper {
+  background: linear-gradient(135deg, $primary-grey 25%, white);
+  height: 100vh;
+  width: 100vw;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.collectionHeader {
+  color: $secondary-grey;
+  margin-top: 5vh;
+  font-size: 4rem;
+}
+
+.collectionCardWrapper {
+  margin-top: 5vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
+.collectionCard {
+  width: 25rem;
+  margin-bottom: 2rem;
+  background-color: $secondary-grey;
+  border-radius: 10px;
+  padding: 1rem;
+  transition: 0.3s;
+  & h3 {
+    font-size: 2rem;
+  }
+  & p {
+    line-height: 1.5;
+  }
+  &:hover {
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 1px 1px 5px 10px rgba(0, 0, 0, 0.5);
+    scale: 1.05;
+    cursor: pointer;
+  }
+}
+
+.collectionLink{
+    color: black;
+    text-decoration: none;
+}
