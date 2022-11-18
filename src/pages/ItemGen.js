@@ -680,24 +680,59 @@ const ItemGen = () => {
               <h1>Additional</h1>
             ) : null}
             {type === "Weapon" ? (
-              <InputText placeholder="Weapon detes" />
+              <div>
+              <InputNumber placeholder="Damage" />
+              <Dropdown placeholder="Damage Type" />
+              <Dropdown placeholder="Properties" />
+              </div>
             ) : null}
             {type === "Vehicle" ? (
+              <div>
               <InputNumber
+                placeholder="Speed"
+                mode="decimal"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <InputNumber
+              placeholder="Carry Capacity"
+              mode="decimal"
+              minFractionDigits={0}
+              maxFractionDigits={2}
+            />
+            </div>
+            ) : null}
+            {type === "Armor" ? (
+              <div>
+                   <InputNumber
+              placeholder="Armor Class"
+              mode="decimal"
+              minFractionDigits={0}
+              maxFractionDigits={2}
+            />
+              <Dropdown placeholder="Modifier" />
+              <Dropdown placeholder="Strength Req." />
+              <Dropdown placeholder="Stealth Disadvantage" />
+              </div>
+            ) : null}
+            {type === "Equipment Pack" ? (
+              <InputText placeholder="Contains" />
+            ) : null}
+            {type === "Mount" ? (
+                <div>
+                <InputNumber
+                  placeholder="Speed"
+                  mode="decimal"
+                  minFractionDigits={0}
+                  maxFractionDigits={2}
+                />
+                <InputNumber
                 placeholder="Carry Capacity"
                 mode="decimal"
                 minFractionDigits={0}
                 maxFractionDigits={2}
               />
-            ) : null}
-            {type === "Armor" ? (
-              <InputText placeholder="Armor detes" />
-            ) : null}
-            {type === "Equipment Pack" ? (
-              <InputText placeholder="Weapon detes" />
-            ) : null}
-            {type === "Mount" ? (
-              <InputText placeholder="Mount detes" />
+              </div>
             ) : null}
           </div>
         </div>
