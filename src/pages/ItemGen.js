@@ -16,6 +16,7 @@ import { FileUpload } from "primereact/fileupload";
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
+import { Dropdown } from "primereact/dropdown";
 
 const ItemGen = () => {
   // Set state variables
@@ -68,59 +69,10 @@ const ItemGen = () => {
   const [weapon, setWeapon] = useState();
   const [weaponOptions, setWeaponOptions] = useState();
 
-  //Datatable settings
+  //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
   const dt = useRef(null);
 
-  const [filters, setFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    "country.name": { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    representative: { value: null, matchMode: FilterMatchMode.IN },
-    status: { value: null, matchMode: FilterMatchMode.EQUALS },
-    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
-  });
-
-  const [globalFilterValue, setGlobalFilterValue] = useState("");
-  const [dialogVisible, setDialogVisible] = useState(false);
-
-  const openDialog = () => {
-    setDialogVisible(true);
-  };
-
-  const closeDialog = () => {
-    setDialogVisible(false);
-  };
-
-  const dialogFooterTemplate = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
-  };
-
-  const onGlobalFilterChange = (e) => {
-    const value = e.target.value;
-    let _filters = { ...filters };
-    _filters["global"].value = value;
-
-    setFilters(_filters);
-    setGlobalFilterValue(value);
-  };
-
-  const renderHeader = () => {
-    return (
-      <div>
-        <span className="p-input-icon-left">
-          <i className="pi pi-search mr-2" />
-          <InputText
-            value={globalFilterValue}
-            onChange={onGlobalFilterChange}
-            placeholder="Keyword Search"
-          />
-        </span>
-      </div>
-    );
-  };
-
-  //Export Logic
   const exportPdf = () => {
     import("jspdf").then((jsPDF) => {
       import("jspdf-autotable").then(() => {
@@ -198,21 +150,6 @@ const ItemGen = () => {
         className="p-button-warning mr-2"
         data-pr-tooltip="Export PDF"
       />
-    </div>
-  );
-
-  const showSection = (e) => {
-    console.log("showing");
-  };
-
-  const header = (
-    <div className="flex justify-content-between">{renderHeader()}</div>
-  );
-
-  const footer = (
-    <div className="flex align-items-center">
-      <h3 className="text-xl  mr-2">Export</h3>
-      {exportBtns}
     </div>
   );
 
@@ -509,7 +446,23 @@ const ItemGen = () => {
       <Navbar />
       <div className={style.itemgenBody}>
         <h1 className={style.itemgenHeader}>Item Generator</h1>
-        <div className={style.itemgenOptionsWrapper}></div>
+        <div className={style.itemgenOptionsWrapper}>
+          <div>
+            <h1>Name</h1>
+            <InputText />
+            <button className={style.itemgenBtnName}>Randomize</button>
+          </div>
+          <div>
+            <h1>Type</h1>
+            <Dropdown
+              optionLabel="name"
+              value={weapon}
+              options={weaponOptions}
+            //   onChange={onRaceChange}
+              placeholder="Choose Type"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
