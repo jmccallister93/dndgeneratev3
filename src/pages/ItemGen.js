@@ -19,6 +19,8 @@ import { Dialog } from "primereact/dialog";
 import { Dropdown } from "primereact/dropdown";
 import { e } from "mathjs";
 import { InputNumber } from "primereact/inputnumber";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Checkbox } from "primereact/checkbox";
 
 const ItemGen = () => {
   // Set state variables
@@ -91,6 +93,10 @@ const ItemGen = () => {
   const [cost, setCost] = useState("");
 
   const [weight, setWeight] = useState("");
+
+  const [additional, setAddtional] = useState();
+  const [additionals, setAdditionals] = useState();
+  const [additionalOptions, setAdditionalOptions] = useState();
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -529,6 +535,11 @@ const ItemGen = () => {
     }
   };
 
+  useEffect(() => {
+    if (type === "Weapon") {
+    }
+  }, [type]);
+
   const onTypeCustom = (e) => {
     setType(e.target.value);
   };
@@ -575,6 +586,12 @@ const ItemGen = () => {
 
   const onWeightChange = (e) => {
     setWeight(e.value);
+  };
+
+  const onRandomWeight = (e) => {
+    let r = Math.floor(Math.random() * (2000 - 0));
+    setWeight(r);
+    console.log(r);
   };
 
   return (
@@ -645,7 +662,28 @@ const ItemGen = () => {
               minFractionDigits={0}
               maxFractionDigits={2}
             />
+            <button className={style.itemgenBtnName} onClick={onRandomWeight}>
+              Randomize
+            </button>
+          </div>
+          <div>
+            <h1>Description</h1>
+            <InputTextarea />
             <button className={style.itemgenBtnName}>Randomize</button>
+          </div>
+          <div>
+            {type ? <h1>Additional</h1> : null}
+            {type === "Weapon" ? (
+              <InputText placeholder="Weapon detes" />
+            ) : null}
+            {type === "Vehicle" ? (
+              <InputNumber
+                placeholder="Carry Capacity"
+                mode="decimal"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+            ) : null}
           </div>
         </div>
       </div>
