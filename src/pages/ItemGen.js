@@ -672,7 +672,13 @@ const ItemGen = () => {
             <button className={style.itemgenBtnName}>Randomize</button>
           </div>
           <div>
-            {type ? <h1>Additional</h1> : null}
+            {type === "Weapon" ||
+            type === "Vehicle" ||
+            type === "Armor" ||
+            type === "Equipment Pack" || 
+            type === "Mount" ? (
+              <h1>Additional</h1>
+            ) : null}
             {type === "Weapon" ? (
               <InputText placeholder="Weapon detes" />
             ) : null}
@@ -683,6 +689,15 @@ const ItemGen = () => {
                 minFractionDigits={0}
                 maxFractionDigits={2}
               />
+            ) : null}
+            {type === "Armor" ? (
+              <InputText placeholder="Armor detes" />
+            ) : null}
+            {type === "Equipment Pack" ? (
+              <InputText placeholder="Weapon detes" />
+            ) : null}
+            {type === "Mount" ? (
+              <InputText placeholder="Mount detes" />
             ) : null}
           </div>
         </div>
