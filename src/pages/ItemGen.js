@@ -17,6 +17,7 @@ import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 import { Dropdown } from "primereact/dropdown";
+import { e } from "mathjs";
 
 const ItemGen = () => {
   // Set state variables
@@ -68,6 +69,18 @@ const ItemGen = () => {
 
   const [weapon, setWeapon] = useState();
   const [weaponOptions, setWeaponOptions] = useState();
+
+  const [type, setType] = useState("");
+  const [types, setTypes] = useState();
+  const [typeOptions, setTypeOptions] = useState();
+  const [showTypeInput, setShowTypeInput] = useState(false);
+
+  const [rarity, setRarity] = useState("");
+  const [rarities, setRarities] = useState();
+  const [rarityOptions, setRarityOptions] = useState();
+  const [showRarityInput, setShowRarityInput] = useState(false);
+
+  
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -441,6 +454,75 @@ const ItemGen = () => {
     // console.log(allItems);
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("itemsTypes").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setType(null);
+        console.log(error);
+      }
+      if (data) {
+        setFetchError(null);
+        setTypes(data);
+        setTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("itemsRarities").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setRarity(null);
+        console.log(error);
+      }
+      if (data) {
+        setFetchError(null);
+        setRarities(data);
+        setRarityOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  //On change events
+
+  const onTypeChange = (e) => {
+    setType(e.value);
+    setShowTypeInput(false)
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (21 - 2) +2);
+      setType(typeOptions[r].name);
+    }
+    if (e.value === "Custom"){
+        setShowTypeInput(true)
+    }
+  };
+
+  const onTypeCustom = (e) => {
+    setType(e.target.value)
+  }
+
+  const onRarityChange = (e) => {
+    setRarity(e.value);
+    setShowRarityInput(false)
+    if (e.value === "Random") {
+      let r = Math.floor(Math.random() * (6 - 2) +2);
+      setRarity(rarityOptions[r].name);
+    }
+    if (e.value === "Custom"){
+        setShowRarityInput(true)
+    }
+  };
+
+  const onRarityCustom = (e) => {
+    setRarity(e.target.value)
+  }
+
   return (
     <div className={style.itemgenWrapper}>
       <Navbar />
@@ -454,14 +536,27 @@ const ItemGen = () => {
           </div>
           <div>
             <h1>Type</h1>
+            {showTypeInput ? <InputText onChange={onTypeCustom}/> : null}
             <Dropdown
               optionLabel="name"
-              value={weapon}
-              options={weaponOptions}
-            //   onChange={onRaceChange}
+              value={type}
+              options={typeOptions}
+              onChange={onTypeChange}
               placeholder="Choose Type"
             />
           </div>
+          <div>
+            <h1>Rarity</h1>
+            {showRarityInput ? <InputText onChange={onRarityCustom}/> : null}
+            <Dropdown
+              optionLabel="name"
+              value={rarity}
+              options={rarityOptions}
+              onChange={onRarityChange}
+              placeholder="Choose Rarity"
+            />
+          </div>
+          
         </div>
       </div>
     </div>
