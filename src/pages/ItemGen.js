@@ -110,6 +110,9 @@ const ItemGen = () => {
   const [dmgTypes, setDmgTypes] = useState("");
   const [dmgTypeOptions, setDmgTypeOptions] = useState();
 
+  const [vehicleSpeed, setVehicleSpeed] = useState("")
+  const [vehicleCapacity, setVehicleCapacity] = useState("")
+
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
   const dt = useRef(null);
@@ -569,7 +572,10 @@ const ItemGen = () => {
     "Two-handed",
     "Versatile",
   ];
-
+  const speeds = []
+  for (let n=0; n <= 500; n+= 10){
+    speeds.push(n)
+  }
 
   //On change events
 
@@ -686,15 +692,22 @@ const ItemGen = () => {
 
   const onDmgTypeChange = (e) => {
     setDmgType(e.value);
-    
     if (e.value === "Random") {
       let r = Math.floor(Math.random() * (17 - 1) + 1);
       setDmgType(dmgTypeOptions[r].name);
-    
     } 
   };
 
-  //Todo
+  const onRandomVehicleSpeed = (e) => {
+    let r = Math.floor(Math.random() * (50))
+    setVehicleSpeed(speeds[r])
+  }
+  const onRandomVehicleCapacity = (e) => {
+    let r = Math.floor(Math.random() * (2000 - 1))
+    setVehicleCapacity(r)
+  }
+
+  //Todo Searching
   const onSearchPack = (e) => {};
 
   //Generate and Clear
@@ -754,6 +767,20 @@ const ItemGen = () => {
         let wtChoice = weaponTypes[wt];
         setWeaponType(wtChoice);
       }
+      if (dmgType === ""){
+        let r = Math.floor(Math.random() * (17 - 1) + 1);
+        setDmgType(dmgTypeOptions[r].name);
+      }
+    }
+    if (type === "Vehicle") {
+      if (vehicleSpeed === ""){
+        let r = Math.floor(Math.random() * (50))
+        setVehicleSpeed(speeds[r])
+      }
+      if(vehicleCapacity === ""){
+        let r = Math.floor(Math.random() * (2000 - 1))
+        setVehicleCapacity(r)
+      }
     }
   };
 
@@ -768,6 +795,9 @@ const ItemGen = () => {
     setWeaponDmg("");
     setWeaponProperty("");
     setWeaponType("");
+    setDmgType("")
+    setVehicleSpeed("")
+    setVehicleCapacity("")
   };
 
   return (
@@ -922,6 +952,7 @@ const ItemGen = () => {
               <div>
                 <InputNumber
                   style={{ display: "flex" }}
+                  value={vehicleSpeed}
                   placeholder="Speed"
                   mode="decimal"
                   showButtons
@@ -931,11 +962,18 @@ const ItemGen = () => {
                   incrementButtonIcon="pi pi-plus"
                   decrementButtonIcon="pi pi-minus"
                   minFractionDigits={0}
-                  maxFractionDigits={2}
+                  maxFractionDigits={3}
                   step={5}
                 />
+                 <button
+                  className={style.itemgenBtnName}
+                  onClick={onRandomVehicleSpeed}
+                >
+                  Randomize
+                </button>
                 <InputNumber
                   style={{ display: "flex" }}
+                  value={vehicleCapacity}
                   placeholder="Carry Capacity"
                   mode="decimal"
                   showButtons
@@ -947,6 +985,12 @@ const ItemGen = () => {
                   minFractionDigits={0}
                   maxFractionDigits={2}
                 />
+                 <button
+                  className={style.itemgenBtnName}
+                  onClick={onRandomVehicleCapacity}
+                >
+                  Randomize
+                </button>
               </div>
             ) : null}
             {type === "Armor" ? (
