@@ -449,7 +449,7 @@ const NpcGen = () => {
   const onGenerate = (e) => {
     if (bond === "") {
       let r = Math.round(Math.random() * (9 - 1) +1);
-      setBond(bondOptions[9].name);
+      setBond(bondOptions[r].name);
     } else {
       setBond(bond);
     }

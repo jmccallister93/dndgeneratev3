@@ -566,6 +566,7 @@ const ItemGen = () => {
     if (e.value === "Random") {
       let r = Math.floor(Math.random() * (6 - 2) + 2);
       setCurrency(currencyOptions[r].name);
+      setCurrencyValue(Math.round(Math.random() * (2000 - 1)))
     }
     if (e.value === "Custom") {
       setShowCurrencyInput(true);
@@ -577,6 +578,10 @@ const ItemGen = () => {
   };
 
   const onCurrencyValueChange = (e) => {
+    if (e.value === "Random") {
+      let r = Math.floor(Math.random() * (6 - 2) + 2);
+      setCurrencyValue(r);
+    }
     setCurrencyValue(e.value);
   };
 
@@ -594,8 +599,44 @@ const ItemGen = () => {
     console.log(r);
   };
 
+  //Todo
   const onSearchPack = (e) => {
     
+  }
+
+  //Generate and Clear
+  const onGenerate = (e) => {
+    if (type === "") {
+      let r = Math.floor(Math.random() * (22 - 2) + 2);
+      setType(typeOptions[r].name)
+    } else {
+      setType(type)
+    }
+    if (rarity === "") {
+      let r = Math.floor(Math.random() * (7 - 2) + 2);
+      setRarity(rarityOptions[r].name)
+    } else {
+      setRarity(rarity)
+    }
+    if (currency === "") {
+      let r = Math.floor(Math.random() * (6 - 2) + 2);
+      setCurrency(currencyOptions[r].name)
+    } else {
+      setCurrency(currency)
+    }
+    if (currencyValue === ""){
+      setCurrencyValue(Math.round(Math.random() * (2000 - 1)))
+    } else {
+      setCurrencyValue(currencyValue)
+    }
+
+
+  }
+  const onClear = (e) => {
+    setType("")
+    setRarity("")
+    setCurrency("")
+    setCurrencyValue("")
   }
 
   return (
@@ -636,7 +677,7 @@ const ItemGen = () => {
             />
           </div>
           <div>
-            <h1>Value</h1>
+            <h1>Cost</h1>
             <InputNumber
               value={currencyValue}
               onChange={onCurrencyValueChange}
@@ -800,6 +841,16 @@ const ItemGen = () => {
                 />
               </div>
             ) : null}
+          </div>
+        </div>
+        <div>
+          <div className={style.itemgenBtnWrapper}>
+            <button onClick={onGenerate} className={style.itemgenBtnGen}>
+              Generate
+            </button>
+            <button onClick={onClear} className={style.itemgenBtnClear}>
+              Clear
+            </button>
           </div>
         </div>
       </div>
