@@ -94,6 +94,9 @@ const ItemGen = () => {
 
   const [weight, setWeight] = useState("");
 
+  const [description, setDescription] = useState("")
+  const [descriptionOptions, setDescriptionOptions] = useState()
+
   const [additional, setAddtional] = useState();
   const [additionals, setAdditionals] = useState();
   const [additionalOptions, setAdditionalOptions] = useState();
@@ -585,6 +588,10 @@ const ItemGen = () => {
     setCurrencyValue(e.value);
   };
 
+  const onRandomCurrencyValue = (e) => {
+    setCurrencyValue(Math.round(Math.random() * (2000 - 1)))
+  }
+
   useEffect(() => {
     setCost(currencyValue + " " + currency);
   }, [currencyValue][currency]);
@@ -630,6 +637,25 @@ const ItemGen = () => {
       setCurrencyValue(currencyValue)
     }
 
+    setCost(currencyValue + " " + currency)
+    
+    if (weight === ""){
+      setWeight(Math.round(Math.random() * (2000 - 1)))
+    } else {
+      setWeight(weight)
+    }
+    if (description === ""){
+      setDescription("Random")
+    } else {
+      setDescription(description)
+    }
+    if (type === "Weapon" ||
+    type === "Vehicle" ||
+    type === "Armor" ||
+    type === "Equipment Pack" ||
+    type === "Mount") {
+
+    }
 
   }
   const onClear = (e) => {
@@ -637,6 +663,8 @@ const ItemGen = () => {
     setRarity("")
     setCurrency("")
     setCurrencyValue("")
+    setWeight("")
+    setDescription("")
   }
 
   return (
@@ -692,6 +720,9 @@ const ItemGen = () => {
               minFractionDigits={0}
               maxFractionDigits={2}
             />
+            <button className={style.itemgenBtnName} onClick={onRandomCurrencyValue}>
+              Randomize
+            </button>
             {showCurrencyInput ? (
               <InputText onChange={onCurrencyCustom} placeholder="Currency" />
             ) : null}
@@ -725,7 +756,7 @@ const ItemGen = () => {
           </div>
           <div>
             <h1>Description</h1>
-            <InputTextarea />
+            <InputTextarea value={description}/>
             <button className={style.itemgenBtnName}>Randomize</button>
           </div>
           <div className={style.itemgenWeaponAdditionalWrapper}>
