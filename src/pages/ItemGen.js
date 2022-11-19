@@ -94,12 +94,14 @@ const ItemGen = () => {
 
   const [weight, setWeight] = useState("");
 
-  const [description, setDescription] = useState("")
-  const [descriptionOptions, setDescriptionOptions] = useState()
+  const [description, setDescription] = useState("");
+  const [descriptionOptions, setDescriptionOptions] = useState();
 
   const [additional, setAddtional] = useState();
   const [additionals, setAdditionals] = useState();
   const [additionalOptions, setAdditionalOptions] = useState();
+
+  const [weaponDmg, setWeaponDmg] = useState("")
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -569,7 +571,7 @@ const ItemGen = () => {
     if (e.value === "Random") {
       let r = Math.floor(Math.random() * (6 - 2) + 2);
       setCurrency(currencyOptions[r].name);
-      setCurrencyValue(Math.round(Math.random() * (2000 - 1)))
+      setCurrencyValue(Math.round(Math.random() * (2000 - 1)));
     }
     if (e.value === "Custom") {
       setShowCurrencyInput(true);
@@ -589,8 +591,8 @@ const ItemGen = () => {
   };
 
   const onRandomCurrencyValue = (e) => {
-    setCurrencyValue(Math.round(Math.random() * (2000 - 1)))
-  }
+    setCurrencyValue(Math.round(Math.random() * (2000 - 1)));
+  };
 
   useEffect(() => {
     setCost(currencyValue + " " + currency);
@@ -603,69 +605,77 @@ const ItemGen = () => {
   const onRandomWeight = (e) => {
     let r = Math.floor(Math.random() * (2000 - 0));
     setWeight(r);
-    console.log(r);
   };
-
-  //Todo
-  const onSearchPack = (e) => {
-    
+  const onRandomDescription = (e) => {
+    setDescription("Random");
+  };
+  const onRandomWeaponDmg = (e) =>{
+    const diceOptions = ["d4","d6","d8","d10","d12","d20"]
+    let dice = Math.floor(Math.random() * (5 - 0));
+    let diceChoice = diceOptions[dice]
+    let diceAmount = Math.floor(Math.random() * (8-0) +1)
+    let add = Math.floor(Math.random()*(20-1) +1)
+    setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
+    console.log(weaponDmg)
   }
+  //Todo
+  const onSearchPack = (e) => {};
 
   //Generate and Clear
   const onGenerate = (e) => {
     if (type === "") {
       let r = Math.floor(Math.random() * (22 - 2) + 2);
-      setType(typeOptions[r].name)
+      setType(typeOptions[r].name);
     } else {
-      setType(type)
+      setType(type);
     }
     if (rarity === "") {
       let r = Math.floor(Math.random() * (7 - 2) + 2);
-      setRarity(rarityOptions[r].name)
+      setRarity(rarityOptions[r].name);
     } else {
-      setRarity(rarity)
+      setRarity(rarity);
     }
     if (currency === "") {
       let r = Math.floor(Math.random() * (6 - 2) + 2);
-      setCurrency(currencyOptions[r].name)
+      setCurrency(currencyOptions[r].name);
     } else {
-      setCurrency(currency)
+      setCurrency(currency);
     }
-    if (currencyValue === ""){
-      setCurrencyValue(Math.round(Math.random() * (2000 - 1)))
+    if (currencyValue === "") {
+      setCurrencyValue(Math.round(Math.random() * (2000 - 1)));
     } else {
-      setCurrencyValue(currencyValue)
+      setCurrencyValue(currencyValue);
     }
 
-    setCost(currencyValue + " " + currency)
-    
-    if (weight === ""){
-      setWeight(Math.round(Math.random() * (2000 - 1)))
-    } else {
-      setWeight(weight)
-    }
-    if (description === ""){
-      setDescription("Random")
-    } else {
-      setDescription(description)
-    }
-    if (type === "Weapon" ||
-    type === "Vehicle" ||
-    type === "Armor" ||
-    type === "Equipment Pack" ||
-    type === "Mount") {
+    setCost(currencyValue + " " + currency);
 
+    if (weight === "") {
+      setWeight(Math.round(Math.random() * (2000 - 1)));
+    } else {
+      setWeight(weight);
     }
-
-  }
+    if (description === "") {
+      setDescription("Random");
+    } else {
+      setDescription(description);
+    }
+    if (
+      type === "Weapon" ||
+      type === "Vehicle" ||
+      type === "Armor" ||
+      type === "Equipment Pack" ||
+      type === "Mount"
+    ) {
+    }
+  };
   const onClear = (e) => {
-    setType("")
-    setRarity("")
-    setCurrency("")
-    setCurrencyValue("")
-    setWeight("")
-    setDescription("")
-  }
+    setType("");
+    setRarity("");
+    setCurrency("");
+    setCurrencyValue("");
+    setWeight("");
+    setDescription("");
+  };
 
   return (
     <div className={style.itemgenWrapper}>
@@ -720,7 +730,10 @@ const ItemGen = () => {
               minFractionDigits={0}
               maxFractionDigits={2}
             />
-            <button className={style.itemgenBtnName} onClick={onRandomCurrencyValue}>
+            <button
+              className={style.itemgenBtnName}
+              onClick={onRandomCurrencyValue}
+            >
               Randomize
             </button>
             {showCurrencyInput ? (
@@ -756,8 +769,13 @@ const ItemGen = () => {
           </div>
           <div>
             <h1>Description</h1>
-            <InputTextarea value={description}/>
-            <button className={style.itemgenBtnName}>Randomize</button>
+            <InputTextarea value={description} />
+            <button
+              className={style.itemgenBtnName}
+              onClick={onRandomDescription}
+            >
+              Randomize
+            </button>
           </div>
           <div className={style.itemgenWeaponAdditionalWrapper}>
             {type === "Weapon" ||
@@ -768,9 +786,10 @@ const ItemGen = () => {
               <h1>Additional</h1>
             ) : null}
             {type === "Weapon" ? (
-              <div className={style.itemgenWeaponAdditionalInput}>
-                <InputNumber
-                  className={style.itemgenWeaponDmgInput}
+              <div >
+                <InputText
+                  value={weaponDmg}
+                  // className={style.itemgenWeaponDmgInput}
                   mode="decimal"
                   showButtons
                   buttonLayout="currency"
@@ -780,6 +799,12 @@ const ItemGen = () => {
                   decrementButtonIcon="pi pi-minus"
                   placeholder="Damage Amount"
                 />
+                <button
+                  className={style.itemgenBtnName}
+                  onClick={onRandomWeaponDmg}
+                >
+                  Randomize
+                </button>
                 <Dropdown placeholder="Damage Type" />
                 <Dropdown placeholder="Properties" />
               </div>
@@ -838,7 +863,10 @@ const ItemGen = () => {
             {type === "Equipment Pack" ? (
               <div>
                 <InputText placeholder="Contains" />
-                <button className={style.itemgenBtnSearch} onClick={onSearchPack}>
+                <button
+                  className={style.itemgenBtnSearch}
+                  onClick={onSearchPack}
+                >
                   <i className="pi pi-search"></i>
                 </button>
               </div>
