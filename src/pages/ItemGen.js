@@ -106,9 +106,9 @@ const ItemGen = () => {
   const [weaponProperty, setWeaponProperty] = useState("");
   const [weaponDmgType, setWeaponDmgType] = useState("");
 
-  const [dmgType, setDmgType] = useState("")
-  const [dmgTypes, setDmgTypes] = useState("")
-  const [dmgTypeOptions, setDmgTypeOptions] = useState()
+  const [dmgType, setDmgType] = useState("");
+  const [dmgTypes, setDmgTypes] = useState("");
+  const [dmgTypeOptions, setDmgTypeOptions] = useState();
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -534,8 +534,22 @@ const ItemGen = () => {
   }, []);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("damageTypes").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setDmgTypes(null);
+        console.log(error);
+      }
+      if (data) {
+        setFetchError(null);
+        setDmgTypes(data);
+        setDmgTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
 
-  }, [])
 
   const weaponTypes = [
     "Random",
@@ -556,7 +570,6 @@ const ItemGen = () => {
     "Versatile",
   ];
 
-  const damageTypes = [];
 
   //On change events
 
@@ -649,15 +662,6 @@ const ItemGen = () => {
     let add = Math.floor(Math.random() * (20 - 1) + 1);
     setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
   };
-  // const onRandomWeaponType = (e) => {
-  //   let wt = Math.floor(Math.random() * (4 - 1));
-  //   let wp = Math.floor(Math.random() * (8 - 1));
-  //   let wtChoice = weaponTypes[wt];
-  //   let wpChoice = weaponProperties[wp];
-  //   setWeaponType(wtChoice)
-  //   setWeaponProperty(wpChoice)
-  // };
-  // const onRandomWeaponProperty = (e) => {};
 
   const onWeaponPropertyChange = (e) => {
     setWeaponProperty(e.value);
@@ -678,6 +682,16 @@ const ItemGen = () => {
     } else {
       setWeaponType(e.value);
     }
+  };
+
+  const onDmgTypeChange = (e) => {
+    setDmgType(e.value);
+    
+    if (e.value === "Random") {
+      let r = Math.floor(Math.random() * (17 - 1) + 1);
+      setDmgType(dmgTypeOptions[r].name);
+    
+    } 
   };
 
   //Todo
@@ -883,7 +897,13 @@ const ItemGen = () => {
                 >
                   Randomize
                 </button>
-                <Dropdown placeholder="Damage Type" />
+                <Dropdown
+                  optionLabel="name"
+                  value={dmgType}
+                  options={dmgTypeOptions}
+                  onChange={onDmgTypeChange}
+                  placeholder="Damage Type"
+                />
                 <Dropdown
                   value={weaponType}
                   options={weaponTypes}
