@@ -156,6 +156,23 @@ $secondary-grey: #d6e4e5;
   }
 }
 
+.itemgenBtnSearch{
+  height: 2rem; 
+  color: $primary-grey;
+  width: 2rem;
+  border-radius: 0.5rem;
+  border: 0px;
+  background-color: rgba(0, 187, 255, 0.75);
+  margin: 0.5rem;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgba(0, 187, 255);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(0, 187, 255, 0.5);
+  }
+}
+
 .itemgenBtnName{
   font-size: 1rem;
   color: $secondary-grey;
@@ -170,4 +187,26 @@ $secondary-grey: #d6e4e5;
     cursor: pointer;
     box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
   }
+}
+
+.itemgenWeaponAdditionalWrapper{
+  padding: 0;
+  justify-items: center;
+  text-align: center; 
+  align-items: center;
+}
+
+.itemgenWeaponAdditionalInput{
+  justify-items: center;
+  text-align: center; 
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+.itemgenWeaponDmgInput{
+  display: flex;
+  justify-self: center;
+  padding: 0;
+  margin: 0;
+  
 }

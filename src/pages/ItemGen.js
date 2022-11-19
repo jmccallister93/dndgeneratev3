@@ -594,6 +594,10 @@ const ItemGen = () => {
     console.log(r);
   };
 
+  const onSearchPack = (e) => {
+    
+  }
+
   return (
     <div className={style.itemgenWrapper}>
       <Navbar />
@@ -638,6 +642,12 @@ const ItemGen = () => {
               onChange={onCurrencyValueChange}
               placeholder="Value"
               mode="decimal"
+              showButtons
+              buttonLayout="currency"
+              decrementButtonClassName="p-button-secondary"
+              incrementButtonClassName="p-button-secondary"
+              incrementButtonIcon="pi pi-plus"
+              decrementButtonIcon="pi pi-minus"
               minFractionDigits={0}
               maxFractionDigits={2}
             />
@@ -659,6 +669,12 @@ const ItemGen = () => {
               onChange={onWeightChange}
               placeholder="Weight"
               mode="decimal"
+              showButtons
+              buttonLayout="currency"
+              decrementButtonClassName="p-button-secondary"
+              incrementButtonClassName="p-button-secondary"
+              incrementButtonIcon="pi pi-plus"
+              decrementButtonIcon="pi pi-minus"
               minFractionDigits={0}
               maxFractionDigits={2}
             />
@@ -671,67 +687,117 @@ const ItemGen = () => {
             <InputTextarea />
             <button className={style.itemgenBtnName}>Randomize</button>
           </div>
-          <div>
+          <div className={style.itemgenWeaponAdditionalWrapper}>
             {type === "Weapon" ||
             type === "Vehicle" ||
             type === "Armor" ||
-            type === "Equipment Pack" || 
+            type === "Equipment Pack" ||
             type === "Mount" ? (
               <h1>Additional</h1>
             ) : null}
             {type === "Weapon" ? (
-              <div>
-              <InputNumber placeholder="Damage" />
-              <Dropdown placeholder="Damage Type" />
-              <Dropdown placeholder="Properties" />
+              <div className={style.itemgenWeaponAdditionalInput}>
+                <InputNumber
+                  className={style.itemgenWeaponDmgInput}
+                  mode="decimal"
+                  showButtons
+                  buttonLayout="currency"
+                  decrementButtonClassName="p-button-secondary"
+                  incrementButtonClassName="p-button-secondary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                  placeholder="Damage Amount"
+                />
+                <Dropdown placeholder="Damage Type" />
+                <Dropdown placeholder="Properties" />
               </div>
             ) : null}
             {type === "Vehicle" ? (
               <div>
-              <InputNumber
-                placeholder="Speed"
-                mode="decimal"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <InputNumber
-              placeholder="Carry Capacity"
-              mode="decimal"
-              minFractionDigits={0}
-              maxFractionDigits={2}
-            />
-            </div>
+                <InputNumber
+                  style={{ display: "flex" }}
+                  placeholder="Speed"
+                  mode="decimal"
+                  showButtons
+                  buttonLayout="currency"
+                  decrementButtonClassName="p-button-secondary"
+                  incrementButtonClassName="p-button-secondary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                  minFractionDigits={0}
+                  maxFractionDigits={2}
+                  step={5}
+                />
+                <InputNumber
+                  style={{ display: "flex" }}
+                  placeholder="Carry Capacity"
+                  mode="decimal"
+                  showButtons
+                  buttonLayout="currency"
+                  decrementButtonClassName="p-button-secondary"
+                  incrementButtonClassName="p-button-secondary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                  minFractionDigits={0}
+                  maxFractionDigits={2}
+                />
+              </div>
             ) : null}
             {type === "Armor" ? (
               <div>
-                   <InputNumber
-              placeholder="Armor Class"
-              mode="decimal"
-              minFractionDigits={0}
-              maxFractionDigits={2}
-            />
-              <Dropdown placeholder="Modifier" />
-              <Dropdown placeholder="Strength Req." />
-              <Dropdown placeholder="Stealth Disadvantage" />
+                <InputNumber
+                  style={{ display: "flex" }}
+                  placeholder="Armor Class"
+                  mode="decimal"
+                  showButtons
+                  buttonLayout="currency"
+                  decrementButtonClassName="p-button-secondary"
+                  incrementButtonClassName="p-button-secondary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                  minFractionDigits={0}
+                  maxFractionDigits={2}
+                />
+                <Dropdown placeholder="Modifier" />
+                <Dropdown placeholder="Strength Req." />
+                <Dropdown placeholder="Stealth Disadvantage" />
               </div>
             ) : null}
             {type === "Equipment Pack" ? (
-              <InputText placeholder="Contains" />
+              <div>
+                <InputText placeholder="Contains" />
+                <button className={style.itemgenBtnSearch} onClick={onSearchPack}>
+                  <i className="pi pi-search"></i>
+                </button>
+              </div>
             ) : null}
             {type === "Mount" ? (
-                <div>
+              <div>
                 <InputNumber
                   placeholder="Speed"
                   mode="decimal"
+                  showButtons
+                  buttonLayout="currency"
+                  decrementButtonClassName="p-button-secondary"
+                  incrementButtonClassName="p-button-secondary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                  step={5}
                   minFractionDigits={0}
                   maxFractionDigits={2}
                 />
                 <InputNumber
-                placeholder="Carry Capacity"
-                mode="decimal"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
+                  placeholder="Carry Capacity"
+                  mode="decimal"
+                  showButtons
+                  buttonLayout="currency"
+                  decrementButtonClassName="p-button-secondary"
+                  incrementButtonClassName="p-button-secondary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                  minFractionDigits={0}
+                  maxFractionDigits={2}
+                />
               </div>
             ) : null}
           </div>
