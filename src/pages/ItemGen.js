@@ -101,7 +101,10 @@ const ItemGen = () => {
   const [additionals, setAdditionals] = useState();
   const [additionalOptions, setAdditionalOptions] = useState();
 
-  const [weaponDmg, setWeaponDmg] = useState("")
+  const [weaponDmg, setWeaponDmg] = useState("");
+  const [weaponType, setWeaponType] = useState("");
+  const [weaponProperty, setWeaponProperty] = useState("");
+  const [weaponDmgType, setWeaponDmgType] = useState("")
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -526,6 +529,29 @@ const ItemGen = () => {
     fetchData();
   }, []);
 
+  const weaponTypes = [
+    "Random",
+    "Simple Melee",
+    "Simple Ranged",
+    "Martial Melee",
+    "Martial Ranged",
+  ];
+  const weaponProperties = [
+    "Random",
+    "Finesse",
+    "Heavy",
+    "Light",
+    "Range",
+    "Reach",
+    "Thrown",
+    "Two-handed",
+    "Versatile",
+  ];
+
+  const damageTypes = [
+
+  ]
+
   //On change events
 
   const onTypeChange = (e) => {
@@ -609,15 +635,45 @@ const ItemGen = () => {
   const onRandomDescription = (e) => {
     setDescription("Random");
   };
-  const onRandomWeaponDmg = (e) =>{
-    const diceOptions = ["d4","d6","d8","d10","d12","d20"]
-    let dice = Math.floor(Math.random() * (5 - 0));
-    let diceChoice = diceOptions[dice]
-    let diceAmount = Math.floor(Math.random() * (8-0) +1)
-    let add = Math.floor(Math.random()*(20-1) +1)
+  const onRandomWeaponDmg = (e) => {
+    const diceOptions = ["d4", "d6", "d8", "d10", "d12", "d20"];
+    let dice = Math.floor(Math.random() * (6 - 0));
+    let diceChoice = diceOptions[dice];
+    let diceAmount = Math.floor(Math.random() * (8 - 0) + 1);
+    let add = Math.floor(Math.random() * (20 - 1) + 1);
     setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
-    console.log(weaponDmg)
+  };
+  // const onRandomWeaponType = (e) => {
+  //   let wt = Math.floor(Math.random() * (4 - 1));
+  //   let wp = Math.floor(Math.random() * (8 - 1));
+  //   let wtChoice = weaponTypes[wt];
+  //   let wpChoice = weaponProperties[wp];
+  //   setWeaponType(wtChoice)
+  //   setWeaponProperty(wpChoice)
+  // };
+  // const onRandomWeaponProperty = (e) => {};
+
+  const onWeaponPropertyChange = (e) => {
+    setWeaponProperty(e.value)
+    if(e.value === "Random"){
+      let wp = Math.floor(Math.random() * (9 - 1) + 1);
+      let wpChoice = weaponProperties[wp];
+      setWeaponProperty(wpChoice)
+    } else{
+      setWeaponProperty(e.value)
+    }
   }
+  const onWeaponTypeChange = (e) => {
+    setWeaponType(e.value)
+    if(e.value === "Random"){
+      let wt = Math.floor(Math.random() * (5 - 1) + 1);
+      let wtChoice = weaponTypes[wt];
+      setWeaponType(wtChoice)
+    } else{
+      setWeaponType(e.value)
+    }
+  }
+
   //Todo
   const onSearchPack = (e) => {};
 
@@ -659,15 +715,19 @@ const ItemGen = () => {
     } else {
       setDescription(description);
     }
-    if (
-      type === "Weapon" ||
-      type === "Vehicle" ||
-      type === "Armor" ||
-      type === "Equipment Pack" ||
-      type === "Mount"
-    ) {
+    if (type === "Weapon") {
+      if (weaponDmg === "") {
+        const diceOptions = ["d4", "d6", "d8", "d10", "d12", "d20"];
+        let dice = Math.floor(Math.random() * (5 - 0));
+        let diceChoice = diceOptions[dice];
+        let diceAmount = Math.floor(Math.random() * (8 - 0) + 1);
+        let add = Math.floor(Math.random() * (20 - 1) + 1);
+        setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
+      }
     }
   };
+
+  //Clear
   const onClear = (e) => {
     setType("");
     setRarity("");
@@ -675,6 +735,9 @@ const ItemGen = () => {
     setCurrencyValue("");
     setWeight("");
     setDescription("");
+    setWeaponDmg("");
+    setWeaponProperty("");
+    setWeaponType("")
   };
 
   return (
@@ -786,10 +849,9 @@ const ItemGen = () => {
               <h1>Additional</h1>
             ) : null}
             {type === "Weapon" ? (
-              <div >
+              <div>
                 <InputText
                   value={weaponDmg}
-                  // className={style.itemgenWeaponDmgInput}
                   mode="decimal"
                   showButtons
                   buttonLayout="currency"
@@ -806,7 +868,18 @@ const ItemGen = () => {
                   Randomize
                 </button>
                 <Dropdown placeholder="Damage Type" />
-                <Dropdown placeholder="Properties" />
+                <Dropdown
+                  value={weaponType}
+                  options={weaponTypes}
+                  onChange={onWeaponTypeChange}
+                  placeholder="Weapon Type"
+                />
+                <Dropdown
+                  value={weaponProperty}
+                  options={weaponProperties}
+                  onChange={onWeaponPropertyChange}
+                  placeholder="Property"
+                />
               </div>
             ) : null}
             {type === "Vehicle" ? (
