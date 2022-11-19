@@ -104,7 +104,11 @@ const ItemGen = () => {
   const [weaponDmg, setWeaponDmg] = useState("");
   const [weaponType, setWeaponType] = useState("");
   const [weaponProperty, setWeaponProperty] = useState("");
-  const [weaponDmgType, setWeaponDmgType] = useState("")
+  const [weaponDmgType, setWeaponDmgType] = useState("");
+
+  const [dmgType, setDmgType] = useState("")
+  const [dmgTypes, setDmgTypes] = useState("")
+  const [dmgTypeOptions, setDmgTypeOptions] = useState()
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -529,6 +533,10 @@ const ItemGen = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+
+  }, [])
+
   const weaponTypes = [
     "Random",
     "Simple Melee",
@@ -548,9 +556,7 @@ const ItemGen = () => {
     "Versatile",
   ];
 
-  const damageTypes = [
-
-  ]
+  const damageTypes = [];
 
   //On change events
 
@@ -654,25 +660,25 @@ const ItemGen = () => {
   // const onRandomWeaponProperty = (e) => {};
 
   const onWeaponPropertyChange = (e) => {
-    setWeaponProperty(e.value)
-    if(e.value === "Random"){
+    setWeaponProperty(e.value);
+    if (e.value === "Random") {
       let wp = Math.floor(Math.random() * (9 - 1) + 1);
       let wpChoice = weaponProperties[wp];
-      setWeaponProperty(wpChoice)
-    } else{
-      setWeaponProperty(e.value)
+      setWeaponProperty(wpChoice);
+    } else {
+      setWeaponProperty(e.value);
     }
-  }
+  };
   const onWeaponTypeChange = (e) => {
-    setWeaponType(e.value)
-    if(e.value === "Random"){
+    setWeaponType(e.value);
+    if (e.value === "Random") {
       let wt = Math.floor(Math.random() * (5 - 1) + 1);
       let wtChoice = weaponTypes[wt];
-      setWeaponType(wtChoice)
-    } else{
-      setWeaponType(e.value)
+      setWeaponType(wtChoice);
+    } else {
+      setWeaponType(e.value);
     }
-  }
+  };
 
   //Todo
   const onSearchPack = (e) => {};
@@ -724,6 +730,16 @@ const ItemGen = () => {
         let add = Math.floor(Math.random() * (20 - 1) + 1);
         setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
       }
+      if (weaponProperty === "") {
+        let wp = Math.floor(Math.random() * (9 - 1) + 1);
+        let wpChoice = weaponProperties[wp];
+        setWeaponProperty(wpChoice);
+      }
+      if (weaponType === "") {
+        let wt = Math.floor(Math.random() * (5 - 1) + 1);
+        let wtChoice = weaponTypes[wt];
+        setWeaponType(wtChoice);
+      }
     }
   };
 
@@ -737,7 +753,7 @@ const ItemGen = () => {
     setDescription("");
     setWeaponDmg("");
     setWeaponProperty("");
-    setWeaponType("")
+    setWeaponType("");
   };
 
   return (
@@ -878,7 +894,7 @@ const ItemGen = () => {
                   value={weaponProperty}
                   options={weaponProperties}
                   onChange={onWeaponPropertyChange}
-                  placeholder="Property"
+                  placeholder="Weapon Property"
                 />
               </div>
             ) : null}
