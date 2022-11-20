@@ -55,6 +55,13 @@ const MonsterGen = () => {
   const [abilities, setAbilities] = useState("");
   const [abilityOptions, setAbilityOptions] = useState();
 
+  const [str, setStr] = useState("");
+  const [dex, setDex] = useState("");
+  const [con, setCon] = useState("");
+  const [int, setInt] = useState("");
+  const [wis, setWis] = useState("");
+  const [cha, setCha] = useState("");
+
   const [save, setSave] = useState("");
   const [saves, setSaves] = useState("");
   const [saveOptions, setSaveOptions] = useState();
@@ -115,7 +122,6 @@ const MonsterGen = () => {
 
   //TODO Names
   useEffect(() => {});
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -549,24 +555,23 @@ const MonsterGen = () => {
       setArmorType(armorTypeOptions[r].name);
     }
   };
-  
 
   const onHpChange = (e) => {
-    setHp(e.value)
+    setHp(e.value);
   };
 
   const onRandomHp = (e) => {
     let r = Math.floor(Math.random() * 500);
     setHp(r);
-  }
+  };
 
   const onSpeedChange = (e) => {
-    setSpeed(e.value)
+    setSpeed(e.value);
   };
   const onRandomSpeed = (e) => {
-    let r = Math.floor(Math.random() * (120-0));
+    let r = Math.floor(Math.random() * (120 - 0));
     setSpeed(r);
-  }
+  };
 
   const onSpeedTypeChange = (e) => {
     setSpeedType(e.value);
@@ -575,18 +580,59 @@ const MonsterGen = () => {
       setSpeedType(speedTypeOptions[r].name);
     }
   };
- 
+
+  //TODO List of Speeds
   const onSpeedExtraChange = (e) => {
-    setSpeedExtra(e.value)
+    setSpeedExtra(e.value);
   };
   const onRandomSpeedExtra = (e) => {
-    let r = Math.floor(Math.random() * (120-0));
+    let r = Math.floor(Math.random() * (120 - 0));
     setSpeedExtra(r);
-  }
-
+  };
 
   //TODO
-  const onAbilityChange = (e) => {};
+  const onStrChange = (e) => {
+    setStr(e.value);
+  };
+  const onRandomStr = (e) => {
+    let r = Math.floor(Math.random() * (30 - 0));
+    setStr(r);
+  };
+  const onDexChange = (e) => {
+    setDex(e.value);
+  };
+  const onRandomDex = (e) => {
+    let r = Math.floor(Math.random() * (30 - 0));
+    setDex(r);
+  };
+  const onConChange = (e) => {
+    setCon(e.value);
+  };
+  const onRandomCon = (e) => {
+    let r = Math.floor(Math.random() * (30 - 0));
+    setCon(r);
+  };
+  const onIntChange = (e) => {
+    setInt(e.value);
+  };
+  const onRandomInt = (e) => {
+    let r = Math.floor(Math.random() * (30 - 0));
+    setInt(r);
+  };
+  const onWisChange = (e) => {
+    setWis(e.value);
+  };
+  const onRandomWis = (e) => {
+    let r = Math.floor(Math.random() * (30 - 0));
+    setWis(r);
+  };
+  const onChaChange = (e) => {
+    setCha(e.value);
+  };
+  const onRandomCha = (e) => {
+    let r = Math.floor(Math.random() * (30 - 0));
+    setCha(r);
+  };
 
   //   const onSaveChange = (e) => {
   //     setSave(e.value);
@@ -725,21 +771,67 @@ const MonsterGen = () => {
     } else {
       setArmorType(armorType);
     }
-    //TODO
-    // if (hp === "")
-    //TODO
-    //if (speed === "")
+    if (hp === "") {
+      let r = Math.floor(Math.random() * 500);
+      setHp(r);
+    } else {
+      setHp(hp);
+    }
+    if (speed === "") {
+      let r = Math.floor(Math.random() * (120 - 0));
+      setSpeed(r);
+    } else {
+      setSpeed(speed);
+    }
     if (speedType === "") {
       let r = Math.round(Math.random() * (6 - 1) + 1);
       setSpeedType(speedTypeOptions[r].name);
     } else {
       setSpeedType(speedType);
     }
-    //TODO
-    // if(speedExtra === "")
-    //TODO
-    // if(ability === "")
-    //TOD
+    if (speedExtra === "") {
+      let r = Math.floor(Math.random() * (120 - 0));
+      setSpeedExtra(r);
+    } else {
+      setSpeedExtra(speedExtra);
+    }
+    if (str === "") {
+      let r = Math.floor(Math.random() * (30 - 0));
+      setStr(r);
+    } else {
+      setStr(str);
+    }
+    if (dex === "") {
+      let r = Math.floor(Math.random() * (30 - 0));
+      setDex(r);
+    } else {
+      setDex(dex);
+    }
+    if (con === "") {
+      let r = Math.floor(Math.random() * (30 - 0));
+      setCon(r);
+    } else {
+      setCon(con);
+    }
+    if (int === "") {
+      let r = Math.floor(Math.random() * (30 - 0));
+      setInt(r);
+    } else {
+      setInt(int);
+    }
+    if (wis === "") {
+      let r = Math.floor(Math.random() * (30 - 0));
+      setWis(r);
+    } else {
+      setWis(wis);
+    }
+    if (cha === "") {
+      let r = Math.floor(Math.random() * (30 - 0));
+      setCha(r);
+    } else {
+      setCha(cha);
+    }
+//TODO
     // if(save === "")
     if (vuln === "") {
       let r = Math.round(Math.random() * (17 - 1) + 1);
@@ -807,6 +899,7 @@ const MonsterGen = () => {
     } else {
       setLegend(legend);
     }
+//TODO
     // if (lair === "") {
     //     let r = Math.round(Math.random() * (39 - 1) + 1);
     //     setLair(lairOptions[r].name);
@@ -826,7 +919,12 @@ const MonsterGen = () => {
     setSpeed("");
     setSpeedType("");
     setSpeedExtra("");
-    setAbility("");
+    setStr("");
+    setDex("");
+    setCon("");
+    setInt("");
+    setWis("");
+    setCha("");
     setSave("");
     setSkill("");
     setVuln("");
@@ -929,10 +1027,7 @@ const MonsterGen = () => {
                 minFractionDigits={0}
                 maxFractionDigits={2}
               />
-               <button
-                onClick={onRandomHp}
-                className={style.monstergenBtnName}
-              >
+              <button onClick={onRandomHp} className={style.monstergenBtnName}>
                 Randomize
               </button>
             </div>
@@ -952,7 +1047,7 @@ const MonsterGen = () => {
                 maxFractionDigits={2}
                 step={5}
               />
-               <button
+              <button
                 onClick={onRandomSpeed}
                 className={style.monstergenBtnName}
               >
@@ -982,7 +1077,7 @@ const MonsterGen = () => {
                 maxFractionDigits={2}
                 step={5}
               />
-               <button
+              <button
                 onClick={onRandomSpeedExtra}
                 className={style.monstergenBtnName}
               >
@@ -992,149 +1087,203 @@ const MonsterGen = () => {
           </div>
           <div className={style.monstergenSubsection}>
             <h1>Ability Scores</h1>
-          <div>  
-            <h1>Strength</h1>
-            <Dropdown
-              optionLabel="name"
-              value={ability}
-              options={abilityOptions}
-              onChange={onAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div>
-          <div>  
-            <h1>Dexterity</h1>
-            <Dropdown
-              optionLabel="name"
-              value={ability}
-              options={abilityOptions}
-              onChange={onAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div>
-          <div>  
-            <h1>Constitution</h1>
-            <Dropdown
-              optionLabel="name"
-              value={ability}
-              options={abilityOptions}
-              onChange={onAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div>
-          <div>  
-            <h1>Intelligence</h1>
-            <Dropdown
-              optionLabel="name"
-              value={ability}
-              options={abilityOptions}
-              onChange={onAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div>
-          <div>  
-            <h1>Wisdom</h1>
-            <Dropdown
-              optionLabel="name"
-              value={ability}
-              options={abilityOptions}
-              onChange={onAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div>
-          <div>  
-            <h1>Charisma</h1>
-            <Dropdown
-              optionLabel="name"
-              value={ability}
-              options={abilityOptions}
-              onChange={onAbilityChange}
-              placeholder="Choose Ability"
-            />
-          </div>
+            <div>
+              <h1>Strength</h1>
+              <InputNumber
+                value={str}
+                onChange={onStrChange}
+                placeholder="Set STR"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button onClick={onRandomStr} className={style.monstergenBtnName}>
+                Randomize
+              </button>
+            </div>
+            <div>
+              <h1>Dexterity</h1>
+              <InputNumber
+                value={dex}
+                onChange={onDexChange}
+                placeholder="Set DEX"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button onClick={onRandomDex} className={style.monstergenBtnName}>
+                Randomize
+              </button>
+            </div>
+            <div>
+              <h1>Constitution</h1>
+              <InputNumber
+                value={con}
+                onChange={onConChange}
+                placeholder="Set CON"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button onClick={onRandomCon} className={style.monstergenBtnName}>
+                Randomize
+              </button>
+            </div>
+            <div>
+              <h1>Intelligence</h1>
+              <InputNumber
+                value={int}
+                onChange={onIntChange}
+                placeholder="Set INT"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button onClick={onRandomInt} className={style.monstergenBtnName}>
+                Randomize
+              </button>
+            </div>
+            <div>
+              <h1>Wisdom</h1>
+              <InputNumber
+                value={wis}
+                onChange={onWisChange}
+                placeholder="Set WIS"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button onClick={onRandomWis} className={style.monstergenBtnName}>
+                Randomize
+              </button>
+            </div>
+            <div>
+              <h1>Charisma</h1>
+              <InputNumber
+                value={cha}
+                onChange={onChaChange}
+                placeholder="Set CHA"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button onClick={onRandomCha} className={style.monstergenBtnName}>
+                Randomize
+              </button>
+            </div>
           </div>
           <div className={style.monstergenSubsection}>
             <h1>Saves/Skills/Dmgs</h1>
-          <div>
-            <h1>Saves</h1>
-            <Dropdown
-              optionLabel="name"
-              value={save}
-              options={saveOptions}
-              //   onChange={onSaveChange}
-              placeholder="Choose Save"
-            />
-          </div>
-          <div>
-            <h1>Skill</h1>
-            <Dropdown
-              optionLabel="name"
-              value={skill}
-              options={skillOptions}
-              onChange={onSkillChange}
-              placeholder="Choose Skill"
-            />
-          </div>
-          <div>
-            <h1>Vulnerabities</h1>
-            <Dropdown
-              optionLabel="name"
-              value={vuln}
-              options={vulnOptions}
-              onChange={onVulnChange}
-              placeholder="Choose Vulnerabities"
-            />
-          </div>
-          <div>
-            <h1>Immunities</h1>
-            <Dropdown
-              optionLabel="name"
-              value={immune}
-              options={immuneOptions}
-              onChange={onImmuneChange}
-              placeholder="Choose Immunities"
-            />
-          </div>
-          <div>
-            <h1>Resistances</h1>
-            <Dropdown
-              optionLabel="name"
-              value={resist}
-              options={resistOptions}
-              onChange={onResistChange}
-              placeholder="Choose Resistances"
-            />
-          </div>
-          <div>
-            <h1>Condition Immunities</h1>
-            <Dropdown
-              optionLabel="name"
-              value={condition}
-              options={conditionOptions}
-              onChange={onConditionChange}
-              placeholder="Choose Condition Immunities"
-            />
-          </div>
-          <div>
-            <h1>Senses</h1>
-            <Dropdown
-              optionLabel="name"
-              value={sense}
-              options={senseOptions}
-              onChange={onSenseChange}
-              placeholder="Choose Senses"
-            />
-          </div>
-          <div>
-            <h1>Languages</h1>
-            <Dropdown
-              optionLabel="name"
-              value={lang}
-              options={langOptions}
-              onChange={onLangChange}
-              placeholder="Choose Languages"
-            />
-          </div>
+            <div>
+              <h1>Saves</h1>
+              <Dropdown
+                optionLabel="name"
+                value={save}
+                options={saveOptions}
+                //   onChange={onSaveChange}
+                placeholder="Choose Save"
+              />
+            </div>
+            <div>
+              <h1>Skill</h1>
+              <Dropdown
+                optionLabel="name"
+                value={skill}
+                options={skillOptions}
+                onChange={onSkillChange}
+                placeholder="Choose Skill"
+              />
+            </div>
+            <div>
+              <h1>Vulnerabities</h1>
+              <Dropdown
+                optionLabel="name"
+                value={vuln}
+                options={vulnOptions}
+                onChange={onVulnChange}
+                placeholder="Choose Vulnerabities"
+              />
+            </div>
+            <div>
+              <h1>Immunities</h1>
+              <Dropdown
+                optionLabel="name"
+                value={immune}
+                options={immuneOptions}
+                onChange={onImmuneChange}
+                placeholder="Choose Immunities"
+              />
+            </div>
+            <div>
+              <h1>Resistances</h1>
+              <Dropdown
+                optionLabel="name"
+                value={resist}
+                options={resistOptions}
+                onChange={onResistChange}
+                placeholder="Choose Resistances"
+              />
+            </div>
+            <div>
+              <h1>Condition Immunities</h1>
+              <Dropdown
+                optionLabel="name"
+                value={condition}
+                options={conditionOptions}
+                onChange={onConditionChange}
+                placeholder="Choose Condition Immunities"
+              />
+            </div>
+            <div>
+              <h1>Senses</h1>
+              <Dropdown
+                optionLabel="name"
+                value={sense}
+                options={senseOptions}
+                onChange={onSenseChange}
+                placeholder="Choose Senses"
+              />
+            </div>
+            <div>
+              <h1>Languages</h1>
+              <Dropdown
+                optionLabel="name"
+                value={lang}
+                options={langOptions}
+                onChange={onLangChange}
+                placeholder="Choose Languages"
+              />
+            </div>
           </div>
           <div>
             <h1>Sepcials</h1>
@@ -1284,27 +1433,27 @@ const MonsterGen = () => {
                 <h2 className={style.monstergenDescHeader}>Stats</h2>
                 <div className={style.monstergenDetail}>
                   <h1 className={style.monstergenDetailTitle}>STR: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{}</h1>
+                  <h1 className={style.monstergenDetailOutput}>{str}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
                   <h1 className={style.monstergenDetailTitle}>DEX: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{}</h1>
+                  <h1 className={style.monstergenDetailOutput}>{dex}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
                   <h1 className={style.monstergenDetailTitle}>CON: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{}</h1>
+                  <h1 className={style.monstergenDetailOutput}>{con}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
                   <h1 className={style.monstergenDetailTitle}>INT: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{}</h1>
+                  <h1 className={style.monstergenDetailOutput}>{int}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
                   <h1 className={style.monstergenDetailTitle}>WIS: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{}</h1>
+                  <h1 className={style.monstergenDetailOutput}>{wis}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
                   <h1 className={style.monstergenDetailTitle}>CHA: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{}</h1>
+                  <h1 className={style.monstergenDetailOutput}>{cha}</h1>
                 </div>
               </div>
             </div>
