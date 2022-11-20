@@ -126,6 +126,8 @@ const ItemGen = () => {
   const [mountSpeed, setMountSpeed] = useState("");
   const [mountCapacity, setMountCapacity] = useState("");
 
+  const [genItem, setGenItem] = useState();
+
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
   const dt = useRef(null);
@@ -1303,6 +1305,7 @@ const ItemGen = () => {
         {/* Display */}
         {/* Main Display */}
         <div className={style.itemgenDisplay}>
+        
           {/* Display Wrapper */}
           <div className={style.itemgenDescWrapper}>
             {/* Display Desc  */}
@@ -1403,14 +1406,10 @@ const ItemGen = () => {
                   <div>
                     <div className={style.itemgenDetail}>
                       <h1 className={style.itemgenDetailTitle}>Items: </h1>
-                      <h1 className={style.itemgenDetailOutput}>
-                        {}
-                      </h1>
+                      <h1 className={style.itemgenDetailOutput}>{}</h1>
                     </div>
                   </div>
                 ) : null}
-
-
               </div>
             </div>
             {/* Description */}
@@ -1421,6 +1420,10 @@ const ItemGen = () => {
                 {/* <h1 className={style.itemgenDetailOutput}>{description}</h1> */}
               </div>
             </div>
+          </div>
+          <div className="flex align-items-center">
+            <h3 className="text-xl  mr-2">Export</h3>
+            {exportBtns}
           </div>
         </div>
       </div>

@@ -34,13 +34,6 @@ const Create = () => {
     </Card>
   );
 
-  const cardItemCollection = (
-    <Card className={style.createCard}>
-      <h3>Item Collection</h3>
-      <p>Collection of all Items!</p>
-    </Card>
-  );
-
   return (
     <div className={style.createWrapper}>
       <Navbar />
