@@ -105,13 +105,26 @@ const ItemGen = () => {
   const [weaponType, setWeaponType] = useState("");
   const [weaponProperty, setWeaponProperty] = useState("");
   const [weaponDmgType, setWeaponDmgType] = useState("");
-
   const [dmgType, setDmgType] = useState("");
   const [dmgTypes, setDmgTypes] = useState("");
   const [dmgTypeOptions, setDmgTypeOptions] = useState();
 
-  const [vehicleSpeed, setVehicleSpeed] = useState("")
-  const [vehicleCapacity, setVehicleCapacity] = useState("")
+  const [vehicleSpeed, setVehicleSpeed] = useState("");
+  const [vehicleCapacity, setVehicleCapacity] = useState("");
+
+  const [armorAc, setArmorAc] = useState("");
+  const [armorMod, setArmorMod] = useState("");
+  const [armorStr, setArmorStr] = useState("");
+  const [armorStealth, setArmorStealth] = useState("");
+
+  const [abilities, setAbilities] = useState("");
+  const [abilitiesOptions, setAbilitiesOptions] = useState("");
+
+  const [abilityModOptions, setAbilityModOptions] = useState("");
+  const [abilityMods, setAbilityMods] = useState("");
+
+  const [mountSpeed, setMountSpeed] = useState("");
+  const [mountCapacity, setMountCapacity] = useState("");
 
   //Export Logic
   const [selectedItems, setSelectedItems] = useState(null);
@@ -202,7 +215,9 @@ const ItemGen = () => {
     const fetchData = async () => {
       const { data, error } = await supabase
         .from("itemsAdventuringGear")
-        .select();
+        
+          .select()
+          .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setAdventuringGear(null);
@@ -221,7 +236,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsArmor").select();
+      const { data, error } = await supabase.from("itemsArmor")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setArmor(null);
@@ -238,7 +255,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsArt").select();
+      const { data, error } = await supabase.from("itemsArt")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setArt(null);
@@ -255,7 +274,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsContainers").select();
+      const { data, error } = await supabase.from("itemsContainers")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setContainer(null);
@@ -276,7 +297,9 @@ const ItemGen = () => {
     const fetchData = async () => {
       const { data, error } = await supabase
         .from("itemsEquipmentPacks")
-        .select();
+        
+          .select()
+          .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setPack(null);
@@ -293,7 +316,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsExpenses").select();
+      const { data, error } = await supabase.from("itemsExpenses")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setExpense(null);
@@ -310,7 +335,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsGemstones").select();
+      const { data, error } = await supabase.from("itemsGemstones")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setGemstone(null);
@@ -327,7 +354,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsMagicAll").select();
+      const { data, error } = await supabase.from("itemsMagicAll")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setMagic(null);
@@ -344,7 +373,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsMountItems").select();
+      const { data, error } = await supabase.from("itemsMountItems")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setMountItem(null);
@@ -363,7 +394,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsMounts").select();
+      const { data, error } = await supabase.from("itemsMounts")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setMount(null);
@@ -380,7 +413,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTools").select();
+      const { data, error } = await supabase.from("itemsTools")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setTool(null);
@@ -397,7 +432,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTradeGoods").select();
+      const { data, error } = await supabase.from("itemsTradeGoods")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setTradeGood(null);
@@ -416,7 +453,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTrinkets").select();
+      const { data, error } = await supabase.from("itemsTrinkets")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setTrinket(null);
@@ -433,7 +472,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsVehicles").select();
+      const { data, error } = await supabase.from("itemsVehicles")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setVehicle(null);
@@ -457,7 +498,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsWeapons").select();
+      const { data, error } = await supabase.from("itemsWeapons")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setWeapon(null);
@@ -487,7 +530,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTypes").select();
+      const { data, error } = await supabase.from("itemsTypes")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setType(null);
@@ -504,7 +549,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsRarities").select();
+      const { data, error } = await supabase.from("itemsRarities")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setRarity(null);
@@ -521,7 +568,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsCurrencies").select();
+      const { data, error } = await supabase.from("itemsCurrencies")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setCurrency(null);
@@ -538,7 +587,9 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("damageTypes").select();
+      const { data, error } = await supabase.from("damageTypes")
+        .select()
+        .order('id')
       if (error) {
         setFetchError("Could not fetch the data");
         setDmgTypes(null);
@@ -553,6 +604,49 @@ const ItemGen = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("abilitiesModifiers")
+        
+          .select()
+          .order('id')
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setAbilityMods(null);
+        console.log(error);
+      }
+      if (data) {
+        setFetchError(null);
+        setAbilityMods(data);
+        setAbilityModOptions(
+          data.map((r) => ({ name: r.name, value: r.value }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("abilities")
+        .select()
+        .order('id')
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setAbilities(null);
+        console.log(error);
+      }
+      if (data) {
+        setFetchError(null);
+        setAbilities(data);
+        setAbilitiesOptions(
+          data.map((r) => ({ name: r.name, value: r.value }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
 
   const weaponTypes = [
     "Random",
@@ -572,9 +666,14 @@ const ItemGen = () => {
     "Two-handed",
     "Versatile",
   ];
-  const speeds = []
-  for (let n=0; n <= 500; n+= 10){
-    speeds.push(n)
+  const speeds = [];
+  for (let n = 0; n <= 500; n += 10) {
+    speeds.push(n);
+  }
+
+  const acOptions = [];
+  for (let n = 0; n <= 30; n += 1) {
+    acOptions.push(n);
   }
 
   //On change events
@@ -695,17 +794,70 @@ const ItemGen = () => {
     if (e.value === "Random") {
       let r = Math.floor(Math.random() * (17 - 1) + 1);
       setDmgType(dmgTypeOptions[r].name);
-    } 
+    }
   };
 
   const onRandomVehicleSpeed = (e) => {
-    let r = Math.floor(Math.random() * (50))
-    setVehicleSpeed(speeds[r])
-  }
+    let r = Math.floor(Math.random() * 50);
+    setVehicleSpeed(speeds[r]);
+  };
   const onRandomVehicleCapacity = (e) => {
-    let r = Math.floor(Math.random() * (2000 - 1))
-    setVehicleCapacity(r)
-  }
+    let r = Math.floor(Math.random() * (2000 - 1));
+    setVehicleCapacity(r);
+  };
+
+  const onRandomAc = (e) => {
+    let r = Math.floor(Math.random() * 30);
+    setArmorAc(acOptions[r]);
+  };
+
+  const onChangeArmorMod = (e) => {
+    setArmorMod(e.value);
+    if (e.value === "Random") {
+      let r = Math.floor(Math.random() * (7 - 1) + 1);
+      setArmorMod(abilitiesOptions[r].name);
+    }
+  };
+
+  const strReq = [
+    "Random",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+  ];
+
+  const onChangeArmorStr = (e) => {
+    setArmorStr(e.value);
+    if (e.value === "Random") {
+      let r = Math.floor(Math.random() * (10 - 1) + 1);
+      setArmorStr(strReq[r]);
+    }
+  };
+
+  const stealthDisadvantage = ["Random", "Yes", "No"];
+
+  const onChangeArmorStealth = (e) => {
+    setArmorStealth(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (2 - 1) + 1);
+      setArmorStealth(stealthDisadvantage[r]);
+    }
+  };
+
+  const onRandomMountSpeed = (e) => {
+    let r = Math.floor(Math.random() * 50);
+    setMountSpeed(speeds[r]);
+  };
+  const onRandomMountCapacity = (e) => {
+    let r = Math.floor(Math.random() * (2000 - 1));
+    setMountCapacity(r);
+  };
 
   //Todo Searching
   const onSearchPack = (e) => {};
@@ -767,19 +919,47 @@ const ItemGen = () => {
         let wtChoice = weaponTypes[wt];
         setWeaponType(wtChoice);
       }
-      if (dmgType === ""){
+      if (dmgType === "") {
         let r = Math.floor(Math.random() * (17 - 1) + 1);
         setDmgType(dmgTypeOptions[r].name);
       }
     }
     if (type === "Vehicle") {
-      if (vehicleSpeed === ""){
-        let r = Math.floor(Math.random() * (50))
-        setVehicleSpeed(speeds[r])
+      if (vehicleSpeed === "") {
+        let r = Math.floor(Math.random() * 50);
+        setVehicleSpeed(speeds[r]);
       }
-      if(vehicleCapacity === ""){
-        let r = Math.floor(Math.random() * (2000 - 1))
-        setVehicleCapacity(r)
+      if (vehicleCapacity === "") {
+        let r = Math.floor(Math.random() * (2000 - 1));
+        setVehicleCapacity(r);
+      }
+    }
+    if (type === "Armor") {
+      if (armorAc === "") {
+        let r = Math.floor(Math.random() * 30);
+        setArmorAc(acOptions[r]);
+      }
+      if (armorMod === "") {
+        let r = Math.floor(Math.random() * (7 - 1) + 1);
+        setArmorMod(abilitiesOptions[r].name);
+      }
+      if (armorStr === "") {
+        let r = Math.floor(Math.random() * 9);
+        setArmorStr(strReq[r]);
+      }
+      if (armorStealth === "") {
+        let r = Math.floor(Math.random() * (2 - 1) + 1);
+        setArmorStealth(stealthDisadvantage[r]);
+      }
+    }
+    if(type === "Mount"){
+      if(mountSpeed === ""){
+        let r = Math.floor(Math.random() * 50);
+        setMountSpeed(speeds[r]);
+      }
+      if (mountCapacity === ""){
+        let r = Math.floor(Math.random() * (2000 - 1));
+        setMountCapacity(r);
       }
     }
   };
@@ -795,9 +975,15 @@ const ItemGen = () => {
     setWeaponDmg("");
     setWeaponProperty("");
     setWeaponType("");
-    setDmgType("")
-    setVehicleSpeed("")
-    setVehicleCapacity("")
+    setDmgType("");
+    setVehicleSpeed("");
+    setVehicleCapacity("");
+    setArmorAc("");
+    setArmorMod("");
+    setArmorStealth("");
+    setArmorStr("");
+    setMountSpeed("");
+    setMountCapacity("")
   };
 
   return (
@@ -965,7 +1151,7 @@ const ItemGen = () => {
                   maxFractionDigits={3}
                   step={5}
                 />
-                 <button
+                <button
                   className={style.itemgenBtnName}
                   onClick={onRandomVehicleSpeed}
                 >
@@ -985,7 +1171,7 @@ const ItemGen = () => {
                   minFractionDigits={0}
                   maxFractionDigits={2}
                 />
-                 <button
+                <button
                   className={style.itemgenBtnName}
                   onClick={onRandomVehicleCapacity}
                 >
@@ -997,6 +1183,7 @@ const ItemGen = () => {
               <div>
                 <InputNumber
                   style={{ display: "flex" }}
+                  value={armorAc}
                   placeholder="Armor Class"
                   mode="decimal"
                   showButtons
@@ -1008,9 +1195,28 @@ const ItemGen = () => {
                   minFractionDigits={0}
                   maxFractionDigits={2}
                 />
-                <Dropdown placeholder="Modifier" />
-                <Dropdown placeholder="Strength Req." />
-                <Dropdown placeholder="Stealth Disadvantage" />
+                <button className={style.itemgenBtnName} onClick={onRandomAc}>
+                  Randomize
+                </button>
+                <Dropdown
+                  optionLabel="name"
+                  value={armorMod}
+                  options={abilitiesOptions}
+                  onChange={onChangeArmorMod}
+                  placeholder="Modifier"
+                />
+                <Dropdown
+                  value={armorStr}
+                  options={strReq}
+                  placeholder="Strength Req."
+                  onChange={onChangeArmorStr}
+                />
+                <Dropdown
+                  value={armorStealth}
+                  options={stealthDisadvantage}
+                  placeholder="Stealth Disadvantage"
+                  onChange={onChangeArmorStealth}
+                />
               </div>
             ) : null}
             {type === "Equipment Pack" ? (
@@ -1027,6 +1233,7 @@ const ItemGen = () => {
             {type === "Mount" ? (
               <div>
                 <InputNumber
+                  value={mountSpeed}
                   placeholder="Speed"
                   mode="decimal"
                   showButtons
@@ -1039,7 +1246,14 @@ const ItemGen = () => {
                   minFractionDigits={0}
                   maxFractionDigits={2}
                 />
+                <button
+                  className={style.itemgenBtnName}
+                  onClick={onRandomMountSpeed}
+                >
+                  Randomize
+                </button>
                 <InputNumber
+                  value={mountCapacity}
                   placeholder="Carry Capacity"
                   mode="decimal"
                   showButtons
@@ -1051,6 +1265,12 @@ const ItemGen = () => {
                   minFractionDigits={0}
                   maxFractionDigits={2}
                 />
+                <button
+                  className={style.itemgenBtnName}
+                  onClick={onRandomMountCapacity}
+                >
+                  Randomize
+                </button>
               </div>
             ) : null}
           </div>
