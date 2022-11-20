@@ -293,6 +293,218 @@ useEffect(() => {
   }, []);
 
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("skills").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setSkill(null);
+        console.log(error);
+      }
+      if (data) {
+        setSkills(data);
+        setFetchError(null);
+        setSkillOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("damageTypes").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setVuln(null);
+        console.log(error);
+      }
+      if (data) {
+        setVulns(data);
+        setFetchError(null);
+        setVulnOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("damageTypes").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setImmune(null);
+        console.log(error);
+      }
+      if (data) {
+        setImmunes(data);
+        setFetchError(null);
+        setImmuneOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("damageTypes").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setResist(null);
+        console.log(error);
+      }
+      if (data) {
+        setResists(data);
+        setFetchError(null);
+        setResistOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("conditions").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setCondition(null);
+        console.log(error);
+      }
+      if (data) {
+        setConditions(data);
+        setFetchError(null);
+        setConditionOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("sense").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setSense(null);
+        console.log(error);
+      }
+      if (data) {
+        setSenses(data);
+        setFetchError(null);
+        setSenseOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("languages").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setLang(null);
+        console.log(error);
+      }
+      if (data) {
+        setLangs(data);
+        setFetchError(null);
+        setLangOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("monstersAbilities").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setSpecial(null);
+        console.log(error);
+      }
+      if (data) {
+        setSpecials(data);
+        setFetchError(null);
+        setSpecialOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("mosntersActions").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setAction(null);
+        console.log(error);
+      }
+      if (data) {
+        setActions(data);
+        setFetchError(null);
+        setActionOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("monstersLegendaryActions").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setLegend(null);
+        console.log(error);
+      }
+      if (data) {
+        setLegends(data);
+        setFetchError(null);
+        setLegendOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("monstersLairActions").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setLair(null);
+        console.log(error);
+      }
+      if (data) {
+        setLairs(data);
+        setFetchError(null);
+        setLairOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
+
+//TODO
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const { data, error } = await supabase.from("itemsAll").select();
+//       if (error) {
+//         setFetchError("Could not fetch the data");
+//         setGear(null);
+//         console.log(error);
+//       }
+//       if (data) {
+//         setGears(data);
+//         setFetchError(null);
+//         setGearOptions(data.map((r) => ({ name: r.name, value: r.value })));
+//       }
+//     };
+//     fetchData();
+//   }, []);
+
 //OnChanges
   const onNameChange = (e) => {};
 
