@@ -7,7 +7,7 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
-import { e } from "mathjs";
+import { InputNumber } from "primereact/inputnumber";
 
 const MonsterGen = () => {
   //Set States
@@ -16,10 +16,6 @@ const MonsterGen = () => {
   const [name, setName] = useState("");
   const [names, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
-
-  const [race, setRace] = useState("");
-  const [races, setRaces] = useState();
-  const [raceOptions, setRaceOptions] = useState();
 
   const [size, setSize] = useState("");
   const [sizes, setSizes] = useState();
@@ -42,8 +38,6 @@ const MonsterGen = () => {
   const [armorTypeOptions, setArmorTypeOptions] = useState();
 
   const [hp, setHp] = useState("");
-  const [hps, setHps] = useState("");
-  const [hpOptions, setHpOptions] = useState();
 
   const [speed, setSpeed] = useState("");
   const [speeds, setSpeeds] = useState("");
@@ -122,22 +116,6 @@ const MonsterGen = () => {
   //TODO Names
   useEffect(() => {});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("races").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setRace(null);
-        console.log(error);
-      }
-      if (data) {
-        setRaces(data);
-        setFetchError(null);
-        setRaceOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -532,14 +510,6 @@ const MonsterGen = () => {
   //TODO
   const onRandomName = (e) => {};
 
-  const onRaceChange = (e) => {
-    setRace(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (28 - 1) + 1);
-      setRace(raceOptions[r].name);
-    }
-  };
-
   const onSizeChange = (e) => {
     setSize(e.value);
     if (e.value === "Random") {
@@ -579,8 +549,16 @@ const MonsterGen = () => {
       setArmorType(armorTypeOptions[r].name);
     }
   };
-  //TODO
-  const onHpChange = (e) => {};
+  
+
+  const onHpChange = (e) => {
+    setHp(e.value)
+  };
+
+  const onRandomHp = (e) => {
+    let r = Math.floor(Math.random() * 500);
+    setHp(r);
+  }
   //TODO
   const onSpeedChange = (e) => {};
 
@@ -597,10 +575,10 @@ const MonsterGen = () => {
   const onAbilityChange = (e) => {};
 
   //   const onSaveChange = (e) => {
-  //     setRace(e.value);
+  //     setSave(e.value);
   //     if (e.value === "Random") {
   //       let r = Math.round(Math.random() * (28 - 1) +1);
-  //       setRace(raceOptions[r].name);
+  //       setSave(saveOptions[r].name);
   //     }
   //   };
 
@@ -703,12 +681,6 @@ const MonsterGen = () => {
   const onGearChange = (e) => {};
 
   const onGenerate = (e) => {
-    if (race === "") {
-      let r = Math.round(Math.random() * (28 - 1) + 1);
-      setRace(raceOptions[r].name);
-    } else {
-      setRace(race);
-    }
     if (size === "") {
       let r = Math.round(Math.random() * (6 - 1) + 1);
       setSize(sizeOptions[r].name);
@@ -831,7 +803,6 @@ const MonsterGen = () => {
 
   const onClear = (e) => {
     setName("");
-    setRace("");
     setSize("");
     setType("");
     setAlign("");
@@ -865,7 +836,7 @@ const MonsterGen = () => {
         <h1 className={style.monstergenHeader}>Monster Generator</h1>
         <div className={style.monstergenOptionsWrapper}>
           <div className={style.monstergenSubsection}>
-            <h1>Basic Details</h1>
+            <h1>Details</h1>
             <div>
               <h1>Name: </h1>
               <InputText value={name} onChange={onNameChange} />
@@ -875,16 +846,6 @@ const MonsterGen = () => {
               >
                 Randomize
               </button>
-            </div>
-            <div>
-              <h1>Race</h1>
-              <Dropdown
-                optionLabel="name"
-                value={race}
-                options={raceOptions}
-                onChange={onRaceChange}
-                placeholder="Choose Race"
-              />
             </div>
             <div>
               <h1>Size</h1>
@@ -941,13 +902,25 @@ const MonsterGen = () => {
             </div>
             <div>
               <h1>HP</h1>
-              <Dropdown
-                optionLabel="name"
+              <InputNumber
                 value={hp}
-                options={hpOptions}
                 onChange={onHpChange}
-                placeholder="Choose HP"
+                placeholder="Set HP"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
               />
+               <button
+                onClick={onRandomHp}
+                className={style.monstergenBtnName}
+              >
+                Randomize
+              </button>
             </div>
             <div>
               <h1>Speed</h1>
@@ -968,10 +941,7 @@ const MonsterGen = () => {
                 onChange={onSpeedTypeChange}
                 placeholder="Choose Additional Move"
               />
-            </div>
-            <div>
-              <h1>Additional Move Speed</h1>
-              <Dropdown
+               <Dropdown
                 optionLabel="name"
                 value={speedExtra}
                 options={speedExtraOptions}
@@ -983,7 +953,57 @@ const MonsterGen = () => {
           <div className={style.monstergenSubsection}>
             <h1>Ability Scores</h1>
           <div>  
-            <h1>Abilities</h1>
+            <h1>Strength</h1>
+            <Dropdown
+              optionLabel="name"
+              value={ability}
+              options={abilityOptions}
+              onChange={onAbilityChange}
+              placeholder="Choose Ability"
+            />
+          </div>
+          <div>  
+            <h1>Dexterity</h1>
+            <Dropdown
+              optionLabel="name"
+              value={ability}
+              options={abilityOptions}
+              onChange={onAbilityChange}
+              placeholder="Choose Ability"
+            />
+          </div>
+          <div>  
+            <h1>Constitution</h1>
+            <Dropdown
+              optionLabel="name"
+              value={ability}
+              options={abilityOptions}
+              onChange={onAbilityChange}
+              placeholder="Choose Ability"
+            />
+          </div>
+          <div>  
+            <h1>Intelligence</h1>
+            <Dropdown
+              optionLabel="name"
+              value={ability}
+              options={abilityOptions}
+              onChange={onAbilityChange}
+              placeholder="Choose Ability"
+            />
+          </div>
+          <div>  
+            <h1>Wisdom</h1>
+            <Dropdown
+              optionLabel="name"
+              value={ability}
+              options={abilityOptions}
+              onChange={onAbilityChange}
+              placeholder="Choose Ability"
+            />
+          </div>
+          <div>  
+            <h1>Charisma</h1>
             <Dropdown
               optionLabel="name"
               value={ability}
@@ -1163,10 +1183,7 @@ const MonsterGen = () => {
                     <h1 className={style.monstergenDetailTitle}>Name: </h1>
                     <h1 className={style.monstergenDetailOutput}>{name}</h1>
                   </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>Race: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{race}</h1>
-                  </div>
+
                   <div className={style.monstergenDetail}>
                     <h1 className={style.monstergenDetailTitle}>Size: </h1>
                     <h1 className={style.monstergenDetailOutput}>{size}</h1>

@@ -17,7 +17,6 @@ import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 import { Dropdown } from "primereact/dropdown";
-import { e } from "mathjs";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
