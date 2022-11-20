@@ -559,8 +559,14 @@ const MonsterGen = () => {
     let r = Math.floor(Math.random() * 500);
     setHp(r);
   }
-  //TODO
-  const onSpeedChange = (e) => {};
+
+  const onSpeedChange = (e) => {
+    setSpeed(e.value)
+  };
+  const onRandomSpeed = (e) => {
+    let r = Math.floor(Math.random() * (120-0));
+    setSpeed(r);
+  }
 
   const onSpeedTypeChange = (e) => {
     setSpeedType(e.value);
@@ -569,8 +575,16 @@ const MonsterGen = () => {
       setSpeedType(speedTypeOptions[r].name);
     }
   };
-  //TODO
-  const onSpeedExtraChange = (e) => {};
+ 
+  const onSpeedExtraChange = (e) => {
+    setSpeedExtra(e.value)
+  };
+  const onRandomSpeedExtra = (e) => {
+    let r = Math.floor(Math.random() * (120-0));
+    setSpeedExtra(r);
+  }
+
+
   //TODO
   const onAbilityChange = (e) => {};
 
@@ -924,13 +938,26 @@ const MonsterGen = () => {
             </div>
             <div>
               <h1>Speed</h1>
-              <Dropdown
-                optionLabel="name"
+              <InputNumber
                 value={speed}
-                options={speedOptions}
                 onChange={onSpeedChange}
-                placeholder="Choose Speed"
+                placeholder="Set Speed"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+                step={5}
               />
+               <button
+                onClick={onRandomSpeed}
+                className={style.monstergenBtnName}
+              >
+                Randomize
+              </button>
             </div>
             <div>
               <h1>Additional Movement</h1>
@@ -941,13 +968,26 @@ const MonsterGen = () => {
                 onChange={onSpeedTypeChange}
                 placeholder="Choose Additional Move"
               />
-               <Dropdown
-                optionLabel="name"
+              <InputNumber
                 value={speedExtra}
-                options={speedExtraOptions}
                 onChange={onSpeedExtraChange}
-                placeholder="Choose Additional Speed"
+                placeholder="Set Speed"
+                mode="decimal"
+                showButtons
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+                step={5}
               />
+               <button
+                onClick={onRandomSpeedExtra}
+                className={style.monstergenBtnName}
+              >
+                Randomize
+              </button>
             </div>
           </div>
           <div className={style.monstergenSubsection}>
