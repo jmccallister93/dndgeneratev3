@@ -70,7 +70,7 @@ const ItemGen = () => {
   const [vehicle, setVehicle] = useState();
   const [vehicleOptions, setVehicleOptions] = useState();
 
-  const [weapon, setWeapon] = useState();
+  const [weapon, setWeapon] = useState("");
   const [weaponOptions, setWeaponOptions] = useState();
 
   const [type, setType] = useState("");
@@ -88,7 +88,7 @@ const ItemGen = () => {
   const [currencyOptions, setCurrencyOptions] = useState();
   const [showCurrencyInput, setShowCurrencyInput] = useState(false);
 
-  const [currencyValue, setCurrencyValue] = useState();
+  const [currencyValue, setCurrencyValue] = useState("");
 
   const [cost, setCost] = useState("");
 
@@ -215,9 +215,9 @@ const ItemGen = () => {
     const fetchData = async () => {
       const { data, error } = await supabase
         .from("itemsAdventuringGear")
-        
-          .select()
-          .order('id')
+
+        .select()
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setAdventuringGear(null);
@@ -236,9 +236,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsArmor")
+      const { data, error } = await supabase
+        .from("itemsArmor")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setArmor(null);
@@ -255,9 +256,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsArt")
+      const { data, error } = await supabase
+        .from("itemsArt")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setArt(null);
@@ -274,9 +276,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsContainers")
+      const { data, error } = await supabase
+        .from("itemsContainers")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setContainer(null);
@@ -297,9 +300,9 @@ const ItemGen = () => {
     const fetchData = async () => {
       const { data, error } = await supabase
         .from("itemsEquipmentPacks")
-        
-          .select()
-          .order('id')
+
+        .select()
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setPack(null);
@@ -316,9 +319,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsExpenses")
+      const { data, error } = await supabase
+        .from("itemsExpenses")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setExpense(null);
@@ -335,9 +339,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsGemstones")
+      const { data, error } = await supabase
+        .from("itemsGemstones")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setGemstone(null);
@@ -354,9 +359,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsMagicAll")
+      const { data, error } = await supabase
+        .from("itemsMagicAll")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setMagic(null);
@@ -373,9 +379,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsMountItems")
+      const { data, error } = await supabase
+        .from("itemsMountItems")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setMountItem(null);
@@ -394,9 +401,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsMounts")
+      const { data, error } = await supabase
+        .from("itemsMounts")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setMount(null);
@@ -413,9 +421,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTools")
+      const { data, error } = await supabase
+        .from("itemsTools")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setTool(null);
@@ -432,9 +441,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTradeGoods")
+      const { data, error } = await supabase
+        .from("itemsTradeGoods")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setTradeGood(null);
@@ -453,9 +463,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTrinkets")
+      const { data, error } = await supabase
+        .from("itemsTrinkets")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setTrinket(null);
@@ -472,9 +483,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsVehicles")
+      const { data, error } = await supabase
+        .from("itemsVehicles")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setVehicle(null);
@@ -498,9 +510,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsWeapons")
+      const { data, error } = await supabase
+        .from("itemsWeapons")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setWeapon(null);
@@ -530,9 +543,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsTypes")
+      const { data, error } = await supabase
+        .from("itemsTypes")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setType(null);
@@ -549,9 +563,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsRarities")
+      const { data, error } = await supabase
+        .from("itemsRarities")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setRarity(null);
@@ -568,9 +583,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("itemsCurrencies")
+      const { data, error } = await supabase
+        .from("itemsCurrencies")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setCurrency(null);
@@ -587,9 +603,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("damageTypes")
+      const { data, error } = await supabase
+        .from("damageTypes")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setDmgTypes(null);
@@ -608,9 +625,9 @@ const ItemGen = () => {
     const fetchData = async () => {
       const { data, error } = await supabase
         .from("abilitiesModifiers")
-        
-          .select()
-          .order('id')
+
+        .select()
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setAbilityMods(null);
@@ -629,9 +646,10 @@ const ItemGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("abilities")
+      const { data, error } = await supabase
+        .from("abilities")
         .select()
-        .order('id')
+        .order("id");
       if (error) {
         setFetchError("Could not fetch the data");
         setAbilities(null);
@@ -871,7 +889,7 @@ const ItemGen = () => {
       setType(type);
     }
     if (rarity === "") {
-      let r = Math.floor(Math.random() * (7 - 2) + 2);
+      let r = Math.floor(Math.random() * (5 - 2) + 2);
       setRarity(rarityOptions[r].name);
     } else {
       setRarity(rarity);
@@ -952,12 +970,12 @@ const ItemGen = () => {
         setArmorStealth(stealthDisadvantage[r]);
       }
     }
-    if(type === "Mount"){
-      if(mountSpeed === ""){
+    if (type === "Mount") {
+      if (mountSpeed === "") {
         let r = Math.floor(Math.random() * 50);
         setMountSpeed(speeds[r]);
       }
-      if (mountCapacity === ""){
+      if (mountCapacity === "") {
         let r = Math.floor(Math.random() * (2000 - 1));
         setMountCapacity(r);
       }
@@ -983,7 +1001,7 @@ const ItemGen = () => {
     setArmorStealth("");
     setArmorStr("");
     setMountSpeed("");
-    setMountCapacity("")
+    setMountCapacity("");
   };
 
   return (
@@ -1031,7 +1049,7 @@ const ItemGen = () => {
               placeholder="Value"
               mode="decimal"
               showButtons
-              buttonLayout="currency"
+              // buttonLayout="currency"
               decrementButtonClassName="p-button-secondary"
               incrementButtonClassName="p-button-secondary"
               incrementButtonIcon="pi pi-plus"
@@ -1101,10 +1119,6 @@ const ItemGen = () => {
                   mode="decimal"
                   showButtons
                   buttonLayout="currency"
-                  decrementButtonClassName="p-button-secondary"
-                  incrementButtonClassName="p-button-secondary"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
                   placeholder="Damage Amount"
                 />
                 <button
@@ -1257,7 +1271,7 @@ const ItemGen = () => {
                   placeholder="Carry Capacity"
                   mode="decimal"
                   showButtons
-                  buttonLayout="currency"
+                  // buttonLayout="currency"
                   decrementButtonClassName="p-button-secondary"
                   incrementButtonClassName="p-button-secondary"
                   incrementButtonIcon="pi pi-plus"
@@ -1283,6 +1297,130 @@ const ItemGen = () => {
             <button onClick={onClear} className={style.itemgenBtnClear}>
               Clear
             </button>
+          </div>
+        </div>
+
+        {/* Display */}
+        {/* Main Display */}
+        <div className={style.itemgenDisplay}>
+          {/* Display Wrapper */}
+          <div className={style.itemgenDescWrapper}>
+            {/* Display Desc  */}
+            <div className={style.itemgenDesc}>
+              <h2 className={style.itemgenDescHeader}>Item Info</h2>
+              <div>
+                <div className={style.itemgenDetail}>
+                  <h1 className={style.itemgenDetailTitle}>Name: </h1>
+                  <h1 className={style.itemgenDetailOutput}>{}</h1>
+                </div>
+                <div className={style.itemgenDetail}>
+                  <h1 className={style.itemgenDetailTitle}>Type: </h1>
+                  <h1 className={style.itemgenDetailOutput}>{type}</h1>
+                </div>
+                <div className={style.itemgenDetail}>
+                  <h1 className={style.itemgenDetailTitle}>Rarity: </h1>
+                  <h1 className={style.itemgenDetailOutput}>{rarity}</h1>
+                </div>
+                <div className={style.itemgenDetail}>
+                  <h1 className={style.itemgenDetailTitle}>Cost: </h1>
+                  <h1 className={style.itemgenDetailOutput}>{cost}</h1>
+                </div>
+                <div className={style.itemgenDetail}>
+                  <h1 className={style.itemgenDetailTitle}>Weight: </h1>
+                  <h1 className={style.itemgenDetailOutput}>{weight}</h1>
+                </div>
+
+                {type === "Weapon" ? (
+                  <div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>Damage: </h1>
+                      <h1 className={style.itemgenDetailOutput}>{weaponDmg}</h1>
+                    </div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>
+                        Damage Type:{" "}
+                      </h1>
+                      <h1 className={style.itemgenDetailOutput}>{dmgType}</h1>
+                    </div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>
+                        Weapon Type:{" "}
+                      </h1>
+                      <h1 className={style.itemgenDetailOutput}>
+                        {weaponType}
+                      </h1>
+                    </div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>
+                        Weapon Property:{" "}
+                      </h1>
+                      <h1 className={style.itemgenDetailOutput}>
+                        {weaponProperty}
+                      </h1>
+                    </div>
+                  </div>
+                ) : null}
+
+                {type === "Vehicle" ? (
+                  <div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>Speed: </h1>
+                      <h1 className={style.itemgenDetailOutput}>
+                        {vehicleSpeed}
+                      </h1>
+                    </div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>
+                        Carry Capacity:{" "}
+                      </h1>
+                      <h1 className={style.itemgenDetailOutput}>
+                        {vehicleCapacity}
+                      </h1>
+                    </div>
+                  </div>
+                ) : null}
+
+                {type === "Mount" ? (
+                  <div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>Speed: </h1>
+                      <h1 className={style.itemgenDetailOutput}>
+                        {mountSpeed}
+                      </h1>
+                    </div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>
+                        Carry Capacity:{" "}
+                      </h1>
+                      <h1 className={style.itemgenDetailOutput}>
+                        {mountCapacity}
+                      </h1>
+                    </div>
+                  </div>
+                ) : null}
+
+                {type === "Equipment Pack" ? (
+                  <div>
+                    <div className={style.itemgenDetail}>
+                      <h1 className={style.itemgenDetailTitle}>Items: </h1>
+                      <h1 className={style.itemgenDetailOutput}>
+                        {}
+                      </h1>
+                    </div>
+                  </div>
+                ) : null}
+
+
+              </div>
+            </div>
+            {/* Description */}
+            <div>
+              <div>
+                <h1 className={style.itemgenDetailTitle}>Description: </h1>
+                <InputTextarea value={description} />
+                {/* <h1 className={style.itemgenDetailOutput}>{description}</h1> */}
+              </div>
+            </div>
           </div>
         </div>
       </div>
