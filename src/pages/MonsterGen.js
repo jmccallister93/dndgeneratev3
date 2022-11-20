@@ -387,7 +387,7 @@ const MonsterGen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("sense").select();
+      const { data, error } = await supabase.from("senses").select();
       if (error) {
         setFetchError("Could not fetch the data");
         setSense(null);
@@ -499,11 +499,11 @@ const MonsterGen = () => {
         setLair(null);
         console.log(error);
       }
-      if (data) {
-        setLairs(data);
-        setFetchError(null);
-        setLairOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
+      //   if (data) {
+      //     setLairs(data);
+      //     setFetchError(null);
+      //     setLairOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      //   }
     };
     fetchData();
   }, []);
@@ -710,125 +710,123 @@ const MonsterGen = () => {
       setRace(race);
     }
     if (size === "") {
-        let r = Math.round(Math.random() * (6 - 1) + 1);
-        setSize(sizeOptions[r].name);
-      } else {
-        setSize(size);
-      }
-    if (type === "") {
-    let r = Math.round(Math.random() * (16 - 1) + 1);
-    setType(typeOptions[r].name);
+      let r = Math.round(Math.random() * (6 - 1) + 1);
+      setSize(sizeOptions[r].name);
     } else {
-        setType(type)
+      setSize(size);
+    }
+    if (type === "") {
+      let r = Math.round(Math.random() * (16 - 1) + 1);
+      setType(typeOptions[r].name);
+    } else {
+      setType(type);
     }
     if (align === "") {
-        let r = Math.round(Math.random() * (9 - 1) + 1);
-        setAlign(alignOptions[r].name);
+      let r = Math.round(Math.random() * (9 - 1) + 1);
+      setAlign(alignOptions[r].name);
     } else {
-        setAlign(align)
+      setAlign(align);
     }
     if (ac === "") {
-        let r = Math.round(Math.random() * (30 - 1) + 1);
-        setAc(acOptions[r].name);
+      let r = Math.round(Math.random() * (30 - 1) + 1);
+      setAc(acOptions[r].name);
     } else {
-        setAc(ac)
+      setAc(ac);
     }
     if (armorType === "") {
-        let r = Math.round(Math.random() * (5 - 1) + 1);
-        setArmorType(armorTypeOptions[r].name);
+      let r = Math.round(Math.random() * (5 - 1) + 1);
+      setArmorType(armorTypeOptions[r].name);
     } else {
-        setArmorType(armorType)
+      setArmorType(armorType);
     }
     //TODO
     // if (hp === "")
     //TODO
     //if (speed === "")
     if (speedType === "") {
-        let r = Math.round(Math.random() * (6 - 1) + 1);
-        setSpeedType(speedTypeOptions[r].name);
+      let r = Math.round(Math.random() * (6 - 1) + 1);
+      setSpeedType(speedTypeOptions[r].name);
     } else {
-        setSpeedType(speedType)
+      setSpeedType(speedType);
     }
-    //TODO 
+    //TODO
     // if(speedExtra === "")
     //TODO
     // if(ability === "")
     //TOD
     // if(save === "")
     if (vuln === "") {
-        let r = Math.round(Math.random() * (17 - 1) + 1);
-        setVuln(vulnOptions[r].name);
+      let r = Math.round(Math.random() * (17 - 1) + 1);
+      setVuln(vulnOptions[r].name);
     } else {
-        setVuln(vuln)
-    }  
+      setVuln(vuln);
+    }
     if (skill === "") {
-        let r = Math.round(Math.random() * (18 - 1) + 1);
-        setSkill(skillOptions[r].name);
+      let r = Math.round(Math.random() * (18 - 1) + 1);
+      setSkill(skillOptions[r].name);
     } else {
-        setSkill(skill)
-    } 
+      setSkill(skill);
+    }
     if (immune === "") {
-        let r = Math.round(Math.random() * (17 - 1) + 1);
-        setImmune(immuneOptions[r].name);
+      let r = Math.round(Math.random() * (17 - 1) + 1);
+      setImmune(immuneOptions[r].name);
     } else {
-        setImmune(immune)
+      setImmune(immune);
     }
     if (resist === "") {
-        let r = Math.round(Math.random() * (17 - 1) + 1);
-        setResist(resistOptions[r].name);
+      let r = Math.round(Math.random() * (17 - 1) + 1);
+      setResist(resistOptions[r].name);
     } else {
-        setResist(resist)
+      setResist(resist);
     }
     if (condition === "") {
-        let r = Math.round(Math.random() * (15 - 1) + 1);
-        setCondition(conditionOptions[r].name);
+      let r = Math.round(Math.random() * (15 - 1) + 1);
+      setCondition(conditionOptions[r].name);
     } else {
-        setCondition(condition)
+      setCondition(condition);
     }
     if (sense === "") {
-        let r = Math.round(Math.random() * (4 - 1) + 1);
-        setSense(senseOptions[r].name);
+      let r = Math.round(Math.random() * (4 - 1) + 1);
+      setSense(senseOptions[r].name);
     } else {
-        setSense(sense)
+      setSense(sense);
     }
     if (lang === "") {
-        let r = Math.round(Math.random() * (16 - 1) + 1);
-        setLang(langOptions[r].name);
+      let r = Math.round(Math.random() * (16 - 1) + 1);
+      setLang(langOptions[r].name);
     } else {
-        setLang(lang)
+      setLang(lang);
     }
     if (special === "") {
-        let r = Math.round(Math.random() * (208 - 1) + 1);
-        setSpecial(specialOptions[r].name);
+      let r = Math.round(Math.random() * (208 - 1) + 1);
+      setSpecial(specialOptions[r].name);
     } else {
-        setSpecial(special)
+      setSpecial(special);
     }
     if (action === "") {
-        let r = Math.round(Math.random() * (292 - 1) + 1);
-        setAction(actionOptions[r].name);
+      let r = Math.round(Math.random() * (292 - 1) + 1);
+      setAction(actionOptions[r].name);
     } else {
-        setAction(action)
+      setAction(action);
     }
     if (reaction === "") {
-        let r = Math.round(Math.random() * (11 - 1) + 1);
-        setReaction(reactionOptions[r].name);
+      let r = Math.round(Math.random() * (11 - 1) + 1);
+      setReaction(reactionOptions[r].name);
     } else {
-        setReaction(reaction)
+      setReaction(reaction);
     }
     if (legend === "") {
-        let r = Math.round(Math.random() * (35 - 1) + 1);
-        setLegend(legendOptions[r].name);
+      let r = Math.round(Math.random() * (35 - 1) + 1);
+      setLegend(legendOptions[r].name);
     } else {
-        setLegend(legend)
+      setLegend(legend);
     }
-    if (lair === "") {
-        let r = Math.round(Math.random() * (39 - 1) + 1);
-        setLair(lairOptions[r].name);
-    } else {
-        setLair(lair)
-    }
-
-
+    // if (lair === "") {
+    //     let r = Math.round(Math.random() * (39 - 1) + 1);
+    //     setLair(lairOptions[r].name);
+    // } else {
+    //     setLair(lair)
+    // }
   };
 
   const onClear = (e) => {
@@ -1134,6 +1132,123 @@ const MonsterGen = () => {
             <button onClick={onClear} className={style.monstergenBtnClear}>
               Clear
             </button>
+          </div>
+        </div>
+
+        {/* Main Display */}
+        <div className={style.monstergenDisplay}>
+          {/* Display Wrapper */}
+          <div className={style.npggenDescWrapper}>
+            {/* Display Desc  */}
+            <div className={style.monstergenDesc}>
+              <h2 className={style.monstergenDescHeader}>Details</h2>
+              <div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Name: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{name}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Race: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{race}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Size: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{size}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Type: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{type}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Alignment: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{align}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>AC: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{ac}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Armor Type: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{armorType}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>HP: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{hp}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Speed: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{speed}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Movement Type: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{speedType}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Extra Movement: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{speedExtra}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Ability Scores: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Saves: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{save}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Skills: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{skill}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Vulnerabilites: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{vuln}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Immunities: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{immune}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Resistances: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{resist}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Conidition Immunities: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{condition}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Senses: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{sense}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Languages: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{lang}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Abilities: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{special}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Actions: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{action}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Reactions: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{reaction}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Legendary Actions: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{legend}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Lair Actions: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{lair}</h1>
+                </div>
+                <div className={style.monstergenDetail}>
+                  <h1 className={style.monstergenDetailTitle}>Equipment: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{gear}</h1>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
