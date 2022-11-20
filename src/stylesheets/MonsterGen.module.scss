@@ -5,7 +5,7 @@ $secondary-grey: #d6e4e5;
     background: linear-gradient(135deg, $primary-grey 25%, white) ;
     height: fit-content;
     width: 99vw;
-    height: 100vh;
+    height: fit-content;
     display: inline-block;
     text-align: center;
     align-items: center;
@@ -48,6 +48,11 @@ $secondary-grey: #d6e4e5;
     & div {
       padding: 10px;
     }
+  }
+
+  .monstergenColumns{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .monstergenDisplay {

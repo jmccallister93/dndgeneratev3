@@ -864,114 +864,125 @@ const MonsterGen = () => {
       <div className={style.monstergenBody}>
         <h1 className={style.monstergenHeader}>Monster Generator</h1>
         <div className={style.monstergenOptionsWrapper}>
-          <div>
-            <h1>Name: </h1>
-            <InputText value={name} onChange={onNameChange} />
-            <button onClick={onRandomName} className={style.monstergenBtnName}>
-              Randomize
-            </button>
+          <div className={style.monstergenSubsection}>
+            <h1>Basic Details</h1>
+            <div>
+              <h1>Name: </h1>
+              <InputText value={name} onChange={onNameChange} />
+              <button
+                onClick={onRandomName}
+                className={style.monstergenBtnName}
+              >
+                Randomize
+              </button>
+            </div>
+            <div>
+              <h1>Race</h1>
+              <Dropdown
+                optionLabel="name"
+                value={race}
+                options={raceOptions}
+                onChange={onRaceChange}
+                placeholder="Choose Race"
+              />
+            </div>
+            <div>
+              <h1>Size</h1>
+              <Dropdown
+                optionLabel="name"
+                value={size}
+                options={sizeOptions}
+                onChange={onSizeChange}
+                placeholder="Choose Size"
+              />
+            </div>
+            <div>
+              <h1>Type</h1>
+              <Dropdown
+                optionLabel="name"
+                value={type}
+                options={typeOptions}
+                onChange={onTypeChange}
+                placeholder="Choose Type"
+              />
+            </div>
+            <div>
+              <h1>Align</h1>
+              <Dropdown
+                optionLabel="name"
+                value={align}
+                options={alignOptions}
+                onChange={onAlignChange}
+                placeholder="Choose Alignment"
+              />
+            </div>
           </div>
-          <div>
-            <h1>Race</h1>
-            <Dropdown
-              optionLabel="name"
-              value={race}
-              options={raceOptions}
-              onChange={onRaceChange}
-              placeholder="Choose Race"
-            />
+          <div className={style.monstergenSubsection}>
+            <div>
+              <h1>Basic Stats</h1>
+              <h1>AC</h1>
+              <Dropdown
+                optionLabel="name"
+                value={ac}
+                options={acOptions}
+                onChange={onAcChange}
+                placeholder="Choose AC"
+              />
+            </div>
+            <div>
+              <h1>Armor Type</h1>
+              <Dropdown
+                optionLabel="name"
+                value={armorType}
+                options={armorTypeOptions}
+                onChange={onArmorTypeChange}
+                placeholder="Choose Armor Type"
+              />
+            </div>
+            <div>
+              <h1>HP</h1>
+              <Dropdown
+                optionLabel="name"
+                value={hp}
+                options={hpOptions}
+                onChange={onHpChange}
+                placeholder="Choose HP"
+              />
+            </div>
+            <div>
+              <h1>Speed</h1>
+              <Dropdown
+                optionLabel="name"
+                value={speed}
+                options={speedOptions}
+                onChange={onSpeedChange}
+                placeholder="Choose Speed"
+              />
+            </div>
+            <div>
+              <h1>Additional Movement</h1>
+              <Dropdown
+                optionLabel="name"
+                value={speedType}
+                options={speedTypeOptions}
+                onChange={onSpeedTypeChange}
+                placeholder="Choose Additional Move"
+              />
+            </div>
+            <div>
+              <h1>Additional Move Speed</h1>
+              <Dropdown
+                optionLabel="name"
+                value={speedExtra}
+                options={speedExtraOptions}
+                onChange={onSpeedExtraChange}
+                placeholder="Choose Additional Speed"
+              />
+            </div>
           </div>
-          <div>
-            <h1>Size</h1>
-            <Dropdown
-              optionLabel="name"
-              value={size}
-              options={sizeOptions}
-              onChange={onSizeChange}
-              placeholder="Choose Size"
-            />
-          </div>
-          <div>
-            <h1>Type</h1>
-            <Dropdown
-              optionLabel="name"
-              value={type}
-              options={typeOptions}
-              onChange={onTypeChange}
-              placeholder="Choose Type"
-            />
-          </div>
-          <div>
-            <h1>Align</h1>
-            <Dropdown
-              optionLabel="name"
-              value={align}
-              options={alignOptions}
-              onChange={onAlignChange}
-              placeholder="Choose Alignment"
-            />
-          </div>
-          <div>
-            <h1>AC</h1>
-            <Dropdown
-              optionLabel="name"
-              value={ac}
-              options={acOptions}
-              onChange={onAcChange}
-              placeholder="Choose AC"
-            />
-          </div>
-          <div>
-            <h1>Armor Type</h1>
-            <Dropdown
-              optionLabel="name"
-              value={armorType}
-              options={armorTypeOptions}
-              onChange={onArmorTypeChange}
-              placeholder="Choose Armor Type"
-            />
-          </div>
-          <div>
-            <h1>HP</h1>
-            <Dropdown
-              optionLabel="name"
-              value={hp}
-              options={hpOptions}
-              onChange={onHpChange}
-              placeholder="Choose HP"
-            />
-          </div>
-          <div>
-            <h1>Speed</h1>
-            <Dropdown
-              optionLabel="name"
-              value={speed}
-              options={speedOptions}
-              onChange={onSpeedChange}
-              placeholder="Choose Speed"
-            />
-          </div>
-          <div>
-            <h1>Additional Movement</h1>
-            <Dropdown
-              optionLabel="name"
-              value={speedType}
-              options={speedTypeOptions}
-              onChange={onSpeedTypeChange}
-              placeholder="Choose Additional Move"
-            />
-          </div>
-          <div>
-            <h1>Additional Move Speed</h1>
-            <Dropdown
-              optionLabel="name"
-              value={speedExtra}
-              options={speedExtraOptions}
-              onChange={onSpeedExtraChange}
-              placeholder="Choose Additional Speed"
-            />
-          </div>
-          <div>
+          <div className={style.monstergenSubsection}>
+            <h1>Ability Scores</h1>
+          <div>  
             <h1>Abilities</h1>
             <Dropdown
               optionLabel="name"
@@ -981,6 +992,9 @@ const MonsterGen = () => {
               placeholder="Choose Ability"
             />
           </div>
+          </div>
+          <div className={style.monstergenSubsection}>
+            <h1>Saves/Skills/Dmgs</h1>
           <div>
             <h1>Saves</h1>
             <Dropdown
@@ -1061,6 +1075,7 @@ const MonsterGen = () => {
               placeholder="Choose Languages"
             />
           </div>
+          </div>
           <div>
             <h1>Sepcials</h1>
             <Dropdown
@@ -1135,122 +1150,121 @@ const MonsterGen = () => {
           </div>
         </div>
 
-        {/* Main Display */}
-        <div className={style.monstergenDisplay}>
-          {/* Display Wrapper */}
-          <div className={style.npggenDescWrapper}>
-            {/* Display Desc  */}
-            <div className={style.monstergenDesc}>
-              <h2 className={style.monstergenDescHeader}>Details</h2>
-              <div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Name: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{name}</h1>
+        <div className={style.monstergenColumns}>
+          {/* Main Display */}
+          <div className={style.monstergenDisplay}>
+            {/* Display Wrapper */}
+            <div className={style.npggenDescWrapper}>
+              {/* Display Desc  */}
+              <div className={style.monstergenDesc}>
+                <h2 className={style.monstergenDescHeader}>Details</h2>
+                <div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>Name: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{name}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>Race: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{race}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>Size: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{size}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>Type: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{type}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>Alignment: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{align}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>AC: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{ac}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>
+                      Armor Type:{" "}
+                    </h1>
+                    <h1 className={style.monstergenDetailOutput}>
+                      {armorType}
+                    </h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>HP: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{hp}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>Speed: </h1>
+                    <h1 className={style.monstergenDetailOutput}>{speed}</h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>
+                      Movement Type:{" "}
+                    </h1>
+                    <h1 className={style.monstergenDetailOutput}>
+                      {speedType}
+                    </h1>
+                  </div>
+                  <div className={style.monstergenDetail}>
+                    <h1 className={style.monstergenDetailTitle}>
+                      Extra Movement:{" "}
+                    </h1>
+                    <h1 className={style.monstergenDetailOutput}>
+                      {speedExtra}
+                    </h1>
+                  </div>
                 </div>
+              </div>
+            </div>
+            {/* End first Column */}
+          </div>
+          {/* Second column */}
+          <div className={style.monstergenDisplay}>
+            <div className={style.npggenDescWrapper}>
+              <div className={style.monstergenDesc}>
+                <h2 className={style.monstergenDescHeader}>Stats</h2>
                 <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Race: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{race}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Size: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{size}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Type: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{type}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Alignment: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{align}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>AC: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{ac}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Armor Type: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{armorType}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>HP: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{hp}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Speed: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{speed}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Movement Type: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{speedType}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Extra Movement: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{speedExtra}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Ability Scores: </h1>
+                  <h1 className={style.monstergenDetailTitle}>STR: </h1>
                   <h1 className={style.monstergenDetailOutput}>{}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Saves: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{save}</h1>
+                  <h1 className={style.monstergenDetailTitle}>DEX: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Skills: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{skill}</h1>
+                  <h1 className={style.monstergenDetailTitle}>CON: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Vulnerabilites: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{vuln}</h1>
+                  <h1 className={style.monstergenDetailTitle}>INT: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Immunities: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{immune}</h1>
+                  <h1 className={style.monstergenDetailTitle}>WIS: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{}</h1>
                 </div>
                 <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Resistances: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{resist}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Conidition Immunities: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{condition}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Senses: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{sense}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Languages: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{lang}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Abilities: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{special}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Actions: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{action}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Reactions: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{reaction}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Legendary Actions: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{legend}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Lair Actions: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{lair}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>Equipment: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{gear}</h1>
+                  <h1 className={style.monstergenDetailTitle}>CHA: </h1>
+                  <h1 className={style.monstergenDetailOutput}>{}</h1>
                 </div>
               </div>
             </div>
           </div>
+          {/* end second column */}
+          {/* Second column */}
+          <div className={style.monstergenDisplay}>
+            <div className={style.npggenDescWrapper}>
+              <div className={style.monstergenDesc}>
+                <h2 className={style.monstergenDescHeader}>Actions</h2>
+              </div>
+            </div>
+          </div>
+          {/* end second column */}
         </div>
+
+        {/* End full column wrapper */}
       </div>
     </div>
   );
