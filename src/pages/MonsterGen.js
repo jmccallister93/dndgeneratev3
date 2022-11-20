@@ -102,6 +102,10 @@ const MonsterGen = () => {
   const [actions, setActions] = useState("");
   const [actionOptions, setActionOptions] = useState();
 
+  const [reaction, setReaction] = useState("");
+  const [reactions, setReactions] = useState("");
+  const [reactionOptions, setReactionOptions] = useState();
+
   const [legend, setLegend] = useState("");
   const [legends, setLegends] = useState("");
   const [legendOptions, setLegendOptions] = useState();
@@ -437,7 +441,7 @@ useEffect(() => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("mosntersActions").select();
+      const { data, error } = await supabase.from("monstersActions").select();
       if (error) {
         setFetchError("Could not fetch the data");
         setAction(null);
@@ -452,6 +456,22 @@ useEffect(() => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("monstersReactions").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setReaction(null);
+        console.log(error);
+      }
+      if (data) {
+        setReactions(data);
+        setFetchError(null);
+        setReactionOptions(data.map((r) => ({ name: r.name, value: r.value })));
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -506,57 +526,217 @@ useEffect(() => {
 //   }, []);
 
 //OnChanges
+//TODO
   const onNameChange = (e) => {};
-
+//TODO
   const onRandomName = (e) => {};
 
-  const onRaceChange = (e) => {};
+  const onRaceChange = (e) => {
+    setRace(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (28 - 1) +1);
+      setRace(raceOptions[r].name);
+    }
+  };
 
-  const onSizeChange = (e) => {};
+  const onSizeChange = (e) => {
+    setSize(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (6 - 1) +1);
+      setSize(sizeOptions[r].name);
+    }
+  };
 
-  const onTypeChange = (e) => {};
+  const onTypeChange = (e) => {
+    setType(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (16 - 1) +1);
+      setType(typeOptions[r].name);
+    }
+  };
 
-  const onAlignChange = (e) => {};
+  const onAlignChange = (e) => { 
+    setAlign(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (9 - 1) +1);
+      setAlign(alignOptions[r].name);
+    }};
 
-  const onAcChange = (e) => {};
+  const onAcChange = (e) => {
+    setAc(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (30 - 1) +1);
+      setAc(acOptions[r].name);
+    }
+  };
 
-  const onArmorTypeChange = (e) => {};
-
+  const onArmorTypeChange = (e) => {
+    setArmorType(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (5 - 1) +1);
+      setArmorType(armorTypeOptions[r].name);
+    }
+  };
+//TODO
   const onHpChange = (e) => {};
-
+//TODO
   const onSpeedChange = (e) => {};
 
-  const onSpeedTypeChange = (e) => {};
-
+  const onSpeedTypeChange = (e) => {
+    setSpeedType(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (6 - 1) +1);
+      setSpeedType(speedTypeOptions[r].name);
+    }
+  };
+//TODO
   const onSpeedExtraChange = (e) => {};
-
+//TODO
   const onAbilityChange = (e) => {};
 
-  const onSaveChange = (e) => {};
+//   const onSaveChange = (e) => {
+//     setRace(e.value);
+//     if (e.value === "Random") {
+//       let r = Math.round(Math.random() * (28 - 1) +1);
+//       setRace(raceOptions[r].name);
+//     }
+//   };
 
-  const onVulnChange = (e) => {};
 
-  const onSkillChange = (e) => {};
+  const onVulnChange = (e) => {
+    setVuln(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (17 - 1) +1);
+      setVuln(vulnOptions[r].name);
+    }
+  };
 
-  const onImmuneChange = (e) => {};
+  const onSkillChange = (e) => {
+    setSkill(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (18 - 1) +1);
+      setSkill(skillOptions[r].name);
+    }
+  };
 
-  const onResistChange = (e) => {};
+  const onImmuneChange = (e) => {
+    setImmune(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (17 - 1) +1);
+      setImmune(immuneOptions[r].name);
+    }
+  };
 
-  const onConditionChange = (e) => {};
+  const onResistChange = (e) => {
+    setResist(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (17 - 1) +1);
+      setResist(resistOptions[r].name);
+    }
+  };
 
-  const onSenseChange = (e) => {};
+  const onConditionChange = (e) => {
+    setCondition(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (15 - 1) +1);
+      setCondition(conditionOptions[r].name);
+    }
+  };
 
-  const onLangChange = (e) => {};
+  const onSenseChange = (e) => {
+    setSense(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (4 - 1) +1);
+      setSense(senseOptions[r].name);
+    }
+  };
 
-  const onSpecialChange = (e) => {};
+  const onLangChange = (e) => {
+    setLang(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (16 - 1) +1);
+      setLang(langOptions[r].name);
+    }
+  };
 
-  const onActionChange = (e) => {};
+  const onSpecialChange = (e) => {
+    setSpecial(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (208 - 1) +1);
+      setSpecial(specialOptions[r].name);
+    }
+  };
 
-  const onLegendChange = (e) => {};
+  const onActionChange = (e) => {
+    setAction(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (292 - 1) +1);
+      setAction(actionOptions[r].name);
+    }
+  };
 
-  const onLairChange = (e) => {};
+  const onReactionChange = (e) => {
+    setReaction(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (11 - 1) +1);
+      setReaction(reactionOptions[r].name);
+    }
+  };
 
+  const onLegendChange = (e) => {
+    setLegend(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (35 - 1) +1);
+      setLegend(legendOptions[r].name);
+    }
+  };
+
+  const onLairChange = (e) => {
+    setLair(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (39 - 1) +1);
+      setLair(lairOptions[r].name);
+    }
+  };
+//TODO
   const onGearChange = (e) => {};
+
+  const onGenerate = (e) => {
+    if (bond === "") {
+      let r = Math.round(Math.random() * (9 - 1) +1);
+      setBond(bondOptions[r].name);
+    } else {
+      setBond(bond);
+    }
+
+    const onClear = (e) => {
+        setName("");
+        setRace("")
+        setSize("")
+        setType("")
+        setAlign("")
+        setAc("")
+        setArmorType("")
+        setHp("")
+        setSpeed("")
+        setSpeedType("")
+        setSpeedExtra("")
+        setAbility("")
+        setSave("")
+        setSkill("")
+        setVuln("")
+        setImmune("")
+        setResist("")
+        setCondition("")
+        setSense("")
+        setLang("")
+        setSpecial("")
+        setAction("")
+        setReaction("")
+        setLegend("")
+        setLair("")
+        setGear("")
+    }
 
   return (
     <div className={style.monstergenWrapper}>
@@ -687,7 +867,7 @@ useEffect(() => {
               optionLabel="name"
               value={save}
               options={saveOptions}
-              onChange={onSaveChange}
+            //   onChange={onSaveChange}
               placeholder="Choose Save"
             />
           </div>
@@ -782,6 +962,16 @@ useEffect(() => {
             />
           </div>
           <div>
+            <h1>Reactions</h1>
+            <Dropdown
+              optionLabel="name"
+              value={reaction}
+              options={reactionOptions}
+              onChange={onReactionChange}
+              placeholder="Choose Reactions"
+            />
+          </div>
+          <div>
             <h1>Legendary Actions</h1>
             <Dropdown
               optionLabel="name"
@@ -812,6 +1002,19 @@ useEffect(() => {
             />
           </div>
         </div>
+
+        {/* Generate Btns */}
+        <div>
+          <div className={style.npcgenBtnWrapper}>
+            <button onClick={onGenerate} className={style.npcgenBtnGen}>
+              Generate
+            </button>
+            <button onClick={onClear} className={style.npcgenBtnClear}>
+              Clear
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   );
