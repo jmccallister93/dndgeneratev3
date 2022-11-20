@@ -10,9 +10,8 @@ import supabase from "../config/supabaseClient";
 import { e } from "mathjs";
 
 const MonsterGen = () => {
-
-//Set States
-  const [fetchError, setFetchError] = useState()
+  //Set States
+  const [fetchError, setFetchError] = useState();
 
   const [name, setName] = useState("");
   const [names, setNames] = useState();
@@ -118,12 +117,12 @@ const MonsterGen = () => {
   const [gears, setGears] = useState("");
   const [gearOptions, setGearOptions] = useState();
 
-//Import Data
+  //Import Data
 
-//TODO Names
-useEffect(() => {})
+  //TODO Names
+  useEffect(() => {});
 
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("races").select();
       if (error) {
@@ -138,8 +137,8 @@ useEffect(() => {
       }
     };
     fetchData();
-  }, []);  
-  
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("sizes").select();
@@ -156,7 +155,7 @@ useEffect(() => {
     };
     fetchData();
   }, []);
-    
+
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("monstersTypes").select();
@@ -173,7 +172,7 @@ useEffect(() => {
     };
     fetchData();
   }, []);
-    
+
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("aligns").select();
@@ -219,12 +218,13 @@ useEffect(() => {
       if (data) {
         setArmorTypes(data);
         setFetchError(null);
-        setArmorTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
+        setArmorTypeOptions(
+          data.map((r) => ({ name: r.name, value: r.value }))
+        );
       }
     };
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -237,12 +237,13 @@ useEffect(() => {
       if (data) {
         setSpeedTypes(data);
         setFetchError(null);
-        setSpeedTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
+        setSpeedTypeOptions(
+          data.map((r) => ({ name: r.name, value: r.value }))
+        );
       }
     };
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -255,12 +256,13 @@ useEffect(() => {
       if (data) {
         setArmorTypes(data);
         setFetchError(null);
-        setArmorTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
+        setArmorTypeOptions(
+          data.map((r) => ({ name: r.name, value: r.value }))
+        );
       }
     };
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -296,7 +298,6 @@ useEffect(() => {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("skills").select();
@@ -314,7 +315,6 @@ useEffect(() => {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("damageTypes").select();
@@ -331,7 +331,6 @@ useEffect(() => {
     };
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -367,7 +366,6 @@ useEffect(() => {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("conditions").select();
@@ -379,7 +377,9 @@ useEffect(() => {
       if (data) {
         setConditions(data);
         setFetchError(null);
-        setConditionOptions(data.map((r) => ({ name: r.name, value: r.value })));
+        setConditionOptions(
+          data.map((r) => ({ name: r.name, value: r.value }))
+        );
       }
     };
     fetchData();
@@ -402,7 +402,6 @@ useEffect(() => {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("languages").select();
@@ -420,7 +419,6 @@ useEffect(() => {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("monstersAbilities").select();
@@ -437,7 +435,6 @@ useEffect(() => {
     };
     fetchData();
   }, []);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -475,7 +472,9 @@ useEffect(() => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("monstersLegendaryActions").select();
+      const { data, error } = await supabase
+        .from("monstersLegendaryActions")
+        .select();
       if (error) {
         setFetchError("Could not fetch the data");
         setLegend(null);
@@ -492,7 +491,9 @@ useEffect(() => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("monstersLairActions").select();
+      const { data, error } = await supabase
+        .from("monstersLairActions")
+        .select();
       if (error) {
         setFetchError("Could not fetch the data");
         setLair(null);
@@ -507,34 +508,34 @@ useEffect(() => {
     fetchData();
   }, []);
 
-//TODO
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const { data, error } = await supabase.from("itemsAll").select();
-//       if (error) {
-//         setFetchError("Could not fetch the data");
-//         setGear(null);
-//         console.log(error);
-//       }
-//       if (data) {
-//         setGears(data);
-//         setFetchError(null);
-//         setGearOptions(data.map((r) => ({ name: r.name, value: r.value })));
-//       }
-//     };
-//     fetchData();
-//   }, []);
+  //TODO
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       const { data, error } = await supabase.from("itemsAll").select();
+  //       if (error) {
+  //         setFetchError("Could not fetch the data");
+  //         setGear(null);
+  //         console.log(error);
+  //       }
+  //       if (data) {
+  //         setGears(data);
+  //         setFetchError(null);
+  //         setGearOptions(data.map((r) => ({ name: r.name, value: r.value })));
+  //       }
+  //     };
+  //     fetchData();
+  //   }, []);
 
-//OnChanges
-//TODO
+  //OnChanges
+  //TODO
   const onNameChange = (e) => {};
-//TODO
+  //TODO
   const onRandomName = (e) => {};
 
   const onRaceChange = (e) => {
     setRace(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (28 - 1) +1);
+      let r = Math.round(Math.random() * (28 - 1) + 1);
       setRace(raceOptions[r].name);
     }
   };
@@ -542,7 +543,7 @@ useEffect(() => {
   const onSizeChange = (e) => {
     setSize(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (6 - 1) +1);
+      let r = Math.round(Math.random() * (6 - 1) + 1);
       setSize(sizeOptions[r].name);
     }
   };
@@ -550,22 +551,23 @@ useEffect(() => {
   const onTypeChange = (e) => {
     setType(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (16 - 1) +1);
+      let r = Math.round(Math.random() * (16 - 1) + 1);
       setType(typeOptions[r].name);
     }
   };
 
-  const onAlignChange = (e) => { 
+  const onAlignChange = (e) => {
     setAlign(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) +1);
+      let r = Math.round(Math.random() * (9 - 1) + 1);
       setAlign(alignOptions[r].name);
-    }};
+    }
+  };
 
   const onAcChange = (e) => {
     setAc(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (30 - 1) +1);
+      let r = Math.round(Math.random() * (30 - 1) + 1);
       setAc(acOptions[r].name);
     }
   };
@@ -573,40 +575,39 @@ useEffect(() => {
   const onArmorTypeChange = (e) => {
     setArmorType(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (5 - 1) +1);
+      let r = Math.round(Math.random() * (5 - 1) + 1);
       setArmorType(armorTypeOptions[r].name);
     }
   };
-//TODO
+  //TODO
   const onHpChange = (e) => {};
-//TODO
+  //TODO
   const onSpeedChange = (e) => {};
 
   const onSpeedTypeChange = (e) => {
     setSpeedType(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (6 - 1) +1);
+      let r = Math.round(Math.random() * (6 - 1) + 1);
       setSpeedType(speedTypeOptions[r].name);
     }
   };
-//TODO
+  //TODO
   const onSpeedExtraChange = (e) => {};
-//TODO
+  //TODO
   const onAbilityChange = (e) => {};
 
-//   const onSaveChange = (e) => {
-//     setRace(e.value);
-//     if (e.value === "Random") {
-//       let r = Math.round(Math.random() * (28 - 1) +1);
-//       setRace(raceOptions[r].name);
-//     }
-//   };
-
+  //   const onSaveChange = (e) => {
+  //     setRace(e.value);
+  //     if (e.value === "Random") {
+  //       let r = Math.round(Math.random() * (28 - 1) +1);
+  //       setRace(raceOptions[r].name);
+  //     }
+  //   };
 
   const onVulnChange = (e) => {
     setVuln(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (17 - 1) +1);
+      let r = Math.round(Math.random() * (17 - 1) + 1);
       setVuln(vulnOptions[r].name);
     }
   };
@@ -614,7 +615,7 @@ useEffect(() => {
   const onSkillChange = (e) => {
     setSkill(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (18 - 1) +1);
+      let r = Math.round(Math.random() * (18 - 1) + 1);
       setSkill(skillOptions[r].name);
     }
   };
@@ -622,7 +623,7 @@ useEffect(() => {
   const onImmuneChange = (e) => {
     setImmune(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (17 - 1) +1);
+      let r = Math.round(Math.random() * (17 - 1) + 1);
       setImmune(immuneOptions[r].name);
     }
   };
@@ -630,7 +631,7 @@ useEffect(() => {
   const onResistChange = (e) => {
     setResist(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (17 - 1) +1);
+      let r = Math.round(Math.random() * (17 - 1) + 1);
       setResist(resistOptions[r].name);
     }
   };
@@ -638,7 +639,7 @@ useEffect(() => {
   const onConditionChange = (e) => {
     setCondition(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (15 - 1) +1);
+      let r = Math.round(Math.random() * (15 - 1) + 1);
       setCondition(conditionOptions[r].name);
     }
   };
@@ -646,7 +647,7 @@ useEffect(() => {
   const onSenseChange = (e) => {
     setSense(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (4 - 1) +1);
+      let r = Math.round(Math.random() * (4 - 1) + 1);
       setSense(senseOptions[r].name);
     }
   };
@@ -654,7 +655,7 @@ useEffect(() => {
   const onLangChange = (e) => {
     setLang(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (16 - 1) +1);
+      let r = Math.round(Math.random() * (16 - 1) + 1);
       setLang(langOptions[r].name);
     }
   };
@@ -662,7 +663,7 @@ useEffect(() => {
   const onSpecialChange = (e) => {
     setSpecial(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (208 - 1) +1);
+      let r = Math.round(Math.random() * (208 - 1) + 1);
       setSpecial(specialOptions[r].name);
     }
   };
@@ -670,7 +671,7 @@ useEffect(() => {
   const onActionChange = (e) => {
     setAction(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (292 - 1) +1);
+      let r = Math.round(Math.random() * (292 - 1) + 1);
       setAction(actionOptions[r].name);
     }
   };
@@ -678,7 +679,7 @@ useEffect(() => {
   const onReactionChange = (e) => {
     setReaction(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1) +1);
+      let r = Math.round(Math.random() * (11 - 1) + 1);
       setReaction(reactionOptions[r].name);
     }
   };
@@ -686,7 +687,7 @@ useEffect(() => {
   const onLegendChange = (e) => {
     setLegend(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (35 - 1) +1);
+      let r = Math.round(Math.random() * (35 - 1) + 1);
       setLegend(legendOptions[r].name);
     }
   };
@@ -694,49 +695,170 @@ useEffect(() => {
   const onLairChange = (e) => {
     setLair(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (39 - 1) +1);
+      let r = Math.round(Math.random() * (39 - 1) + 1);
       setLair(lairOptions[r].name);
     }
   };
-//TODO
+  //TODO
   const onGearChange = (e) => {};
 
   const onGenerate = (e) => {
-    if (bond === "") {
-      let r = Math.round(Math.random() * (9 - 1) +1);
-      setBond(bondOptions[r].name);
+    if (race === "") {
+      let r = Math.round(Math.random() * (28 - 1) + 1);
+      setRace(raceOptions[r].name);
     } else {
-      setBond(bond);
+      setRace(race);
+    }
+    if (size === "") {
+        let r = Math.round(Math.random() * (6 - 1) + 1);
+        setSize(sizeOptions[r].name);
+      } else {
+        setSize(size);
+      }
+    if (type === "") {
+    let r = Math.round(Math.random() * (16 - 1) + 1);
+    setType(typeOptions[r].name);
+    } else {
+        setType(type)
+    }
+    if (align === "") {
+        let r = Math.round(Math.random() * (9 - 1) + 1);
+        setAlign(alignOptions[r].name);
+    } else {
+        setAlign(align)
+    }
+    if (ac === "") {
+        let r = Math.round(Math.random() * (30 - 1) + 1);
+        setAc(acOptions[r].name);
+    } else {
+        setAc(ac)
+    }
+    if (armorType === "") {
+        let r = Math.round(Math.random() * (5 - 1) + 1);
+        setArmorType(armorTypeOptions[r].name);
+    } else {
+        setArmorType(armorType)
+    }
+    //TODO
+    // if (hp === "")
+    //TODO
+    //if (speed === "")
+    if (speedType === "") {
+        let r = Math.round(Math.random() * (6 - 1) + 1);
+        setSpeedType(speedTypeOptions[r].name);
+    } else {
+        setSpeedType(speedType)
+    }
+    //TODO 
+    // if(speedExtra === "")
+    //TODO
+    // if(ability === "")
+    //TOD
+    // if(save === "")
+    if (vuln === "") {
+        let r = Math.round(Math.random() * (17 - 1) + 1);
+        setVuln(vulnOptions[r].name);
+    } else {
+        setVuln(vuln)
+    }  
+    if (skill === "") {
+        let r = Math.round(Math.random() * (18 - 1) + 1);
+        setSkill(skillOptions[r].name);
+    } else {
+        setSkill(skill)
+    } 
+    if (immune === "") {
+        let r = Math.round(Math.random() * (17 - 1) + 1);
+        setImmune(immuneOptions[r].name);
+    } else {
+        setImmune(immune)
+    }
+    if (resist === "") {
+        let r = Math.round(Math.random() * (17 - 1) + 1);
+        setResist(resistOptions[r].name);
+    } else {
+        setResist(resist)
+    }
+    if (condition === "") {
+        let r = Math.round(Math.random() * (15 - 1) + 1);
+        setCondition(conditionOptions[r].name);
+    } else {
+        setCondition(condition)
+    }
+    if (sense === "") {
+        let r = Math.round(Math.random() * (4 - 1) + 1);
+        setSense(senseOptions[r].name);
+    } else {
+        setSense(sense)
+    }
+    if (lang === "") {
+        let r = Math.round(Math.random() * (16 - 1) + 1);
+        setLang(langOptions[r].name);
+    } else {
+        setLang(lang)
+    }
+    if (special === "") {
+        let r = Math.round(Math.random() * (208 - 1) + 1);
+        setSpecial(specialOptions[r].name);
+    } else {
+        setSpecial(special)
+    }
+    if (action === "") {
+        let r = Math.round(Math.random() * (292 - 1) + 1);
+        setAction(actionOptions[r].name);
+    } else {
+        setAction(action)
+    }
+    if (reaction === "") {
+        let r = Math.round(Math.random() * (11 - 1) + 1);
+        setReaction(reactionOptions[r].name);
+    } else {
+        setReaction(reaction)
+    }
+    if (legend === "") {
+        let r = Math.round(Math.random() * (35 - 1) + 1);
+        setLegend(legendOptions[r].name);
+    } else {
+        setLegend(legend)
+    }
+    if (lair === "") {
+        let r = Math.round(Math.random() * (39 - 1) + 1);
+        setLair(lairOptions[r].name);
+    } else {
+        setLair(lair)
     }
 
-    const onClear = (e) => {
-        setName("");
-        setRace("")
-        setSize("")
-        setType("")
-        setAlign("")
-        setAc("")
-        setArmorType("")
-        setHp("")
-        setSpeed("")
-        setSpeedType("")
-        setSpeedExtra("")
-        setAbility("")
-        setSave("")
-        setSkill("")
-        setVuln("")
-        setImmune("")
-        setResist("")
-        setCondition("")
-        setSense("")
-        setLang("")
-        setSpecial("")
-        setAction("")
-        setReaction("")
-        setLegend("")
-        setLair("")
-        setGear("")
-    }
+
+  };
+
+  const onClear = (e) => {
+    setName("");
+    setRace("");
+    setSize("");
+    setType("");
+    setAlign("");
+    setAc("");
+    setArmorType("");
+    setHp("");
+    setSpeed("");
+    setSpeedType("");
+    setSpeedExtra("");
+    setAbility("");
+    setSave("");
+    setSkill("");
+    setVuln("");
+    setImmune("");
+    setResist("");
+    setCondition("");
+    setSense("");
+    setLang("");
+    setSpecial("");
+    setAction("");
+    setReaction("");
+    setLegend("");
+    setLair("");
+    setGear("");
+  };
 
   return (
     <div className={style.monstergenWrapper}>
@@ -867,7 +989,7 @@ useEffect(() => {
               optionLabel="name"
               value={save}
               options={saveOptions}
-            //   onChange={onSaveChange}
+              //   onChange={onSaveChange}
               placeholder="Choose Save"
             />
           </div>
@@ -1005,16 +1127,15 @@ useEffect(() => {
 
         {/* Generate Btns */}
         <div>
-          <div className={style.npcgenBtnWrapper}>
-            <button onClick={onGenerate} className={style.npcgenBtnGen}>
+          <div className={style.monstergenBtnWrapper}>
+            <button onClick={onGenerate} className={style.monstergenBtnGen}>
               Generate
             </button>
-            <button onClick={onClear} className={style.npcgenBtnClear}>
+            <button onClick={onClear} className={style.monstergenBtnClear}>
               Clear
             </button>
           </div>
         </div>
-
       </div>
     </div>
   );
