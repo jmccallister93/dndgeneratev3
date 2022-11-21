@@ -255,151 +255,82 @@ const MonsterGen = () => {
   const onChaChange = (e) => {
     objectChange(e.value, setCha);
   };
-//TODO
-    // const onSaveChange = (e) => {
-    //   setSave(e.value);
-    //   if (e.value === "Random") {
-    //     let r = Math.round(Math.random() * (28 - 1) +1);
-    //     setSave(saveOptions[r].name);
-    //   }
-    // };
+  //TODO
+  // const onSaveChange = (e) => {
+  //   objectChange(e.value, setSave, 17, 1, 1, saveOptions)
+  // };
+  //   const onGearChange = (e) => {}
+  //   objectChange(e.value, setGear, 17, 1, 1, gearOptions)
+  // };
   const onVulnChange = (e) => {
-    objectChange(e.value, setVuln, 17, 1, 1, vulnOptions)
+    objectChange(e.value, setVuln, 17, 1, 1, vulnOptions);
   };
-
   const onSkillChange = (e) => {
-    objectChange(e.value, setSkill, 18, 1, 1, skillOptions)
+    objectChange(e.value, setSkill, 18, 1, 1, skillOptions);
   };
-
   const onImmuneChange = (e) => {
-    objectChange(e.value, setImmune, 17, 1, 1, immuneOptions)
+    objectChange(e.value, setImmune, 17, 1, 1, immuneOptions);
   };
-
   const onResistChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setResist(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (17 - 1) + 1);
-      setResist(resistOptions[r].name);
-    }
+    objectChange(e.value, setResist, 17, 1, 1, resistOptions);
   };
-
   const onConditionChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setCondition(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (15 - 1) + 1);
-      setCondition(conditionOptions[r].name);
-    }
+    objectChange(e.value, setCondition, 15, 1, 1, conditionOptions);
   };
-
   const onSenseChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setSense(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (4 - 1) + 1);
-      setSense(senseOptions[r].name);
-    }
+    objectChange(e.value, setSense, 4, 1, 1, senseOptions);
   };
-
   const onLangChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setLang(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (16 - 1) + 1);
-      setLang(langOptions[r].name);
-    }
+    objectChange(e.value, setLang, 16, 1, 1, langOptions);
   };
-
   const onSpecialChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setSpecial(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (208 - 1) + 1);
-      setSpecial(specialOptions[r].name);
-    }
+    objectChange(e.value, setSpecial, 208, 1, 1, specialOptions);
   };
-
   const onActionChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setAction(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (292 - 1) + 1);
-      setAction(actionOptions[r].name);
-    }
+    objectChange(e.value, setAction, 292, 1, 1, actionOptions);
   };
-
   const onReactionChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setReaction(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
-      setReaction(reactionOptions[r].name);
-    }
+    objectChange(e.value, setReaction, 11, 1, 1, reactionOptions);
   };
-
   const onLegendChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setLegend(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (35 - 1) + 1);
-      setLegend(legendOptions[r].name);
-    }
+    objectChange(e.value, setLegend, 35, 1, 1, legendOptions);
   };
-
   const onLairChange = (e) => {
-    objectChange(e.value, setArmorType, 14, 1, 1, armorTypeOptions)
-    setLair(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (39 - 1) + 1);
-      setLair(lairOptions[r].name);
-    }
+    objectChange(e.value, setLair, 39, 1, 1, lairOptions);
   };
 
-
+  //Random Number Button
+  const randomButton = (setObject, max, min) => {
+    let r = Math.floor(Math.random() * (max - min));
+    setObject(r);
+  };
   const onRandomHp = (e) => {
-    let r = Math.floor(Math.random() * 500);
-    setHp(r);
+    randomButton(setHp, 500, 0);
   };
   const onRandomSpeed = (e) => {
-    let r = Math.floor(Math.random() * (120 - 0));
-    setSpeed(r);
+    randomButton(setSpeed, 120, 0);
   };
   const onRandomSpeedExtra = (e) => {
-    let r = Math.floor(Math.random() * (120 - 0));
-    setSpeedExtra(r);
+    randomButton(setSpeedExtra, 120, 0);
   };
   const onRandomStr = (e) => {
-    let r = Math.floor(Math.random() * (30 - 0));
-    setStr(r);
+    randomButton(setStr, 30, 0);
   };
   const onRandomDex = (e) => {
-    let r = Math.floor(Math.random() * (30 - 0));
-    setDex(r);
+    randomButton(setDex, 30, 0);
   };
   const onRandomCon = (e) => {
-    let r = Math.floor(Math.random() * (30 - 0));
-    setCon(r);
+    randomButton(setCon, 30, 0);
   };
   const onRandomInt = (e) => {
-    let r = Math.floor(Math.random() * (30 - 0));
-    setInt(r);
+    randomButton(setInt, 30, 0);
   };
   const onRandomWis = (e) => {
-    let r = Math.floor(Math.random() * (30 - 0));
-    setWis(r);
+    randomButton(setWis, 30, 0);
   };
   const onRandomCha = (e) => {
-    let r = Math.floor(Math.random() * (30 - 0));
-    setCha(r);
+    randomButton(setCha, 30, 0);
   };
-
-
-
-
-
-  //TODO
-  const onGearChange = (e) => {};
 
   const onGenerate = (e) => {
     if (size === "") {
@@ -1002,7 +933,7 @@ const MonsterGen = () => {
               optionLabel="name"
               value={gear}
               options={gearOptions}
-              onChange={onGearChange}
+            //   onChange={onGearChange}
               placeholder="Choose Sear"
             />
           </div>
