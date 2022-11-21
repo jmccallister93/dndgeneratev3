@@ -10,6 +10,8 @@ import supabase from "../config/supabaseClient";
 import { InputNumber } from "primereact/inputnumber";
 
 const MonsterGen = () => {
+    const [monster, setMonster] = useState({size: '', type: ''})
+
   //Set States
   const [fetchError, setFetchError] = useState();
 
@@ -119,14 +121,8 @@ const MonsterGen = () => {
   const [gearOptions, setGearOptions] = useState();
 
   //Import Data
-
-  //TODO Names
-  useEffect(() => {});
-
+  //Get Data function
   const getData = (
-    // fetchName,
-    // dataName,
-    // errorName,
     tableName,
     setSingular,
     setPlural,
@@ -149,8 +145,10 @@ const MonsterGen = () => {
     };
     fetchData();
   };
-
+//Import data via getData
   useEffect(() => {
+//TODO Names
+    // getData("names", setName, setNames, setNameOptions)    
     getData("sizes", setSize, setSizes, setSizeOptions);
     getData("monstersTypes", setType, setTypes, setTypeOptions)
     getData("aligns", setAlign, setAligns, setAlignOptions)
@@ -173,6 +171,12 @@ const MonsterGen = () => {
     getData("monstersLegendaryActions", setLegend, setLegends, setLegendOptions)
     getData("monstersLairActions", setLair, setLairs, setLairOptions)
   }, [])
+
+//TODO Monster Object
+  useEffect(() => {
+    setMonster((monster) => ({...monster, size: size, type: type}))
+  }, [size,type])
+  
 
   //TODO
   //   useEffect(() => {
@@ -198,13 +202,24 @@ const MonsterGen = () => {
   //TODO
   const onRandomName = (e) => {};
 
-  const onSizeChange = (e) => {
-    setSize(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (6 - 1) + 1);
-      setSize(sizeOptions[r].name);
-    }
-  };
+const objectChange = (click, setObject, max, min, floor, objectOptions) => {
+        setObject(click);
+        if (click === "Random"){
+            let r = Math.round(Math.random() * (max - min) + floor);
+            setObject(objectOptions[r].name);
+        } 
+}
+
+const onSizeChange = (e) => {objectChange(e.value, setSize, 6, 1, 1, sizeOptions)}
+
+
+// const onSizeChange   = (e) => {
+//     setSize(e.value);
+//     if (e.value === "Random") {
+//       let r = Math.round(Math.random() * (6 - 1) + 1);
+//       setSize(sizeOptions[r].name);
+//     }
+//   };
 
   const onTypeChange = (e) => {
     setType(e.value);
