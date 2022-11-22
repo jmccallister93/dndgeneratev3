@@ -437,7 +437,7 @@ const MonsterGen = () => {
   //DropDowns
   const customDrop = (title, value, options, change, placeholder) => (
     <div className={style.dropContainer}>
-      <h2>{title}</h2>
+      <h2 className={style.monstergenTitles}>{title}</h2>
       <Dropdown
         optionLabel="name"
         value={value}
@@ -534,10 +534,63 @@ const MonsterGen = () => {
     "Choose Languages"
   );
 
+  const movementDrop = (
+    <div className={style.dropContainer}>
+      <h2>Extra Movement</h2>
+      <Dropdown
+        optionLabel="name"
+        value={speedType}
+        options={speedTypeOptions}
+        onChange={onSpeedTypeChange}
+        placeholder="Choose Movement"
+      />
+
+      <button onClick={onAddSpeedType} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"></i>
+      </button>
+      <InputNumber
+        value={speedExtra}
+        onChange={onSpeedExtraChange}
+        placeholder={"Set " + speedType + " Speed"}
+        mode="decimal"
+        showButtons
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <button onClick={onRandomSpeedExtra} className={style.monstergenBtnName}>
+        Randomize
+      </button>
+    </div>
+  );
+  const movementInput = (
+    <>
+      <InputNumber
+        value={speedExtra}
+        onChange={onSpeedExtraChange}
+        placeholder={"Set " + speedType + " Speed"}
+        mode="decimal"
+        showButtons
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <button onClick={onRandomSpeedExtra} className={style.monstergenBtnName}>
+        Randomize
+      </button>
+    </>
+  );
+
   //InputTexts
   const customInputText = (title, value, change, placeholder, click) => (
     <div>
-      <h2>{title}</h2>
+      <h2 className={style.monstergenTitles}>{title}</h2>
       <InputText value={value} onChange={change} placeholder={placeholder} />
       <button onClick={click} className={style.monstergenBtnName}>
         Random
@@ -555,7 +608,7 @@ const MonsterGen = () => {
   //InputNumbers
   const customInputNumber = (title, value, change, placeholder, click) => (
     <div>
-      <h2>{title}</h2>
+      <h2 className={style.monstergenTitles}>{title}</h2>
       <InputNumber
         value={value}
         onChange={change}
@@ -633,9 +686,10 @@ const MonsterGen = () => {
       <div>
         <h3>
           {i}
+          {/* {movementRandomBtn} */}
           <button
             onClick={onRemoveSpeedType}
-            className={style.monstergenBtnClear}
+            className={style.monstergenBtnRemove}
           >
             <i className="pi pi-minus"></i>
           </button>
@@ -648,21 +702,19 @@ const MonsterGen = () => {
     <div className={style.monstergenWrapper}>
       <Navbar />
       <div className={style.topHeader}>
-      <h1 className={style.monstergenHeader}>Monster Generator</h1>
-      
+        <h1 className={style.monstergenHeader}>Monster Generator</h1>
 
-      {/* Generate Btns */}
-      <div>
-        <div className={style.monstergenBtnWrapper}>
-          <button onClick={onGenerate} className={style.monstergenBtnGen}>
-            Generate
-          </button>
-          <button onClick={onClear} className={style.monstergenBtnClear}>
-            Clear
-          </button>
+        {/* Generate Btns */}
+        <div>
+          <div className={style.monstergenBtnWrapper}>
+            <button onClick={onGenerate} className={style.monstergenBtnGen}>
+              Generate
+            </button>
+            <button onClick={onClear} className={style.monstergenBtnClear}>
+              Clear
+            </button>
+          </div>
         </div>
-      </div>
-
       </div>
       <div className={style.monstergenBody}>
         {/* Options */}
@@ -679,41 +731,7 @@ const MonsterGen = () => {
           <div className={style.monstergenSubsection}>
             {hpInput}
             {speedInput}
-            <div className={style.dropContainer}>
-              <h2>Extra Movement</h2>
-              <Dropdown
-                optionLabel="name"
-                value={speedType}
-                options={speedTypeOptions}
-                onChange={onSpeedTypeChange}
-                placeholder="Choose Movement"
-              />
-              <InputNumber
-                value={speedExtra}
-                onChange={onSpeedExtraChange}
-                placeholder={"Set " + speedType + " Speed"}
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button
-                onClick={onRandomSpeedExtra}
-                className={style.monstergenBtnName}
-              >
-                Randomize
-              </button>
-              <button
-                onClick={onAddSpeedType}
-                className={style.monstergenBtnName}
-              >
-                <i className="pi pi-plus"></i>
-              </button>
-            </div>
+            {movementDrop}
             <div className={style.dropContainer}>
               <h3>{extraSpeedDispaly}</h3>
             </div>
