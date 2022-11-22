@@ -337,94 +337,82 @@ const MonsterGen = () => {
       if (value === "") {
         let r = Math.round(Math.random() * (max - min) + 1);
         setValue(options[r].name);
+      } else {
+        setValue(value)
       }
     };
-    ifBlank(size, setSize, sizeOptions, 6, 1)
-    ifBlank(type, setType, typeOptions, 16, 1)
-    ifBlank(align, setAlign, alignOptions, 9, 1)
-    ifBlank(ac, setAc, acOptions, 30, 1)
-    ifBlank(armorType, setArmorType, armorTypeOptions, 5, 1)
-    ifBlank(speedType, setSpeedType, speedTypeOptions, 6, 1)
-    ifBlank(vuln, setVuln, vulnOptions, 17, 1)
-    ifBlank(skill, setSkill, skillOptions, 18, 1)
-    ifBlank(immune, setImmune, immuneOptions, 17, 1)
-    ifBlank(resist, setResist, resistOptions, 17, 1)
-    ifBlank(condition, setCondition, conditionOptions, 15, 1)
-    ifBlank(sense, setSense, senseOptions, 4, 1)
-    ifBlank(lang, setLang, langOptions, 16, 1)
-    ifBlank(special, setSpecial, specialOptions, 208, 1)
-    ifBlank(action, setAction, actionOptions, 292, 1)
-    ifBlank(reaction, setReaction, reactionOptions, 11, 1)
+    ifBlank(size, setSize, sizeOptions, 6, 1);
+    ifBlank(type, setType, typeOptions, 16, 1);
+    ifBlank(align, setAlign, alignOptions, 9, 1);
+    ifBlank(ac, setAc, acOptions, 30, 1);
+    ifBlank(armorType, setArmorType, armorTypeOptions, 5, 1);
+    ifBlank(speedType, setSpeedType, speedTypeOptions, 6, 1);
+    ifBlank(vuln, setVuln, vulnOptions, 17, 1);
+    ifBlank(skill, setSkill, skillOptions, 18, 1);
+    ifBlank(immune, setImmune, immuneOptions, 17, 1);
+    ifBlank(resist, setResist, resistOptions, 17, 1);
+    ifBlank(condition, setCondition, conditionOptions, 15, 1);
+    ifBlank(sense, setSense, senseOptions, 4, 1);
+    ifBlank(lang, setLang, langOptions, 16, 1);
+    ifBlank(special, setSpecial, specialOptions, 208, 1);
+    ifBlank(action, setAction, actionOptions, 292, 1);
+    ifBlank(reaction, setReaction, reactionOptions, 11, 1);
+    ifBlank(legend, setLegend, legendOptions, 35, 1)
+    // ifBlank(lair, setLair, lairOptions, 39, 1)
     //TODO
-    // if(save === "")
-    if (hp === "") {
-      let r = Math.floor(Math.random() * 500);
-      setHp(r);
-    }
-    if (speed === "") {
-      let r = Math.floor(Math.random() * (120 - 0));
-      setSpeed(r);
-    }
-    if (speedExtra === "") {
-      let r = Math.floor(Math.random() * (120 - 0));
-      setSpeedExtra(r);
-    }
-    if (str === "") {
-      let r = Math.floor(Math.random() * (30 - 0));
-      setStr(r);
-    }
-    if (dex === "") {
-      let r = Math.floor(Math.random() * (30 - 0));
-      setDex(r);
-    }
-    if (con === "") {
-      let r = Math.floor(Math.random() * (30 - 0));
-      setCon(r);
-    }
-    if (int === "") {
-      let r = Math.floor(Math.random() * (30 - 0));
-      setInt(r);
-    }
-    if (wis === "") {
-      let r = Math.floor(Math.random() * (30 - 0));
-      setWis(r);
-    }
-    if (cha === "") {
-      let r = Math.floor(Math.random() * (30 - 0));
-      setCha(r);
-    }
+    // ifBlank(save, setSave, saveOptions, 11, 1)
+
+    const ifBlank2 = (value, setValue, max, min) => {
+      if (value === "") {
+        let r = Math.round(Math.random() * (max - min) + 1);
+        setValue(r);
+      }else {
+        setValue(value)
+      }
+    };
+    ifBlank2(hp, setHp, 500, 0)
+    ifBlank2(speed, setSpeed, 120, 0)
+    ifBlank2(speedExtra, setSpeedExtra, 120, 0)
+    ifBlank2(str, setStr, 30, 0)
+    ifBlank2(dex, setDex, 30, 0)
+    ifBlank2(con, setCon, 30, 0)
+    ifBlank2(int, setInt, 30, 0)
+    ifBlank2(wis, setWis, 30, 0)
+    ifBlank2(cha, setCha, 30, 0)
     
-    if (legend === "") {
-      let r = Math.round(Math.random() * (35 - 1) + 1);
-      setLegend(legendOptions[r].name);
-    } else {
-      setSize(size);
-      setType(type);
-      setAlign(align);
-      setAc(ac);
-      setArmorType(armorType);
-      setHp(hp);
-      setSpeed(speed);
-      setSpeedType(speedType);
-      setSpeedExtra(speedExtra);
-      setStr(str);
-      setDex(dex);
-      setCon(con);
-      setInt(int);
-      setWis(wis);
-      setCha(cha);
-      setVuln(vuln);
-      setSkill(skill);
-      setImmune(immune);
-      setResist(resist);
-      setCondition(condition);
-      setSense(sense);
-      setLang(lang);
-      setSpecial(special);
-      setAction(action);
-      setLegend(legend);
-      setReaction(reaction);
-    }
+
+
+    // if (legend === "") {
+    //   let r = Math.round(Math.random() * (35 - 1) + 1);
+    //   setLegend(legendOptions[r].name);
+    // } else {
+    //   setSize(size);
+    //   setType(type);
+    //   setAlign(align);
+    //   setAc(ac);
+    //   setArmorType(armorType);
+    //   setHp(hp);
+    //   setSpeed(speed);
+    //   setSpeedType(speedType);
+    //   setSpeedExtra(speedExtra);
+    //   setStr(str);
+    //   setDex(dex);
+    //   setCon(con);
+    //   setInt(int);
+    //   setWis(wis);
+    //   setCha(cha);
+    //   setVuln(vuln);
+    //   setSkill(skill);
+    //   setImmune(immune);
+    //   setResist(resist);
+    //   setCondition(condition);
+    //   setSense(sense);
+    //   setLang(lang);
+    //   setSpecial(special);
+    //   setAction(action);
+    //   setLegend(legend);
+    //   setReaction(reaction);
+    // }
     //TODO
     // if (lair === "") {
     //     let r = Math.round(Math.random() * (39 - 1) + 1);
