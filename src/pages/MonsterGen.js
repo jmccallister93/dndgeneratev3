@@ -59,12 +59,11 @@ const MonsterGen = () => {
 
   const [speedExtra, setSpeedExtra] = useState("");
   const [speedExtraList, setSpeedExtraList] = useState([]);
-  const [burrow, setBurrow] = useState("")
-  const [climb, setClimb] = useState("")
-  const [fly, setFly] = useState("")
-  const [hover, setHover] = useState("")
-  const [swim, setSwim] = useState("")
-
+  const [burrow, setBurrow] = useState("");
+  const [climb, setClimb] = useState("");
+  const [fly, setFly] = useState("");
+  const [hover, setHover] = useState("");
+  const [swim, setSwim] = useState("");
 
   const [ability, setAbility] = useState("");
   const [abilities, setAbilities] = useState("");
@@ -383,10 +382,6 @@ const MonsterGen = () => {
     randomButton(setCha, 30, 0);
   };
 
-  const onRemoveSpeedType = (e) => {
-    const x = e.target.getAttribute("name");
-    setSpeedExtraList(speedExtraList.filter((item) => item.x !== x));
-  };
   //Generate and Clear
   const onGenerate = (e) => {
     const ifBlank = (value, setValue, options, max, min) => {
@@ -471,7 +466,7 @@ const MonsterGen = () => {
     setSpeedExtraList([]);
   };
 
-  //Display elements
+  //DISPLAY ELEMNTS
 
   //DropDowns
   const customDrop = (title, value, options, change, placeholder) => (
@@ -573,19 +568,19 @@ const MonsterGen = () => {
     "Choose Languages"
   );
 
+  //TODO SPEED
   const openDialog = () => {
     setDialogVisible(true);
   };
 
   const closeDialog = () => {
     setDialogVisible(false);
-    
-    for (let i=0; i < selectedItems.length; i++){
-        if(speedExtraList.includes(selectedItems[i])){
 
-        } else {
-        setSpeedExtraList(speedArray => [...speedArray,selectedItems[i]])
-        }
+    for (let i = 0; i < selectedItems.length; i++) {
+      if (speedExtraList.includes(selectedItems[i])) {
+      } else {
+        setSpeedExtraList((speedArray) => [...speedArray, selectedItems[i]]);
+      }
     }
   };
 
@@ -593,48 +588,111 @@ const MonsterGen = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
 
-//   const onAddSpeedType = (e) => {
-//     setSpeedExtraList((speedArray) => [...speedArray, speedType]);
-//     setSpeedExtraList((speedArray) => [...speedArray, selectedItems]);
-//     console.log(speedType);
-//   };
-
-// const extraSpeedDispaly = speedExtraList.map(i => (
-//     console.log(i)
-//     )
-// )
-const onBurrowChange = (e) => {
+  const onBurrowChange = (e) => {
     objectChange(e.value, setBurrow);
   };
+  const onClimbChange = (e) => {
+    objectChange(e.value, setClimb);
+  };
+  const onFlyChange = (e) => {
+    objectChange(e.value, setFly);
+  };
+  const onHoverChange = (e) => {
+    objectChange(e.value, setHover);
+  };
+  const onSwimChange = (e) => {
+    objectChange(e.value, setSwim);
+  };
+  const onRemoveBurrow = (e) => {
+    setSpeedExtraList(speedExtraList.filter(value => value.name !== "Burrow"))
+    
+  };
 
-const burrowInput = (
-    <InputNumber
-      value={speedExtra}
-      onChange={onBurrowChange}
-      placeholder={"Set " + speedType + " Speed"}
-      mode="decimal"
-      showButtons
-      decrementButtonClassName="p-button-secondary"
-      incrementButtonClassName="p-button-secondary"
-      incrementButtonIcon="pi pi-plus"
-      decrementButtonIcon="pi pi-minus"
-      minFractionDigits={0}
-      maxFractionDigits={2}
-    />
-  );
-
-  const extraSpeedDispaly = speedExtraList.map((i) => {
-    console.log(speedExtraList)
-    return (
-      <div>
-        <h3>
-          {i.name}
-          <button
-            onClick={onRemoveSpeedType}
+  const customSpeedInput = (value, change, placeholder, onrandom) => (
+    <div>
+      <InputNumber
+        value={value}
+        onChange={change}
+        placeholder={placeholder}
+        mode="decimal"
+        showButtons
+        buttonLayout="stacked"
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <button onClick={onrandom} className={style.monstergenBtnName}>
+        Random
+      </button>
+      <button
+            onClick={onRemoveBurrow}
             className={style.monstergenBtnRemove}
           >
             <i className="pi pi-minus"> Remove</i>
           </button>
+    </div>
+  );
+  const onRandomBurrow = (e) => {
+    randomButton(setBurrow, 120, 0);
+  };
+  const onRandomClimb = (e) => {
+    randomButton(setClimb, 120, 0);
+  };
+  const onRandomFly = (e) => {
+    randomButton(setFly, 120, 0);
+  };
+  const onRandomHover = (e) => {
+    randomButton(setHover, 120, 0);
+  };
+  const onRandomSwim = (e) => {
+    randomButton(setSwim, 120, 0);
+  };
+  const burrowInput = customSpeedInput(
+    burrow,
+    onBurrowChange,
+    "Burrow Speed",
+    onRandomBurrow
+  );
+  const climbInput = customSpeedInput(
+    climb,
+    onClimbChange,
+    "Climb Speed",
+    onRandomClimb
+  );
+  const flyInput = customSpeedInput(fly, onFlyChange, "Fly Speed", onRandomFly);
+  const hoverInput = customSpeedInput(
+    hover,
+    onHoverChange,
+    "Hover Speed",
+    onRandomHover
+  );
+  const swimInput = customSpeedInput(
+    swim,
+    onSwimChange,
+    "Swim Speed",
+    onRandomSwim
+  );
+
+  const extraSpeedDispaly = speedExtraList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+          {i.name === "Burrow"
+            ? burrowInput
+            : i.name === "Climb"
+            ? climbInput
+            : i.name === "Fly"
+            ? flyInput
+            : i.name === "Hover"
+            ? hoverInput
+            : i.name === "Swim"
+            ? swimInput
+            : null}
+         
         </h3>
       </div>
     );
