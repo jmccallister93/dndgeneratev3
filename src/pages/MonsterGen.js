@@ -14,6 +14,7 @@ import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { Tooltip } from "primereact/tooltip";
 
 const MonsterGen = () => {
   const [monster, setMonster] = useState({ size: "", type: "" });
@@ -568,7 +569,7 @@ const MonsterGen = () => {
     "Choose Languages"
   );
 
-  //TODO SPEED
+  //Additonal SPEED
   const openDialog = () => {
     setDialogVisible(true);
   };
@@ -603,10 +604,12 @@ const MonsterGen = () => {
   const onSwimChange = (e) => {
     objectChange(e.value, setSwim);
   };
+  useEffect(()=>{
+    setSelectedItems(speedExtraList)
+  },[speedExtraList])
 
   const onRemoveCustom = (name) => {
     setSpeedExtraList(speedExtraList.filter((value) => value.name !== name));
-    setSelectedItems(speedExtraList);
   };
 
   const onRemoveBurrow = (e) => onRemoveCustom("Burrow");
@@ -616,7 +619,7 @@ const MonsterGen = () => {
   const onRemoveSwim = (e) => onRemoveCustom("Swim");
 
   const customSpeedInput = (value, change, placeholder, onRandom, onRemove) => (
-    <div>
+    <div className={style.monstergenSpeedsWrapper}>
       <InputNumber
         value={value}
         onChange={change}
@@ -631,12 +634,14 @@ const MonsterGen = () => {
         minFractionDigits={0}
         maxFractionDigits={2}
       />
-      <button onClick={onRandom} className={style.monstergenBtnName}>
+      <div style={{display: "flex"}}>
+      <Button onClick={onRandom} className={style.monstergenBtnName} style={{height: "2rem"}}>
         Random
-      </button>
-      <button onClick={onRemove} className={style.monstergenBtnRemove}>
-        <i className="pi pi-minus"> Remove</i>
-      </button>
+      </Button>
+      <Button tooltip="Remove?" onClick={onRemove} className={style.monstergenBtnRemove} style={{height: "2rem"}}>
+      <i className="pi pi-minus"></i>
+      </Button>
+      </div>
     </div>
   );
   const onRandomBurrow = (e) => {
@@ -714,9 +719,9 @@ const MonsterGen = () => {
   const moveDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Addtional Movement</h2>
-      <button onClick={openDialog} className={style.monstergenBtnName}>
+      <Button onClick={openDialog} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
-      </button>
+      </Button>
       <Dialog
         header="Additional Movement"
         visible={dialogVisible}
@@ -769,9 +774,9 @@ const MonsterGen = () => {
     <div>
       <h2 className={style.monstergenTitles}>{title}</h2>
       <InputText value={value} onChange={change} placeholder={placeholder} />
-      <button onClick={click} className={style.monstergenBtnName}>
+      <Button onClick={click} className={style.monstergenBtnName}>
         Random
-      </button>
+      </Button>
     </div>
   );
   const nameText = customInputText(
@@ -800,9 +805,9 @@ const MonsterGen = () => {
         minFractionDigits={0}
         maxFractionDigits={2}
       />
-      <button onClick={click} className={style.monstergenBtnName}>
+      <Button onClick={click} className={style.monstergenBtnName}>
         Random
-      </button>
+      </Button>
     </div>
   );
 
@@ -890,11 +895,9 @@ const MonsterGen = () => {
           <div className={style.monstergenSubsection}>
             {hpInput}
             {speedInput}
-            {/* {movementDrop} */}
             {moveDialog}
-
             <div className={style.dropContainer}>
-              <h3>{extraSpeedDispaly}</h3>
+              {extraSpeedDispaly}
             </div>
           </div>
           <h1 className={style.monstergenSubHeader}>Ability Scores</h1>

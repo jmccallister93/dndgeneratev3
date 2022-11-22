@@ -76,6 +76,11 @@ $header-color: #3E6D9C;
     box-shadow: 5px 5px 5px 2px $primary-grey;
   }
 
+  .dropContainer{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+  }
+
   .monstergenTitles{
     /* offset-x | offset-y | blur-radius | color */
     // text-shadow: 5px 5px 10px $primary-grey;
