@@ -659,17 +659,16 @@ const MonsterGen = () => {
         onHide={closeDialog}
         footer={dialogFooterTemplate}
       >
-        
         <DataTable
           value={speedTypeOptions}
           scrollable
           scrollHeight="60vh"
-          className="p-datatable-customers"
+        //   className="p-datatable-customers"
           rows={20}
-          dataKey="id"
+          dataKey="name"
           selection={selectedItems}
-          onSelectionChange={(e) => setSelectedItems(e.value)}
-          selectionPageOnly
+          onSelectionChange={e => setSelectedItems(e.value)}
+        //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
           responsiveLayout="scroll"
