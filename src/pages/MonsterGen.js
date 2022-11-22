@@ -53,7 +53,7 @@ const MonsterGen = () => {
   const [speedExtras, setSpeedExtras] = useState("");
   const [speedExtraOptions, setSpeedExtraOptions] = useState();
   const [speedExtraList, setSpeedExtraList] = useState([]);
-  const [updateList, setUpdateList] = useState()
+  const [updateList, setUpdateList] = useState();
 
   const [ability, setAbility] = useState("");
   const [abilities, setAbilities] = useState("");
@@ -258,7 +258,8 @@ const MonsterGen = () => {
     objectChange(e.value, setCha);
   };
   //TODO
-  // const onSaveChange = (e) => {
+  const onSaveChange = (e) => {};
+  //{
   //   objectChange(e.value, setSave, 17, 1, 1, saveOptions)
   // };
   //   const onGearChange = (e) => {}
@@ -343,9 +344,9 @@ const MonsterGen = () => {
   };
 
   const onRemoveSpeedType = (e) => {
-    const x = e.target.getAttribute("name") 
-    setSpeedExtraList(speedExtraList.filter(item => item.x !== x))
-  }
+    const x = e.target.getAttribute("name");
+    setSpeedExtraList(speedExtraList.filter((item) => item.x !== x));
+  };
   //Generate and Clear
   const onGenerate = (e) => {
     const ifBlank = (value, setValue, options, max, min) => {
@@ -431,6 +432,8 @@ const MonsterGen = () => {
   };
 
   //Display elements
+
+  //DropDowns
   const customDrop = (title, value, options, change, placeholder) => (
     <div className={style.dropContainer}>
       <h2>{title}</h2>
@@ -473,6 +476,64 @@ const MonsterGen = () => {
     onArmorTypeChange,
     "Choose Armor Type"
   );
+  const saveDrop = customDrop(
+    "Saves",
+    save,
+    saveOptions,
+    onSaveChange,
+    "Choose Save"
+  );
+  const skillDrop = customDrop(
+    "Skills",
+    skill,
+    skillOptions,
+    onSkillChange,
+    "Choose Skill"
+  );
+  const vulnDrop = customDrop(
+    "Vulnerabities",
+    vuln,
+    vulnOptions,
+    onVulnChange,
+    "Choose Vulnerabities"
+  );
+  const immuneDrop = customDrop(
+    "Immunities",
+    immune,
+    immuneOptions,
+    onImmuneChange,
+    "Choose Immunities"
+  );
+  const resistDrop = customDrop(
+    "Resistances",
+    resist,
+    resistOptions,
+    onResistChange,
+    "Choose Resist"
+  );
+  const conditionDrop = customDrop(
+    "Condition Immunities",
+    condition,
+    conditionOptions,
+    onConditionChange,
+    "Choose Condition"
+  );
+  const senseDrop = customDrop(
+    "Senses",
+    sense,
+    senseOptions,
+    onSenseChange,
+    "Choose Senses"
+  );
+  const langDrop = customDrop(
+    "Languages",
+    save,
+    langOptions,
+    onLangChange,
+    "Choose Languages"
+  );
+
+  //InputTexts
   const customInputText = (title, value, change, placeholder, click) => (
     <div>
       <h2>{title}</h2>
@@ -490,6 +551,7 @@ const MonsterGen = () => {
     onRandomName
   );
 
+  //InputNumbers
   const customInputNumber = (title, value, change, placeholder, click) => (
     <div>
       <h2>{title}</h2>
@@ -520,22 +582,65 @@ const MonsterGen = () => {
     "Set Speed",
     onRandomSpeed
   );
+  const strInput = customInputNumber(
+    "Strength",
+    str,
+    onStrChange,
+    "Set STR",
+    onRandomStr
+  );
+  const dexInput = customInputNumber(
+    "Dexterity",
+    dex,
+    onDexChange,
+    "Set DEX",
+    onRandomDex
+  );
+  const conInput = customInputNumber(
+    "Constituion",
+    con,
+    onConChange,
+    "Set CON",
+    onRandomCon
+  );
+  const intInput = customInputNumber(
+    "Intelligence",
+    int,
+    onIntChange,
+    "Set INT",
+    onRandomInt
+  );
+  const wisInput = customInputNumber(
+    "Wisdom",
+    wis,
+    onWisChange,
+    "Set WIS",
+    onRandomWis
+  );
+  const chaInput = customInputNumber(
+    "Charisma",
+    cha,
+    onChaChange,
+    "Set CHA",
+    onRandomCha
+  );
 
+  //TODO Speed List
   const extraSpeedDispaly = speedExtraList.map((i) => {
     return (
-        <div>
-            <h3>
-            {i}
-            <button
-                  onClick={onRemoveSpeedType}
-                  className={style.monstergenBtnClear}
-                >
-                  <i className="pi pi-minus"></i>
-                </button>
-            </h3>
-        </div>
-    )
-  })
+      <div>
+        <h3>
+          {i}
+          <button
+            onClick={onRemoveSpeedType}
+            className={style.monstergenBtnClear}
+          >
+            <i className="pi pi-minus"></i>
+          </button>
+        </h3>
+      </div>
+    );
+  });
 
   return (
     <div className={style.monstergenWrapper}>
@@ -607,272 +712,93 @@ const MonsterGen = () => {
               </button>
             </div>
             <div className={style.dropContainer}>
-              <h3>
-                {extraSpeedDispaly}
-               
-              </h3>
+              <h3>{extraSpeedDispaly}</h3>
             </div>
           </div>
-
+          <h1>Ability Scores</h1>
           <div className={style.monstergenSubsection}>
-            <h1>Ability Scores</h1>
-            <div>
-              <h1>Strength</h1>
-              <InputNumber
-                value={str}
-                onChange={onStrChange}
-                placeholder="Set STR"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button onClick={onRandomStr} className={style.monstergenBtnName}>
-                Randomize
-              </button>
-            </div>
-            <div>
-              <h1>Dexterity</h1>
-              <InputNumber
-                value={dex}
-                onChange={onDexChange}
-                placeholder="Set DEX"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button onClick={onRandomDex} className={style.monstergenBtnName}>
-                Randomize
-              </button>
-            </div>
-            <div>
-              <h1>Constitution</h1>
-              <InputNumber
-                value={con}
-                onChange={onConChange}
-                placeholder="Set CON"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button onClick={onRandomCon} className={style.monstergenBtnName}>
-                Randomize
-              </button>
-            </div>
-            <div>
-              <h1>Intelligence</h1>
-              <InputNumber
-                value={int}
-                onChange={onIntChange}
-                placeholder="Set INT"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button onClick={onRandomInt} className={style.monstergenBtnName}>
-                Randomize
-              </button>
-            </div>
-            <div>
-              <h1>Wisdom</h1>
-              <InputNumber
-                value={wis}
-                onChange={onWisChange}
-                placeholder="Set WIS"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button onClick={onRandomWis} className={style.monstergenBtnName}>
-                Randomize
-              </button>
-            </div>
-            <div>
-              <h1>Charisma</h1>
-              <InputNumber
-                value={cha}
-                onChange={onChaChange}
-                placeholder="Set CHA"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button onClick={onRandomCha} className={style.monstergenBtnName}>
-                Randomize
-              </button>
-            </div>
+            {strInput}
+            {dexInput}
+            {conInput}
           </div>
           <div className={style.monstergenSubsection}>
-            <h1>Saves/Skills/Dmgs</h1>
-            <div>
-              <h1>Saves</h1>
-              <Dropdown
-                optionLabel="name"
-                value={save}
-                options={saveOptions}
-                //   onChange={onSaveChange}
-                placeholder="Choose Save"
-              />
-            </div>
-            <div>
-              <h1>Skill</h1>
-              <Dropdown
-                optionLabel="name"
-                value={skill}
-                options={skillOptions}
-                onChange={onSkillChange}
-                placeholder="Choose Skill"
-              />
-            </div>
-            <div>
-              <h1>Vulnerabities</h1>
-              <Dropdown
-                optionLabel="name"
-                value={vuln}
-                options={vulnOptions}
-                onChange={onVulnChange}
-                placeholder="Choose Vulnerabities"
-              />
-            </div>
-            <div>
-              <h1>Immunities</h1>
-              <Dropdown
-                optionLabel="name"
-                value={immune}
-                options={immuneOptions}
-                onChange={onImmuneChange}
-                placeholder="Choose Immunities"
-              />
-            </div>
-            <div>
-              <h1>Resistances</h1>
-              <Dropdown
-                optionLabel="name"
-                value={resist}
-                options={resistOptions}
-                onChange={onResistChange}
-                placeholder="Choose Resistances"
-              />
-            </div>
-            <div>
-              <h1>Condition Immunities</h1>
-              <Dropdown
-                optionLabel="name"
-                value={condition}
-                options={conditionOptions}
-                onChange={onConditionChange}
-                placeholder="Choose Condition Immunities"
-              />
-            </div>
-            <div>
-              <h1>Senses</h1>
-              <Dropdown
-                optionLabel="name"
-                value={sense}
-                options={senseOptions}
-                onChange={onSenseChange}
-                placeholder="Choose Senses"
-              />
-            </div>
-            <div>
-              <h1>Languages</h1>
-              <Dropdown
-                optionLabel="name"
-                value={lang}
-                options={langOptions}
-                onChange={onLangChange}
-                placeholder="Choose Languages"
-              />
-            </div>
+            {intInput}
+            {wisInput}
+            {chaInput}
           </div>
-          <div>
-            <h1>Sepcials</h1>
-            <Dropdown
-              optionLabel="name"
-              value={special}
-              options={specialOptions}
-              onChange={onSpecialChange}
-              placeholder="Choose Specials"
-            />
+          <h1>Saves/Skills/Dmgs</h1>
+          <div className={style.monstergenSubsection}>
+            {saveDrop}
+            {skillDrop}
+            {vulnDrop}
+            {immuneDrop}
+            {resistDrop}
+            {conditionDrop}
+            {senseDrop}
+            {langDrop}
           </div>
-          <div>
-            <h1>Actions</h1>
-            <Dropdown
-              optionLabel="name"
-              value={action}
-              options={actionOptions}
-              onChange={onActionChange}
-              placeholder="Choose Actions"
-            />
-          </div>
-          <div>
-            <h1>Reactions</h1>
-            <Dropdown
-              optionLabel="name"
-              value={reaction}
-              options={reactionOptions}
-              onChange={onReactionChange}
-              placeholder="Choose Reactions"
-            />
-          </div>
-          <div>
-            <h1>Legendary Actions</h1>
-            <Dropdown
-              optionLabel="name"
-              value={legend}
-              options={legendOptions}
-              onChange={onLegendChange}
-              placeholder="Choose Legendary Actions"
-            />
-          </div>
-          <div>
-            <h1>Lair</h1>
-            <Dropdown
-              optionLabel="name"
-              value={lair}
-              options={lairOptions}
-              onChange={onLairChange}
-              placeholder="Choose Lair Actions"
-            />
-          </div>
-          <div>
-            <h1>Gear</h1>
-            <Dropdown
-              optionLabel="name"
-              value={gear}
-              options={gearOptions}
-              //   onChange={onGearChange}
-              placeholder="Choose Sear"
-            />
+          <h1>Actions / Abilities</h1>
+          <div className={style.monstergenSubsection}>
+            <div>
+              <h1>Specials</h1>
+              <Dropdown
+                optionLabel="name"
+                value={special}
+                options={specialOptions}
+                onChange={onSpecialChange}
+                placeholder="Choose Specials"
+              />
+            </div>
+            <div>
+              <h1>Actions</h1>
+              <Dropdown
+                optionLabel="name"
+                value={action}
+                options={actionOptions}
+                onChange={onActionChange}
+                placeholder="Choose Actions"
+              />
+            </div>
+            <div>
+              <h1>Reactions</h1>
+              <Dropdown
+                optionLabel="name"
+                value={reaction}
+                options={reactionOptions}
+                onChange={onReactionChange}
+                placeholder="Choose Reactions"
+              />
+            </div>
+            <div>
+              <h1>Legendary Actions</h1>
+              <Dropdown
+                optionLabel="name"
+                value={legend}
+                options={legendOptions}
+                onChange={onLegendChange}
+                placeholder="Choose Legendary Actions"
+              />
+            </div>
+            <div>
+              <h1>Lair</h1>
+              <Dropdown
+                optionLabel="name"
+                value={lair}
+                options={lairOptions}
+                onChange={onLairChange}
+                placeholder="Choose Lair Actions"
+              />
+            </div>
+            <div>
+              <h1>Gear</h1>
+              <Dropdown
+                optionLabel="name"
+                value={gear}
+                options={gearOptions}
+                //   onChange={onGearChange}
+                placeholder="Choose Sear"
+              />
+            </div>
           </div>
         </div>
 
