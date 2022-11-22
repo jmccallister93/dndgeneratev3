@@ -579,7 +579,7 @@ const MonsterGen = () => {
   const closeDialog = () => {
     setDialogVisible(false);
     for (let i=0; i < selectedItems.length; i++){
-        setSpeedExtraList([selectedItems])
+        setSpeedExtraList(speedArray => [...speedArray,selectedItems[i]])
     }
   };
 
@@ -593,11 +593,18 @@ const MonsterGen = () => {
 //     console.log(speedType);
 //   };
 
+// const extraSpeedDispaly = speedExtraList.map(i => (
+//     console.log(i)
+//     )
+// )
+
+
   const extraSpeedDispaly = speedExtraList.map((i) => {
+    console.log(speedExtraList)
     return (
       <div>
         <h3>
-          {i[0]}
+          {i.name}
           {/* {movementRandomBtn} */}
           <button
             onClick={onRemoveSpeedType}
