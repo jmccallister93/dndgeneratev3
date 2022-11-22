@@ -382,14 +382,6 @@ const MonsterGen = () => {
     randomButton(setCha, 30, 0);
   };
 
-  const onAddSpeedType = (e) => {
-    setSpeedExtraList((speedArray) => [
-      ...speedArray,
-      speedType + " " + speedExtra,
-    ]);
-    console.log(speedType);
-  };
-
   const onRemoveSpeedType = (e) => {
     const x = e.target.getAttribute("name");
     setSpeedExtraList(speedExtraList.filter((item) => item.x !== x));
@@ -580,74 +572,63 @@ const MonsterGen = () => {
     "Choose Languages"
   );
 
-  const movementDrop = (
-    <div className={style.dropContainer}>
-      <h2>Extra Movement</h2>
-      <Dropdown
-        optionLabel="name"
-        value={speedType}
-        options={speedTypeOptions}
-        onChange={onSpeedTypeChange}
-        placeholder="Choose Movement"
-      />
-
-      <InputNumber
-        value={speedExtra}
-        onChange={onSpeedExtraChange}
-        placeholder={"Set " + speedType + " Speed"}
-        mode="decimal"
-        showButtons
-        decrementButtonClassName="p-button-secondary"
-        incrementButtonClassName="p-button-secondary"
-        incrementButtonIcon="pi pi-plus"
-        decrementButtonIcon="pi pi-minus"
-        minFractionDigits={0}
-        maxFractionDigits={2}
-      />
-      <button onClick={onRandomSpeedExtra} className={style.monstergenBtnName}>
-        Randomize
-      </button>
-      <button onClick={onAddSpeedType} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"> Add</i>
-      </button>
-    </div>
-  );
-
-  //   const dialogFuncMap = {
-  //     displaySpeed: setDisplaySpeed,
-  //   };
-
   const openDialog = () => {
     setDialogVisible(true);
   };
 
   const closeDialog = () => {
     setDialogVisible(false);
+    for (let i=0; i < selectedItems.length; i++){
+        setSpeedExtraList([selectedItems])
+    }
   };
 
   const dialogFooterTemplate = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
 
+//   const onAddSpeedType = (e) => {
+//     setSpeedExtraList((speedArray) => [...speedArray, speedType]);
+//     setSpeedExtraList((speedArray) => [...speedArray, selectedItems]);
+//     console.log(speedType);
+//   };
+
+  const extraSpeedDispaly = speedExtraList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i[0]}
+          {/* {movementRandomBtn} */}
+          <button
+            onClick={onRemoveSpeedType}
+            className={style.monstergenBtnRemove}
+          >
+            <i className="pi pi-minus"> Remove</i>
+          </button>
+        </h3>
+      </div>
+    );
+  });
+
   const extraSpeedInput = (
     <InputNumber
-    value={speedExtra}
-    onChange={onSpeedExtraChange}
-    placeholder={"Set " + speedType + " Speed"}
-    mode="decimal"
-    showButtons
-    decrementButtonClassName="p-button-secondary"
-    incrementButtonClassName="p-button-secondary"
-    incrementButtonIcon="pi pi-plus"
-    decrementButtonIcon="pi pi-minus"
-    minFractionDigits={0}
-    maxFractionDigits={2}
-  />
-  )
+      value={speedExtra}
+      onChange={onSpeedExtraChange}
+      placeholder={"Set " + speedType + " Speed"}
+      mode="decimal"
+      showButtons
+      decrementButtonClassName="p-button-secondary"
+      incrementButtonClassName="p-button-secondary"
+      incrementButtonIcon="pi pi-plus"
+      decrementButtonIcon="pi pi-minus"
+      minFractionDigits={0}
+      maxFractionDigits={2}
+    />
+  );
 
   const moveDialog = (
     <div className="card">
-        <h2 className={style.monstergenTitles}>Addtional Movement</h2>
+      <h2 className={style.monstergenTitles}>Addtional Movement</h2>
       <button onClick={openDialog} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </button>
@@ -663,12 +644,12 @@ const MonsterGen = () => {
           value={speedTypeOptions}
           scrollable
           scrollHeight="60vh"
-        //   className="p-datatable-customers"
+          //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
           selection={selectedItems}
-          onSelectionChange={e => setSelectedItems(e.value)}
-        //   selectionPageOnly
+          onSelectionChange={(e) => setSelectedItems(e.value)}
+          //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
           responsiveLayout="scroll"
@@ -681,18 +662,18 @@ const MonsterGen = () => {
           reorderableColumns
           reorderableRows
         >
-        <Column
-          selectionMode="multiple"
-          selectionAriaLabel="name"
-          headerStyle={{ width: "6em" }}
-        ></Column>
-        <Column
-          field="name"
-          header="Name"
-          sortable
-          filter
-          filterPlaceholder="Search"
-        ></Column>
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
         </DataTable>
       </Dialog>
     </div>
@@ -791,24 +772,6 @@ const MonsterGen = () => {
     onRandomCha
   );
 
-  //TODO Speed List
-  const extraSpeedDispaly = speedExtraList.map((i) => {
-    return (
-      <div>
-        <h3>
-          {i}
-          {/* {movementRandomBtn} */}
-          <button
-            onClick={onRemoveSpeedType}
-            className={style.monstergenBtnRemove}
-          >
-            <i className="pi pi-minus"> Remove</i>
-          </button>
-        </h3>
-      </div>
-    );
-  });
-
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
@@ -844,7 +807,7 @@ const MonsterGen = () => {
             {speedInput}
             {/* {movementDrop} */}
             {moveDialog}
-            
+
             <div className={style.dropContainer}>
               <h3>{extraSpeedDispaly}</h3>
             </div>
