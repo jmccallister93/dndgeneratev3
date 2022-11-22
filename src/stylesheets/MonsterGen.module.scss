@@ -1,5 +1,6 @@
 $primary-grey: #393E46;
 $secondary-grey: #d6e4e5;
+$header-color: #002895;
 
 .monstergenWrapper {
     background: linear-gradient(135deg, $primary-grey 25%, white) ;
@@ -56,7 +57,12 @@ $secondary-grey: #d6e4e5;
 
   .monstergenSubsection{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .monstergenSubHeader{
+    background: linear-gradient(45deg, silver, rgb(146, 146, 146)); 
+    // color: $secondary-grey;
   }
 
   .monstergenColumns{

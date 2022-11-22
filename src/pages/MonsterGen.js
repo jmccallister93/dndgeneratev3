@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/MonsterGen.module.scss";
+import styled from "../stylesheets/styledComponents.scss"
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
@@ -428,7 +429,7 @@ const MonsterGen = () => {
     setLegend("");
     setLair("");
     setGear("");
-    setSpeedExtraList("");
+    // setSpeedExtraList("");
   };
 
   //Display elements
@@ -539,7 +540,7 @@ const MonsterGen = () => {
       <h2>{title}</h2>
       <InputText value={value} onChange={change} placeholder={placeholder} />
       <button onClick={click} className={style.monstergenBtnName}>
-        Randomize
+        Random
       </button>
     </div>
   );
@@ -553,7 +554,7 @@ const MonsterGen = () => {
 
   //InputNumbers
   const customInputNumber = (title, value, change, placeholder, click) => (
-    <div>
+    <div >
       <h2>{title}</h2>
       <InputNumber
         value={value}
@@ -561,15 +562,17 @@ const MonsterGen = () => {
         placeholder={placeholder}
         mode="decimal"
         showButtons
+        buttonLayout="stacked"
         decrementButtonClassName="p-button-secondary"
         incrementButtonClassName="p-button-secondary"
         incrementButtonIcon="pi pi-plus"
         decrementButtonIcon="pi pi-minus"
         minFractionDigits={0}
         maxFractionDigits={2}
+        
       />
       <button onClick={click} className={style.monstergenBtnName}>
-        Randomize
+        Random
       </button>
     </div>
   );
@@ -662,20 +665,18 @@ const MonsterGen = () => {
 
         {/* Options */}
         <div className={style.monstergenOptionsWrapper}>
-          <h1>Basic Info</h1>
+          <h1 className={style.monstergenSubHeader}>Basic Info</h1>
           <div className={style.monstergenSubsection}>
             {nameText}
             {sizeDrop}
             {typeDrop}
             {alignDrop}
-          </div>
-          <div className={style.monstergenSubsection}>
             {acDrop}
             {armorTypeDrop}
-            {hpInput}
-            {speedInput}
           </div>
           <div className={style.monstergenSubsection}>
+            {hpInput}
+            {speedInput}
             <div className={style.dropContainer}>
               <h2>Extra Movement</h2>
               <Dropdown
@@ -715,18 +716,16 @@ const MonsterGen = () => {
               <h3>{extraSpeedDispaly}</h3>
             </div>
           </div>
-          <h1>Ability Scores</h1>
+          <h1 className={style.monstergenSubHeader}>Ability Scores</h1>
           <div className={style.monstergenSubsection}>
             {strInput}
             {dexInput}
             {conInput}
-          </div>
-          <div className={style.monstergenSubsection}>
             {intInput}
             {wisInput}
             {chaInput}
           </div>
-          <h1>Saves/Skills/Dmgs</h1>
+          <h1 className={style.monstergenSubHeader}>Saves/Skills/Dmgs</h1>
           <div className={style.monstergenSubsection}>
             {saveDrop}
             {skillDrop}
@@ -737,7 +736,7 @@ const MonsterGen = () => {
             {senseDrop}
             {langDrop}
           </div>
-          <h1>Actions / Abilities</h1>
+          <h1 className={style.monstergenSubHeader}>Actions / Abilities</h1>
           <div className={style.monstergenSubsection}>
             <div>
               <h1>Specials</h1>
