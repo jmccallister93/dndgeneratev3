@@ -1,6 +1,6 @@
 $primary-grey: #393E46;
 $secondary-grey: #d6e4e5;
-$header-color: #002895;
+$header-color: #3E6D9C;
 
 .monstergenWrapper {
     background: linear-gradient(135deg, $primary-grey 25%, white) ;
@@ -17,7 +17,7 @@ $header-color: #002895;
   .monstergenBody {
     display: grid;
     // TODO 50% width
-    width: fit-content;
+    width: 75%;
     margin: 0;
     padding: 0;
     grid-template-rows: repeat(2, 1fr);
@@ -26,12 +26,19 @@ $header-color: #002895;
     justify-content: center;
     place-items: center;
   }
+
+  .topHeader{
+    display: inline-block;
+    align-items: center;
+  }
   
   .monstergenHeader {
     font-size: 3rem;
     color: $secondary-grey;
     margin-top: 2rem;
     border-bottom: 1px solid #d6e4e5;
+    justify-self: center;
+    text-align: center;
   }
   
   .monstergenOptionsWrapper {
@@ -51,7 +58,7 @@ $header-color: #002895;
     justify-content: center;
     border-radius: 1rem;
     & div {
-      padding: 10px;
+      padding: 2px;
     }
   }
 
@@ -61,8 +68,12 @@ $header-color: #002895;
   }
 
   .monstergenSubHeader{
-    background: linear-gradient(45deg, silver, rgb(146, 146, 146)); 
-    // color: $secondary-grey;
+    color: $primary-grey;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 1px solid $header-color;
+    width: fit-content;
+    box-shadow: 5px 5px 5px 2px $primary-grey;
   }
 
   .monstergenColumns{
@@ -102,10 +113,6 @@ $header-color: #002895;
     padding-right: 1rem;
     justify-content: flex-end;
     border-bottom: 1px dashed;
-  
-    & h1 {
-      // padding-right: 1rem;
-    }
   }
   
   .monstergenDetailTitle {

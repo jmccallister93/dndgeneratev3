@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/MonsterGen.module.scss";
-import styled from "../stylesheets/styledComponents.scss"
+import styled from "../stylesheets/styledComponents.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
@@ -429,7 +429,7 @@ const MonsterGen = () => {
     setLegend("");
     setLair("");
     setGear("");
-    // setSpeedExtraList("");
+    setSpeedExtraList([]);
   };
 
   //Display elements
@@ -554,7 +554,7 @@ const MonsterGen = () => {
 
   //InputNumbers
   const customInputNumber = (title, value, change, placeholder, click) => (
-    <div >
+    <div>
       <h2>{title}</h2>
       <InputNumber
         value={value}
@@ -569,7 +569,6 @@ const MonsterGen = () => {
         decrementButtonIcon="pi pi-minus"
         minFractionDigits={0}
         maxFractionDigits={2}
-        
       />
       <button onClick={click} className={style.monstergenBtnName}>
         Random
@@ -648,21 +647,24 @@ const MonsterGen = () => {
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
-      <div className={style.monstergenBody}>
-        <h1 className={style.monstergenHeader}>Monster Generator</h1>
+      <div className={style.topHeader}>
+      <h1 className={style.monstergenHeader}>Monster Generator</h1>
+      
 
-        {/* Generate Btns */}
-        <div>
-          <div className={style.monstergenBtnWrapper}>
-            <button onClick={onGenerate} className={style.monstergenBtnGen}>
-              Generate
-            </button>
-            <button onClick={onClear} className={style.monstergenBtnClear}>
-              Clear
-            </button>
-          </div>
+      {/* Generate Btns */}
+      <div>
+        <div className={style.monstergenBtnWrapper}>
+          <button onClick={onGenerate} className={style.monstergenBtnGen}>
+            Generate
+          </button>
+          <button onClick={onClear} className={style.monstergenBtnClear}>
+            Clear
+          </button>
         </div>
+      </div>
 
+      </div>
+      <div className={style.monstergenBody}>
         {/* Options */}
         <div className={style.monstergenOptionsWrapper}>
           <h1 className={style.monstergenSubHeader}>Basic Info</h1>
