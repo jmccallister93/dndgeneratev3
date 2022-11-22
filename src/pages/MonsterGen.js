@@ -619,7 +619,6 @@ const MonsterGen = () => {
 
   const openDialog = () => {
     setDialogVisible(true);
-    console.log(speedTypeOptions);
   };
 
   const closeDialog = () => {
@@ -648,6 +647,7 @@ const MonsterGen = () => {
 
   const moveDialog = (
     <div className="card">
+        <h2 className={style.monstergenTitles}>Addtional Movement</h2>
       <button onClick={openDialog} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </button>
