@@ -120,7 +120,6 @@ const MonsterGen = () => {
   const [gears, setGears] = useState("");
   const [gearOptions, setGearOptions] = useState();
 
-  //Import Data
   //Get Data function
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -198,7 +197,6 @@ const MonsterGen = () => {
   //OnChanges
   //TODO
   const onNameChange = (e) => {};
-  //TODO
   const onRandomName = (e) => {};
 
   //On Change function
@@ -331,14 +329,14 @@ const MonsterGen = () => {
   const onRandomCha = (e) => {
     randomButton(setCha, 30, 0);
   };
-
+  //Generate and Clear
   const onGenerate = (e) => {
     const ifBlank = (value, setValue, options, max, min) => {
       if (value === "") {
         let r = Math.round(Math.random() * (max - min) + 1);
         setValue(options[r].name);
       } else {
-        setValue(value)
+        setValue(value);
       }
     };
     ifBlank(size, setSize, sizeOptions, 6, 1);
@@ -357,7 +355,7 @@ const MonsterGen = () => {
     ifBlank(special, setSpecial, specialOptions, 208, 1);
     ifBlank(action, setAction, actionOptions, 292, 1);
     ifBlank(reaction, setReaction, reactionOptions, 11, 1);
-    ifBlank(legend, setLegend, legendOptions, 35, 1)
+    ifBlank(legend, setLegend, legendOptions, 35, 1);
     // ifBlank(lair, setLair, lairOptions, 39, 1)
     //TODO
     // ifBlank(save, setSave, saveOptions, 11, 1)
@@ -366,60 +364,19 @@ const MonsterGen = () => {
       if (value === "") {
         let r = Math.round(Math.random() * (max - min) + 1);
         setValue(r);
-      }else {
-        setValue(value)
+      } else {
+        setValue(value);
       }
     };
-    ifBlank2(hp, setHp, 500, 0)
-    ifBlank2(speed, setSpeed, 120, 0)
-    ifBlank2(speedExtra, setSpeedExtra, 120, 0)
-    ifBlank2(str, setStr, 30, 0)
-    ifBlank2(dex, setDex, 30, 0)
-    ifBlank2(con, setCon, 30, 0)
-    ifBlank2(int, setInt, 30, 0)
-    ifBlank2(wis, setWis, 30, 0)
-    ifBlank2(cha, setCha, 30, 0)
-    
-
-
-    // if (legend === "") {
-    //   let r = Math.round(Math.random() * (35 - 1) + 1);
-    //   setLegend(legendOptions[r].name);
-    // } else {
-    //   setSize(size);
-    //   setType(type);
-    //   setAlign(align);
-    //   setAc(ac);
-    //   setArmorType(armorType);
-    //   setHp(hp);
-    //   setSpeed(speed);
-    //   setSpeedType(speedType);
-    //   setSpeedExtra(speedExtra);
-    //   setStr(str);
-    //   setDex(dex);
-    //   setCon(con);
-    //   setInt(int);
-    //   setWis(wis);
-    //   setCha(cha);
-    //   setVuln(vuln);
-    //   setSkill(skill);
-    //   setImmune(immune);
-    //   setResist(resist);
-    //   setCondition(condition);
-    //   setSense(sense);
-    //   setLang(lang);
-    //   setSpecial(special);
-    //   setAction(action);
-    //   setLegend(legend);
-    //   setReaction(reaction);
-    // }
-    //TODO
-    // if (lair === "") {
-    //     let r = Math.round(Math.random() * (39 - 1) + 1);
-    //     setLair(lairOptions[r].name);
-    // } else {
-    //     setLair(lair)
-    // }
+    ifBlank2(hp, setHp, 500, 0);
+    ifBlank2(speed, setSpeed, 120, 0);
+    ifBlank2(speedExtra, setSpeedExtra, 120, 0);
+    ifBlank2(str, setStr, 30, 0);
+    ifBlank2(dex, setDex, 30, 0);
+    ifBlank2(con, setCon, 30, 0);
+    ifBlank2(int, setInt, 30, 0);
+    ifBlank2(wis, setWis, 30, 0);
+    ifBlank2(cha, setCha, 30, 0);
   };
 
   const onClear = (e) => {
@@ -455,6 +412,86 @@ const MonsterGen = () => {
     setGear("");
   };
 
+  //Display elements
+  const customDrop = (title, value, options, change, placeholder) => (
+    <div className={style.dropContainer}>
+      <h2>{title}</h2>
+      <Dropdown
+        optionLabel="name"
+        value={value}
+        options={options}
+        onChange={change}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+
+  const sizeDrop = customDrop(
+    "Size",
+    size,
+    sizeOptions,
+    onSizeChange,
+    "Choose Size"
+  );
+  const typeDrop = customDrop(
+    "Type",
+    type,
+    typeOptions,
+    onTypeChange,
+    "Choose Type"
+  );
+  const alignDrop = customDrop(
+    "Alignment",
+    align,
+    alignOptions,
+    onAlignChange,
+    "Choose Alignment"
+  );
+  const acDrop = customDrop("AC", ac, acOptions, onAcChange, "Choose AC");
+  const armorTypeDrop = customDrop(
+    "Armor Type",
+    armorType,
+    armorTypeOptions,
+    onArmorTypeChange,
+    "Choose Armor Type"
+  );
+
+  const customInputText = (title, value, change, click) => (
+    <div>
+      <h2>{title}</h2>
+      <InputText value={value} onChange={change} />
+      <button onClick={click} className={style.monstergenBtnName}>
+        Randomize
+      </button>
+    </div>
+  );
+  const nameText = customInputText("Name", name, onNameChange, onRandomName);
+
+  const customInputNumber = (title, value, change, placeholder, click) => (
+    <div>
+      <h2>{title}</h2>
+      <InputNumber
+        value={value}
+        onChange={change}
+        placeholder={placeholder}
+        mode="decimal"
+        showButtons
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <button onClick={click} className={style.monstergenBtnName}>
+        Randomize
+      </button>
+    </div>
+  );
+
+  const hpInput = customInputNumber("HP", hp, onHpChange, "Set HP", onRandomHp);
+  const speedInput = customInputNumber("Speed", speed, onSpeedChange, "Set Speed", onRandomSpeed)
+
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
@@ -462,112 +499,16 @@ const MonsterGen = () => {
         <h1 className={style.monstergenHeader}>Monster Generator</h1>
         <div className={style.monstergenOptionsWrapper}>
           <div className={style.monstergenSubsection}>
-            <h1>Details</h1>
-            <div>
-              <h1>Name: </h1>
-              <InputText value={name} onChange={onNameChange} />
-              <button
-                onClick={onRandomName}
-                className={style.monstergenBtnName}
-              >
-                Randomize
-              </button>
-            </div>
-            <div>
-              <h1>Size</h1>
-              <Dropdown
-                optionLabel="name"
-                value={size}
-                options={sizeOptions}
-                onChange={onSizeChange}
-                placeholder="Choose Size"
-              />
-            </div>
-            <div>
-              <h1>Type</h1>
-              <Dropdown
-                optionLabel="name"
-                value={type}
-                options={typeOptions}
-                onChange={onTypeChange}
-                placeholder="Choose Type"
-              />
-            </div>
-            <div>
-              <h1>Align</h1>
-              <Dropdown
-                optionLabel="name"
-                value={align}
-                options={alignOptions}
-                onChange={onAlignChange}
-                placeholder="Choose Alignment"
-              />
-            </div>
+            {nameText}
+            {sizeDrop}
+            {typeDrop}
+            {alignDrop}
           </div>
           <div className={style.monstergenSubsection}>
-            <div>
-              <h1>Basic Stats</h1>
-              <h1>AC</h1>
-              <Dropdown
-                optionLabel="name"
-                value={ac}
-                options={acOptions}
-                onChange={onAcChange}
-                placeholder="Choose AC"
-              />
-            </div>
-            <div>
-              <h1>Armor Type</h1>
-              <Dropdown
-                optionLabel="name"
-                value={armorType}
-                options={armorTypeOptions}
-                onChange={onArmorTypeChange}
-                placeholder="Choose Armor Type"
-              />
-            </div>
-            <div>
-              <h1>HP</h1>
-              <InputNumber
-                value={hp}
-                onChange={onHpChange}
-                placeholder="Set HP"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-              />
-              <button onClick={onRandomHp} className={style.monstergenBtnName}>
-                Randomize
-              </button>
-            </div>
-            <div>
-              <h1>Speed</h1>
-              <InputNumber
-                value={speed}
-                onChange={onSpeedChange}
-                placeholder="Set Speed"
-                mode="decimal"
-                showButtons
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
-                step={5}
-              />
-              <button
-                onClick={onRandomSpeed}
-                className={style.monstergenBtnName}
-              >
-                Randomize
-              </button>
-            </div>
+            {acDrop}
+            {armorTypeDrop}
+            {hpInput}
+            {speedInput}
             <div>
               <h1>Additional Movement</h1>
               <Dropdown

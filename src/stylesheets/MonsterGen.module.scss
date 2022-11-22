@@ -33,7 +33,7 @@ $secondary-grey: #d6e4e5;
   
   .monstergenOptionsWrapper {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     background-color: $secondary-grey;
     width: fit-content;
     padding: 0px;
@@ -48,6 +48,11 @@ $secondary-grey: #d6e4e5;
     & div {
       padding: 10px;
     }
+  }
+
+  .monstergenSubsection{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .monstergenColumns{
