@@ -578,8 +578,13 @@ const MonsterGen = () => {
 
   const closeDialog = () => {
     setDialogVisible(false);
+    
     for (let i=0; i < selectedItems.length; i++){
+        if(speedExtraList.includes(selectedItems[i])){
+
+        } else {
         setSpeedExtraList(speedArray => [...speedArray,selectedItems[i]])
+        }
     }
   };
 
