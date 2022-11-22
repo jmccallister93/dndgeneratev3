@@ -603,12 +603,19 @@ const MonsterGen = () => {
   const onSwimChange = (e) => {
     objectChange(e.value, setSwim);
   };
-  const onRemoveBurrow = (e) => {
-    setSpeedExtraList(speedExtraList.filter(value => value.name !== "Burrow"))
-    
+
+  const onRemoveCustom = (name) => {
+    setSpeedExtraList(speedExtraList.filter((value) => value.name !== name));
+    setSelectedItems(speedExtraList);
   };
 
-  const customSpeedInput = (value, change, placeholder, onrandom) => (
+  const onRemoveBurrow = (e) => onRemoveCustom("Burrow");
+  const onRemoveClimb = (e) => onRemoveCustom("Climb");
+  const onRemoveHover = (e) => onRemoveCustom("Hover");
+  const onRemoveFly = (e) => onRemoveCustom("Fly");
+  const onRemoveSwim = (e) => onRemoveCustom("Swim");
+
+  const customSpeedInput = (value, change, placeholder, onRandom, onRemove) => (
     <div>
       <InputNumber
         value={value}
@@ -624,15 +631,12 @@ const MonsterGen = () => {
         minFractionDigits={0}
         maxFractionDigits={2}
       />
-      <button onClick={onrandom} className={style.monstergenBtnName}>
+      <button onClick={onRandom} className={style.monstergenBtnName}>
         Random
       </button>
-      <button
-            onClick={onRemoveBurrow}
-            className={style.monstergenBtnRemove}
-          >
-            <i className="pi pi-minus"> Remove</i>
-          </button>
+      <button onClick={onRemove} className={style.monstergenBtnRemove}>
+        <i className="pi pi-minus"> Remove</i>
+      </button>
     </div>
   );
   const onRandomBurrow = (e) => {
@@ -654,26 +658,36 @@ const MonsterGen = () => {
     burrow,
     onBurrowChange,
     "Burrow Speed",
-    onRandomBurrow
+    onRandomBurrow,
+    onRemoveBurrow
   );
   const climbInput = customSpeedInput(
     climb,
     onClimbChange,
     "Climb Speed",
-    onRandomClimb
+    onRandomClimb,
+    onRemoveClimb
   );
-  const flyInput = customSpeedInput(fly, onFlyChange, "Fly Speed", onRandomFly);
+  const flyInput = customSpeedInput(
+    fly,
+    onFlyChange,
+    "Fly Speed",
+    onRandomFly,
+    onRemoveFly
+  );
   const hoverInput = customSpeedInput(
     hover,
     onHoverChange,
     "Hover Speed",
-    onRandomHover
+    onRandomHover,
+    onRemoveHover
   );
   const swimInput = customSpeedInput(
     swim,
     onSwimChange,
     "Swim Speed",
-    onRandomSwim
+    onRandomSwim,
+    onRemoveSwim
   );
 
   const extraSpeedDispaly = speedExtraList.map((i) => {
@@ -692,7 +706,6 @@ const MonsterGen = () => {
             : i.name === "Swim"
             ? swimInput
             : null}
-         
         </h3>
       </div>
     );
