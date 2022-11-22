@@ -53,8 +53,7 @@ const MonsterGen = () => {
   const [speedExtras, setSpeedExtras] = useState("");
   const [speedExtraOptions, setSpeedExtraOptions] = useState();
   const [speedExtraList, setSpeedExtraList] = useState([]);
-  const [speedListItem, setSpeedListItem] = useState("")
-  
+  const [updateList, setUpdateList] = useState()
 
   const [ability, setAbility] = useState("");
   const [abilities, setAbilities] = useState("");
@@ -335,14 +334,17 @@ const MonsterGen = () => {
     randomButton(setCha, 30, 0);
   };
 
-  useEffect(() => {
-    
-  }, [speedType,speedExtra])
-
   const onAddSpeedType = (e) => {
-    setSpeedListItem(speedType+" "+speedExtra)
-    setSpeedExtraList(speedArray => [...speedArray, speedListItem])
-    console.log()
+    setSpeedExtraList((speedArray) => [
+      ...speedArray,
+      speedType + " " + speedExtra,
+    ]);
+    console.log(speedType);
+  };
+
+  const onRemoveSpeedType = (e) => {
+    const x = e.target.getAttribute("name") 
+    setSpeedExtraList(speedExtraList.filter(item => item.x !== x))
   }
   //Generate and Clear
   const onGenerate = (e) => {
@@ -425,6 +427,7 @@ const MonsterGen = () => {
     setLegend("");
     setLair("");
     setGear("");
+    setSpeedExtraList("");
   };
 
   //Display elements
@@ -517,13 +520,22 @@ const MonsterGen = () => {
     "Set Speed",
     onRandomSpeed
   );
-  const speedExtraInput = customInputNumber(
-    `${speedType} Speed`,
-    speedExtra,
-    onSpeedExtraChange,
-    "Set Speed",
-    onRandomSpeedExtra
-  );
+
+  const extraSpeedDispaly = speedExtraList.map((i) => {
+    return (
+        <div>
+            <h3>
+            {i}
+            <button
+                  onClick={onRemoveSpeedType}
+                  className={style.monstergenBtnClear}
+                >
+                  <i className="pi pi-minus"></i>
+                </button>
+            </h3>
+        </div>
+    )
+  })
 
   return (
     <div className={style.monstergenWrapper}>
@@ -581,12 +593,25 @@ const MonsterGen = () => {
                 minFractionDigits={0}
                 maxFractionDigits={2}
               />
-              <button onClick={onRandomSpeedExtra} className={style.monstergenBtnName}>
+              <button
+                onClick={onRandomSpeedExtra}
+                className={style.monstergenBtnName}
+              >
                 Randomize
               </button>
-              <button onClick={onAddSpeedType} className={style.monstergenBtnName}><i className="pi pi-plus"></i></button>
+              <button
+                onClick={onAddSpeedType}
+                className={style.monstergenBtnName}
+              >
+                <i className="pi pi-plus"></i>
+              </button>
             </div>
-            {speedExtraList}
+            <div className={style.dropContainer}>
+              <h3>
+                {extraSpeedDispaly}
+               
+              </h3>
+            </div>
           </div>
 
           <div className={style.monstergenSubsection}>
