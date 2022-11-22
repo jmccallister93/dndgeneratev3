@@ -333,163 +333,140 @@ const MonsterGen = () => {
   };
 
   const onGenerate = (e) => {
-    if (size === "") {
-      let r = Math.round(Math.random() * (6 - 1) + 1);
-      setSize(sizeOptions[r].name);
-    } else {
-      setSize(size);
-    }
-    if (type === "") {
-      let r = Math.round(Math.random() * (16 - 1) + 1);
-      setType(typeOptions[r].name);
-    } else {
-      setType(type);
-    }
+    const ifStates = (value, setValue, options, max, min) => {
+      if (value === "") {
+        let r = Math.round(Math.random() * (max - min) + 1);
+        setValue(options[r].name);
+      }
+    };
+
+    ifStates(size, setSize, sizeOptions, 6, 1)
+    ifStates(type, setType, typeOptions, 16, 1)
+  
     if (align === "") {
       let r = Math.round(Math.random() * (9 - 1) + 1);
       setAlign(alignOptions[r].name);
-    } else {
-      setAlign(align);
     }
     if (ac === "") {
       let r = Math.round(Math.random() * (30 - 1) + 1);
       setAc(acOptions[r].name);
-    } else {
-      setAc(ac);
     }
     if (armorType === "") {
       let r = Math.round(Math.random() * (5 - 1) + 1);
       setArmorType(armorTypeOptions[r].name);
-    } else {
-      setArmorType(armorType);
     }
     if (hp === "") {
       let r = Math.floor(Math.random() * 500);
       setHp(r);
-    } else {
-      setHp(hp);
     }
     if (speed === "") {
       let r = Math.floor(Math.random() * (120 - 0));
       setSpeed(r);
-    } else {
-      setSpeed(speed);
     }
     if (speedType === "") {
       let r = Math.round(Math.random() * (6 - 1) + 1);
       setSpeedType(speedTypeOptions[r].name);
-    } else {
-      setSpeedType(speedType);
     }
     if (speedExtra === "") {
       let r = Math.floor(Math.random() * (120 - 0));
       setSpeedExtra(r);
-    } else {
-      setSpeedExtra(speedExtra);
     }
     if (str === "") {
       let r = Math.floor(Math.random() * (30 - 0));
       setStr(r);
-    } else {
-      setStr(str);
     }
     if (dex === "") {
       let r = Math.floor(Math.random() * (30 - 0));
       setDex(r);
-    } else {
-      setDex(dex);
     }
     if (con === "") {
       let r = Math.floor(Math.random() * (30 - 0));
       setCon(r);
-    } else {
-      setCon(con);
     }
     if (int === "") {
       let r = Math.floor(Math.random() * (30 - 0));
       setInt(r);
-    } else {
-      setInt(int);
     }
     if (wis === "") {
       let r = Math.floor(Math.random() * (30 - 0));
       setWis(r);
-    } else {
-      setWis(wis);
     }
     if (cha === "") {
       let r = Math.floor(Math.random() * (30 - 0));
       setCha(r);
-    } else {
-      setCha(cha);
     }
     //TODO
     // if(save === "")
     if (vuln === "") {
       let r = Math.round(Math.random() * (17 - 1) + 1);
       setVuln(vulnOptions[r].name);
-    } else {
-      setVuln(vuln);
     }
     if (skill === "") {
       let r = Math.round(Math.random() * (18 - 1) + 1);
       setSkill(skillOptions[r].name);
-    } else {
-      setSkill(skill);
     }
     if (immune === "") {
       let r = Math.round(Math.random() * (17 - 1) + 1);
       setImmune(immuneOptions[r].name);
-    } else {
-      setImmune(immune);
     }
     if (resist === "") {
       let r = Math.round(Math.random() * (17 - 1) + 1);
       setResist(resistOptions[r].name);
-    } else {
-      setResist(resist);
     }
     if (condition === "") {
       let r = Math.round(Math.random() * (15 - 1) + 1);
       setCondition(conditionOptions[r].name);
-    } else {
-      setCondition(condition);
     }
     if (sense === "") {
       let r = Math.round(Math.random() * (4 - 1) + 1);
       setSense(senseOptions[r].name);
-    } else {
-      setSense(sense);
     }
     if (lang === "") {
       let r = Math.round(Math.random() * (16 - 1) + 1);
       setLang(langOptions[r].name);
-    } else {
-      setLang(lang);
     }
     if (special === "") {
       let r = Math.round(Math.random() * (208 - 1) + 1);
       setSpecial(specialOptions[r].name);
-    } else {
-      setSpecial(special);
     }
     if (action === "") {
       let r = Math.round(Math.random() * (292 - 1) + 1);
       setAction(actionOptions[r].name);
-    } else {
-      setAction(action);
     }
     if (reaction === "") {
       let r = Math.round(Math.random() * (11 - 1) + 1);
       setReaction(reactionOptions[r].name);
-    } else {
-      setReaction(reaction);
     }
     if (legend === "") {
       let r = Math.round(Math.random() * (35 - 1) + 1);
       setLegend(legendOptions[r].name);
     } else {
+      setSize(size);
+      setType(type);
+      setAlign(align);
+      setAc(ac);
+      setArmorType(armorType);
+      setHp(hp);
+      setSpeed(speed);
+      setSpeedType(speedType);
+      setSpeedExtra(speedExtra);
+      setStr(str);
+      setDex(dex);
+      setCon(con);
+      setInt(int);
+      setWis(wis);
+      setCha(cha);
+      setVuln(vuln);
+      setSkill(skill);
+      setImmune(immune);
+      setResist(resist);
+      setCondition(condition);
+      setSense(sense);
+      setLang(lang);
+      setSpecial(special);
+      setAction(action);
       setLegend(legend);
+      setReaction(reaction);
     }
     //TODO
     // if (lair === "") {
@@ -933,7 +910,7 @@ const MonsterGen = () => {
               optionLabel="name"
               value={gear}
               options={gearOptions}
-            //   onChange={onGearChange}
+              //   onChange={onGearChange}
               placeholder="Choose Sear"
             />
           </div>
