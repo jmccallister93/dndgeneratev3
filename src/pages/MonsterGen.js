@@ -333,28 +333,30 @@ const MonsterGen = () => {
   };
 
   const onGenerate = (e) => {
-    const ifStates = (value, setValue, options, max, min) => {
+    const ifBlank = (value, setValue, options, max, min) => {
       if (value === "") {
         let r = Math.round(Math.random() * (max - min) + 1);
         setValue(options[r].name);
       }
     };
-
-    ifStates(size, setSize, sizeOptions, 6, 1)
-    ifStates(type, setType, typeOptions, 16, 1)
-  
-    if (align === "") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setAlign(alignOptions[r].name);
-    }
-    if (ac === "") {
-      let r = Math.round(Math.random() * (30 - 1) + 1);
-      setAc(acOptions[r].name);
-    }
-    if (armorType === "") {
-      let r = Math.round(Math.random() * (5 - 1) + 1);
-      setArmorType(armorTypeOptions[r].name);
-    }
+    ifBlank(size, setSize, sizeOptions, 6, 1)
+    ifBlank(type, setType, typeOptions, 16, 1)
+    ifBlank(align, setAlign, alignOptions, 9, 1)
+    ifBlank(ac, setAc, acOptions, 30, 1)
+    ifBlank(armorType, setArmorType, armorTypeOptions, 5, 1)
+    ifBlank(speedType, setSpeedType, speedTypeOptions, 6, 1)
+    ifBlank(vuln, setVuln, vulnOptions, 17, 1)
+    ifBlank(skill, setSkill, skillOptions, 18, 1)
+    ifBlank(immune, setImmune, immuneOptions, 17, 1)
+    ifBlank(resist, setResist, resistOptions, 17, 1)
+    ifBlank(condition, setCondition, conditionOptions, 15, 1)
+    ifBlank(sense, setSense, senseOptions, 4, 1)
+    ifBlank(lang, setLang, langOptions, 16, 1)
+    ifBlank(special, setSpecial, specialOptions, 208, 1)
+    ifBlank(action, setAction, actionOptions, 292, 1)
+    ifBlank(reaction, setReaction, reactionOptions, 11, 1)
+    //TODO
+    // if(save === "")
     if (hp === "") {
       let r = Math.floor(Math.random() * 500);
       setHp(r);
@@ -362,10 +364,6 @@ const MonsterGen = () => {
     if (speed === "") {
       let r = Math.floor(Math.random() * (120 - 0));
       setSpeed(r);
-    }
-    if (speedType === "") {
-      let r = Math.round(Math.random() * (6 - 1) + 1);
-      setSpeedType(speedTypeOptions[r].name);
     }
     if (speedExtra === "") {
       let r = Math.floor(Math.random() * (120 - 0));
@@ -395,48 +393,7 @@ const MonsterGen = () => {
       let r = Math.floor(Math.random() * (30 - 0));
       setCha(r);
     }
-    //TODO
-    // if(save === "")
-    if (vuln === "") {
-      let r = Math.round(Math.random() * (17 - 1) + 1);
-      setVuln(vulnOptions[r].name);
-    }
-    if (skill === "") {
-      let r = Math.round(Math.random() * (18 - 1) + 1);
-      setSkill(skillOptions[r].name);
-    }
-    if (immune === "") {
-      let r = Math.round(Math.random() * (17 - 1) + 1);
-      setImmune(immuneOptions[r].name);
-    }
-    if (resist === "") {
-      let r = Math.round(Math.random() * (17 - 1) + 1);
-      setResist(resistOptions[r].name);
-    }
-    if (condition === "") {
-      let r = Math.round(Math.random() * (15 - 1) + 1);
-      setCondition(conditionOptions[r].name);
-    }
-    if (sense === "") {
-      let r = Math.round(Math.random() * (4 - 1) + 1);
-      setSense(senseOptions[r].name);
-    }
-    if (lang === "") {
-      let r = Math.round(Math.random() * (16 - 1) + 1);
-      setLang(langOptions[r].name);
-    }
-    if (special === "") {
-      let r = Math.round(Math.random() * (208 - 1) + 1);
-      setSpecial(specialOptions[r].name);
-    }
-    if (action === "") {
-      let r = Math.round(Math.random() * (292 - 1) + 1);
-      setAction(actionOptions[r].name);
-    }
-    if (reaction === "") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
-      setReaction(reactionOptions[r].name);
-    }
+    
     if (legend === "") {
       let r = Math.round(Math.random() * (35 - 1) + 1);
       setLegend(legendOptions[r].name);
