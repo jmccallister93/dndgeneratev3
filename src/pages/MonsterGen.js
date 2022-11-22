@@ -837,16 +837,16 @@ const MonsterGen = () => {
     ifBlank2(wis, setWis, 30, 0);
     ifBlank2(cha, setCha, 30, 0);
 
-    const ifBlank3 = (value, setValue, options, max, min) => {
-      if (value === []) {
-        let r = Math.round(Math.random() * (max - min) + 1);
-        setValue(options[r]);
-      } else {
-        setValue(value);
-      }
-    };
+    // const ifBlank3 = (value, setValue, options, max, min) => {
+    //   if (value === []) {
+    //     let r = Math.round(Math.random() * (max - min) + 1);
+    //     setValue(options[r]);
+    //   } else {
+    //     setValue(value);
+    //   }
+    // };
 
-    ifBlank3(speedExtraList, setSpeedExtraList, speedTypeOptions, 5, 1);
+    // ifBlank3(speedExtraList, setSpeedExtraList, speedTypeOptions, 5, 1);
 
     if (speedExtraList.length === 0) {
       let x = Math.round(Math.random() * (1 - 0));
@@ -855,10 +855,14 @@ const MonsterGen = () => {
         setSpeedExtraList((speedArray) => [...speedArray, speedTypeOptions[r]]);
       }
     }
-    if (speedExtraList.includes(name === "Burrow")){
-        let y = Math.round(Math.random() * (120-5))
-        setBurrow(y)
-    }
+    if (speedExtraList.length > 0) {
+      let y = Math.round(Math.random() * (120 - 5));
+      setBurrow(y);
+      setClimb(y);
+      setHover(y);
+      setFly(y);
+      setSwim(y);
+    } 
   };
 
   const onClear = (e) => {
