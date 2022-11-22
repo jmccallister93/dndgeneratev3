@@ -383,90 +383,6 @@ const MonsterGen = () => {
     randomButton(setCha, 30, 0);
   };
 
-  //Generate and Clear
-  const onGenerate = (e) => {
-    const ifBlank = (value, setValue, options, max, min) => {
-      if (value === "") {
-        let r = Math.round(Math.random() * (max - min) + 1);
-        setValue(options[r].name);
-      } else {
-        setValue(value);
-      }
-    };
-    ifBlank(size, setSize, sizeOptions, 6, 1);
-    ifBlank(type, setType, typeOptions, 16, 1);
-    ifBlank(align, setAlign, alignOptions, 9, 1);
-    ifBlank(ac, setAc, acOptions, 30, 1);
-    ifBlank(armorType, setArmorType, armorTypeOptions, 5, 1);
-    ifBlank(speedType, setSpeedType, speedTypeOptions, 6, 1);
-    ifBlank(vuln, setVuln, vulnOptions, 17, 1);
-    ifBlank(skill, setSkill, skillOptions, 18, 1);
-    ifBlank(immune, setImmune, immuneOptions, 17, 1);
-    ifBlank(resist, setResist, resistOptions, 17, 1);
-    ifBlank(condition, setCondition, conditionOptions, 15, 1);
-    ifBlank(sense, setSense, senseOptions, 4, 1);
-    ifBlank(lang, setLang, langOptions, 16, 1);
-    ifBlank(special, setSpecial, specialOptions, 208, 1);
-    ifBlank(action, setAction, actionOptions, 292, 1);
-    ifBlank(reaction, setReaction, reactionOptions, 11, 1);
-    ifBlank(legend, setLegend, legendOptions, 35, 1);
-    // ifBlank(lair, setLair, lairOptions, 39, 1)
-    //TODO
-    // ifBlank(save, setSave, saveOptions, 11, 1)
-
-    const ifBlank2 = (value, setValue, max, min) => {
-      if (value === "") {
-        let r = Math.round(Math.random() * (max - min) + 1);
-        setValue(r);
-      } else {
-        setValue(value);
-      }
-    };
-    ifBlank2(hp, setHp, 500, 0);
-    ifBlank2(speed, setSpeed, 120, 0);
-    ifBlank2(speedExtra, setSpeedExtra, 120, 0);
-    ifBlank2(str, setStr, 30, 0);
-    ifBlank2(dex, setDex, 30, 0);
-    ifBlank2(con, setCon, 30, 0);
-    ifBlank2(int, setInt, 30, 0);
-    ifBlank2(wis, setWis, 30, 0);
-    ifBlank2(cha, setCha, 30, 0);
-  };
-
-  const onClear = (e) => {
-    setName("");
-    setSize("");
-    setType("");
-    setAlign("");
-    setAc("");
-    setArmorType("");
-    setHp("");
-    setSpeed("");
-    setSpeedType("");
-    setSpeedExtra("");
-    setStr("");
-    setDex("");
-    setCon("");
-    setInt("");
-    setWis("");
-    setCha("");
-    setSave("");
-    setSkill("");
-    setVuln("");
-    setImmune("");
-    setResist("");
-    setCondition("");
-    setSense("");
-    setLang("");
-    setSpecial("");
-    setAction("");
-    setReaction("");
-    setLegend("");
-    setLair("");
-    setGear("");
-    setSpeedExtraList([]);
-  };
-
   //DISPLAY ELEMNTS
 
   //DropDowns
@@ -604,9 +520,9 @@ const MonsterGen = () => {
   const onSwimChange = (e) => {
     objectChange(e.value, setSwim);
   };
-  useEffect(()=>{
-    setSelectedItems(speedExtraList)
-  },[speedExtraList])
+  useEffect(() => {
+    setSelectedItems(speedExtraList);
+  }, [speedExtraList]);
 
   const onRemoveCustom = (name) => {
     setSpeedExtraList(speedExtraList.filter((value) => value.name !== name));
@@ -634,13 +550,22 @@ const MonsterGen = () => {
         minFractionDigits={0}
         maxFractionDigits={2}
       />
-      <div style={{display: "flex"}}>
-      <Button onClick={onRandom} className={style.monstergenBtnName} style={{height: "2rem"}}>
-        Random
-      </Button>
-      <Button tooltip="Remove?" onClick={onRemove} className={style.monstergenBtnRemove} style={{height: "2rem"}}>
-      <i className="pi pi-minus"></i>
-      </Button>
+      <div style={{ display: "flex" }}>
+        <Button
+          onClick={onRandom}
+          className={style.monstergenBtnName}
+          style={{ height: "2rem" }}
+        >
+          Random
+        </Button>
+        <Button
+          tooltip="Remove?"
+          onClick={onRemove}
+          className={style.monstergenBtnRemove}
+          style={{ height: "2rem" }}
+        >
+          <i className="pi pi-minus"></i>
+        </Button>
       </div>
     </div>
   );
@@ -862,6 +787,119 @@ const MonsterGen = () => {
     onRandomCha
   );
 
+  //Generate and Clear
+  const onGenerate = (e) => {
+    const ifBlank = (value, setValue, options, max, min) => {
+      if (value === "") {
+        let r = Math.round(Math.random() * (max - min) + 1);
+        setValue(options[r].name);
+      } else {
+        setValue(value);
+      }
+    };
+    ifBlank(size, setSize, sizeOptions, 6, 1);
+    ifBlank(type, setType, typeOptions, 16, 1);
+    ifBlank(align, setAlign, alignOptions, 9, 1);
+    ifBlank(ac, setAc, acOptions, 30, 1);
+    ifBlank(armorType, setArmorType, armorTypeOptions, 5, 1);
+    ifBlank(speedType, setSpeedType, speedTypeOptions, 6, 1);
+    ifBlank(vuln, setVuln, vulnOptions, 17, 1);
+    ifBlank(skill, setSkill, skillOptions, 18, 1);
+    ifBlank(immune, setImmune, immuneOptions, 17, 1);
+    ifBlank(resist, setResist, resistOptions, 17, 1);
+    ifBlank(condition, setCondition, conditionOptions, 15, 1);
+    ifBlank(sense, setSense, senseOptions, 4, 1);
+    ifBlank(lang, setLang, langOptions, 16, 1);
+    ifBlank(special, setSpecial, specialOptions, 208, 1);
+    ifBlank(action, setAction, actionOptions, 292, 1);
+    ifBlank(reaction, setReaction, reactionOptions, 11, 1);
+    ifBlank(legend, setLegend, legendOptions, 35, 1);
+
+    // ifBlank(lair, setLair, lairOptions, 39, 1)
+    //TODO
+    // ifBlank(save, setSave, saveOptions, 11, 1)
+
+    const ifBlank2 = (value, setValue, max, min) => {
+      if (value === "") {
+        let r = Math.round(Math.random() * (max - min) + 1);
+        setValue(r);
+      } else {
+        setValue(value);
+      }
+    };
+    ifBlank2(hp, setHp, 500, 0);
+    ifBlank2(speed, setSpeed, 120, 0);
+    ifBlank2(speedExtra, setSpeedExtra, 120, 0);
+    ifBlank2(str, setStr, 30, 0);
+    ifBlank2(dex, setDex, 30, 0);
+    ifBlank2(con, setCon, 30, 0);
+    ifBlank2(int, setInt, 30, 0);
+    ifBlank2(wis, setWis, 30, 0);
+    ifBlank2(cha, setCha, 30, 0);
+
+    const ifBlank3 = (value, setValue, options, max, min) => {
+      if (value === []) {
+        let r = Math.round(Math.random() * (max - min) + 1);
+        setValue(options[r]);
+      } else {
+        setValue(value);
+      }
+    };
+
+    ifBlank3(speedExtraList, setSpeedExtraList, speedTypeOptions, 5, 1);
+
+    if (speedExtraList.length === 0) {
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (4 - 0));
+        setSpeedExtraList((speedArray) => [...speedArray, speedTypeOptions[r]]);
+      }
+    }
+    if (speedExtraList.includes(name === "Burrow")){
+        let y = Math.round(Math.random() * (120-5))
+        setBurrow(y)
+    }
+  };
+
+  const onClear = (e) => {
+    setName("");
+    setSize("");
+    setType("");
+    setAlign("");
+    setAc("");
+    setArmorType("");
+    setHp("");
+    setSpeed("");
+    setSpeedType("");
+    setSpeedExtra("");
+    setStr("");
+    setDex("");
+    setCon("");
+    setInt("");
+    setWis("");
+    setCha("");
+    setSave("");
+    setSkill("");
+    setVuln("");
+    setImmune("");
+    setResist("");
+    setCondition("");
+    setSense("");
+    setLang("");
+    setSpecial("");
+    setAction("");
+    setReaction("");
+    setLegend("");
+    setLair("");
+    setGear("");
+    setSpeedExtraList([]);
+    setBurrow("");
+    setClimb("");
+    setHover("");
+    setFly("");
+    setSwim("");
+  };
+
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
@@ -896,9 +934,7 @@ const MonsterGen = () => {
             {hpInput}
             {speedInput}
             {moveDialog}
-            <div className={style.dropContainer}>
-              {extraSpeedDispaly}
-            </div>
+            <div className={style.speedContainer}>{extraSpeedDispaly}</div>
           </div>
           <h1 className={style.monstergenSubHeader}>Ability Scores</h1>
           <div className={style.monstergenSubsection}>
