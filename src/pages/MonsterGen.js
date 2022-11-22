@@ -58,12 +58,13 @@ const MonsterGen = () => {
   const [speedTypeOptions, setSpeedTypeOptions] = useState();
 
   const [speedExtra, setSpeedExtra] = useState("");
-  const [speedExtras, setSpeedExtras] = useState("");
-  const [speedExtraOptions, setSpeedExtraOptions] = useState();
   const [speedExtraList, setSpeedExtraList] = useState([]);
-  const [updateList, setUpdateList] = useState();
-  const [displaySpeed, setDisplaySpeed] = useState(false);
-  const [speedVisible, setSpeedVisible] = useState(false);
+  const [burrow, setBurrow] = useState("")
+  const [climb, setClimb] = useState("")
+  const [fly, setFly] = useState("")
+  const [hover, setHover] = useState("")
+  const [swim, setSwim] = useState("")
+
 
   const [ability, setAbility] = useState("");
   const [abilities, setAbilities] = useState("");
@@ -602,30 +603,14 @@ const MonsterGen = () => {
 //     console.log(i)
 //     )
 // )
+const onBurrowChange = (e) => {
+    objectChange(e.value, setBurrow);
+  };
 
-
-  const extraSpeedDispaly = speedExtraList.map((i) => {
-    console.log(speedExtraList)
-    return (
-      <div>
-        <h3>
-          {i.name}
-          {/* {movementRandomBtn} */}
-          <button
-            onClick={onRemoveSpeedType}
-            className={style.monstergenBtnRemove}
-          >
-            <i className="pi pi-minus"> Remove</i>
-          </button>
-        </h3>
-      </div>
-    );
-  });
-
-  const extraSpeedInput = (
+const burrowInput = (
     <InputNumber
       value={speedExtra}
-      onChange={onSpeedExtraChange}
+      onChange={onBurrowChange}
       placeholder={"Set " + speedType + " Speed"}
       mode="decimal"
       showButtons
@@ -637,6 +622,23 @@ const MonsterGen = () => {
       maxFractionDigits={2}
     />
   );
+
+  const extraSpeedDispaly = speedExtraList.map((i) => {
+    console.log(speedExtraList)
+    return (
+      <div>
+        <h3>
+          {i.name}
+          <button
+            onClick={onRemoveSpeedType}
+            className={style.monstergenBtnRemove}
+          >
+            <i className="pi pi-minus"> Remove</i>
+          </button>
+        </h3>
+      </div>
+    );
+  });
 
   const moveDialog = (
     <div className="card">
