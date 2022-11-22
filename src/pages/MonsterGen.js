@@ -9,12 +9,19 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { InputNumber } from "primereact/inputnumber";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { FilterMatchMode, FilterOperator } from "primereact/api";
 
 const MonsterGen = () => {
   const [monster, setMonster] = useState({ size: "", type: "" });
 
   //Set States
   const [fetchError, setFetchError] = useState();
+
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   const [name, setName] = useState("");
   const [names, setNames] = useState();
@@ -55,6 +62,8 @@ const MonsterGen = () => {
   const [speedExtraOptions, setSpeedExtraOptions] = useState();
   const [speedExtraList, setSpeedExtraList] = useState([]);
   const [updateList, setUpdateList] = useState();
+  const [displaySpeed, setDisplaySpeed] = useState(false);
+  const [speedVisible, setSpeedVisible] = useState(false);
 
   const [ability, setAbility] = useState("");
   const [abilities, setAbilities] = useState("");
@@ -122,6 +131,43 @@ const MonsterGen = () => {
   const [gear, setGear] = useState("");
   const [gears, setGears] = useState("");
   const [gearOptions, setGearOptions] = useState();
+
+  //Datatable
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const [selectedItems, setSelectedItems] = useState(null);
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    // "country.name": { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    representative: { value: null, matchMode: FilterMatchMode.IN },
+    status: { value: null, matchMode: FilterMatchMode.EQUALS },
+    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
+  });
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+  const renderHeader = () => {
+    return (
+      <div>
+        <span className="p-input-icon-left">
+          <i className="pi pi-search mr-2" />
+          <InputText
+            value={globalFilterValue}
+            onChange={onGlobalFilterChange}
+            placeholder="Keyword Search"
+          />
+        </span>
+      </div>
+    );
+  };
+  const header = (
+    <div className="flex justify-content-between">{renderHeader()}</div>
+  );
 
   //Get Data function
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -545,9 +591,6 @@ const MonsterGen = () => {
         placeholder="Choose Movement"
       />
 
-      <button onClick={onAddSpeedType} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"></i>
-      </button>
       <InputNumber
         value={speedExtra}
         onChange={onSpeedExtraChange}
@@ -563,28 +606,97 @@ const MonsterGen = () => {
       />
       <button onClick={onRandomSpeedExtra} className={style.monstergenBtnName}>
         Randomize
+      </button>
+      <button onClick={onAddSpeedType} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
       </button>
     </div>
   );
-  const movementInput = (
-    <>
-      <InputNumber
-        value={speedExtra}
-        onChange={onSpeedExtraChange}
-        placeholder={"Set " + speedType + " Speed"}
-        mode="decimal"
-        showButtons
-        decrementButtonClassName="p-button-secondary"
-        incrementButtonClassName="p-button-secondary"
-        incrementButtonIcon="pi pi-plus"
-        decrementButtonIcon="pi pi-minus"
-        minFractionDigits={0}
-        maxFractionDigits={2}
-      />
-      <button onClick={onRandomSpeedExtra} className={style.monstergenBtnName}>
-        Randomize
+
+  //   const dialogFuncMap = {
+  //     displaySpeed: setDisplaySpeed,
+  //   };
+
+  const openDialog = () => {
+    setDialogVisible(true);
+    console.log(speedTypeOptions);
+  };
+
+  const closeDialog = () => {
+    setDialogVisible(false);
+  };
+
+  const dialogFooterTemplate = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
+  };
+
+  const extraSpeedInput = (
+    <InputNumber
+    value={speedExtra}
+    onChange={onSpeedExtraChange}
+    placeholder={"Set " + speedType + " Speed"}
+    mode="decimal"
+    showButtons
+    decrementButtonClassName="p-button-secondary"
+    incrementButtonClassName="p-button-secondary"
+    incrementButtonIcon="pi pi-plus"
+    decrementButtonIcon="pi pi-minus"
+    minFractionDigits={0}
+    maxFractionDigits={2}
+  />
+  )
+
+  const moveDialog = (
+    <div className="card">
+      <button onClick={openDialog} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
       </button>
-    </>
+      <Dialog
+        header="Additional Movement"
+        visible={dialogVisible}
+        maximizable
+        modal
+        onHide={closeDialog}
+        footer={dialogFooterTemplate}
+      >
+        
+        <DataTable
+          value={speedTypeOptions}
+          scrollable
+          scrollHeight="60vh"
+          className="p-datatable-customers"
+          rows={20}
+          dataKey="id"
+          selection={selectedItems}
+          onSelectionChange={(e) => setSelectedItems(e.value)}
+          selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+        <Column
+          selectionMode="multiple"
+          selectionAriaLabel="name"
+          headerStyle={{ width: "6em" }}
+        ></Column>
+        <Column
+          field="name"
+          header="Name"
+          sortable
+          filter
+          filterPlaceholder="Search"
+        ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
   );
 
   //InputTexts
@@ -691,7 +803,7 @@ const MonsterGen = () => {
             onClick={onRemoveSpeedType}
             className={style.monstergenBtnRemove}
           >
-            <i className="pi pi-minus"></i>
+            <i className="pi pi-minus"> Remove</i>
           </button>
         </h3>
       </div>
@@ -731,7 +843,9 @@ const MonsterGen = () => {
           <div className={style.monstergenSubsection}>
             {hpInput}
             {speedInput}
-            {movementDrop}
+            {/* {movementDrop} */}
+            {moveDialog}
+            
             <div className={style.dropContainer}>
               <h3>{extraSpeedDispaly}</h3>
             </div>

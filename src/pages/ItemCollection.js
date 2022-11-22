@@ -206,9 +206,7 @@ const ItemCollection = () => {
   };
 
   const header = (
-    <div className="flex justify-content-between">
-      {renderHeader()}
-    </div>
+    <div className="flex justify-content-between">{renderHeader()}</div>
   );
 
   const footer = (
@@ -512,11 +510,14 @@ const ItemCollection = () => {
       <div className={style.itemcollectionBody}>
         <h1 className={style.itemcollectionHeader}>Item Collection</h1>
         <div className={style.itemcollectionOptionsWrapper}>
-        <Button className="surface-300 border-0 text-color" onClick={openDialog}>
-        <h3 className="text-4xl">
-          Weapons <i className="pi pi-arrow-up-right"></i>
-        </h3>
-      </Button>
+          <Button
+            className="surface-300 border-0 text-color"
+            onClick={openDialog}
+          >
+            <h3 className="text-4xl">
+              Weapons <i className="pi pi-arrow-up-right"></i>
+            </h3>
+          </Button>
           <Dialog
             header="Weapons"
             visible={dialogVisible}
@@ -580,11 +581,14 @@ const ItemCollection = () => {
             </DataTable>
           </Dialog>
 
-        <Button className="surface-300 border-0 text-color" onClick={openDialog}>
-        <h3 className="text-4xl">
-          Vehicles <i className="pi pi-arrow-up-right"></i>
-        </h3>
-      </Button>
+          <Button
+            className="surface-300 border-0 text-color"
+            onClick={openDialog}
+          >
+            <h3 className="text-4xl">
+              Vehicles <i className="pi pi-arrow-up-right"></i>
+            </h3>
+          </Button>
           <Dialog
             header="Vehicles"
             visible={dialogVisible}
@@ -593,60 +597,61 @@ const ItemCollection = () => {
             onHide={closeDialog}
             footer={dialogFooterTemplate}
           >
-          <Tooltip target=".export-buttons>button" position="bottom" />
-          <DataTable
-            value={vehicleOptions}
-            // paginator
-            scrollable
-            scrollHeight="50vh"
-            className="p-datatable-customers"
-            rows={20}
-            dataKey="id"
-            selection={selectedItems}
-            onSelectionChange={(e) => setSelectedItems(e.value)}
-            selectionPageOnly
-            filters={filters}
-            filterDisplay="row"
-            responsiveLayout="scroll"
-            globalFilterFields={["name"]}
-            header={header}
-            footer={footer}
-            emptyMessage="No items found."
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            rowHover
-            resizableColumns
-            reorderableColumns
-            reorderableRows
-            ref={dt}
-          >
-            <Column
-              selectionMode="multiple"
-              selectionAriaLabel="name"
-              headerStyle={{ width: "3em" }}
-            ></Column>
-            <Column
-              field="name"
-              header="Name"
-              sortable
-              filter
-              filterPlaceholder="Search by name"
-            ></Column>
-            <Column
-              field="cost"
-              header="Cost"
-              sortable
-              filter
-              filterPlaceholder="Search by name"
-            ></Column>
-            <Column
-              field="type"
-              header="Type"
-              sortable
-              filter
-              filterPlaceholder="Search by name"
-            ></Column>
-          </DataTable>
-        </Dialog>
+            <Tooltip target=".export-buttons>button" position="bottom" />
+            
+            <DataTable
+              value={vehicleOptions}
+              // paginator
+              scrollable
+              scrollHeight="50vh"
+              className="p-datatable-customers"
+              rows={20}
+              dataKey="id"
+              selection={selectedItems}
+              onSelectionChange={(e) => setSelectedItems(e.value)}
+              selectionPageOnly
+              filters={filters}
+              filterDisplay="row"
+              responsiveLayout="scroll"
+              globalFilterFields={["name"]}
+              header={header}
+              footer={footer}
+              emptyMessage="No items found."
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              rowHover
+              resizableColumns
+              reorderableColumns
+              reorderableRows
+              ref={dt}
+            >
+              <Column
+                selectionMode="multiple"
+                selectionAriaLabel="name"
+                headerStyle={{ width: "3em" }}
+              ></Column>
+              <Column
+                field="name"
+                header="Name"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+              <Column
+                field="cost"
+                header="Cost"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+              <Column
+                field="type"
+                header="Type"
+                sortable
+                filter
+                filterPlaceholder="Search by name"
+              ></Column>
+            </DataTable>
+          </Dialog>
         </div>
       </div>
     </div>
