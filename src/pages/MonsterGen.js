@@ -517,14 +517,209 @@ const MonsterGen = () => {
   const openDialogSpeed = () => {
     setDialogVisibleSpeed(true);
   };
+  const openDialogSkill = () => {
+    setDialogVisibleSkill(true)
+  }
+  const openDialogVuln = () => {
+    setDialogVisibleVuln(true)
+  }
+  const openDialogImmune = () => {
+    setDialogVisibleImmune(true)
+  }
+  const openDialogResist = () => {
+    setDialogVisibleResist(true)
+  }
+  const openDialogCondition = () => {
+    setDialogVisibleCondition(true)
+  }
+  const openDialogSense = () => {
+    setDialogVisibleSense(true)
+  }
+  const openDialogLang = () => {
+    setDialogVisibleLang(true)
+  }
+  const openDialogSpecial = () => {
+    setDialogVisibleSpecial(true)
+  }
+  const openDialogAction = () => {
+    setDialogVisibleAction(true)
+  }
+  const openDialogReaction = () => {
+    setDialogVisibleReaction(true)
+  }
+  const openDialogLegend = () => {
+    setDialogVisibleLegend(true)
+  }
+  const openDialogLair = () => {
+    setDialogVisibleLair(true)
+  }
+  const openDialogGear = () => {
+    setDialogVisibleGear(true)
+  }
   const closeDialogSpeed = () => {
     setDialogVisibleSpeed(false);
     for (let i = 0; i < selectedItemsSpeed.length; i++) {
       if (speedExtraList.includes(selectedItemsSpeed[i])) {
       } else {
-        setSpeedExtraList((speedArray) => [
-          ...speedArray,
+        setSpeedExtraList((oldArray) => [
+          ...oldArray,
           selectedItemsSpeed[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogSkill = () => {
+    setDialogVisibleSkill(false);
+    for (let i = 0; i < selectedItemsSkill.length; i++) {
+      if (skillList.includes(selectedItemsSkill[i])) {
+      } else {
+        setSkillList((oldArray) => [
+          ...oldArray,
+          selectedItemsSkill[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogVuln = () => {
+    setDialogVisibleVuln(false);
+    for (let i = 0; i < selectedItemsVuln.length; i++) {
+      if (vulnList.includes(selectedItemsVuln[i])) {
+      } else {
+        setVulnList((oldArray) => [
+          ...oldArray,
+          selectedItemsVuln[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogImmune = () => {
+    setDialogVisibleImmune(false);
+    for (let i = 0; i < selectedItemsImmune.length; i++) {
+      if (immuneList.includes(selectedItemsImmune[i])) {
+      } else {
+        setImmuneList((oldArray) => [
+          ...oldArray,
+          selectedItemsImmune[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogResist = () => {
+    setDialogVisibleResist(false);
+    for (let i = 0; i < selectedItemsResist.length; i++) {
+      if (resistList.includes(selectedItemsResist[i])) {
+      } else {
+        setResistList((oldArray) => [
+          ...oldArray,
+          selectedItemsResist[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogCondition = () => {
+    setDialogVisibleCondition(false);
+    for (let i = 0; i < selectedItemsCondition.length; i++) {
+      if (conditionList.includes(selectedItemsCondition[i])) {
+      } else {
+        setConditionList((oldArray) => [
+          ...oldArray,
+          selectedItemsCondition[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogSense = () => {
+    setDialogVisibleSense(false);
+    for (let i = 0; i < selectedItemsSense.length; i++) {
+      if (senseList.includes(selectedItemsSense[i])) {
+      } else {
+        setSenseList((oldArray) => [
+          ...oldArray,
+          selectedItemsSense[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogLang = () => {
+    setDialogVisibleLang(false);
+    for (let i = 0; i < selectedItemsLang.length; i++) {
+      if (langList.includes(selectedItemsLang[i])) {
+      } else {
+        setLangList((oldArray) => [
+          ...oldArray,
+          selectedItemsLang[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogSpecial = () => {
+    setDialogVisibleSpecial(false);
+    for (let i = 0; i < selectedItemsSpecial.length; i++) {
+      if (specialList.includes(selectedItemsSpecial[i])) {
+      } else {
+        setSpecialList((oldArray) => [
+          ...oldArray,
+          selectedItemsSpecial[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogAction = () => {
+    setDialogVisibleAction(false);
+    for (let i = 0; i < selectedItemsAction.length; i++) {
+      if (actionList.includes(selectedItemsAction[i])) {
+      } else {
+        setActionList((oldArray) => [
+          ...oldArray,
+          selectedItemsAction[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogReaction = () => {
+    setDialogVisibleReaction(false);
+    for (let i = 0; i < selectedItemsReaction.length; i++) {
+      if (reactionList.includes(selectedItemsReaction[i])) {
+      } else {
+        setReactionList((oldArray) => [
+          ...oldArray,
+          selectedItemsReaction[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogLegend = () => {
+    setDialogVisibleLegend(false);
+    for (let i = 0; i < selectedItemsLegend.length; i++) {
+      if (legendList.includes(selectedItemsLegend[i])) {
+      } else {
+        setLegendList((oldArray) => [
+          ...oldArray,
+          selectedItemsLegend[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogLair = () => {
+    setDialogVisibleLair(false);
+    for (let i = 0; i < selectedItemsLair.length; i++) {
+      if (lairList.includes(selectedItemsLair[i])) {
+      } else {
+        setLairList((oldArray) => [
+          ...oldArray,
+          selectedItemsLair[i],
+        ]);
+      }
+    }
+  };
+  const closeDialogGear = () => {
+    setDialogVisibleGear(false);
+    for (let i = 0; i < selectedItemsGear.length; i++) {
+      if (gearList.includes(selectedItemsGear[i])) {
+      } else {
+        setGearList((oldArray) => [
+          ...oldArray,
+          selectedItemsGear[i],
         ]);
       }
     }
