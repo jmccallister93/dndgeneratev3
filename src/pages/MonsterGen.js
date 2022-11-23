@@ -121,6 +121,22 @@ const MonsterGen = () => {
   const [vulnList, setVulnList] = useState([]);
   const [dialogVisibleVuln, setDialogVisibleVuln] = useState(false);
   const [selectedItemsVuln, setSelectedItemsVuln] = useState(null);
+  const [vulnAcid, setVulnAcid] = useState("");
+  const [vulnCold, setVulnCold] = useState("");
+  const [vulnFire, setVulnFire] = useState("");
+  const [vulnForce, setVulnForce] = useState("");
+  const [vulnLightning, setVulnLightning] = useState("");
+  const [vulnNecrotic, setVulnNecrotic] = useState("");
+  const [vulnPoison, setVulnPoison] = useState("");
+  const [vulnPsychic, setVulnPsychic] = useState("");
+  const [vulnRadiant, setVulnRadiant] = useState("");
+  const [vulnThunder, setVulnThunder] = useState("");
+  const [vulnBludgeoning, setVulnBludgeoning] = useState("");
+  const [vulnSlashing, setVulnSlashing] = useState("");
+  const [vulnPiercing, setVulnPiercing] = useState("");
+  const [vulnNMBludgeoning, setVulnNMBludgeoning] = useState("");
+  const [vulnNMSlashing, setVulnNMSlashing] = useState("");
+  const [vulnNMPiercing, setVulnNMPiercing] = useState("");
 
   const [immune, setImmune] = useState("");
   const [immunes, setImmunes] = useState("");
@@ -128,6 +144,22 @@ const MonsterGen = () => {
   const [immuneList, setImmuneList] = useState([]);
   const [dialogVisibleImmune, setDialogVisibleImmune] = useState(false);
   const [selectedItemsImmune, setSelectedItemsImmune] = useState(null);
+  const [immuneAcid, setImmuneAcid] = useState("");
+  const [immuneCold, setImmuneCold] = useState("");
+  const [immuneFire, setImmuneFire] = useState("");
+  const [immuneForce, setImmuneForce] = useState("");
+  const [immuneLightning, setImmuneLightning] = useState("");
+  const [immuneNecrotic, setImmuneNecrotic] = useState("");
+  const [immunePoison, setImmunePoison] = useState("");
+  const [immunePsychic, setImmunePsychic] = useState("");
+  const [immuneRadiant, setImmuneRadiant] = useState("");
+  const [immuneThunder, setImmuneThunder] = useState("");
+  const [immuneBludgeoning, setImmuneBludgeoning] = useState("");
+  const [immuneSlashing, setImmuneSlashing] = useState("");
+  const [immunePiercing, setImmunePiercing] = useState("");
+  const [immuneNMBludgeoning, setImmuneNMBludgeoning] = useState("");
+  const [immuneNMSlashing, setImmuneNMSlashing] = useState("");
+  const [immuneNMPiercing, setImmuneNMPiercing] = useState("");
 
   const [resist, setResist] = useState("");
   const [resists, setResists] = useState("");
@@ -135,6 +167,22 @@ const MonsterGen = () => {
   const [resistList, setResistList] = useState([]);
   const [dialogVisibleResist, setDialogVisibleResist] = useState(false);
   const [selectedItemsResist, setSelectedItemsResist] = useState(null);
+  const [resistAcid, setResistAcid] = useState("");
+  const [resistCold, setResistCold] = useState("");
+  const [resistFire, setResistFire] = useState("");
+  const [resistForce, setResistForce] = useState("");
+  const [resistLightning, setResistLightning] = useState("");
+  const [resistNecrotic, setResistNecrotic] = useState("");
+  const [resistPoison, setResistPoison] = useState("");
+  const [resistPsychic, setResistPsychic] = useState("");
+  const [resistRadiant, setResistRadiant] = useState("");
+  const [resistThunder, setResistThunder] = useState("");
+  const [resistBludgeoning, setResistBludgeoning] = useState("");
+  const [resistSlashing, setResistSlashing] = useState("");
+  const [resistPiercing, setResistPiercing] = useState("");
+  const [resistNMBludgeoning, setResistNMBludgeoning] = useState("");
+  const [resistNMSlashing, setResistNMSlashing] = useState("");
+  const [resistNMPiercing, setResistNMPiercing] = useState("");
 
   const [condition, setCondition] = useState("");
   const [conditions, setConditions] = useState("");
@@ -142,6 +190,21 @@ const MonsterGen = () => {
   const [conditionList, setConditionList] = useState([]);
   const [dialogVisibleCondition, setDialogVisibleCondition] = useState(false);
   const [selectedItemsCondition, setSelectedItemsCondition] = useState(null);
+  const [conBlinded, setConBlinded] = useState("");
+  const [conCharmed, setConCharmed] = useState("");
+  const [conDeafened, setConDeafened] = useState("");
+  const [conExhaustion, setConExhaustion] = useState("");
+  const [conFrightened, setConFrightened] = useState("");
+  const [conGrappled, setConGrappled] = useState("");
+  const [conIncapacitated, setConIncapacitated] = useState("");
+  const [conInvisible, setConInvisible] = useState("");
+  const [conParalyzed, setConParalyzed] = useState("");
+  const [conPetrified, setConPetrified] = useState("");
+  const [conPoisoned, setConPoisoned] = useState("");
+  const [conProne, setConProne] = useState("");
+  const [conRestrained, setConRestrained] = useState("");
+  const [conStunned, setConStunned] = useState("");
+  const [conUnconscious, setConUnconscious] = useState("");
 
   const [sense, setSense] = useState("");
   const [senses, setSenses] = useState("");
@@ -1325,8 +1388,8 @@ const MonsterGen = () => {
     randomButton(setSkillPerception, 15, 0);
   };
   const onRandomSkillPerformance = (e) => {
-    randomButton(setSkillPerformance)
-  }
+    randomButton(setSkillPerformance);
+  };
   const onRandomSkillPersuasion = (e) => {
     randomButton(setSkillPersuasion, 15, 0);
   };
@@ -1567,6 +1630,82 @@ const MonsterGen = () => {
     </div>
   );
   //Vuln
+  const onRemoveVulnAcid = (e) => onRemoveCustom(setVulnList, vulnList, "Acid");
+  const onRemoveVulnCold = (e) => onRemoveCustom(setVulnList, vulnList, "Cold");
+  const onRemoveVulnFire = (e) => onRemoveCustom(setVulnList, vulnList, "Fire");
+  const onRemoveVulnForce = (e) => onRemoveCustom(setVulnList, vulnList, "Force");
+  const onRemoveVulnLightning = (e) => onRemoveCustom(setVulnList, vulnList, "Lightning");
+  const onRemoveVulnNecrotic = (e) => onRemoveCustom(setVulnList, vulnList, "Necrotic");
+  const onRemoveVulnPoison = (e) => onRemoveCustom(setVulnList, vulnList, "Poison");
+  const onRemoveVulnPsychic = (e) => onRemoveCustom(setVulnList, vulnList, "Psychic");
+  const onRemoveVulnRadiant = (e) => onRemoveCustom(setVulnList, vulnList, "Radiant");
+  const onRemoveVulnThunder = (e) => onRemoveCustom(setVulnList, vulnList, "Thunder");
+  const onRemoveVulnBludgeoning = (e) => onRemoveCustom(setVulnList, vulnList, "Bludgeoning");
+  const onRemoveVulnSlashing = (e) => onRemoveCustom(setVulnList, vulnList, "Slashing");
+  const onRemoveVulnPiercing = (e) => onRemoveCustom(setVulnList, vulnList, "Piercing");
+  const onRemoveVulnMagic = (e) => onRemoveCustom(setVulnList, vulnList, "Magic");
+  const onRemoveVulnMBludgeoning = (e) => onRemoveCustom(setVulnList, vulnList, "Magical Bludgeoning");
+  const onRemoveVulnMSlashing= (e) => onRemoveCustom(setVulnList, vulnList, "Magical Slashing");
+  const onRemoveVulnMPiercing = (e) => onRemoveCustom(setVulnList, vulnList, "Magical Piercing");
+
+
+  const customDmgRemove = (value, change, placeholder, onRandom, onRemove) => (
+    <div className={style.monstergenSpeedsWrapper}>
+      <Button
+        tooltip="Remove?"
+        onClick={onRemove}
+        className={style.monstergenBtnRemove}
+        style={{ height: "2rem" }}
+      >
+        <i className="pi pi-minus"></i>
+      </Button>
+    </div>
+  );
+
+  const vulnDisplay = vulnList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+          {i.name === "Acid"
+            ? skillAcrobaticsInput
+            : i.name === "Cold"
+            ? skillAnimalInput
+            : i.name === "Fire"
+            ? skillArcanaInput
+            : i.name === "Force"
+            ? skillAthleticsInput
+            : i.name === "Lightning"
+            ? skillDeceptionInput
+            : i.name === "Necrotic"
+            ? skillHistoryInput
+            : i.name === "Poison"
+            ? skillInsightInput
+            : i.name === "Psychic"
+            ? skillIntimidationInput
+            : i.name === "Radiant"
+            ? skillInvestigationInput
+            : i.name === "Thunder"
+            ? skillMedicineInput
+            : i.name === "Bludgeoning"
+            ? skillNatureInput
+            : i.name === "Slashing"
+            ? skillPerceptionInput
+            : i.name === "Piercing"
+            ? skillPerformanceInput
+            : i.name === "Magic"
+            ? skillPersuasionInput
+            : i.name === "Magical Bludgeoning"
+            ? skillReligionInput
+            : i.name === "Magical Slashing"
+            ? skillSleightInput
+            : i.name === "Magical Piercing"
+            ? skillStealthInput
+            : null}
+        </h3>
+      </div>
+    );
+  });
   const vulnDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Vulnerabilities</h2>
@@ -2379,12 +2518,12 @@ const MonsterGen = () => {
       }
     }
     if (skillList.length === 0) {
-        let x = Math.round(Math.random() * (1 - 0));
-        if (x === 1) {
-          let r = Math.round(Math.random() * (4 - 0));
-          setSkillList((saveArray) => [...saveArray, skillOptions[r]]);
-        }
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (4 - 0));
+        setSkillList((saveArray) => [...saveArray, skillOptions[r]]);
       }
+    }
   };
 
   const onClear = (e) => {
@@ -2431,25 +2570,25 @@ const MonsterGen = () => {
     setSaveInt("");
     setSaveWis("");
     setSaveCha("");
-    setSkillList([])
-    setSkillAcrobatics("")
-    setSkillAnimal("")
-    setSkillArcana("")
-    setSkillAthletics("")
-    setSkillDeception("")
-    setSkillHistory("")
-    setSkillInsight("")
-    setSkillIntimidation("")
-    setSkillInvestigation("")
-    setSkillMedicine("")
-    setSkillNature("")
-    setSkillPerception("")
-    setSkillPerformance("")
-    setSkillPersuasion("")
-    setSkillReligion("")
-    setSkillSleight("")
-    setSkillStealth("")
-    setSkillSurvival("")
+    setSkillList([]);
+    setSkillAcrobatics("");
+    setSkillAnimal("");
+    setSkillArcana("");
+    setSkillAthletics("");
+    setSkillDeception("");
+    setSkillHistory("");
+    setSkillInsight("");
+    setSkillIntimidation("");
+    setSkillInvestigation("");
+    setSkillMedicine("");
+    setSkillNature("");
+    setSkillPerception("");
+    setSkillPerformance("");
+    setSkillPersuasion("");
+    setSkillReligion("");
+    setSkillSleight("");
+    setSkillStealth("");
+    setSkillSurvival("");
   };
 
   return (
@@ -2504,6 +2643,7 @@ const MonsterGen = () => {
             {skillDialog}
             <div className={style.speedContainer}>{skillDisplay}</div>
             {vulnDialog}
+            <div className={style.speedContainer}>{vulnDisplay}</div>
             {immuneDialog}
             {resistDialog}
             {conditionDialog}
