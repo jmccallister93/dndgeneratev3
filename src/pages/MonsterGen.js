@@ -22,8 +22,6 @@ const MonsterGen = () => {
   //Set States
   const [fetchError, setFetchError] = useState();
 
-  const [dialogVisible, setDialogVisible] = useState(false);
-
   const [name, setName] = useState("");
   const [names, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
@@ -65,6 +63,8 @@ const MonsterGen = () => {
   const [fly, setFly] = useState("");
   const [hover, setHover] = useState("");
   const [swim, setSwim] = useState("");
+  const [dialogVisibleSpeed, setDialogVisibleSpeed] = useState(false);
+  const [selectedItemsSpeed, setSelectedItemsSpeed] = useState(null);
 
   const [ability, setAbility] = useState("");
   const [abilities, setAbilities] = useState("");
@@ -80,6 +80,16 @@ const MonsterGen = () => {
   const [save, setSave] = useState("");
   const [saves, setSaves] = useState("");
   const [saveOptions, setSaveOptions] = useState();
+  const [saveList, setSaveList] = useState([])
+  const [saveExtra, setSaveExtra] = useState("");
+  const [saveStr, setSaveStr] = useState("");
+  const [saveDex, setSaveDex] = useState("");
+  const [saveCon, setSaveCon] = useState("");
+  const [saveInt, setSaveInt] = useState("");
+  const [saveWis, setSaveWis] = useState("");
+  const [saveCha, setSaveCha] = useState("");
+  const [dialogVisibleSave, setDialogVisibleSave] = useState(false);
+  const [selectedItemsSave, setSelectedItemsSave] = useState(null);
 
   const [skill, setSkill] = useState("");
   const [skills, setSkills] = useState("");
@@ -135,7 +145,6 @@ const MonsterGen = () => {
 
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
-  const [selectedItems, setSelectedItems] = useState(null);
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -281,12 +290,6 @@ const MonsterGen = () => {
   const onSpeedChange = (e) => {
     objectChange(e.value, setSpeed);
   };
-  const onSpeedTypeChange = (e) => {
-    objectChange(e.value, setSpeedType, 6, 1, 1, speedTypeOptions);
-  };
-  const onSpeedExtraChange = (e) => {
-    objectChange(e.value, setSpeedExtra);
-  };
   const onStrChange = (e) => {
     objectChange(e.value, setStr);
   };
@@ -307,9 +310,6 @@ const MonsterGen = () => {
   };
   //TODO
   const onSaveChange = (e) => {};
-  //{
-  //   objectChange(e.value, setSave, 17, 1, 1, saveOptions)
-  // };
   //   const onGearChange = (e) => {}
   //   objectChange(e.value, setGear, 17, 1, 1, gearOptions)
   // };
@@ -360,9 +360,6 @@ const MonsterGen = () => {
   };
   const onRandomSpeed = (e) => {
     randomButton(setSpeed, 120, 0);
-  };
-  const onRandomSpeedExtra = (e) => {
-    randomButton(setSpeedExtra, 120, 0);
   };
   const onRandomStr = (e) => {
     randomButton(setStr, 30, 0);
@@ -428,13 +425,6 @@ const MonsterGen = () => {
     onArmorTypeChange,
     "Choose Armor Type"
   );
-  const saveDrop = customDrop(
-    "Saves",
-    save,
-    saveOptions,
-    onSaveChange,
-    "Choose Save"
-  );
   const skillDrop = customDrop(
     "Skills",
     skill,
@@ -486,25 +476,22 @@ const MonsterGen = () => {
   );
 
   //Additonal SPEED
-  const openDialog = () => {
-    setDialogVisible(true);
+  const openDialogSpeed = () => {
+    setDialogVisibleSpeed(true);
   };
+  const closeDialogSpeed = () => {
+    setDialogVisibleSpeed(false);
 
-  const closeDialog = () => {
-    setDialogVisible(false);
-
-    for (let i = 0; i < selectedItems.length; i++) {
-      if (speedExtraList.includes(selectedItems[i])) {
+    for (let i = 0; i < selectedItemsSpeed.length; i++) {
+      if (speedExtraList.includes(selectedItemsSpeed[i])) {
       } else {
-        setSpeedExtraList((speedArray) => [...speedArray, selectedItems[i]]);
+        setSpeedExtraList((speedArray) => [...speedArray, selectedItemsSpeed[i]]);
       }
     }
   };
-
-  const dialogFooterTemplate = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
+  const dialogFooterSpeed = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSpeed} />;
   };
-
   const onBurrowChange = (e) => {
     objectChange(e.value, setBurrow);
   };
@@ -521,18 +508,18 @@ const MonsterGen = () => {
     objectChange(e.value, setSwim);
   };
   useEffect(() => {
-    setSelectedItems(speedExtraList);
+    setSelectedItemsSpeed(speedExtraList);
   }, [speedExtraList]);
 
-  const onRemoveCustom = (name) => {
-    setSpeedExtraList(speedExtraList.filter((value) => value.name !== name));
+  const onRemoveCustom = (list, name) => {
+    setSpeedExtraList(list.filter((value) => value.name !== name));
   };
 
-  const onRemoveBurrow = (e) => onRemoveCustom("Burrow");
-  const onRemoveClimb = (e) => onRemoveCustom("Climb");
-  const onRemoveHover = (e) => onRemoveCustom("Hover");
-  const onRemoveFly = (e) => onRemoveCustom("Fly");
-  const onRemoveSwim = (e) => onRemoveCustom("Swim");
+  const onRemoveBurrow = (e) => onRemoveCustom(speedExtraList,"Burrow");
+  const onRemoveClimb = (e) => onRemoveCustom(speedExtraList,"Climb");
+  const onRemoveHover = (e) => onRemoveCustom(speedExtraList,"Hover");
+  const onRemoveFly = (e) => onRemoveCustom(speedExtraList,"Fly");
+  const onRemoveSwim = (e) => onRemoveCustom(speedExtraList,"Swim");
 
   const customSpeedInput = (value, change, placeholder, onRandom, onRemove) => (
     <div className={style.monstergenSpeedsWrapper}>
@@ -644,16 +631,16 @@ const MonsterGen = () => {
   const moveDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Addtional Movement</h2>
-      <Button onClick={openDialog} className={style.monstergenBtnName}>
+      <Button onClick={openDialogSpeed} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
         header="Additional Movement"
-        visible={dialogVisible}
+        visible={dialogVisibleSpeed}
         maximizable
         modal
-        onHide={closeDialog}
-        footer={dialogFooterTemplate}
+        onHide={closeDialogSpeed}
+        footer={dialogFooterSpeed}
       >
         <DataTable
           value={speedTypeOptions}
@@ -662,8 +649,8 @@ const MonsterGen = () => {
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItems}
-          onSelectionChange={(e) => setSelectedItems(e.value)}
+          selection={selectedItemsSpeed}
+          onSelectionChange={(e) => setSelectedItemsSpeed(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -694,6 +681,96 @@ const MonsterGen = () => {
     </div>
   );
 
+  //TODO Saves
+  const openDialogSave = () => {
+    setDialogVisibleSave(true);
+  };
+  const closeDialogSave = () => {
+    setDialogVisibleSave(false);
+    for (let i = 0; i < selectedItemsSave.length; i++) {
+      if (speedExtraList.includes(selectedItemsSave[i])) {
+      } else {
+        setSpeedExtraList((speedArray) => [...speedArray, selectedItemsSave[i]]);
+      }
+    }
+  };
+  const dialogFooterSave = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSave} />;
+  };
+  const onSaveStrChange = (e) => {
+    objectChange(e.value, setSaveStr);
+  };
+  const onSaveDexChange = (e) => {
+    objectChange(e.value, setSaveDex);
+  };
+  const onSaveConChange = (e) => {
+    objectChange(e.value, setSaveCon);
+  };
+  const onSaveIntChange = (e) => {
+    objectChange(e.value, setSaveInt);
+  };
+  const onSaveWisChange = (e) => {
+    objectChange(e.value, setSaveWis);
+  };
+  const onSaveChaChange = (e) => {
+    objectChange(e.value, setSaveCha);
+  };
+  useEffect(() => {
+    setSelectedItemsSave(saveList);
+  }, [saveList]);
+
+  const saveDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
   //InputTexts
   const customInputText = (title, value, change, placeholder, click) => (
     <div>
@@ -951,7 +1028,7 @@ const MonsterGen = () => {
           </div>
           <h1 className={style.monstergenSubHeader}>Saves/Skills/Dmgs</h1>
           <div className={style.monstergenSubsection}>
-            {saveDrop}
+            {saveDialog}
             {skillDrop}
             {vulnDrop}
             {immuneDrop}
