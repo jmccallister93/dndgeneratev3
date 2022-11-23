@@ -762,6 +762,12 @@ const MonsterGen = () => {
   const dialogFooterSense = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSense} />;
   };
+  const dialogFooterLang = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogLang} />;
+  };
+  const dialogFooterSpecial = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSpecial} />;
+  };
   const dialogFooterAction = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogAction} />;
   };
@@ -1222,27 +1228,27 @@ const MonsterGen = () => {
   //Skills
   const skillDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Skills</h2>
+      <Button onClick={openDialogSkill} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Skills"
+        visible={dialogVisibleSkill}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogSkill}
+        footer={dialogFooterSkill}
       >
         <DataTable
-          value={saveOptions}
+          value={skillOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsSkill}
+          onSelectionChange={(e) => setSelectedItemsSkill(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1275,27 +1281,27 @@ const MonsterGen = () => {
   //Vuln
   const vulnDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Vulnerabilities</h2>
+      <Button onClick={openDialogVuln} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Vulnerabilities"
+        visible={dialogVisibleVuln}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogVuln}
+        footer={dialogFooterVuln}
       >
         <DataTable
-          value={saveOptions}
+          value={vulnOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsVuln}
+          onSelectionChange={(e) => setSelectedItemsVuln(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1328,27 +1334,27 @@ const MonsterGen = () => {
   //Immune
   const immuneDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Immunities</h2>
+      <Button onClick={openDialogImmune} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Immunities"
+        visible={dialogVisibleImmune}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogImmune}
+        footer={dialogFooterImmune}
       >
         <DataTable
-          value={saveOptions}
+          value={immuneOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsImmune}
+          onSelectionChange={(e) => setSelectedItemsImmune(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1381,27 +1387,27 @@ const MonsterGen = () => {
   //Resist
   const resistDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Resistances</h2>
+      <Button onClick={openDialogResist} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Resistances"
+        visible={dialogVisibleResist}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogResist}
+        footer={dialogFooterResist}
       >
         <DataTable
-          value={saveOptions}
+          value={resistOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsResist}
+          onSelectionChange={(e) => setSelectedItemsResist(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1434,27 +1440,27 @@ const MonsterGen = () => {
   //Condition
   const conditionDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Conditions</h2>
+      <Button onClick={openDialogCondition} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Conditions"
+        visible={dialogVisibleCondition}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogCondition}
+        footer={dialogFooterCondition}
       >
         <DataTable
-          value={saveOptions}
+          value={conditionOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsCondition}
+          onSelectionChange={(e) => setSelectedItemsCondition(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1487,27 +1493,27 @@ const MonsterGen = () => {
   //Sense
   const senseDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Senses</h2>
+      <Button onClick={openDialogSense} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Senses"
+        visible={dialogVisibleSense}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogSense}
+        footer={dialogFooterSense}
       >
         <DataTable
-          value={saveOptions}
+          value={senseOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsSense}
+          onSelectionChange={(e) => setSelectedItemsSense(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1540,27 +1546,27 @@ const MonsterGen = () => {
   //Languages
   const langDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Languages</h2>
+      <Button onClick={openDialogLang} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Languages"
+        visible={dialogVisibleLang}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogLang}
+        footer={dialogFooterLang}
       >
         <DataTable
-          value={saveOptions}
+          value={langOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsLang}
+          onSelectionChange={(e) => setSelectedItemsLang(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1593,27 +1599,27 @@ const MonsterGen = () => {
   //Special
   const specialDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Special Abilities</h2>
+      <Button onClick={openDialogSpecial} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Special Abilities"
+        visible={dialogVisibleSpecial}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogSpecial}
+        footer={dialogFooterSpecial}
       >
         <DataTable
-          value={saveOptions}
+          value={specialOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsSpecial}
+          onSelectionChange={(e) => setSelectedItemsSpecial(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1646,27 +1652,27 @@ const MonsterGen = () => {
   //Action
   const actionDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Actions</h2>
+      <Button onClick={openDialogAction} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Actions"
+        visible={dialogVisibleAction}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogAction}
+        footer={dialogFooterAction}
       >
         <DataTable
-          value={saveOptions}
+          value={actionOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsAction}
+          onSelectionChange={(e) => setSelectedItemsAction(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1699,27 +1705,27 @@ const MonsterGen = () => {
   //Reaction
   const reactionDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Reactions</h2>
+      <Button onClick={openDialogReaction} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Reactions"
+        visible={dialogVisibleReaction}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogReaction}
+        footer={dialogFooterReaction}
       >
         <DataTable
-          value={saveOptions}
+          value={reactionOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsReaction}
+          onSelectionChange={(e) => setSelectedItemsReaction(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1752,27 +1758,27 @@ const MonsterGen = () => {
   //Legendary
   const legendDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Legendary Actions</h2>
+      <Button onClick={openDialogLegend} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Legendary Actions"
+        visible={dialogVisibleLegend}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogLegend}
+        footer={dialogFooterLegend}
       >
         <DataTable
-          value={saveOptions}
+          value={legendOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsLegend}
+          onSelectionChange={(e) => setSelectedItemsLegend(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1805,27 +1811,27 @@ const MonsterGen = () => {
   //Lair
   const lairDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Lair Actions</h2>
+      <Button onClick={openDialogLair} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Lair Actions"
+        visible={dialogVisibleLair}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogLair}
+        footer={dialogFooterLair}
       >
         <DataTable
-          value={saveOptions}
+          value={lairOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsLair}
+          onSelectionChange={(e) => setSelectedItemsLair(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -1858,27 +1864,27 @@ const MonsterGen = () => {
   //Gear
   const gearDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Saving Throws</h2>
-      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+      <h2 className={style.monstergenTitles}>Gear</h2>
+      <Button onClick={openDialogGear} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Saving Throws"
-        visible={dialogVisibleSave}
+        header="Gear"
+        visible={dialogVisibleGear}
         maximizable
         modal
-        onHide={closeDialogSave}
-        footer={dialogFooterSave}
+        onHide={closeDialogGear}
+        footer={dialogFooterGear}
       >
         <DataTable
-          value={saveOptions}
+          value={gearOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
-          selection={selectedItemsSave}
-          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          selection={selectedItemsGear}
+          onSelectionChange={(e) => setSelectedItemsGear(e.value)}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -2182,75 +2188,21 @@ const MonsterGen = () => {
             {saveDialog}
             <div className={style.speedContainer}>{saveDisplay}</div>
             {skillDialog}
-            {vulnDrop}
-            {immuneDrop}
-            {resistDrop}
-            {conditionDrop}
-            {senseDrop}
-            {langDrop}
+            {vulnDialog}
+            {immuneDialog}
+            {resistDialog}
+            {conditionDialog}
+            {senseDialog}
+            {langDialog}
           </div>
           <h1 className={style.monstergenSubHeader}>Actions / Abilities</h1>
           <div className={style.monstergenSubsection}>
-            <div>
-              <h1>Specials</h1>
-              <Dropdown
-                optionLabel="name"
-                value={special}
-                options={specialOptions}
-                onChange={onSpecialChange}
-                placeholder="Choose Specials"
-              />
-            </div>
-            <div>
-              <h1>Actions</h1>
-              <Dropdown
-                optionLabel="name"
-                value={action}
-                options={actionOptions}
-                onChange={onActionChange}
-                placeholder="Choose Actions"
-              />
-            </div>
-            <div>
-              <h1>Reactions</h1>
-              <Dropdown
-                optionLabel="name"
-                value={reaction}
-                options={reactionOptions}
-                onChange={onReactionChange}
-                placeholder="Choose Reactions"
-              />
-            </div>
-            <div>
-              <h1>Legendary Actions</h1>
-              <Dropdown
-                optionLabel="name"
-                value={legend}
-                options={legendOptions}
-                onChange={onLegendChange}
-                placeholder="Choose Legendary Actions"
-              />
-            </div>
-            <div>
-              <h1>Lair</h1>
-              <Dropdown
-                optionLabel="name"
-                value={lair}
-                options={lairOptions}
-                onChange={onLairChange}
-                placeholder="Choose Lair Actions"
-              />
-            </div>
-            <div>
-              <h1>Gear</h1>
-              <Dropdown
-                optionLabel="name"
-                value={gear}
-                options={gearOptions}
-                //   onChange={onGearChange}
-                placeholder="Choose Sear"
-              />
-            </div>
+            {specialDialog}
+            {actionDialog}
+            {reactionDialog}
+            {legendDialog}
+            {lairDialog}
+            {gearDialog}
           </div>
         </div>
 
