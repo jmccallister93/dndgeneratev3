@@ -779,9 +779,49 @@ const MonsterGen = () => {
   const onSwimChange = (e) => {
     objectChange(e.value, setSwim);
   };
+  //UseEffect Real time update
   useEffect(() => {
     setSelectedItemsSpeed(speedExtraList);
   }, [speedExtraList]);
+  useEffect(() => {
+    setSelectedItemsSkill(skillList);
+  }, [skillList]);
+  useEffect(() => {
+    setSelectedItemsVuln(vulnList);
+  }, [vulnList]);
+  useEffect(() => {
+    setSelectedItemsImmune(immuneList);
+  }, [immuneList]);
+  useEffect(() => {
+    setSelectedItemsResist(resistList);
+  }, [resistList]);
+  useEffect(() => {
+    setSelectedItemsCondition(conditionList);
+  }, [conditionList]);
+  useEffect(() => {
+    setSelectedItemsSense(senseList);
+  }, [senseList]);
+  useEffect(() => {
+    setSelectedItemsLang(langList);
+  }, [langList]);
+  useEffect(() => {
+    setSelectedItemsSpecial(specialList);
+  }, [specialList]);
+  useEffect(() => {
+    setSelectedItemsAction(actionList);
+  }, [actionList]);
+  useEffect(() => {
+    setSelectedItemsReaction(reactionList);
+  }, [reactionList]);
+  useEffect(() => {
+    setSelectedItemsLegend(legendList);
+  }, [legendList]);
+  useEffect(() => {
+    setSelectedItemsLair(lairList);
+  }, [lairList]);
+  useEffect(() => {
+    setSelectedItemsGear(gearList);
+  }, [gearList]);
 
   const onRemoveCustom = (setlist, list, name) => {
     setlist(list.filter((value) => value.name !== name));
