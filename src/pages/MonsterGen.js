@@ -688,9 +688,9 @@ const MonsterGen = () => {
   const closeDialogSave = () => {
     setDialogVisibleSave(false);
     for (let i = 0; i < selectedItemsSave.length; i++) {
-      if (speedExtraList.includes(selectedItemsSave[i])) {
+      if (saveList.includes(selectedItemsSave[i])) {
       } else {
-        setSpeedExtraList((speedArray) => [...speedArray, selectedItemsSave[i]]);
+        setSaveList((saveArray) => [...saveArray, selectedItemsSave[i]]);
       }
     }
   };
@@ -820,7 +820,28 @@ const MonsterGen = () => {
     onRandomSaveCha,
     onRemoveSaveCha
   );
-
+  const saveDisplay = saveList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+          {i.name === "Strength"
+            ? saveStrInput
+            : i.name === "Dexterity"
+            ? saveDexInput
+            : i.name === "Constitution"
+            ? saveConInput
+            : i.name === "Intelligence"
+            ? saveIntInput
+            : i.name === "Wisdom"
+            ? saveWisInput
+            : i.name === "Charisma"
+            ? saveChaInput
+            : null}
+        </h3>
+      </div>
+    );
+  });
   const saveDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Saving Throws</h2>
@@ -1131,6 +1152,9 @@ const MonsterGen = () => {
           <h1 className={style.monstergenSubHeader}>Saves/Skills/Dmgs</h1>
           <div className={style.monstergenSubsection}>
             {saveDialog}
+            <div className={style.speedContainer}>
+            {saveDisplay}
+            </div>
             {skillDrop}
             {vulnDrop}
             {immuneDrop}
