@@ -1,34 +1,34 @@
-const ImmuneRemoveMPiercing = customDmgRemove(onRemoveImmuneMPiercing);const onRemoveImmuneAcid = (e) => onRemoveCustom(setImmuneList, ImmuneList, "Acid");
-const onRemoveImmuneCold = (e) => onRemoveCustom(setImmuneList, ImmuneList, "Cold");
-const onRemoveImmuneFire = (e) => onRemoveCustom(setImmuneList, ImmuneList, "Fire");
-const onRemoveImmuneForce = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Force");
-const onRemoveImmuneLightning = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Lightning");
-const onRemoveImmuneNecrotic = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Necrotic");
-const onRemoveImmunePoison = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Poison");
-const onRemoveImmunePsychic = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Psychic");
-const onRemoveImmuneRadiant = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Radiant");
-const onRemoveImmuneThunder = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Thunder");
-const onRemoveImmuneBludgeoning = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Bludgeoning");
-const onRemoveImmuneSlashing = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Slashing");
-const onRemoveImmunePiercing = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Piercing");
-const onRemoveImmuneMagic = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Magic");
-const onRemoveImmuneMBludgeoning = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Magical Bludgeoning");
-const onRemoveImmuneMSlashing = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Magical Slashing");
-const onRemoveImmuneMPiercing = (e) =>
-  onRemoveCustom(setImmuneList, ImmuneList, "Magical Piercing");
+const ResistRemoveMPiercing = customDmgRemove(onRemoveResistMPiercing);const onRemoveResistAcid = (e) => onRemoveCustom(setResistList, ResistList, "Acid");
+const onRemoveResistCold = (e) => onRemoveCustom(setResistList, ResistList, "Cold");
+const onRemoveResistFire = (e) => onRemoveCustom(setResistList, ResistList, "Fire");
+const onRemoveResistForce = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Force");
+const onRemoveResistLightning = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Lightning");
+const onRemoveResistNecrotic = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Necrotic");
+const onRemoveResistPoison = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Poison");
+const onRemoveResistPsychic = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Psychic");
+const onRemoveResistRadiant = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Radiant");
+const onRemoveResistThunder = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Thunder");
+const onRemoveResistBludgeoning = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Bludgeoning");
+const onRemoveResistSlashing = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Slashing");
+const onRemoveResistPiercing = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Piercing");
+const onRemoveResistMagic = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Magic");
+const onRemoveResistMBludgeoning = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Magical Bludgeoning");
+const onRemoveResistMSlashing = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Magical Slashing");
+const onRemoveResistMPiercing = (e) =>
+  onRemoveCustom(setResistList, ResistList, "Magical Piercing");
 
 const customDmgRemove = (onRemove) => (
   <div className={style.monstergenSpeedsWrapper}>
@@ -42,91 +42,91 @@ const customDmgRemove = (onRemove) => (
     </Button>
   </div>
 );
-const ImmuneRemoveAcid = customDmgRemove(onRemoveImmuneAcid);
-const ImmuneRemoveCold = customDmgRemove(onRemoveImmuneCold);
-const ImmuneRemoveFire = customDmgRemove(onRemoveImmuneFire);
-const ImmuneRemoveForce = customDmgRemove(onRemoveImmuneForce);
-const ImmuneRemoveLightning = customDmgRemove(onRemoveImmuneLightning);
-const ImmuneRemoveNecrotic = customDmgRemove(onRemoveImmuneNecrotic);
-const ImmuneRemovePoison = customDmgRemove(onRemoveImmunePoison);
-const ImmuneRemovePsychic = customDmgRemove(onRemoveImmunePsychic);
-const ImmuneRemoveRadiant = customDmgRemove(onRemoveImmuneRadiant);
-const ImmuneRemoveThunder = customDmgRemove(onRemoveImmuneThunder);
-const ImmuneRemoveBludgeoning = customDmgRemove(onRemoveImmuneBludgeoning);
-const ImmuneRemoveSlashing = customDmgRemove(onRemoveImmuneSlashing);
-const ImmuneRemovePiercing = customDmgRemove(onRemoveImmunePiercing);
-const ImmuneRemoveMagic = customDmgRemove(onRemoveImmuneMagic);
-const ImmuneRemoveMBludgeoning = customDmgRemove(onRemoveImmuneMBludgeoning);
-const ImmuneRemoveMSlashing = customDmgRemove(onRemoveImmuneMSlashing);
-const ImmuneRemoveMPiercing = customDmgRemove(onRemoveImmuneMPiercing);
+const ResistRemoveAcid = customDmgRemove(onRemoveResistAcid);
+const ResistRemoveCold = customDmgRemove(onRemoveResistCold);
+const ResistRemoveFire = customDmgRemove(onRemoveResistFire);
+const ResistRemoveForce = customDmgRemove(onRemoveResistForce);
+const ResistRemoveLightning = customDmgRemove(onRemoveResistLightning);
+const ResistRemoveNecrotic = customDmgRemove(onRemoveResistNecrotic);
+const ResistRemovePoison = customDmgRemove(onRemoveResistPoison);
+const ResistRemovePsychic = customDmgRemove(onRemoveResistPsychic);
+const ResistRemoveRadiant = customDmgRemove(onRemoveResistRadiant);
+const ResistRemoveThunder = customDmgRemove(onRemoveResistThunder);
+const ResistRemoveBludgeoning = customDmgRemove(onRemoveResistBludgeoning);
+const ResistRemoveSlashing = customDmgRemove(onRemoveResistSlashing);
+const ResistRemovePiercing = customDmgRemove(onRemoveResistPiercing);
+const ResistRemoveMagic = customDmgRemove(onRemoveResistMagic);
+const ResistRemoveMBludgeoning = customDmgRemove(onRemoveResistMBludgeoning);
+const ResistRemoveMSlashing = customDmgRemove(onRemoveResistMSlashing);
+const ResistRemoveMPiercing = customDmgRemove(onRemoveResistMPiercing);
 
-const ImmuneDisplay = ImmuneList.map((i) => {
+const ResistDisplay = ResistList.map((i) => {
   return (
     <div>
       <h3>
         {i.name}
         {i.name === "Acid"
-          ? ImmuneRemoveAcid
+          ? ResistRemoveAcid
           : i.name === "Cold"
-          ? ImmuneRemoveCold
+          ? ResistRemoveCold
           : i.name === "Fire"
-          ? ImmuneRemoveFire
+          ? ResistRemoveFire
           : i.name === "Force"
-          ? ImmuneRemoveForce
+          ? ResistRemoveForce
           : i.name === "Lightning"
-          ? ImmuneRemoveLightning
+          ? ResistRemoveLightning
           : i.name === "Necrotic"
-          ? ImmuneRemoveNecrotic
+          ? ResistRemoveNecrotic
           : i.name === "Poison"
-          ? ImmuneRemovePoison
+          ? ResistRemovePoison
           : i.name === "Psychic"
-          ? ImmuneRemovePsychic
+          ? ResistRemovePsychic
           : i.name === "Radiant"
-          ? ImmuneRemoveRadiant
+          ? ResistRemoveRadiant
           : i.name === "Thunder"
-          ? ImmuneRemoveThunder
+          ? ResistRemoveThunder
           : i.name === "Bludgeoning"
-          ? ImmuneRemoveBludgeoning
+          ? ResistRemoveBludgeoning
           : i.name === "Slashing"
-          ? ImmuneRemoveSlashing
+          ? ResistRemoveSlashing
           : i.name === "Piercing"
-          ? ImmuneRemovePiercing
+          ? ResistRemovePiercing
           : i.name === "Magic"
-          ? ImmuneRemoveMagic
+          ? ResistRemoveMagic
           : i.name === "Magical Bludgeoning"
-          ? ImmuneRemoveMBludgeoning
+          ? ResistRemoveMBludgeoning
           : i.name === "Magical Slashing"
-          ? ImmuneRemoveMSlashing
+          ? ResistRemoveMSlashing
           : i.name === "Magical Piercing"
-          ? ImmuneRemoveMPiercing
+          ? ResistRemoveMPiercing
           : null}
       </h3>
     </div>
   );
 });
-const ImmuneDialog = (
+const ResistDialog = (
   <div className="card">
-    <h2 className={style.monstergenTitles}>Immuneerabilities</h2>
-    <Button onClick={openDialogImmune} className={style.monstergenBtnName}>
+    <h2 className={style.monstergenTitles}>Resistances</h2>
+    <Button onClick={openDialogResist} className={style.monstergenBtnName}>
       <i className="pi pi-plus"> Add</i>
     </Button>
     <Dialog
-      header="Immuneerabilities"
-      visible={dialogVisibleImmune}
+      header="Resistances"
+      visible={dialogVisibleResist}
       maximizable
       modal
-      onHide={closeDialogImmune}
-      footer={dialogFooterImmune}
+      onHide={closeDialogResist}
+      footer={dialogFooterResist}
     >
       <DataTable
-        value={ImmuneOptions}
+        value={ResistOptions}
         scrollable
         scrollHeight="60vh"
         //   className="p-datatable-customers"
         rows={20}
         dataKey="name"
-        selection={selectedItemsImmune}
-        onSelectionChange={(e) => setSelectedItemsImmune(e.value)}
+        selection={selectedItemsResist}
+        onSelectionChange={(e) => setSelectedItemsResist(e.value)}
         //   selectionPageOnly
         filters={filters}
         filterDisplay="row"
