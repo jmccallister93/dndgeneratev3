@@ -512,8 +512,8 @@ const MonsterGen = () => {
     "Choose Languages"
   );
 
-  //Additonal SPEED
-
+  //List setups
+//Open Dialogs
   const openDialogSpeed = () => {
     setDialogVisibleSpeed(true);
   };
@@ -556,6 +556,7 @@ const MonsterGen = () => {
   const openDialogGear = () => {
     setDialogVisibleGear(true)
   }
+  //Close dialogs
   const closeDialogSpeed = () => {
     setDialogVisibleSpeed(false);
     for (let i = 0; i < selectedItemsSpeed.length; i++) {
@@ -724,9 +725,45 @@ const MonsterGen = () => {
       }
     }
   };
+  //Dialog Footer
   const dialogFooterSpeed = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSpeed} />;
   };
+  const dialogFooterSkill = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSkill} />;
+  };
+  const dialogFooterVuln = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogVuln} />;
+  };
+  const dialogFooterImmune = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogImmune} />;
+  };
+  const dialogFooterResist = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogResist} />;
+  };
+  const dialogFooterCondition = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogCondition} />;
+  };
+  const dialogFooterSense = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSense} />;
+  };
+  const dialogFooterAction = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogAction} />;
+  };
+  const dialogFooterReaction = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogReaction} />;
+  };
+  const dialogFooterLegend = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogLegend} />;
+  };
+  const dialogFooterLair = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogLair} />;
+  };
+  const dialogFooterGear = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogGear} />;
+  };
+
+  //On Change
   const onBurrowChange = (e) => {
     objectChange(e.value, setBurrow);
   };
