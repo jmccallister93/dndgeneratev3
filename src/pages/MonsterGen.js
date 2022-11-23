@@ -190,21 +190,21 @@ const MonsterGen = () => {
   const [conditionList, setConditionList] = useState([]);
   const [dialogVisibleCondition, setDialogVisibleCondition] = useState(false);
   const [selectedItemsCondition, setSelectedItemsCondition] = useState(null);
-  const [conBlinded, setConBlinded] = useState("");
-  const [conCharmed, setConCharmed] = useState("");
-  const [conDeafened, setConDeafened] = useState("");
-  const [conExhaustion, setConExhaustion] = useState("");
-  const [conFrightened, setConFrightened] = useState("");
-  const [conGrappled, setConGrappled] = useState("");
-  const [conIncapacitated, setConIncapacitated] = useState("");
-  const [conInvisible, setConInvisible] = useState("");
-  const [conParalyzed, setConParalyzed] = useState("");
-  const [conPetrified, setConPetrified] = useState("");
-  const [conPoisoned, setConPoisoned] = useState("");
-  const [conProne, setConProne] = useState("");
-  const [conRestrained, setConRestrained] = useState("");
-  const [conStunned, setConStunned] = useState("");
-  const [conUnconscious, setConUnconscious] = useState("");
+//   const [conBlinded, setConBlinded] = useState("");
+//   const [conCharmed, setConCharmed] = useState("");
+//   const [conDeafened, setConDeafened] = useState("");
+//   const [conExhaustion, setConExhaustion] = useState("");
+//   const [conFrightened, setConFrightened] = useState("");
+//   const [conGrappled, setConGrappled] = useState("");
+//   const [conIncapacitated, setConIncapacitated] = useState("");
+//   const [conInvisible, setConInvisible] = useState("");
+//   const [conParalyzed, setConParalyzed] = useState("");
+//   const [conPetrified, setConPetrified] = useState("");
+//   const [conPoisoned, setConPoisoned] = useState("");
+//   const [conProne, setConProne] = useState("");
+//   const [conRestrained, setConRestrained] = useState("");
+//   const [conStunned, setConStunned] = useState("");
+//   const [conUnconscious, setConUnconscious] = useState("");
 
   const [sense, setSense] = useState("");
   const [senses, setSenses] = useState("");
@@ -212,6 +212,10 @@ const MonsterGen = () => {
   const [senseList, setSenseList] = useState([]);
   const [dialogVisibleSense, setDialogVisibleSense] = useState(false);
   const [selectedItemsSense, setSelectedItemsSense] = useState(null);
+  const [senseBlindsight, setSenseBlindsight] = useState("")
+  const [senseDarkvision, setSenseDarkvision] = useState("")
+  const [senseTremorsense, setSenseTremorsense] = useState("")
+  const [senseTruesight, setSenseTruesight] = useState("")
 
   const [lang, setLang] = useState("");
   const [langs, setLangs] = useState("");
@@ -2230,6 +2234,122 @@ const MonsterGen = () => {
     </div>
   );
   //Sense
+  const onSenseBlindsightChange = (e) => {
+    objectChange(e.value, setSenseBlindsight);
+  };
+  const onSenseDarkvisionChange = (e) => {
+    objectChange(e.value, setSenseDarkvision);
+  };
+  const onSenseTremorsenseChange = (e) => {
+    objectChange(e.value, setSenseTremorsense);
+  };
+  const onSenseTruesightChange = (e) => {
+    objectChange(e.value, setSenseTruesight);
+  };
+
+  const customSenseInput = (value, change, placeholder, onRandom, onRemove) => (
+    <div className={style.monstergenSpeedsWrapper}>
+      <InputNumber
+        value={value}
+        onChange={change}
+        placeholder={placeholder}
+        mode="decimal"
+        showButtons
+        buttonLayout="stacked"
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <div style={{ display: "flex" }}>
+        <Button
+          onClick={onRandom}
+          className={style.monstergenBtnName}
+          style={{ height: "2rem" }}
+        >
+          Random
+        </Button>
+        <Button
+          tooltip="Remove?"
+          onClick={onRemove}
+          className={style.monstergenBtnRemove}
+          style={{ height: "2rem" }}
+        >
+          <i className="pi pi-minus"></i>
+        </Button>
+      </div>
+    </div>
+  );
+  const onRemoveSenseBlindsight = (e) =>
+    onRemoveCustom(setSenseList, senseList, "Blindsight");
+  const onRemoveSenseDarkvision = (e) =>
+    onRemoveCustom(setSenseList, senseList, "Darkvision");
+  const onRemoveSenseTremorsense = (e) =>
+    onRemoveCustom(setSenseList, senseList, "Tremorsense");
+  const onRemoveSenseTruesight = (e) =>
+    onRemoveCustom(setSenseList, senseList, "Truesight");
+
+  const onRandomSenseBlindsight = (e) => {
+    randomButton(setSenseBlindsight, 120, 0);
+  };
+  const onRandomSenseDarkvision = (e) => {
+    randomButton(setSenseDarkvision, 120, 0);
+  };
+  const onRandomSenseTremorsense = (e) => {
+    randomButton(setSenseTremorsense, 120, 0);
+  };
+  const onRandomSenseTruesight = (e) => {
+    randomButton(setSenseTruesight, 120, 0);
+  };
+
+  const senseBlindsightInput = customSenseInput(
+    senseBlindsight,
+    onSenseBlindsightChange,
+    "Range",
+    onRandomSenseBlindsight,
+    onRemoveSenseBlindsight
+  );
+  const senseDarkvisionInput = customSenseInput(
+    senseDarkvision,
+    onSenseDarkvisionChange,
+    "Range",
+    onRandomSenseDarkvision,
+    onRemoveSenseDarkvision
+  );
+  const senseTremorsenseInput = customSenseInput(
+    senseTremorsense,
+    onSenseTremorsenseChange,
+    "Range",
+    onRandomSenseTremorsense,
+    onRemoveSenseTremorsense
+  );
+  const senseTruesightInput = customSenseInput(
+    senseTruesight,
+    onSenseTruesightChange,
+    "Range",
+    onRandomSenseTruesight,
+    onRemoveSenseTruesight
+  );
+  const senseDisplay = senseList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+          {i.name === "Blindsight"
+            ? senseBlindsightInput
+            : i.name === "Darkvision"
+            ? senseDarkvisionInput
+            : i.name === "Tremorsense"
+            ? senseTremorsenseInput
+            : i.name === "Truesight"
+            ? senseTruesightInput
+            : null}
+        </h3>
+      </div>
+    );
+  });
   const senseDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Senses</h2>
@@ -2904,6 +3024,12 @@ const MonsterGen = () => {
     setVulnList([])
     setImmuneList([])
     setResistList([])
+    setConditionList([])
+    setSenseList([])
+    setSenseDarkvision("")
+    setSenseBlindsight("")
+    setSenseTremorsense("")
+    setSenseTruesight("")
   };
 
   return (
@@ -2966,6 +3092,7 @@ const MonsterGen = () => {
             {conditionDialog}
             <div className={style.speedContainer}>{conditionDisplay}</div>
             {senseDialog}
+            <div className={style.speedContainer}>{senseDisplay}</div>
             {langDialog}
           </div>
           <h1 className={style.monstergenSubHeader}>Actions / Abilities</h1>
