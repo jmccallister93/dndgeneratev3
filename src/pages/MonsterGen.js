@@ -110,7 +110,7 @@ const MonsterGen = () => {
   const [skillPerception, setSkillPerception] = useState("")
   const [skillPersuasion, setSkillPersuasion] = useState("")
   const [skillReligion, setSkillReligion] = useState("")
-  const [skillSlieght, setSkillSlieght] = useState("")
+  const [skillSleight, setSkillSleight] = useState("")
   const [skillStealth, setSkillStealth] = useState("")
   const [skillSurvival, setSkillSurvival] = useState("")
 
@@ -478,55 +478,6 @@ const MonsterGen = () => {
     armorTypeOptions,
     onArmorTypeChange,
     "Choose Armor Type"
-  );
-  const skillDrop = customDrop(
-    "Skills",
-    skill,
-    skillOptions,
-    onSkillChange,
-    "Choose Skill"
-  );
-  const vulnDrop = customDrop(
-    "Vulnerabities",
-    vuln,
-    vulnOptions,
-    onVulnChange,
-    "Choose Vulnerabities"
-  );
-  const immuneDrop = customDrop(
-    "Immunities",
-    immune,
-    immuneOptions,
-    onImmuneChange,
-    "Choose Immunities"
-  );
-  const resistDrop = customDrop(
-    "Resistances",
-    resist,
-    resistOptions,
-    onResistChange,
-    "Choose Resist"
-  );
-  const conditionDrop = customDrop(
-    "Condition Immunities",
-    condition,
-    conditionOptions,
-    onConditionChange,
-    "Choose Condition"
-  );
-  const senseDrop = customDrop(
-    "Senses",
-    sense,
-    senseOptions,
-    onSenseChange,
-    "Choose Senses"
-  );
-  const langDrop = customDrop(
-    "Languages",
-    save,
-    langOptions,
-    onLangChange,
-    "Choose Languages"
   );
 
   //List setups
@@ -1243,6 +1194,57 @@ const MonsterGen = () => {
     </div>
   );
   //Skills
+  const onSkillAcrobaticsChange = (e) => {
+    objectChange(e.value, setSkillAcrobatics);
+  };
+  const onSkillAnimalChange = (e) => {
+    objectChange(e.value, setSkillAnimal);
+  };
+  const onSkillArcanaChange = (e) => {
+    objectChange(e.value, setSkillArcana);
+  };
+  const onSkillAthleticsChange = (e) => {
+    objectChange(e.value, setSkillAthletics);
+  };
+  const onSkillDeceptionChange = (e) => {
+    objectChange(e.value, setSkillDeception);
+  };
+  const onSkillHistoryChange = (e) => {
+    objectChange(e.value, setSkillHistory);
+  };
+  const onSkillInsightChange = (e) => {
+    objectChange(e.value, setSkillInsight);
+  };
+  const onSkillIntimidationChange = (e) => {
+    objectChange(e.value, setSkillIntimidation);
+  };
+  const onSkillInvestigationChange = (e) => {
+    objectChange(e.value, setSkillInvestigation);
+  };
+  const onSkillMedicineChange = (e) => {
+    objectChange(e.value, setSkillMedicine);
+  };
+  const onSkillNatureChange = (e) => {
+    objectChange(e.value, setSkillNature);
+  };
+  const onSkillPerceptionChange = (e) => {
+    objectChange(e.value, setSkillPerception);
+  };
+  const onSkillPersuasionChange = (e) => {
+    objectChange(e.value, setSkillPersuasion);
+  };
+  const onSkillReligionChange = (e) => {
+    objectChange(e.value, setSkillReligion);
+  };
+  const onSkillSleightChange = (e) => {
+    objectChange(e.value, setSkillSleight);
+  };
+  const onSkillStealthChange = (e) => {
+    objectChange(e.value, setSkillStealth);
+  };
+  const onSkillSurvivalChange = (e) => {
+    objectChange(e.value, setSkillSurvival);
+  };
   const customSkillInput = (value, change, placeholder, onRandom, onRemove) => (
     <div className={style.monstergenSpeedsWrapper}>
       <InputNumber
@@ -1320,8 +1322,8 @@ const MonsterGen = () => {
   const onRandomSkillReligion = (e) => {
     randomButton(setSkillReligion, 15, 0);
   };
-  const onRandomSkillSlieght = (e) => {
-    randomButton(setSkillSlieght, 15, 0);
+  const onRandomSkillSleight = (e) => {
+    randomButton(setSkillSleight, 15, 0);
   };
   const onRandomSkillStealth = (e) => {
     randomButton(setSkillStealth, 15, 0);
@@ -1329,6 +1331,13 @@ const MonsterGen = () => {
   const onRandomSkillSurvival = (e) => {
     randomButton(setSkillSurvival, 15, 0);
   };
+  const skillAcrobaticsInput = customSkillInput(
+    skillAcrobatics,
+    onSaveStrChange,
+    "STR Modifier",
+    onRandomSaveStr,
+    onRemoveSaveStr
+  );
   const skillDisplay = saveList.map((i) => {
     return (
       <div>
