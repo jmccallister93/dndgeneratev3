@@ -1633,23 +1633,36 @@ const MonsterGen = () => {
   const onRemoveVulnAcid = (e) => onRemoveCustom(setVulnList, vulnList, "Acid");
   const onRemoveVulnCold = (e) => onRemoveCustom(setVulnList, vulnList, "Cold");
   const onRemoveVulnFire = (e) => onRemoveCustom(setVulnList, vulnList, "Fire");
-  const onRemoveVulnForce = (e) => onRemoveCustom(setVulnList, vulnList, "Force");
-  const onRemoveVulnLightning = (e) => onRemoveCustom(setVulnList, vulnList, "Lightning");
-  const onRemoveVulnNecrotic = (e) => onRemoveCustom(setVulnList, vulnList, "Necrotic");
-  const onRemoveVulnPoison = (e) => onRemoveCustom(setVulnList, vulnList, "Poison");
-  const onRemoveVulnPsychic = (e) => onRemoveCustom(setVulnList, vulnList, "Psychic");
-  const onRemoveVulnRadiant = (e) => onRemoveCustom(setVulnList, vulnList, "Radiant");
-  const onRemoveVulnThunder = (e) => onRemoveCustom(setVulnList, vulnList, "Thunder");
-  const onRemoveVulnBludgeoning = (e) => onRemoveCustom(setVulnList, vulnList, "Bludgeoning");
-  const onRemoveVulnSlashing = (e) => onRemoveCustom(setVulnList, vulnList, "Slashing");
-  const onRemoveVulnPiercing = (e) => onRemoveCustom(setVulnList, vulnList, "Piercing");
-  const onRemoveVulnMagic = (e) => onRemoveCustom(setVulnList, vulnList, "Magic");
-  const onRemoveVulnMBludgeoning = (e) => onRemoveCustom(setVulnList, vulnList, "Magical Bludgeoning");
-  const onRemoveVulnMSlashing= (e) => onRemoveCustom(setVulnList, vulnList, "Magical Slashing");
-  const onRemoveVulnMPiercing = (e) => onRemoveCustom(setVulnList, vulnList, "Magical Piercing");
+  const onRemoveVulnForce = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Force");
+  const onRemoveVulnLightning = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Lightning");
+  const onRemoveVulnNecrotic = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Necrotic");
+  const onRemoveVulnPoison = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Poison");
+  const onRemoveVulnPsychic = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Psychic");
+  const onRemoveVulnRadiant = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Radiant");
+  const onRemoveVulnThunder = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Thunder");
+  const onRemoveVulnBludgeoning = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Bludgeoning");
+  const onRemoveVulnSlashing = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Slashing");
+  const onRemoveVulnPiercing = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Piercing");
+  const onRemoveVulnMagic = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Magic");
+  const onRemoveVulnMBludgeoning = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Magical Bludgeoning");
+  const onRemoveVulnMSlashing = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Magical Slashing");
+  const onRemoveVulnMPiercing = (e) =>
+    onRemoveCustom(setVulnList, vulnList, "Magical Piercing");
 
-
-  const customDmgRemove = (value, change, placeholder, onRandom, onRemove) => (
+  const customDmgRemove = (onRemove) => (
     <div className={style.monstergenSpeedsWrapper}>
       <Button
         tooltip="Remove?"
@@ -1661,6 +1674,21 @@ const MonsterGen = () => {
       </Button>
     </div>
   );
+  const vulnRemoveAcid = customDmgRemove(onRemoveVulnAcid);
+  const vulnRemoveCold = customDmgRemove(onRemoveVulnCold);
+  const vulnRemoveFire = customDmgRemove(onRemoveVulnFire);
+  const vulnRemoveForce = customDmgRemove(onRemoveVulnForce);
+  const vulnRemoveLightning = customDmgRemove(onRemoveVulnLightning);
+  const vulnRemoveNecrotic = customDmgRemove(onRemoveVulnNecrotic);
+  const vulnRemovePoison = customDmgRemove(onRemoveVulnPoison);
+  const vulnRemovePsychic = customDmgRemove(onRemoveVulnPsychic);
+  const vulnRemoveRadiant = customDmgRemove(onRemoveVulnRadiant);
+  const vulnRemoveThunder = customDmgRemove(onRemoveVulnThunder);
+  const vulnRemovePiercing = customDmgRemove(onRemoveVulnPiercing);
+  const vulnRemoveMagic = customDmgRemove(onRemoveVulnMagic);
+  const vulnRemoveMBludgeoning = customDmgRemove(onRemoveVulnMBludgeoning);
+  const vulnRemoveMSlashing = customDmgRemove(onRemoveVulnMSlashing);
+  const vulnRemoveMPiercing = customDmgRemove(onRemoveVulnMPiercing);
 
   const vulnDisplay = vulnList.map((i) => {
     return (
