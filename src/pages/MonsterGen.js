@@ -2378,6 +2378,13 @@ const MonsterGen = () => {
         setSaveList((saveArray) => [...saveArray, saveOptions[r]]);
       }
     }
+    if (skillList.length === 0) {
+        let x = Math.round(Math.random() * (1 - 0));
+        if (x === 1) {
+          let r = Math.round(Math.random() * (4 - 0));
+          setSkillList((saveArray) => [...saveArray, skillOptions[r]]);
+        }
+      }
   };
 
   const onClear = (e) => {
@@ -2424,6 +2431,25 @@ const MonsterGen = () => {
     setSaveInt("");
     setSaveWis("");
     setSaveCha("");
+    setSkillList([])
+    setSkillAcrobatics("")
+    setSkillAnimal("")
+    setSkillArcana("")
+    setSkillAthletics("")
+    setSkillDeception("")
+    setSkillHistory("")
+    setSkillInsight("")
+    setSkillIntimidation("")
+    setSkillInvestigation("")
+    setSkillMedicine("")
+    setSkillNature("")
+    setSkillPerception("")
+    setSkillPerformance("")
+    setSkillPersuasion("")
+    setSkillReligion("")
+    setSkillSleight("")
+    setSkillStealth("")
+    setSkillSurvival("")
   };
 
   return (
@@ -2476,6 +2502,7 @@ const MonsterGen = () => {
             {saveDialog}
             <div className={style.speedContainer}>{saveDisplay}</div>
             {skillDialog}
+            <div className={style.speedContainer}>{skillDisplay}</div>
             {vulnDialog}
             {immuneDialog}
             {resistDialog}
