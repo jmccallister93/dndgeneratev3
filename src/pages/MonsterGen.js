@@ -96,6 +96,23 @@ const MonsterGen = () => {
   const [skillList, setSkillList] = useState([]);
   const [dialogVisibleSkill, setDialogVisibleSkill] = useState(false);
   const [selectedItemsSkill, setSelectedItemsSkill] = useState(null);
+  const [skillAcrobatics, setSkillAcrobatics] = useState("")
+  const [skillAnimal, setSkillAnimal] = useState("")
+  const [skillArcana, setSkillArcana] = useState("")
+  const [skillAthletics, setSkillAthletics] = useState("")
+  const [skillDeception, setSkillDeception] = useState("")
+  const [skillHistory, setSkillHistory] = useState("")
+  const [skillInsight, setSkillInsight] = useState("")
+  const [skillIntimidation, setSkillIntimidation] = useState("")
+  const [skillInvestigation, setSkillInvestigation] = useState("")
+  const [skillMedicine, setSkillMedicine] = useState("")
+  const [skillNature, setSkillNature] = useState("")
+  const [skillPerception, setSkillPerception] = useState("")
+  const [skillPersuasion, setSkillPersuasion] = useState("")
+  const [skillReligion, setSkillReligion] = useState("")
+  const [skillSlieght, setSkillSlieght] = useState("")
+  const [skillStealth, setSkillStealth] = useState("")
+  const [skillSurvival, setSkillSurvival] = useState("")
 
   const [vuln, setVuln] = useState("");
   const [vulns, setVulns] = useState("");
@@ -1226,6 +1243,114 @@ const MonsterGen = () => {
     </div>
   );
   //Skills
+  const customSkillInput = (value, change, placeholder, onRandom, onRemove) => (
+    <div className={style.monstergenSpeedsWrapper}>
+      <InputNumber
+        value={value}
+        onChange={change}
+        placeholder={placeholder}
+        mode="decimal"
+        showButtons
+        buttonLayout="stacked"
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <div style={{ display: "flex" }}>
+        <Button
+          onClick={onRandom}
+          className={style.monstergenBtnName}
+          style={{ height: "2rem" }}
+        >
+          Random
+        </Button>
+        <Button
+          tooltip="Remove?"
+          onClick={onRemove}
+          className={style.monstergenBtnRemove}
+          style={{ height: "2rem" }}
+        >
+          <i className="pi pi-minus"></i>
+        </Button>
+      </div>
+    </div>
+  );
+  const onRandomSkillAcrobatics = (e) => {
+    randomButton(setSkillAcrobatics, 15, 0);
+  };
+  const onRandomSkillAnimal = (e) => {
+    randomButton(setSkillAnimal, 15, 0);
+  };
+  const onRandomSkillArcana = (e) => {
+    randomButton(setSkillArcana, 15, 0);
+  };
+  const onRandomSkillAthletics = (e) => {
+    randomButton(setSkillAthletics, 15, 0);
+  };
+  const onRandomSkillDeception = (e) => {
+    randomButton(setSkillDeception, 15, 0);
+  };
+  const onRandomSkillHistory = (e) => {
+    randomButton(setSkillHistory, 15, 0);
+  };
+  const onRandomSkillInsight = (e) => {
+    randomButton(setSkillInsight, 15, 0);
+  };
+  const onRandomSkillIntimidation = (e) => {
+    randomButton(setSkillIntimidation, 15, 0);
+  };
+  const onRandomSkillInvestigation = (e) => {
+    randomButton(setSkillInvestigation, 15, 0);
+  };
+  const onRandomSkillMedicine = (e) => {
+    randomButton(setSkillMedicine, 15, 0);
+  };
+  const onRandomSkillNature = (e) => {
+    randomButton(setSkillNature, 15, 0);
+  };
+  const onRandomSkillPerception = (e) => {
+    randomButton(setSkillPerception, 15, 0);
+  };
+  const onRandomSkillPersuasion = (e) => {
+    randomButton(setSkillPersuasion, 15, 0);
+  };
+  const onRandomSkillReligion = (e) => {
+    randomButton(setSkillReligion, 15, 0);
+  };
+  const onRandomSkillSlieght = (e) => {
+    randomButton(setSkillSlieght, 15, 0);
+  };
+  const onRandomSkillStealth = (e) => {
+    randomButton(setSkillStealth, 15, 0);
+  };
+  const onRandomSkillSurvival = (e) => {
+    randomButton(setSkillSurvival, 15, 0);
+  };
+  const skillDisplay = saveList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+          {i.name === "Strength"
+            ? saveStrInput
+            : i.name === "Dexterity"
+            ? saveDexInput
+            : i.name === "Constitution"
+            ? saveConInput
+            : i.name === "Intelligence"
+            ? saveIntInput
+            : i.name === "Wisdom"
+            ? saveWisInput
+            : i.name === "Charisma"
+            ? saveChaInput
+            : null}
+        </h3>
+      </div>
+    );
+  });
   const skillDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Skills</h2>
@@ -1824,7 +1949,7 @@ const MonsterGen = () => {
         footer={dialogFooterLair}
       >
         <DataTable
-          value={lairOptions}
+        //   value={lairOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
