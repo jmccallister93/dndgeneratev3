@@ -517,6 +517,9 @@ const MonsterGen = () => {
   const openDialogSpeed = () => {
     setDialogVisibleSpeed(true);
   };
+  const openDialogSave = () => {
+    setDialogVisibleSave(true);
+  };
   const openDialogSkill = () => {
     setDialogVisibleSkill(true)
   }
@@ -566,6 +569,15 @@ const MonsterGen = () => {
           ...oldArray,
           selectedItemsSpeed[i],
         ]);
+      }
+    }
+  };
+  const closeDialogSave = () => {
+    setDialogVisibleSave(false);
+    for (let i = 0; i < selectedItemsSave.length; i++) {
+      if (saveList.includes(selectedItemsSave[i])) {
+      } else {
+        setSaveList((saveArray) => [...saveArray, selectedItemsSave[i]]);
       }
     }
   };
@@ -729,6 +741,9 @@ const MonsterGen = () => {
   const dialogFooterSpeed = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSpeed} />;
   };
+  const dialogFooterSave = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSave} />;
+  };
   const dialogFooterSkill = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSkill} />;
   };
@@ -784,6 +799,9 @@ const MonsterGen = () => {
     setSelectedItemsSpeed(speedExtraList);
   }, [speedExtraList]);
   useEffect(() => {
+    setSelectedItemsSave(saveList);
+  }, [saveList]);
+  useEffect(() => {
     setSelectedItemsSkill(skillList);
   }, [skillList]);
   useEffect(() => {
@@ -823,6 +841,7 @@ const MonsterGen = () => {
     setSelectedItemsGear(gearList);
   }, [gearList]);
 
+  //Remove from list
   const onRemoveCustom = (setlist, list, name) => {
     setlist(list.filter((value) => value.name !== name));
   };
@@ -923,7 +942,7 @@ const MonsterGen = () => {
     onRandomSwim,
     onRemoveSwim
   );
-
+//Speed
   const extraSpeedDispaly = speedExtraList.map((i) => {
     return (
       <div>
@@ -998,22 +1017,7 @@ const MonsterGen = () => {
     </div>
   );
 
-  //TODO Saves
-  const openDialogSave = () => {
-    setDialogVisibleSave(true);
-  };
-  const closeDialogSave = () => {
-    setDialogVisibleSave(false);
-    for (let i = 0; i < selectedItemsSave.length; i++) {
-      if (saveList.includes(selectedItemsSave[i])) {
-      } else {
-        setSaveList((saveArray) => [...saveArray, selectedItemsSave[i]]);
-      }
-    }
-  };
-  const dialogFooterSave = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSave} />;
-  };
+//Saves
   const onSaveStrChange = (e) => {
     objectChange(e.value, setSaveStr);
   };
@@ -1032,9 +1036,7 @@ const MonsterGen = () => {
   const onSaveChaChange = (e) => {
     objectChange(e.value, setSaveCha);
   };
-  useEffect(() => {
-    setSelectedItemsSave(saveList);
-  }, [saveList]);
+
   const onRemoveSaveStr = (e) =>
     onRemoveCustom(setSaveList, saveList, "Strength");
   const onRemoveSaveDex = (e) =>
@@ -1166,6 +1168,695 @@ const MonsterGen = () => {
     );
   });
   const saveDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Skills
+  const skillDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Vuln
+  const vulnDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Immune
+  const immuneDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Resist
+  const resistDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Condition
+  const conditionDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Sense
+  const senseDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Languages
+  const langDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Special
+  const specialDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Action
+  const actionDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Reaction
+  const reactionDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Legendary
+  const legendDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Lair
+  const lairDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Saving Throws</h2>
+      <Button onClick={openDialogSave} className={style.monstergenBtnName}>
+        <i className="pi pi-plus"> Add</i>
+      </Button>
+      <Dialog
+        header="Saving Throws"
+        visible={dialogVisibleSave}
+        maximizable
+        modal
+        onHide={closeDialogSave}
+        footer={dialogFooterSave}
+      >
+        <DataTable
+          value={saveOptions}
+          scrollable
+          scrollHeight="60vh"
+          //   className="p-datatable-customers"
+          rows={20}
+          dataKey="name"
+          selection={selectedItemsSave}
+          onSelectionChange={(e) => setSelectedItemsSave(e.value)}
+          //   selectionPageOnly
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  //Gear
+  const gearDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Saving Throws</h2>
       <Button onClick={openDialogSave} className={style.monstergenBtnName}>
@@ -1490,7 +2181,7 @@ const MonsterGen = () => {
           <div className={style.monstergenSubsection}>
             {saveDialog}
             <div className={style.speedContainer}>{saveDisplay}</div>
-            {skillDrop}
+            {skillDialog}
             {vulnDrop}
             {immuneDrop}
             {resistDrop}
