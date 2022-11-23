@@ -1063,6 +1063,13 @@ const MonsterGen = () => {
       setFly(y);
       setSwim(y);
     } 
+    if (saveList.length === 0) {
+        let x = Math.round(Math.random() * (1 - 0));
+        if (x === 1) {
+          let r = Math.round(Math.random() * (4 - 0));
+          setSaveList((saveArray) => [...saveArray, saveOptions[r]]);
+        }
+      }
   };
 
   const onClear = (e) => {
@@ -1102,6 +1109,13 @@ const MonsterGen = () => {
     setHover("");
     setFly("");
     setSwim("");
+    setSaveList([]);
+    setSaveStr("")
+    setSaveDex("")
+    setSaveCon("")
+    setSaveInt("")
+    setSaveWis("")
+    setSaveCha("")
   };
 
   return (
