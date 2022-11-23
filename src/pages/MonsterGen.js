@@ -96,23 +96,24 @@ const MonsterGen = () => {
   const [skillList, setSkillList] = useState([]);
   const [dialogVisibleSkill, setDialogVisibleSkill] = useState(false);
   const [selectedItemsSkill, setSelectedItemsSkill] = useState(null);
-  const [skillAcrobatics, setSkillAcrobatics] = useState("")
-  const [skillAnimal, setSkillAnimal] = useState("")
-  const [skillArcana, setSkillArcana] = useState("")
-  const [skillAthletics, setSkillAthletics] = useState("")
-  const [skillDeception, setSkillDeception] = useState("")
-  const [skillHistory, setSkillHistory] = useState("")
-  const [skillInsight, setSkillInsight] = useState("")
-  const [skillIntimidation, setSkillIntimidation] = useState("")
-  const [skillInvestigation, setSkillInvestigation] = useState("")
-  const [skillMedicine, setSkillMedicine] = useState("")
-  const [skillNature, setSkillNature] = useState("")
-  const [skillPerception, setSkillPerception] = useState("")
-  const [skillPersuasion, setSkillPersuasion] = useState("")
-  const [skillReligion, setSkillReligion] = useState("")
-  const [skillSleight, setSkillSleight] = useState("")
-  const [skillStealth, setSkillStealth] = useState("")
-  const [skillSurvival, setSkillSurvival] = useState("")
+  const [skillAcrobatics, setSkillAcrobatics] = useState("");
+  const [skillAnimal, setSkillAnimal] = useState("");
+  const [skillArcana, setSkillArcana] = useState("");
+  const [skillAthletics, setSkillAthletics] = useState("");
+  const [skillDeception, setSkillDeception] = useState("");
+  const [skillHistory, setSkillHistory] = useState("");
+  const [skillInsight, setSkillInsight] = useState("");
+  const [skillIntimidation, setSkillIntimidation] = useState("");
+  const [skillInvestigation, setSkillInvestigation] = useState("");
+  const [skillMedicine, setSkillMedicine] = useState("");
+  const [skillNature, setSkillNature] = useState("");
+  const [skillPerception, setSkillPerception] = useState("");
+  const [skillPerformance, setSkillPerformance] = useState("");
+  const [skillPersuasion, setSkillPersuasion] = useState("");
+  const [skillReligion, setSkillReligion] = useState("");
+  const [skillSleight, setSkillSleight] = useState("");
+  const [skillStealth, setSkillStealth] = useState("");
+  const [skillSurvival, setSkillSurvival] = useState("");
 
   const [vuln, setVuln] = useState("");
   const [vulns, setVulns] = useState("");
@@ -148,7 +149,7 @@ const MonsterGen = () => {
   const [senseList, setSenseList] = useState([]);
   const [dialogVisibleSense, setDialogVisibleSense] = useState(false);
   const [selectedItemsSense, setSelectedItemsSense] = useState(null);
-  
+
   const [lang, setLang] = useState("");
   const [langs, setLangs] = useState("");
   const [langOptions, setLangOptions] = useState();
@@ -481,7 +482,7 @@ const MonsterGen = () => {
   );
 
   //List setups
-//Open Dialogs
+  //Open Dialogs
   const openDialogSpeed = () => {
     setDialogVisibleSpeed(true);
   };
@@ -489,54 +490,51 @@ const MonsterGen = () => {
     setDialogVisibleSave(true);
   };
   const openDialogSkill = () => {
-    setDialogVisibleSkill(true)
-  }
+    setDialogVisibleSkill(true);
+  };
   const openDialogVuln = () => {
-    setDialogVisibleVuln(true)
-  }
+    setDialogVisibleVuln(true);
+  };
   const openDialogImmune = () => {
-    setDialogVisibleImmune(true)
-  }
+    setDialogVisibleImmune(true);
+  };
   const openDialogResist = () => {
-    setDialogVisibleResist(true)
-  }
+    setDialogVisibleResist(true);
+  };
   const openDialogCondition = () => {
-    setDialogVisibleCondition(true)
-  }
+    setDialogVisibleCondition(true);
+  };
   const openDialogSense = () => {
-    setDialogVisibleSense(true)
-  }
+    setDialogVisibleSense(true);
+  };
   const openDialogLang = () => {
-    setDialogVisibleLang(true)
-  }
+    setDialogVisibleLang(true);
+  };
   const openDialogSpecial = () => {
-    setDialogVisibleSpecial(true)
-  }
+    setDialogVisibleSpecial(true);
+  };
   const openDialogAction = () => {
-    setDialogVisibleAction(true)
-  }
+    setDialogVisibleAction(true);
+  };
   const openDialogReaction = () => {
-    setDialogVisibleReaction(true)
-  }
+    setDialogVisibleReaction(true);
+  };
   const openDialogLegend = () => {
-    setDialogVisibleLegend(true)
-  }
+    setDialogVisibleLegend(true);
+  };
   const openDialogLair = () => {
-    setDialogVisibleLair(true)
-  }
+    setDialogVisibleLair(true);
+  };
   const openDialogGear = () => {
-    setDialogVisibleGear(true)
-  }
+    setDialogVisibleGear(true);
+  };
   //Close dialogs
   const closeDialogSpeed = () => {
     setDialogVisibleSpeed(false);
     for (let i = 0; i < selectedItemsSpeed.length; i++) {
       if (speedExtraList.includes(selectedItemsSpeed[i])) {
       } else {
-        setSpeedExtraList((oldArray) => [
-          ...oldArray,
-          selectedItemsSpeed[i],
-        ]);
+        setSpeedExtraList((oldArray) => [...oldArray, selectedItemsSpeed[i]]);
       }
     }
   };
@@ -554,10 +552,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsSkill.length; i++) {
       if (skillList.includes(selectedItemsSkill[i])) {
       } else {
-        setSkillList((oldArray) => [
-          ...oldArray,
-          selectedItemsSkill[i],
-        ]);
+        setSkillList((oldArray) => [...oldArray, selectedItemsSkill[i]]);
       }
     }
   };
@@ -566,10 +561,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsVuln.length; i++) {
       if (vulnList.includes(selectedItemsVuln[i])) {
       } else {
-        setVulnList((oldArray) => [
-          ...oldArray,
-          selectedItemsVuln[i],
-        ]);
+        setVulnList((oldArray) => [...oldArray, selectedItemsVuln[i]]);
       }
     }
   };
@@ -578,10 +570,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsImmune.length; i++) {
       if (immuneList.includes(selectedItemsImmune[i])) {
       } else {
-        setImmuneList((oldArray) => [
-          ...oldArray,
-          selectedItemsImmune[i],
-        ]);
+        setImmuneList((oldArray) => [...oldArray, selectedItemsImmune[i]]);
       }
     }
   };
@@ -590,10 +579,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsResist.length; i++) {
       if (resistList.includes(selectedItemsResist[i])) {
       } else {
-        setResistList((oldArray) => [
-          ...oldArray,
-          selectedItemsResist[i],
-        ]);
+        setResistList((oldArray) => [...oldArray, selectedItemsResist[i]]);
       }
     }
   };
@@ -614,10 +600,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsSense.length; i++) {
       if (senseList.includes(selectedItemsSense[i])) {
       } else {
-        setSenseList((oldArray) => [
-          ...oldArray,
-          selectedItemsSense[i],
-        ]);
+        setSenseList((oldArray) => [...oldArray, selectedItemsSense[i]]);
       }
     }
   };
@@ -626,10 +609,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsLang.length; i++) {
       if (langList.includes(selectedItemsLang[i])) {
       } else {
-        setLangList((oldArray) => [
-          ...oldArray,
-          selectedItemsLang[i],
-        ]);
+        setLangList((oldArray) => [...oldArray, selectedItemsLang[i]]);
       }
     }
   };
@@ -638,10 +618,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsSpecial.length; i++) {
       if (specialList.includes(selectedItemsSpecial[i])) {
       } else {
-        setSpecialList((oldArray) => [
-          ...oldArray,
-          selectedItemsSpecial[i],
-        ]);
+        setSpecialList((oldArray) => [...oldArray, selectedItemsSpecial[i]]);
       }
     }
   };
@@ -650,10 +627,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsAction.length; i++) {
       if (actionList.includes(selectedItemsAction[i])) {
       } else {
-        setActionList((oldArray) => [
-          ...oldArray,
-          selectedItemsAction[i],
-        ]);
+        setActionList((oldArray) => [...oldArray, selectedItemsAction[i]]);
       }
     }
   };
@@ -662,10 +636,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsReaction.length; i++) {
       if (reactionList.includes(selectedItemsReaction[i])) {
       } else {
-        setReactionList((oldArray) => [
-          ...oldArray,
-          selectedItemsReaction[i],
-        ]);
+        setReactionList((oldArray) => [...oldArray, selectedItemsReaction[i]]);
       }
     }
   };
@@ -674,10 +645,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsLegend.length; i++) {
       if (legendList.includes(selectedItemsLegend[i])) {
       } else {
-        setLegendList((oldArray) => [
-          ...oldArray,
-          selectedItemsLegend[i],
-        ]);
+        setLegendList((oldArray) => [...oldArray, selectedItemsLegend[i]]);
       }
     }
   };
@@ -686,10 +654,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsLair.length; i++) {
       if (lairList.includes(selectedItemsLair[i])) {
       } else {
-        setLairList((oldArray) => [
-          ...oldArray,
-          selectedItemsLair[i],
-        ]);
+        setLairList((oldArray) => [...oldArray, selectedItemsLair[i]]);
       }
     }
   };
@@ -698,10 +663,7 @@ const MonsterGen = () => {
     for (let i = 0; i < selectedItemsGear.length; i++) {
       if (gearList.includes(selectedItemsGear[i])) {
       } else {
-        setGearList((oldArray) => [
-          ...oldArray,
-          selectedItemsGear[i],
-        ]);
+        setGearList((oldArray) => [...oldArray, selectedItemsGear[i]]);
       }
     }
   };
@@ -725,7 +687,9 @@ const MonsterGen = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogResist} />;
   };
   const dialogFooterCondition = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogCondition} />;
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogCondition} />
+    );
   };
   const dialogFooterSense = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSense} />;
@@ -734,13 +698,17 @@ const MonsterGen = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogLang} />;
   };
   const dialogFooterSpecial = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogSpecial} />;
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogSpecial} />
+    );
   };
   const dialogFooterAction = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogAction} />;
   };
   const dialogFooterReaction = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogReaction} />;
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogReaction} />
+    );
   };
   const dialogFooterLegend = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogLegend} />;
@@ -916,7 +884,7 @@ const MonsterGen = () => {
     onRandomSwim,
     onRemoveSwim
   );
-//Speed
+  //Speed
   const extraSpeedDispaly = speedExtraList.map((i) => {
     return (
       <div>
@@ -991,7 +959,7 @@ const MonsterGen = () => {
     </div>
   );
 
-//Saves
+  //Saves
   const onSaveStrChange = (e) => {
     objectChange(e.value, setSaveStr);
   };
@@ -1230,6 +1198,9 @@ const MonsterGen = () => {
   const onSkillPerceptionChange = (e) => {
     objectChange(e.value, setSkillPerception);
   };
+  const onSkillPerformanceChange = (e) => {
+    objectChange(e.value, setSkillPerformance);
+  };
   const onSkillPersuasionChange = (e) => {
     objectChange(e.value, setSkillPersuasion);
   };
@@ -1280,6 +1251,43 @@ const MonsterGen = () => {
       </div>
     </div>
   );
+  const onRemoveSkillAcrobatics = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Acrobatics");
+  const onRemoveSkillAnimal = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Animal Handling");
+  const onRemoveSkillArcana = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Arcana");
+  const onRemoveSkillAthletics = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Athletics");
+  const onRemoveSkillDeception = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Deception");
+  const onRemoveSkillHistory = (e) =>
+    onRemoveCustom(setSkillList, skillList, "History");
+  const onRemoveSkillInsight = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Insight");
+  const onRemoveSkillIntimidation = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Intimidation");
+  const onRemoveSkillInvestigation = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Investigation");
+  const onRemoveSkillMedicine = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Medicine");
+  const onRemoveSkillNature = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Nature");
+  const onRemoveSkillPerception = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Perception");
+  const onRemoveSkillPerformance = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Performance");
+  const onRemoveSkillPersuasion = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Persuasion");
+  const onRemoveSkillReligion = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Religion");
+  const onRemoveSkillSleight = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Sleight of Hand");
+  const onRemoveSkillStealth = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Stealth");
+  const onRemoveSkillSurvival = (e) =>
+    onRemoveCustom(setSkillList, skillList, "Survival");
+
   const onRandomSkillAcrobatics = (e) => {
     randomButton(setSkillAcrobatics, 15, 0);
   };
@@ -1316,6 +1324,9 @@ const MonsterGen = () => {
   const onRandomSkillPerception = (e) => {
     randomButton(setSkillPerception, 15, 0);
   };
+  const onRandomSkillPerformance = (e) => {
+    randomButton(setSkillPerformance)
+  }
   const onRandomSkillPersuasion = (e) => {
     randomButton(setSkillPersuasion, 15, 0);
   };
@@ -1333,28 +1344,171 @@ const MonsterGen = () => {
   };
   const skillAcrobaticsInput = customSkillInput(
     skillAcrobatics,
-    onSaveStrChange,
-    "STR Modifier",
-    onRandomSaveStr,
-    onRemoveSaveStr
+    onSkillAcrobaticsChange,
+    "Modifier",
+    onRandomSkillAcrobatics,
+    onRemoveSkillAcrobatics
   );
-  const skillDisplay = saveList.map((i) => {
+  const skillAnimalInput = customSkillInput(
+    skillAnimal,
+    onSkillAnimalChange,
+    "Modifier",
+    onRandomSkillAnimal,
+    onRemoveSkillAnimal
+  );
+  const skillArcanaInput = customSkillInput(
+    skillArcana,
+    onSkillArcanaChange,
+    "Modifier",
+    onRandomSkillArcana,
+    onRemoveSkillArcana
+  );
+  const skillAthleticsInput = customSkillInput(
+    skillAthletics,
+    onSkillAthleticsChange,
+    "Modifier",
+    onRandomSkillAthletics,
+    onRemoveSkillAthletics
+  );
+  const skillDeceptionInput = customSkillInput(
+    skillDeception,
+    onSkillDeceptionChange,
+    "Modifier",
+    onRandomSkillDeception,
+    onRemoveSkillDeception
+  );
+  const skillHistoryInput = customSkillInput(
+    skillHistory,
+    onSkillHistoryChange,
+    "Modifier",
+    onRandomSkillHistory,
+    onRemoveSkillHistory
+  );
+  const skillInsightInput = customSkillInput(
+    skillInsight,
+    onSkillInsightChange,
+    "Modifier",
+    onRandomSkillInsight,
+    onRemoveSkillInsight
+  );
+  const skillIntimidationInput = customSkillInput(
+    skillIntimidation,
+    onSkillIntimidationChange,
+    "Modifier",
+    onRandomSkillIntimidation,
+    onRemoveSkillIntimidation
+  );
+  const skillInvestigationInput = customSkillInput(
+    skillInvestigation,
+    onSkillInvestigationChange,
+    "Modifier",
+    onRandomSkillInvestigation,
+    onRemoveSkillInvestigation
+  );
+  const skillMedicineInput = customSkillInput(
+    skillMedicine,
+    onSkillMedicineChange,
+    "Modifier",
+    onRandomSkillMedicine,
+    onRemoveSkillMedicine
+  );
+  const skillNatureInput = customSkillInput(
+    skillNature,
+    onSkillNatureChange,
+    "Modifier",
+    onRandomSkillNature,
+    onRemoveSkillNature
+  );
+  const skillPerceptionInput = customSkillInput(
+    skillPerception,
+    onSkillPerceptionChange,
+    "Modifier",
+    onRandomSkillPerception,
+    onRemoveSkillPerception
+  );
+  const skillPerformanceInput = customSkillInput(
+    skillPerformance,
+    onSkillPerformanceChange,
+    "Modifier",
+    onRandomSkillPerformance,
+    onRemoveSkillPerformance
+  );
+  const skillPersuasionInput = customSkillInput(
+    skillPersuasion,
+    onSkillPersuasionChange,
+    "Modifier",
+    onRandomSkillPersuasion,
+    onRemoveSkillPersuasion
+  );
+  const skillReligionInput = customSkillInput(
+    skillReligion,
+    onSkillReligionChange,
+    "Modifier",
+    onRandomSkillReligion,
+    onRemoveSkillReligion
+  );
+  const skillSleightInput = customSkillInput(
+    skillSleight,
+    onSkillSleightChange,
+    "Modifier",
+    onRandomSkillSleight,
+    onRemoveSkillSleight
+  );
+  const skillStealthInput = customSkillInput(
+    skillStealth,
+    onSkillStealthChange,
+    "Modifier",
+    onRandomSkillStealth,
+    onRemoveSkillStealth
+  );
+  const skillSurvivalInput = customSkillInput(
+    skillSurvival,
+    onSkillSurvivalChange,
+    "Modifier",
+    onRandomSkillSurvival,
+    onRemoveSkillSurvival
+  );
+  const skillDisplay = skillList.map((i) => {
     return (
       <div>
         <h3>
           {i.name}
-          {i.name === "Strength"
-            ? saveStrInput
-            : i.name === "Dexterity"
-            ? saveDexInput
-            : i.name === "Constitution"
-            ? saveConInput
-            : i.name === "Intelligence"
-            ? saveIntInput
-            : i.name === "Wisdom"
-            ? saveWisInput
-            : i.name === "Charisma"
-            ? saveChaInput
+          {i.name === "Acrobatics"
+            ? skillAcrobaticsInput
+            : i.name === "Animal Handling"
+            ? skillAnimalInput
+            : i.name === "Arcana"
+            ? skillArcanaInput
+            : i.name === "Athletics"
+            ? skillAthleticsInput
+            : i.name === "Deception"
+            ? skillDeceptionInput
+            : i.name === "History"
+            ? skillHistoryInput
+            : i.name === "Insight"
+            ? skillInsightInput
+            : i.name === "Intimidation"
+            ? skillIntimidationInput
+            : i.name === "Investigation"
+            ? skillInvestigationInput
+            : i.name === "Medicine"
+            ? skillMedicineInput
+            : i.name === "Nature"
+            ? skillNatureInput
+            : i.name === "Perception"
+            ? skillPerceptionInput
+            : i.name === "Performance"
+            ? skillPerformanceInput
+            : i.name === "Persuasion"
+            ? skillPersuasionInput
+            : i.name === "Religion"
+            ? skillReligionInput
+            : i.name === "Sleight of Hand"
+            ? skillSleightInput
+            : i.name === "Stealth"
+            ? skillStealthInput
+            : i.name === "Survival"
+            ? skillSurvivalInput
             : null}
         </h3>
       </div>
@@ -1958,7 +2112,7 @@ const MonsterGen = () => {
         footer={dialogFooterLair}
       >
         <DataTable
-        //   value={lairOptions}
+          //   value={lairOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
