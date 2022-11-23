@@ -80,8 +80,7 @@ const MonsterGen = () => {
   const [save, setSave] = useState("");
   const [saves, setSaves] = useState("");
   const [saveOptions, setSaveOptions] = useState();
-  const [saveList, setSaveList] = useState([])
-  const [saveExtra, setSaveExtra] = useState("");
+  const [saveList, setSaveList] = useState([]);
   const [saveStr, setSaveStr] = useState("");
   const [saveDex, setSaveDex] = useState("");
   const [saveCon, setSaveCon] = useState("");
@@ -94,54 +93,93 @@ const MonsterGen = () => {
   const [skill, setSkill] = useState("");
   const [skills, setSkills] = useState("");
   const [skillOptions, setSkillOptions] = useState();
+  const [skillList, setSkillList] = useState([]);
+  const [dialogVisibleSkill, setDialogVisibleSkill] = useState(false);
+  const [selectedItemsSkill, setSelectedItemsSkill] = useState(null);
 
   const [vuln, setVuln] = useState("");
   const [vulns, setVulns] = useState("");
   const [vulnOptions, setVulnOptions] = useState();
+  const [vulnList, setVulnList] = useState([]);
+  const [dialogVisibleVuln, setDialogVisibleVuln] = useState(false);
+  const [selectedItemsVuln, setSelectedItemsVuln] = useState(null);
 
   const [immune, setImmune] = useState("");
   const [immunes, setImmunes] = useState("");
   const [immuneOptions, setImmuneOptions] = useState();
+  const [immuneList, setImmuneList] = useState([]);
+  const [dialogVisibleImmune, setDialogVisibleImmune] = useState(false);
+  const [selectedItemsImmune, setSelectedItemsImmune] = useState(null);
 
   const [resist, setResist] = useState("");
   const [resists, setResists] = useState("");
   const [resistOptions, setResistOptions] = useState();
+  const [resistList, setResistList] = useState([]);
+  const [dialogVisibleResist, setDialogVisibleResist] = useState(false);
+  const [selectedItemsResist, setSelectedItemsResist] = useState(null);
 
   const [condition, setCondition] = useState("");
   const [conditions, setConditions] = useState("");
   const [conditionOptions, setConditionOptions] = useState();
+  const [conditionList, setConditionList] = useState([]);
+  const [dialogVisibleCondition, setDialogVisibleCondition] = useState(false);
+  const [selectedItemsCondition, setSelectedItemsCondition] = useState(null);
 
   const [sense, setSense] = useState("");
   const [senses, setSenses] = useState("");
   const [senseOptions, setSenseOptions] = useState();
-
+  const [senseList, setSenseList] = useState([]);
+  const [dialogVisibleSense, setDialogVisibleSense] = useState(false);
+  const [selectedItemsSense, setSelectedItemsSense] = useState(null);
+  
   const [lang, setLang] = useState("");
   const [langs, setLangs] = useState("");
   const [langOptions, setLangOptions] = useState();
+  const [langList, setLangList] = useState([]);
+  const [dialogVisibleLang, setDialogVisibleLang] = useState(false);
+  const [selectedItemsLang, setSelectedItemsLang] = useState(null);
 
   const [special, setSpecial] = useState("");
   const [Specials, setSpecials] = useState("");
   const [specialOptions, setSpecialOptions] = useState();
+  const [specialList, setSpecialList] = useState([]);
+  const [dialogVisibleSpecial, setDialogVisibleSpecial] = useState(false);
+  const [selectedItemsSpecial, setSelectedItemsSpecial] = useState(null);
 
   const [action, setAction] = useState("");
   const [actions, setActions] = useState("");
   const [actionOptions, setActionOptions] = useState();
+  const [actionList, setActionList] = useState([]);
+  const [dialogVisibleAction, setDialogVisibleAction] = useState(false);
+  const [selectedItemsAction, setSelectedItemsAction] = useState(null);
 
   const [reaction, setReaction] = useState("");
   const [reactions, setReactions] = useState("");
   const [reactionOptions, setReactionOptions] = useState();
+  const [reactionList, setReactionList] = useState([]);
+  const [dialogVisibleReaction, setDialogVisibleReaction] = useState(false);
+  const [selectedItemsReaction, setSelectedItemsReaction] = useState(null);
 
   const [legend, setLegend] = useState("");
   const [legends, setLegends] = useState("");
   const [legendOptions, setLegendOptions] = useState();
+  const [legendList, setLegendList] = useState([]);
+  const [dialogVisibleLegend, setDialogVisibleLegend] = useState(false);
+  const [selectedItemsLegend, setSelectedItemsLegend] = useState(null);
 
   const [lair, setLair] = useState("");
   const [Lairs, setLairs] = useState("");
   const [lairOptions, setLairOptions] = useState();
+  const [lairList, setLairList] = useState([]);
+  const [dialogVisibleLair, setDialogVisibleLair] = useState(false);
+  const [selectedItemsLair, setSelectedItemsLair] = useState(null);
 
   const [gear, setGear] = useState("");
   const [gears, setGears] = useState("");
   const [gearOptions, setGearOptions] = useState();
+  const [gearList, setGearList] = useState([]);
+  const [dialogVisibleGear, setDialogVisibleGear] = useState(false);
+  const [selectedItemsGear, setSelectedItemsGear] = useState(null);
 
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -309,7 +347,6 @@ const MonsterGen = () => {
     objectChange(e.value, setCha);
   };
   //TODO
-  const onSaveChange = (e) => {};
   //   const onGearChange = (e) => {}
   //   objectChange(e.value, setGear, 17, 1, 1, gearOptions)
   // };
@@ -476,16 +513,19 @@ const MonsterGen = () => {
   );
 
   //Additonal SPEED
+
   const openDialogSpeed = () => {
     setDialogVisibleSpeed(true);
   };
   const closeDialogSpeed = () => {
     setDialogVisibleSpeed(false);
-
     for (let i = 0; i < selectedItemsSpeed.length; i++) {
       if (speedExtraList.includes(selectedItemsSpeed[i])) {
       } else {
-        setSpeedExtraList((speedArray) => [...speedArray, selectedItemsSpeed[i]]);
+        setSpeedExtraList((speedArray) => [
+          ...speedArray,
+          selectedItemsSpeed[i],
+        ]);
       }
     }
   };
@@ -511,15 +551,20 @@ const MonsterGen = () => {
     setSelectedItemsSpeed(speedExtraList);
   }, [speedExtraList]);
 
-  const onRemoveCustom = (list, name) => {
-    setSpeedExtraList(list.filter((value) => value.name !== name));
+  const onRemoveCustom = (setlist, list, name) => {
+    setlist(list.filter((value) => value.name !== name));
   };
 
-  const onRemoveBurrow = (e) => onRemoveCustom(speedExtraList,"Burrow");
-  const onRemoveClimb = (e) => onRemoveCustom(speedExtraList,"Climb");
-  const onRemoveHover = (e) => onRemoveCustom(speedExtraList,"Hover");
-  const onRemoveFly = (e) => onRemoveCustom(speedExtraList,"Fly");
-  const onRemoveSwim = (e) => onRemoveCustom(speedExtraList,"Swim");
+  const onRemoveBurrow = (e) =>
+    onRemoveCustom(setSpeedExtraList, speedExtraList, "Burrow");
+  const onRemoveClimb = (e) =>
+    onRemoveCustom(setSpeedExtraList, speedExtraList, "Climb");
+  const onRemoveHover = (e) =>
+    onRemoveCustom(setSpeedExtraList, speedExtraList, "Hover");
+  const onRemoveFly = (e) =>
+    onRemoveCustom(setSpeedExtraList, speedExtraList, "Fly");
+  const onRemoveSwim = (e) =>
+    onRemoveCustom(setSpeedExtraList, speedExtraList, "Swim");
 
   const customSpeedInput = (value, change, placeholder, onRandom, onRemove) => (
     <div className={style.monstergenSpeedsWrapper}>
@@ -718,12 +763,18 @@ const MonsterGen = () => {
   useEffect(() => {
     setSelectedItemsSave(saveList);
   }, [saveList]);
-  const onRemoveSaveStr = (e) => onRemoveCustom(saveList,"Strength");
-  const onRemoveSaveDex = (e) => onRemoveCustom(saveList,"Dexterity");
-  const onRemoveSaveCon = (e) => onRemoveCustom(saveList,"Constituion");
-  const onRemoveSaveInt = (e) => onRemoveCustom(saveList,"Intelligence");
-  const onRemoveSaveWis = (e) => onRemoveCustom(saveList,"Wisdom");
-  const onRemoveSaveCha = (e) => onRemoveCustom(saveList,"Charisma");
+  const onRemoveSaveStr = (e) =>
+    onRemoveCustom(setSaveList, saveList, "Strength");
+  const onRemoveSaveDex = (e) =>
+    onRemoveCustom(setSaveList, saveList, "Dexterity");
+  const onRemoveSaveCon = (e) =>
+    onRemoveCustom(setSaveList, saveList, "Constitution");
+  const onRemoveSaveInt = (e) =>
+    onRemoveCustom(setSaveList, saveList, "Intelligence");
+  const onRemoveSaveWis = (e) =>
+    onRemoveCustom(setSaveList, saveList, "Wisdom");
+  const onRemoveSaveCha = (e) =>
+    onRemoveCustom(setSaveList, saveList, "Charisma");
 
   const customSaveInput = (value, change, placeholder, onRandom, onRemove) => (
     <div className={style.monstergenSpeedsWrapper}>
@@ -1062,14 +1113,14 @@ const MonsterGen = () => {
       setHover(y);
       setFly(y);
       setSwim(y);
-    } 
+    }
     if (saveList.length === 0) {
-        let x = Math.round(Math.random() * (1 - 0));
-        if (x === 1) {
-          let r = Math.round(Math.random() * (4 - 0));
-          setSaveList((saveArray) => [...saveArray, saveOptions[r]]);
-        }
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (4 - 0));
+        setSaveList((saveArray) => [...saveArray, saveOptions[r]]);
       }
+    }
   };
 
   const onClear = (e) => {
@@ -1110,12 +1161,12 @@ const MonsterGen = () => {
     setFly("");
     setSwim("");
     setSaveList([]);
-    setSaveStr("")
-    setSaveDex("")
-    setSaveCon("")
-    setSaveInt("")
-    setSaveWis("")
-    setSaveCha("")
+    setSaveStr("");
+    setSaveDex("");
+    setSaveCon("");
+    setSaveInt("");
+    setSaveWis("");
+    setSaveCha("");
   };
 
   return (
@@ -1166,9 +1217,7 @@ const MonsterGen = () => {
           <h1 className={style.monstergenSubHeader}>Saves/Skills/Dmgs</h1>
           <div className={style.monstergenSubsection}>
             {saveDialog}
-            <div className={style.speedContainer}>
-            {saveDisplay}
-            </div>
+            <div className={style.speedContainer}>{saveDisplay}</div>
             {skillDrop}
             {vulnDrop}
             {immuneDrop}
