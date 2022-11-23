@@ -2403,6 +2403,98 @@ const MonsterGen = () => {
     </div>
   );
   //Languages
+  const onRemoveLangAbyssal = (e) =>
+  onRemoveCustom(setLangList, langList, "Abyssal");
+  const onRemoveLangCelestial = (e) =>
+  onRemoveCustom(setLangList, langList, "Celestial");
+  const onRemoveLangCommon = (e) =>
+  onRemoveCustom(setLangList, langList, "Common");
+  const onRemoveLangDeepSpeech = (e) =>
+  onRemoveCustom(setLangList, langList, "Deep Speech");
+  const onRemoveLangDraconic = (e) =>
+  onRemoveCustom(setLangList, langList, "Draconic");
+  const onRemoveLangDwarvish = (e) =>
+  onRemoveCustom(setLangList, langList, "Dwarvish");
+  const onRemoveLangElvish = (e) =>
+  onRemoveCustom(setLangList, langList, "Elvish");
+  const onRemoveLangGiant = (e) =>
+  onRemoveCustom(setLangList, langList, "Giant");
+  const onRemoveLangGnomish = (e) =>
+  onRemoveCustom(setLangList, langList, "Gnomish");
+  const onRemoveLangGoblin = (e) =>
+  onRemoveCustom(setLangList, langList, "Goblin");
+  const onRemoveLangHalfling = (e) =>
+  onRemoveCustom(setLangList, langList, "Halfling");
+  const onRemoveLangInfernal = (e) =>
+  onRemoveCustom(setLangList, langList, "Infernal");
+  const onRemoveLangOrc = (e) =>
+  onRemoveCustom(setLangList, langList, "Orc");
+  const onRemoveLangPrimordial = (e) =>
+  onRemoveCustom(setLangList, langList, "Primordial");
+  const onRemoveLangSylvan = (e) =>
+  onRemoveCustom(setLangList, langList, "Sylvan");
+  const onRemoveLangUndercommon = (e) =>
+  onRemoveCustom(setLangList, langList, "Undercommon");
+  
+  const langRemoveAbyssal = customDmgRemove(onRemoveLangAbyssal);
+  const langRemoveCelestial = customDmgRemove(onRemoveLangCelestial);
+  const langRemoveCommon = customDmgRemove(onRemoveLangCommon);
+  const langRemoveDeepSpeech = customDmgRemove(onRemoveLangDeepSpeech);
+  const langRemoveDraconic = customDmgRemove(onRemoveLangDraconic);
+  const langRemoveDwarvish = customDmgRemove(onRemoveLangDwarvish);
+  const langRemoveElvish = customDmgRemove(onRemoveLangElvish);
+  const langRemoveGiant = customDmgRemove(onRemoveLangGiant);
+  const langRemoveGnomish = customDmgRemove(onRemoveLangGnomish);
+  const langRemoveGoblin = customDmgRemove(onRemoveLangGoblin);
+  const langRemoveHalfling = customDmgRemove(onRemoveLangHalfling);
+  const langRemoveInfernal = customDmgRemove(onRemoveLangInfernal);
+  const langRemoveOrc = customDmgRemove(onRemoveLangOrc);
+  const langRemovePrimordial = customDmgRemove(onRemoveLangPrimordial);
+  const langRemoveSylvan = customDmgRemove(onRemoveLangSylvan);
+  const langRemoveUndercommon = customDmgRemove(onRemoveLangUndercommon);
+  
+  const langDisplay = langList.map((i) => {
+  return (
+    <div>
+      <h3>
+        {i.name}
+        {i.name === "Abyssal"
+          ? langRemoveAbyssal
+          : i.name === "Celestial"
+          ? langRemoveCelestial
+          : i.name === "Common"
+          ? langRemoveCommon
+          : i.name === "Deep Speech"
+          ? langRemoveDeepSpeech
+          : i.name === "Draconic"
+          ? langRemoveDraconic
+          : i.name === "Dwarvish"
+          ? langRemoveDwarvish
+          : i.name === "Elvish"
+          ? langRemoveElvish
+          : i.name === "Giant"
+          ? langRemoveGiant
+          : i.name === "Gnomish"
+          ? langRemoveGnomish
+          : i.name === "Goblin"
+          ? langRemoveGoblin
+          : i.name === "Halfling"
+          ? langRemoveHalfling
+          : i.name === "Infernal"
+          ? langRemoveInfernal
+          : i.name === "Orc"
+          ? langRemoveOrc
+          : i.name === "Primordial"
+          ? langRemovePrimordial
+          : i.name === "Sylvan"
+          ? langRemoveSylvan
+          : i.name === "Undercommon"
+          ? langRemoveUndercommon
+          : null}
+      </h3>
+    </div>
+  );
+  });
   const langDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Languages</h2>
@@ -3030,6 +3122,7 @@ const MonsterGen = () => {
     setSenseBlindsight("")
     setSenseTremorsense("")
     setSenseTruesight("")
+    setLangList([])
   };
 
   return (
@@ -3094,6 +3187,7 @@ const MonsterGen = () => {
             {senseDialog}
             <div className={style.speedContainer}>{senseDisplay}</div>
             {langDialog}
+            <div className={style.speedContainer}>{langDisplay}</div>
           </div>
           <h1 className={style.monstergenSubHeader}>Actions / Abilities</h1>
           <div className={style.monstergenSubsection}>
