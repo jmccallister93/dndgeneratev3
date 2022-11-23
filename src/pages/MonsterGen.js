@@ -144,22 +144,22 @@ const MonsterGen = () => {
   const [immuneList, setImmuneList] = useState([]);
   const [dialogVisibleImmune, setDialogVisibleImmune] = useState(false);
   const [selectedItemsImmune, setSelectedItemsImmune] = useState(null);
-  const [immuneAcid, setImmuneAcid] = useState("");
-  const [immuneCold, setImmuneCold] = useState("");
-  const [immuneFire, setImmuneFire] = useState("");
-  const [immuneForce, setImmuneForce] = useState("");
-  const [immuneLightning, setImmuneLightning] = useState("");
-  const [immuneNecrotic, setImmuneNecrotic] = useState("");
-  const [immunePoison, setImmunePoison] = useState("");
-  const [immunePsychic, setImmunePsychic] = useState("");
-  const [immuneRadiant, setImmuneRadiant] = useState("");
-  const [immuneThunder, setImmuneThunder] = useState("");
-  const [immuneBludgeoning, setImmuneBludgeoning] = useState("");
-  const [immuneSlashing, setImmuneSlashing] = useState("");
-  const [immunePiercing, setImmunePiercing] = useState("");
-  const [immuneNMBludgeoning, setImmuneNMBludgeoning] = useState("");
-  const [immuneNMSlashing, setImmuneNMSlashing] = useState("");
-  const [immuneNMPiercing, setImmuneNMPiercing] = useState("");
+//   const [immuneAcid, setImmuneAcid] = useState("");
+//   const [immuneCold, setImmuneCold] = useState("");
+//   const [immuneFire, setImmuneFire] = useState("");
+//   const [immuneForce, setImmuneForce] = useState("");
+//   const [immuneLightning, setImmuneLightning] = useState("");
+//   const [immuneNecrotic, setImmuneNecrotic] = useState("");
+//   const [immunePoison, setImmunePoison] = useState("");
+//   const [immunePsychic, setImmunePsychic] = useState("");
+//   const [immuneRadiant, setImmuneRadiant] = useState("");
+//   const [immuneThunder, setImmuneThunder] = useState("");
+//   const [immuneBludgeoning, setImmuneBludgeoning] = useState("");
+//   const [immuneSlashing, setImmuneSlashing] = useState("");
+//   const [immunePiercing, setImmunePiercing] = useState("");
+//   const [immuneNMBludgeoning, setImmuneNMBludgeoning] = useState("");
+//   const [immuneNMSlashing, setImmuneNMSlashing] = useState("");
+//   const [immuneNMPiercing, setImmuneNMPiercing] = useState("");
 
   const [resist, setResist] = useState("");
   const [resists, setResists] = useState("");
@@ -167,22 +167,22 @@ const MonsterGen = () => {
   const [resistList, setResistList] = useState([]);
   const [dialogVisibleResist, setDialogVisibleResist] = useState(false);
   const [selectedItemsResist, setSelectedItemsResist] = useState(null);
-  const [resistAcid, setResistAcid] = useState("");
-  const [resistCold, setResistCold] = useState("");
-  const [resistFire, setResistFire] = useState("");
-  const [resistForce, setResistForce] = useState("");
-  const [resistLightning, setResistLightning] = useState("");
-  const [resistNecrotic, setResistNecrotic] = useState("");
-  const [resistPoison, setResistPoison] = useState("");
-  const [resistPsychic, setResistPsychic] = useState("");
-  const [resistRadiant, setResistRadiant] = useState("");
-  const [resistThunder, setResistThunder] = useState("");
-  const [resistBludgeoning, setResistBludgeoning] = useState("");
-  const [resistSlashing, setResistSlashing] = useState("");
-  const [resistPiercing, setResistPiercing] = useState("");
-  const [resistNMBludgeoning, setResistNMBludgeoning] = useState("");
-  const [resistNMSlashing, setResistNMSlashing] = useState("");
-  const [resistNMPiercing, setResistNMPiercing] = useState("");
+//   const [resistAcid, setResistAcid] = useState("");
+//   const [resistCold, setResistCold] = useState("");
+//   const [resistFire, setResistFire] = useState("");
+//   const [resistForce, setResistForce] = useState("");
+//   const [resistLightning, setResistLightning] = useState("");
+//   const [resistNecrotic, setResistNecrotic] = useState("");
+//   const [resistPoison, setResistPoison] = useState("");
+//   const [resistPsychic, setResistPsychic] = useState("");
+//   const [resistRadiant, setResistRadiant] = useState("");
+//   const [resistThunder, setResistThunder] = useState("");
+//   const [resistBludgeoning, setResistBludgeoning] = useState("");
+//   const [resistSlashing, setResistSlashing] = useState("");
+//   const [resistPiercing, setResistPiercing] = useState("");
+//   const [resistNMBludgeoning, setResistNMBludgeoning] = useState("");
+//   const [resistNMSlashing, setResistNMSlashing] = useState("");
+//   const [resistNMPiercing, setResistNMPiercing] = useState("");
 
   const [condition, setCondition] = useState("");
   const [conditions, setConditions] = useState("");
@@ -2090,14 +2090,101 @@ const MonsterGen = () => {
     </div>
   );
   //Condition
+  const onRemoveConditionBlinded = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Blinded");
+  const onRemoveConditionCharmed = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Charmed");
+  const onRemoveConditionDeafened = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Deafened");
+  const onRemoveConditionExhaustion = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Exhaustion");
+  const onRemoveConditionFrightened = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Frightened");
+  const onRemoveConditionGrappled = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Grappled");
+  const onRemoveConditionIncapacitated = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Incapacitated");
+  const onRemoveConditionInvisible = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Invisible");
+  const onRemoveConditionParalyzed = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Paralyzed");
+  const onRemoveConditionPetrified = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Petrified");
+  const onRemoveConditionPoisoned = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Poisoned");
+  const onRemoveConditionProne = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Prone");
+  const onRemoveConditionRestrained = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Restrained");
+  const onRemoveConditionStunned = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Stunned");
+  const onRemoveConditionUnconscious = (e) =>
+  onRemoveCustom(setConditionList, conditionList, "Unconscious");
+  
+  const conditionRemoveBlinded = customDmgRemove(onRemoveConditionBlinded);
+  const conditionRemoveCharmed = customDmgRemove(onRemoveConditionCharmed);
+  const conditionRemoveDeafened = customDmgRemove(onRemoveConditionDeafened);
+  const conditionRemoveExhaustion = customDmgRemove(onRemoveConditionExhaustion);
+  const conditionRemoveFrightened = customDmgRemove(onRemoveConditionFrightened);
+  const conditionRemoveGrappled = customDmgRemove(onRemoveConditionGrappled);
+  const conditionRemoveIncapacitated = customDmgRemove(onRemoveConditionIncapacitated);
+  const conditionRemoveInvisible = customDmgRemove(onRemoveConditionInvisible);
+  const conditionRemoveParalyzed = customDmgRemove(onRemoveConditionParalyzed);
+  const conditionRemovePetrified = customDmgRemove(onRemoveConditionPetrified);
+  const conditionRemovePoisoned = customDmgRemove(onRemoveConditionPoisoned);
+  const conditionRemoveProne = customDmgRemove(onRemoveConditionProne);
+  const conditionRemoveRestrained = customDmgRemove(onRemoveConditionRestrained);
+  const conditionRemoveStunned = customDmgRemove(onRemoveConditionStunned);
+  const conditionRemoveUnconscious = customDmgRemove(onRemoveConditionUnconscious);
+  
+  const conditionDisplay = conditionList.map((i) => {
+  return (
+    <div>
+      <h3>
+        {i.name}
+        {i.name === "Blinded"
+          ? conditionRemoveBlinded
+          : i.name === "Charmed"
+          ? conditionRemoveCharmed
+          : i.name === "Deafened"
+          ? conditionRemoveDeafened
+          : i.name === "Exhaustion"
+          ? conditionRemoveExhaustion
+          : i.name === "Frightened"
+          ? conditionRemoveFrightened
+          : i.name === "Grappled"
+          ? conditionRemoveGrappled
+          : i.name === "Incapacitated"
+          ? conditionRemoveIncapacitated
+          : i.name === "Invisible"
+          ? conditionRemoveInvisible
+          : i.name === "Paralyzed"
+          ? conditionRemoveParalyzed
+          : i.name === "Petrified"
+          ? conditionRemovePetrified
+          : i.name === "Poisoned"
+          ? conditionRemovePoisoned
+          : i.name === "Prone"
+          ? conditionRemoveProne
+          : i.name === "Restrained"
+          ? conditionRemoveRestrained
+          : i.name === "Stunned"
+          ? conditionRemoveStunned
+          : i.name === "Unconscious"
+          ? conditionRemoveUnconscious
+          : null}
+      </h3>
+    </div>
+  );
+  });
   const conditionDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Conditions</h2>
+      <h2 className={style.monstergenTitles}>Condition Resistances</h2>
       <Button onClick={openDialogCondition} className={style.monstergenBtnName}>
         <i className="pi pi-plus"> Add</i>
       </Button>
       <Dialog
-        header="Conditions"
+        header="Condition Resistances"
         visible={dialogVisibleCondition}
         maximizable
         modal
@@ -2877,6 +2964,7 @@ const MonsterGen = () => {
             {resistDialog}
             <div className={style.speedContainer}>{resistDisplay}</div>
             {conditionDialog}
+            <div className={style.speedContainer}>{conditionDisplay}</div>
             {senseDialog}
             {langDialog}
           </div>
