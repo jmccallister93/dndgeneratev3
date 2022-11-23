@@ -718,6 +718,108 @@ const MonsterGen = () => {
   useEffect(() => {
     setSelectedItemsSave(saveList);
   }, [saveList]);
+  const onRemoveSaveStr = (e) => onRemoveCustom(saveList,"Strength");
+  const onRemoveSaveDex = (e) => onRemoveCustom(saveList,"Dexterity");
+  const onRemoveSaveCon = (e) => onRemoveCustom(saveList,"Constituion");
+  const onRemoveSaveInt = (e) => onRemoveCustom(saveList,"Intelligence");
+  const onRemoveSaveWis = (e) => onRemoveCustom(saveList,"Wisdom");
+  const onRemoveSaveCha = (e) => onRemoveCustom(saveList,"Charisma");
+
+  const customSaveInput = (value, change, placeholder, onRandom, onRemove) => (
+    <div className={style.monstergenSpeedsWrapper}>
+      <InputNumber
+        value={value}
+        onChange={change}
+        placeholder={placeholder}
+        mode="decimal"
+        showButtons
+        buttonLayout="stacked"
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <div style={{ display: "flex" }}>
+        <Button
+          onClick={onRandom}
+          className={style.monstergenBtnName}
+          style={{ height: "2rem" }}
+        >
+          Random
+        </Button>
+        <Button
+          tooltip="Remove?"
+          onClick={onRemove}
+          className={style.monstergenBtnRemove}
+          style={{ height: "2rem" }}
+        >
+          <i className="pi pi-minus"></i>
+        </Button>
+      </div>
+    </div>
+  );
+  const onRandomSaveStr = (e) => {
+    randomButton(setSaveStr, 15, 0);
+  };
+  const onRandomSaveDex = (e) => {
+    randomButton(setSaveDex, 15, 0);
+  };
+  const onRandomSaveCon = (e) => {
+    randomButton(setSaveCon, 15, 0);
+  };
+  const onRandomSaveInt = (e) => {
+    randomButton(setSaveInt, 15, 0);
+  };
+  const onRandomSaveWis = (e) => {
+    randomButton(setSaveWis, 15, 0);
+  };
+  const onRandomSaveCha = (e) => {
+    randomButton(setSaveCha, 15, 0);
+  };
+  const saveStrInput = customSaveInput(
+    saveStr,
+    onSaveStrChange,
+    "STR Modifier",
+    onRandomSaveStr,
+    onRemoveSaveStr
+  );
+  const saveDexInput = customSaveInput(
+    saveDex,
+    onSaveDexChange,
+    "DEX Modifier",
+    onRandomSaveDex,
+    onRemoveSaveDex
+  );
+  const saveConInput = customSaveInput(
+    saveCon,
+    onSaveConChange,
+    "CON Modifier",
+    onRandomSaveCon,
+    onRemoveSaveCon
+  );
+  const saveIntInput = customSaveInput(
+    saveInt,
+    onSaveIntChange,
+    "INT Modifier",
+    onRandomSaveInt,
+    onRemoveSaveInt
+  );
+  const saveWisInput = customSaveInput(
+    saveWis,
+    onSaveWisChange,
+    "WIS Modifier",
+    onRandomSaveWis,
+    onRemoveSaveWis
+  );
+  const saveChaInput = customSaveInput(
+    saveCha,
+    onSaveChaChange,
+    "CHA Modifier",
+    onRandomSaveCha,
+    onRemoveSaveCha
+  );
 
   const saveDialog = (
     <div className="card">
