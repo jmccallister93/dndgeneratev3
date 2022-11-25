@@ -2548,11 +2548,57 @@ const MonsterGen = () => {
     </div>
   );
   //Special
+  const onRemoveSelected = (setlist, list, name) => {
+    setlist(list.filter((value) => value.name !== name));
+  };
+  const onRemoveSpecial = (e) => {
+    // setSelectedItemsSpecial(selectedItemsSpecial.filter((e.target.value)))
+    console.log(e.target.value)
+  }
+  const specialDisplay = (
+      <div>
+        <DataTable
+        value={selectedItemsSpecial}
+        scrollable
+        rows={20}
+        dataKey="name"
+        filters={filters}
+        filterDisplay="row"
+        responsiveLayout="scroll"
+        globalFilterFields={["name"]}
+        // header={header}
+        emptyMessage="No items found."
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        rowHover
+        resizableColumns
+        reorderableColumns
+        reorderableRows
+        selection={selectedItemsSpecial}
+        onSelectionChange={onRemoveSpecial}
+        >
+            {/* <Column
+            // selectionMode="multiple"
+            // selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+            header="Special Abilities"
+          ></Column> */}
+          <Column
+          header="Special Abilities"
+            field="name"
+            // header="Name"
+            // sortable
+            // filter
+            // filterPlaceholder="Search"
+          ></Column>
+          </DataTable>
+      </div>
+    );
+
   const specialDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Special Abilities</h2>
       <Button onClick={openDialogSpecial} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"> Add</i>
+        Add / Remove
       </Button>
       <Dialog
         header="Special Abilities"
@@ -2601,6 +2647,15 @@ const MonsterGen = () => {
     </div>
   );
   //Action
+  const actionDisplay = actionList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+        </h3>
+      </div>
+    );
+    });
   const actionDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Actions</h2>
@@ -2654,6 +2709,15 @@ const MonsterGen = () => {
     </div>
   );
   //Reaction
+  const reactionDisplay = reactionList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+        </h3>
+      </div>
+    );
+    });
   const reactionDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Reactions</h2>
@@ -2707,6 +2771,15 @@ const MonsterGen = () => {
     </div>
   );
   //Legendary
+  const legendDisplay = legendList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+        </h3>
+      </div>
+    );
+    });
   const legendDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Legendary Actions</h2>
@@ -2760,6 +2833,15 @@ const MonsterGen = () => {
     </div>
   );
   //Lair
+  const lairDisplay = lairList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+        </h3>
+      </div>
+    );
+    });
   const lairDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Lair Actions</h2>
@@ -2813,6 +2895,15 @@ const MonsterGen = () => {
     </div>
   );
   //Gear
+  const gearDisplay = gearList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+        </h3>
+      </div>
+    );
+    });
   const gearDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Gear</h2>
@@ -3192,11 +3283,17 @@ const MonsterGen = () => {
           <h1 className={style.monstergenSubHeader}>Actions / Abilities</h1>
           <div className={style.monstergenSubsection}>
             {specialDialog}
+            {specialDisplay}
             {actionDialog}
+            <div className={style.speedContainer}>{actionDisplay}</div>
             {reactionDialog}
+            <div className={style.speedContainer}>{reactionDisplay}</div>
             {legendDialog}
+            <div className={style.speedContainer}>{legendDisplay}</div>
             {lairDialog}
+            <div className={style.speedContainer}>{lairDisplay}</div>
             {gearDialog}
+            <div className={style.speedContainer}>{gearDisplay}</div>
           </div>
         </div>
 
