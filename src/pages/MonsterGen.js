@@ -2566,29 +2566,19 @@ const MonsterGen = () => {
         filterDisplay="row"
         responsiveLayout="scroll"
         globalFilterFields={["name"]}
-        // header={header}
         emptyMessage="No items found."
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         rowHover
         resizableColumns
         reorderableColumns
         reorderableRows
-        selection={selectedItemsSpecial}
-        onSelectionChange={onRemoveSpecial}
         >
-            {/* <Column
-            // selectionMode="multiple"
-            // selectionAriaLabel="name"
-            headerStyle={{ width: "6em" }}
-            header="Special Abilities"
-          ></Column> */}
           <Column
           header="Special Abilities"
             field="name"
-            // header="Name"
-            // sortable
-            // filter
-            // filterPlaceholder="Search"
+            sortable
+            filter
+            filterPlaceholder="Search"
           ></Column>
           </DataTable>
       </div>
