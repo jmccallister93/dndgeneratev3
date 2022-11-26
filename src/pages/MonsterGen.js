@@ -3478,6 +3478,24 @@ const MonsterGen = () => {
     onAbilityModChange(cha, setChaMod);
   }, [str, dex, con, int, wis, cha]);
 
+  const mapSaves = saveList.map((i) => {
+    return ` ${i.name} +${
+      i.name === "Strength"
+        ?  saveStr
+        : i.name === "Dexterity"
+        ? saveDex
+        : i.name === "Constitution"
+        ? saveCon
+        : i.name === "Wisdom"
+        ? saveWis
+        : i.name === "Charisma"
+        ? saveCha
+        : i.name === "Intelligence"
+        ? saveInt
+        : null
+    }, `;
+  });
+
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
@@ -3638,7 +3656,7 @@ const MonsterGen = () => {
             </div>
           </h3>
           <hr className={style.lineBreak} />
-          <h3>Saving Throws: {save}</h3>
+          <h3>Saving Throws {mapSaves}</h3>
           <h3>Skills: {skill}</h3>
           <h3>Damage Immunities: {immune} </h3>
           <h3>Condition Immunities: {condition}</h3>
