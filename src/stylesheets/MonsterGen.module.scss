@@ -138,6 +138,12 @@ $display-red: #9a2818;
    
 }
 
+.abilityScores{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px;
+}
+
 
 .monstergenDescHeader {
   font-size: 2.5rem;

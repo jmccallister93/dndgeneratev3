@@ -3470,13 +3470,12 @@ const MonsterGen = () => {
         setAbilityMod(modifierList[14]);
       }
     };
-   onAbilityModChange(str, setStrMod)
-   onAbilityModChange(dex, setDexMod)
-   onAbilityModChange(con, setConMod)
-   onAbilityModChange(int, setIntMod)
-   onAbilityModChange(wis, setWisMod)
-   onAbilityModChange(cha, setChaMod)
-    
+    onAbilityModChange(str, setStrMod);
+    onAbilityModChange(dex, setDexMod);
+    onAbilityModChange(con, setConMod);
+    onAbilityModChange(int, setIntMod);
+    onAbilityModChange(wis, setWisMod);
+    onAbilityModChange(cha, setChaMod);
   }, [str, dex, con, int, wis, cha]);
 
   return (
@@ -3600,11 +3599,43 @@ const MonsterGen = () => {
             Speed {speed} ft., {mapExtraSpeeds}
           </h3>
           <hr className={style.lineBreak} />
-          <h3>
-            STR {str} ({strMod}) DEX {dex} ({dexMod}) CON {con} ({conMod})
+          <h3 className={style.abilityScores}>
+            <div>
+              <h3>STR</h3>
+              <div>
+                {str} ({strMod}){" "}
+              </div>
+            </div>
+            <div>
+              <h3>DEX</h3>
+              <div>
+                {dex} ({dexMod}){" "}
+              </div>
+            </div>
+            <div>
+              <h3>CON</h3>
+              <div>
+                {con} ({conMod}){" "}
+              </div>
+            </div>
           </h3>
-          <h3>
-            INT {int} ({intMod}) WIS {wis} ({wisMod}) CHA {cha} ({chaMod})
+          <h3 className={style.abilityScores}>
+            <div>
+                <h3>INT</h3>
+                <div>
+                {int} ({intMod})
+                </div>
+            </div>
+            <div>
+                <h3>WIS</h3>
+                <div>
+                {wis} ({wisMod})
+                </div>
+            </div>
+            <div>
+                <h3>CHA</h3>
+                <div>{cha} ({chaMod})</div>
+            </div>
           </h3>
           <hr className={style.lineBreak} />
           <h3>Saving Throws: {save}</h3>
