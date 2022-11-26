@@ -680,7 +680,7 @@ const MonsterGen = () => {
       }
     }
   };
-  const closeDialogSpecial = () => {
+  const closeDialogSpecial = (e) => {
     setDialogVisibleSpecial(false);
     for (let i = 0; i < selectedItemsSpecial.length; i++) {
       if (specialList.includes(selectedItemsSpecial[i])) {
@@ -2555,6 +2555,10 @@ const MonsterGen = () => {
     // setSelectedItemsSpecial(selectedItemsSpecial.filter((e.target.value)))
     console.log(e.target.value)
   }
+
+  const onSpecialSelect = (e) => {
+    setSpecialList(e.value)
+}
   const specialDisplay = (
       <div>
         <DataTable
@@ -2572,6 +2576,7 @@ const MonsterGen = () => {
         resizableColumns
         reorderableColumns
         reorderableRows
+        
         >
           <Column
           header="Special Abilities"
@@ -2606,7 +2611,7 @@ const MonsterGen = () => {
           rows={20}
           dataKey="name"
           selection={selectedItemsSpecial}
-          onSelectionChange={(e) => setSelectedItemsSpecial(e.value)}
+          onSelectionChange={onSpecialSelect}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
