@@ -3474,118 +3474,28 @@ const showDT = (e) => {
           </div>
         </div>
 
-        <div className={style.monstergenColumns}>
+       
           {/* Main Display */}
           <div className={style.monstergenDisplay}>
-            {/* Display Wrapper */}
-            <div className={style.npggenDescWrapper}>
-              {/* Display Desc  */}
-              <div className={style.monstergenDesc}>
-                <h2 className={style.monstergenDescHeader}>Details</h2>
-                <div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>Name: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{name}</h1>
-                  </div>
+            <h1>{name}</h1>
+            <h3>{size} {type}, {align}</h3>
+            <hr />
+            <h3>Armor Class {ac} ({armorType})</h3>
+            <h3>{hp}</h3>
+            <h3>Speed {speed}, Extra Speeds map</h3>
+            <hr />
+            <h3>STR {str} DEX {dex} CON {con}</h3>
+            <h3>INT {int} WIS {wis} CHA {cha}</h3>
+            <hr />
+            <h3>Saving Throws: {save}</h3>
+            <h3>Skills: {skill}</h3>
+            <h3>Damage Immunities: {immune} </h3>
+            <h3>Condition Immunities: </h3>
+          </div>
 
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>Size: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{size}</h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>Type: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{type}</h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>Alignment: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{align}</h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>AC: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{ac}</h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>
-                      Armor Type:{" "}
-                    </h1>
-                    <h1 className={style.monstergenDetailOutput}>
-                      {armorType}
-                    </h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>HP: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{hp}</h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>Speed: </h1>
-                    <h1 className={style.monstergenDetailOutput}>{speed}</h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>
-                      Movement Type:{" "}
-                    </h1>
-                    <h1 className={style.monstergenDetailOutput}>
-                      {speedType}
-                    </h1>
-                  </div>
-                  <div className={style.monstergenDetail}>
-                    <h1 className={style.monstergenDetailTitle}>
-                      Extra Movement:{" "}
-                    </h1>
-                    <h1 className={style.monstergenDetailOutput}>
-                      {speedExtra}
-                    </h1>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* End first Column */}
-          </div>
-          {/* Second column */}
-          <div className={style.monstergenDisplay}>
-            <div className={style.npggenDescWrapper}>
-              <div className={style.monstergenDesc}>
-                <h2 className={style.monstergenDescHeader}>Stats</h2>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>STR: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{str}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>DEX: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{dex}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>CON: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{con}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>INT: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{int}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>WIS: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{wis}</h1>
-                </div>
-                <div className={style.monstergenDetail}>
-                  <h1 className={style.monstergenDetailTitle}>CHA: </h1>
-                  <h1 className={style.monstergenDetailOutput}>{cha}</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* end second column */}
-          {/* Second column */}
-          <div className={style.monstergenDisplay}>
-            <div className={style.npggenDescWrapper}>
-              <div className={style.monstergenDesc}>
-                <h2 className={style.monstergenDescHeader}>Actions</h2>
-              </div>
-            </div>
-          </div>
-          {/* end second column */}
-        </div>
 
-        {/* End full column wrapper */}
+
+           
       </div>
     </div>
   );
