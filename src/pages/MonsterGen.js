@@ -15,6 +15,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
+import { leftShift } from "mathjs";
 
 const MonsterGen = () => {
   const [monster, setMonster] = useState({ size: "", type: "" });
@@ -71,11 +72,17 @@ const MonsterGen = () => {
   const [abilityOptions, setAbilityOptions] = useState();
 
   const [str, setStr] = useState("");
+  const [strMod, setStrMod] = useState("");
   const [dex, setDex] = useState("");
+  const [dexMod, setDexMod] = useState("");
   const [con, setCon] = useState("");
+  const [conMod, setConMod] = useState("");
   const [int, setInt] = useState("");
+  const [intMod, setIntMod] = useState("");
   const [wis, setWis] = useState("");
+  const [wisMod, setWisMod] = useState("");
   const [cha, setCha] = useState("");
+  const [chaMod, setChaMod] = useState("");
 
   const [save, setSave] = useState("");
   const [saves, setSaves] = useState("");
@@ -266,11 +273,11 @@ const MonsterGen = () => {
   const [dialogVisibleGear, setDialogVisibleGear] = useState(false);
   const [selectedItemsGear, setSelectedItemsGear] = useState(null);
 
-  const [isAAActive, setIsAAActive] = useState(false)
-  const [isAbilityActive, setIsAbilityActive] = useState(false)
-  const [isBasicActive, setIsBasicActive] = useState(false)
-  const [isSSDActive, setIsSSDActive] = useState(false)
-  const [isDTActive, setIsDTActive] = useState(false)
+  const [isAAActive, setIsAAActive] = useState(false);
+  const [isAbilityActive, setIsAbilityActive] = useState(false);
+  const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isSSDActive, setIsSSDActive] = useState(false);
+  const [isDTActive, setIsDTActive] = useState(false);
 
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -3143,6 +3150,8 @@ const MonsterGen = () => {
         decrementButtonIcon="pi pi-minus"
         minFractionDigits={0}
         maxFractionDigits={2}
+        min={0}
+        max={30}
       />
       <Button onClick={click} className={style.monstergenBtnName}>
         Random
@@ -3373,40 +3382,102 @@ const MonsterGen = () => {
     setLairList([]);
     setGearList([]);
   };
-//Showoptions
+  //Showoptions
   const showBasics = (e) => {
-    setIsBasicActive(current => !current)
-}
-const showAbility = (e) => {
-    setIsAbilityActive(current => !current)
-}
-const showSSD = (e) => {
-    setIsSSDActive(current => !current)
-}
-const showAA = (e) => {
-    setIsAAActive(current => !current)
-}
-const showDT = (e) => {
-    setIsDTActive(current => !current)
-}
-//Map items for display
-const mapExtraSpeeds = speedExtraList.map(((i) => {
+    setIsBasicActive((current) => !current);
+  };
+  const showAbility = (e) => {
+    setIsAbilityActive((current) => !current);
+  };
+  const showSSD = (e) => {
+    setIsSSDActive((current) => !current);
+  };
+  const showAA = (e) => {
+    setIsAAActive((current) => !current);
+  };
+  const showDT = (e) => {
+    setIsDTActive((current) => !current);
+  };
+  //Map items for display
+  const mapExtraSpeeds = speedExtraList.map((i) => {
+    return ` ${i.name} ${
+      i.name === "Burrow"
+        ? burrow
+        : i.name === "Climb"
+        ? climb
+        : i.name === "Fly"
+        ? fly
+        : i.name === "Hover"
+        ? hover
+        : i.name === "Swim"
+        ? swim
+        : null
+    } ft., `;
+  });
+
+  useEffect(() => {
+    let modifierList = [
+      "-5",
+      "-4",
+      "-3",
+      "-2",
+      "-1",
+      "+0",
+      "+1",
+      "+2",
+      "+3",
+      "+4",
+      "+5",
+      "+6",
+      "+7",
+      "+8",
+      "+9",
+      "+10",
+    ];
+
+    const onAbilityModChange = (abilityType, setAbilityMod) => {
+      if (abilityType <= 1) {
+        setAbilityMod(modifierList[0]);
+      } else if (abilityType <= 3) {
+        setAbilityMod(modifierList[0]);
+      } else if (abilityType <= 5) {
+        setAbilityMod(modifierList[1]);
+      } else if (abilityType <= 7) {
+        setAbilityMod(modifierList[2]);
+      } else if (abilityType <= 9) {
+        setAbilityMod(modifierList[3]);
+      } else if (abilityType <= 11) {
+        setAbilityMod(modifierList[4]);
+      } else if (abilityType <= 13) {
+        setAbilityMod(modifierList[5]);
+      } else if (abilityType <= 15) {
+        setAbilityMod(modifierList[6]);
+      } else if (abilityType <= 17) {
+        setAbilityMod(modifierList[7]);
+      } else if (abilityType <= 19) {
+        setAbilityMod(modifierList[8]);
+      } else if (abilityType <= 21) {
+        setAbilityMod(modifierList[9]);
+      } else if (abilityType <= 23) {
+        setAbilityMod(modifierList[10]);
+      } else if (abilityType <= 25) {
+        setAbilityMod(modifierList[11]);
+      } else if (abilityType <= 27) {
+        setAbilityMod(modifierList[12]);
+      } else if (abilityType <= 29) {
+        setAbilityMod(modifierList[13]);
+      } else if (abilityType <= 30) {
+        setAbilityMod(modifierList[14]);
+      }
+    };
+   onAbilityModChange(str, setStrMod)
+   onAbilityModChange(dex, setDexMod)
+   onAbilityModChange(con, setConMod)
+   onAbilityModChange(int, setIntMod)
+   onAbilityModChange(wis, setWisMod)
+   onAbilityModChange(cha, setChaMod)
     
-        return (
-            ` ${i.name} ${i.name === "Burrow"
-            ? burrow
-            : i.name === "Climb"
-            ? climb
-            : i.name === "Fly"
-            ? fly
-            : i.name === "Hover"
-            ? hover
-            : i.name === "Swim"
-            ? swim
-            : null} ft., `
-            )
-    
-}))
+  }, [str, dex, con, int, wis, cha]);
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3432,7 +3503,11 @@ const mapExtraSpeeds = speedExtraList.map(((i) => {
           <h1 className={style.monstergenSubHeader} onClick={showBasics}>
             Basic Info
           </h1>
-          <div className={isBasicActive ? style.monstergenSubsection : style.hidden}>
+          <div
+            className={
+              isBasicActive ? style.monstergenSubsection : style.hidden
+            }
+          >
             {nameText}
             {sizeDrop}
             {typeDrop}
@@ -3444,8 +3519,14 @@ const mapExtraSpeeds = speedExtraList.map(((i) => {
             {moveDialog}
             <div className={style.speedContainer}>{extraSpeedDispaly}</div>
           </div>
-          <h1 className={style.monstergenSubHeader} onClick={showAbility}>Ability Scores</h1>
-          <div className={isAbilityActive ? style.monstergenSubsection : style.hidden}>
+          <h1 className={style.monstergenSubHeader} onClick={showAbility}>
+            Ability Scores
+          </h1>
+          <div
+            className={
+              isAbilityActive ? style.monstergenSubsection : style.hidden
+            }
+          >
             {strInput}
             {dexInput}
             {conInput}
@@ -3453,8 +3534,12 @@ const mapExtraSpeeds = speedExtraList.map(((i) => {
             {wisInput}
             {chaInput}
           </div>
-          <h1 className={style.monstergenSubHeader} onClick={showSSD}>Saves & Skills</h1>
-          <div className={isSSDActive ? style.monstergenSubsection : style.hidden}>
+          <h1 className={style.monstergenSubHeader} onClick={showSSD}>
+            Saves & Skills
+          </h1>
+          <div
+            className={isSSDActive ? style.monstergenSubsection : style.hidden}
+          >
             {saveDialog}
             <div className={style.speedContainer}>{saveDisplay}</div>
             {skillDialog}
@@ -3464,9 +3549,13 @@ const mapExtraSpeeds = speedExtraList.map(((i) => {
             {langDialog}
             <div className={style.speedContainer}>{langDisplay}</div>
           </div>
-          <h1 className={style.monstergenSubHeader} onClick={showDT}>Damage Types</h1>
-          <div className={isDTActive ? style.monstergenSubsection : style.hidden}>
-          {vulnDialog}
+          <h1 className={style.monstergenSubHeader} onClick={showDT}>
+            Damage Types
+          </h1>
+          <div
+            className={isDTActive ? style.monstergenSubsection : style.hidden}
+          >
+            {vulnDialog}
             <div className={style.speedContainer}>{vulnDisplay}</div>
             {immuneDialog}
             <div className={style.speedContainer}>{immuneDisplay}</div>
@@ -3474,9 +3563,13 @@ const mapExtraSpeeds = speedExtraList.map(((i) => {
             <div className={style.speedContainer}>{resistDisplay}</div>
             {conditionDialog}
             <div className={style.speedContainer}>{conditionDisplay}</div>
-            </div>
-          <h1 className={style.monstergenSubHeader} onClick={showAA}>Actions / Abilities</h1>
-          <div className={isAAActive ? style.monstergenSubsection : style.hidden}>
+          </div>
+          <h1 className={style.monstergenSubHeader} onClick={showAA}>
+            Actions / Abilities
+          </h1>
+          <div
+            className={isAAActive ? style.monstergenSubsection : style.hidden}
+          >
             {specialDialog}
             {specialDisplay}
             {actionDialog}
@@ -3492,38 +3585,43 @@ const mapExtraSpeeds = speedExtraList.map(((i) => {
           </div>
         </div>
 
-       
-          {/* Main Display */}
-          <div className={style.monstergenDisplay}>
-            <h1>{name}</h1>
-            <h3>{size} {type}, {align}</h3>
-            <hr className={style.lineBreak}/>
-            <h3>Armor Class {ac} ({armorType})</h3>
-            <h3>Hit Points {hp}</h3>
-            <h3>Speed {speed} ft., {mapExtraSpeeds}</h3>
-            <hr className={style.lineBreak}/>
-            <h3>STR {str} DEX {dex} CON {con}</h3>
-            <h3>INT {int} WIS {wis} CHA {cha}</h3>
-            <hr className={style.lineBreak}/>
-            <h3>Saving Throws: {save}</h3>
-            <h3>Skills: {skill}</h3>
-            <h3>Damage Immunities: {immune} </h3>
-            <h3>Condition Immunities: {condition}</h3>
-            <h3>Senses </h3>
-            <h3>Languages </h3>
-            <hr className={style.lineBreak}/>
-            <h3>Abilities</h3>
-            <h2 >Actions</h2>
-            <hr className={style.subLineBreak}/>
-            <h3>Actions List</h3>
-            <h2>Legendary Actions</h2>
-            <hr className={style.subLineBreak}/>
-            <h3>Legendary actions Listed</h3>
-          </div>
-
-
-
-           
+        {/* Main Display */}
+        <div className={style.monstergenDisplay}>
+          <h1>{name}</h1>
+          <h3>
+            {size} {type}, {align}
+          </h3>
+          <hr className={style.lineBreak} />
+          <h3>
+            Armor Class {ac} ({armorType})
+          </h3>
+          <h3>Hit Points {hp}</h3>
+          <h3>
+            Speed {speed} ft., {mapExtraSpeeds}
+          </h3>
+          <hr className={style.lineBreak} />
+          <h3>
+            STR {str} ({strMod}) DEX {dex} ({dexMod}) CON {con} ({conMod})
+          </h3>
+          <h3>
+            INT {int} ({intMod}) WIS {wis} ({wisMod}) CHA {cha} ({chaMod})
+          </h3>
+          <hr className={style.lineBreak} />
+          <h3>Saving Throws: {save}</h3>
+          <h3>Skills: {skill}</h3>
+          <h3>Damage Immunities: {immune} </h3>
+          <h3>Condition Immunities: {condition}</h3>
+          <h3>Senses </h3>
+          <h3>Languages </h3>
+          <hr className={style.lineBreak} />
+          <h3>Abilities</h3>
+          <h2>Actions</h2>
+          <hr className={style.subLineBreak} />
+          <h3>Actions List</h3>
+          <h2>Legendary Actions</h2>
+          <hr className={style.subLineBreak} />
+          <h3>Legendary actions Listed</h3>
+        </div>
       </div>
     </div>
   );
