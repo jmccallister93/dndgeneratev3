@@ -266,6 +266,11 @@ const MonsterGen = () => {
   const [dialogVisibleGear, setDialogVisibleGear] = useState(false);
   const [selectedItemsGear, setSelectedItemsGear] = useState(null);
 
+  const [isAAActive, setIsAAActive] = useState(false)
+  const [isAbilityActive, setIsAbilityActive] = useState(false)
+  const [isBasicActive, setIsBasicActive] = useState(false)
+  const [isSSDActive, setIsSSDActive] = useState(false)
+
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -2738,7 +2743,9 @@ const MonsterGen = () => {
           rows={20}
           dataKey="name"
           selection={selectedItemsAction}
-          onSelectionChange={(e) => {setActionList(e.value)}}
+          onSelectionChange={(e) => {
+            setActionList(e.value);
+          }}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -2819,7 +2826,9 @@ const MonsterGen = () => {
           rows={20}
           dataKey="name"
           selection={selectedItemsReaction}
-          onSelectionChange={(e) => {setReactionList(e.value)}}
+          onSelectionChange={(e) => {
+            setReactionList(e.value);
+          }}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -2850,18 +2859,39 @@ const MonsterGen = () => {
     </div>
   );
   //Legendary
-  const legendDisplay = legendList.map((i) => {
-    return (
-      <div>
-        <h3>{i.name}</h3>
-      </div>
-    );
-  });
+  const legendDisplay = (
+    <div>
+      <DataTable
+        value={selectedItemsLegend}
+        scrollable
+        rows={20}
+        dataKey="name"
+        filters={filters}
+        filterDisplay="row"
+        responsiveLayout="scroll"
+        globalFilterFields={["name"]}
+        emptyMessage="No items found."
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        rowHover
+        resizableColumns
+        reorderableColumns
+        reorderableRows
+      >
+        <Column
+          header="Legendary Actions"
+          field="name"
+          sortable
+          filter
+          filterPlaceholder="Search"
+        ></Column>
+      </DataTable>
+    </div>
+  );
   const legendDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Legendary Actions</h2>
       <Button onClick={openDialogLegend} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"> Add</i>
+        Add / Remove
       </Button>
       <Dialog
         header="Legendary Actions"
@@ -2879,7 +2909,9 @@ const MonsterGen = () => {
           rows={20}
           dataKey="name"
           selection={selectedItemsLegend}
-          onSelectionChange={(e) => setSelectedItemsLegend(e.value)}
+          onSelectionChange={(e) => {
+            setLegendList(e.value);
+          }}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -2910,18 +2942,39 @@ const MonsterGen = () => {
     </div>
   );
   //Lair
-  const lairDisplay = lairList.map((i) => {
-    return (
-      <div>
-        <h3>{i.name}</h3>
-      </div>
-    );
-  });
+  const lairDisplay = (
+    <div>
+      <DataTable
+        value={selectedItemsLair}
+        scrollable
+        rows={20}
+        dataKey="name"
+        filters={filters}
+        filterDisplay="row"
+        responsiveLayout="scroll"
+        globalFilterFields={["name"]}
+        emptyMessage="No items found."
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        rowHover
+        resizableColumns
+        reorderableColumns
+        reorderableRows
+      >
+        <Column
+          header="Lair Actions"
+          field="name"
+          sortable
+          filter
+          filterPlaceholder="Search"
+        ></Column>
+      </DataTable>
+    </div>
+  );
   const lairDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Lair Actions</h2>
       <Button onClick={openDialogLair} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"> Add</i>
+        Add / Remove
       </Button>
       <Dialog
         header="Lair Actions"
@@ -2932,14 +2985,16 @@ const MonsterGen = () => {
         footer={dialogFooterLair}
       >
         <DataTable
-          //   value={lairOptions}
+          value={lairOptions}
           scrollable
           scrollHeight="60vh"
           //   className="p-datatable-customers"
           rows={20}
           dataKey="name"
           selection={selectedItemsLair}
-          onSelectionChange={(e) => setSelectedItemsLair(e.value)}
+          onSelectionChange={(e) => {
+            setLairList(e.value);
+          }}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -2970,18 +3025,39 @@ const MonsterGen = () => {
     </div>
   );
   //Gear
-  const gearDisplay = gearList.map((i) => {
-    return (
-      <div>
-        <h3>{i.name}</h3>
-      </div>
-    );
-  });
+  const gearDisplay = (
+    <div>
+      <DataTable
+        value={selectedItemsGear}
+        scrollable
+        rows={20}
+        dataKey="name"
+        filters={filters}
+        filterDisplay="row"
+        responsiveLayout="scroll"
+        globalFilterFields={["name"]}
+        emptyMessage="No items found."
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        rowHover
+        resizableColumns
+        reorderableColumns
+        reorderableRows
+      >
+        <Column
+          header="Gear"
+          field="name"
+          sortable
+          filter
+          filterPlaceholder="Search"
+        ></Column>
+      </DataTable>
+    </div>
+  );
   const gearDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Gear</h2>
       <Button onClick={openDialogGear} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"> Add</i>
+        Add / Remove
       </Button>
       <Dialog
         header="Gear"
@@ -2999,7 +3075,9 @@ const MonsterGen = () => {
           rows={20}
           dataKey="name"
           selection={selectedItemsGear}
-          onSelectionChange={(e) => setSelectedItemsGear(e.value)}
+          onSelectionChange={(e) => {
+            setGearList(e.value);
+          }}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -3287,7 +3365,26 @@ const MonsterGen = () => {
     setSenseTremorsense("");
     setSenseTruesight("");
     setLangList([]);
+    setSpecialList([]);
+    setActionList([]);
+    setReactionList([]);
+    setLegendList([]);
+    setLairList([]);
+    setGearList([]);
   };
+
+  const showBasics = (e) => {
+    setIsBasicActive(current => !current)
+}
+const showAbility = (e) => {
+    setIsAbilityActive(current => !current)
+}
+const showSSD = (e) => {
+    setIsSSDActive(current => !current)
+}
+const showAA = (e) => {
+    setIsAAActive(current => !current)
+}
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3310,8 +3407,10 @@ const MonsterGen = () => {
       <div className={style.monstergenBody}>
         {/* Options */}
         <div className={style.monstergenOptionsWrapper}>
-          <h1 className={style.monstergenSubHeader}>Basic Info</h1>
-          <div className={style.monstergenSubsection}>
+          <h1 className={style.monstergenSubHeader} onClick={showBasics}>
+            Basic Info
+          </h1>
+          <div className={isBasicActive ? style.monstergenSubsection : ''}>
             {nameText}
             {sizeDrop}
             {typeDrop}
@@ -3325,8 +3424,8 @@ const MonsterGen = () => {
             {moveDialog}
             <div className={style.speedContainer}>{extraSpeedDispaly}</div>
           </div>
-          <h1 className={style.monstergenSubHeader}>Ability Scores</h1>
-          <div className={style.monstergenSubsection}>
+          <h1 className={style.monstergenSubHeader} onClick={showAbility}>Ability Scores</h1>
+          <div className={isAbilityActive ? style.monstergenSubsection : ''}>
             {strInput}
             {dexInput}
             {conInput}
@@ -3334,8 +3433,8 @@ const MonsterGen = () => {
             {wisInput}
             {chaInput}
           </div>
-          <h1 className={style.monstergenSubHeader}>Saves/Skills/Dmgs</h1>
-          <div className={style.monstergenSubsection}>
+          <h1 className={style.monstergenSubHeader} onClick={showSSD}>Saves/Skills/Dmgs</h1>
+          <div className={isSSDActive ? style.monstergenSubsection : ''}>
             {saveDialog}
             <div className={style.speedContainer}>{saveDisplay}</div>
             {skillDialog}
@@ -3353,8 +3452,8 @@ const MonsterGen = () => {
             {langDialog}
             <div className={style.speedContainer}>{langDisplay}</div>
           </div>
-          <h1 className={style.monstergenSubHeader}>Actions / Abilities</h1>
-          <div className={style.monstergenSubsection}>
+          <h1 className={style.monstergenSubHeader} onClick={showAA}>Actions / Abilities</h1>
+          <div className={isAAActive ? style.monstergenSubsection : ''}>
             {specialDialog}
             {specialDisplay}
             {actionDialog}

@@ -1,227 +1,239 @@
-$primary-grey: #393E46;
+$primary-grey: #393e46;
 $secondary-grey: #d6e4e5;
-$header-color: #3E6D9C;
+$header-color: #3e6d9c;
 
 .monstergenWrapper {
-    background: linear-gradient(135deg, $primary-grey 25%, white) ;
-    height: fit-content;
-    width: 99vw;
-    height: fit-content;
-    display: inline-block;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    color: $primary-grey;
-  }
-  
-  .monstergenBody {
-    display: grid;
-    // TODO 50% width
-    margin: 0;
-    padding: 0;
-    grid-template-rows: repeat(2, 1fr);
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    place-items: center;
-  }
+  background: linear-gradient(135deg, $primary-grey 25%, white);
+  height: fit-content;
+  width: 99vw;
+  height: fit-content;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: $primary-grey;
+}
 
-  .topHeader{
-    display: inline-block;
-    align-items: center;
+.monstergenBody {
+  display: grid;
+  // TODO 50% width
+  margin: 0;
+  padding: 0;
+  grid-template-rows: repeat(2, 1fr);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
+}
+
+.topHeader {
+  display: inline-block;
+  align-items: center;
+}
+
+.monstergenHeader {
+  font-size: 3rem;
+  color: $secondary-grey;
+  margin-top: 2rem;
+  border-bottom: 1px solid #d6e4e5;
+  justify-self: center;
+  text-align: center;
+}
+
+.monstergenOptionsWrapper {
+  display: flex;
+  flex-direction: column;
+  // grid-template-rows: auto;
+  background-color: $secondary-grey;
+  width: fit-content;
+  height: fit-content;
+  padding: 0px;
+  margin: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 5rem;
+  text-align: center;
+  align-items: left;
+  justify-content: left;
+  border-radius: 1rem;
+  & div {
+    padding: 2px;
   }
-  
-  .monstergenHeader {
-    font-size: 3rem;
-    color: $secondary-grey;
-    margin-top: 2rem;
-    border-bottom: 1px solid #d6e4e5;
-    justify-self: center;
-    text-align: center;
-  }
-  
-  .monstergenOptionsWrapper {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    grid-template-rows: auto;
-    background-color: $secondary-grey;
-    width: fit-content;
-    height: fit-content;
-    padding: 0px;
-    margin: 0;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-top: 5rem;
+}
+
+.monstergenSubsection {
+  // display: grid;
+  // grid-template-columns: repeat(6, 1fr);
+  display: flex;
+  flex-direction: column;
+  & div {
     text-align: center;
     align-items: left;
-    justify-content: center;
-    border-radius: 1rem;
-    & div {
-      padding: 2px;
-    }
+    justify-content: left;
   }
+}
 
-  .monstergenSubsection{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+.monstergenSubHeader {
+  color: $primary-grey;
+  background-color: white;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid $header-color;
+  width: fit-content;
+  box-shadow: 5px 5px 5px 2px $primary-grey;
+  transition: 0.3s;
+  &:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px green;
+    scale: 1.1
   }
+}
 
-  .monstergenSubHeader{
-    color: $primary-grey;
-    background-color: white;
-    margin: 1rem;
-    padding: 0.5rem;
-    border: 1px solid $header-color;
-    width: fit-content;
-    box-shadow: 5px 5px 5px 2px $primary-grey;
-  }
+.speedContainer {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+}
 
-  .speedContainer{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-  }
+.monstergenTitles {
+  /* offset-x | offset-y | blur-radius | color */
+  // text-shadow: 5px 5px 10px $primary-grey;
+}
 
-  .monstergenTitles{
-    /* offset-x | offset-y | blur-radius | color */
-    // text-shadow: 5px 5px 10px $primary-grey;
-  }
-  
-  .monstergenColumns{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    
-  }
+.monstergenColumns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
 
-  .monstergenDisplay {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background-color: $secondary-grey;
-    width: fit-content;
-    padding: 0px;
-    margin: 0;
-    text-align: left;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-  }
-  
-  .monstergenDescWrapper {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 95vw;
-  }
-  
-  .monstergenDesc {
-    display: block;
-    justify-self: center;
-    width: 80%;
-  }
-  
-  .monstergenDetail {
-    display: flex;
-    padding-right: 1rem;
-    justify-content: flex-end;
-    border-bottom: 1px dashed;
-  }
-  
-  .monstergenDetailTitle {
-    margin-right: auto;
-  }
-  
-  .monstergenDetailOutput {
-    // margin-right: auto;
-  }
-  
-  .monstergenStats {
-    display: block;
-    width: 80%;
-    justify-self: center;
-  }
-  
-  .monstergenStatDetail {
-    display: flex;
-    padding-right: 1rem;
-    justify-content: flex-end;
-    border-bottom: 1px dashed;
-  }
-  
-  .monstergenDescHeader {
-    font-size: 2.5rem;
-    border-bottom: 1px solid black;
-    width: fit-content;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .monstergenBtnWrapper {
-    margin: 1rem;
-    background-color: $secondary-grey;
-    border-radius: 1rem;
-    width: 30vw;
-  }
-  
-  .monstergenBtnClear {
-    font-size: 2rem;
-    color: $secondary-grey;
-    background-color: rgba(255, 0, 0, 0.75);
-    border-radius: 0.5rem;
-    border: 0px;
-    margin: 1rem;
-    padding: 0.5rem;
-    transition: 0.5s;
-    &:hover {
-      background-color: rgb(255, 0, 0);
-      cursor: pointer;
-      /* offset-x | offset-y | blur-radius | spread-radius | color */
-      box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.5);
-    }
-  }
-  
-  .monstergenBtnGen {
-    font-size: 2rem;
-    color: $secondary-grey;
-    background-color: rgba(0, 128, 0, 0.75);
-    border-radius: 0.5rem;
-    border: 0px;
-    margin: 1rem;
-    padding: 0.5rem;
-    transition: 0.5s;
-    &:hover {
-      background-color: rgba(0, 128, 0);
-      cursor: pointer;
-      box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
-    }
-  }
+.monstergenDisplay {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: $secondary-grey;
+  width: fit-content;
+  padding: 0px;
+  margin: 0;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+}
 
-  .monstergenBtnRemove{
-    font-size: 1rem;
-    color: $secondary-grey;
-    background-color: rgba(255, 0, 0, 0.75);
-    border-radius: 0.5rem;
-    border: 0px;
-    margin-left: 0.25rem;
-    padding: 0.5rem;
-    transition: 0.5s;
-    &:hover {
-      background-color: rgb(255, 0, 0);
-      cursor: pointer;
-      box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.5);
-    }
+.monstergenDescWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 95vw;
+}
+
+.monstergenDesc {
+  display: block;
+  justify-self: center;
+  width: 80%;
+}
+
+.monstergenDetail {
+  display: flex;
+  padding-right: 1rem;
+  justify-content: flex-end;
+  border-bottom: 1px dashed;
+}
+
+.monstergenDetailTitle {
+  margin-right: auto;
+}
+
+.monstergenDetailOutput {
+  // margin-right: auto;
+}
+
+.monstergenStats {
+  display: block;
+  width: 80%;
+  justify-self: center;
+}
+
+.monstergenStatDetail {
+  display: flex;
+  padding-right: 1rem;
+  justify-content: flex-end;
+  border-bottom: 1px dashed;
+}
+
+.monstergenDescHeader {
+  font-size: 2.5rem;
+  border-bottom: 1px solid black;
+  width: fit-content;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.monstergenBtnWrapper {
+  margin: 1rem;
+  background-color: $secondary-grey;
+  border-radius: 1rem;
+  width: 30vw;
+}
+
+.monstergenBtnClear {
+  font-size: 2rem;
+  color: $secondary-grey;
+  background-color: rgba(255, 0, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  margin: 1rem;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgb(255, 0, 0);
+    cursor: pointer;
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.5);
   }
-  
-  .monstergenBtnName{
-    font-size: 1rem;
-    color: $secondary-grey;
-    background-color: rgba(0, 128, 0, 0.75);
-    border-radius: 0.5rem;
-    border: 0px;
-    margin-left: 0.5rem;
-    padding: 0.5rem;
-    transition: 0.5s;
-    &:hover {
-      background-color: rgba(0, 128, 0);
-      cursor: pointer;
-      box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
-    }
+}
+
+.monstergenBtnGen {
+  font-size: 2rem;
+  color: $secondary-grey;
+  background-color: rgba(0, 128, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  margin: 1rem;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgba(0, 128, 0);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
   }
+}
+
+.monstergenBtnRemove {
+  font-size: 1rem;
+  color: $secondary-grey;
+  background-color: rgba(255, 0, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  margin-left: 0.25rem;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgb(255, 0, 0);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.5);
+  }
+}
+
+.monstergenBtnName {
+  font-size: 1rem;
+  color: $secondary-grey;
+  background-color: rgba(0, 128, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgba(0, 128, 0);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
+  }
+}
