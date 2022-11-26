@@ -3495,6 +3495,23 @@ const MonsterGen = () => {
         : null
     }, `;
   });
+  const mapSkills = skillList.map((i) => {
+    return ` ${i.name} +${
+      i.name === "Acrobatics"
+        ?  skillAcrobatics
+        : i.name === "Dexterity"
+        ? saveDex
+        : i.name === "Constitution"
+        ? saveCon
+        : i.name === "Wisdom"
+        ? saveWis
+        : i.name === "Charisma"
+        ? saveCha
+        : i.name === "Intelligence"
+        ? saveInt
+        : null
+    }, `;
+  });
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3657,7 +3674,7 @@ const MonsterGen = () => {
           </h3>
           <hr className={style.lineBreak} />
           <h3>Saving Throws {mapSaves}</h3>
-          <h3>Skills: {skill}</h3>
+          <h3>Skills {skill}</h3>
           <h3>Damage Immunities: {immune} </h3>
           <h3>Condition Immunities: {condition}</h3>
           <h3>Senses </h3>
