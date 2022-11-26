@@ -15,7 +15,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
-import { leftShift } from "mathjs";
+import { i, leftShift } from "mathjs";
 
 const MonsterGen = () => {
   const [monster, setMonster] = useState({ size: "", type: "" });
@@ -2374,43 +2374,6 @@ const MonsterGen = () => {
     );
   });
 
-  // <div>
-  //   <DataTable
-  //   value={selectedItemsSense}
-  //   scrollable
-  //   rows={20}
-  //   dataKey="name"
-  //   filters={filters}
-  //   filterDisplay="row"
-  //   responsiveLayout="scroll"
-  //   globalFilterFields={["name"]}
-  //   emptyMessage="No items found."
-  //   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  //   rowHover
-  //   resizableColumns
-  //   reorderableColumns
-  //   reorderableRows
-  //   >
-  //     <Column
-  //     header="Senses"
-  //       field="name"
-  //       sortable
-  //       filter
-  //       filterPlaceholder="Search"
-  //     ></Column>
-  //     <Column
-  //     header="Range"
-  //     // value={senseBlindsight}
-  //       field={"range"}
-  //       editor={senseRange}
-  //       sortable
-  //       filter
-  //       filterPlaceholder="Search"
-  //       hidden={false}
-  //     ></Column>
-  //     </DataTable>
-  // </div>
-
   const senseDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Senses</h2>
@@ -3499,19 +3462,69 @@ const MonsterGen = () => {
     return ` ${i.name} +${
       i.name === "Acrobatics"
         ?  skillAcrobatics
-        : i.name === "Dexterity"
-        ? saveDex
-        : i.name === "Constitution"
-        ? saveCon
-        : i.name === "Wisdom"
-        ? saveWis
-        : i.name === "Charisma"
-        ? saveCha
-        : i.name === "Intelligence"
-        ? saveInt
+        : i.name === "Animal Handling"
+        ? skillAnimal
+        : i.name === "Arcana"
+        ? skillArcana
+        : i.name === "Athletics"
+        ? skillAthletics
+        : i.name === "Deception"
+        ? skillDeception
+        : i.name === "History"
+        ? skillHistory
+        : i.name === "Insight"
+        ? skillInsight
+        : i.name === "Intimidation"
+        ? skillIntimidation
+        : i.name === "Invetigation"
+        ? skillInvestigation
+        : i.name === "Medicine"
+        ? skillMedicine
+        : i.name === "Nature"
+        ? skillNature
+        : i.name === "Perception"
+        ? skillPerception
+        : i.name === "Performance"
+        ? skillPerformance
+        : i.name === "Persuasion"
+        ? skillPersuasion
+        : i.name === "Religion"
+        ? skillReligion
+        : i.name === "Sleight of Hand"
+        ? skillSleight
+        : i.name === "Stealth"
+        ? skillStealth
+        : i.name === "Survival"
+        ? skillSurvival
         : null
     }, `;
   });
+  const mapSenses = senseList.map((i) => {
+    return (`${i.name} ${i.name === "Blindsight"
+            ? senseBlindsight
+            : i.name === "Darkvision"
+            ? senseDarkvision
+            : i.name === "Tremorsense"
+            ? senseTremorsense
+            : i.name === "Truesight"
+            ? senseTruesight
+            : null} ft., `)
+  })
+  const mapLangs = langList.map((i) =>{
+    return (`${i.name}, `)
+  })
+const mapVulns = vulnList.map((i) => {
+    return (`${i.name}, `)
+})
+const mapImmunes = immuneList.map((i) => {
+    return (`${i.name}, `)
+})
+const mapResists = resistList.map((i) => {
+    return(`${i.name}, `)
+})
+const mapConditions = conditionList.map((i) => {
+    return(`${i.name}, `)
+})
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3617,7 +3630,7 @@ const MonsterGen = () => {
             {gearDialog}
             <div className={style.speedContainer}>{gearDisplay}</div>
           </div>
-        </div>
+        
 
         {/* Main Display */}
         <div className={style.monstergenDisplay}>
@@ -3674,11 +3687,13 @@ const MonsterGen = () => {
           </h3>
           <hr className={style.lineBreak} />
           <h3>Saving Throws {mapSaves}</h3>
-          <h3>Skills {skill}</h3>
-          <h3>Damage Immunities: {immune} </h3>
-          <h3>Condition Immunities: {condition}</h3>
-          <h3>Senses </h3>
-          <h3>Languages </h3>
+          <h3>Skills {mapSkills}</h3>
+          <h3>Damage Vulnerabilities {mapVulns}</h3>
+          <h3>Damage Immunities {mapImmunes}</h3>
+          <h3>Damage Resistances {mapResists}</h3>
+          <h3>Condition Immunities {mapConditions}</h3>
+          <h3>Senses {mapSenses}</h3>
+          <h3>Languages {mapLangs}</h3>
           <hr className={style.lineBreak} />
           <h3>Abilities</h3>
           <h2>Actions</h2>
@@ -3688,6 +3703,7 @@ const MonsterGen = () => {
           <hr className={style.subLineBreak} />
           <h3>Legendary actions Listed</h3>
         </div>
+      </div>
       </div>
     </div>
   );
