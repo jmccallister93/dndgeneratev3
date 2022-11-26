@@ -3373,7 +3373,7 @@ const MonsterGen = () => {
     setLairList([]);
     setGearList([]);
   };
-
+//Showoptions
   const showBasics = (e) => {
     setIsBasicActive(current => !current)
 }
@@ -3389,6 +3389,24 @@ const showAA = (e) => {
 const showDT = (e) => {
     setIsDTActive(current => !current)
 }
+//Map items for display
+const mapExtraSpeeds = speedExtraList.map(((i) => {
+    
+        return (
+            ` ${i.name} ${i.name === "Burrow"
+            ? burrow
+            : i.name === "Climb"
+            ? climb
+            : i.name === "Fly"
+            ? fly
+            : i.name === "Hover"
+            ? hover
+            : i.name === "Swim"
+            ? swim
+            : null} ft., `
+            )
+    
+}))
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3482,7 +3500,7 @@ const showDT = (e) => {
             <hr className={style.lineBreak}/>
             <h3>Armor Class {ac} ({armorType})</h3>
             <h3>Hit Points {hp}</h3>
-            <h3>Speed {speed}, Extra Speeds map</h3>
+            <h3>Speed {speed} ft., {mapExtraSpeeds}</h3>
             <hr className={style.lineBreak}/>
             <h3>STR {str} DEX {dex} CON {con}</h3>
             <h3>INT {int} WIS {wis} CHA {cha}</h3>
