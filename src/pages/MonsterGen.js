@@ -3479,18 +3479,28 @@ const showDT = (e) => {
           <div className={style.monstergenDisplay}>
             <h1>{name}</h1>
             <h3>{size} {type}, {align}</h3>
-            <hr />
+            <hr className={style.lineBreak}/>
             <h3>Armor Class {ac} ({armorType})</h3>
-            <h3>{hp}</h3>
+            <h3>Hit Points {hp}</h3>
             <h3>Speed {speed}, Extra Speeds map</h3>
-            <hr />
+            <hr className={style.lineBreak}/>
             <h3>STR {str} DEX {dex} CON {con}</h3>
             <h3>INT {int} WIS {wis} CHA {cha}</h3>
-            <hr />
+            <hr className={style.lineBreak}/>
             <h3>Saving Throws: {save}</h3>
             <h3>Skills: {skill}</h3>
             <h3>Damage Immunities: {immune} </h3>
-            <h3>Condition Immunities: </h3>
+            <h3>Condition Immunities: {condition}</h3>
+            <h3>Senses </h3>
+            <h3>Languages </h3>
+            <hr className={style.lineBreak}/>
+            <h3>Abilities</h3>
+            <h2 >Actions</h2>
+            <hr className={style.subLineBreak}/>
+            <h3>Actions List</h3>
+            <h2>Legendary Actions</h2>
+            <hr className={style.subLineBreak}/>
+            <h3>Legendary actions Listed</h3>
           </div>
 
 
