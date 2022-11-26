@@ -270,6 +270,7 @@ const MonsterGen = () => {
   const [isAbilityActive, setIsAbilityActive] = useState(false)
   const [isBasicActive, setIsBasicActive] = useState(false)
   const [isSSDActive, setIsSSDActive] = useState(false)
+  const [isDTActive, setIsDTActive] = useState(false)
 
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -3385,6 +3386,9 @@ const showSSD = (e) => {
 const showAA = (e) => {
     setIsAAActive(current => !current)
 }
+const showDT = (e) => {
+    setIsDTActive(current => !current)
+}
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3410,22 +3414,20 @@ const showAA = (e) => {
           <h1 className={style.monstergenSubHeader} onClick={showBasics}>
             Basic Info
           </h1>
-          <div className={isBasicActive ? style.monstergenSubsection : ''}>
+          <div className={isBasicActive ? style.monstergenSubsection : style.hidden}>
             {nameText}
             {sizeDrop}
             {typeDrop}
             {alignDrop}
             {acDrop}
             {armorTypeDrop}
-          </div>
-          <div className={style.monstergenSubsection}>
             {hpInput}
             {speedInput}
             {moveDialog}
             <div className={style.speedContainer}>{extraSpeedDispaly}</div>
           </div>
           <h1 className={style.monstergenSubHeader} onClick={showAbility}>Ability Scores</h1>
-          <div className={isAbilityActive ? style.monstergenSubsection : ''}>
+          <div className={isAbilityActive ? style.monstergenSubsection : style.hidden}>
             {strInput}
             {dexInput}
             {conInput}
@@ -3433,13 +3435,20 @@ const showAA = (e) => {
             {wisInput}
             {chaInput}
           </div>
-          <h1 className={style.monstergenSubHeader} onClick={showSSD}>Saves/Skills/Dmgs</h1>
-          <div className={isSSDActive ? style.monstergenSubsection : ''}>
+          <h1 className={style.monstergenSubHeader} onClick={showSSD}>Saves & Skills</h1>
+          <div className={isSSDActive ? style.monstergenSubsection : style.hidden}>
             {saveDialog}
             <div className={style.speedContainer}>{saveDisplay}</div>
             {skillDialog}
             <div className={style.speedContainer}>{skillDisplay}</div>
-            {vulnDialog}
+            {senseDialog}
+            <div className={style.speedContainer}>{senseDisplay}</div>
+            {langDialog}
+            <div className={style.speedContainer}>{langDisplay}</div>
+          </div>
+          <h1 className={style.monstergenSubHeader} onClick={showDT}>Damage Types</h1>
+          <div className={isDTActive ? style.monstergenSubsection : style.hidden}>
+          {vulnDialog}
             <div className={style.speedContainer}>{vulnDisplay}</div>
             {immuneDialog}
             <div className={style.speedContainer}>{immuneDisplay}</div>
@@ -3447,13 +3456,9 @@ const showAA = (e) => {
             <div className={style.speedContainer}>{resistDisplay}</div>
             {conditionDialog}
             <div className={style.speedContainer}>{conditionDisplay}</div>
-            {senseDialog}
-            <div className={style.speedContainer}>{senseDisplay}</div>
-            {langDialog}
-            <div className={style.speedContainer}>{langDisplay}</div>
-          </div>
+            </div>
           <h1 className={style.monstergenSubHeader} onClick={showAA}>Actions / Abilities</h1>
-          <div className={isAAActive ? style.monstergenSubsection : ''}>
+          <div className={isAAActive ? style.monstergenSubsection : style.hidden}>
             {specialDialog}
             {specialDisplay}
             {actionDialog}

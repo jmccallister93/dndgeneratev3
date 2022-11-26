@@ -89,6 +89,10 @@ $header-color: #3e6d9c;
   }
 }
 
+.hidden{
+    display: none;
+}
+
 .speedContainer {
   display: flex;
   grid-template-columns: repeat(3, 1fr);
