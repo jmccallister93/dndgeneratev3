@@ -144,22 +144,22 @@ const MonsterGen = () => {
   const [immuneList, setImmuneList] = useState([]);
   const [dialogVisibleImmune, setDialogVisibleImmune] = useState(false);
   const [selectedItemsImmune, setSelectedItemsImmune] = useState(null);
-//   const [immuneAcid, setImmuneAcid] = useState("");
-//   const [immuneCold, setImmuneCold] = useState("");
-//   const [immuneFire, setImmuneFire] = useState("");
-//   const [immuneForce, setImmuneForce] = useState("");
-//   const [immuneLightning, setImmuneLightning] = useState("");
-//   const [immuneNecrotic, setImmuneNecrotic] = useState("");
-//   const [immunePoison, setImmunePoison] = useState("");
-//   const [immunePsychic, setImmunePsychic] = useState("");
-//   const [immuneRadiant, setImmuneRadiant] = useState("");
-//   const [immuneThunder, setImmuneThunder] = useState("");
-//   const [immuneBludgeoning, setImmuneBludgeoning] = useState("");
-//   const [immuneSlashing, setImmuneSlashing] = useState("");
-//   const [immunePiercing, setImmunePiercing] = useState("");
-//   const [immuneNMBludgeoning, setImmuneNMBludgeoning] = useState("");
-//   const [immuneNMSlashing, setImmuneNMSlashing] = useState("");
-//   const [immuneNMPiercing, setImmuneNMPiercing] = useState("");
+  //   const [immuneAcid, setImmuneAcid] = useState("");
+  //   const [immuneCold, setImmuneCold] = useState("");
+  //   const [immuneFire, setImmuneFire] = useState("");
+  //   const [immuneForce, setImmuneForce] = useState("");
+  //   const [immuneLightning, setImmuneLightning] = useState("");
+  //   const [immuneNecrotic, setImmuneNecrotic] = useState("");
+  //   const [immunePoison, setImmunePoison] = useState("");
+  //   const [immunePsychic, setImmunePsychic] = useState("");
+  //   const [immuneRadiant, setImmuneRadiant] = useState("");
+  //   const [immuneThunder, setImmuneThunder] = useState("");
+  //   const [immuneBludgeoning, setImmuneBludgeoning] = useState("");
+  //   const [immuneSlashing, setImmuneSlashing] = useState("");
+  //   const [immunePiercing, setImmunePiercing] = useState("");
+  //   const [immuneNMBludgeoning, setImmuneNMBludgeoning] = useState("");
+  //   const [immuneNMSlashing, setImmuneNMSlashing] = useState("");
+  //   const [immuneNMPiercing, setImmuneNMPiercing] = useState("");
 
   const [resist, setResist] = useState("");
   const [resists, setResists] = useState("");
@@ -167,22 +167,22 @@ const MonsterGen = () => {
   const [resistList, setResistList] = useState([]);
   const [dialogVisibleResist, setDialogVisibleResist] = useState(false);
   const [selectedItemsResist, setSelectedItemsResist] = useState(null);
-//   const [resistAcid, setResistAcid] = useState("");
-//   const [resistCold, setResistCold] = useState("");
-//   const [resistFire, setResistFire] = useState("");
-//   const [resistForce, setResistForce] = useState("");
-//   const [resistLightning, setResistLightning] = useState("");
-//   const [resistNecrotic, setResistNecrotic] = useState("");
-//   const [resistPoison, setResistPoison] = useState("");
-//   const [resistPsychic, setResistPsychic] = useState("");
-//   const [resistRadiant, setResistRadiant] = useState("");
-//   const [resistThunder, setResistThunder] = useState("");
-//   const [resistBludgeoning, setResistBludgeoning] = useState("");
-//   const [resistSlashing, setResistSlashing] = useState("");
-//   const [resistPiercing, setResistPiercing] = useState("");
-//   const [resistNMBludgeoning, setResistNMBludgeoning] = useState("");
-//   const [resistNMSlashing, setResistNMSlashing] = useState("");
-//   const [resistNMPiercing, setResistNMPiercing] = useState("");
+  //   const [resistAcid, setResistAcid] = useState("");
+  //   const [resistCold, setResistCold] = useState("");
+  //   const [resistFire, setResistFire] = useState("");
+  //   const [resistForce, setResistForce] = useState("");
+  //   const [resistLightning, setResistLightning] = useState("");
+  //   const [resistNecrotic, setResistNecrotic] = useState("");
+  //   const [resistPoison, setResistPoison] = useState("");
+  //   const [resistPsychic, setResistPsychic] = useState("");
+  //   const [resistRadiant, setResistRadiant] = useState("");
+  //   const [resistThunder, setResistThunder] = useState("");
+  //   const [resistBludgeoning, setResistBludgeoning] = useState("");
+  //   const [resistSlashing, setResistSlashing] = useState("");
+  //   const [resistPiercing, setResistPiercing] = useState("");
+  //   const [resistNMBludgeoning, setResistNMBludgeoning] = useState("");
+  //   const [resistNMSlashing, setResistNMSlashing] = useState("");
+  //   const [resistNMPiercing, setResistNMPiercing] = useState("");
 
   const [condition, setCondition] = useState("");
   const [conditions, setConditions] = useState("");
@@ -190,21 +190,21 @@ const MonsterGen = () => {
   const [conditionList, setConditionList] = useState([]);
   const [dialogVisibleCondition, setDialogVisibleCondition] = useState(false);
   const [selectedItemsCondition, setSelectedItemsCondition] = useState(null);
-//   const [conBlinded, setConBlinded] = useState("");
-//   const [conCharmed, setConCharmed] = useState("");
-//   const [conDeafened, setConDeafened] = useState("");
-//   const [conExhaustion, setConExhaustion] = useState("");
-//   const [conFrightened, setConFrightened] = useState("");
-//   const [conGrappled, setConGrappled] = useState("");
-//   const [conIncapacitated, setConIncapacitated] = useState("");
-//   const [conInvisible, setConInvisible] = useState("");
-//   const [conParalyzed, setConParalyzed] = useState("");
-//   const [conPetrified, setConPetrified] = useState("");
-//   const [conPoisoned, setConPoisoned] = useState("");
-//   const [conProne, setConProne] = useState("");
-//   const [conRestrained, setConRestrained] = useState("");
-//   const [conStunned, setConStunned] = useState("");
-//   const [conUnconscious, setConUnconscious] = useState("");
+  //   const [conBlinded, setConBlinded] = useState("");
+  //   const [conCharmed, setConCharmed] = useState("");
+  //   const [conDeafened, setConDeafened] = useState("");
+  //   const [conExhaustion, setConExhaustion] = useState("");
+  //   const [conFrightened, setConFrightened] = useState("");
+  //   const [conGrappled, setConGrappled] = useState("");
+  //   const [conIncapacitated, setConIncapacitated] = useState("");
+  //   const [conInvisible, setConInvisible] = useState("");
+  //   const [conParalyzed, setConParalyzed] = useState("");
+  //   const [conPetrified, setConPetrified] = useState("");
+  //   const [conPoisoned, setConPoisoned] = useState("");
+  //   const [conProne, setConProne] = useState("");
+  //   const [conRestrained, setConRestrained] = useState("");
+  //   const [conStunned, setConStunned] = useState("");
+  //   const [conUnconscious, setConUnconscious] = useState("");
 
   const [sense, setSense] = useState("");
   const [senses, setSenses] = useState("");
@@ -212,10 +212,10 @@ const MonsterGen = () => {
   const [senseList, setSenseList] = useState([]);
   const [dialogVisibleSense, setDialogVisibleSense] = useState(false);
   const [selectedItemsSense, setSelectedItemsSense] = useState(null);
-  const [senseBlindsight, setSenseBlindsight] = useState("")
-  const [senseDarkvision, setSenseDarkvision] = useState("")
-  const [senseTremorsense, setSenseTremorsense] = useState("")
-  const [senseTruesight, setSenseTruesight] = useState("")
+  const [senseBlindsight, setSenseBlindsight] = useState("");
+  const [senseDarkvision, setSenseDarkvision] = useState("");
+  const [senseTremorsense, setSenseTremorsense] = useState("");
+  const [senseTruesight, setSenseTruesight] = useState("");
 
   const [lang, setLang] = useState("");
   const [langs, setLangs] = useState("");
@@ -2095,91 +2095,101 @@ const MonsterGen = () => {
   );
   //Condition
   const onRemoveConditionBlinded = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Blinded");
+    onRemoveCustom(setConditionList, conditionList, "Blinded");
   const onRemoveConditionCharmed = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Charmed");
+    onRemoveCustom(setConditionList, conditionList, "Charmed");
   const onRemoveConditionDeafened = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Deafened");
+    onRemoveCustom(setConditionList, conditionList, "Deafened");
   const onRemoveConditionExhaustion = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Exhaustion");
+    onRemoveCustom(setConditionList, conditionList, "Exhaustion");
   const onRemoveConditionFrightened = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Frightened");
+    onRemoveCustom(setConditionList, conditionList, "Frightened");
   const onRemoveConditionGrappled = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Grappled");
+    onRemoveCustom(setConditionList, conditionList, "Grappled");
   const onRemoveConditionIncapacitated = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Incapacitated");
+    onRemoveCustom(setConditionList, conditionList, "Incapacitated");
   const onRemoveConditionInvisible = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Invisible");
+    onRemoveCustom(setConditionList, conditionList, "Invisible");
   const onRemoveConditionParalyzed = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Paralyzed");
+    onRemoveCustom(setConditionList, conditionList, "Paralyzed");
   const onRemoveConditionPetrified = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Petrified");
+    onRemoveCustom(setConditionList, conditionList, "Petrified");
   const onRemoveConditionPoisoned = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Poisoned");
+    onRemoveCustom(setConditionList, conditionList, "Poisoned");
   const onRemoveConditionProne = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Prone");
+    onRemoveCustom(setConditionList, conditionList, "Prone");
   const onRemoveConditionRestrained = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Restrained");
+    onRemoveCustom(setConditionList, conditionList, "Restrained");
   const onRemoveConditionStunned = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Stunned");
+    onRemoveCustom(setConditionList, conditionList, "Stunned");
   const onRemoveConditionUnconscious = (e) =>
-  onRemoveCustom(setConditionList, conditionList, "Unconscious");
-  
+    onRemoveCustom(setConditionList, conditionList, "Unconscious");
+
   const conditionRemoveBlinded = customDmgRemove(onRemoveConditionBlinded);
   const conditionRemoveCharmed = customDmgRemove(onRemoveConditionCharmed);
   const conditionRemoveDeafened = customDmgRemove(onRemoveConditionDeafened);
-  const conditionRemoveExhaustion = customDmgRemove(onRemoveConditionExhaustion);
-  const conditionRemoveFrightened = customDmgRemove(onRemoveConditionFrightened);
+  const conditionRemoveExhaustion = customDmgRemove(
+    onRemoveConditionExhaustion
+  );
+  const conditionRemoveFrightened = customDmgRemove(
+    onRemoveConditionFrightened
+  );
   const conditionRemoveGrappled = customDmgRemove(onRemoveConditionGrappled);
-  const conditionRemoveIncapacitated = customDmgRemove(onRemoveConditionIncapacitated);
+  const conditionRemoveIncapacitated = customDmgRemove(
+    onRemoveConditionIncapacitated
+  );
   const conditionRemoveInvisible = customDmgRemove(onRemoveConditionInvisible);
   const conditionRemoveParalyzed = customDmgRemove(onRemoveConditionParalyzed);
   const conditionRemovePetrified = customDmgRemove(onRemoveConditionPetrified);
   const conditionRemovePoisoned = customDmgRemove(onRemoveConditionPoisoned);
   const conditionRemoveProne = customDmgRemove(onRemoveConditionProne);
-  const conditionRemoveRestrained = customDmgRemove(onRemoveConditionRestrained);
-  const conditionRemoveStunned = customDmgRemove(onRemoveConditionStunned);
-  const conditionRemoveUnconscious = customDmgRemove(onRemoveConditionUnconscious);
-  
-  const conditionDisplay = conditionList.map((i) => {
-  return (
-    <div>
-      <h3>
-        {i.name}
-        {i.name === "Blinded"
-          ? conditionRemoveBlinded
-          : i.name === "Charmed"
-          ? conditionRemoveCharmed
-          : i.name === "Deafened"
-          ? conditionRemoveDeafened
-          : i.name === "Exhaustion"
-          ? conditionRemoveExhaustion
-          : i.name === "Frightened"
-          ? conditionRemoveFrightened
-          : i.name === "Grappled"
-          ? conditionRemoveGrappled
-          : i.name === "Incapacitated"
-          ? conditionRemoveIncapacitated
-          : i.name === "Invisible"
-          ? conditionRemoveInvisible
-          : i.name === "Paralyzed"
-          ? conditionRemoveParalyzed
-          : i.name === "Petrified"
-          ? conditionRemovePetrified
-          : i.name === "Poisoned"
-          ? conditionRemovePoisoned
-          : i.name === "Prone"
-          ? conditionRemoveProne
-          : i.name === "Restrained"
-          ? conditionRemoveRestrained
-          : i.name === "Stunned"
-          ? conditionRemoveStunned
-          : i.name === "Unconscious"
-          ? conditionRemoveUnconscious
-          : null}
-      </h3>
-    </div>
+  const conditionRemoveRestrained = customDmgRemove(
+    onRemoveConditionRestrained
   );
+  const conditionRemoveStunned = customDmgRemove(onRemoveConditionStunned);
+  const conditionRemoveUnconscious = customDmgRemove(
+    onRemoveConditionUnconscious
+  );
+
+  const conditionDisplay = conditionList.map((i) => {
+    return (
+      <div>
+        <h3>
+          {i.name}
+          {i.name === "Blinded"
+            ? conditionRemoveBlinded
+            : i.name === "Charmed"
+            ? conditionRemoveCharmed
+            : i.name === "Deafened"
+            ? conditionRemoveDeafened
+            : i.name === "Exhaustion"
+            ? conditionRemoveExhaustion
+            : i.name === "Frightened"
+            ? conditionRemoveFrightened
+            : i.name === "Grappled"
+            ? conditionRemoveGrappled
+            : i.name === "Incapacitated"
+            ? conditionRemoveIncapacitated
+            : i.name === "Invisible"
+            ? conditionRemoveInvisible
+            : i.name === "Paralyzed"
+            ? conditionRemoveParalyzed
+            : i.name === "Petrified"
+            ? conditionRemovePetrified
+            : i.name === "Poisoned"
+            ? conditionRemovePoisoned
+            : i.name === "Prone"
+            ? conditionRemoveProne
+            : i.name === "Restrained"
+            ? conditionRemoveRestrained
+            : i.name === "Stunned"
+            ? conditionRemoveStunned
+            : i.name === "Unconscious"
+            ? conditionRemoveUnconscious
+            : null}
+        </h3>
+      </div>
+    );
   });
   const conditionDialog = (
     <div className="card">
@@ -2350,6 +2360,44 @@ const MonsterGen = () => {
       </div>
     );
   });
+
+  // <div>
+  //   <DataTable
+  //   value={selectedItemsSense}
+  //   scrollable
+  //   rows={20}
+  //   dataKey="name"
+  //   filters={filters}
+  //   filterDisplay="row"
+  //   responsiveLayout="scroll"
+  //   globalFilterFields={["name"]}
+  //   emptyMessage="No items found."
+  //   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  //   rowHover
+  //   resizableColumns
+  //   reorderableColumns
+  //   reorderableRows
+  //   >
+  //     <Column
+  //     header="Senses"
+  //       field="name"
+  //       sortable
+  //       filter
+  //       filterPlaceholder="Search"
+  //     ></Column>
+  //     <Column
+  //     header="Range"
+  //     // value={senseBlindsight}
+  //       field={"range"}
+  //       editor={senseRange}
+  //       sortable
+  //       filter
+  //       filterPlaceholder="Search"
+  //       hidden={false}
+  //     ></Column>
+  //     </DataTable>
+  // </div>
+
   const senseDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Senses</h2>
@@ -2404,38 +2452,37 @@ const MonsterGen = () => {
   );
   //Languages
   const onRemoveLangAbyssal = (e) =>
-  onRemoveCustom(setLangList, langList, "Abyssal");
+    onRemoveCustom(setLangList, langList, "Abyssal");
   const onRemoveLangCelestial = (e) =>
-  onRemoveCustom(setLangList, langList, "Celestial");
+    onRemoveCustom(setLangList, langList, "Celestial");
   const onRemoveLangCommon = (e) =>
-  onRemoveCustom(setLangList, langList, "Common");
+    onRemoveCustom(setLangList, langList, "Common");
   const onRemoveLangDeepSpeech = (e) =>
-  onRemoveCustom(setLangList, langList, "Deep Speech");
+    onRemoveCustom(setLangList, langList, "Deep Speech");
   const onRemoveLangDraconic = (e) =>
-  onRemoveCustom(setLangList, langList, "Draconic");
+    onRemoveCustom(setLangList, langList, "Draconic");
   const onRemoveLangDwarvish = (e) =>
-  onRemoveCustom(setLangList, langList, "Dwarvish");
+    onRemoveCustom(setLangList, langList, "Dwarvish");
   const onRemoveLangElvish = (e) =>
-  onRemoveCustom(setLangList, langList, "Elvish");
+    onRemoveCustom(setLangList, langList, "Elvish");
   const onRemoveLangGiant = (e) =>
-  onRemoveCustom(setLangList, langList, "Giant");
+    onRemoveCustom(setLangList, langList, "Giant");
   const onRemoveLangGnomish = (e) =>
-  onRemoveCustom(setLangList, langList, "Gnomish");
+    onRemoveCustom(setLangList, langList, "Gnomish");
   const onRemoveLangGoblin = (e) =>
-  onRemoveCustom(setLangList, langList, "Goblin");
+    onRemoveCustom(setLangList, langList, "Goblin");
   const onRemoveLangHalfling = (e) =>
-  onRemoveCustom(setLangList, langList, "Halfling");
+    onRemoveCustom(setLangList, langList, "Halfling");
   const onRemoveLangInfernal = (e) =>
-  onRemoveCustom(setLangList, langList, "Infernal");
-  const onRemoveLangOrc = (e) =>
-  onRemoveCustom(setLangList, langList, "Orc");
+    onRemoveCustom(setLangList, langList, "Infernal");
+  const onRemoveLangOrc = (e) => onRemoveCustom(setLangList, langList, "Orc");
   const onRemoveLangPrimordial = (e) =>
-  onRemoveCustom(setLangList, langList, "Primordial");
+    onRemoveCustom(setLangList, langList, "Primordial");
   const onRemoveLangSylvan = (e) =>
-  onRemoveCustom(setLangList, langList, "Sylvan");
+    onRemoveCustom(setLangList, langList, "Sylvan");
   const onRemoveLangUndercommon = (e) =>
-  onRemoveCustom(setLangList, langList, "Undercommon");
-  
+    onRemoveCustom(setLangList, langList, "Undercommon");
+
   const langRemoveAbyssal = customDmgRemove(onRemoveLangAbyssal);
   const langRemoveCelestial = customDmgRemove(onRemoveLangCelestial);
   const langRemoveCommon = customDmgRemove(onRemoveLangCommon);
@@ -2452,48 +2499,48 @@ const MonsterGen = () => {
   const langRemovePrimordial = customDmgRemove(onRemoveLangPrimordial);
   const langRemoveSylvan = customDmgRemove(onRemoveLangSylvan);
   const langRemoveUndercommon = customDmgRemove(onRemoveLangUndercommon);
-  
+
   const langDisplay = langList.map((i) => {
-  return (
-    <div>
-      <h3>
-        {i.name}
-        {i.name === "Abyssal"
-          ? langRemoveAbyssal
-          : i.name === "Celestial"
-          ? langRemoveCelestial
-          : i.name === "Common"
-          ? langRemoveCommon
-          : i.name === "Deep Speech"
-          ? langRemoveDeepSpeech
-          : i.name === "Draconic"
-          ? langRemoveDraconic
-          : i.name === "Dwarvish"
-          ? langRemoveDwarvish
-          : i.name === "Elvish"
-          ? langRemoveElvish
-          : i.name === "Giant"
-          ? langRemoveGiant
-          : i.name === "Gnomish"
-          ? langRemoveGnomish
-          : i.name === "Goblin"
-          ? langRemoveGoblin
-          : i.name === "Halfling"
-          ? langRemoveHalfling
-          : i.name === "Infernal"
-          ? langRemoveInfernal
-          : i.name === "Orc"
-          ? langRemoveOrc
-          : i.name === "Primordial"
-          ? langRemovePrimordial
-          : i.name === "Sylvan"
-          ? langRemoveSylvan
-          : i.name === "Undercommon"
-          ? langRemoveUndercommon
-          : null}
-      </h3>
-    </div>
-  );
+    return (
+      <div>
+        <h3>
+          {i.name}
+          {i.name === "Abyssal"
+            ? langRemoveAbyssal
+            : i.name === "Celestial"
+            ? langRemoveCelestial
+            : i.name === "Common"
+            ? langRemoveCommon
+            : i.name === "Deep Speech"
+            ? langRemoveDeepSpeech
+            : i.name === "Draconic"
+            ? langRemoveDraconic
+            : i.name === "Dwarvish"
+            ? langRemoveDwarvish
+            : i.name === "Elvish"
+            ? langRemoveElvish
+            : i.name === "Giant"
+            ? langRemoveGiant
+            : i.name === "Gnomish"
+            ? langRemoveGnomish
+            : i.name === "Goblin"
+            ? langRemoveGoblin
+            : i.name === "Halfling"
+            ? langRemoveHalfling
+            : i.name === "Infernal"
+            ? langRemoveInfernal
+            : i.name === "Orc"
+            ? langRemoveOrc
+            : i.name === "Primordial"
+            ? langRemovePrimordial
+            : i.name === "Sylvan"
+            ? langRemoveSylvan
+            : i.name === "Undercommon"
+            ? langRemoveUndercommon
+            : null}
+        </h3>
+      </div>
+    );
   });
   const langDialog = (
     <div className="card">
@@ -2553,15 +2600,15 @@ const MonsterGen = () => {
   };
   const onRemoveSpecial = (e) => {
     // setSelectedItemsSpecial(selectedItemsSpecial.filter((e.target.value)))
-    console.log(e.target.value)
-  }
+    console.log(e.target.value);
+  };
 
   const onSpecialSelect = (e) => {
-    setSpecialList(e.value)
-}
+    setSpecialList(e.value);
+  };
   const specialDisplay = (
-      <div>
-        <DataTable
+    <div>
+      <DataTable
         value={selectedItemsSpecial}
         scrollable
         rows={20}
@@ -2576,18 +2623,17 @@ const MonsterGen = () => {
         resizableColumns
         reorderableColumns
         reorderableRows
-        
-        >
-          <Column
+      >
+        <Column
           header="Special Abilities"
-            field="name"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
-          </DataTable>
-      </div>
-    );
+          field="name"
+          sortable
+          filter
+          filterPlaceholder="Search"
+        ></Column>
+      </DataTable>
+    </div>
+  );
 
   const specialDialog = (
     <div className="card">
@@ -2642,20 +2688,39 @@ const MonsterGen = () => {
     </div>
   );
   //Action
-  const actionDisplay = actionList.map((i) => {
-    return (
-      <div>
-        <h3>
-          {i.name}
-        </h3>
-      </div>
-    );
-    });
+  const actionDisplay = (
+    <div>
+      <DataTable
+        value={selectedItemsAction}
+        scrollable
+        rows={20}
+        dataKey="name"
+        filters={filters}
+        filterDisplay="row"
+        responsiveLayout="scroll"
+        globalFilterFields={["name"]}
+        emptyMessage="No items found."
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        rowHover
+        resizableColumns
+        reorderableColumns
+        reorderableRows
+      >
+        <Column
+          header="Actions"
+          field="name"
+          sortable
+          filter
+          filterPlaceholder="Search"
+        ></Column>
+      </DataTable>
+    </div>
+  );
   const actionDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Actions</h2>
       <Button onClick={openDialogAction} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"> Add</i>
+        Add / Remove
       </Button>
       <Dialog
         header="Actions"
@@ -2673,7 +2738,7 @@ const MonsterGen = () => {
           rows={20}
           dataKey="name"
           selection={selectedItemsAction}
-          onSelectionChange={(e) => setSelectedItemsAction(e.value)}
+          onSelectionChange={(e) => {setActionList(e.value)}}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -2704,20 +2769,39 @@ const MonsterGen = () => {
     </div>
   );
   //Reaction
-  const reactionDisplay = reactionList.map((i) => {
-    return (
-      <div>
-        <h3>
-          {i.name}
-        </h3>
-      </div>
-    );
-    });
+  const reactionDisplay = (
+    <div>
+      <DataTable
+        value={selectedItemsReaction}
+        scrollable
+        rows={20}
+        dataKey="name"
+        filters={filters}
+        filterDisplay="row"
+        responsiveLayout="scroll"
+        globalFilterFields={["name"]}
+        emptyMessage="No items found."
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        rowHover
+        resizableColumns
+        reorderableColumns
+        reorderableRows
+      >
+        <Column
+          header="Reactions"
+          field="name"
+          sortable
+          filter
+          filterPlaceholder="Search"
+        ></Column>
+      </DataTable>
+    </div>
+  );
   const reactionDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Reactions</h2>
       <Button onClick={openDialogReaction} className={style.monstergenBtnName}>
-        <i className="pi pi-plus"> Add</i>
+        Add / Remove
       </Button>
       <Dialog
         header="Reactions"
@@ -2735,7 +2819,7 @@ const MonsterGen = () => {
           rows={20}
           dataKey="name"
           selection={selectedItemsReaction}
-          onSelectionChange={(e) => setSelectedItemsReaction(e.value)}
+          onSelectionChange={(e) => {setReactionList(e.value)}}
           //   selectionPageOnly
           filters={filters}
           filterDisplay="row"
@@ -2769,12 +2853,10 @@ const MonsterGen = () => {
   const legendDisplay = legendList.map((i) => {
     return (
       <div>
-        <h3>
-          {i.name}
-        </h3>
+        <h3>{i.name}</h3>
       </div>
     );
-    });
+  });
   const legendDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Legendary Actions</h2>
@@ -2831,12 +2913,10 @@ const MonsterGen = () => {
   const lairDisplay = lairList.map((i) => {
     return (
       <div>
-        <h3>
-          {i.name}
-        </h3>
+        <h3>{i.name}</h3>
       </div>
     );
-    });
+  });
   const lairDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Lair Actions</h2>
@@ -2893,12 +2973,10 @@ const MonsterGen = () => {
   const gearDisplay = gearList.map((i) => {
     return (
       <div>
-        <h3>
-          {i.name}
-        </h3>
+        <h3>{i.name}</h3>
       </div>
     );
-    });
+  });
   const gearDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Gear</h2>
@@ -3199,16 +3277,16 @@ const MonsterGen = () => {
     setSkillSleight("");
     setSkillStealth("");
     setSkillSurvival("");
-    setVulnList([])
-    setImmuneList([])
-    setResistList([])
-    setConditionList([])
-    setSenseList([])
-    setSenseDarkvision("")
-    setSenseBlindsight("")
-    setSenseTremorsense("")
-    setSenseTruesight("")
-    setLangList([])
+    setVulnList([]);
+    setImmuneList([]);
+    setResistList([]);
+    setConditionList([]);
+    setSenseList([]);
+    setSenseDarkvision("");
+    setSenseBlindsight("");
+    setSenseTremorsense("");
+    setSenseTruesight("");
+    setLangList([]);
   };
 
   return (
