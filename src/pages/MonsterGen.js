@@ -417,6 +417,8 @@ const MonsterGen = () => {
     fetchData();
   }, []);
 
+  
+
   //Import data via getData
   useEffect(() => {
     //TODO Names
@@ -3291,8 +3293,8 @@ const MonsterGen = () => {
     };
     ifBlank2(hp, setHp, 500, 0);
     ifBlank2(speed, setSpeed, 120, 0);
-
-    console.log(speedExtra);
+    
+    console.log(speedExtra)
     ifBlank2(str, setStr, 30, 0);
     ifBlank2(dex, setDex, 30, 0);
     ifBlank2(con, setCon, 30, 0);
@@ -3305,6 +3307,7 @@ const MonsterGen = () => {
     ifBlank2(int, setInt, 30, 0);
     ifBlank2(wis, setWis, 30, 0);
     ifBlank2(cha, setCha, 30, 0);
+    
 
     // const ifBlank3 = (value, setValue, options, max, min) => {
     //   if (value === []) {
@@ -3321,23 +3324,30 @@ const MonsterGen = () => {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
         let r = Math.round(Math.random() * (4 - 0));
-        let y = Math.round(Math.random() * (120 - 5));
         setSpeedExtraList((speedArray) => [...speedArray, speedTypeOptions[r]]);
-        if (speedExtraList.includes("Burrow")) {
-          setBurrow(y);
-        }
-        if (speedTypeOptions[r] === "Climb") {
-          setClimb(y);
-        }
-        if (speedTypeOptions[r] === "Fly") {
-          setFly(y);
-        }
-        if (speedTypeOptions[r] === "Swim") {
-          setSwim(y);
-        }
-      }
+      } 
     }
 
+    if (speedExtraList) {
+        let y = Math.round(Math.random() * (120 - 5));
+        if(!burrow){
+            setBurrow(y);
+        }
+        if(!climb){
+            setClimb(y)
+        }
+        if(!hover){
+            setHover(y)
+        }
+        if(!fly){
+            setFly(y)
+        }
+        if(!swim){
+            setSwim(y)
+        }
+
+      }
+ 
     if (saveList.length === 0) {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
@@ -3622,8 +3632,8 @@ const MonsterGen = () => {
   const mapSpecials = specialList.map((i) => {
     return (
       <>
-        <div>
-          {i.name}. <span className={style.minorText2}>{i.desc}</span>
+      <div>
+        {i.name}. <span className={style.minorText2}>{i.desc}</span>
         </div>
       </>
     );
@@ -3631,20 +3641,20 @@ const MonsterGen = () => {
   const mapActions = actionList.map((i) => {
     return (
       <>
-        <div>
-          {i.name}. <span className={style.minorText2}>{i.desc}</span>
+      <div>
+        {i.name}. <span className={style.minorText2}>{i.desc}</span>
         </div>
       </>
     );
   });
   const mapLegends = legendList.map((i) => {
     return (
-      <>
+        <>
         <div>
           {i.name}. <span className={style.minorText2}>{i.desc}</span>
-        </div>
-      </>
-    );
+          </div>
+        </>
+      );
   });
   const mapLairs = lairList.map((i) => {
     return `${i.name}, `;
