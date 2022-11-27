@@ -417,8 +417,6 @@ const MonsterGen = () => {
     fetchData();
   }, []);
 
-  
-
   //Import data via getData
   useEffect(() => {
     //TODO Names
@@ -3265,18 +3263,14 @@ const MonsterGen = () => {
     ifBlank(type, setType, typeOptions, 16, 1);
     ifBlank(align, setAlign, alignOptions, 9, 1);
     ifBlank(ac, setAc, acOptions, 30, 1);
-    ifBlank(armorType, setArmorType, armorTypeOptions, 5, 1);
-    ifBlank(speedType, setSpeedType, speedTypeOptions, 6, 1);
+    ifBlank(armorType, setArmorType, armorTypeOptions, 14, 1);
     ifBlank(vuln, setVuln, vulnOptions, 17, 1);
     ifBlank(skill, setSkill, skillOptions, 18, 1);
     ifBlank(immune, setImmune, immuneOptions, 17, 1);
     ifBlank(resist, setResist, resistOptions, 17, 1);
     ifBlank(condition, setCondition, conditionOptions, 15, 1);
-    ifBlank(sense, setSense, senseOptions, 4, 1);
-    ifBlank(lang, setLang, langOptions, 16, 1);
     ifBlank(special, setSpecial, specialOptions, 208, 1);
     ifBlank(action, setAction, actionOptions, 292, 1);
-    // ifBlank(reaction, setReaction, reactionOptions, 11, 1);
     ifBlank(legend, setLegend, legendOptions, 35, 1);
 
     // ifBlank(lair, setLair, lairOptions, 39, 1)
@@ -3293,8 +3287,8 @@ const MonsterGen = () => {
     };
     ifBlank2(hp, setHp, 500, 0);
     ifBlank2(speed, setSpeed, 120, 0);
-    
-    console.log(speedExtra)
+
+    console.log(speedExtra);
     ifBlank2(str, setStr, 30, 0);
     ifBlank2(dex, setDex, 30, 0);
     ifBlank2(con, setCon, 30, 0);
@@ -3307,46 +3301,33 @@ const MonsterGen = () => {
     ifBlank2(int, setInt, 30, 0);
     ifBlank2(wis, setWis, 30, 0);
     ifBlank2(cha, setCha, 30, 0);
-    
-
-    // const ifBlank3 = (value, setValue, options, max, min) => {
-    //   if (value === []) {
-    //     let r = Math.round(Math.random() * (max - min) + 1);
-    //     setValue(options[r]);
-    //   } else {
-    //     setValue(value);
-    //   }
-    // };
-
-    // ifBlank3(speedExtraList, setSpeedExtraList, speedTypeOptions, 5, 1);
 
     if (speedExtraList.length === 0) {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
         let r = Math.round(Math.random() * (4 - 0));
         setSpeedExtraList((speedArray) => [...speedArray, speedTypeOptions[r]]);
-      } 
+      }
     }
     if (speedExtraList) {
-        let y = Math.round(Math.random() * (120 - 5));
-        if(!burrow){
-            setBurrow(y);
-        }
-        if(!climb){
-            setClimb(y)
-        }
-        if(!hover){
-            setHover(y)
-        }
-        if(!fly){
-            setFly(y)
-        }
-        if(!swim){
-            setSwim(y)
-        }
-
+      let y = Math.round(Math.random() * (120 - 5));
+      if (!burrow) {
+        setBurrow(y);
       }
- 
+      if (!climb) {
+        setClimb(y);
+      }
+      if (!hover) {
+        setHover(y);
+      }
+      if (!fly) {
+        setFly(y);
+      }
+      if (!swim) {
+        setSwim(y);
+      }
+    }
+
     if (saveList.length === 0) {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
@@ -3355,26 +3336,26 @@ const MonsterGen = () => {
       }
     }
     if (saveList) {
-        let y = Math.round(Math.random() * (10 - 1));
-        if(!saveStr){
-            setSaveStr(y);
-        }
-        if(!saveDex){
-            setSaveDex(y);
-        }
-        if(!saveCon){
-            setSaveCon(y);
-        }
-        if(!saveWis){
-            setSaveWis(y);
-        }
-        if(!saveCha){
-            setSaveCha(y);
-        }
-        if(!saveInt){
-            setSaveInt(y);
-        }
+      let y = Math.round(Math.random() * (10 - 1));
+      if (!saveStr) {
+        setSaveStr(y);
       }
+      if (!saveDex) {
+        setSaveDex(y);
+      }
+      if (!saveCon) {
+        setSaveCon(y);
+      }
+      if (!saveWis) {
+        setSaveWis(y);
+      }
+      if (!saveCha) {
+        setSaveCha(y);
+      }
+      if (!saveInt) {
+        setSaveInt(y);
+      }
+    }
     if (skillList.length === 0) {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
@@ -3383,62 +3364,113 @@ const MonsterGen = () => {
       }
     }
     if (skillList) {
-        let y = Math.round(Math.random() * (10 - 1));
-        if(!skillAcrobatics){
-            setSkillAcrobatics(y);
-        }
-        if(!skillAnimal){
-            setSkillAnimal(y);
-        }
-        if(!skillArcana){
-            setSkillArcana(y);
-        }
-        if(!skillAthletics){
-            setSkillAthletics(y);
-        }
-        if(!skillDeception){
-            setSkillDeception(y);
-        }
-        if(!skillHistory){
-            setSkillHistory(y);
-        }
-        if(!skillInsight){
-            setSkillInsight(y);
-        }
-        if(!skillIntimidation){
-            setSkillIntimidation(y);
-        }
-        if(!skillInvestigation){
-            setSkillInvestigation(y);
-        }
-        if(!skillMedicine){
-            setSkillMedicine(y);
-        }
-        if(!skillNature){
-            setSkillNature(y);
-        }
-        if(!skillPerception){
-            setSkillPerception(y);
-        }
-        if(!skillPerformance){
-            setSkillPerformance(y);
-        }
-        if(!skillPersuasion){
-            setSkillPersuasion(y);
-        }
-        if(!skillReligion){
-            setSkillReligion(y);
-        }
-        if(!skillSleight){
-            setSkillSleight(y);
-        }
-        if(!skillStealth){
-            setSkillStealth(y);
-        }
-        if(!skillSurvival){
-            setSkillSurvival(y);
-        }
+      let y = Math.round(Math.random() * (10 - 1));
+      if (!skillAcrobatics) {
+        setSkillAcrobatics(y);
       }
+      if (!skillAnimal) {
+        setSkillAnimal(y);
+      }
+      if (!skillArcana) {
+        setSkillArcana(y);
+      }
+      if (!skillAthletics) {
+        setSkillAthletics(y);
+      }
+      if (!skillDeception) {
+        setSkillDeception(y);
+      }
+      if (!skillHistory) {
+        setSkillHistory(y);
+      }
+      if (!skillInsight) {
+        setSkillInsight(y);
+      }
+      if (!skillIntimidation) {
+        setSkillIntimidation(y);
+      }
+      if (!skillInvestigation) {
+        setSkillInvestigation(y);
+      }
+      if (!skillMedicine) {
+        setSkillMedicine(y);
+      }
+      if (!skillNature) {
+        setSkillNature(y);
+      }
+      if (!skillPerception) {
+        setSkillPerception(y);
+      }
+      if (!skillPerformance) {
+        setSkillPerformance(y);
+      }
+      if (!skillPersuasion) {
+        setSkillPersuasion(y);
+      }
+      if (!skillReligion) {
+        setSkillReligion(y);
+      }
+      if (!skillSleight) {
+        setSkillSleight(y);
+      }
+      if (!skillStealth) {
+        setSkillStealth(y);
+      }
+      if (!skillSurvival) {
+        setSkillSurvival(y);
+      }
+    }
+
+    if (senseList.length === 0) {
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (4 - 0));
+        setSenseList((speedArray) => [...speedArray, senseOptions[r]]);
+      }
+    }
+    if (senseList) {
+      let y = Math.round(Math.random() * (120 - 5));
+      if (!senseBlindsight) {
+        setSenseBlindsight(y);
+      }
+      if (!senseDarkvision) {
+        setSenseDarkvision(y);
+      }
+      if (!senseTremorsense) {
+        setSenseTremorsense(y);
+      }
+      if (!senseTruesight) {
+        setSenseTruesight(y);
+      }
+    }
+
+    if (langList.length === 0) {
+          let r = Math.round(Math.random() * (16 - 1));
+          setLangList((speedArray) => [...speedArray, langOptions[r]]);
+      }
+
+    if (actionList.length === 0){
+        let r = Math.round(Math.random() * (292 - 1));
+        let z = Math.round(Math.random() * (292 - 1));
+        let x = Math.round(Math.random() * (2 - 0));
+        setActionList((speedArray) => [...speedArray, actionOptions[r]]);
+        if(x === 1){
+         setActionList((speedArray) => [...speedArray, actionOptions[z]]);
+        }
+        
+    }  
+
+    if (specialList.length === 0){
+        let r = Math.round(Math.random() * (292 - 1));
+        let z = Math.round(Math.random() * (292 - 1));
+        let x = Math.round(Math.random() * (2 - 0));
+        setSpecialList((speedArray) => [...speedArray, specialOptions[r]]);
+        if(x === 1){
+         setSpecialList((speedArray) => [...speedArray, specialOptions[z]]);
+        }
+        
+    }  
+    
   };
 
   const onClear = (e) => {
@@ -3709,8 +3741,8 @@ const MonsterGen = () => {
   const mapSpecials = specialList.map((i) => {
     return (
       <>
-      <div>
-        {i.name}. <span className={style.minorText2}>{i.desc}</span>
+        <div>
+          {i.name}. <span className={style.minorText2}>{i.desc}</span>
         </div>
       </>
     );
@@ -3718,20 +3750,20 @@ const MonsterGen = () => {
   const mapActions = actionList.map((i) => {
     return (
       <>
-      <div>
-        {i.name}. <span className={style.minorText2}>{i.desc}</span>
+        <div>
+          {i.name}. <span className={style.minorText2}>{i.desc}</span>
         </div>
       </>
     );
   });
   const mapLegends = legendList.map((i) => {
     return (
-        <>
+      <>
         <div>
           {i.name}. <span className={style.minorText2}>{i.desc}</span>
-          </div>
-        </>
-      );
+        </div>
+      </>
+    );
   });
   const mapLairs = lairList.map((i) => {
     return `${i.name}, `;
