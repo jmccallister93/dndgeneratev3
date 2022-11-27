@@ -335,7 +335,7 @@ const MonsterGen = () => {
     };
     fetchData();
   };
-  
+  //Specials
   useEffect(() => {
     const fetchData = async () => {
         const { data: dataName, error: errorName } = await supabase
@@ -350,6 +350,54 @@ const MonsterGen = () => {
           setSpecials(dataName);
           setFetchError(null);
           setSpecialOptions(dataName.map((r) => ({ 
+            name: r.name, 
+            value: r.value,
+            desc: r.desc,
+            type: r.type,
+            source: r.source 
+        })));
+        }
+      };
+      fetchData();
+  }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+        const { data: dataName, error: errorName } = await supabase
+          .from('monstersActions')
+          .select();
+        if (errorName) {
+          setFetchError("Could not fetch the data");
+          console.log(errorName);
+          setAction(null);
+        }
+        if (dataName) {
+          setActions(dataName);
+          setFetchError(null);
+          setActionOptions(dataName.map((r) => ({ 
+            name: r.name, 
+            value: r.value,
+            desc: r.desc,
+            type: r.type,
+            source: r.source 
+        })));
+        }
+      };
+      fetchData();
+  }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+        const { data: dataName, error: errorName } = await supabase
+          .from('monstersLegendaryActions')
+          .select();
+        if (errorName) {
+          setFetchError("Could not fetch the data");
+          console.log(errorName);
+          setLegend(null);
+        }
+        if (dataName) {
+          setLegends(dataName);
+          setFetchError(null);
+          setLegendOptions(dataName.map((r) => ({ 
             name: r.name, 
             value: r.value,
             desc: r.desc,
@@ -382,8 +430,8 @@ const MonsterGen = () => {
     getData("senses", setSense, setSenses, setSenseOptions);
     getData("languages", setLang, setLangs, setLangOptions);
     // getData("monstersAbilities", setSpecial, setSpecials, setSpecialOptions);
-    getData("monstersActions", setAction, setActions, setActionOptions);
-    getData("monstersReactions", setReaction, setReactions, setReactionOptions);
+    // getData("monstersActions", setAction, setActions, setActionOptions);
+    // getData("monstersReactions", setReaction, setReactions, setReactionOptions);
     getData(
       "monstersLegendaryActions",
       setLegend,
@@ -3562,10 +3610,10 @@ const MonsterGen = () => {
     return `${i.name}. ${i.desc} `;
   });
   const mapActions = actionList.map((i) => {
-    return `${i.name}, `;
+    return `${i.name}. ${i.desc}`;
   });
   const mapLegends = legendList.map((i) => {
-    return `${i.name}, `;
+    return `${i.name}. ${i.desc}`;
   });
   const mapLairs = lairList.map((i) => {
     return `${i.name}, `;
