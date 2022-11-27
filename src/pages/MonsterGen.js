@@ -3264,14 +3264,6 @@ const MonsterGen = () => {
     ifBlank(align, setAlign, alignOptions, 9, 1);
     ifBlank(ac, setAc, acOptions, 30, 1);
     ifBlank(armorType, setArmorType, armorTypeOptions, 14, 1);
-    ifBlank(vuln, setVuln, vulnOptions, 17, 1);
-    ifBlank(skill, setSkill, skillOptions, 18, 1);
-    ifBlank(immune, setImmune, immuneOptions, 17, 1);
-    ifBlank(resist, setResist, resistOptions, 17, 1);
-    ifBlank(condition, setCondition, conditionOptions, 15, 1);
-    ifBlank(special, setSpecial, specialOptions, 208, 1);
-    ifBlank(action, setAction, actionOptions, 292, 1);
-    ifBlank(legend, setLegend, legendOptions, 35, 1);
 
     // ifBlank(lair, setLair, lairOptions, 39, 1)
     //TODO
@@ -3443,6 +3435,34 @@ const MonsterGen = () => {
         setSenseTruesight(y);
       }
     }
+    if (vulnList.length === 0) {
+        let x = Math.round(Math.random() * (1 - 0));
+        if (x === 1) {
+          let r = Math.round(Math.random() * (17 - 0));
+          setVulnList((speedArray) => [...speedArray, vulnOptions[r]]);
+        }
+      }
+      if (immuneList.length === 0) {
+        let x = Math.round(Math.random() * (1 - 0));
+        if (x === 1) {
+          let r = Math.round(Math.random() * (17 - 0));
+          setImmuneList((speedArray) => [...speedArray, immuneOptions[r]]);
+        }
+      }
+      if (resistList.length === 0) {
+        let x = Math.round(Math.random() * (1 - 0));
+        if (x === 1) {
+          let r = Math.round(Math.random() * (17 - 0));
+          setResistList((speedArray) => [...speedArray, resistOptions[r]]);
+        }
+      }
+      if (conditionList.length === 0) {
+        let x = Math.round(Math.random() * (1 - 0));
+        if (x === 1) {
+          let r = Math.round(Math.random() * (15 - 0));
+          setConditionList((speedArray) => [...speedArray, conditionOptions[r]]);
+        }
+      }
 
     if (langList.length === 0) {
           let r = Math.round(Math.random() * (16 - 1));
@@ -3461,15 +3481,24 @@ const MonsterGen = () => {
     }  
 
     if (specialList.length === 0){
-        let r = Math.round(Math.random() * (292 - 1));
-        let z = Math.round(Math.random() * (292 - 1));
+        let r = Math.round(Math.random() * (208- 1));
+        let z = Math.round(Math.random() * (208 - 1));
         let x = Math.round(Math.random() * (2 - 0));
         setSpecialList((speedArray) => [...speedArray, specialOptions[r]]);
         if(x === 1){
          setSpecialList((speedArray) => [...speedArray, specialOptions[z]]);
-        }
-        
+        } 
     }  
+
+    if(legendList.length === 0){
+        let r = Math.round(Math.random() * (35- 1));
+        let z = Math.round(Math.random() * (35 - 1));
+        let x = Math.round(Math.random() * (4 - 0));
+        setLegendList((speedArray) => [...speedArray, legendOptions[r]]);
+        if(x === 1){
+            setLegendList((speedArray) => [...speedArray, legendOptions[z]]);
+        } 
+    }
     
   };
 
