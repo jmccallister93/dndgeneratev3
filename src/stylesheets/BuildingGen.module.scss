@@ -1,0 +1,18 @@
+$primary-grey: #393e46;
+$secondary-grey: #d6e4e5;
+$header-color: #3e6d9c;
+$display-tan: #f7f1cf;
+$display-red: #9a2818;
+
+.mainWrapper{
+    background: linear-gradient(135deg, $primary-grey 25%, white);
+    height: fit-content;
+    width: 99vw;
+    min-height: 100vh;
+    max-height: fit-content;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: $primary-grey;
+}

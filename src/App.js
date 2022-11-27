@@ -9,6 +9,7 @@ import ItemCollection from "./pages/ItemCollection";
 import ItemGen from "./pages/ItemGen"
 import MonsterGen from "./pages/MonsterGen"
 import Collections from "./pages/Collections";
+import BuildingGen from "./pages/BuildingGen";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/itemcollection" element={<ItemCollection/>} />
           <Route path="/itemgen" element={<ItemGen />} />
           <Route path="/monstergen" element={<MonsterGen/>} />
+          <Route path="/buildinggen" element={<BuildingGen/>} />
         </Routes>
       </BrowserRouter>
     </div>

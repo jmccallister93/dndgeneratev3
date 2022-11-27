@@ -15,10 +15,19 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
-import { e, i, leftShift } from "mathjs";
+import { Document, Page } from 'react-pdf';
 
 const MonsterGen = () => {
-  const [monster, setMonster] = useState({ size: "", type: "" });
+  const [monster, setMonster] = useState({
+    name:"", 
+    size: "", 
+    type: "",
+    align: "",
+    ac: "",
+    armorType: "",
+    hp: "",
+    speed: "",
+});
 
   //Set States
   const [fetchError, setFetchError] = useState();
@@ -489,93 +498,95 @@ const MonsterGen = () => {
   //     fetchData();
   //   }, []);
   //Export Logic
-  const [selectedItems, setSelectedItems] = useState(null);
-  const [allSelection, setAllSelection] = useState();
-  const dt = useRef(null);
+//   const [selectedItems, setSelectedItems] = useState(null);
+//   const [allSelection, setAllSelection] = useState();
+//   const dt = useRef(null);
 
-  const exportPdf = () => {
-    import("jspdf").then((jsPDF) => {
-      import("jspdf-autotable").then(() => {
-        const doc = new jsPDF.default(0, 0);
-        doc.autoTable(exportColumns, allSelection);
-        doc.save({name} + ".pdf");
-      });
-    });
-  };
-  const cols = [
-    { field: "name", header: "Name" },
-    { field: "size", header: "Size" },
-    { field: "type", header: "Type" },
-    { field: "alignment", header: "Alignment" },
-  ];
-  const exportColumns = cols.map((col) => ({
-    title: col.header,
-    dataKey: col.field,
-  }));
+//   const exportPdf = () => {
+//     import("jspdf").then((jsPDF) => {
+//       import("jspdf-autotable").then(() => {
+//         const doc = new jsPDF.default(0, 0);
+//         doc.autoTable(exportColumns, allSelection);
+//         doc.save({name} + ".pdf");
+//       });
+//     });
+//   };
+//   const cols = [
+//     { field: "name", header: "Name" },
+//     { field: "size", header: "Size" },
+//     { field: "type", header: "Type" },
+//     { field: "alignment", header: "Alignment" },
+//   ];
+//   const exportColumns = cols.map((col) => ({
+//     title: col.header,
+//     dataKey: col.field,
+//   }));
 
-  const exportCSV = (selectionOnly) => {
-    dt.current.exportCSV({ selectionOnly });
-  };
+//   const exportCSV = (selectionOnly) => {
+//     dt.current.exportCSV({ selectionOnly });
+//   };
 
-  const exportExcel = () => {
-    import("xlsx").then((xlsx) => {
-      const worksheet = xlsx.utils.json_to_sheet(allSelection);
-      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-      const excelBuffer = xlsx.write(workbook, {
-        bookType: "xlsx",
-        type: "array",
-      });
-      saveAsExcelFile(excelBuffer, "products");
-    });
-  };
+//   const exportExcel = () => {
+//     import("xlsx").then((xlsx) => {
+//       const worksheet = xlsx.utils.json_to_sheet(allSelection);
+//       const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+//       const excelBuffer = xlsx.write(workbook, {
+//         bookType: "xlsx",
+//         type: "array",
+//       });
+//       saveAsExcelFile(excelBuffer, "products");
+//     });
+//   };
 
-  const saveAsExcelFile = (buffer, fileName) => {
-    import("file-saver").then((module) => {
-      if (module && module.default) {
-        let EXCEL_TYPE =
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-        let EXCEL_EXTENSION = ".xlsx";
-        const data = new Blob([buffer], {
-          type: EXCEL_TYPE,
-        });
+//   const saveAsExcelFile = (buffer, fileName) => {
+//     import("file-saver").then((module) => {
+//       if (module && module.default) {
+//         let EXCEL_TYPE =
+//           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+//         let EXCEL_EXTENSION = ".xlsx";
+//         const data = new Blob([buffer], {
+//           type: EXCEL_TYPE,
+//         });
 
-        module.default.saveAs(
-          data,
-          fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
-        );
-      }
-    });
-  };
+//         module.default.saveAs(
+//           data,
+//           fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+//         );
+//       }
+//     });
+//   };
 
-  //Export Buttons
-  const exportBtns = (
-    <div >
-      <Button
-        type="button"
-        icon="pi pi-file"
-        onClick={() => exportCSV(true)}
-        className="p-button-info mr-2 "
-        data-pr-tooltip="Export CSV"
-        tooltip="CSV"
-      />
-      <Button
-        type="button"
-        icon="pi pi-file-excel"
-        onClick={() => exportExcel(true)}
-        className="p-button-success mr-2"
-        data-pr-tooltip="Export XLS"
-        tooltip="XLS"
-      />
-      <Button
-        type="button"
-        icon="pi pi-file-pdf"
-        onClick={exportPdf}
-        className="p-button-warning mr-2"
-        data-pr-tooltip="Export PDF"
-        tooltip="PDF"
-      />
-    </div>
-  );
+//   //Export Buttons
+//   const exportBtns = (
+//     <div >
+//       <Button
+//         type="button"
+//         icon="pi pi-file"
+//         onClick={() => exportCSV(true)}
+//         className="p-button-info mr-2 "
+//         data-pr-tooltip="Export CSV"
+//         tooltip="CSV"
+//       />
+//       <Button
+//         type="button"
+//         icon="pi pi-file-excel"
+//         onClick={exportExcel}
+//         className="p-button-success mr-2"
+//         data-pr-tooltip="Export XLS"
+//         tooltip="XLS"
+//       />
+//       <Button
+//         type="button"
+//         icon="pi pi-file-pdf"
+//         onClick={exportPdf}
+//         className="p-button-warning mr-2"
+//         data-pr-tooltip="Export PDF"
+//         tooltip="PDF"
+//       />
+//     </div>
+//   );
+
+
 
   //OnChanges
   const onNameChange = (e) => {
@@ -3938,7 +3949,7 @@ const MonsterGen = () => {
         <div className={style.monstergenOptionsWrapper}>
           <div className={style.exportButtons}>
             <h2>Export Monster</h2>
-            <div>{exportBtns}</div>
+            <div>placeholder for btns</div>
           </div>
           <h1>Monster Options</h1>
           <h1 className={style.monstergenSubHeader} onClick={showBasics}>

@@ -33,6 +33,15 @@ const Create = () => {
       </p>
     </Card>
   );
+  const cardBuildingGen = (
+    <Card className={style.createCard}>
+      <h3>Building Generator</h3>
+      <p>
+        Generate Taverns, Inns, Shops, etc. with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
 
   return (
     <div className={style.createWrapper}>
@@ -47,6 +56,9 @@ const Create = () => {
         </Link>
         <Link className={style.createLink} to="/monstergen">
           {cardMonsterGen}
+        </Link>
+        <Link className={style.createLink} to="/buildinggen">
+          {cardBuildingGen}
         </Link>
       </div>
     </div>
