@@ -3848,6 +3848,7 @@ const MonsterGen = () => {
       <div className={style.monstergenBody}>
         {/* Options */}
         <div className={style.monstergenOptionsWrapper}>
+            <h1>Monster Options</h1>
           <h1 className={style.monstergenSubHeader} onClick={showBasics}>
             Basic Info
           </h1>
