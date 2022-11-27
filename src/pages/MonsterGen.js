@@ -15,7 +15,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
-import { i, leftShift } from "mathjs";
+import { e, i, leftShift } from "mathjs";
 
 const MonsterGen = () => {
   const [monster, setMonster] = useState({ size: "", type: "" });
@@ -278,6 +278,7 @@ const MonsterGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isSSDActive, setIsSSDActive] = useState(false);
   const [isDTActive, setIsDTActive] = useState(false);
+  const [isGearActive, setIsGearActive] = useState(false);
 
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -3361,6 +3362,10 @@ const MonsterGen = () => {
   const showDT = (e) => {
     setIsDTActive((current) => !current);
   };
+
+  const showGear = (e) => {
+    setIsGearActive((current) => !current);
+  };
   //Map items for display
   const mapExtraSpeeds = speedExtraList.map((i) => {
     return ` ${i.name} ${
@@ -3444,7 +3449,7 @@ const MonsterGen = () => {
   const mapSaves = saveList.map((i) => {
     return ` ${i.name} +${
       i.name === "Strength"
-        ?  saveStr
+        ? saveStr
         : i.name === "Dexterity"
         ? saveDex
         : i.name === "Constitution"
@@ -3461,7 +3466,7 @@ const MonsterGen = () => {
   const mapSkills = skillList.map((i) => {
     return ` ${i.name} +${
       i.name === "Acrobatics"
-        ?  skillAcrobatics
+        ? skillAcrobatics
         : i.name === "Animal Handling"
         ? skillAnimal
         : i.name === "Arcana"
@@ -3500,31 +3505,49 @@ const MonsterGen = () => {
     }, `;
   });
   const mapSenses = senseList.map((i) => {
-    return (`${i.name} ${i.name === "Blindsight"
-            ? senseBlindsight
-            : i.name === "Darkvision"
-            ? senseDarkvision
-            : i.name === "Tremorsense"
-            ? senseTremorsense
-            : i.name === "Truesight"
-            ? senseTruesight
-            : null} ft., `)
-  })
-  const mapLangs = langList.map((i) =>{
-    return (`${i.name}, `)
-  })
-const mapVulns = vulnList.map((i) => {
-    return (`${i.name}, `)
-})
-const mapImmunes = immuneList.map((i) => {
-    return (`${i.name}, `)
-})
-const mapResists = resistList.map((i) => {
-    return(`${i.name}, `)
-})
-const mapConditions = conditionList.map((i) => {
-    return(`${i.name}, `)
-})
+    return `${i.name} ${
+      i.name === "Blindsight"
+        ? senseBlindsight
+        : i.name === "Darkvision"
+        ? senseDarkvision
+        : i.name === "Tremorsense"
+        ? senseTremorsense
+        : i.name === "Truesight"
+        ? senseTruesight
+        : null
+    } ft., `;
+  });
+  const mapLangs = langList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapVulns = vulnList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapImmunes = immuneList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapResists = resistList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapConditions = conditionList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapSpecials = specialList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapActions = actionList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapLegends = legendList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapLairs = lairList.map((i) => {
+    return `${i.name}, `;
+  });
+  const mapGear = gearList.map((i) => {
+    return `${i.name}`;
+  });
+  console.log(legendList);
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3621,89 +3644,139 @@ const mapConditions = conditionList.map((i) => {
             {specialDisplay}
             {actionDialog}
             <div className={style.speedContainer}>{actionDisplay}</div>
-            {reactionDialog}
-            <div className={style.speedContainer}>{reactionDisplay}</div>
+            {/* {reactionDialog}
+            <div className={style.speedContainer}>{reactionDisplay}</div> */}
             {legendDialog}
             <div className={style.speedContainer}>{legendDisplay}</div>
             {lairDialog}
             <div className={style.speedContainer}>{lairDisplay}</div>
-            {gearDialog}
+          </div>
+          <h1 className={style.monstergenSubHeader} onClick={showGear}>
+            Equipment
+          </h1>
+          <div
+            className={isGearActive ? style.monstergenSubsection : style.hidden}
+          >
             <div className={style.speedContainer}>{gearDisplay}</div>
           </div>
-        
 
-        {/* Main Display */}
-        <div className={style.monstergenDisplay}>
-          <h1>{name}</h1>
-          <h3>
-            {size} {type}, {align}
-          </h3>
-          <hr className={style.lineBreak} />
-          <h3>
-            Armor Class {ac} ({armorType})
-          </h3>
-          <h3>Hit Points {hp}</h3>
-          <h3>
-            Speed {speed} ft., {mapExtraSpeeds}
-          </h3>
-          <hr className={style.lineBreak} />
-          <h3 className={style.abilityScores}>
-            <div>
-              <h3>STR</h3>
+          {/* Main Display */}
+          <div className={style.monstergenDisplay}>
+            <h1>{name}</h1>
+            <h2>
+              {size} {type}, {align}
+            </h2>
+            <hr className={style.lineBreak} />
+            <h2>
+              Armor Class {ac} ({armorType})
+            </h2>
+            <h2>Hit Points {hp}</h2>
+            <h2>
+              Speed {speed} ft., {mapExtraSpeeds}
+            </h2>
+            <hr className={style.lineBreak} />
+            <h3 className={style.abilityScores}>
               <div>
-                {str} ({strMod}){" "}
+                <h3>STR</h3>
+                <div>
+                  {str} ({strMod}){" "}
+                </div>
               </div>
-            </div>
-            <div>
-              <h3>DEX</h3>
               <div>
-                {dex} ({dexMod}){" "}
+                <h3>DEX</h3>
+                <div>
+                  {dex} ({dexMod}){" "}
+                </div>
               </div>
-            </div>
-            <div>
-              <h3>CON</h3>
               <div>
-                {con} ({conMod}){" "}
+                <h3>CON</h3>
+                <div>
+                  {con} ({conMod}){" "}
+                </div>
               </div>
-            </div>
-          </h3>
-          <h3 className={style.abilityScores}>
-            <div>
+            </h3>
+            <h3 className={style.abilityScores}>
+              <div>
                 <h3>INT</h3>
                 <div>
-                {int} ({intMod})
+                  {int} ({intMod})
                 </div>
-            </div>
-            <div>
+              </div>
+              <div>
                 <h3>WIS</h3>
                 <div>
-                {wis} ({wisMod})
+                  {wis} ({wisMod})
                 </div>
-            </div>
-            <div>
+              </div>
+              <div>
                 <h3>CHA</h3>
-                <div>{cha} ({chaMod})</div>
-            </div>
-          </h3>
-          <hr className={style.lineBreak} />
-          <h3>Saving Throws {mapSaves}</h3>
-          <h3>Skills {mapSkills}</h3>
-          <h3>Damage Vulnerabilities {mapVulns}</h3>
-          <h3>Damage Immunities {mapImmunes}</h3>
-          <h3>Damage Resistances {mapResists}</h3>
-          <h3>Condition Immunities {mapConditions}</h3>
-          <h3>Senses {mapSenses}</h3>
-          <h3>Languages {mapLangs}</h3>
-          <hr className={style.lineBreak} />
-          <h3>Abilities</h3>
-          <h2>Actions</h2>
-          <hr className={style.subLineBreak} />
-          <h3>Actions List</h3>
-          <h2>Legendary Actions</h2>
-          <hr className={style.subLineBreak} />
-          <h3>Legendary actions Listed</h3>
+                <div>
+                  {cha} ({chaMod})
+                </div>
+              </div>
+            </h3>
+            <hr className={style.lineBreak} />
+            {saveList.length === 0 ? null : (
+              <>
+                <h2>Saving Throws {mapSaves}</h2>
+              </>
+            )}
+
+            {skillList.length === 0 ? null : (
+              <>
+                <h2>Skills {mapSkills}</h2>
+              </>
+            )}
+
+            {vulnList.length === 0 ? null : (
+              <>
+                <h2>Damage Vulnerabilities {mapVulns}</h2>
+              </>
+            )}
+
+            {immuneList.length === 0 ? null : (
+              <>
+                <h2>Damage Immunities {mapImmunes}</h2>
+              </>
+            )}
+
+            {resistList.length === 0 ? null : (
+              <>
+                <h2>Damage Resistances {mapResists}</h2>
+              </>
+            )}
+            {conditionList.length === 0 ? null : (
+              <>
+                <h2>Condition Immunities {mapConditions}</h2>
+              </>
+            )}
+            {senseList.length === 0 ? null : (
+              <>
+                <h2>Senses{mapSenses}</h2>
+              </>
+            )}
+            <h2>Languages {langList.length === 0 ? "--" : mapLangs}</h2>
+            <hr className={style.lineBreak} />
+            {specialList.length === 0 ? null : <h2>{mapSpecials}</h2>}
+            <h1>Actions</h1>
+            <hr className={style.subLineBreak} />
+            <h2>{mapActions}</h2>
+            {legendList.length === 0 ? null : (
+              <>
+                <h1>Legendary Actions</h1>
+                <hr className={style.subLineBreak} />
+                <h2>{mapLegends}</h2>
+              </>
+            )}
+            {lairList.length === 0 ? null : (
+              <>
+                <h1>Lair Actions</h1>
+                <hr className={style.subLineBreak} />
+                <h2>{mapLairs}</h2>
+              </>
+            )}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
