@@ -120,16 +120,24 @@ $display-red: #9a2818;
   justify-content: end;
   border-radius: 0;
   color: $display-red;
-  padding: 5px;
-  padding-bottom: 10px;
-  position: fixed;
+  position: absolute;
   right: 20%;
+    & h1 {
+        padding: 5px;
+    }
+    & h2 {
+        padding: 5px;
+    }
+    & h3 {
+        padding: 5px;
+    }
+   
 }
 
 .lineBreak{
  border-top: 5px solid transparent;
  border-bottom: 5px solid transparent;
- border-left: 40vw solid $display-red;
+ border-left: 38vw solid $display-red;
 }
 
 .subLineBreak{

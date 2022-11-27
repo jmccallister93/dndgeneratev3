@@ -362,6 +362,7 @@ const MonsterGen = () => {
     };
     fetchData();
   }, []);
+  //Actions
   useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -388,6 +389,7 @@ const MonsterGen = () => {
     };
     fetchData();
   }, []);
+  //Legend
   useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -2652,13 +2654,6 @@ const MonsterGen = () => {
     </div>
   );
   //Special
-  const onRemoveSelected = (setlist, list, name) => {
-    setlist(list.filter((value) => value.name !== name));
-  };
-  const onRemoveSpecial = (e) => {
-    // setSelectedItemsSpecial(selectedItemsSpecial.filter((e.target.value)))
-    console.log(e.target.value);
-  };
 
   const onSpecialSelect = (e) => {
     setSpecialList(e.value);
@@ -3279,7 +3274,7 @@ const MonsterGen = () => {
     ifBlank(lang, setLang, langOptions, 16, 1);
     ifBlank(special, setSpecial, specialOptions, 208, 1);
     ifBlank(action, setAction, actionOptions, 292, 1);
-    ifBlank(reaction, setReaction, reactionOptions, 11, 1);
+    // ifBlank(reaction, setReaction, reactionOptions, 11, 1);
     ifBlank(legend, setLegend, legendOptions, 35, 1);
 
     // ifBlank(lair, setLair, lairOptions, 39, 1)
@@ -3296,7 +3291,14 @@ const MonsterGen = () => {
     };
     ifBlank2(hp, setHp, 500, 0);
     ifBlank2(speed, setSpeed, 120, 0);
-    ifBlank2(speedExtra, setSpeedExtra, 120, 0);
+
+    console.log(speedExtra);
+    ifBlank2(str, setStr, 30, 0);
+    ifBlank2(dex, setDex, 30, 0);
+    ifBlank2(con, setCon, 30, 0);
+    ifBlank2(int, setInt, 30, 0);
+    ifBlank2(wis, setWis, 30, 0);
+    ifBlank2(cha, setCha, 30, 0);
     ifBlank2(str, setStr, 30, 0);
     ifBlank2(dex, setDex, 30, 0);
     ifBlank2(con, setCon, 30, 0);
@@ -3319,17 +3321,23 @@ const MonsterGen = () => {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
         let r = Math.round(Math.random() * (4 - 0));
+        let y = Math.round(Math.random() * (120 - 5));
         setSpeedExtraList((speedArray) => [...speedArray, speedTypeOptions[r]]);
+        if (speedExtraList.includes("Burrow")) {
+          setBurrow(y);
+        }
+        if (speedTypeOptions[r] === "Climb") {
+          setClimb(y);
+        }
+        if (speedTypeOptions[r] === "Fly") {
+          setFly(y);
+        }
+        if (speedTypeOptions[r] === "Swim") {
+          setSwim(y);
+        }
       }
     }
-    if (speedExtraList.length > 0) {
-      let y = Math.round(Math.random() * (120 - 5));
-      setBurrow(y);
-      setClimb(y);
-      setHover(y);
-      setFly(y);
-      setSwim(y);
-    }
+
     if (saveList.length === 0) {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
@@ -3442,7 +3450,6 @@ const MonsterGen = () => {
   const showDT = (e) => {
     setIsDTActive((current) => !current);
   };
-
   const showGear = (e) => {
     setIsGearActive((current) => !current);
   };
@@ -3615,23 +3622,29 @@ const MonsterGen = () => {
   const mapSpecials = specialList.map((i) => {
     return (
       <>
-        {i.name} <span className={style.minorText2}>{i.desc}</span>
+        <div>
+          {i.name}. <span className={style.minorText2}>{i.desc}</span>
+        </div>
       </>
     );
   });
   const mapActions = actionList.map((i) => {
     return (
       <>
-        {i.name} <span className={style.minorText2}>{i.desc}</span>
+        <div>
+          {i.name}. <span className={style.minorText2}>{i.desc}</span>
+        </div>
       </>
     );
   });
   const mapLegends = legendList.map((i) => {
     return (
-        <>
-          {i.name} <span className={style.minorText2}>{i.desc}</span>
-        </>
-      );
+      <>
+        <div>
+          {i.name}. <span className={style.minorText2}>{i.desc}</span>
+        </div>
+      </>
+    );
   });
   const mapLairs = lairList.map((i) => {
     return `${i.name}, `;
