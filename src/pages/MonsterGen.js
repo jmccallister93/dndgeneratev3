@@ -3327,7 +3327,6 @@ const MonsterGen = () => {
         setSpeedExtraList((speedArray) => [...speedArray, speedTypeOptions[r]]);
       } 
     }
-
     if (speedExtraList) {
         let y = Math.round(Math.random() * (120 - 5));
         if(!burrow){
@@ -3355,6 +3354,27 @@ const MonsterGen = () => {
         setSaveList((saveArray) => [...saveArray, saveOptions[r]]);
       }
     }
+    if (saveList) {
+        let y = Math.round(Math.random() * (10 - 1));
+        if(!saveStr){
+            setSaveStr(y);
+        }
+        if(!saveDex){
+            setSaveDex(y);
+        }
+        if(!saveCon){
+            setSaveCon(y);
+        }
+        if(!saveWis){
+            setSaveWis(y);
+        }
+        if(!saveCha){
+            setSaveCha(y);
+        }
+        if(!saveInt){
+            setSaveInt(y);
+        }
+      }
     if (skillList.length === 0) {
       let x = Math.round(Math.random() * (1 - 0));
       if (x === 1) {
@@ -3362,6 +3382,63 @@ const MonsterGen = () => {
         setSkillList((saveArray) => [...saveArray, skillOptions[r]]);
       }
     }
+    if (skillList) {
+        let y = Math.round(Math.random() * (10 - 1));
+        if(!skillAcrobatics){
+            setSkillAcrobatics(y);
+        }
+        if(!skillAnimal){
+            setSkillAnimal(y);
+        }
+        if(!skillArcana){
+            setSkillArcana(y);
+        }
+        if(!skillAthletics){
+            setSkillAthletics(y);
+        }
+        if(!skillDeception){
+            setSkillDeception(y);
+        }
+        if(!skillHistory){
+            setSkillHistory(y);
+        }
+        if(!skillInsight){
+            setSkillInsight(y);
+        }
+        if(!skillIntimidation){
+            setSkillIntimidation(y);
+        }
+        if(!skillInvestigation){
+            setSkillInvestigation(y);
+        }
+        if(!skillMedicine){
+            setSkillMedicine(y);
+        }
+        if(!skillNature){
+            setSkillNature(y);
+        }
+        if(!skillPerception){
+            setSkillPerception(y);
+        }
+        if(!skillPerformance){
+            setSkillPerformance(y);
+        }
+        if(!skillPersuasion){
+            setSkillPersuasion(y);
+        }
+        if(!skillReligion){
+            setSkillReligion(y);
+        }
+        if(!skillSleight){
+            setSkillSleight(y);
+        }
+        if(!skillStealth){
+            setSkillStealth(y);
+        }
+        if(!skillSurvival){
+            setSkillSurvival(y);
+        }
+      }
   };
 
   const onClear = (e) => {
