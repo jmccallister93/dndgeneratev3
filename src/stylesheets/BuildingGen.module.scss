@@ -56,9 +56,9 @@ $display-red: #9a2818;
 }
 
 .topHeader {
-    display: inline-block;
-    align-items: center;
-  }
+  display: inline-block;
+  align-items: center;
+}
 
 .btnWrapper {
   display: flex;
@@ -100,4 +100,34 @@ $display-red: #9a2818;
     cursor: pointer;
     box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
   }
+}
+
+.subHeader {
+    color: $primary-grey;
+    background-color: white;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 1px solid $header-color;
+    width: fit-content;
+    box-shadow: 5px 5px 5px 2px $primary-grey;
+    transition: 0.3s;
+    &:hover{
+      cursor: pointer;
+      box-shadow: 0px 0px 5px 5px green;
+      scale: 1.1
+    }
+  }
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  & div {
+    text-align: center;
+    align-items: left;
+    justify-content: left;
+  }
+}
+
+.hidden {
+  display: none;
 }

@@ -90,8 +90,6 @@ $display-red: #9a2818;
   }
 
 .monstergenSubsection {
-  // display: grid;
-  // grid-template-columns: repeat(6, 1fr);
   display: flex;
   flex-direction: column;
   & div {

@@ -10,10 +10,11 @@ import supabase from "../config/supabaseClient";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
+  const [isBasicActive, setIsBasicActive] = useState(false)
   const [buildingType, setBuildingType] = useState("");
   const [buildingTypes, setBuildingTypes] = useState("");
   const [buildingTypeOptions, setBuildingTypeOptions] = useState("");
-
+//Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -36,6 +37,11 @@ const BuildingGen = () => {
   useEffect(() => {
     getData("buildingsTypes", setBuildingType, setBuildingTypes, setBuildingTypeOptions);
   }, []);
+//Show Options
+const showBasics = (e) => {
+    setIsBasicActive((current) => !current);
+  };
+  //Buttons
   const onGenerate = (e) => {};
   const onClear = (e) => {};
 
@@ -56,8 +62,18 @@ const BuildingGen = () => {
           </div>
         </div>
       </div>
+      {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
+        <h1>Building Options</h1>
+        <h1 className={style.subHeader} onClick={showBasics}>
+            Basic Info
+          </h1>
+          <div
+            className={
+              isBasicActive ? style.subsection : style.hidden
+            }
+          ></div>
             
         </div>
       </div>
