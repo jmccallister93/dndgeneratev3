@@ -26,6 +26,9 @@ const MonsterGen = () => {
   const [name, setName] = useState("");
   const [names, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
+  const [nameAnimal, setNameAnimal] = useState();
+  const [nameAdejctive, setNameAdjective] = useState();
+  const [nameNoun, setNameNoun] = useState();
 
   const [size, setSize] = useState("");
   const [sizes, setSizes] = useState();
@@ -417,10 +420,33 @@ const MonsterGen = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("monsterNames")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setName(null);
+      }
+      if (dataName) {
+        setNames(dataName);
+        setFetchError(null);
+        setNameOptions(
+          dataName.map((r) => ({
+            animal: r.animal,
+            adjective: r.adjective,
+            noun: r.noun,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+
   //Import data via getData
   useEffect(() => {
-    //TODO Names
-    // getData("names", setName, setNames, setNameOptions)
     getData("sizes", setSize, setSizes, setSizeOptions);
     getData("monstersTypes", setType, setTypes, setTypeOptions);
     getData("aligns", setAlign, setAligns, setAlignOptions);
@@ -437,15 +463,6 @@ const MonsterGen = () => {
     getData("conditions", setCondition, setConditions, setConditionOptions);
     getData("senses", setSense, setSenses, setSenseOptions);
     getData("languages", setLang, setLangs, setLangOptions);
-    // getData("monstersAbilities", setSpecial, setSpecials, setSpecialOptions);
-    // getData("monstersActions", setAction, setActions, setActionOptions);
-    // getData("monstersReactions", setReaction, setReactions, setReactionOptions);
-    // getData(
-    //   "monstersLegendaryActions",
-    //   setLegend,
-    //   setLegends,
-    //   setLegendOptions
-    // );
     getData("monstersLairActions", setLair, setLairs, setLairOptions);
   }, []);
 
@@ -477,7 +494,56 @@ const MonsterGen = () => {
   const onNameChange = (e) => {
     setName(e.target.value);
   };
-  const onRandomName = (e) => {};
+  const onRandomName = (e) => {
+    const a = Math.round(Math.random() * (139 - 0));
+    const ad = Math.round(Math.random() * (83 - 0));
+    const n = Math.round(Math.random() * (69 - 0));
+    const x = Math.round(Math.random() * (4 - 0));
+    if (x === 0) {
+      setName(
+        nameOptions[n].noun.charAt(0).toUpperCase() +
+          nameOptions[n].noun.slice(1) +
+          " " +
+          nameOptions[ad].adjective.charAt(0).toUpperCase() +
+          nameOptions[ad].adjective.slice(1) +
+          " " +
+          nameOptions[a].animal
+      );
+    }
+    if (x === 1) {
+      setName(
+        nameOptions[ad].adjective.charAt(0).toUpperCase() +
+          nameOptions[ad].adjective.slice(1) +
+          " " +
+          nameOptions[a].animal
+      );
+    }
+    if (x === 2) {
+      setName(
+        nameOptions[n].noun.charAt(0).toUpperCase() +
+          nameOptions[n].noun.slice(1) +
+          " " +
+          nameOptions[a].animal
+      );
+    }
+    if (x === 3) {
+      setName(
+        nameOptions[ad].adjective.charAt(0).toUpperCase() +
+          nameOptions[ad].adjective.slice(1) +
+          " " +
+          nameOptions[n].noun.charAt(0).toUpperCase() +
+          nameOptions[n].noun.slice(1)
+      );
+    }
+    if (x === 4) {
+      setName(
+        nameOptions[a].animal +
+          " " +
+          nameOptions[n].noun.charAt(0).toUpperCase() +
+          nameOptions[n].noun.slice(1)
+      );
+    }
+  };
 
   //On Change function
   const objectChange = (value, setObject, max, min, floor, objectOptions) => {
@@ -3211,6 +3277,10 @@ const MonsterGen = () => {
 
   //Generate and Clear
   const onGenerate = (e) => {
+    if(name === ""){
+        onRandomName()
+    }
+    
     const ifBlank = (value, setValue, options, max, min) => {
       if (value === "") {
         let r = Math.round(Math.random() * (max - min) + 1);
@@ -3239,8 +3309,6 @@ const MonsterGen = () => {
     };
     ifBlank2(hp, setHp, 500, 0);
     ifBlank2(speed, setSpeed, 120, 0);
-
-    console.log(speedExtra);
     ifBlank2(str, setStr, 30, 0);
     ifBlank2(dex, setDex, 30, 0);
     ifBlank2(con, setCon, 30, 0);
@@ -3396,70 +3464,68 @@ const MonsterGen = () => {
       }
     }
     if (vulnList.length === 0) {
-        let x = Math.round(Math.random() * (1 - 0));
-        if (x === 1) {
-          let r = Math.round(Math.random() * (17 - 0));
-          setVulnList((speedArray) => [...speedArray, vulnOptions[r]]);
-        }
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (17 - 0));
+        setVulnList((speedArray) => [...speedArray, vulnOptions[r]]);
       }
-      if (immuneList.length === 0) {
-        let x = Math.round(Math.random() * (1 - 0));
-        if (x === 1) {
-          let r = Math.round(Math.random() * (17 - 0));
-          setImmuneList((speedArray) => [...speedArray, immuneOptions[r]]);
-        }
+    }
+    if (immuneList.length === 0) {
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (17 - 0));
+        setImmuneList((speedArray) => [...speedArray, immuneOptions[r]]);
       }
-      if (resistList.length === 0) {
-        let x = Math.round(Math.random() * (1 - 0));
-        if (x === 1) {
-          let r = Math.round(Math.random() * (17 - 0));
-          setResistList((speedArray) => [...speedArray, resistOptions[r]]);
-        }
+    }
+    if (resistList.length === 0) {
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (17 - 0));
+        setResistList((speedArray) => [...speedArray, resistOptions[r]]);
       }
-      if (conditionList.length === 0) {
-        let x = Math.round(Math.random() * (1 - 0));
-        if (x === 1) {
-          let r = Math.round(Math.random() * (15 - 0));
-          setConditionList((speedArray) => [...speedArray, conditionOptions[r]]);
-        }
+    }
+    if (conditionList.length === 0) {
+      let x = Math.round(Math.random() * (1 - 0));
+      if (x === 1) {
+        let r = Math.round(Math.random() * (15 - 0));
+        setConditionList((speedArray) => [...speedArray, conditionOptions[r]]);
       }
+    }
 
     if (langList.length === 0) {
-          let r = Math.round(Math.random() * (16 - 1));
-          setLangList((speedArray) => [...speedArray, langOptions[r]]);
-      }
-
-    if (actionList.length === 0){
-        let r = Math.round(Math.random() * (292 - 1));
-        let z = Math.round(Math.random() * (292 - 1));
-        let x = Math.round(Math.random() * (2 - 0));
-        setActionList((speedArray) => [...speedArray, actionOptions[r]]);
-        if(x === 1){
-         setActionList((speedArray) => [...speedArray, actionOptions[z]]);
-        }
-        
-    }  
-
-    if (specialList.length === 0){
-        let r = Math.round(Math.random() * (208- 1));
-        let z = Math.round(Math.random() * (208 - 1));
-        let x = Math.round(Math.random() * (2 - 0));
-        setSpecialList((speedArray) => [...speedArray, specialOptions[r]]);
-        if(x === 1){
-         setSpecialList((speedArray) => [...speedArray, specialOptions[z]]);
-        } 
-    }  
-
-    if(legendList.length === 0){
-        let r = Math.round(Math.random() * (35- 1));
-        let z = Math.round(Math.random() * (35 - 1));
-        let x = Math.round(Math.random() * (4 - 0));
-        setLegendList((speedArray) => [...speedArray, legendOptions[r]]);
-        if(x === 1){
-            setLegendList((speedArray) => [...speedArray, legendOptions[z]]);
-        } 
+      let r = Math.round(Math.random() * (16 - 1));
+      setLangList((speedArray) => [...speedArray, langOptions[r]]);
     }
-    
+
+    if (actionList.length === 0) {
+      let r = Math.round(Math.random() * (292 - 1));
+      let z = Math.round(Math.random() * (292 - 1));
+      let x = Math.round(Math.random() * (2 - 0));
+      setActionList((speedArray) => [...speedArray, actionOptions[r]]);
+      if (x === 1) {
+        setActionList((speedArray) => [...speedArray, actionOptions[z]]);
+      }
+    }
+
+    if (specialList.length === 0) {
+      let r = Math.round(Math.random() * (208 - 1));
+      let z = Math.round(Math.random() * (208 - 1));
+      let x = Math.round(Math.random() * (2 - 0));
+      setSpecialList((speedArray) => [...speedArray, specialOptions[r]]);
+      if (x === 1) {
+        setSpecialList((speedArray) => [...speedArray, specialOptions[z]]);
+      }
+    }
+
+    if (legendList.length === 0) {
+      let r = Math.round(Math.random() * (35 - 1));
+      let z = Math.round(Math.random() * (35 - 1));
+      let x = Math.round(Math.random() * (4 - 0));
+      setLegendList((speedArray) => [...speedArray, legendOptions[r]]);
+      if (x === 1) {
+        setLegendList((speedArray) => [...speedArray, legendOptions[z]]);
+      }
+    }
   };
 
   const onClear = (e) => {
@@ -3760,8 +3826,7 @@ const MonsterGen = () => {
   const mapGear = gearList.map((i) => {
     return `${i.name}`;
   });
-//   console.log(actionList)
-  console.log(legendList)
+
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
