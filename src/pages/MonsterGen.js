@@ -3,7 +3,7 @@ import style from "../stylesheets/MonsterGen.module.scss";
 import styled from "../stylesheets/styledComponents.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -488,9 +488,96 @@ const MonsterGen = () => {
   //     };
   //     fetchData();
   //   }, []);
+  //Export Logic
+  const [selectedItems, setSelectedItems] = useState(null);
+  const [allSelection, setAllSelection] = useState();
+  const dt = useRef(null);
+
+  const exportPdf = () => {
+    import("jspdf").then((jsPDF) => {
+      import("jspdf-autotable").then(() => {
+        const doc = new jsPDF.default(0, 0);
+        doc.autoTable(exportColumns, allSelection);
+        doc.save({name} + ".pdf");
+      });
+    });
+  };
+  const cols = [
+    { field: "name", header: "Name" },
+    { field: "size", header: "Size" },
+    { field: "type", header: "Type" },
+    { field: "alignment", header: "Alignment" },
+  ];
+  const exportColumns = cols.map((col) => ({
+    title: col.header,
+    dataKey: col.field,
+  }));
+
+  const exportCSV = (selectionOnly) => {
+    dt.current.exportCSV({ selectionOnly });
+  };
+
+  const exportExcel = () => {
+    import("xlsx").then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(allSelection);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+      const excelBuffer = xlsx.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
+      saveAsExcelFile(excelBuffer, "products");
+    });
+  };
+
+  const saveAsExcelFile = (buffer, fileName) => {
+    import("file-saver").then((module) => {
+      if (module && module.default) {
+        let EXCEL_TYPE =
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+        let EXCEL_EXTENSION = ".xlsx";
+        const data = new Blob([buffer], {
+          type: EXCEL_TYPE,
+        });
+
+        module.default.saveAs(
+          data,
+          fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+        );
+      }
+    });
+  };
+
+  //Export Buttons
+  const exportBtns = (
+    <div >
+      <Button
+        type="button"
+        icon="pi pi-file"
+        onClick={() => exportCSV(true)}
+        className="p-button-info mr-2 "
+        data-pr-tooltip="Export CSV"
+        tooltip="CSV"
+      />
+      <Button
+        type="button"
+        icon="pi pi-file-excel"
+        onClick={() => exportExcel(true)}
+        className="p-button-success mr-2"
+        data-pr-tooltip="Export XLS"
+        tooltip="XLS"
+      />
+      <Button
+        type="button"
+        icon="pi pi-file-pdf"
+        onClick={exportPdf}
+        className="p-button-warning mr-2"
+        data-pr-tooltip="Export PDF"
+        tooltip="PDF"
+      />
+    </div>
+  );
 
   //OnChanges
-  //TODO
   const onNameChange = (e) => {
     setName(e.target.value);
   };
@@ -3277,10 +3364,10 @@ const MonsterGen = () => {
 
   //Generate and Clear
   const onGenerate = (e) => {
-    if(name === ""){
-        onRandomName()
+    if (name === "") {
+      onRandomName();
     }
-    
+
     const ifBlank = (value, setValue, options, max, min) => {
       if (value === "") {
         let r = Math.round(Math.random() * (max - min) + 1);
@@ -3847,8 +3934,13 @@ const MonsterGen = () => {
       </div>
       <div className={style.monstergenBody}>
         {/* Options */}
+
         <div className={style.monstergenOptionsWrapper}>
-            <h1>Monster Options</h1>
+          <div className={style.exportButtons}>
+            <h2>Export Monster</h2>
+            <div>{exportBtns}</div>
+          </div>
+          <h1>Monster Options</h1>
           <h1 className={style.monstergenSubHeader} onClick={showBasics}>
             Basic Info
           </h1>
@@ -3938,173 +4030,172 @@ const MonsterGen = () => {
           >
             <div className={style.speedContainer}>{gearDisplay}</div>
           </div>
+        </div>
+
+        {/* Main Display */}
+        <div className={style.monstergenDisplay}>
+          <h1>{name}</h1>
+          <h2 className={style.minorText1}>
+            {size} {type}, {align}
+          </h2>
+          <hr className={style.lineBreak} />
+          <h2>
+            Armor Class{" "}
+            <span className={style.minorText2}>
+              {ac} ({armorType})
+            </span>
+          </h2>
+          <h2>
+            Hit Points <span className={style.minorText2}>{hp}</span>
+          </h2>
+          <h2>
+            Speed{" "}
+            <span className={style.minorText2}>
+              {speed} ft., {mapExtraSpeeds}
+            </span>
+          </h2>
+          <hr className={style.lineBreak} />
+          <h3 className={style.abilityScores}>
+            <div>
+              <h3>STR</h3>
+              <div>
+                <span className={style.minorText2}>
+                  {str} ({strMod}){" "}
+                </span>
+              </div>
             </div>
-            
-          {/* Main Display */}
-          <div className={style.monstergenDisplay}>
-            <h1>{name}</h1>
-            <h2 className={style.minorText1}>
-              {size} {type}, {align}
-            </h2>
-            <hr className={style.lineBreak} />
-            <h2>
-              Armor Class{" "}
-              <span className={style.minorText2}>
-                {ac} ({armorType})
-              </span>
-            </h2>
-            <h2>
-              Hit Points <span className={style.minorText2}>{hp}</span>
-            </h2>
-            <h2>
-              Speed{" "}
-              <span className={style.minorText2}>
-                {speed} ft., {mapExtraSpeeds}
-              </span>
-            </h2>
-            <hr className={style.lineBreak} />
-            <h3 className={style.abilityScores}>
+            <div>
+              <h3>DEX</h3>
               <div>
-                <h3>STR</h3>
-                <div>
-                  <span className={style.minorText2}>
-                    {str} ({strMod}){" "}
-                  </span>
-                </div>
+                <span className={style.minorText2}>
+                  {dex} ({dexMod}){" "}
+                </span>
               </div>
+            </div>
+            <div>
+              <h3>CON</h3>
               <div>
-                <h3>DEX</h3>
-                <div>
-                  <span className={style.minorText2}>
-                    {dex} ({dexMod}){" "}
-                  </span>
-                </div>
+                <span className={style.minorText2}>
+                  {con} ({conMod}){" "}
+                </span>
               </div>
+            </div>
+          </h3>
+          <h3 className={style.abilityScores}>
+            <div>
+              <h3>INT</h3>
               <div>
-                <h3>CON</h3>
-                <div>
-                  <span className={style.minorText2}>
-                    {con} ({conMod}){" "}
-                  </span>
-                </div>
+                <span className={style.minorText2}>
+                  {int} ({intMod})
+                </span>
               </div>
-            </h3>
-            <h3 className={style.abilityScores}>
+            </div>
+            <div>
+              <h3>WIS</h3>
               <div>
-                <h3>INT</h3>
-                <div>
-                  <span className={style.minorText2}>
-                    {int} ({intMod})
-                  </span>
-                </div>
+                <span className={style.minorText2}>
+                  {wis} ({wisMod})
+                </span>
               </div>
+            </div>
+            <div>
+              <h3>CHA</h3>
               <div>
-                <h3>WIS</h3>
-                <div>
-                  <span className={style.minorText2}>
-                    {wis} ({wisMod})
-                  </span>
-                </div>
+                <span className={style.minorText2}>
+                  {cha} ({chaMod})
+                </span>
               </div>
-              <div>
-                <h3>CHA</h3>
-                <div>
-                  <span className={style.minorText2}>
-                    {cha} ({chaMod})
-                  </span>
-                </div>
-              </div>
-            </h3>
-            <hr className={style.lineBreak} />
-            {saveList.length === 0 ? null : (
-              <>
-                <h2>
-                  Saving Throws{" "}
-                  <span className={style.minorText2}>{mapSaves}</span>
-                </h2>
-              </>
-            )}
+            </div>
+          </h3>
+          <hr className={style.lineBreak} />
+          {saveList.length === 0 ? null : (
+            <>
+              <h2>
+                Saving Throws{" "}
+                <span className={style.minorText2}>{mapSaves}</span>
+              </h2>
+            </>
+          )}
 
-            {skillList.length === 0 ? null : (
-              <>
-                <h2>
-                  Skills <span className={style.minorText2}>{mapSkills}</span>
-                </h2>
-              </>
-            )}
+          {skillList.length === 0 ? null : (
+            <>
+              <h2>
+                Skills <span className={style.minorText2}>{mapSkills}</span>
+              </h2>
+            </>
+          )}
 
-            {vulnList.length === 0 ? null : (
-              <>
-                <h2>
-                  Damage Vulnerabilities{" "}
-                  <span className={style.minorText2}>{mapVulns}</span>
-                </h2>
-              </>
-            )}
+          {vulnList.length === 0 ? null : (
+            <>
+              <h2>
+                Damage Vulnerabilities{" "}
+                <span className={style.minorText2}>{mapVulns}</span>
+              </h2>
+            </>
+          )}
 
-            {immuneList.length === 0 ? null : (
-              <>
-                <h2>
-                  Damage Immunities{" "}
-                  <span className={style.minorText2}>{mapImmunes}</span>
-                </h2>
-              </>
-            )}
+          {immuneList.length === 0 ? null : (
+            <>
+              <h2>
+                Damage Immunities{" "}
+                <span className={style.minorText2}>{mapImmunes}</span>
+              </h2>
+            </>
+          )}
 
-            {resistList.length === 0 ? null : (
-              <>
-                <h2>
-                  Damage Resistances{" "}
-                  <span className={style.minorText2}>{mapResists}</span>
-                </h2>
-              </>
+          {resistList.length === 0 ? null : (
+            <>
+              <h2>
+                Damage Resistances{" "}
+                <span className={style.minorText2}>{mapResists}</span>
+              </h2>
+            </>
+          )}
+          {conditionList.length === 0 ? null : (
+            <>
+              <h2>
+                Condition Immunities{" "}
+                <span className={style.minorText2}>{mapConditions}</span>
+              </h2>
+            </>
+          )}
+          {senseList.length === 0 ? null : (
+            <>
+              <h2>
+                Senses <span className={style.minorText2}>{mapSenses}</span>
+              </h2>
+            </>
+          )}
+          <h2>
+            Languages{" "}
+            {langList.length === 0 ? (
+              "--"
+            ) : (
+              <span className={style.minorText2}>{mapLangs}</span>
             )}
-            {conditionList.length === 0 ? null : (
-              <>
-                <h2>
-                  Condition Immunities{" "}
-                  <span className={style.minorText2}>{mapConditions}</span>
-                </h2>
-              </>
-            )}
-            {senseList.length === 0 ? null : (
-              <>
-                <h2>
-                  Senses <span className={style.minorText2}>{mapSenses}</span>
-                </h2>
-              </>
-            )}
-            <h2>
-              Languages{" "}
-              {langList.length === 0 ? (
-                "--"
-              ) : (
-                <span className={style.minorText2}>{mapLangs}</span>
-              )}
-            </h2>
-            <hr className={style.lineBreak} />
-            {specialList.length === 0 ? null : <h2>{mapSpecials}</h2>}
-            <h1>Actions</h1>
-            <hr className={style.subLineBreak} />
-            <h2>{mapActions}</h2>
-            {legendList.length === 0 ? null : (
-              <>
-                <h1>Legendary Actions</h1>
-                <hr className={style.subLineBreak} />
-                <h2>{mapLegends}</h2>
-              </>
-            )}
-            {lairList.length === 0 ? null : (
-              <>
-                <h1>Lair Actions</h1>
-                <hr className={style.subLineBreak} />
-                <h2>{mapLairs}</h2>
-              </>
-            )}
-          </div>
+          </h2>
+          <hr className={style.lineBreak} />
+          {specialList.length === 0 ? null : <h2>{mapSpecials}</h2>}
+          <h1>Actions</h1>
+          <hr className={style.subLineBreak} />
+          <h2>{mapActions}</h2>
+          {legendList.length === 0 ? null : (
+            <>
+              <h1>Legendary Actions</h1>
+              <hr className={style.subLineBreak} />
+              <h2>{mapLegends}</h2>
+            </>
+          )}
+          {lairList.length === 0 ? null : (
+            <>
+              <h1>Lair Actions</h1>
+              <hr className={style.subLineBreak} />
+              <h2>{mapLairs}</h2>
+            </>
+          )}
         </div>
       </div>
-    
+    </div>
   );
 };
 
