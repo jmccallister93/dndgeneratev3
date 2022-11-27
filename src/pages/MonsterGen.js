@@ -440,12 +440,12 @@ const MonsterGen = () => {
     // getData("monstersAbilities", setSpecial, setSpecials, setSpecialOptions);
     // getData("monstersActions", setAction, setActions, setActionOptions);
     // getData("monstersReactions", setReaction, setReactions, setReactionOptions);
-    getData(
-      "monstersLegendaryActions",
-      setLegend,
-      setLegends,
-      setLegendOptions
-    );
+    // getData(
+    //   "monstersLegendaryActions",
+    //   setLegend,
+    //   setLegends,
+    //   setLegendOptions
+    // );
     getData("monstersLairActions", setLair, setLairs, setLairOptions);
   }, []);
 
@@ -526,46 +526,6 @@ const MonsterGen = () => {
   };
   const onChaChange = (e) => {
     objectChange(e.value, setCha);
-  };
-  //TODO
-  //   const onGearChange = (e) => {}
-  //   objectChange(e.value, setGear, 17, 1, 1, gearOptions)
-  // };
-  const onVulnChange = (e) => {
-    objectChange(e.value, setVuln, 17, 1, 1, vulnOptions);
-  };
-  const onSkillChange = (e) => {
-    objectChange(e.value, setSkill, 18, 1, 1, skillOptions);
-  };
-  const onImmuneChange = (e) => {
-    objectChange(e.value, setImmune, 17, 1, 1, immuneOptions);
-  };
-  const onResistChange = (e) => {
-    objectChange(e.value, setResist, 17, 1, 1, resistOptions);
-  };
-  const onConditionChange = (e) => {
-    objectChange(e.value, setCondition, 15, 1, 1, conditionOptions);
-  };
-  const onSenseChange = (e) => {
-    objectChange(e.value, setSense, 4, 1, 1, senseOptions);
-  };
-  const onLangChange = (e) => {
-    objectChange(e.value, setLang, 16, 1, 1, langOptions);
-  };
-  const onSpecialChange = (e) => {
-    objectChange(e.value, setSpecial, 208, 1, 1, specialOptions);
-  };
-  const onActionChange = (e) => {
-    objectChange(e.value, setAction, 292, 1, 1, actionOptions);
-  };
-  const onReactionChange = (e) => {
-    objectChange(e.value, setReaction, 11, 1, 1, reactionOptions);
-  };
-  const onLegendChange = (e) => {
-    objectChange(e.value, setLegend, 35, 1, 1, legendOptions);
-  };
-  const onLairChange = (e) => {
-    objectChange(e.value, setLair, 39, 1, 1, lairOptions);
   };
 
   //Random Number Button
@@ -3800,7 +3760,8 @@ const MonsterGen = () => {
   const mapGear = gearList.map((i) => {
     return `${i.name}`;
   });
-
+//   console.log(actionList)
+  console.log(legendList)
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
