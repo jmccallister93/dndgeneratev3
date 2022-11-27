@@ -338,76 +338,82 @@ const MonsterGen = () => {
   //Specials
   useEffect(() => {
     const fetchData = async () => {
-        const { data: dataName, error: errorName } = await supabase
-          .from('monstersAbilities')
-          .select();
-        if (errorName) {
-          setFetchError("Could not fetch the data");
-          console.log(errorName);
-          setSpecial(null);
-        }
-        if (dataName) {
-          setSpecials(dataName);
-          setFetchError(null);
-          setSpecialOptions(dataName.map((r) => ({ 
-            name: r.name, 
+      const { data: dataName, error: errorName } = await supabase
+        .from("monstersAbilities")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setSpecial(null);
+      }
+      if (dataName) {
+        setSpecials(dataName);
+        setFetchError(null);
+        setSpecialOptions(
+          dataName.map((r) => ({
+            name: r.name,
             value: r.value,
             desc: r.desc,
             type: r.type,
-            source: r.source 
-        })));
-        }
-      };
-      fetchData();
-  }, [])
+            source: r.source,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
-        const { data: dataName, error: errorName } = await supabase
-          .from('monstersActions')
-          .select();
-        if (errorName) {
-          setFetchError("Could not fetch the data");
-          console.log(errorName);
-          setAction(null);
-        }
-        if (dataName) {
-          setActions(dataName);
-          setFetchError(null);
-          setActionOptions(dataName.map((r) => ({ 
-            name: r.name, 
+      const { data: dataName, error: errorName } = await supabase
+        .from("monstersActions")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setAction(null);
+      }
+      if (dataName) {
+        setActions(dataName);
+        setFetchError(null);
+        setActionOptions(
+          dataName.map((r) => ({
+            name: r.name,
             value: r.value,
             desc: r.desc,
             type: r.type,
-            source: r.source 
-        })));
-        }
-      };
-      fetchData();
-  }, [])
+            source: r.source,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
-        const { data: dataName, error: errorName } = await supabase
-          .from('monstersLegendaryActions')
-          .select();
-        if (errorName) {
-          setFetchError("Could not fetch the data");
-          console.log(errorName);
-          setLegend(null);
-        }
-        if (dataName) {
-          setLegends(dataName);
-          setFetchError(null);
-          setLegendOptions(dataName.map((r) => ({ 
-            name: r.name, 
+      const { data: dataName, error: errorName } = await supabase
+        .from("monstersLegendaryActions")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setLegend(null);
+      }
+      if (dataName) {
+        setLegends(dataName);
+        setFetchError(null);
+        setLegendOptions(
+          dataName.map((r) => ({
+            name: r.name,
             value: r.value,
             desc: r.desc,
             type: r.type,
-            source: r.source 
-        })));
-        }
-      };
-      fetchData();
-  }, [])
+            source: r.source,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
 
   //Import data via getData
   useEffect(() => {
@@ -3607,13 +3613,25 @@ const MonsterGen = () => {
     return `${i.name}, `;
   });
   const mapSpecials = specialList.map((i) => {
-    return `${i.name}. ${i.desc} `;
+    return (
+      <>
+        {i.name} <span className={style.minorText2}>{i.desc}</span>
+      </>
+    );
   });
   const mapActions = actionList.map((i) => {
-    return `${i.name}. ${i.desc}`;
+    return (
+      <>
+        {i.name} <span className={style.minorText2}>{i.desc}</span>
+      </>
+    );
   });
   const mapLegends = legendList.map((i) => {
-    return `${i.name}. ${i.desc}`;
+    return (
+        <>
+          {i.name} <span className={style.minorText2}>{i.desc}</span>
+        </>
+      );
   });
   const mapLairs = lairList.map((i) => {
     return `${i.name}, `;
@@ -3736,35 +3754,49 @@ const MonsterGen = () => {
           {/* Main Display */}
           <div className={style.monstergenDisplay}>
             <h1>{name}</h1>
-            <h2>
+            <h2 className={style.minorText1}>
               {size} {type}, {align}
             </h2>
             <hr className={style.lineBreak} />
             <h2>
-              Armor Class {ac} ({armorType})
+              Armor Class{" "}
+              <span className={style.minorText2}>
+                {ac} ({armorType})
+              </span>
             </h2>
-            <h2>Hit Points {hp}</h2>
             <h2>
-              Speed {speed} ft., {mapExtraSpeeds}
+              Hit Points <span className={style.minorText2}>{hp}</span>
+            </h2>
+            <h2>
+              Speed{" "}
+              <span className={style.minorText2}>
+                {speed} ft., {mapExtraSpeeds}
+              </span>
             </h2>
             <hr className={style.lineBreak} />
             <h3 className={style.abilityScores}>
               <div>
                 <h3>STR</h3>
                 <div>
-                  {str} ({strMod}){" "}
+                  <span className={style.minorText2}>
+                    {str} ({strMod}){" "}
+                  </span>
                 </div>
               </div>
               <div>
                 <h3>DEX</h3>
                 <div>
-                  {dex} ({dexMod}){" "}
+                  <span className={style.minorText2}>
+                    {dex} ({dexMod}){" "}
+                  </span>
                 </div>
               </div>
               <div>
                 <h3>CON</h3>
                 <div>
-                  {con} ({conMod}){" "}
+                  <span className={style.minorText2}>
+                    {con} ({conMod}){" "}
+                  </span>
                 </div>
               </div>
             </h3>
@@ -3772,63 +3804,95 @@ const MonsterGen = () => {
               <div>
                 <h3>INT</h3>
                 <div>
-                  {int} ({intMod})
+                  <span className={style.minorText2}>
+                    {int} ({intMod})
+                  </span>
                 </div>
               </div>
               <div>
                 <h3>WIS</h3>
                 <div>
-                  {wis} ({wisMod})
+                  <span className={style.minorText2}>
+                    {wis} ({wisMod})
+                  </span>
                 </div>
               </div>
               <div>
                 <h3>CHA</h3>
                 <div>
-                  {cha} ({chaMod})
+                  <span className={style.minorText2}>
+                    {cha} ({chaMod})
+                  </span>
                 </div>
               </div>
             </h3>
             <hr className={style.lineBreak} />
             {saveList.length === 0 ? null : (
               <>
-                <h2>Saving Throws {mapSaves}</h2>
+                <h2>
+                  Saving Throws{" "}
+                  <span className={style.minorText2}>{mapSaves}</span>
+                </h2>
               </>
             )}
 
             {skillList.length === 0 ? null : (
               <>
-                <h2>Skills {mapSkills}</h2>
+                <h2>
+                  Skills <span className={style.minorText2}>{mapSkills}</span>
+                </h2>
               </>
             )}
 
             {vulnList.length === 0 ? null : (
               <>
-                <h2>Damage Vulnerabilities {mapVulns}</h2>
+                <h2>
+                  Damage Vulnerabilities{" "}
+                  <span className={style.minorText2}>{mapVulns}</span>
+                </h2>
               </>
             )}
 
             {immuneList.length === 0 ? null : (
               <>
-                <h2>Damage Immunities {mapImmunes}</h2>
+                <h2>
+                  Damage Immunities{" "}
+                  <span className={style.minorText2}>{mapImmunes}</span>
+                </h2>
               </>
             )}
 
             {resistList.length === 0 ? null : (
               <>
-                <h2>Damage Resistances {mapResists}</h2>
+                <h2>
+                  Damage Resistances{" "}
+                  <span className={style.minorText2}>{mapResists}</span>
+                </h2>
               </>
             )}
             {conditionList.length === 0 ? null : (
               <>
-                <h2>Condition Immunities {mapConditions}</h2>
+                <h2>
+                  Condition Immunities{" "}
+                  <span className={style.minorText2}>{mapConditions}</span>
+                </h2>
               </>
             )}
             {senseList.length === 0 ? null : (
               <>
-                <h2>Senses{mapSenses}</h2>
+                <h2>
+                  Senses <span className={style.minorText2}>{mapSenses}</span>
+                </h2>
               </>
             )}
-            <h2>Languages {langList.length === 0 ? "--" : mapLangs}</h2>
+            <h2>
+              Languages{" "}
+              {langList.length === 0 ? (
+                "--"
+              ) : (
+                <span className={style.minorText2}>{mapLangs}</span>
+              )}
+            </h2>
             <hr className={style.lineBreak} />
             {specialList.length === 0 ? null : <h2>{mapSpecials}</h2>}
             <h1>Actions</h1>
