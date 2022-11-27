@@ -3937,7 +3937,8 @@ const MonsterGen = () => {
           >
             <div className={style.speedContainer}>{gearDisplay}</div>
           </div>
-
+            </div>
+            
           {/* Main Display */}
           <div className={style.monstergenDisplay}>
             <h1>{name}</h1>
@@ -4102,7 +4103,7 @@ const MonsterGen = () => {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

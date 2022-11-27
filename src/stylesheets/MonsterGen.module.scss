@@ -22,13 +22,13 @@ $display-red: #9a2818;
 }
 
 .monstergenBody {
-  display: block;
+  display: grid;
   // TODO 50% width
   margin: 0;
   padding: 0;
-//   grid-template-columns: repeat(3, 1fr);
+   grid-template-columns: repeat(3, 1fr);
   text-align: center;
-  align-items: center;
+  align-content: start;
   justify-content: center;
   place-items: center;
 }
@@ -50,7 +50,7 @@ $display-red: #9a2818;
 .monstergenOptionsWrapper {
   display: flex;
   flex-direction: column;
-  // grid-template-rows: auto;
+  grid-template-rows: auto;
   background-color: $secondary-grey;
   width: fit-content;
   height: fit-content;
@@ -63,6 +63,7 @@ $display-red: #9a2818;
   align-items: left;
   justify-content: left;
   border-radius: 1rem;
+
   & div {
     padding: 2px;
   }
@@ -108,11 +109,11 @@ $display-red: #9a2818;
 .monstergenDisplay {
   grid-column: 2 / span 3;
   grid-row: 1;
-//   display: flex;
-//   flex-direction: column;
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   background-color: $display-tan;
-  width: 40%;
+  width: 100%;
   padding: 0px;
   margin: 0;
   text-align: left;
@@ -120,8 +121,9 @@ $display-red: #9a2818;
   justify-content: end;
   border-radius: 0;
   color: $display-red;
-  position: absolute;
-  right: 20%;
+
+//   position: absolute;
+//   right: 20%;
     & h1 {
         padding: 5px;
     }
