@@ -70,6 +70,9 @@ const BuildingGen = () => {
   const onRandomBuildingName = (e) => {
 
   }
+  const onBuildingTypeChange = (e) => {
+    setBuildingType(e.value)
+  }
 
   //Name Input
   const nameText = customInputText(
@@ -79,6 +82,28 @@ const BuildingGen = () => {
     "Set Name",
     onRandomBuildingName
   );
+
+    //DropDowns
+    const customDrop = (title, value, options, change, placeholder) => (
+        <div className={style.dropContainer}>
+          <h2 className={style.monstergenTitles}>{title}</h2>
+          <Dropdown
+            optionLabel="name"
+            value={value}
+            options={options}
+            onChange={change}
+            placeholder={placeholder}
+          />
+        </div>
+      );
+
+    const buildingTypeDrop = customDrop(
+        "Type",
+        buildingType,
+        buildingTypeOptions,
+        onBuildingTypeChange,
+        "Choose Type"
+      );
 
 
   //Buttons
@@ -113,8 +138,14 @@ const BuildingGen = () => {
             className={isBasicActive ? style.subsection : style.hidden}
           >
             {nameText}
+            {buildingTypeDrop}
           </div>
         </div>
+        {/* Main Display */}
+        <div className={style.display}>
+          <h1>{buildingName}</h1>
+          <h3>{buildingType}</h3>
+          </div>
       </div>
     </div>
   );

@@ -147,3 +147,29 @@ $display-red: #9a2818;
 .hidden {
   display: none;
 }
+
+.display {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: $display-tan;
+    width: 50%;
+    padding: 10px;
+    margin: 0;
+    margin-left: 1%;
+    text-align: left;
+    align-items: left;
+    align-self: flex-start;
+    justify-content: end;
+    border-radius: 0;
+    color: $display-red;
+      & h1 {
+          padding: 5px;
+      }
+      & h2 {
+          padding: 5px;
+      }
+      & h3 {
+          padding: 5px;
+      } 
+  }
