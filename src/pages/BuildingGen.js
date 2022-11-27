@@ -7,14 +7,20 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
+import { Button } from "primereact/button";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
-  const [isBasicActive, setIsBasicActive] = useState(false)
+  const [isBasicActive, setIsBasicActive] = useState(false);
+
+  const [buildingName, setBuildingName] = useState("");
+  const [buildingNames, setBuildingNames] = useState("");
+  const [buildingNameOptions, setBuildingNameOptions] = useState("");
+
   const [buildingType, setBuildingType] = useState("");
   const [buildingTypes, setBuildingTypes] = useState("");
   const [buildingTypeOptions, setBuildingTypeOptions] = useState("");
-//Get Data
+  //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -35,12 +41,46 @@ const BuildingGen = () => {
   };
 
   useEffect(() => {
-    getData("buildingsTypes", setBuildingType, setBuildingTypes, setBuildingTypeOptions);
+    getData(
+      "buildingsTypes",
+      setBuildingType,
+      setBuildingTypes,
+      setBuildingTypeOptions
+    );
   }, []);
-//Show Options
-const showBasics = (e) => {
+  //Show Options
+  const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
+  //InputTexts
+  const customInputText = (title, value, change, placeholder, click) => (
+    <div>
+      <h2 className={style.titles}>{title}</h2>
+      <InputText value={value} onChange={change} placeholder={placeholder} />
+      <Button onClick={click} className={style.btnName}>
+        Random
+      </Button>
+    </div>
+  );
+
+  //onChanges
+  const onBuildingNameChange = (e) => {
+    setBuildingName(e.target.value);
+  };
+  const onRandomBuildingName = (e) => {
+
+  }
+
+  //Name Input
+  const nameText = customInputText(
+    "Building Name",
+    buildingName,
+    onBuildingNameChange,
+    "Set Name",
+    onRandomBuildingName
+  );
+
+
   //Buttons
   const onGenerate = (e) => {};
   const onClear = (e) => {};
@@ -65,16 +105,15 @@ const showBasics = (e) => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-        <h1>Building Options</h1>
-        <h1 className={style.subHeader} onClick={showBasics}>
+          <h1>Building Options</h1>
+          <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
           </h1>
           <div
-            className={
-              isBasicActive ? style.subsection : style.hidden
-            }
-          ></div>
-            
+            className={isBasicActive ? style.subsection : style.hidden}
+          >
+            {nameText}
+          </div>
         </div>
       </div>
     </div>
