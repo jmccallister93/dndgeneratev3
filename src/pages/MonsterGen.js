@@ -335,6 +335,32 @@ const MonsterGen = () => {
     };
     fetchData();
   };
+  
+  useEffect(() => {
+    const fetchData = async () => {
+        const { data: dataName, error: errorName } = await supabase
+          .from('monstersAbilities')
+          .select();
+        if (errorName) {
+          setFetchError("Could not fetch the data");
+          console.log(errorName);
+          setSpecial(null);
+        }
+        if (dataName) {
+          setSpecials(dataName);
+          setFetchError(null);
+          setSpecialOptions(dataName.map((r) => ({ 
+            name: r.name, 
+            value: r.value,
+            desc: r.desc,
+            type: r.type,
+            source: r.source 
+        })));
+        }
+      };
+      fetchData();
+  }, [])
+
   //Import data via getData
   useEffect(() => {
     //TODO Names
@@ -355,7 +381,7 @@ const MonsterGen = () => {
     getData("conditions", setCondition, setConditions, setConditionOptions);
     getData("senses", setSense, setSenses, setSenseOptions);
     getData("languages", setLang, setLangs, setLangOptions);
-    getData("monstersAbilities", setSpecial, setSpecials, setSpecialOptions);
+    // getData("monstersAbilities", setSpecial, setSpecials, setSpecialOptions);
     getData("monstersActions", setAction, setActions, setActionOptions);
     getData("monstersReactions", setReaction, setReactions, setReactionOptions);
     getData(
@@ -3533,7 +3559,7 @@ const MonsterGen = () => {
     return `${i.name}, `;
   });
   const mapSpecials = specialList.map((i) => {
-    return `${i.name}, `;
+    return `${i.name}. ${i.desc} `;
   });
   const mapActions = actionList.map((i) => {
     return `${i.name}, `;
@@ -3547,7 +3573,6 @@ const MonsterGen = () => {
   const mapGear = gearList.map((i) => {
     return `${i.name}`;
   });
-  console.log(legendList);
 
   return (
     <div className={style.monstergenWrapper}>
