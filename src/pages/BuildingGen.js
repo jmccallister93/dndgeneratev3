@@ -29,6 +29,7 @@ const BuildingGen = () => {
   const [buildingType, setBuildingType] = useState("");
   const [buildingTypes, setBuildingTypes] = useState("");
   const [buildingTypeOptions, setBuildingTypeOptions] = useState("");
+  const [buildingTypeCategory, setBuildingTypeCategory] = useState()
   const [buildingList, setBuildingList] = useState([]);
   const [selectedBuildingType, setSelectedBuildingType] = useState(null);
   const [dialogVisibleBuildingType, setDialogVisibleBuildingType] =
@@ -201,13 +202,18 @@ const BuildingGen = () => {
     setDialogVisibleBuildingType(false);
     setBuildingType(selectedBuildingType.name);
     };
-
- 
   const dialogFooterBuildingType = () => {
     return (
       <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingType} />
     );
   };
+
+//TODO Filter by Category
+  useEffect(() => {
+    if(buildingCategory === "Housing"){
+        setBuildingTypeOptions(buildingTypeOptions.type === "Housing")
+    }
+  }, [buildingCategory]) 
   //   const buildingTypeDisplay = (
   //     <div>
   //       <DataTable
