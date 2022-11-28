@@ -8,6 +8,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
+import { e } from "mathjs";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -17,15 +18,22 @@ const BuildingGen = () => {
   const [buildingNames, setBuildingNames] = useState("");
   const [buildingNameOptions, setBuildingNameOptions] = useState("");
 
+  const [buildingCategory, setBuildingCategory] = useState("");
+  const [buildingCategorys, setBuildingCategorys] = useState("");
+  const [buildingCategoryOptions, setBuildingCategoryOptions] = useState("");
+
   const [buildingType, setBuildingType] = useState("");
   const [buildingTypes, setBuildingTypes] = useState("");
   const [buildingTypeOptions, setBuildingTypeOptions] = useState("");
+
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
         .from(tableName)
-        .select();
+        .select()
+        .order("id");
+
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);
@@ -42,12 +50,19 @@ const BuildingGen = () => {
 
   useEffect(() => {
     getData(
-      "buildingsTypes",
+      "buildingCategory",
+      setBuildingCategory,
+      setBuildingCategorys,
+      setBuildingCategoryOptions
+    );
+    getData(
+      "buildingType",
       setBuildingType,
       setBuildingTypes,
       setBuildingTypeOptions
     );
   }, []);
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -67,12 +82,21 @@ const BuildingGen = () => {
   const onBuildingNameChange = (e) => {
     setBuildingName(e.target.value);
   };
-  const onRandomBuildingName = (e) => {
-
-  }
+  const onRandomBuildingName = (e) => {};
+  const onBuildingCategoryChange = (e) => {
+    setBuildingCategory(e.value);
+  };
+  const onRandomBuildingCategory= (e) => {
+    let r = Math.round(Math.random() * (9 - 0));
+    setBuildingCategory(buildingCategoryOptions[r].name);
+  };
   const onBuildingTypeChange = (e) => {
-    setBuildingType(e.value)
-  }
+    setBuildingType(e.value);
+  };
+  const onRandomBuildingType= (e) => {
+    let r = Math.round(Math.random() * (9 - 0));
+    setBuildingType(buildingTypeOptions[r].name);
+  };
 
   //Name Input
   const nameText = customInputText(
@@ -83,28 +107,42 @@ const BuildingGen = () => {
     onRandomBuildingName
   );
 
-    //DropDowns
-    const customDrop = (title, value, options, change, placeholder) => (
-        <div className={style.dropContainer}>
-          <h2 className={style.monstergenTitles}>{title}</h2>
-          <Dropdown
-            optionLabel="name"
-            value={value}
-            options={options}
-            onChange={change}
-            placeholder={placeholder}
-          />
-        </div>
-      );
+  //DropDowns
+  const customDrop = (title, value, options, change, placeholder, click) => (
+    <div className={style.dropContainer}>
+      <h2 className={style.monstergenTitles}>{title}</h2>
+      <Dropdown
+        optionLabel="name"
+        value={value}
+        options={options}
+        onChange={change}
+        placeholder={placeholder}
+      />
+      <Button onClick={click} className={style.btnName}>
+        Random
+      </Button>
+    </div>
+  );
+//BuildingCategory
+const buildingCategoryDrop = customDrop(
+    "Category",
+    buildingCategory,
+    buildingCategoryOptions,
+    onBuildingCategoryChange,
+    "Choose Category",
+    onRandomBuildingCategory
+  );
+  //BuildingType
+  const buildingTypeDrop = customDrop(
+    "Type",
+    buildingType,
+    buildingTypeOptions,
+    onBuildingTypeChange,
+    "Choose Type",
+    onRandomBuildingType
+  );
 
-    const buildingTypeDrop = customDrop(
-        "Type",
-        buildingType,
-        buildingTypeOptions,
-        onBuildingTypeChange,
-        "Choose Type"
-      );
-
+  
 
   //Buttons
   const onGenerate = (e) => {};
@@ -134,18 +172,22 @@ const BuildingGen = () => {
           <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
           </h1>
-          <div
-            className={isBasicActive ? style.subsection : style.hidden}
-          >
+          <div className={isBasicActive ? style.subsection : style.hidden}>
             {nameText}
+            {buildingCategoryDrop}
             {buildingTypeDrop}
           </div>
         </div>
         {/* Main Display */}
         <div className={style.display}>
           <h1>{buildingName}</h1>
-          <h3>{buildingType}</h3>
-          </div>
+          <h2>
+            Category: <span className={style.minorText2}>{buildingCategory}</span>
+          </h2>
+          <h2>
+            Type: <span className={style.minorText2}>{buildingType}</span>
+          </h2>
+        </div>
       </div>
     </div>
   );
