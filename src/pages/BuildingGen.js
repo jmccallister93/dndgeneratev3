@@ -9,6 +9,10 @@ import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
 import { e } from "mathjs";
+import { DataTable } from "primereact/datatable";
+import { Column } from "jspdf-autotable";
+import { Dialog } from "primereact/dialog";
+import { FilterMatchMode, FilterOperator } from "primereact/api";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -25,6 +29,25 @@ const BuildingGen = () => {
   const [buildingType, setBuildingType] = useState("");
   const [buildingTypes, setBuildingTypes] = useState("");
   const [buildingTypeOptions, setBuildingTypeOptions] = useState("");
+  const [selectedBuildingType, setSelectedBuildingType] = useState(null)
+  const [dialogVisibleBuildingType, setDialogVisibleBuildingType] = useState(false);
+
+  const [buildingAg, setBuildingAg] = useState("");
+  const [buildingAgs, setBuildingAgs] = useState("");
+  const [buildingAgOptions, setBuildingAgOptions] = useState("");
+
+  const [buildingFarm, setBuildingFarm] = useState("");
+  const [buildingFarms, setBuildingFarms] = useState("");
+  const [buildingFarmOptions, setBuildingFarmOptions] = useState("");
+
+  const [buildingHouse, setBuildingHouse] = useState("");
+  const [buildingHouses, setBuildingHouses] = useState("");
+  const [buildingHouseOptions, setBuildingHouseOptions] = useState("");
+
+  const [buildingMine, setBuildingMine] = useState("");
+  const [buildingMines, setBuildingMines] = useState("");
+  const [buildingMineOptions, setBuildingMineOptions] = useState("");
+  
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -42,7 +65,7 @@ const BuildingGen = () => {
       if (dataName) {
         setPlural(dataName);
         setFetchError(null);
-        setOptions(dataName.map((r) => ({ name: r.name, value: r.value })));
+        setOptions(dataName.map((r) => ({ name: r.name, value: r.value, type: r.type })));
       }
     };
     fetchData();
@@ -56,12 +79,47 @@ const BuildingGen = () => {
       setBuildingCategoryOptions
     );
     getData(
-      "buildingType",
+      "buildingAll",
       setBuildingType,
       setBuildingTypes,
       setBuildingTypeOptions
     );
   }, []);
+
+  //Datatable
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    representative: { value: null, matchMode: FilterMatchMode.IN },
+    status: { value: null, matchMode: FilterMatchMode.EQUALS },
+    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
+  });
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+  const renderHeader = () => {
+    return (
+      <div>
+        <span className="p-input-icon-left">
+          <i className="pi pi-search mr-2" />
+          <InputText
+            value={globalFilterValue}
+            onChange={onGlobalFilterChange}
+            placeholder="Keyword Search"
+          />
+        </span>
+      </div>
+    );
+  };
+  const header = (
+    <div className="flex justify-content-between">{renderHeader()}</div>
+  );
 
   //Show Options
   const showBasics = (e) => {
@@ -133,13 +191,107 @@ const buildingCategoryDrop = customDrop(
     onRandomBuildingCategory
   );
   //BuildingType
-  const buildingTypeDrop = customDrop(
-    "Type",
-    buildingType,
-    buildingTypeOptions,
-    onBuildingTypeChange,
-    "Choose Type",
-    onRandomBuildingType
+  const openDialogBuildingType = () => {
+    setDialogVisibleBuildingType(true);
+  };
+  const closeDialogBuildingType = () => {
+    setDialogVisibleBuildingType(false);
+    // for (let i = 0; i < selectedItemsSpeed.length; i++) {
+    //   if (speedExtraList.includes(selectedItemsSpeed[i])) {
+    //   } else {
+    //     setSpeedExtraList((oldArray) => [...oldArray, selectedItemsSpeed[i]]);
+    //   }
+    // }
+  };
+  const dialogFooterBuildingType = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingType} />;
+  };
+//   const buildingTypeDisplay = (
+//     <div>
+//       <DataTable
+//         value={selectedBuildingType}
+//         scrollable
+//         rows={20}
+//         dataKey="name"
+//         filters={filters}
+//         filterDisplay="row"
+//         responsiveLayout="scroll"
+//         globalFilterFields={["name"]}
+//         emptyMessage="No items found."
+//         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+//         rowHover
+//         resizableColumns
+//         reorderableColumns
+//         reorderableRows
+//       >
+//         <Column
+//           header="Building Type"
+//           field="name"
+//           sortable
+//           filter
+//           filterPlaceholder="Search"
+//         ></Column>
+//       </DataTable>
+//     </div>
+//   );
+  const buildingTypeDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Building Type</h2>
+      <Button onClick={openDialogBuildingType} className={style.monstergenBtnName}>
+        Add / Remove
+      </Button>
+      <Dialog
+        header="Building Type"
+        visible={dialogVisibleBuildingType}
+        maximizable
+        modal
+        onHide={closeDialogBuildingType}
+        footer={dialogFooterBuildingType}
+      >
+        <DataTable
+          value={buildingTypeOptions}
+          scrollable
+          scrollHeight="60vh"
+          rows={20}
+          dataKey="name"
+          selection={selectedBuildingType}
+          onSelectionChange={(e) => {
+            setBuildingType(e.value);
+          }}
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="single"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+          <Column
+            field="type"
+            header="Type"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
   );
 
   
@@ -175,7 +327,7 @@ const buildingCategoryDrop = customDrop(
           <div className={isBasicActive ? style.subsection : style.hidden}>
             {nameText}
             {buildingCategoryDrop}
-            {buildingTypeDrop}
+            {buildingTypeDialog}
           </div>
         </div>
         {/* Main Display */}
