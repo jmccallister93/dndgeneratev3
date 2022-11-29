@@ -584,15 +584,18 @@ const BuildingGen = () => {
   const onRandomRoomType = (e) => {
     const max = roomTypeOptions.length - 1;
     let r = Math.round(Math.random() * (max - 0));
-    // roomTypeList.push(roomTypeOptions[r].name)
-    setRoomTypeList((saveArray) => [...saveArray, roomTypeOptions[r]]);
+    if(roomTypeList.includes(roomTypeOptions[r])){
+
+    }else {
+        setRoomTypeList((saveArray) => [...saveArray, roomTypeOptions[r]]);
+    }
+    
   };
   const randomRoomTypeBtn = (
     <Button onClick={onRandomRoomType} className={style.btnName}>
       Random
     </Button>
   );
-  
   const roomTypeDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Specific Rooms</h2>
@@ -657,9 +660,11 @@ const BuildingGen = () => {
   );
   const roomTypeDisplay = roomTypeList.map((i) => {
     return (
+        <div>
         <h4>
-          {i.name + ", "}
+          {`${i.name},`}
         </h4>
+        </div>
     );
   });
  
@@ -689,8 +694,12 @@ const BuildingGen = () => {
     if (buildingWindow === "") {
       onRandomBuildingWindow();
     }
-    if (roomType === "") {
-      onRandomRoomType();
+    if (roomType === ""){
+        let r = Math.round(Math.random() * (2 - 0));
+        if(r === 1){
+            onRandomRoomType();
+        }
+      
     }
     if (buildingFloor === "") {
       onRandomBuildingFloor();
@@ -820,7 +829,7 @@ const BuildingGen = () => {
             Room Count: <span className={style.minorText2}>{buildingRoom}</span>
           </h2>
           <h2>
-            Room Type: <div className={style.detesContainer}>{roomTypeDisplay}</div>
+            Specific Rooms: <div className={style.detesContainer}>{roomTypeDisplay}</div>
           </h2>
         </div>
       </div>
