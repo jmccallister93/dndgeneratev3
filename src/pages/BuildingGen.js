@@ -38,22 +38,37 @@ const BuildingGen = () => {
   const [buildingRoom, setBuildingRoom] = useState("");
   const [buildingRooms, setBuildingRooms] = useState("");
   const [buildingRoomOptions, setBuildingRoomOptions] = useState("");
+  const [selectedBuildingRoom, setSelectedBuildingRoom] = useState(null);
+  const [dialogVisibleBuildingRoom, setDialogVisibleBuildingRoom] =
+    useState(false);
 
   const [buildingColor, setBuildingColor] = useState("");
   const [buildingColors, setBuildingColors] = useState("");
   const [buildingColorOptions, setBuildingColorOptions] = useState("");
+  const [selectedBuildingColor, setSelectedBuildingColor] = useState(null);
+  const [dialogVisibleBuildingColor, setDialogVisibleBuildingColor] =
+    useState(false);
 
   const [buildingSound, setBuildingSound] = useState("");
   const [buildingSounds, setBuildingSounds] = useState("");
   const [buildingSoundOptions, setBuildingSoundOptions] = useState("");
+  const [selectedBuildingSound, setSelectedBuildingSound] = useState(null);
+  const [dialogVisibleBuildingSound, setDialogVisibleBuildingSound] =
+    useState(false);
 
   const [buildingSmell, setBuildingSmell] = useState("");
   const [buildingSmells, setBuildingSmells] = useState("");
   const [buildingSmellOptions, setBuildingSmellOptions] = useState("");
+  const [selectedBuildingSmell, setSelectedBuildingSmell] = useState(null);
+  const [dialogVisibleBuildingSmell, setDialogVisibleBuildingSmell] =
+    useState(false);
 
   const [buildingStyle, setBuildingStyle] = useState("");
   const [buildingStyles, setBuildingStyles] = useState("");
   const [buildingStyleOptions, setBuildingStyleOptions] = useState("");
+  const [selectedBuildingStyle, setSelectedBuildingStyle] = useState(null);
+  const [dialogVisibleBuildingStyle, setDialogVisibleBuildingStyle] =
+    useState(false);
 
   const [buildingEnterance, setBuildingEnterance] = useState("");
   const [buildingEnterances, setBuildingEnterances] = useState("");
@@ -66,8 +81,6 @@ const BuildingGen = () => {
   const [buildingWindow, setBuildingWindow] = useState("");
   const [buildingWindows, setBuildingWindows] = useState("");
   const [buildingWindowOptions, setBuildingWindowOptions] = useState("");
-
-
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -106,6 +119,30 @@ const BuildingGen = () => {
       setBuildingTypes,
       setBuildingTypeOptions
     );
+    getData(
+      "buildingColors",
+      setBuildingColor,
+      setBuildingColors,
+      setBuildingColorOptions
+    );
+    getData(
+      "buildingSmell",
+      setBuildingSmell,
+      setBuildingSmells,
+      setBuildingSmellOptions
+    );
+    getData(
+      "buildingSound",
+      setBuildingSound,
+      setBuildingSounds,
+      setBuildingSoundOptions
+    );
+    getData(
+        "buildingStyle",
+        setBuildingStyle,
+        setBuildingStyles,
+        setBuildingStyleOptions
+      );
   }, []);
 
   //Datatable
@@ -223,6 +260,71 @@ const BuildingGen = () => {
   const dialogFooterBuildingType = () => {
     return (
       <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingType} />
+    );
+  };
+  //BuildingRooms
+  const openDialogBuildingRoom = () => {
+    setDialogVisibleBuildingRoom(true);
+  };
+  const closeDialogBuildingRoom = () => {
+    setDialogVisibleBuildingRoom(false);
+    setBuildingRoom(selectedBuildingRoom.name);
+  };
+  const dialogFooterBuildingRoom = () => {
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingRoom} />
+    );
+  };
+  //BuildingStyle
+  const openDialogBuildingStyle = () => {
+    setDialogVisibleBuildingStyle(true);
+  };
+  const closeDialogBuildingStyle = () => {
+    setDialogVisibleBuildingStyle(false);
+    setBuildingStyle(selectedBuildingStyle.name);
+  };
+  const dialogFooterBuildingStyle = () => {
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingStyle} />
+    );
+  };
+  //BuildingColor
+  const openDialogBuildingColor = () => {
+    setDialogVisibleBuildingColor(true);
+  };
+  const closeDialogBuildingColor = () => {
+    setDialogVisibleBuildingColor(false);
+    setBuildingColor(selectedBuildingColor.name);
+  };
+  const dialogFooterBuildingColor = () => {
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingColor} />
+    );
+  };
+  //BuildingSound
+  const openDialogBuildingSound = () => {
+    setDialogVisibleBuildingSound(true);
+  };
+  const closeDialogBuildingSound = () => {
+    setDialogVisibleBuildingSound(false);
+    setBuildingSound(selectedBuildingSound.name);
+  };
+  const dialogFooterBuildingSound = () => {
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingSound} />
+    );
+  };
+  //BuildingColor
+  const openDialogBuildingColor = () => {
+    setDialogVisibleBuildingColor(true);
+  };
+  const closeDialogBuildingColor = () => {
+    setDialogVisibleBuildingColor(false);
+    setBuildingColor(selectedBuildingColor.name);
+  };
+  const dialogFooterBuildingColor = () => {
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingColor} />
     );
   };
 
