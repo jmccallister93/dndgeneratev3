@@ -213,12 +213,13 @@ const BuildingGen = () => {
     for (let i = 0; buildingTypeOptions.length > i; i++) {
       if (buildingCategory === "Housing") {
         // setBuildingTypeOptions(buildingTypeOptions[i])
-        setBuildingTypeOptions(buildingTypeOptions.filter((value) => value.type === "Housing"));
-        console.log(buildingTypeOptions)
+        return setBuildingTypeOptions(buildingTypeOptions.filter((value) => value.type === "Housing"));
+        // console.log(buildingTypeOptions.filter((value) => value.type === "Housing"))
       }
     }
     // console.log(buildingTypeOptions)
   }, [buildingCategory]);
+  console.log(buildingTypeOptions)
   //   const buildingTypeDisplay = (
   //     <div>
   //       <DataTable
