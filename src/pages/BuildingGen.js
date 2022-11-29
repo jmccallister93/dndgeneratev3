@@ -210,7 +210,7 @@ const BuildingGen = () => {
 
   const onRandomBuildingType = (e) => {
     let r = Math.round(Math.random() * (9 - 0));
-    setBuildingType(buildingTypeOptions[r].name);
+    setBuildingType(buildingList[r].name);
   };
 
   //Name Input
@@ -385,16 +385,14 @@ const BuildingGen = () => {
     }
   }, [buildingCategory]);
 
-  //Filter if Type is set
-  //   useEffect(() =>{
-  //     if(buildingCategory === ""){
-  //       setBuildingCategory(buildingType)
-  //         if(buildingType.type === "Housing"){
-  //             console.log("y")
-  //         }
-
-  //     }
-  //   }, [buildingType])
+  useEffect(() => {
+    if (buildingCategory === "") {
+      if (buildingList.type === "Housing") {
+        setBuildingCategory(buildingCategoryOptions["Housing"]);
+      }
+    }
+    console.log(buildingList);
+  }, [buildingType]);
 
   //   const buildingTypeDisplay = (
   //     <div>
@@ -427,20 +425,13 @@ const BuildingGen = () => {
   const buildingTypeDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Building Type</h2>
-      {buildingType === "" ? (
-        <Button
-          onClick={openDialogBuildingType}
-          className={style.btnNull}
-        >
+      {buildingCategory === "" ? "Set Category" : (
+        <>
+        <Button onClick={openDialogBuildingType} className={style.btnAddRemove}>
           Add / Remove
         </Button>
-      ) : (
-        <Button
-          onClick={openDialogBuildingType}
-          className={style.btnAddRemove}
-        >
-          Add / Remove
-        </Button>
+        {randomBuildingTypeBtn}
+        </>
       )}
 
       <Dialog
@@ -500,16 +491,16 @@ const BuildingGen = () => {
   //Buttons
   const onGenerate = (e) => {};
   const onClear = (e) => {
-    setBuildingName("")
-    setBuildingCategory("")
-    setBuildingType("")
-    setBuildingColor("")
-    setBuildingEnterance("")
-    setBuildingRoom("")
-    setBuildingSmell("")
-    setBuildingSound("")
-    setBuildingStyle("")
-    setBuildingWindow("")
+    setBuildingName("");
+    setBuildingCategory("");
+    setBuildingType("");
+    setBuildingColor("");
+    setBuildingEnterance("");
+    setBuildingRoom("");
+    setBuildingSmell("");
+    setBuildingSound("");
+    setBuildingStyle("");
+    setBuildingWindow("");
   };
 
   return (
