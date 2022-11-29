@@ -301,6 +301,7 @@ const BuildingGen = () => {
       <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingType} />
     );
   };
+ 
   const onRandomBuildingType = (e) => {
     const max = buildingList.length - 1;
     let r = Math.round(Math.random() * (max - 0));
@@ -358,9 +359,7 @@ const BuildingGen = () => {
         );
       } else if (buildingCategory === "Any") {
         return setBuildingList(buildingTypeOptions);
-      } else {
-        return setBuildingList(buildingTypeOptions);
-      }
+      } 
     }
   }, [buildingCategory]);
   const buildingTypeDialog = (
@@ -631,17 +630,40 @@ const BuildingGen = () => {
   );
   //Buttons
   const onGenerate = (e) => {
-    onRandomBuildingCategory()
-    onRandomBuildingColor()
-    onRandomBuildingEnterance()
-    onRandomBuildingFloor()
-    onRandomBuildingName()
-    onRandomBuildingRoom()
-    onRandomBuildingSound()
-    onRandomBuildingStyle()
-    onRandomBuildingType()
-    onRandomBuildingWindow()
-    onRandomRoomType()
+    if(buildingCategory === ""){
+        onRandomBuildingCategory()
+    }
+    if(buildingColor === ""){
+        onRandomBuildingColor()
+    }
+    if(buildingName === ""){
+        onRandomBuildingName()
+    }
+    if(buildingEnterance === ""){
+        onRandomBuildingEnterance()
+    }
+    if(buildingRoom === ""){
+        onRandomBuildingRoom()
+    }
+    if(buildingSound === ""){
+        onRandomBuildingSound()
+    }
+    if(buildingStyle === ""){
+        onRandomBuildingStyle()
+    }
+    if(buildingType === ""){
+        onRandomBuildingType()
+    }
+    if(buildingWindow === ""){
+        onRandomBuildingWindow()
+    }
+    if(roomType === ""){
+        onRandomRoomType()
+    }
+    
+
+    // onRandomBuildingType()
+    randomBuildingTypeBtn()
   };
   const onClear = (e) => {
     setBuildingName("");
