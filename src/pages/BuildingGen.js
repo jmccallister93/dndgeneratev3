@@ -558,16 +558,15 @@ const BuildingGen = () => {
     );
   };
   const onRandomRoomType = (e) => {
-    const max = roomList.length - 1;
+    const max = roomTypeOptions.length - 1;
     let r = Math.round(Math.random() * (max - 0));
-    setRoomType(roomList[r].name);
+    setRoomType(roomTypeOptions[r].name);
   };
   const randomRoomTypeBtn = (
     <Button onClick={onRandomRoomType} className={style.btnName}>
       Random
     </Button>
   );
-  
   const roomTypeDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Room Type</h2>
@@ -746,7 +745,7 @@ const BuildingGen = () => {
             Room Count: <span className={style.minorText2}>{buildingRoom}</span>
           </h2>
           <h2>
-            Room Type: <span className={style.minorText2}>{}</span>
+            Room Type: <span className={style.minorText2}>{roomType}</span>
           </h2>
         </div>
       </div>
