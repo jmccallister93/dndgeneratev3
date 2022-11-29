@@ -88,7 +88,7 @@ const BuildingGen = () => {
 
   const [buildingFloor, setBuildingFloor] = useState("");
   const [buildingFloors, setBuildingFloors] = useState("");
-  const [buildingFloorOptions, setBuildingFloorOptions] = useState("");  
+  const [buildingFloorOptions, setBuildingFloorOptions] = useState("");
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -514,8 +514,8 @@ const BuildingGen = () => {
     "Set Windows",
     onRandomBuildingWindow
   );
-//Room Count
-const onBuildingRoomChange = (e) => {
+  //Room Count
+  const onBuildingRoomChange = (e) => {
     setBuildingRoom(e.value);
   };
   const onRandomBuildingRoom = (e) => {
@@ -589,6 +589,11 @@ const onBuildingRoomChange = (e) => {
           <h1 className={style.subHeader} onClick={showLayout}>
             Building Layout
           </h1>
+          <div className={isLayoutActive ? style.subsection : style.hidden}>
+            {floorNumber}
+            {enteranceNumber}
+            {windowNumber}
+          </div>
           <h1 className={style.subHeader} onClick={showDetails}>
             Building Details
           </h1>
@@ -596,9 +601,6 @@ const onBuildingRoomChange = (e) => {
             {buildingStyleDrop}
             {buildingColorDrop}
             {buildingSoundDrop}
-            {floorNumber}
-            {enteranceNumber}
-            {windowNumber}
           </div>
           <h1 className={style.subHeader} onClick={showRooms}>
             Room Details
