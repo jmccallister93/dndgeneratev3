@@ -93,10 +93,21 @@ const BuildingGen = () => {
   const [roomType, setRoomType] = useState("");
   const [roomTypes, setRoomTypes] = useState("");
   const [roomTypeOptions, setRoomTypeOptions] = useState("");
-    const [selectedRoomType, setSelectedRoomType] = useState(null);
-    const [dialogVisibleRoomType, setDialogVisibleRoomType] =
-      useState(false);
-    const [roomList, setRoomList] = useState("")
+  const [selectedRoomType, setSelectedRoomType] = useState(null);
+  const [dialogVisibleRoomType, setDialogVisibleRoomType] = useState(false);
+  const [roomList, setRoomList] = useState("");
+
+  const [housingOptions, setHousingOptions] = useState("")
+  const [tradeOptions, setTradeOptions] = useState("")
+  const [religiousOptions, setReligiousOptions] = useState("")
+  const [farmOptions, setFarmOptions] = useState("")
+  const [recreationalOptions, setRecreationalOptions] = useState("")
+  const [educationOptions, setEducationOptions] = useState("")
+  const [militaryOptions, setMilitaryOptions] = useState("")
+  const [institutionalOptions, setInstitutionalOptions] = useState("")
+  const [mineOptions, setMineOptions] = useState("")
+  const [agricultureOptions, setAgricultureOptions] = useState("")
+
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -158,12 +169,7 @@ const BuildingGen = () => {
       setBuildingStyles,
       setBuildingStyleOptions
     );
-    getData(
-        "buildingRoomsAll",
-        setRoomType,
-        setRoomTypes,
-        setRoomTypeOptions
-      );
+    getData("buildingRoomsAll", setRoomType, setRoomTypes, setRoomTypeOptions);
   }, []);
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -301,17 +307,7 @@ const BuildingGen = () => {
       <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingType} />
     );
   };
- 
-  const onRandomBuildingType = (e) => {
-    const max = buildingList.length - 1;
-    let r = Math.round(Math.random() * (max - 0));
-    setBuildingType(buildingList[r].name);
-  };
-  const randomBuildingTypeBtn = (
-    <Button onClick={onRandomBuildingType} className={style.btnName}>
-      Random
-    </Button>
-  );
+
   useEffect(() => {
     // setBuildingType("");
 
@@ -359,9 +355,22 @@ const BuildingGen = () => {
         );
       } else if (buildingCategory === "Any") {
         return setBuildingList(buildingTypeOptions);
-      } 
+      }
     }
   }, [buildingCategory]);
+
+  const onRandomBuildingType = (e) => {
+    console.log(buildingList);
+    const max = buildingList.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
+    setBuildingType(buildingList[r].name);
+  };
+  const randomBuildingTypeBtn = (
+    <Button onClick={onRandomBuildingType} className={style.btnName}>
+      Random
+    </Button>
+  );
+
   const buildingTypeDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Building Type</h2>
@@ -434,7 +443,8 @@ const BuildingGen = () => {
   );
   //BuildingStyle
   const onRandomBuildingStyle = (e) => {
-    let r = Math.round(Math.random() * (9 - 0));
+    let max = buildingStyleOptions.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
     setBuildingStyle(buildingStyleOptions[r].name);
   };
   const onBuildingStyleChange = (e) => {
@@ -450,7 +460,8 @@ const BuildingGen = () => {
   );
   //BuildingColor
   const onRandomBuildingColor = (e) => {
-    let r = Math.round(Math.random() * (9 - 0));
+    let max = buildingColorOptions.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
     setBuildingColor(buildingColorOptions[r].name);
   };
   const onBuildingColorChange = (e) => {
@@ -466,7 +477,8 @@ const BuildingGen = () => {
   );
   //BuildingSound
   const onRandomBuildingSound = (e) => {
-    let r = Math.round(Math.random() * (9 - 0));
+    let max = buildingSoundOptions.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
     setBuildingSound(buildingSoundOptions[r].name);
   };
   const onBuildingSoundChange = (e) => {
@@ -566,15 +578,12 @@ const BuildingGen = () => {
   const roomTypeDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Room Type</h2>
-        <>
-          <Button
-            onClick={openDialogRoomType}
-            className={style.btnAddRemove}
-          >
-            Add / Remove
-          </Button>
-          {randomRoomTypeBtn}
-        </>
+      <>
+        <Button onClick={openDialogRoomType} className={style.btnAddRemove}>
+          Add / Remove
+        </Button>
+        {randomRoomTypeBtn}
+      </>
       <Dialog
         header="Room Type"
         visible={dialogVisibleRoomType}
@@ -630,40 +639,39 @@ const BuildingGen = () => {
   );
   //Buttons
   const onGenerate = (e) => {
-    if(buildingCategory === ""){
-        onRandomBuildingCategory()
+    if (buildingCategory === "") {
+      onRandomBuildingCategory();
     }
-    if(buildingColor === ""){
-        onRandomBuildingColor()
+    if (buildingColor === "") {
+      onRandomBuildingColor();
     }
-    if(buildingName === ""){
-        onRandomBuildingName()
+    if (buildingName === "") {
+      onRandomBuildingName();
     }
-    if(buildingEnterance === ""){
-        onRandomBuildingEnterance()
+    if (buildingEnterance === "") {
+      onRandomBuildingEnterance();
     }
-    if(buildingRoom === ""){
-        onRandomBuildingRoom()
+    if (buildingRoom === "") {
+      onRandomBuildingRoom();
     }
-    if(buildingSound === ""){
-        onRandomBuildingSound()
+    if (buildingSound === "") {
+      onRandomBuildingSound();
     }
-    if(buildingStyle === ""){
-        onRandomBuildingStyle()
+    if (buildingStyle === "") {
+      onRandomBuildingStyle();
     }
-    if(buildingType === ""){
-        onRandomBuildingType()
+    if (buildingType === "") {
+      onRandomBuildingType();
     }
-    if(buildingWindow === ""){
-        onRandomBuildingWindow()
+    if (buildingWindow === "") {
+      onRandomBuildingWindow();
     }
-    if(roomType === ""){
-        onRandomRoomType()
+    if (roomType === "") {
+      onRandomRoomType();
     }
-    
-
-    // onRandomBuildingType()
-    randomBuildingTypeBtn()
+    if (buildingFloor === "") {
+      onRandomBuildingFloor();
+    }
   };
   const onClear = (e) => {
     setBuildingName("");
@@ -678,7 +686,8 @@ const BuildingGen = () => {
     setBuildingWindow("");
     setBuildingRoom("");
     setBuildingFloor("");
-    setRoomType("")
+    setRoomType("");
+    setBuildingList("");
   };
 
   return (
