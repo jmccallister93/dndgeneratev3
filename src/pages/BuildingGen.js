@@ -13,10 +13,13 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { InputNumber } from "primereact/inputnumber";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isRoomActive, setIsRoomActive] = useState(false);
 
   const [buildingName, setBuildingName] = useState("");
   const [buildingNames, setBuildingNames] = useState("");
@@ -184,6 +187,12 @@ const BuildingGen = () => {
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
+  const showDetails = (e) => {
+    setIsDetailActive((current) => !current);
+  };
+  const showRooms = (e) => {
+    setIsRoomActive((current) => !current);
+  };
   //InputTexts
   const customInputText = (title, value, change, placeholder, click) => (
     <div>
@@ -194,35 +203,28 @@ const BuildingGen = () => {
       </Button>
     </div>
   );
-
-  //onChanges
-  const onBuildingNameChange = (e) => {
-    setBuildingName(e.target.value);
-  };
-  const onRandomBuildingName = (e) => {};
-  const onBuildingCategoryChange = (e) => {
-    setBuildingCategory(e.value);
-  };
-  const onRandomBuildingCategory = (e) => {
-    let r = Math.round(Math.random() * (9 - 0));
-    setBuildingCategory(buildingCategoryOptions[r].name);
-  };
-
-  const onRandomBuildingType = (e) => {
-    const max = buildingList.length - 1
-    let r = Math.round(Math.random() * (max - 0));
-    setBuildingType(buildingList[r].name);
-  };
-
-  //Name Input
-  const nameText = customInputText(
-    "Building Name",
-    buildingName,
-    onBuildingNameChange,
-    "Set Name",
-    onRandomBuildingName
+  //InputNumber
+  const customInputNumber = (title, value, change, placeholder, click) => (
+    <div>
+      <h2 className={style.titles}>{title}</h2>
+      <InputNumber
+        value={value}
+        onChange={change}
+        placeholder={placeholder}
+        showButtons
+        buttonLayout="stacked"
+        decrementButtonClassName="p-button-secondary"
+        incrementButtonClassName="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        minFractionDigits={0}
+        maxFractionDigits={2}
+      />
+      <Button onClick={click} className={style.btnName}>
+        Random
+      </Button>
+    </div>
   );
-
   //DropDowns
   const customDrop = (title, value, options, change, placeholder, click) => (
     <div className={style.dropContainer}>
@@ -239,7 +241,34 @@ const BuildingGen = () => {
       </Button>
     </div>
   );
+
+  //Building Name
+  const onBuildingNameChange = (e) => {
+    setBuildingName(e.target.value);
+  };
+  const onRandomBuildingName = (e) => {};
+
+  const nameText = customInputText(
+    "Building Name",
+    buildingName,
+    onBuildingNameChange,
+    "Set Name",
+    onRandomBuildingName
+  );
+
   //BuildingCategory
+  const onRandomBuildingCategory = (e) => {
+    let r = Math.round(Math.random() * (9 - 0));
+    setBuildingCategory(buildingCategoryOptions[r].name);
+  };
+  const onBuildingCategoryChange = (e) => {
+    setBuildingCategory(e.value);
+  };
+  const onRandomBuildingType = (e) => {
+    const max = buildingList.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
+    setBuildingType(buildingList[r].name);
+  };
   const buildingCategoryDrop = customDrop(
     "Category",
     buildingCategory,
@@ -265,6 +294,129 @@ const BuildingGen = () => {
     <Button onClick={onRandomBuildingType} className={style.btnName}>
       Random
     </Button>
+  );
+  useEffect(() => {
+    setBuildingType("");
+
+    setBuildingList(buildingTypeOptions);
+    for (let i = 0; buildingTypeOptions.length > i; i++) {
+      if (buildingCategory === "Housing") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Housing")
+        );
+      } else if (buildingCategory === "Trade") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Trade")
+        );
+      } else if (buildingCategory === "Religious") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Religious")
+        );
+      } else if (buildingCategory === "Farm") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Farm")
+        );
+      } else if (buildingCategory === "Recreation") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Recreation")
+        );
+      } else if (buildingCategory === "Education") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Education")
+        );
+      } else if (buildingCategory === "Military") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Military")
+        );
+      } else if (buildingCategory === "Institutional") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Institutional")
+        );
+      } else if (buildingCategory === "Mine") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Mine")
+        );
+      } else if (buildingCategory === "Agriculture") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Agriculture")
+        );
+      } else if (buildingCategory === "Any") {
+        return setBuildingList(buildingTypeOptions);
+      } else {
+        return setBuildingList(buildingTypeOptions);
+      }
+    }
+  }, [buildingCategory]);
+
+  const buildingTypeDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Building Type</h2>
+      {buildingCategory === "" ? (
+        "Set Category"
+      ) : (
+        <>
+          <Button
+            onClick={openDialogBuildingType}
+            className={style.btnAddRemove}
+          >
+            Add / Remove
+          </Button>
+          {randomBuildingTypeBtn}
+        </>
+      )}
+
+      <Dialog
+        header="Building Type"
+        visible={dialogVisibleBuildingType}
+        maximizable
+        modal
+        onHide={closeDialogBuildingType}
+        footer={dialogFooterBuildingType}
+      >
+        <DataTable
+          value={buildingList}
+          scrollable
+          scrollHeight="60vh"
+          rows={20}
+          dataKey="name"
+          selection={selectedBuildingType}
+          onSelectionChange={(e) => {
+            setSelectedBuildingType(e.value);
+          }}
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="single"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+          <Column
+            field="type"
+            header="Type"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
   );
 
   //BuildingRooms
@@ -331,153 +483,35 @@ const BuildingGen = () => {
       />
     );
   };
-
-  //Filter by Category
-  useEffect(() => {
-    setBuildingType("");
-
-    setBuildingList(buildingTypeOptions);
-    for (let i = 0; buildingTypeOptions.length > i; i++) {
-      if (buildingCategory === "Housing") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Housing")
-        );
-      } else if (buildingCategory === "Trade") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Trade")
-        );
-      } else if (buildingCategory === "Religious") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Religious")
-        );
-      } else if (buildingCategory === "Farm") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Farm")
-        );
-      } else if (buildingCategory === "Recreation") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Recreation")
-        );
-      } else if (buildingCategory === "Education") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Education")
-        );
-      } else if (buildingCategory === "Military") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Military")
-        );
-      } else if (buildingCategory === "Institutional") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Institutional")
-        );
-      } else if (buildingCategory === "Mine") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Mine")
-        );
-      } else if (buildingCategory === "Agriculture") {
-        return setBuildingList(
-          buildingTypeOptions.filter((value) => value.type === "Agriculture")
-        );
-      } else if (buildingCategory === "Any") {
-        return setBuildingList(buildingTypeOptions);
-      } else {
-        return setBuildingList(buildingTypeOptions);
-      }
-    }
-  }, [buildingCategory]);
-
-  //   const buildingTypeDisplay = (
-  //     <div>
-  //       <DataTable
-  //         value={selectedBuildingType}
-  //         scrollable
-  //         rows={20}
-  //         dataKey="name"
-  //         filters={filters}
-  //         filterDisplay="row"
-  //         responsiveLayout="scroll"
-  //         globalFilterFields={["name"]}
-  //         emptyMessage="No items found."
-  //         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  //         rowHover
-  //         resizableColumns
-  //         reorderableColumns
-  //         reorderableRows
-  //       >
-  //         <Column
-  //           header="Building Type"
-  //           field="name"
-  //           sortable
-  //           filter
-  //           filterPlaceholder="Search"
-  //         ></Column>
-  //       </DataTable>
-  //     </div>
-  //   );
-  const buildingTypeDialog = (
-    <div className="card">
-      <h2 className={style.monstergenTitles}>Building Type</h2>
-      {buildingCategory === "" ? "Set Category" : (
-        <>
-        <Button onClick={openDialogBuildingType} className={style.btnAddRemove}>
-          Add / Remove
-        </Button>
-        {randomBuildingTypeBtn}
-        </>
-      )}
-
-      <Dialog
-        header="Building Type"
-        visible={dialogVisibleBuildingType}
-        maximizable
-        modal
-        onHide={closeDialogBuildingType}
-        footer={dialogFooterBuildingType}
-      >
-        <DataTable
-          value={buildingList}
-          scrollable
-          scrollHeight="60vh"
-          rows={20}
-          dataKey="name"
-          selection={selectedBuildingType}
-          onSelectionChange={(e) => {
-            setSelectedBuildingType(e.value);
-          }}
-          filters={filters}
-          filterDisplay="row"
-          responsiveLayout="scroll"
-          globalFilterFields={["name"]}
-          header={header}
-          emptyMessage="No items found."
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          rowHover
-          resizableColumns
-          reorderableColumns
-          reorderableRows
-        >
-          <Column
-            selectionMode="single"
-            selectionAriaLabel="name"
-            headerStyle={{ width: "6em" }}
-          ></Column>
-          <Column
-            field="name"
-            header="Name"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
-          <Column
-            field="type"
-            header="Type"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
-        </DataTable>
-      </Dialog>
-    </div>
+  //Building Enterances
+  const onBuildingEnteranceChange = (e) => {
+    setBuildingEnterance(e.value);
+  };
+  const onRandomBuildingEnterance = (e) => {
+    let r = Math.round(Math.random() * (10 - 1));
+    setBuildingEnterance(r);
+  };
+  const enteranceNumber = customInputNumber(
+    "Building Enterances",
+    buildingEnterance,
+    onBuildingEnteranceChange,
+    "Set Enterances",
+    onRandomBuildingEnterance
+  );
+  //Building Windows
+  const onBuildingWindowChange = (e) => {
+    setBuildingWindow(e.value);
+  };
+  const onRandomBuildingWindow = (e) => {
+    let r = Math.round(Math.random() * (20 - 0));
+    setBuildingWindow(r);
+  };
+  const windowNumber = customInputNumber(
+    "Building Windows",
+    buildingWindow,
+    onBuildingWindowChange,
+    "Set Windows",
+    onRandomBuildingWindow
   );
 
   //Buttons
@@ -524,6 +558,19 @@ const BuildingGen = () => {
             {buildingCategoryDrop}
             {buildingTypeDialog}
           </div>
+          <h1 className={style.subHeader} onClick={showDetails}>
+            Building Details
+          </h1>
+          <div className={isDetailActive ? style.subsection : style.hidden}>
+            {enteranceNumber}
+            {windowNumber}
+          </div>
+          <h1 className={style.subHeader} onClick={showRooms}>
+            Room Details
+          </h1>
+          <div className={isDetailActive ? style.subsection : style.hidden}>
+            {enteranceNumber}
+          </div>
         </div>
         {/* Main Display */}
         <div className={style.display}>
@@ -534,6 +581,29 @@ const BuildingGen = () => {
           </h2>
           <h2>
             Type: <span className={style.minorText2}>{buildingType}</span>
+          </h2>
+          <h2>
+            Building Style: <span className={style.minorText2}>{}</span>
+          </h2>
+          <h2>
+            Building Color: <span className={style.minorText2}>{}</span>
+          </h2>
+          <h2>
+            Building Ambiance: <span className={style.minorText2}>{}</span>
+          </h2>
+          <h2>
+            Building Enterances:{" "}
+            <span className={style.minorText2}>{buildingEnterance}</span>
+          </h2>
+          <h2>
+            Building Windows:{" "}
+            <span className={style.minorText2}>{buildingWindow}</span>
+          </h2>
+          <h2>
+            Room Count: <span className={style.minorText2}>{}</span>
+          </h2>
+          <h2>
+            Room Type: <span className={style.minorText2}>{}</span>
           </h2>
         </div>
       </div>
