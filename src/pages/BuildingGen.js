@@ -39,13 +39,6 @@ const BuildingGen = () => {
   const [dialogVisibleBuildingType, setDialogVisibleBuildingType] =
     useState(false);
 
-  const [buildingRoom, setBuildingRoom] = useState("");
-  const [buildingRooms, setBuildingRooms] = useState("");
-  const [buildingRoomOptions, setBuildingRoomOptions] = useState("");
-  const [selectedBuildingRoom, setSelectedBuildingRoom] = useState(null);
-  const [dialogVisibleBuildingRoom, setDialogVisibleBuildingRoom] =
-    useState(false);
-
   const [buildingColor, setBuildingColor] = useState("");
   const [buildingColors, setBuildingColors] = useState("");
   const [buildingColorOptions, setBuildingColorOptions] = useState("");
@@ -89,6 +82,21 @@ const BuildingGen = () => {
   const [buildingFloor, setBuildingFloor] = useState("");
   const [buildingFloors, setBuildingFloors] = useState("");
   const [buildingFloorOptions, setBuildingFloorOptions] = useState("");
+
+  const [buildingRoom, setBuildingRoom] = useState("");
+  const [buildingRooms, setBuildingRooms] = useState("");
+  const [buildingRoomOptions, setBuildingRoomOptions] = useState("");
+  const [selectedBuildingRoom, setSelectedBuildingRoom] = useState(null);
+  const [dialogVisibleBuildingRoom, setDialogVisibleBuildingRoom] =
+    useState(false);
+
+  const [roomType, setRoomType] = useState("");
+  const [roomTypes, setRoomTypes] = useState("");
+  const [roomTypeOptions, setRoomTypeOptions] = useState("");
+    const [selectedRoomType, setSelectedRoomType] = useState(null);
+    const [dialogVisibleRoomType, setDialogVisibleRoomType] =
+      useState(false);
+    const [roomList, setRoomList] = useState("")
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -151,6 +159,12 @@ const BuildingGen = () => {
       setBuildingStyles,
       setBuildingStyleOptions
     );
+    getData(
+        "buildingRoomsAll",
+        setRoomType,
+        setRoomTypes,
+        setRoomTypeOptions
+      );
   }, []);
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -268,11 +282,7 @@ const BuildingGen = () => {
   const onBuildingCategoryChange = (e) => {
     setBuildingCategory(e.value);
   };
-  const onRandomBuildingType = (e) => {
-    const max = buildingList.length - 1;
-    let r = Math.round(Math.random() * (max - 0));
-    setBuildingType(buildingList[r].name);
-  };
+ 
   const buildingCategoryDrop = customDrop(
     "Category",
     buildingCategory,
@@ -293,6 +303,11 @@ const BuildingGen = () => {
     return (
       <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingType} />
     );
+  };
+  const onRandomBuildingType = (e) => {
+    const max = buildingList.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
+    setBuildingType(buildingList[r].name);
   };
   const randomBuildingTypeBtn = (
     <Button onClick={onRandomBuildingType} className={style.btnName}>
@@ -523,25 +538,101 @@ const BuildingGen = () => {
     setBuildingRoom(r);
   };
   const roomNumber = customInputNumber(
-    "Building Rooms",
+    "Room Count",
     buildingRoom,
     onBuildingRoomChange,
-    "Set Rooms",
+    "Set Count",
     onRandomBuildingRoom
   );
   //Room Type
-  const openDialogBuildingRoom = () => {
-    setDialogVisibleBuildingRoom(true);
+  const openDialogRoomType = () => {
+    setDialogVisibleRoomType(true);
   };
-  const closeDialogBuildingRoom = () => {
-    setDialogVisibleBuildingRoom(false);
-    setBuildingRoom(selectedBuildingRoom.name);
+  const closeDialogRoomType = () => {
+    setDialogVisibleRoomType(false);
+    setRoomType(selectedRoomType.name);
   };
-  const dialogFooterBuildingRoom = () => {
+  const dialogFooterRoomType = () => {
     return (
-      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingRoom} />
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogRoomType} />
     );
   };
+  const onRandomRoomType = (e) => {
+    const max = roomList.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
+    setRoomType(roomList[r].name);
+  };
+  const randomRoomTypeBtn = (
+    <Button onClick={onRandomRoomType} className={style.btnName}>
+      Random
+    </Button>
+  );
+  
+  const roomTypeDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Room Type</h2>
+        <>
+          <Button
+            onClick={openDialogRoomType}
+            className={style.btnAddRemove}
+          >
+            Add / Remove
+          </Button>
+          {randomRoomTypeBtn}
+        </>
+      <Dialog
+        header="Room Type"
+        visible={dialogVisibleRoomType}
+        maximizable
+        modal
+        onHide={closeDialogRoomType}
+        footer={dialogFooterRoomType}
+      >
+        <DataTable
+          value={roomTypeOptions}
+          scrollable
+          scrollHeight="60vh"
+          rows={20}
+          dataKey="name"
+          selection={selectedRoomType}
+          onSelectionChange={(e) => {
+            setSelectedRoomType(e.value);
+          }}
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="single"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+          <Column
+            field="type"
+            header="Type"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
   //Buttons
   const onGenerate = (e) => {};
   const onClear = (e) => {
@@ -555,6 +646,9 @@ const BuildingGen = () => {
     setBuildingSound("");
     setBuildingStyle("");
     setBuildingWindow("");
+    setBuildingRoom("");
+    setBuildingFloor("");
+    setRoomType("")
   };
 
   return (
@@ -603,10 +697,11 @@ const BuildingGen = () => {
             {buildingSoundDrop}
           </div>
           <h1 className={style.subHeader} onClick={showRooms}>
-            Room Details
+            Rooms Details
           </h1>
-          <div className={isDetailActive ? style.subsection : style.hidden}>
-            {enteranceNumber}
+          <div className={isRoomActive ? style.subsection : style.hidden}>
+            {roomNumber}
+            {roomTypeDialog}
           </div>
         </div>
         {/* Main Display */}
@@ -621,18 +716,6 @@ const BuildingGen = () => {
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            Building Style:{" "}
-            <span className={style.minorText2}>{buildingStyle}</span>
-          </h2>
-          <h2>
-            Building Color:{" "}
-            <span className={style.minorText2}>{buildingColor}</span>
-          </h2>
-          <h2>
-            Building Ambiance:{" "}
-            <span className={style.minorText2}>{buildingSound}</span>
-          </h2>
-          <h2>
             Building Floors:{" "}
             <span className={style.minorText2}>{buildingFloor}</span>
           </h2>
@@ -646,7 +729,21 @@ const BuildingGen = () => {
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            Room Count: <span className={style.minorText2}>{}</span>
+            Building Style:{" "}
+            <span className={style.minorText2}>{buildingStyle}</span>
+          </h2>
+          <h2>
+            Building Color:{" "}
+            <span className={style.minorText2}>{buildingColor}</span>
+          </h2>
+          <h2>
+            Building Ambiance:{" "}
+            <span className={style.minorText2}>{buildingSound}</span>
+          </h2>
+
+          <hr className={style.lineBreak} />
+          <h2>
+            Room Count: <span className={style.minorText2}>{buildingRoom}</span>
           </h2>
           <h2>
             Room Type: <span className={style.minorText2}>{}</span>
