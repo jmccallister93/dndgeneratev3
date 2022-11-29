@@ -3,6 +3,7 @@ $secondary-grey: #d6e4e5;
 $header-color: #3e6d9c;
 $display-tan: #f7f1cf;
 $display-red: #9a2818;
+$btn-blue: #2196f3;
 
 .mainWrapper {
   background: linear-gradient(135deg, $primary-grey 25%, white);
@@ -118,6 +119,17 @@ $display-red: #9a2818;
     }
   }
 
+.btnNull {
+    background-color: #393e46;
+    border: #393e46;
+    &:hover {
+        background-color: #393e46;
+        cursor: default;
+      }
+}
+.btnAddRemove{
+    background-color: $btn-blue;
+}
 .subHeader {
     color: $primary-grey;
     background-color: white;

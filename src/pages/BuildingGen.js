@@ -138,11 +138,11 @@ const BuildingGen = () => {
       setBuildingSoundOptions
     );
     getData(
-        "buildingStyle",
-        setBuildingStyle,
-        setBuildingStyles,
-        setBuildingStyleOptions
-      );
+      "buildingStyle",
+      setBuildingStyle,
+      setBuildingStyles,
+      setBuildingStyleOptions
+    );
   }, []);
 
   //Datatable
@@ -207,9 +207,7 @@ const BuildingGen = () => {
     let r = Math.round(Math.random() * (9 - 0));
     setBuildingCategory(buildingCategoryOptions[r].name);
   };
-  const onBuildingTypeChange = (e) => {
-    setBuildingType(e.value);
-  };
+
   const onRandomBuildingType = (e) => {
     let r = Math.round(Math.random() * (9 - 0));
     setBuildingType(buildingTypeOptions[r].name);
@@ -262,6 +260,12 @@ const BuildingGen = () => {
       <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingType} />
     );
   };
+  const randomBuildingTypeBtn = (
+    <Button onClick={onRandomBuildingType} className={style.btnName}>
+      Random
+    </Button>
+  );
+
   //BuildingRooms
   const openDialogBuildingRoom = () => {
     setDialogVisibleBuildingRoom(true);
@@ -285,7 +289,11 @@ const BuildingGen = () => {
   };
   const dialogFooterBuildingStyle = () => {
     return (
-      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingStyle} />
+      <Button
+        label="Ok"
+        icon="pi pi-check"
+        onClick={closeDialogBuildingStyle}
+      />
     );
   };
   //BuildingColor
@@ -298,7 +306,11 @@ const BuildingGen = () => {
   };
   const dialogFooterBuildingColor = () => {
     return (
-      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingColor} />
+      <Button
+        label="Ok"
+        icon="pi pi-check"
+        onClick={closeDialogBuildingColor}
+      />
     );
   };
   //BuildingSound
@@ -311,26 +323,18 @@ const BuildingGen = () => {
   };
   const dialogFooterBuildingSound = () => {
     return (
-      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingSound} />
-    );
-  };
-  //BuildingColor
-  const openDialogBuildingColor = () => {
-    setDialogVisibleBuildingColor(true);
-  };
-  const closeDialogBuildingColor = () => {
-    setDialogVisibleBuildingColor(false);
-    setBuildingColor(selectedBuildingColor.name);
-  };
-  const dialogFooterBuildingColor = () => {
-    return (
-      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingColor} />
+      <Button
+        label="Ok"
+        icon="pi pi-check"
+        onClick={closeDialogBuildingSound}
+      />
     );
   };
 
   //Filter by Category
   useEffect(() => {
     setBuildingType("");
+
     setBuildingList(buildingTypeOptions);
     for (let i = 0; buildingTypeOptions.length > i; i++) {
       if (buildingCategory === "Housing") {
@@ -379,7 +383,6 @@ const BuildingGen = () => {
         return setBuildingList(buildingTypeOptions);
       }
     }
-    // console.log(buildingTypeOptions)
   }, [buildingCategory]);
 
   //Filter if Type is set
@@ -424,12 +427,22 @@ const BuildingGen = () => {
   const buildingTypeDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Building Type</h2>
-      <Button
-        onClick={openDialogBuildingType}
-        className={style.monstergenBtnName}
-      >
-        Add / Remove
-      </Button>
+      {buildingType === "" ? (
+        <Button
+          onClick={openDialogBuildingType}
+          className={style.btnNull}
+        >
+          Add / Remove
+        </Button>
+      ) : (
+        <Button
+          onClick={openDialogBuildingType}
+          className={style.btnAddRemove}
+        >
+          Add / Remove
+        </Button>
+      )}
+
       <Dialog
         header="Building Type"
         visible={dialogVisibleBuildingType}
@@ -486,7 +499,18 @@ const BuildingGen = () => {
 
   //Buttons
   const onGenerate = (e) => {};
-  const onClear = (e) => {};
+  const onClear = (e) => {
+    setBuildingName("")
+    setBuildingCategory("")
+    setBuildingType("")
+    setBuildingColor("")
+    setBuildingEnterance("")
+    setBuildingRoom("")
+    setBuildingSmell("")
+    setBuildingSound("")
+    setBuildingStyle("")
+    setBuildingWindow("")
+  };
 
   return (
     <div className={style.mainWrapper}>
