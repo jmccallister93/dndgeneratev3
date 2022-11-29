@@ -122,6 +122,7 @@ $btn-blue: #2196f3;
 .btnNull {
     background-color: #393e46;
     border: #393e46;
+    
     &:hover {
         background-color: #393e46;
         cursor: default;
@@ -189,3 +190,15 @@ $btn-blue: #2196f3;
 .minorText2{
     font-weight: 350;
 }
+
+.lineBreak{
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 48vw solid $display-red;
+   }
+   
+   .subLineBreak{
+      border-bottom: 1px solid $display-red;
+      width: 98%;
+      margin-left: 2px;
+   }

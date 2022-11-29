@@ -19,6 +19,7 @@ const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isLayoutActive, setIsLayoutActive] = useState(false);
   const [isRoomActive, setIsRoomActive] = useState(false);
 
   const [buildingName, setBuildingName] = useState("");
@@ -85,6 +86,10 @@ const BuildingGen = () => {
   const [buildingWindows, setBuildingWindows] = useState("");
   const [buildingWindowOptions, setBuildingWindowOptions] = useState("");
 
+  const [buildingFloor, setBuildingFloor] = useState("");
+  const [buildingFloors, setBuildingFloors] = useState("");
+  const [buildingFloorOptions, setBuildingFloorOptions] = useState("");  
+
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -147,7 +152,6 @@ const BuildingGen = () => {
       setBuildingStyleOptions
     );
   }, []);
-
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -182,10 +186,12 @@ const BuildingGen = () => {
   const header = (
     <div className="flex justify-content-between">{renderHeader()}</div>
   );
-
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
+  };
+  const showLayout = (e) => {
+    setIsLayoutActive((current) => !current);
   };
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
@@ -241,7 +247,6 @@ const BuildingGen = () => {
       </Button>
     </div>
   );
-
   //Building Name
   const onBuildingNameChange = (e) => {
     setBuildingName(e.target.value);
@@ -255,7 +260,6 @@ const BuildingGen = () => {
     "Set Name",
     onRandomBuildingName
   );
-
   //BuildingCategory
   const onRandomBuildingCategory = (e) => {
     let r = Math.round(Math.random() * (9 - 0));
@@ -347,7 +351,6 @@ const BuildingGen = () => {
       }
     }
   }, [buildingCategory]);
-
   const buildingTypeDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Building Type</h2>
@@ -418,7 +421,6 @@ const BuildingGen = () => {
       </Dialog>
     </div>
   );
-
   //BuildingStyle
   const onRandomBuildingStyle = (e) => {
     let r = Math.round(Math.random() * (9 - 0));
@@ -467,6 +469,21 @@ const BuildingGen = () => {
     "Choose Sound",
     onRandomBuildingSound
   );
+  //Building Floors
+  const onBuildingFloorChange = (e) => {
+    setBuildingFloor(e.value);
+  };
+  const onRandomBuildingFloor = (e) => {
+    let r = Math.round(Math.random() * (5 - 0));
+    setBuildingFloor(r);
+  };
+  const floorNumber = customInputNumber(
+    "Building Floors",
+    buildingFloor,
+    onBuildingFloorChange,
+    "Set Floors",
+    onRandomBuildingFloor
+  );
   //Building Enterances
   const onBuildingEnteranceChange = (e) => {
     setBuildingEnterance(e.value);
@@ -497,7 +514,22 @@ const BuildingGen = () => {
     "Set Windows",
     onRandomBuildingWindow
   );
-  //BuildingRooms
+//Room Count
+const onBuildingRoomChange = (e) => {
+    setBuildingRoom(e.value);
+  };
+  const onRandomBuildingRoom = (e) => {
+    let r = Math.round(Math.random() * (10 - 0));
+    setBuildingRoom(r);
+  };
+  const roomNumber = customInputNumber(
+    "Building Rooms",
+    buildingRoom,
+    onBuildingRoomChange,
+    "Set Rooms",
+    onRandomBuildingRoom
+  );
+  //Room Type
   const openDialogBuildingRoom = () => {
     setDialogVisibleBuildingRoom(true);
   };
@@ -510,7 +542,6 @@ const BuildingGen = () => {
       <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingRoom} />
     );
   };
-
   //Buttons
   const onGenerate = (e) => {};
   const onClear = (e) => {
@@ -555,6 +586,9 @@ const BuildingGen = () => {
             {buildingCategoryDrop}
             {buildingTypeDialog}
           </div>
+          <h1 className={style.subHeader} onClick={showLayout}>
+            Building Layout
+          </h1>
           <h1 className={style.subHeader} onClick={showDetails}>
             Building Details
           </h1>
@@ -562,6 +596,7 @@ const BuildingGen = () => {
             {buildingStyleDrop}
             {buildingColorDrop}
             {buildingSoundDrop}
+            {floorNumber}
             {enteranceNumber}
             {windowNumber}
           </div>
@@ -582,6 +617,7 @@ const BuildingGen = () => {
           <h2>
             Type: <span className={style.minorText2}>{buildingType}</span>
           </h2>
+          <hr className={style.lineBreak} />
           <h2>
             Building Style:{" "}
             <span className={style.minorText2}>{buildingStyle}</span>
@@ -595,6 +631,10 @@ const BuildingGen = () => {
             <span className={style.minorText2}>{buildingSound}</span>
           </h2>
           <h2>
+            Building Floors:{" "}
+            <span className={style.minorText2}>{buildingFloor}</span>
+          </h2>
+          <h2>
             Building Enterances:{" "}
             <span className={style.minorText2}>{buildingEnterance}</span>
           </h2>
@@ -602,6 +642,7 @@ const BuildingGen = () => {
             Building Windows:{" "}
             <span className={style.minorText2}>{buildingWindow}</span>
           </h2>
+          <hr className={style.lineBreak} />
           <h2>
             Room Count: <span className={style.minorText2}>{}</span>
           </h2>
