@@ -499,7 +499,7 @@ const BuildingGen = () => {
     setBuildingFloor(e.value);
   };
   const onRandomBuildingFloor = (e) => {
-    let r = Math.round(Math.random() * (5 - 0));
+    let r = Math.round(Math.random() * (5 - 1));
     setBuildingFloor(r);
   };
   const floorNumber = customInputNumber(
@@ -544,7 +544,7 @@ const BuildingGen = () => {
     setBuildingRoom(e.value);
   };
   const onRandomBuildingRoom = (e) => {
-    let r = Math.round(Math.random() * (10 - 0));
+    let r = Math.round(Math.random() * (10 - 1));
     setBuildingRoom(r);
   };
   const roomNumber = customInputNumber(

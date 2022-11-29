@@ -3969,7 +3969,7 @@ const MonsterGen = () => {
             {hpInput}
             {speedInput}
             {moveDialog}
-            <div className={style.speedContainer}>{extraSpeedDispaly}</div>
+            <div className={style.detesContainer}>{extraSpeedDispaly}</div>
           </div>
           <h1 className={style.monstergenSubHeader} onClick={showAbility}>
             Ability Scores
@@ -3993,13 +3993,13 @@ const MonsterGen = () => {
             className={isSSDActive ? style.monstergenSubsection : style.hidden}
           >
             {saveDialog}
-            <div className={style.speedContainer}>{saveDisplay}</div>
+            <div className={style.detesContainer}>{saveDisplay}</div>
             {skillDialog}
-            <div className={style.speedContainer}>{skillDisplay}</div>
+            <div className={style.detesContainer}>{skillDisplay}</div>
             {senseDialog}
-            <div className={style.speedContainer}>{senseDisplay}</div>
+            <div className={style.detesContainer}>{senseDisplay}</div>
             {langDialog}
-            <div className={style.speedContainer}>{langDisplay}</div>
+            <div className={style.detesContainer}>{langDisplay}</div>
           </div>
           <h1 className={style.monstergenSubHeader} onClick={showDT}>
             Damage Types
@@ -4008,13 +4008,13 @@ const MonsterGen = () => {
             className={isDTActive ? style.monstergenSubsection : style.hidden}
           >
             {vulnDialog}
-            <div className={style.speedContainer}>{vulnDisplay}</div>
+            <div className={style.detesContainer}>{vulnDisplay}</div>
             {immuneDialog}
-            <div className={style.speedContainer}>{immuneDisplay}</div>
+            <div className={style.detesContainer}>{immuneDisplay}</div>
             {resistDialog}
-            <div className={style.speedContainer}>{resistDisplay}</div>
+            <div className={style.detesContainer}>{resistDisplay}</div>
             {conditionDialog}
-            <div className={style.speedContainer}>{conditionDisplay}</div>
+            <div className={style.detesContainer}>{conditionDisplay}</div>
           </div>
           <h1 className={style.monstergenSubHeader} onClick={showAA}>
             Actions / Abilities
@@ -4025,13 +4025,13 @@ const MonsterGen = () => {
             {specialDialog}
             {specialDisplay}
             {actionDialog}
-            <div className={style.speedContainer}>{actionDisplay}</div>
+            <div className={style.detesContainer}>{actionDisplay}</div>
             {/* {reactionDialog}
-            <div className={style.speedContainer}>{reactionDisplay}</div> */}
+            <div className={style.detesContainer}>{reactionDisplay}</div> */}
             {legendDialog}
-            <div className={style.speedContainer}>{legendDisplay}</div>
+            <div className={style.detesContainer}>{legendDisplay}</div>
             {lairDialog}
-            <div className={style.speedContainer}>{lairDisplay}</div>
+            <div className={style.detesContainer}>{lairDisplay}</div>
           </div>
           <h1 className={style.monstergenSubHeader} onClick={showGear}>
             Equipment
@@ -4039,7 +4039,7 @@ const MonsterGen = () => {
           <div
             className={isGearActive ? style.monstergenSubsection : style.hidden}
           >
-            <div className={style.speedContainer}>{gearDisplay}</div>
+            <div className={style.detesContainer}>{gearDisplay}</div>
           </div>
         </div>
 
