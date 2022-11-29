@@ -121,7 +121,6 @@ const BuildingGen = () => {
     };
     fetchData();
   };
-
   useEffect(() => {
     getData(
       "buildingCategory",
@@ -266,7 +265,6 @@ const BuildingGen = () => {
     setBuildingName(e.target.value);
   };
   const onRandomBuildingName = (e) => {};
-
   const nameText = customInputText(
     "Building Name",
     buildingName,
@@ -282,7 +280,6 @@ const BuildingGen = () => {
   const onBuildingCategoryChange = (e) => {
     setBuildingCategory(e.value);
   };
- 
   const buildingCategoryDrop = customDrop(
     "Category",
     buildingCategory,
@@ -315,7 +312,7 @@ const BuildingGen = () => {
     </Button>
   );
   useEffect(() => {
-    setBuildingType("");
+    // setBuildingType("");
 
     setBuildingList(buildingTypeOptions);
     for (let i = 0; buildingTypeOptions.length > i; i++) {
@@ -633,7 +630,19 @@ const BuildingGen = () => {
     </div>
   );
   //Buttons
-  const onGenerate = (e) => {};
+  const onGenerate = (e) => {
+    onRandomBuildingCategory()
+    onRandomBuildingColor()
+    onRandomBuildingEnterance()
+    onRandomBuildingFloor()
+    onRandomBuildingName()
+    onRandomBuildingRoom()
+    onRandomBuildingSound()
+    onRandomBuildingStyle()
+    onRandomBuildingType()
+    onRandomBuildingWindow()
+    onRandomRoomType()
+  };
   const onClear = (e) => {
     setBuildingName("");
     setBuildingCategory("");
