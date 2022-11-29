@@ -97,17 +97,16 @@ const BuildingGen = () => {
   const [dialogVisibleRoomType, setDialogVisibleRoomType] = useState(false);
   const [roomList, setRoomList] = useState("");
 
-  const [housingOptions, setHousingOptions] = useState("")
-  const [tradeOptions, setTradeOptions] = useState("")
-  const [religiousOptions, setReligiousOptions] = useState("")
-  const [farmOptions, setFarmOptions] = useState("")
-  const [recreationalOptions, setRecreationalOptions] = useState("")
-  const [educationOptions, setEducationOptions] = useState("")
-  const [militaryOptions, setMilitaryOptions] = useState("")
-  const [institutionalOptions, setInstitutionalOptions] = useState("")
-  const [mineOptions, setMineOptions] = useState("")
-  const [agricultureOptions, setAgricultureOptions] = useState("")
-
+  const [housingOptions, setHousingOptions] = useState("");
+  const [tradeOptions, setTradeOptions] = useState("");
+  const [religiousOptions, setReligiousOptions] = useState("");
+  const [farmOptions, setFarmOptions] = useState("");
+  const [recreationalOptions, setRecreationalOptions] = useState("");
+  const [educationOptions, setEducationOptions] = useState("");
+  const [militaryOptions, setMilitaryOptions] = useState("");
+  const [institutionalOptions, setInstitutionalOptions] = useState("");
+  const [mineOptions, setMineOptions] = useState("");
+  const [agricultureOptions, setAgricultureOptions] = useState("");
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -309,61 +308,62 @@ const BuildingGen = () => {
   };
 
   useEffect(() => {
-    // setBuildingType("");
+    setBuildingType("");
 
-    setBuildingList(buildingTypeOptions);
+    // setBuildingList(buildingTypeOptions);
     for (let i = 0; buildingTypeOptions.length > i; i++) {
       if (buildingCategory === "Housing") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Housing")
         );
       } else if (buildingCategory === "Trade") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Trade")
         );
       } else if (buildingCategory === "Religious") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Religious")
         );
       } else if (buildingCategory === "Farm") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Farm")
         );
       } else if (buildingCategory === "Recreation") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Recreation")
         );
       } else if (buildingCategory === "Education") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Education")
         );
       } else if (buildingCategory === "Military") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Military")
         );
       } else if (buildingCategory === "Institutional") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Institutional")
         );
       } else if (buildingCategory === "Mine") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Mine")
         );
       } else if (buildingCategory === "Agriculture") {
-        return setBuildingList(
+        setBuildingList(
           buildingTypeOptions.filter((value) => value.type === "Agriculture")
         );
       } else if (buildingCategory === "Any") {
-        return setBuildingList(buildingTypeOptions);
+        setBuildingList(buildingTypeOptions);
       }
     }
   }, [buildingCategory]);
 
-  const onRandomBuildingType = (e) => {
-    console.log(buildingList);
-    const max = buildingList.length - 1;
-    let r = Math.round(Math.random() * (max - 0));
-    setBuildingType(buildingList[r].name);
+  const onRandomBuildingType = () => {
+    if (buildingCategory) {
+      const max = buildingList.length - 1;
+      let r = Math.round(Math.random() * (max - 0));
+      setBuildingType(buildingList[r].name);
+    }
   };
   const randomBuildingTypeBtn = (
     <Button onClick={onRandomBuildingType} className={style.btnName}>
@@ -660,9 +660,6 @@ const BuildingGen = () => {
     if (buildingStyle === "") {
       onRandomBuildingStyle();
     }
-    if (buildingType === "") {
-      onRandomBuildingType();
-    }
     if (buildingWindow === "") {
       onRandomBuildingWindow();
     }
@@ -672,6 +669,17 @@ const BuildingGen = () => {
     if (buildingFloor === "") {
       onRandomBuildingFloor();
     }
+
+    if (buildingType === "") {
+      setTimeout(() => {
+        onRandomBuildingType();
+      }, 100);
+    }
+    // if(buildingType === ""){
+    //     const max = buildingList.length - 1;
+    //     let r = Math.round(Math.random() * (max - 0));
+    //     setBuildingType(buildingList[r].name);
+    // } 
   };
   const onClear = (e) => {
     setBuildingName("");
@@ -687,7 +695,7 @@ const BuildingGen = () => {
     setBuildingRoom("");
     setBuildingFloor("");
     setRoomType("");
-    setBuildingList("");
+    setTimeout(setBuildingList(""), 1000);
   };
 
   return (
