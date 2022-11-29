@@ -558,10 +558,8 @@ const BuildingGen = () => {
         setRoomCount(i)
     }
   }, [buildingRoom])
-//   const roomDisplay = {
-//     for(let i =0;roomNumber>i;i++)
 
-//   }
+  
   //Room Type
   const openDialogRoomType = () => {
     setDialogVisibleRoomType(true);
@@ -647,6 +645,11 @@ const BuildingGen = () => {
       </Dialog>
     </div>
   );
+  const roomTypeDisplayOptions = (
+    <div>
+        {roomTypeDialog}
+    </div>
+  )
   //Buttons
   const onGenerate = (e) => {
     if (buildingCategory === "") {
@@ -758,7 +761,7 @@ const BuildingGen = () => {
           </h1>
           <div className={isRoomActive ? style.subsection : style.hidden}>
             {roomNumber}
-            {roomTypeDialog}
+            {roomTypeDisplayOptions}
           </div>
         </div>
         {/* Main Display */}
