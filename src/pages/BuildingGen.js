@@ -35,21 +35,39 @@ const BuildingGen = () => {
   const [dialogVisibleBuildingType, setDialogVisibleBuildingType] =
     useState(false);
 
-  const [buildingAg, setBuildingAg] = useState("");
-  const [buildingAgs, setBuildingAgs] = useState("");
-  const [buildingAgOptions, setBuildingAgOptions] = useState("");
+  const [buildingRoom, setBuildingRoom] = useState("");
+  const [buildingRooms, setBuildingRooms] = useState("");
+  const [buildingRoomOptions, setBuildingRoomOptions] = useState("");
 
-  const [buildingFarm, setBuildingFarm] = useState("");
-  const [buildingFarms, setBuildingFarms] = useState("");
-  const [buildingFarmOptions, setBuildingFarmOptions] = useState("");
+  const [buildingColor, setBuildingColor] = useState("");
+  const [buildingColors, setBuildingColors] = useState("");
+  const [buildingColorOptions, setBuildingColorOptions] = useState("");
 
-  const [buildingHouse, setBuildingHouse] = useState("");
-  const [buildingHouses, setBuildingHouses] = useState("");
-  const [buildingHouseOptions, setBuildingHouseOptions] = useState("");
+  const [buildingSound, setBuildingSound] = useState("");
+  const [buildingSounds, setBuildingSounds] = useState("");
+  const [buildingSoundOptions, setBuildingSoundOptions] = useState("");
 
-  const [buildingMine, setBuildingMine] = useState("");
-  const [buildingMines, setBuildingMines] = useState("");
-  const [buildingMineOptions, setBuildingMineOptions] = useState("");
+  const [buildingSmell, setBuildingSmell] = useState("");
+  const [buildingSmells, setBuildingSmells] = useState("");
+  const [buildingSmellOptions, setBuildingSmellOptions] = useState("");
+
+  const [buildingStyle, setBuildingStyle] = useState("");
+  const [buildingStyles, setBuildingStyles] = useState("");
+  const [buildingStyleOptions, setBuildingStyleOptions] = useState("");
+
+  const [buildingEnterance, setBuildingEnterance] = useState("");
+  const [buildingEnterances, setBuildingEnterances] = useState("");
+  const [buildingEnteranceOptions, setBuildingEnteranceOptions] = useState("");
+
+  const [buildingRoomCount, setBuildingRoomCount] = useState("");
+  const [buildingRoomCounts, setBuildingRoomCounts] = useState("");
+  const [buildingRoomCountOptions, setBuildingCountOptions] = useState("");
+
+  const [buildingWindow, setBuildingWindow] = useState("");
+  const [buildingWindows, setBuildingWindows] = useState("");
+  const [buildingWindowOptions, setBuildingWindowOptions] = useState("");
+
+
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -208,38 +226,71 @@ const BuildingGen = () => {
     );
   };
 
-  //TODO Filter by Category
+  //Filter by Category
   useEffect(() => {
-    setBuildingType("")
-    setBuildingList(buildingTypeOptions)
+    setBuildingType("");
+    setBuildingList(buildingTypeOptions);
     for (let i = 0; buildingTypeOptions.length > i; i++) {
       if (buildingCategory === "Housing") {
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Housing"));
-      } else if(buildingCategory === "Trade"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Trade"));
-      } else if(buildingCategory === "Religious"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Religious"));
-      }else if(buildingCategory === "Farm"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Farm"));
-      }else if(buildingCategory === "Recreation"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Recreation"));
-      }else if(buildingCategory === "Education"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Education"));
-      }else if(buildingCategory === "Military"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Military"));
-      }else if(buildingCategory === "Institutional"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Institutional"));
-      }else if(buildingCategory === "Mine"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Mine"));
-      }else if(buildingCategory === "Agriculture"){
-        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Agriculture"));
-      }else {
-        return setBuildingList(buildingTypeOptions)
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Housing")
+        );
+      } else if (buildingCategory === "Trade") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Trade")
+        );
+      } else if (buildingCategory === "Religious") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Religious")
+        );
+      } else if (buildingCategory === "Farm") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Farm")
+        );
+      } else if (buildingCategory === "Recreation") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Recreation")
+        );
+      } else if (buildingCategory === "Education") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Education")
+        );
+      } else if (buildingCategory === "Military") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Military")
+        );
+      } else if (buildingCategory === "Institutional") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Institutional")
+        );
+      } else if (buildingCategory === "Mine") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Mine")
+        );
+      } else if (buildingCategory === "Agriculture") {
+        return setBuildingList(
+          buildingTypeOptions.filter((value) => value.type === "Agriculture")
+        );
+      } else if (buildingCategory === "Any") {
+        return setBuildingList(buildingTypeOptions);
+      } else {
+        return setBuildingList(buildingTypeOptions);
       }
     }
     // console.log(buildingTypeOptions)
   }, [buildingCategory]);
-  
+
+  //Filter if Type is set
+  //   useEffect(() =>{
+  //     if(buildingCategory === ""){
+  //       setBuildingCategory(buildingType)
+  //         if(buildingType.type === "Housing"){
+  //             console.log("y")
+  //         }
+
+  //     }
+  //   }, [buildingType])
+
   //   const buildingTypeDisplay = (
   //     <div>
   //       <DataTable
