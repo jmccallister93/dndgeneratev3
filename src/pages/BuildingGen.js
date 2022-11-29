@@ -209,7 +209,8 @@ const BuildingGen = () => {
   };
 
   const onRandomBuildingType = (e) => {
-    let r = Math.round(Math.random() * (9 - 0));
+    const max = buildingList.length - 1
+    let r = Math.round(Math.random() * (max - 0));
     setBuildingType(buildingList[r].name);
   };
 
@@ -384,15 +385,6 @@ const BuildingGen = () => {
       }
     }
   }, [buildingCategory]);
-
-  useEffect(() => {
-    if (buildingCategory === "") {
-      if (buildingList.type === "Housing") {
-        setBuildingCategory(buildingCategoryOptions["Housing"]);
-      }
-    }
-    console.log(buildingList);
-  }, [buildingType]);
 
   //   const buildingTypeDisplay = (
   //     <div>
