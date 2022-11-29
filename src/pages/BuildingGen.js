@@ -419,36 +419,7 @@ const BuildingGen = () => {
     </div>
   );
 
-  //BuildingRooms
-  const openDialogBuildingRoom = () => {
-    setDialogVisibleBuildingRoom(true);
-  };
-  const closeDialogBuildingRoom = () => {
-    setDialogVisibleBuildingRoom(false);
-    setBuildingRoom(selectedBuildingRoom.name);
-  };
-  const dialogFooterBuildingRoom = () => {
-    return (
-      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingRoom} />
-    );
-  };
   //BuildingStyle
-  const openDialogBuildingStyle = () => {
-    setDialogVisibleBuildingStyle(true);
-  };
-  const closeDialogBuildingStyle = () => {
-    setDialogVisibleBuildingStyle(false);
-    setBuildingStyle(selectedBuildingStyle.name);
-  };
-  const dialogFooterBuildingStyle = () => {
-    return (
-      <Button
-        label="Ok"
-        icon="pi pi-check"
-        onClick={closeDialogBuildingStyle}
-      />
-    );
-  };
   const onRandomBuildingStyle = (e) => {
     let r = Math.round(Math.random() * (9 - 0));
     setBuildingStyle(buildingStyleOptions[r].name);
@@ -465,22 +436,6 @@ const BuildingGen = () => {
     onRandomBuildingStyle
   );
   //BuildingColor
-  const openDialogBuildingColor = () => {
-    setDialogVisibleBuildingColor(true);
-  };
-  const closeDialogBuildingColor = () => {
-    setDialogVisibleBuildingColor(false);
-    setBuildingColor(selectedBuildingColor.name);
-  };
-  const dialogFooterBuildingColor = () => {
-    return (
-      <Button
-        label="Ok"
-        icon="pi pi-check"
-        onClick={closeDialogBuildingColor}
-      />
-    );
-  };
   const onRandomBuildingColor = (e) => {
     let r = Math.round(Math.random() * (9 - 0));
     setBuildingColor(buildingColorOptions[r].name);
@@ -497,22 +452,6 @@ const BuildingGen = () => {
     onRandomBuildingColor
   );
   //BuildingSound
-  const openDialogBuildingSound = () => {
-    setDialogVisibleBuildingSound(true);
-  };
-  const closeDialogBuildingSound = () => {
-    setDialogVisibleBuildingSound(false);
-    setBuildingSound(selectedBuildingSound.name);
-  };
-  const dialogFooterBuildingSound = () => {
-    return (
-      <Button
-        label="Ok"
-        icon="pi pi-check"
-        onClick={closeDialogBuildingSound}
-      />
-    );
-  };
   const onRandomBuildingSound = (e) => {
     let r = Math.round(Math.random() * (9 - 0));
     setBuildingSound(buildingSoundOptions[r].name);
@@ -558,6 +497,19 @@ const BuildingGen = () => {
     "Set Windows",
     onRandomBuildingWindow
   );
+  //BuildingRooms
+  const openDialogBuildingRoom = () => {
+    setDialogVisibleBuildingRoom(true);
+  };
+  const closeDialogBuildingRoom = () => {
+    setDialogVisibleBuildingRoom(false);
+    setBuildingRoom(selectedBuildingRoom.name);
+  };
+  const dialogFooterBuildingRoom = () => {
+    return (
+      <Button label="Ok" icon="pi pi-check" onClick={closeDialogBuildingRoom} />
+    );
+  };
 
   //Buttons
   const onGenerate = (e) => {};
@@ -607,9 +559,9 @@ const BuildingGen = () => {
             Building Details
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
-          {buildingStyleDrop}
-          {buildingColorDrop}
-          {buildingSoundDrop}
+            {buildingStyleDrop}
+            {buildingColorDrop}
+            {buildingSoundDrop}
             {enteranceNumber}
             {windowNumber}
           </div>
@@ -631,13 +583,16 @@ const BuildingGen = () => {
             Type: <span className={style.minorText2}>{buildingType}</span>
           </h2>
           <h2>
-            Building Style: <span className={style.minorText2}>{buildingStyle}</span>
+            Building Style:{" "}
+            <span className={style.minorText2}>{buildingStyle}</span>
           </h2>
           <h2>
-            Building Color: <span className={style.minorText2}>{buildingColor}</span>
+            Building Color:{" "}
+            <span className={style.minorText2}>{buildingColor}</span>
           </h2>
           <h2>
-            Building Ambiance: <span className={style.minorText2}>{buildingSound}</span>
+            Building Ambiance:{" "}
+            <span className={style.minorText2}>{buildingSound}</span>
           </h2>
           <h2>
             Building Enterances:{" "}
