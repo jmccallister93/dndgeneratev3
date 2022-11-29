@@ -205,7 +205,9 @@ $btn-blue: #2196f3;
 
 .detesContainer {
     display: flex;
-    grid-template-columns: repeat(3, 1fr);
+    // grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    flex-wrap: wrap;
     & h4{
         font-weight: 300;
     }

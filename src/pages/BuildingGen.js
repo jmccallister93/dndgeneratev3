@@ -660,11 +660,9 @@ const BuildingGen = () => {
   );
   const roomTypeDisplay = roomTypeList.map((i) => {
     return (
-        <div>
         <h4>
           {`${i.name},`}
         </h4>
-        </div>
     );
   });
  
