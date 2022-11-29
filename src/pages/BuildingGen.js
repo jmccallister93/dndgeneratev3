@@ -559,7 +559,7 @@ const BuildingGen = () => {
     }
   }, [buildingRoom])
 
-  
+  console.log(roomCount.value)
   //Room Type
   const openDialogRoomType = () => {
     setDialogVisibleRoomType(true);
@@ -645,11 +645,11 @@ const BuildingGen = () => {
       </Dialog>
     </div>
   );
-  const roomTypeDisplayOptions = (
-    <div>
-        {roomTypeDialog}
-    </div>
-  )
+  const roomTypeDisplayOptions = []
+  for (let i =-1;i<roomCount;i++){
+    roomTypeDisplayOptions.push(roomTypeDialog)
+  }
+  
   //Buttons
   const onGenerate = (e) => {
     if (buildingCategory === "") {
