@@ -449,6 +449,21 @@ const BuildingGen = () => {
       />
     );
   };
+  const onRandomBuildingStyle = (e) => {
+    let r = Math.round(Math.random() * (9 - 0));
+    setBuildingStyle(buildingStyleOptions[r].name);
+  };
+  const onBuildingStyleChange = (e) => {
+    setBuildingStyle(e.value);
+  };
+  const buildingStyleDrop = customDrop(
+    "Style",
+    buildingStyle,
+    buildingStyleOptions,
+    onBuildingStyleChange,
+    "Choose Style",
+    onRandomBuildingStyle
+  );
   //BuildingColor
   const openDialogBuildingColor = () => {
     setDialogVisibleBuildingColor(true);
@@ -466,6 +481,21 @@ const BuildingGen = () => {
       />
     );
   };
+  const onRandomBuildingColor = (e) => {
+    let r = Math.round(Math.random() * (9 - 0));
+    setBuildingColor(buildingColorOptions[r].name);
+  };
+  const onBuildingColorChange = (e) => {
+    setBuildingColor(e.value);
+  };
+  const buildingColorDrop = customDrop(
+    "Color",
+    buildingColor,
+    buildingColorOptions,
+    onBuildingColorChange,
+    "Choose Color",
+    onRandomBuildingColor
+  );
   //BuildingSound
   const openDialogBuildingSound = () => {
     setDialogVisibleBuildingSound(true);
@@ -483,6 +513,21 @@ const BuildingGen = () => {
       />
     );
   };
+  const onRandomBuildingSound = (e) => {
+    let r = Math.round(Math.random() * (9 - 0));
+    setBuildingSound(buildingSoundOptions[r].name);
+  };
+  const onBuildingSoundChange = (e) => {
+    setBuildingSound(e.value);
+  };
+  const buildingSoundDrop = customDrop(
+    "Sound",
+    buildingSound,
+    buildingSoundOptions,
+    onBuildingSoundChange,
+    "Choose Sound",
+    onRandomBuildingSound
+  );
   //Building Enterances
   const onBuildingEnteranceChange = (e) => {
     setBuildingEnterance(e.value);
@@ -562,6 +607,9 @@ const BuildingGen = () => {
             Building Details
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
+          {buildingStyleDrop}
+          {buildingColorDrop}
+          {buildingSoundDrop}
             {enteranceNumber}
             {windowNumber}
           </div>
@@ -583,13 +631,13 @@ const BuildingGen = () => {
             Type: <span className={style.minorText2}>{buildingType}</span>
           </h2>
           <h2>
-            Building Style: <span className={style.minorText2}>{}</span>
+            Building Style: <span className={style.minorText2}>{buildingStyle}</span>
           </h2>
           <h2>
-            Building Color: <span className={style.minorText2}>{}</span>
+            Building Color: <span className={style.minorText2}>{buildingColor}</span>
           </h2>
           <h2>
-            Building Ambiance: <span className={style.minorText2}>{}</span>
+            Building Ambiance: <span className={style.minorText2}>{buildingSound}</span>
           </h2>
           <h2>
             Building Enterances:{" "}
