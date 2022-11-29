@@ -103,49 +103,49 @@ $btn-blue: #2196f3;
   }
 }
 
-.btnName{
-    font-size: 1rem;
-    color: $secondary-grey;
-    background-color: rgba(0, 128, 0, 0.75);
-    border-radius: 0.5rem;
-    border: 0px;
-    margin-left: 0.5rem;
-    padding: 0.5rem;
-    transition: 0.5s;
-    &:hover {
-      background-color: rgba(0, 128, 0);
-      cursor: pointer;
-      box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
-    }
+.btnName {
+  font-size: 1rem;
+  color: $secondary-grey;
+  background-color: rgba(0, 128, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgba(0, 128, 0);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
   }
+}
 
 .btnNull {
+  background-color: #393e46;
+  border: #393e46;
+
+  &:hover {
     background-color: #393e46;
-    border: #393e46;
-    
-    &:hover {
-        background-color: #393e46;
-        cursor: default;
-      }
+    cursor: default;
+  }
 }
-.btnAddRemove{
-    background-color: $btn-blue;
+.btnAddRemove {
+  background-color: $btn-blue;
 }
 .subHeader {
-    color: $primary-grey;
-    background-color: white;
-    margin: 1rem;
-    padding: 0.5rem;
-    border: 1px solid $header-color;
-    width: fit-content;
-    box-shadow: 5px 5px 5px 2px $primary-grey;
-    transition: 0.3s;
-    &:hover{
-      cursor: pointer;
-      box-shadow: 0px 0px 5px 5px green;
-      scale: 1.1
-    }
+  color: $primary-grey;
+  background-color: white;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid $header-color;
+  width: fit-content;
+  box-shadow: 5px 5px 5px 2px $primary-grey;
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px green;
+    scale: 1.1;
   }
+}
 
 .subsection {
   display: flex;
@@ -162,43 +162,52 @@ $btn-blue: #2196f3;
 }
 
 .display {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background-color: $display-tan;
-    width: 50%;
-    padding: 10px;
-    margin: 0;
-    margin-left: 1%;
-    text-align: left;
-    align-items: left;
-    align-self: flex-start;
-    justify-content: end;
-    border-radius: 0;
-    color: $display-red;
-      & h1 {
-          padding: 5px;
-      }
-      & h2 {
-          padding: 5px;
-      }
-      & h3 {
-          padding: 5px;
-      } 
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: $display-tan;
+  width: 50%;
+  padding: 10px;
+  margin: 0;
+  margin-left: 1%;
+  text-align: left;
+  align-items: left;
+  align-self: flex-start;
+  justify-content: end;
+  border-radius: 0;
+  color: $display-red;
+  & h1 {
+    padding: 5px;
   }
-
-.minorText2{
-    font-weight: 350;
+  & h2 {
+    padding: 5px;
+  }
+  & h3 {
+    padding: 5px;
+  }
 }
 
-.lineBreak{
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 48vw solid $display-red;
-   }
-   
-   .subLineBreak{
-      border-bottom: 1px solid $display-red;
-      width: 98%;
-      margin-left: 2px;
-   }
+.minorText2 {
+  font-weight: 350;
+}
+
+.lineBreak {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 48vw solid $display-red;
+}
+
+.subLineBreak {
+  border-bottom: 1px solid $display-red;
+  width: 98%;
+  margin-left: 2px;
+}
+
+.detesContainer {
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    & h4{
+        font-weight: 300;
+    }
+    
+  }

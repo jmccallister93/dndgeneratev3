@@ -95,6 +95,7 @@ const BuildingGen = () => {
   const [roomTypeOptions, setRoomTypeOptions] = useState("");
   const [selectedRoomType, setSelectedRoomType] = useState(null);
   const [dialogVisibleRoomType, setDialogVisibleRoomType] = useState(false);
+  const [roomTypeList, setRoomTypeList]=useState([])
 
   const [roomCount, setRoomCount] = useState("");
 
@@ -559,14 +560,21 @@ const BuildingGen = () => {
     }
   }, [buildingRoom])
 
-  console.log(roomCount.value)
   //Room Type
+  useEffect(() => {
+    setSelectedRoomType(roomTypeList);
+  }, [roomTypeList]);
   const openDialogRoomType = () => {
     setDialogVisibleRoomType(true);
   };
   const closeDialogRoomType = () => {
     setDialogVisibleRoomType(false);
-    setRoomType(selectedRoomType.name);
+    for (let i = 0; i < selectedRoomType.length; i++) {
+      if (roomTypeList.includes(selectedRoomType[i])) {
+      } else {
+        setRoomTypeList((saveArray) => [...saveArray, selectedRoomType[i]]);
+      }
+    }
   };
   const dialogFooterRoomType = () => {
     return (
@@ -576,16 +584,18 @@ const BuildingGen = () => {
   const onRandomRoomType = (e) => {
     const max = roomTypeOptions.length - 1;
     let r = Math.round(Math.random() * (max - 0));
-    setRoomType(roomTypeOptions[r].name);
+    // roomTypeList.push(roomTypeOptions[r].name)
+    setRoomTypeList((saveArray) => [...saveArray, roomTypeOptions[r]]);
   };
   const randomRoomTypeBtn = (
     <Button onClick={onRandomRoomType} className={style.btnName}>
       Random
     </Button>
   );
+  
   const roomTypeDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Room Type</h2>
+      <h2 className={style.monstergenTitles}>Specific Rooms</h2>
       <>
         <Button onClick={openDialogRoomType} className={style.btnAddRemove}>
           Add / Remove
@@ -593,7 +603,7 @@ const BuildingGen = () => {
         {randomRoomTypeBtn}
       </>
       <Dialog
-        header="Room Type"
+        header="Specifc Rooms"
         visible={dialogVisibleRoomType}
         maximizable
         modal
@@ -623,7 +633,7 @@ const BuildingGen = () => {
           reorderableRows
         >
           <Column
-            selectionMode="single"
+            selectionMode="multiple"
             selectionAriaLabel="name"
             headerStyle={{ width: "6em" }}
           ></Column>
@@ -645,11 +655,14 @@ const BuildingGen = () => {
       </Dialog>
     </div>
   );
-  const roomTypeDisplayOptions = []
-  for (let i =-1;i<roomCount;i++){
-    roomTypeDisplayOptions.push(roomTypeDialog)
-  }
-  
+  const roomTypeDisplay = roomTypeList.map((i) => {
+    return (
+        <h4>
+          {i.name + ", "}
+        </h4>
+    );
+  });
+ 
   //Buttons
   const onGenerate = (e) => {
     if (buildingCategory === "") {
@@ -709,6 +722,7 @@ const BuildingGen = () => {
     setBuildingFloor("");
     setRoomType("");
     setBuildingList("")
+    setRoomTypeList([])
   };
 
   return (
@@ -761,7 +775,7 @@ const BuildingGen = () => {
           </h1>
           <div className={isRoomActive ? style.subsection : style.hidden}>
             {roomNumber}
-            {roomTypeDisplayOptions}
+            {roomTypeDialog}
           </div>
         </div>
         {/* Main Display */}
@@ -806,7 +820,7 @@ const BuildingGen = () => {
             Room Count: <span className={style.minorText2}>{buildingRoom}</span>
           </h2>
           <h2>
-            Room Type: <span className={style.minorText2}>{roomType}</span>
+            Room Type: <div className={style.detesContainer}>{roomTypeDisplay}</div>
           </h2>
         </div>
       </div>
