@@ -30,7 +30,7 @@ const BuildingGen = () => {
   const [buildingTypes, setBuildingTypes] = useState("");
   const [buildingTypeOptions, setBuildingTypeOptions] = useState("");
   const [buildingTypeCategory, setBuildingTypeCategory] = useState();
-  const [buildingList, setBuildingList] = useState([]);
+  const [buildingList, setBuildingList] = useState("");
   const [selectedBuildingType, setSelectedBuildingType] = useState(null);
   const [dialogVisibleBuildingType, setDialogVisibleBuildingType] =
     useState(false);
@@ -210,16 +210,36 @@ const BuildingGen = () => {
 
   //TODO Filter by Category
   useEffect(() => {
+    setBuildingType("")
+    setBuildingList(buildingTypeOptions)
     for (let i = 0; buildingTypeOptions.length > i; i++) {
       if (buildingCategory === "Housing") {
-        // setBuildingTypeOptions(buildingTypeOptions[i])
-        return setBuildingTypeOptions(buildingTypeOptions.filter((value) => value.type === "Housing"));
-        // console.log(buildingTypeOptions.filter((value) => value.type === "Housing"))
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Housing"));
+      } else if(buildingCategory === "Trade"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Trade"));
+      } else if(buildingCategory === "Religious"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Religious"));
+      }else if(buildingCategory === "Farm"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Farm"));
+      }else if(buildingCategory === "Recreation"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Recreation"));
+      }else if(buildingCategory === "Education"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Education"));
+      }else if(buildingCategory === "Military"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Military"));
+      }else if(buildingCategory === "Institutional"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Institutional"));
+      }else if(buildingCategory === "Mine"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Mine"));
+      }else if(buildingCategory === "Agriculture"){
+        return setBuildingList(buildingTypeOptions.filter((value) => value.type === "Agriculture"));
+      }else {
+        return setBuildingList(buildingTypeOptions)
       }
     }
     // console.log(buildingTypeOptions)
   }, [buildingCategory]);
-  console.log(buildingTypeOptions)
+  
   //   const buildingTypeDisplay = (
   //     <div>
   //       <DataTable
@@ -266,7 +286,7 @@ const BuildingGen = () => {
         footer={dialogFooterBuildingType}
       >
         <DataTable
-          value={buildingTypeOptions}
+          value={buildingList}
           scrollable
           scrollHeight="60vh"
           rows={20}
