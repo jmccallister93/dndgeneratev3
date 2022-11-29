@@ -8,7 +8,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
-import { e } from "mathjs";
+import { e, i } from "mathjs";
 import { DataTable } from "primereact/datatable";
 import { Column } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
@@ -95,7 +95,8 @@ const BuildingGen = () => {
   const [roomTypeOptions, setRoomTypeOptions] = useState("");
   const [selectedRoomType, setSelectedRoomType] = useState(null);
   const [dialogVisibleRoomType, setDialogVisibleRoomType] = useState(false);
-  const [roomList, setRoomList] = useState("");
+
+  const [roomCount, setRoomCount] = useState("");
 
   const [housingOptions, setHousingOptions] = useState("");
   const [tradeOptions, setTradeOptions] = useState("");
@@ -552,6 +553,15 @@ const BuildingGen = () => {
     "Set Count",
     onRandomBuildingRoom
   );
+  useEffect(()=> {
+    for(let i = 0; buildingRoom > i; i++){
+        setRoomCount(i)
+    }
+  }, [buildingRoom])
+//   const roomDisplay = {
+//     for(let i =0;roomNumber>i;i++)
+
+//   }
   //Room Type
   const openDialogRoomType = () => {
     setDialogVisibleRoomType(true);
@@ -695,7 +705,7 @@ const BuildingGen = () => {
     setBuildingRoom("");
     setBuildingFloor("");
     setRoomType("");
-    setTimeout(setBuildingList(""), 1000);
+    setBuildingList("")
   };
 
   return (
