@@ -23,52 +23,52 @@ const Items = (props) => {
   const [allItems, setAllItems] = useState();
 
   const [adventuringGear, setAdventuringGear] = useState();
-  const [adventuringGearOptions, setAdventuringGearOptions] = useState();
+  const [adventuringGearOptions, setAdventuringGearOptions] = useState("");
 
   const [armor, setArmor] = useState();
-  const [armorOptions, setArmorOptions] = useState();
+  const [armorOptions, setArmorOptions] = useState("");
 
   const [art, setArt] = useState();
-  const [artOptions, setArtOptions] = useState();
+  const [artOptions, setArtOptions] = useState("");
 
   const [container, setContainer] = useState();
-  const [containerOptions, setContainerOptions] = useState();
+  const [containerOptions, setContainerOptions] = useState("");
 
   const [currency, setCurrency] = useState();
-  const [currencyOptions, setCurrencyOptions] = useState();
+  const [currencyOptions, setCurrencyOptions] = useState("");
 
   const [pack, setPack] = useState();
-  const [packOptions, setPackOptions] = useState();
+  const [packOptions, setPackOptions] = useState("");
 
   const [expense, setExpense] = useState();
-  const [expenseOptions, setExpenseOptions] = useState();
+  const [expenseOptions, setExpenseOptions] = useState("");
 
   const [gemstone, setGemstone] = useState();
-  const [gemstoneOptions, setGemstoneOptions] = useState();
+  const [gemstoneOptions, setGemstoneOptions] = useState("");
 
   const [magic, setMagic] = useState();
-  const [magicOptions, setMagicOptions] = useState();
+  const [magicOptions, setMagicOptions] = useState("");
 
   const [mountItem, setMountItem] = useState();
-  const [mountItemOptions, setMountItemOptions] = useState();
+  const [mountItemOptions, setMountItemOptions] = useState("");
 
   const [mount, setMount] = useState();
-  const [mountOptions, setMountOptions] = useState();
+  const [mountOptions, setMountOptions] = useState("");
 
   const [tool, setTool] = useState();
-  const [toolOptions, setToolOptions] = useState();
+  const [toolOptions, setToolOptions] = useState("");
 
   const [tradeGood, setTradeGood] = useState();
-  const [tradeGoodOptions, setTradeGoodOptions] = useState();
+  const [tradeGoodOptions, setTradeGoodOptions] = useState("");
 
   const [trinket, setTrinket] = useState();
-  const [trinketOptions, setTrinketOptions] = useState();
+  const [trinketOptions, setTrinketOptions] = useState("");
 
   const [vehicle, setVehicle] = useState();
-  const [vehicleOptions, setVehicleOptions] = useState();
+  const [vehicleOptions, setVehicleOptions] = useState("");
 
   const [weapon, setWeapon] = useState();
-  const [weaponOptions, setWeaponOptions] = useState();
+  const [weaponOptions, setWeaponOptions] = useState("");
 
   const [itemOptions, setItemOptions] = useState([]);
 
@@ -125,6 +125,7 @@ const Items = (props) => {
   };
 
   //Pull supabase data
+  //adventure gear
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -151,7 +152,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//armor
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsArmor").select();
@@ -179,7 +180,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//art
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsArt").select();
@@ -203,7 +204,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//containers
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsContainers").select();
@@ -227,7 +228,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//currencies
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsCurrencies").select();
@@ -250,7 +251,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//equipment packs
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -277,7 +278,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//expenses
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsExpenses").select();
@@ -301,7 +302,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//gemstones
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsGemstones").select();
@@ -316,16 +317,17 @@ const Items = (props) => {
         setGemstoneOptions(
           data.map((r) => ({
             name: r.name,
-            value: r.value,
-            type: r.type,
-            cost: r.cost,
+            // value: r.value,
+            // type: r.type,
+            // cost: r.cost,
           }))
         );
       }
     };
     fetchData();
+    console.log(gemstoneOptions);
   }, []);
-
+//magic items
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsMagicAll").select();
@@ -349,7 +351,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//mount items
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsMountItems").select();
@@ -374,7 +376,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//mounts
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsMounts").select();
@@ -400,7 +402,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//tools
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsTools").select();
@@ -424,7 +426,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//tradegoods
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsTradeGoods").select();
@@ -448,7 +450,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//trinkets
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsTrinkets").select();
@@ -467,7 +469,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//vehciles
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsVehicles").select();
@@ -493,7 +495,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
+//weapons
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsWeapons").select();
@@ -507,7 +509,6 @@ const Items = (props) => {
         setWeapon(data);
         setWeaponOptions(
           data.map((r) => ({
-            id: r.id,
             name: r.name,
             value: r.value,
             type: r.type,
@@ -541,7 +542,6 @@ const Items = (props) => {
       ...trinketOptions,
       ...vehicleOptions,
     ]);
-    console.log(itemOptions);
   }, [
     adventuringGearOptions,
     armorOptions,
