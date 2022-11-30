@@ -14,7 +14,7 @@ import { Column } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { InputNumber } from "primereact/inputnumber";
-import { Items } from "../components/Items.js";
+import Items from "../components/Items";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -901,7 +901,18 @@ const BuildingGen = () => {
             Items Details
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
-            {}
+           <Items /> 
+           <Items
+              openDialogItem={openDialogItem}
+              randomItemBtn={randomItemBtn}
+              dialogVisibleItem={dialogVisibleItem}
+              closeDialogItem={closeDialogItem}
+              dialogFooterItem={dialogFooterItem}
+              itemOptions={itemOptions}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              header={header}
+            />
             {}
           </div>
         </div>
@@ -909,46 +920,54 @@ const BuildingGen = () => {
         <div className={style.display}>
           <h1>{buildingName}</h1>
           <h2>
-            Category:{" "}
+            Category{" "}
             <span className={style.minorText2}>{buildingCategory}</span>
           </h2>
           <h2>
-            Type: <span className={style.minorText2}>{buildingType}</span>
+            Type <span className={style.minorText2}>{buildingType}</span>
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            Building Floors:{" "}
+            Building Floors{" "}
             <span className={style.minorText2}>{buildingFloor}</span>
           </h2>
           <h2>
-            Building Enterances:{" "}
+            Building Enterances{" "}
             <span className={style.minorText2}>{buildingEnterance}</span>
           </h2>
           <h2>
-            Building Windows:{" "}
+            Building Windows{" "}
             <span className={style.minorText2}>{buildingWindow}</span>
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            Building Style:{" "}
+            Building Style{" "}
             <span className={style.minorText2}>{buildingStyle}</span>
           </h2>
           <h2>
-            Building Color:{" "}
+            Building Color{" "}
             <span className={style.minorText2}>{buildingColor}</span>
           </h2>
           <h2>
-            Building Ambiance:{" "}
+            Building Ambiance{" "}
             <span className={style.minorText2}>{buildingSound}</span>
           </h2>
 
           <hr className={style.lineBreak} />
           <h2>
-            Room Count: <span className={style.minorText2}>{buildingRoom}</span>
+            Room Count <span className={style.minorText2}>{buildingRoom}</span>
           </h2>
           <h2>
-            Specific Rooms:{" "}
+            Specific Rooms{" "}
             <div className={style.detesContainer}>{roomTypeDisplay}</div>
+          </h2>
+          <hr className={style.lineBreak} />
+          <h2>
+            NPCs <div className={style.detesContainer}>{}</div>
+          </h2>
+          <hr className={style.lineBreak} />
+          <h2>
+            Items <div className={style.detesContainer}>{itemDisplay}</div>
           </h2>
         </div>
       </div>

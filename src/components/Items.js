@@ -519,8 +519,69 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
-  return <></>;
+  const itemDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Items</h2>
+      <>
+        <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
+          Add / Remove
+        </Button>
+        {props.randomItemBtn}
+      </>
+      <Dialog
+        header="Items"
+        visible={props.dialogVisibleItem}
+        maximizable
+        modal
+        onHide={props.closeDialogItem}
+        footer={props.dialogFooterItem}
+      >
+        <DataTable
+          value={props.itemOptions}
+          scrollable
+          scrollHeight="60vh"
+          rows={20}
+          dataKey="name"
+          selection={props.selectedItem}
+          onSelectionChange={(e) => {
+            props.setSelectedItem(e.value);
+          }}
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={props.header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+          <Column
+            field="type"
+            header="Type"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  return (itemDialog);
 };
 
 export default Items;
