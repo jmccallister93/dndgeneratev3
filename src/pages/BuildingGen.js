@@ -901,14 +901,13 @@ const BuildingGen = () => {
             Items Details
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
-           <Items /> 
            <Items
               openDialogItem={openDialogItem}
               randomItemBtn={randomItemBtn}
               dialogVisibleItem={dialogVisibleItem}
               closeDialogItem={closeDialogItem}
               dialogFooterItem={dialogFooterItem}
-              itemOptions={itemOptions}
+            //   itemOptions={itemOptions}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
               header={header}

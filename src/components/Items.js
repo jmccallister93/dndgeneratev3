@@ -70,6 +70,8 @@ const Items = (props) => {
   const [weapon, setWeapon] = useState();
   const [weaponOptions, setWeaponOptions] = useState();
 
+  const [itemOptions, setItemOptions] = useState([]);
+
   //Datatable settings
   const [selectedItems, setSelectedItems] = useState(null);
   const dt = useRef(null);
@@ -512,13 +514,45 @@ const Items = (props) => {
             cost: r.cost,
             damage: r.damage,
             weight: r.weight,
-            properties: r.properties
+            properties: r.properties,
           }))
         );
       }
     };
     fetchData();
   }, []);
+
+  //   Set all items together
+  useEffect(() => {
+    // for (let i = 0; i < selectedRoomType.length; i++) {
+    //     if (roomTypeList.includes(selectedRoomType[i])) {
+    //     } else {
+    //       setRoomTypeList((saveArray) => [...saveArray, selectedRoomType[i]]);
+    //     }
+    //   }
+    
+    setItemOptions(weaponOptions);
+    console.log(itemOptions);
+  }, [
+    adventuringGearOptions,
+    armorOptions,
+    artOptions,
+    containerOptions,
+    currencyOptions,
+    packOptions,
+    expenseOptions,
+    gemstoneOptions,
+    magicOptions,
+    mountItemOptions,
+    mountOptions,
+    toolOptions,
+    tradeGoodOptions,
+    trinketOptions,
+    vehicleOptions,
+    weaponOptions,
+  ]);
+
+  //Dialog Vairable
   const itemDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Items</h2>
@@ -537,7 +571,7 @@ const Items = (props) => {
         footer={props.dialogFooterItem}
       >
         <DataTable
-          value={props.itemOptions}
+          value={itemOptions}
           scrollable
           scrollHeight="60vh"
           rows={20}
@@ -581,7 +615,7 @@ const Items = (props) => {
       </Dialog>
     </div>
   );
-  return (itemDialog);
+  return itemDialog;
 };
 
 export default Items;

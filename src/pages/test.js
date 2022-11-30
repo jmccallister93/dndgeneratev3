@@ -1,9 +1,1 @@
-openDialogItem={openDialogItem},
-randomItemBtn={randomItemBtn},
-dialogVisibleItem={dialogVisibleItem},
-closeDialogItem={closeDialogItem},
-dialogFooterItem={dialogFooterItem},
-itemOptions={itemOptions},
-selectedItem={selectedItem},
-setSelectedItem={setSelectedItem},
-header={header}
+[adventuringGearOptions, armorOptions, artOptions, containerOptions, currencyOptions, packOptions, expenseOptions, gemstoneOptions, magicOptions , mountItemOptions, mountOptions, toolOptions, tradeGoodOptions, trinketOptions, vehicleOptions, weaponOptions]
