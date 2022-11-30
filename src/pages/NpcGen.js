@@ -765,219 +765,214 @@ const NpcGen = () => {
             </button>
           </div>
         </div>
-        {/* Options */}
-        <div className={styleB.body}>
-          <div className={styleB.optionsWrapper}>
-            <h1>NPC Options</h1>
-            <h1 className={styleB.subHeader} onClick={showBasics}>
-              Basic Info
-            </h1>
-            <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
-              <div>
-                <h1>Name</h1>
-                <InputText value={name} onChange={onNameChange} />
-                <button onClick={onRandomName} className={style.npcgenBtnName}>
-                  Randomize
-                </button>
-              </div>
-              <div>
-                <h1>Race</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={race}
-                  options={raceOptions}
-                  onChange={onRaceChange}
-                  placeholder="Choose Race"
-                />
-              </div>
-              <div>
-                <h1>Sex</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={sex}
-                  options={sexOptions}
-                  onChange={onSexChange}
-                  placeholder="Choose Sex"
-                />
-              </div>
-              <div>
-                <h1>Alignment</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={align}
-                  options={alignOptions}
-                  onChange={onAlignChange}
-                  placeholder="Choose Alignment"
-                />
-              </div>
+      </div>
+      {/* Options */}
+      <div className={styleB.body}>
+        <div className={styleB.optionsWrapper}>
+          <h1>NPC Options</h1>
+          <h1 className={styleB.subHeader} onClick={showBasics}>
+            Basic Info
+          </h1>
+          <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
+            <div>
+              <h1>Name</h1>
+              <InputText value={name} onChange={onNameChange} />
+              <button onClick={onRandomName} className={style.npcgenBtnName}>
+                Randomize
+              </button>
             </div>
-            <h1 className={styleB.subHeader} onClick={showDetails}>
-              NPC Details
-            </h1>
-            <div className={isDetailActive ? styleB.subsection : styleB.hidden}>
-              <div>
-                <h1>Profession</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={prof}
-                  options={profOptions}
-                  onChange={onProfChange}
-                  placeholder="Choose Profession"
-                />
-              </div>
-              <div>
-                <h1>Feature</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={feature}
-                  options={featureOptions}
-                  onChange={onFeatureChange}
-                  placeholder="Choose Feature"
-                />
-              </div>
-              <div>
-                <h1>Talent</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={talent}
-                  options={talentOptions}
-                  onChange={onTalentChange}
-                  placeholder="Choose Talent"
-                />
-              </div>
-              <div>
-                <h1>Mannerism</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={mannerism}
-                  options={mannerismOptions}
-                  onChange={onMannerismChange}
-                  placeholder="Choose Mannerism"
-                />
-              </div>
-              <div>
-                <h1>Interaction</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={interaction}
-                  options={interactionOptions}
-                  onChange={onInteractionChange}
-                  placeholder="Choose Interaction"
-                />
-              </div>
-              <div>
-                <h1>Bond</h1>
-                <Dropdown
-                  optionLabel="name"
-                  value={bond}
-                  options={bondOptions}
-                  onChange={onBondChange}
-                  placeholder="Choose Bond"
-                />
-              </div>
+            <div>
+              <h1>Race</h1>
+              <Dropdown
+                optionLabel="name"
+                value={race}
+                options={raceOptions}
+                onChange={onRaceChange}
+                placeholder="Choose Race"
+              />
+            </div>
+            <div>
+              <h1>Sex</h1>
+              <Dropdown
+                optionLabel="name"
+                value={sex}
+                options={sexOptions}
+                onChange={onSexChange}
+                placeholder="Choose Sex"
+              />
+            </div>
+            <div>
+              <h1>Alignment</h1>
+              <Dropdown
+                optionLabel="name"
+                value={align}
+                options={alignOptions}
+                onChange={onAlignChange}
+                placeholder="Choose Alignment"
+              />
             </div>
           </div>
-
-          {/* Main Display */}
-          <div className={styleB.display}>
-            <h1>{name}</h1>
-            <h2>
-              <span className={styleB.minorText2}>
-                {race} {sex}, {align}
-              </span>
-            </h2>
-            <hr className={styleB.lineBreak} />
-            <h3 className={styleB.abilityScores}>
-              <div>
-                <h3>STR</h3>
-                <div>
-                  <span className={styleB.minorText2}>
-                    {str}
-                    {/* ({strMod}){" "} */}
-                  </span>
-                </div>
-              </div>
-              <div>
-                <h3>DEX</h3>
-                <div>
-                  <span className={styleB.minorText2}>
-                    {dex}
-                    {/* ({dexMod}){" "} */}
-                  </span>
-                </div>
-              </div>
-              <div>
-                <h3>CON</h3>
-                <div>
-                  <span className={styleB.minorText2}>
-                    {con}
-                    {/* ({conMod}){" "} */}
-                  </span>
-                </div>
-              </div>
-            </h3>
-            <h3 className={styleB.abilityScores}>
-              <div>
-                <h3>INT</h3>
-                <div>
-                  <span className={styleB.minorText2}>
-                    {int}
-                    {/* ({intMod}) */}
-                  </span>
-                </div>
-              </div>
-              <div>
-                <h3>WIS</h3>
-                <div>
-                  <span className={styleB.minorText2}>
-                    {wis}
-                    {/* ({wisMod}) */}
-                  </span>
-                </div>
-              </div>
-              <div>
-                <h3>CHA</h3>
-                <div>
-                  <span className={styleB.minorText2}>
-                    {cha}
-                    {/* ({chaMod}) */}
-                  </span>
-                </div>
-              </div>
-            </h3>
-            <hr className={styleB.lineBreak} />
-            <h2>
-              Profession <span className={styleB.minorText2}>{prof}</span>
-            </h2>
-            <h2>
-              Feature <span className={styleB.minorText2}>{feature}</span>
-            </h2>
-            <h2>
-              Talent <span className={styleB.minorText2}>{talent}</span>
-            </h2>
-            <h2>
-              Mannerism <span className={styleB.minorText2}>{mannerism}</span>
-            </h2>
-            <h2>
-              Interaction{" "}
-              <span className={styleB.minorText2}>{interaction}</span>
-            </h2>
-            <h2>
-              Bond <span className={styleB.minorText2}>{bond}</span>
-            </h2>
-            <h1>Plot Hook</h1>
-            <hr className={styleB.subLineBreak} />
-            <h2>
-              Hook <span className={styleB.minorText2}>{hook}</span>
-            </h2>
+          <h1 className={styleB.subHeader} onClick={showDetails}>
+            NPC Details
+          </h1>
+          <div className={isDetailActive ? styleB.subsection : styleB.hidden}>
+            <div>
+              <h1>Profession</h1>
+              <Dropdown
+                optionLabel="name"
+                value={prof}
+                options={profOptions}
+                onChange={onProfChange}
+                placeholder="Choose Profession"
+              />
+            </div>
+            <div>
+              <h1>Feature</h1>
+              <Dropdown
+                optionLabel="name"
+                value={feature}
+                options={featureOptions}
+                onChange={onFeatureChange}
+                placeholder="Choose Feature"
+              />
+            </div>
+            <div>
+              <h1>Talent</h1>
+              <Dropdown
+                optionLabel="name"
+                value={talent}
+                options={talentOptions}
+                onChange={onTalentChange}
+                placeholder="Choose Talent"
+              />
+            </div>
+            <div>
+              <h1>Mannerism</h1>
+              <Dropdown
+                optionLabel="name"
+                value={mannerism}
+                options={mannerismOptions}
+                onChange={onMannerismChange}
+                placeholder="Choose Mannerism"
+              />
+            </div>
+            <div>
+              <h1>Interaction</h1>
+              <Dropdown
+                optionLabel="name"
+                value={interaction}
+                options={interactionOptions}
+                onChange={onInteractionChange}
+                placeholder="Choose Interaction"
+              />
+            </div>
+            <div>
+              <h1>Bond</h1>
+              <Dropdown
+                optionLabel="name"
+                value={bond}
+                options={bondOptions}
+                onChange={onBondChange}
+                placeholder="Choose Bond"
+              />
+            </div>
           </div>
         </div>
 
-        
+        {/* Main Display */}
+        <div className={styleB.display}>
+          <h1>{name}</h1>
+          <h2>
+            <span className={styleB.minorText2}>
+              {race} {sex}, {align}
+            </span>
+          </h2>
+          <hr className={styleB.lineBreak} />
+          <h3 className={styleB.abilityScores}>
+            <div>
+              <h3>STR</h3>
+              <div>
+                <span className={styleB.minorText2}>
+                  {str}
+                  {/* ({strMod}){" "} */}
+                </span>
+              </div>
+            </div>
+            <div>
+              <h3>DEX</h3>
+              <div>
+                <span className={styleB.minorText2}>
+                  {dex}
+                  {/* ({dexMod}){" "} */}
+                </span>
+              </div>
+            </div>
+            <div>
+              <h3>CON</h3>
+              <div>
+                <span className={styleB.minorText2}>
+                  {con}
+                  {/* ({conMod}){" "} */}
+                </span>
+              </div>
+            </div>
+          </h3>
+          <h3 className={styleB.abilityScores}>
+            <div>
+              <h3>INT</h3>
+              <div>
+                <span className={styleB.minorText2}>
+                  {int}
+                  {/* ({intMod}) */}
+                </span>
+              </div>
+            </div>
+            <div>
+              <h3>WIS</h3>
+              <div>
+                <span className={styleB.minorText2}>
+                  {wis}
+                  {/* ({wisMod}) */}
+                </span>
+              </div>
+            </div>
+            <div>
+              <h3>CHA</h3>
+              <div>
+                <span className={styleB.minorText2}>
+                  {cha}
+                  {/* ({chaMod}) */}
+                </span>
+              </div>
+            </div>
+          </h3>
+          <hr className={styleB.lineBreak} />
+          <h2>
+            Profession <span className={styleB.minorText2}>{prof}</span>
+          </h2>
+          <h2>
+            Feature <span className={styleB.minorText2}>{feature}</span>
+          </h2>
+          <h2>
+            Talent <span className={styleB.minorText2}>{talent}</span>
+          </h2>
+          <h2>
+            Mannerism <span className={styleB.minorText2}>{mannerism}</span>
+          </h2>
+          <h2>
+            Interaction <span className={styleB.minorText2}>{interaction}</span>
+          </h2>
+          <h2>
+            Bond <span className={styleB.minorText2}>{bond}</span>
+          </h2>
+          <h1>Plot Hook</h1>
+          <hr className={styleB.subLineBreak} />
+          <h2>
+            Hook <span className={styleB.minorText2}>{hook}</span>
+          </h2>
         </div>
       </div>
-
-    
+    </div>
   );
 };
 
