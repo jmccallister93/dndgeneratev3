@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/NpcGen.module.scss";
+import styleB from "../stylesheets/BuildingGen.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
@@ -10,6 +11,8 @@ import supabase from "../config/supabaseClient";
 
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
+  const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isDetailActive, setIsDetailActive] = useState(false);
 
   const [align, setAlign] = useState("");
   const [aligns, setAligns] = useState();
@@ -304,7 +307,7 @@ const NpcGen = () => {
   const onRaceChange = (e) => {
     setRace(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (28 - 1) +1);
+      let r = Math.round(Math.random() * (28 - 1) + 1);
       setRace(raceOptions[r].name);
     }
   };
@@ -312,7 +315,7 @@ const NpcGen = () => {
   const onSexChange = (e) => {
     setSex(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (2 - 1) +1);
+      let r = Math.round(Math.random() * (2 - 1) + 1);
       setSex(sexOptions[r].name);
     }
   };
@@ -320,7 +323,7 @@ const NpcGen = () => {
   const onAlignChange = (e) => {
     setAlign(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) +1);
+      let r = Math.round(Math.random() * (9 - 1) + 1);
       setAlign(alignOptions[r].name);
     }
   };
@@ -328,7 +331,7 @@ const NpcGen = () => {
   const onProfChange = (e) => {
     setProf(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (49 - 1) +1);
+      let r = Math.round(Math.random() * (49 - 1) + 1);
       setProf(profOptions[r].name);
     }
   };
@@ -336,7 +339,7 @@ const NpcGen = () => {
   const onFeatureChange = (e) => {
     setFeature(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) +1);
+      let r = Math.round(Math.random() * (20 - 1) + 1);
       setFeature(featureOptions[r].name);
     }
   };
@@ -344,28 +347,28 @@ const NpcGen = () => {
   const onTalentChange = (e) => {
     setTalent(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) +1);
+      let r = Math.round(Math.random() * (20 - 1) + 1);
       setTalent(talentOptions[r].name);
     }
   };
   const onMannerismChange = (e) => {
     setMannerism(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) +1);
+      let r = Math.round(Math.random() * (20 - 1) + 1);
       setMannerism(mannerismOptions[r].name);
     }
   };
   const onInteractionChange = (e) => {
     setInteraction(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1) +1);
+      let r = Math.round(Math.random() * (11 - 1) + 1);
       setInteraction(interactionOptions[r].name);
     }
   };
   const onBondChange = (e) => {
     setBond(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) +1);
+      let r = Math.round(Math.random() * (9 - 1) + 1);
       setBond(bondOptions[r].name);
     }
   };
@@ -401,7 +404,7 @@ const NpcGen = () => {
   const onStrChange = (e) => {
     setStr(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setStr(abilityScoreValues[r].name);
     }
   };
@@ -409,7 +412,7 @@ const NpcGen = () => {
   const onDexChange = (e) => {
     setDex(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setDex(abilityScoreValues[r].name);
     }
   };
@@ -425,7 +428,7 @@ const NpcGen = () => {
   const onIntChange = (e) => {
     setInt(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setInt(abilityScoreValues[r].name);
     }
   };
@@ -433,7 +436,7 @@ const NpcGen = () => {
   const onWisChange = (e) => {
     setWis(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setWis(abilityScoreValues[r].name);
     }
   };
@@ -441,50 +444,50 @@ const NpcGen = () => {
   const onChaChange = (e) => {
     setCha(e.value);
     if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setCha(abilityScoreValues[r].name);
     }
   };
 
   const onGenerate = (e) => {
     if (bond === "") {
-      let r = Math.round(Math.random() * (9 - 1) +1);
+      let r = Math.round(Math.random() * (9 - 1) + 1);
       setBond(bondOptions[r].name);
     } else {
       setBond(bond);
     }
 
     if (race === "") {
-      let r = Math.round(Math.random() * (28 - 1) +1);
+      let r = Math.round(Math.random() * (28 - 1) + 1);
       setRace(raceOptions[r].name);
     } else {
       setRace(race);
     }
 
     if (sex === "") {
-      let r = Math.round(Math.random() * (2 - 1) +1);
+      let r = Math.round(Math.random() * (2 - 1) + 1);
       setSex(sexOptions[r].name);
-      console.log(r)
+      console.log(r);
     } else {
       setSex(sex);
     }
 
     if (align === "") {
-      let r = Math.round(Math.random() * (9 - 1) +1);
+      let r = Math.round(Math.random() * (9 - 1) + 1);
       setAlign(alignOptions[r].name);
     } else {
       setAlign(align);
     }
 
     if (prof === "") {
-      let r = Math.round(Math.random() * (49 - 1) +1);
+      let r = Math.round(Math.random() * (49 - 1) + 1);
       setProf(profOptions[r].name);
     } else {
       setProf(prof);
     }
 
     if (feature === "") {
-      let r = Math.round(Math.random() * (20 - 1) +1);
+      let r = Math.round(Math.random() * (20 - 1) + 1);
       setFeature(featureOptions[r].name);
     } else {
       setFeature(feature);
@@ -498,14 +501,14 @@ const NpcGen = () => {
     }
 
     if (mannerism === "") {
-      let r = Math.round(Math.random() * (20 - 1) +1);
+      let r = Math.round(Math.random() * (20 - 1) + 1);
       setMannerism(mannerismOptions[r].name);
     } else {
       setMannerism(mannerism);
     }
 
     if (interaction === "") {
-      let r = Math.round(Math.random() * (12 - 1) +1);
+      let r = Math.round(Math.random() * (12 - 1) + 1);
       setInteraction(interactionOptions[r].name);
     } else {
       setInteraction(interaction);
@@ -539,46 +542,46 @@ const NpcGen = () => {
     }
 
     if (str === "") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setStr(abilityScoreValues[r].name);
     } else {
       setStr(str);
     }
     if (dex === "") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setDex(abilityScoreValues[r].name);
     } else {
       setDex(dex);
     }
     if (con === "") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setCon(abilityScoreValues[r].name);
     } else {
       setCon(con);
     }
     if (int === "") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setInt(abilityScoreValues[r].name);
     } else {
       setInt(int);
     }
     if (wis === "") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setWis(abilityScoreValues[r].name);
     } else {
       setWis(wis);
     }
     if (cha === "") {
-      let r = Math.round(Math.random() * (8 - 1) +1);
+      let r = Math.round(Math.random() * (8 - 1) + 1);
       setCha(abilityScoreValues[r].name);
     } else {
       setCha(cha);
     }
 
     if (hook === "") {
-      let v = Math.round(Math.random() * (11 - 1) +1);
-      let n = Math.round(Math.random() * (11 - 1) +1);
-      let a = Math.round(Math.random() * (11 - 1) +1);
+      let v = Math.round(Math.random() * (11 - 1) + 1);
+      let n = Math.round(Math.random() * (11 - 1) + 1);
+      let a = Math.round(Math.random() * (11 - 1) + 1);
       setHook(
         hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
       );
@@ -643,250 +646,276 @@ const NpcGen = () => {
     document.body.appendChild(element); // Required for this to work in FireFox
     element.click();
   };
+  //Show Options
+  const showBasics = (e) => {
+    setIsBasicActive((current) => !current);
+  };
+  //Show Options
+  const showDetails = (e) => {
+    setIsDetailActive((current) => !current);
+  };
 
   return (
-    <div className={style.npcgenWrapper}>
+    <div className={styleB.mainWrapper}>
       <Navbar />
-      <div className={style.npcgenBody}>
-        <h1 className={style.npcgenHeader}>NPC Generator</h1>
-        <div className={style.npcgenOptionsWrapper}>
-          <div>
-            <h1>Name</h1>
-            <InputText value={name} onChange={onNameChange} />
-            <button onClick={onRandomName} className={style.npcgenBtnName}>
-              Randomize
-            </button>
-          </div>
-          <div>
-            <h1>Race</h1>
-            <Dropdown
-              optionLabel="name"
-              value={race}
-              options={raceOptions}
-              onChange={onRaceChange}
-              placeholder="Choose Race"
-            />
-          </div>
-          <div>
-            <h1>Sex</h1>
-            <Dropdown
-              optionLabel="name"
-              value={sex}
-              options={sexOptions}
-              onChange={onSexChange}
-              placeholder="Choose Sex"
-            />
-          </div>
-          <div>
-            <h1>Alignment</h1>
-            <Dropdown
-              optionLabel="name"
-              value={align}
-              options={alignOptions}
-              onChange={onAlignChange}
-              placeholder="Choose Alignment"
-            />
-          </div>
-          <div>
-            <h1>Profession</h1>
-            <Dropdown
-              optionLabel="name"
-              value={prof}
-              options={profOptions}
-              onChange={onProfChange}
-              placeholder="Choose Profession"
-            />
-          </div>
-          <div>
-            <h1>Feature</h1>
-            <Dropdown
-              optionLabel="name"
-              value={feature}
-              options={featureOptions}
-              onChange={onFeatureChange}
-              placeholder="Choose Feature"
-            />
-          </div>
-          <div>
-            <h1>Talent</h1>
-            <Dropdown
-              optionLabel="name"
-              value={talent}
-              options={talentOptions}
-              onChange={onTalentChange}
-              placeholder="Choose Talent"
-            />
-          </div>
-          <div>
-            <h1>Mannerism</h1>
-            <Dropdown
-              optionLabel="name"
-              value={mannerism}
-              options={mannerismOptions}
-              onChange={onMannerismChange}
-              placeholder="Choose Mannerism"
-            />
-          </div>
-          <div>
-            <h1>Interaction</h1>
-            <Dropdown
-              optionLabel="name"
-              value={interaction}
-              options={interactionOptions}
-              onChange={onInteractionChange}
-              placeholder="Choose Interaction"
-            />
-          </div>
-          <div>
-            <h1>Bond</h1>
-            <Dropdown
-              optionLabel="name"
-              value={bond}
-              options={bondOptions}
-              onChange={onBondChange}
-              placeholder="Choose Bond"
-            />
-          </div>
-        </div>
+      <div className={styleB.topHeader}>
+        <h1 className={styleB.mainHeader}>NPC Generator</h1>
+        {/* Generate Btns */}
         <div>
-          <div className={style.npcgenBtnWrapper}>
-            <button onClick={onGenerate} className={style.npcgenBtnGen}>
+          <div className={styleB.btnWrapper}>
+            <button onClick={onGenerate} className={styleB.btnGen}>
               Generate
             </button>
-            <button onClick={onClear} className={style.npcgenBtnClear}>
+            <button onClick={onClear} className={styleB.btnClear}>
               Clear
             </button>
           </div>
         </div>
-        {/* Main Display */}
-        <div className={style.npcgenDisplay}>
-          {/* Display Wrapper */}
-          <div className={style.npggenDescWrapper}>
-            {/* Display Desc  */}
-            <div className={style.npcgenDesc}>
-              <h2 className={style.npcgenDescHeader}>Description</h2>
+        {/* Options */}
+        <div className={styleB.body}>
+          <div className={styleB.optionsWrapper}>
+            <h1>NPC Options</h1>
+            <h1 className={styleB.subHeader} onClick={showBasics}>
+              Basic Info
+            </h1>
+            <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
               <div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Name: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{name}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Race: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{race}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Sex: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{sex}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Alignment: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{align}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Profession: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{prof}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Feature: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{feature}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Talent: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{talent}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Mannerism: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{mannerism}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Interaction: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{interaction}</h1>
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Bond: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{bond}</h1>
-                </div>
+                <h1>Name</h1>
+                <InputText value={name} onChange={onNameChange} />
+                <button onClick={onRandomName} className={style.npcgenBtnName}>
+                  Randomize
+                </button>
+              </div>
+              <div>
+                <h1>Race</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={race}
+                  options={raceOptions}
+                  onChange={onRaceChange}
+                  placeholder="Choose Race"
+                />
+              </div>
+              <div>
+                <h1>Sex</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={sex}
+                  options={sexOptions}
+                  onChange={onSexChange}
+                  placeholder="Choose Sex"
+                />
+              </div>
+              <div>
+                <h1>Alignment</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={align}
+                  options={alignOptions}
+                  onChange={onAlignChange}
+                  placeholder="Choose Alignment"
+                />
               </div>
             </div>
-
-            <div className={style.npcgenStats}>
-              <h1 className={style.npcgenDescHeader}>Stats</h1>
+            <h1 className={styleB.subHeader} onClick={showDetails}>
+              NPC Details
+            </h1>
+            <div className={isDetailActive ? styleB.subsection : styleB.hidden}>
               <div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>STR: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{str}</h1>
-                  <Dropdown
-                    optionLabel="name"
-                    value={str}
-                    options={abilityScoreValues}
-                    onChange={onStrChange}
-                    placeholder="Choose Score"
-                  />
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>DEX: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{dex}</h1>
-                  <Dropdown
-                    optionLabel="name"
-                    value={dex}
-                    options={abilityScoreValues}
-                    onChange={onDexChange}
-                    placeholder="Choose Score"
-                  />
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>CON: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{con}</h1>
-                  <Dropdown
-                    optionLabel="name"
-                    value={con}
-                    options={abilityScoreValues}
-                    onChange={onConChange}
-                    placeholder="Choose Score"
-                  />
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>INT: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{int}</h1>
-                  <Dropdown
-                    optionLabel="name"
-                    value={int}
-                    options={abilityScoreValues}
-                    onChange={onIntChange}
-                    placeholder="Choose Score"
-                  />
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>WIS: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{wis}</h1>
-                  <Dropdown
-                    optionLabel="name"
-                    value={wis}
-                    options={abilityScoreValues}
-                    onChange={onWisChange}
-                    placeholder="Choose Score"
-                  />
-                </div>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>CHA: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{cha}</h1>
-                  <Dropdown
-                    optionLabel="name"
-                    value={cha}
-                    options={abilityScoreValues}
-                    onChange={onChaChange}
-                    placeholder="Choose Score"
-                  />
-                </div>
-                <h1 className={style.npcgenDescHeader}>Plot Hook</h1>
-                <div className={style.npcgenDetail}>
-                  <h1 className={style.npcgenDetailTitle}>Hook: </h1>
-                  <h1 className={style.npcgenDetailOutput}>{hook}</h1>
-                </div>
+                <h1>Profession</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={prof}
+                  options={profOptions}
+                  onChange={onProfChange}
+                  placeholder="Choose Profession"
+                />
+              </div>
+              <div>
+                <h1>Feature</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={feature}
+                  options={featureOptions}
+                  onChange={onFeatureChange}
+                  placeholder="Choose Feature"
+                />
+              </div>
+              <div>
+                <h1>Talent</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={talent}
+                  options={talentOptions}
+                  onChange={onTalentChange}
+                  placeholder="Choose Talent"
+                />
+              </div>
+              <div>
+                <h1>Mannerism</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={mannerism}
+                  options={mannerismOptions}
+                  onChange={onMannerismChange}
+                  placeholder="Choose Mannerism"
+                />
+              </div>
+              <div>
+                <h1>Interaction</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={interaction}
+                  options={interactionOptions}
+                  onChange={onInteractionChange}
+                  placeholder="Choose Interaction"
+                />
+              </div>
+              <div>
+                <h1>Bond</h1>
+                <Dropdown
+                  optionLabel="name"
+                  value={bond}
+                  options={bondOptions}
+                  onChange={onBondChange}
+                  placeholder="Choose Bond"
+                />
               </div>
             </div>
           </div>
+
+          {/* Main Display */}
+          <div className={styleB.display}>
+            <h1>{name}</h1>
+            <h2>
+              <span className={styleB.minorText2}>{race} {sex}, {align}</span>
+            </h2>
+            <hr className={styleB.lineBreak} />
+            <h2>
+              Profession {" "}
+              <span className={styleB.minorText2}>
+              {prof}
+            </span>
+            </h2>
+            <h2>
+            Feature {" "}
+              <span className={styleB.minorText2}>
+              {feature}
+            </span>
+            </h2>
+            <h2>
+            Talent {" "}
+              <span className={styleB.minorText2}>
+              {talent}
+            </span>
+            </h2>
+            <h2>
+            Mannerism {" "}
+              <span className={styleB.minorText2}>
+              {mannerism}
+            </span>
+            </h2>
+            <h2>
+            Interaction {" "}
+              <span className={styleB.minorText2}>
+              {interaction}
+            </span>
+            </h2>
+            <h2>
+            Bond {" "}
+              <span className={styleB.minorText2}>
+              {bond}
+            </span>
+            </h2>
+            <h1>Plot Hook</h1>
+            <hr className={styleB.subLineBreak} />
+            <h2>
+            Hook {" "}
+              <span className={styleB.minorText2}>
+              {hook}
+            </span>
+            </h2>
+          </div>
+        </div>
+
+        <div className={style.npcgenStats}>
+          <h1 className={style.npcgenDescHeader}>Stats</h1>
           <div>
+            <div className={style.npcgenDetail}>
+              <h1 className={style.npcgenDetailTitle}>STR: </h1>
+              <h1 className={style.npcgenDetailOutput}>{str}</h1>
+              <Dropdown
+                optionLabel="name"
+                value={str}
+                options={abilityScoreValues}
+                onChange={onStrChange}
+                placeholder="Choose Score"
+              />
+            </div>
+            <div className={style.npcgenDetail}>
+              <h1 className={style.npcgenDetailTitle}>DEX: </h1>
+              <h1 className={style.npcgenDetailOutput}>{dex}</h1>
+              <Dropdown
+                optionLabel="name"
+                value={dex}
+                options={abilityScoreValues}
+                onChange={onDexChange}
+                placeholder="Choose Score"
+              />
+            </div>
+            <div className={style.npcgenDetail}>
+              <h1 className={style.npcgenDetailTitle}>CON: </h1>
+              <h1 className={style.npcgenDetailOutput}>{con}</h1>
+              <Dropdown
+                optionLabel="name"
+                value={con}
+                options={abilityScoreValues}
+                onChange={onConChange}
+                placeholder="Choose Score"
+              />
+            </div>
+            <div className={style.npcgenDetail}>
+              <h1 className={style.npcgenDetailTitle}>INT: </h1>
+              <h1 className={style.npcgenDetailOutput}>{int}</h1>
+              <Dropdown
+                optionLabel="name"
+                value={int}
+                options={abilityScoreValues}
+                onChange={onIntChange}
+                placeholder="Choose Score"
+              />
+            </div>
+            <div className={style.npcgenDetail}>
+              <h1 className={style.npcgenDetailTitle}>WIS: </h1>
+              <h1 className={style.npcgenDetailOutput}>{wis}</h1>
+              <Dropdown
+                optionLabel="name"
+                value={wis}
+                options={abilityScoreValues}
+                onChange={onWisChange}
+                placeholder="Choose Score"
+              />
+            </div>
+            <div className={style.npcgenDetail}>
+              <h1 className={style.npcgenDetailTitle}>CHA: </h1>
+              <h1 className={style.npcgenDetailOutput}>{cha}</h1>
+              <Dropdown
+                optionLabel="name"
+                value={cha}
+                options={abilityScoreValues}
+                onChange={onChaChange}
+                placeholder="Choose Score"
+              />
+            </div>
+            <h1 className={style.npcgenDescHeader}>Plot Hook</h1>
+            <div className={style.npcgenDetail}>
+              <h1 className={style.npcgenDetailTitle}>Hook: </h1>
+              <h1 className={style.npcgenDetailOutput}>{hook}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div>
             <button
               value="download"
               onClick={onExport}
@@ -908,9 +937,7 @@ const NpcGen = () => {
             >
               Add to DB
             </button>
-          </div>
-        </div>
-      </div>
+          </div> */}
     </div>
   );
 };
