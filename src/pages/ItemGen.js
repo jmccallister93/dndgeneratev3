@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/ItemGen.module.scss";
+import styleB from "../stylesheets/BuildingGen.module.scss";
 import supabase from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -24,6 +25,10 @@ import { Checkbox } from "primereact/checkbox";
 const ItemGen = () => {
   // Set state variables
   const [fetchError, setFetchError] = useState(null);
+  const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isLayoutActive, setIsLayoutActive] = useState(false);
+  const [isRoomActive, setIsRoomActive] = useState(false);
 
   const [allItems, setAllItems] = useState();
 
@@ -1004,427 +1009,399 @@ const ItemGen = () => {
     setMountSpeed("");
     setMountCapacity("");
   };
+  const showBasics = (e) => {
+    setIsBasicActive((current) => !current);
+  };
+  const showDetails = (e) => {
+    setIsDetailActive((current) => !current);
+  };
 
   return (
-    <div className={style.itemgenWrapper}>
+    <div className={styleB.mainWrapper}>
       <Navbar />
-      <div className={style.itemgenBody}>
-        <h1 className={style.itemgenHeader}>Item Generator</h1>
-        <div className={style.itemgenOptionsWrapper}>
-          <div>
-            <h1>Name</h1>
-            <InputText placeholder="Name" />
-            <button className={style.itemgenBtnName}>Randomize</button>
-          </div>
-          <div>
-            <h1>Type</h1>
-            {showTypeInput ? (
-              <InputText onChange={onTypeCustom} placeholder="Type" />
-            ) : null}
-            <Dropdown
-              optionLabel="name"
-              value={type}
-              options={typeOptions}
-              onChange={onTypeChange}
-              placeholder={showTypeInput ? "Custom" : "Choose Type"}
-            />
-          </div>
-          <div>
-            <h1>Rarity</h1>
-            {showRarityInput ? (
-              <InputText onChange={onRarityCustom} placeholder="Rarity" />
-            ) : null}
-            <Dropdown
-              optionLabel="name"
-              value={rarity}
-              options={rarityOptions}
-              onChange={onRarityChange}
-              placeholder={showRarityInput ? "Custom" : "Choose Rarity"}
-            />
-          </div>
-          <div>
-            <h1>Cost</h1>
-            <InputNumber
-              value={currencyValue}
-              onChange={onCurrencyValueChange}
-              placeholder="Value"
-              mode="decimal"
-              showButtons
-              // buttonLayout="currency"
-              decrementButtonClassName="p-button-secondary"
-              incrementButtonClassName="p-button-secondary"
-              incrementButtonIcon="pi pi-plus"
-              decrementButtonIcon="pi pi-minus"
-              minFractionDigits={0}
-              maxFractionDigits={2}
-            />
-            <button
-              className={style.itemgenBtnName}
-              onClick={onRandomCurrencyValue}
-            >
-              Randomize
-            </button>
-            {showCurrencyInput ? (
-              <InputText onChange={onCurrencyCustom} placeholder="Currency" />
-            ) : null}
-            <Dropdown
-              optionLabel="name"
-              value={currency}
-              options={currencyOptions}
-              onChange={onCurrencyChange}
-              placeholder={showTypeInput ? "Currency" : "Choose Currency"}
-            />
-          </div>
-          <div>
-            <h1>Weight</h1>
-            <InputNumber
-              value={weight}
-              onChange={onWeightChange}
-              placeholder="Weight"
-              mode="decimal"
-              showButtons
-              buttonLayout="currency"
-              decrementButtonClassName="p-button-secondary"
-              incrementButtonClassName="p-button-secondary"
-              incrementButtonIcon="pi pi-plus"
-              decrementButtonIcon="pi pi-minus"
-              minFractionDigits={0}
-              maxFractionDigits={2}
-            />
-            <button className={style.itemgenBtnName} onClick={onRandomWeight}>
-              Randomize
-            </button>
-          </div>
-          <div>
-            <h1>Description</h1>
-            <InputTextarea value={description} />
-            <button
-              className={style.itemgenBtnName}
-              onClick={onRandomDescription}
-            >
-              Randomize
-            </button>
-          </div>
-          <div className={style.itemgenWeaponAdditionalWrapper}>
-            {type === "Weapon" ||
-            type === "Vehicle" ||
-            type === "Armor" ||
-            type === "Equipment Pack" ||
-            type === "Mount" ? (
-              <h1>Additional</h1>
-            ) : null}
-            {type === "Weapon" ? (
-              <div>
-                <InputText
-                  value={weaponDmg}
-                  mode="decimal"
-                  showButtons
-                  buttonLayout="currency"
-                  placeholder="Damage Amount"
-                />
-                <button
-                  className={style.itemgenBtnName}
-                  onClick={onRandomWeaponDmg}
-                >
-                  Randomize
-                </button>
-                <Dropdown
-                  optionLabel="name"
-                  value={dmgType}
-                  options={dmgTypeOptions}
-                  onChange={onDmgTypeChange}
-                  placeholder="Damage Type"
-                />
-                <Dropdown
-                  value={weaponType}
-                  options={weaponTypes}
-                  onChange={onWeaponTypeChange}
-                  placeholder="Weapon Type"
-                />
-                <Dropdown
-                  value={weaponProperty}
-                  options={weaponProperties}
-                  onChange={onWeaponPropertyChange}
-                  placeholder="Weapon Property"
-                />
-              </div>
-            ) : null}
-            {type === "Vehicle" ? (
-              <div>
-                <InputNumber
-                  style={{ display: "flex" }}
-                  value={vehicleSpeed}
-                  placeholder="Speed"
-                  mode="decimal"
-                  showButtons
-                  buttonLayout="currency"
-                  decrementButtonClassName="p-button-secondary"
-                  incrementButtonClassName="p-button-secondary"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  minFractionDigits={0}
-                  maxFractionDigits={3}
-                  step={5}
-                />
-                <button
-                  className={style.itemgenBtnName}
-                  onClick={onRandomVehicleSpeed}
-                >
-                  Randomize
-                </button>
-                <InputNumber
-                  style={{ display: "flex" }}
-                  value={vehicleCapacity}
-                  placeholder="Carry Capacity"
-                  mode="decimal"
-                  showButtons
-                  buttonLayout="currency"
-                  decrementButtonClassName="p-button-secondary"
-                  incrementButtonClassName="p-button-secondary"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  minFractionDigits={0}
-                  maxFractionDigits={2}
-                />
-                <button
-                  className={style.itemgenBtnName}
-                  onClick={onRandomVehicleCapacity}
-                >
-                  Randomize
-                </button>
-              </div>
-            ) : null}
-            {type === "Armor" ? (
-              <div>
-                <InputNumber
-                  style={{ display: "flex" }}
-                  value={armorAc}
-                  placeholder="Armor Class"
-                  mode="decimal"
-                  showButtons
-                  buttonLayout="currency"
-                  decrementButtonClassName="p-button-secondary"
-                  incrementButtonClassName="p-button-secondary"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  minFractionDigits={0}
-                  maxFractionDigits={2}
-                />
-                <button className={style.itemgenBtnName} onClick={onRandomAc}>
-                  Randomize
-                </button>
-                <Dropdown
-                  optionLabel="name"
-                  value={armorMod}
-                  options={abilitiesOptions}
-                  onChange={onChangeArmorMod}
-                  placeholder="Modifier"
-                />
-                <Dropdown
-                  value={armorStr}
-                  options={strReq}
-                  placeholder="Strength Req."
-                  onChange={onChangeArmorStr}
-                />
-                <Dropdown
-                  value={armorStealth}
-                  options={stealthDisadvantage}
-                  placeholder="Stealth Disadvantage"
-                  onChange={onChangeArmorStealth}
-                />
-              </div>
-            ) : null}
-            {type === "Equipment Pack" ? (
-              <div>
-                <InputText placeholder="Contains" />
-                <button
-                  className={style.itemgenBtnSearch}
-                  onClick={onSearchPack}
-                >
-                  <i className="pi pi-search"></i>
-                </button>
-              </div>
-            ) : null}
-            {type === "Mount" ? (
-              <div>
-                <InputNumber
-                  value={mountSpeed}
-                  placeholder="Speed"
-                  mode="decimal"
-                  showButtons
-                  buttonLayout="currency"
-                  decrementButtonClassName="p-button-secondary"
-                  incrementButtonClassName="p-button-secondary"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  step={5}
-                  minFractionDigits={0}
-                  maxFractionDigits={2}
-                />
-                <button
-                  className={style.itemgenBtnName}
-                  onClick={onRandomMountSpeed}
-                >
-                  Randomize
-                </button>
-                <InputNumber
-                  value={mountCapacity}
-                  placeholder="Carry Capacity"
-                  mode="decimal"
-                  showButtons
-                  // buttonLayout="currency"
-                  decrementButtonClassName="p-button-secondary"
-                  incrementButtonClassName="p-button-secondary"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  minFractionDigits={0}
-                  maxFractionDigits={2}
-                />
-                <button
-                  className={style.itemgenBtnName}
-                  onClick={onRandomMountCapacity}
-                >
-                  Randomize
-                </button>
-              </div>
-            ) : null}
-          </div>
-        </div>
+      <div className={styleB.topHeader}>
+        <h1 className={styleB.mainHeader}>Item Generator</h1>
+        {/* Generate Btns */}
         <div>
-          <div className={style.itemgenBtnWrapper}>
-            <button onClick={onGenerate} className={style.itemgenBtnGen}>
+          <div className={styleB.btnWrapper}>
+            <button onClick={onGenerate} className={styleB.btnGen}>
               Generate
             </button>
-            <button onClick={onClear} className={style.itemgenBtnClear}>
+            <button onClick={onClear} className={styleB.btnClear}>
               Clear
             </button>
           </div>
         </div>
-
-        {/* Display */}
-        {/* Main Display */}
-        <div className={style.itemgenDisplay}>
-        
-          {/* Display Wrapper */}
-          <div className={style.itemgenDescWrapper}>
-            {/* Display Desc  */}
-            <div className={style.itemgenDesc}>
-              <h2 className={style.itemgenDescHeader}>Item Info</h2>
-              <div>
-                <div className={style.itemgenDetail}>
-                  <h1 className={style.itemgenDetailTitle}>Name: </h1>
-                  <h1 className={style.itemgenDetailOutput}>{}</h1>
-                </div>
-                <div className={style.itemgenDetail}>
-                  <h1 className={style.itemgenDetailTitle}>Type: </h1>
-                  <h1 className={style.itemgenDetailOutput}>{type}</h1>
-                </div>
-                <div className={style.itemgenDetail}>
-                  <h1 className={style.itemgenDetailTitle}>Rarity: </h1>
-                  <h1 className={style.itemgenDetailOutput}>{rarity}</h1>
-                </div>
-                <div className={style.itemgenDetail}>
-                  <h1 className={style.itemgenDetailTitle}>Cost: </h1>
-                  <h1 className={style.itemgenDetailOutput}>{cost}</h1>
-                </div>
-                <div className={style.itemgenDetail}>
-                  <h1 className={style.itemgenDetailTitle}>Weight: </h1>
-                  <h1 className={style.itemgenDetailOutput}>{weight}</h1>
-                </div>
-
-                {type === "Weapon" ? (
-                  <div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>Damage: </h1>
-                      <h1 className={style.itemgenDetailOutput}>{weaponDmg}</h1>
-                    </div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>
-                        Damage Type:{" "}
-                      </h1>
-                      <h1 className={style.itemgenDetailOutput}>{dmgType}</h1>
-                    </div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>
-                        Weapon Type:{" "}
-                      </h1>
-                      <h1 className={style.itemgenDetailOutput}>
-                        {weaponType}
-                      </h1>
-                    </div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>
-                        Weapon Property:{" "}
-                      </h1>
-                      <h1 className={style.itemgenDetailOutput}>
-                        {weaponProperty}
-                      </h1>
-                    </div>
-                  </div>
-                ) : null}
-
-                {type === "Vehicle" ? (
-                  <div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>Speed: </h1>
-                      <h1 className={style.itemgenDetailOutput}>
-                        {vehicleSpeed}
-                      </h1>
-                    </div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>
-                        Carry Capacity:{" "}
-                      </h1>
-                      <h1 className={style.itemgenDetailOutput}>
-                        {vehicleCapacity}
-                      </h1>
-                    </div>
-                  </div>
-                ) : null}
-
-                {type === "Mount" ? (
-                  <div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>Speed: </h1>
-                      <h1 className={style.itemgenDetailOutput}>
-                        {mountSpeed}
-                      </h1>
-                    </div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>
-                        Carry Capacity:{" "}
-                      </h1>
-                      <h1 className={style.itemgenDetailOutput}>
-                        {mountCapacity}
-                      </h1>
-                    </div>
-                  </div>
-                ) : null}
-
-                {type === "Equipment Pack" ? (
-                  <div>
-                    <div className={style.itemgenDetail}>
-                      <h1 className={style.itemgenDetailTitle}>Items: </h1>
-                      <h1 className={style.itemgenDetailOutput}>{}</h1>
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-            {/* Description */}
+      </div>
+      <div className={styleB.body}>
+        <div className={styleB.optionsWrapper}>
+          <h1>Item Options</h1>
+          <h1 className={styleB.subHeader} onClick={showBasics}>
+            Basic Info
+          </h1>
+          <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
             <div>
-              <div>
-                <h1 className={style.itemgenDetailTitle}>Description: </h1>
-                <InputTextarea value={description} />
-                {/* <h1 className={style.itemgenDetailOutput}>{description}</h1> */}
-              </div>
+              <h1>Name</h1>
+              <InputText placeholder="Name" />
+              <button className={style.itemgenBtnName}>Randomize</button>
             </div>
-          </div>
-          <div className="flex align-items-center">
-            <h3 className="text-xl  mr-2">Export</h3>
-            {exportBtns}
+
+            <div>
+              <h1>Type</h1>
+              {showTypeInput ? (
+                <InputText onChange={onTypeCustom} placeholder="Type" />
+              ) : null}
+              <Dropdown
+                optionLabel="name"
+                value={type}
+                options={typeOptions}
+                onChange={onTypeChange}
+                placeholder={showTypeInput ? "Custom" : "Choose Type"}
+              />
+            </div>
+            <div>
+              <h1>Rarity</h1>
+              {showRarityInput ? (
+                <InputText onChange={onRarityCustom} placeholder="Rarity" />
+              ) : null}
+              <Dropdown
+                optionLabel="name"
+                value={rarity}
+                options={rarityOptions}
+                onChange={onRarityChange}
+                placeholder={showRarityInput ? "Custom" : "Choose Rarity"}
+              />
+            </div>
+            <div>
+              <h1>Cost</h1>
+              <InputNumber
+                value={currencyValue}
+                onChange={onCurrencyValueChange}
+                placeholder="Value"
+                mode="decimal"
+                showButtons
+                // buttonLayout="currency"
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button
+                className={style.itemgenBtnName}
+                onClick={onRandomCurrencyValue}
+              >
+                Randomize
+              </button>
+              {showCurrencyInput ? (
+                <InputText onChange={onCurrencyCustom} placeholder="Currency" />
+              ) : null}
+              <Dropdown
+                optionLabel="name"
+                value={currency}
+                options={currencyOptions}
+                onChange={onCurrencyChange}
+                placeholder={showTypeInput ? "Currency" : "Choose Currency"}
+              />
+            </div>
+            <div>
+              <h1>Weight</h1>
+              <InputNumber
+                value={weight}
+                onChange={onWeightChange}
+                placeholder="Weight"
+                mode="decimal"
+                showButtons
+                buttonLayout="currency"
+                decrementButtonClassName="p-button-secondary"
+                incrementButtonClassName="p-button-secondary"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                minFractionDigits={0}
+                maxFractionDigits={2}
+              />
+              <button className={style.itemgenBtnName} onClick={onRandomWeight}>
+                Randomize
+              </button>
+            </div>
+            <div>
+              <h1>Description</h1>
+              <InputTextarea value={description} />
+              <button
+                className={style.itemgenBtnName}
+                onClick={onRandomDescription}
+              >
+                Randomize
+              </button>
+            </div>
+            <div className={style.itemgenWeaponAdditionalWrapper}>
+              {type === "Weapon" ||
+              type === "Vehicle" ||
+              type === "Armor" ||
+              type === "Equipment Pack" ||
+              type === "Mount" ? (
+                <h1>Additional</h1>
+              ) : null}
+              {type === "Weapon" ? (
+                <div>
+                  <InputText
+                    value={weaponDmg}
+                    mode="decimal"
+                    showButtons
+                    buttonLayout="currency"
+                    placeholder="Damage Amount"
+                  />
+                  <button
+                    className={style.itemgenBtnName}
+                    onClick={onRandomWeaponDmg}
+                  >
+                    Randomize
+                  </button>
+                  <Dropdown
+                    optionLabel="name"
+                    value={dmgType}
+                    options={dmgTypeOptions}
+                    onChange={onDmgTypeChange}
+                    placeholder="Damage Type"
+                  />
+                  <Dropdown
+                    value={weaponType}
+                    options={weaponTypes}
+                    onChange={onWeaponTypeChange}
+                    placeholder="Weapon Type"
+                  />
+                  <Dropdown
+                    value={weaponProperty}
+                    options={weaponProperties}
+                    onChange={onWeaponPropertyChange}
+                    placeholder="Weapon Property"
+                  />
+                </div>
+              ) : null}
+              {type === "Vehicle" ? (
+                <div>
+                  <InputNumber
+                    style={{ display: "flex" }}
+                    value={vehicleSpeed}
+                    placeholder="Speed"
+                    mode="decimal"
+                    showButtons
+                    buttonLayout="currency"
+                    decrementButtonClassName="p-button-secondary"
+                    incrementButtonClassName="p-button-secondary"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    minFractionDigits={0}
+                    maxFractionDigits={3}
+                    step={5}
+                  />
+                  <button
+                    className={style.itemgenBtnName}
+                    onClick={onRandomVehicleSpeed}
+                  >
+                    Randomize
+                  </button>
+                  <InputNumber
+                    style={{ display: "flex" }}
+                    value={vehicleCapacity}
+                    placeholder="Carry Capacity"
+                    mode="decimal"
+                    showButtons
+                    buttonLayout="currency"
+                    decrementButtonClassName="p-button-secondary"
+                    incrementButtonClassName="p-button-secondary"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    minFractionDigits={0}
+                    maxFractionDigits={2}
+                  />
+                  <button
+                    className={style.itemgenBtnName}
+                    onClick={onRandomVehicleCapacity}
+                  >
+                    Randomize
+                  </button>
+                </div>
+              ) : null}
+              {type === "Armor" ? (
+                <div>
+                  <InputNumber
+                    style={{ display: "flex" }}
+                    value={armorAc}
+                    placeholder="Armor Class"
+                    mode="decimal"
+                    showButtons
+                    buttonLayout="currency"
+                    decrementButtonClassName="p-button-secondary"
+                    incrementButtonClassName="p-button-secondary"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    minFractionDigits={0}
+                    maxFractionDigits={2}
+                  />
+                  <button className={style.itemgenBtnName} onClick={onRandomAc}>
+                    Randomize
+                  </button>
+                  <Dropdown
+                    optionLabel="name"
+                    value={armorMod}
+                    options={abilitiesOptions}
+                    onChange={onChangeArmorMod}
+                    placeholder="Modifier"
+                  />
+                  <Dropdown
+                    value={armorStr}
+                    options={strReq}
+                    placeholder="Strength Req."
+                    onChange={onChangeArmorStr}
+                  />
+                  <Dropdown
+                    value={armorStealth}
+                    options={stealthDisadvantage}
+                    placeholder="Stealth Disadvantage"
+                    onChange={onChangeArmorStealth}
+                  />
+                </div>
+              ) : null}
+              {type === "Equipment Pack" ? (
+                <div>
+                  <InputText placeholder="Contains" />
+                  <button
+                    className={style.itemgenBtnSearch}
+                    onClick={onSearchPack}
+                  >
+                    <i className="pi pi-search"></i>
+                  </button>
+                </div>
+              ) : null}
+              {type === "Mount" ? (
+                <div>
+                  <InputNumber
+                    value={mountSpeed}
+                    placeholder="Speed"
+                    mode="decimal"
+                    showButtons
+                    buttonLayout="currency"
+                    decrementButtonClassName="p-button-secondary"
+                    incrementButtonClassName="p-button-secondary"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    step={5}
+                    minFractionDigits={0}
+                    maxFractionDigits={2}
+                  />
+                  <button
+                    className={style.itemgenBtnName}
+                    onClick={onRandomMountSpeed}
+                  >
+                    Randomize
+                  </button>
+                  <InputNumber
+                    value={mountCapacity}
+                    placeholder="Carry Capacity"
+                    mode="decimal"
+                    showButtons
+                    // buttonLayout="currency"
+                    decrementButtonClassName="p-button-secondary"
+                    incrementButtonClassName="p-button-secondary"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    minFractionDigits={0}
+                    maxFractionDigits={2}
+                  />
+                  <button
+                    className={style.itemgenBtnName}
+                    onClick={onRandomMountCapacity}
+                  >
+                    Randomize
+                  </button>
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
+
+        {/* Main Display */}
+        <div className={styleB.display}>
+          <h1>Placeholder Name</h1>
+          <h2>
+            Type <span className={styleB.minorText2}>{type}</span>
+          </h2>
+          <h2>
+            Rarity <span className={styleB.minorText2}>{rarity}</span>
+          </h2>
+          <h2>
+            Cost <span className={styleB.minorText2}>{cost}</span>
+          </h2>
+          <h2>
+            Weight <span className={styleB.minorText2}>{weight}</span>
+          </h2>
+
+          {type === "Weapon" ? (
+            <>
+              <h2>
+                Damage
+                <span className={styleB.minorText2}>{weaponDmg}</span>
+              </h2>
+              <h2>
+                Damage Type
+                <span className={styleB.minorText2}>{dmgType}</span>
+              </h2>
+              <h2>
+                Weapon Type{" "}
+                <span className={styleB.minorText2}>{weaponType}</span>{" "}
+              </h2>
+              <h2>
+                Weapon Property{" "}
+                <span className={styleB.minorText2}>{weaponProperty}</span>
+              </h2>
+            </>
+          ) : null}
+
+          {type === "Vehicle" ? (
+            <>
+              <h2>
+                Speed
+                <span className={styleB.minorText2}>{vehicleSpeed}</span>
+              </h2>
+              <h2>
+                Carry Capacity
+                <span className={styleB.minorText2}>{vehicleCapacity}</span>
+              </h2>
+            </>
+          ) : null}
+
+          {type === "Mount" ? (
+            <>
+              <h2>
+                Speed
+                <span className={styleB.minorText2}>{mountSpeed}</span>
+              </h2>
+              <h2>
+                Speed
+                <span className={styleB.minorText2}>{mountCapacity}</span>
+              </h2>
+            </>
+          ) : null}
+
+          {type === "Equipment Pack" ? (
+            <>
+              <h2>
+                Items
+                <span className={styleB.minorText2}>{}</span>
+              </h2>
+            </>
+          ) : null}
+        </div>
+
+        {/* <div>
+            <div>
+              <h1 >Description: </h1>
+              <InputTextarea value={description} />
+              <h1 className={style.itemgenDetailOutput}>{description}</h1>
+            </div>
+          </div> */}
       </div>
     </div>
   );
