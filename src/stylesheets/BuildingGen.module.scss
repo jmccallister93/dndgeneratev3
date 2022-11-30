@@ -190,6 +190,11 @@ $btn-blue: #2196f3;
 .minorText2 {
   font-weight: 350;
 }
+.abilityScores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+}
 
 .lineBreak {
   border-top: 5px solid transparent;
@@ -204,12 +209,11 @@ $btn-blue: #2196f3;
 }
 
 .detesContainer {
-    display: flex;
-    // grid-template-columns: repeat(4, 1fr);
-    width: 100%;
-    flex-wrap: wrap;
-    & h4{
-        font-weight: 300;
-    }
-    
+  display: flex;
+  // grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  flex-wrap: wrap;
+  & h4 {
+    font-weight: 300;
   }
+}

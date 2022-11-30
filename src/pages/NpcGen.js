@@ -55,11 +55,17 @@ const NpcGen = () => {
   const [nameOptions, setNameOptions] = useState();
 
   const [str, setStr] = useState("");
+  const [strMod, setStrMod] = useState("");
   const [dex, setDex] = useState("");
+  const [dexMod, setDexMod] = useState("");
   const [con, setCon] = useState("");
+  const [conMod, setConMod] = useState("");
   const [int, setInt] = useState("");
+  const [intMod, setIntMod] = useState("");
   const [wis, setWis] = useState("");
+  const [wisMod, setWisMod] = useState("");
   const [cha, setCha] = useState("");
+  const [chaMod, setChaMod] = useState("");
 
   const [hook, setHook] = useState("");
 
@@ -304,6 +310,15 @@ const NpcGen = () => {
     { id: 12, name: "Bizarre", value: "Bizarre" },
   ];
 
+  //OnChange
+  const objectChange = (value, setObject, max, min, floor, objectOptions) => {
+    setObject(value);
+    if (value === "Random") {
+      let r = Math.round(Math.random() * (max - min) + floor);
+      setObject(objectOptions[r].name);
+    }
+  };
+
   const onRaceChange = (e) => {
     setRace(e.value);
     if (e.value === "Random") {
@@ -400,54 +415,133 @@ const NpcGen = () => {
       setName(firstName + " " + epiphet_b + noun_a);
     }
   };
+  useEffect(() => {
+    let modifierList = [
+      "-5",
+      "-4",
+      "-3",
+      "-2",
+      "-1",
+      "+0",
+      "+1",
+      "+2",
+      "+3",
+      "+4",
+      "+5",
+      "+6",
+      "+7",
+      "+8",
+      "+9",
+      "+10",
+    ];
 
+    const onAbilityModChange = (abilityType, setAbilityMod) => {
+      if (abilityType <= 1) {
+        setAbilityMod(modifierList[0]);
+      } else if (abilityType <= 3) {
+        setAbilityMod(modifierList[0]);
+      } else if (abilityType <= 5) {
+        setAbilityMod(modifierList[1]);
+      } else if (abilityType <= 7) {
+        setAbilityMod(modifierList[2]);
+      } else if (abilityType <= 9) {
+        setAbilityMod(modifierList[3]);
+      } else if (abilityType <= 11) {
+        setAbilityMod(modifierList[4]);
+      } else if (abilityType <= 13) {
+        setAbilityMod(modifierList[5]);
+      } else if (abilityType <= 15) {
+        setAbilityMod(modifierList[6]);
+      } else if (abilityType <= 17) {
+        setAbilityMod(modifierList[7]);
+      } else if (abilityType <= 19) {
+        setAbilityMod(modifierList[8]);
+      } else if (abilityType <= 21) {
+        setAbilityMod(modifierList[9]);
+      } else if (abilityType <= 23) {
+        setAbilityMod(modifierList[10]);
+      } else if (abilityType <= 25) {
+        setAbilityMod(modifierList[11]);
+      } else if (abilityType <= 27) {
+        setAbilityMod(modifierList[12]);
+      } else if (abilityType <= 29) {
+        setAbilityMod(modifierList[13]);
+      } else if (abilityType <= 30) {
+        setAbilityMod(modifierList[14]);
+      }
+    };
+    onAbilityModChange(str, setStrMod);
+    onAbilityModChange(dex, setDexMod);
+    onAbilityModChange(con, setConMod);
+    onAbilityModChange(int, setIntMod);
+    onAbilityModChange(wis, setWisMod);
+    onAbilityModChange(cha, setChaMod);
+  }, [str, dex, con, int, wis, cha]);
   const onStrChange = (e) => {
-    setStr(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setStr(abilityScoreValues[r].name);
-    }
+    objectChange(e.value, setStr);
   };
-
   const onDexChange = (e) => {
-    setDex(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setDex(abilityScoreValues[r].name);
-    }
+    objectChange(e.value, setDex);
   };
-
   const onConChange = (e) => {
-    setCon(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1));
-      setCon(abilityScoreValues[r].name);
-    }
+    objectChange(e.value, setCon);
   };
-
   const onIntChange = (e) => {
-    setInt(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setInt(abilityScoreValues[r].name);
-    }
+    objectChange(e.value, setInt);
   };
-
   const onWisChange = (e) => {
-    setWis(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setWis(abilityScoreValues[r].name);
-    }
+    objectChange(e.value, setWis);
   };
-
   const onChaChange = (e) => {
-    setCha(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setCha(abilityScoreValues[r].name);
-    }
+    objectChange(e.value, setCha);
   };
+  // const onStrChange = (e) => {
+  //   setStr(e.value);
+  //   if (e.value === "Random") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setStr(abilityScoreValues[r].name);
+  //   }
+  // };
+
+  // const onDexChange = (e) => {
+  //   setDex(e.value);
+  //   if (e.value === "Random") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setDex(abilityScoreValues[r].name);
+  //   }
+  // };
+
+  // const onConChange = (e) => {
+  //   setCon(e.value);
+  //   if (e.value === "Random") {
+  //     let r = Math.round(Math.random() * (8 - 1));
+  //     setCon(abilityScoreValues[r].name);
+  //   }
+  // };
+
+  // const onIntChange = (e) => {
+  //   setInt(e.value);
+  //   if (e.value === "Random") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setInt(abilityScoreValues[r].name);
+  //   }
+  // };
+
+  // const onWisChange = (e) => {
+  //   setWis(e.value);
+  //   if (e.value === "Random") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setWis(abilityScoreValues[r].name);
+  //   }
+  // };
+
+  // const onChaChange = (e) => {
+  //   setCha(e.value);
+  //   if (e.value === "Random") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setCha(abilityScoreValues[r].name);
+  //   }
+  // };
 
   const onGenerate = (e) => {
     if (bond === "") {
@@ -788,157 +882,102 @@ const NpcGen = () => {
           <div className={styleB.display}>
             <h1>{name}</h1>
             <h2>
-              <span className={styleB.minorText2}>{race} {sex}, {align}</span>
+              <span className={styleB.minorText2}>
+                {race} {sex}, {align}
+              </span>
             </h2>
             <hr className={styleB.lineBreak} />
+            <h3 className={styleB.abilityScores}>
+              <div>
+                <h3>STR</h3>
+                <div>
+                  <span className={styleB.minorText2}>
+                    {str}
+                    {/* ({strMod}){" "} */}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h3>DEX</h3>
+                <div>
+                  <span className={styleB.minorText2}>
+                    {dex}
+                    {/* ({dexMod}){" "} */}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h3>CON</h3>
+                <div>
+                  <span className={styleB.minorText2}>
+                    {con}
+                    {/* ({conMod}){" "} */}
+                  </span>
+                </div>
+              </div>
+            </h3>
+            <h3 className={styleB.abilityScores}>
+              <div>
+                <h3>INT</h3>
+                <div>
+                  <span className={styleB.minorText2}>
+                    {int}
+                    {/* ({intMod}) */}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h3>WIS</h3>
+                <div>
+                  <span className={styleB.minorText2}>
+                    {wis}
+                    {/* ({wisMod}) */}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <h3>CHA</h3>
+                <div>
+                  <span className={styleB.minorText2}>
+                    {cha}
+                    {/* ({chaMod}) */}
+                  </span>
+                </div>
+              </div>
+            </h3>
+            <hr className={styleB.lineBreak} />
             <h2>
-              Profession {" "}
-              <span className={styleB.minorText2}>
-              {prof}
-            </span>
+              Profession <span className={styleB.minorText2}>{prof}</span>
             </h2>
             <h2>
-            Feature {" "}
-              <span className={styleB.minorText2}>
-              {feature}
-            </span>
+              Feature <span className={styleB.minorText2}>{feature}</span>
             </h2>
             <h2>
-            Talent {" "}
-              <span className={styleB.minorText2}>
-              {talent}
-            </span>
+              Talent <span className={styleB.minorText2}>{talent}</span>
             </h2>
             <h2>
-            Mannerism {" "}
-              <span className={styleB.minorText2}>
-              {mannerism}
-            </span>
+              Mannerism <span className={styleB.minorText2}>{mannerism}</span>
             </h2>
             <h2>
-            Interaction {" "}
-              <span className={styleB.minorText2}>
-              {interaction}
-            </span>
+              Interaction{" "}
+              <span className={styleB.minorText2}>{interaction}</span>
             </h2>
             <h2>
-            Bond {" "}
-              <span className={styleB.minorText2}>
-              {bond}
-            </span>
+              Bond <span className={styleB.minorText2}>{bond}</span>
             </h2>
             <h1>Plot Hook</h1>
             <hr className={styleB.subLineBreak} />
             <h2>
-            Hook {" "}
-              <span className={styleB.minorText2}>
-              {hook}
-            </span>
+              Hook <span className={styleB.minorText2}>{hook}</span>
             </h2>
           </div>
         </div>
 
-        <div className={style.npcgenStats}>
-          <h1 className={style.npcgenDescHeader}>Stats</h1>
-          <div>
-            <div className={style.npcgenDetail}>
-              <h1 className={style.npcgenDetailTitle}>STR: </h1>
-              <h1 className={style.npcgenDetailOutput}>{str}</h1>
-              <Dropdown
-                optionLabel="name"
-                value={str}
-                options={abilityScoreValues}
-                onChange={onStrChange}
-                placeholder="Choose Score"
-              />
-            </div>
-            <div className={style.npcgenDetail}>
-              <h1 className={style.npcgenDetailTitle}>DEX: </h1>
-              <h1 className={style.npcgenDetailOutput}>{dex}</h1>
-              <Dropdown
-                optionLabel="name"
-                value={dex}
-                options={abilityScoreValues}
-                onChange={onDexChange}
-                placeholder="Choose Score"
-              />
-            </div>
-            <div className={style.npcgenDetail}>
-              <h1 className={style.npcgenDetailTitle}>CON: </h1>
-              <h1 className={style.npcgenDetailOutput}>{con}</h1>
-              <Dropdown
-                optionLabel="name"
-                value={con}
-                options={abilityScoreValues}
-                onChange={onConChange}
-                placeholder="Choose Score"
-              />
-            </div>
-            <div className={style.npcgenDetail}>
-              <h1 className={style.npcgenDetailTitle}>INT: </h1>
-              <h1 className={style.npcgenDetailOutput}>{int}</h1>
-              <Dropdown
-                optionLabel="name"
-                value={int}
-                options={abilityScoreValues}
-                onChange={onIntChange}
-                placeholder="Choose Score"
-              />
-            </div>
-            <div className={style.npcgenDetail}>
-              <h1 className={style.npcgenDetailTitle}>WIS: </h1>
-              <h1 className={style.npcgenDetailOutput}>{wis}</h1>
-              <Dropdown
-                optionLabel="name"
-                value={wis}
-                options={abilityScoreValues}
-                onChange={onWisChange}
-                placeholder="Choose Score"
-              />
-            </div>
-            <div className={style.npcgenDetail}>
-              <h1 className={style.npcgenDetailTitle}>CHA: </h1>
-              <h1 className={style.npcgenDetailOutput}>{cha}</h1>
-              <Dropdown
-                optionLabel="name"
-                value={cha}
-                options={abilityScoreValues}
-                onChange={onChaChange}
-                placeholder="Choose Score"
-              />
-            </div>
-            <h1 className={style.npcgenDescHeader}>Plot Hook</h1>
-            <div className={style.npcgenDetail}>
-              <h1 className={style.npcgenDetailTitle}>Hook: </h1>
-              <h1 className={style.npcgenDetailOutput}>{hook}</h1>
-            </div>
-          </div>
+        
         </div>
       </div>
-      {/* <div>
-            <button
-              value="download"
-              onClick={onExport}
-              className={style.npcgenBtnGen}
-            >
-              Export Text
-            </button>
-            <button
-              value="download"
-              onClick={onExport}
-              className={style.npcgenBtnGen}
-            >
-              Export Card
-            </button>
-            <button
-              value="download"
-              onClick={onExport}
-              className={style.npcgenBtnGen}
-            >
-              Add to DB
-            </button>
-          </div> */}
-    </div>
+
+    
   );
 };
 
