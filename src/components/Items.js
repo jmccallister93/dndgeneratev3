@@ -524,14 +524,23 @@ const Items = (props) => {
 
   //   Set all items together
   useEffect(() => {
-    // for (let i = 0; i < selectedRoomType.length; i++) {
-    //     if (roomTypeList.includes(selectedRoomType[i])) {
-    //     } else {
-    //       setRoomTypeList((saveArray) => [...saveArray, selectedRoomType[i]]);
-    //     }
-    //   }
-    
+    // const items = [...weaponOptions,...armorOptions]
     setItemOptions(weaponOptions);
+    setItemOptions((prevState) => [
+      ...prevState,
+      ...armorOptions,
+      ...artOptions,
+      ...containerOptions,
+      ...packOptions,
+      ...expenseOptions,
+      ...gemstoneOptions,
+      ...magicOptions,
+      ...mountItemOptions,
+      ...toolOptions,
+      ...tradeGoodOptions,
+      ...trinketOptions,
+      ...vehicleOptions,
+    ]);
     console.log(itemOptions);
   }, [
     adventuringGearOptions,
