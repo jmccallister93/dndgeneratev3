@@ -16,6 +16,7 @@ import { FileUpload } from "primereact/fileupload";
 import { jsPDF } from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
+import { Toast } from "primereact/toast";
 
 const Items = (props) => {
   const [fetchError, setFetchError] = useState(null);
@@ -152,7 +153,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//armor
+  //armor
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsArmor").select();
@@ -180,7 +181,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//art
+  //art
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsArt").select();
@@ -204,7 +205,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//containers
+  //containers
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsContainers").select();
@@ -228,7 +229,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//currencies
+  //currencies
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsCurrencies").select();
@@ -251,7 +252,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//equipment packs
+  //equipment packs
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -278,7 +279,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//expenses
+  //expenses
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsExpenses").select();
@@ -302,7 +303,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//gemstones
+  //gemstones
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsGemstones").select();
@@ -317,9 +318,9 @@ const Items = (props) => {
         setGemstoneOptions(
           data.map((r) => ({
             name: r.name,
-            // value: r.value,
-            // type: r.type,
-            // cost: r.cost,
+            value: r.value,
+            type: r.type,
+            cost: r.cost,
           }))
         );
       }
@@ -327,7 +328,7 @@ const Items = (props) => {
     fetchData();
     console.log(gemstoneOptions);
   }, []);
-//magic items
+  //magic items
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsMagicAll").select();
@@ -351,7 +352,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//mount items
+  //mount items
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsMountItems").select();
@@ -376,7 +377,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//mounts
+  //mounts
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsMounts").select();
@@ -402,7 +403,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//tools
+  //tools
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsTools").select();
@@ -426,7 +427,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//tradegoods
+  //tradegoods
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsTradeGoods").select();
@@ -450,7 +451,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//trinkets
+  //trinkets
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsTrinkets").select();
@@ -469,7 +470,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//vehciles
+  //vehciles
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsVehicles").select();
@@ -495,7 +496,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-//weapons
+  //weapons
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("itemsWeapons").select();
@@ -565,12 +566,23 @@ const Items = (props) => {
   const itemDialog = (
     <div className="card">
       <h2 className={style.monstergenTitles}>Items</h2>
-      <>
-        <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
-          Add / Remove
-        </Button>
-        {props.randomItemBtn}
-      </>
+
+      {props.dialogVisibleItem === false ? (
+        <div>
+          <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
+            Add / Remove
+          </Button>
+          {props.randomItemBtn}
+        </div>
+      ) : (
+        <div>
+          <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
+            Loading...
+          </Button>
+          {props.randomItemBtn}
+        </div>
+      )}
+
       <Dialog
         header="Items"
         visible={props.dialogVisibleItem}
@@ -578,6 +590,7 @@ const Items = (props) => {
         modal
         onHide={props.closeDialogItem}
         footer={props.dialogFooterItem}
+        transitionOptions
       >
         <DataTable
           value={itemOptions}

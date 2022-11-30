@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import style from "../stylesheets/BuildingGen.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -15,6 +15,7 @@ import { Dialog } from "primereact/dialog";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { InputNumber } from "primereact/inputnumber";
 import Items from "../components/Items";
+import { Toast } from "primereact/toast";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -679,7 +680,7 @@ const BuildingGen = () => {
   //NPCs
 
   //Items
-  const openDialogItem = () => {
+  const openDialogItem = (e) => {
     setDialogVisibleItem(true);
   };
   const closeDialogItem = () => {
@@ -707,68 +708,7 @@ const BuildingGen = () => {
       Random
     </Button>
   );
-  const itemDialog = (
-    <div className="card">
-      <h2 className={style.monstergenTitles}>Items</h2>
-      <>
-        <Button onClick={openDialogItem} className={style.btnAddRemove}>
-          Add / Remove
-        </Button>
-        {randomItemBtn}
-      </>
-      <Dialog
-        header="Items"
-        visible={dialogVisibleItem}
-        maximizable
-        modal
-        onHide={closeDialogItem}
-        footer={dialogFooterItem}
-      >
-        <DataTable
-          value={itemOptions}
-          scrollable
-          scrollHeight="60vh"
-          rows={20}
-          dataKey="name"
-          selection={selectedItem}
-          onSelectionChange={(e) => {
-            setSelectedItem(e.value);
-          }}
-          filters={filters}
-          filterDisplay="row"
-          responsiveLayout="scroll"
-          globalFilterFields={["name"]}
-          header={header}
-          emptyMessage="No items found."
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          rowHover
-          resizableColumns
-          reorderableColumns
-          reorderableRows
-        >
-          <Column
-            selectionMode="multiple"
-            selectionAriaLabel="name"
-            headerStyle={{ width: "6em" }}
-          ></Column>
-          <Column
-            field="name"
-            header="Name"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
-          <Column
-            field="type"
-            header="Type"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
-        </DataTable>
-      </Dialog>
-    </div>
-  );
+
   const itemDisplay = itemList.map((i) => {
     return <h4>{`${i.name},`}</h4>;
   });
@@ -901,13 +841,12 @@ const BuildingGen = () => {
             Items Details
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
-           <Items
+            <Items
               openDialogItem={openDialogItem}
               randomItemBtn={randomItemBtn}
               dialogVisibleItem={dialogVisibleItem}
               closeDialogItem={closeDialogItem}
               dialogFooterItem={dialogFooterItem}
-            //   itemOptions={itemOptions}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
               header={header}
