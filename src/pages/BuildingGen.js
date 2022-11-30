@@ -14,6 +14,7 @@ import { Column } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { InputNumber } from "primereact/inputnumber";
+import { Items } from "../components/Items.js";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -21,6 +22,8 @@ const BuildingGen = () => {
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isLayoutActive, setIsLayoutActive] = useState(false);
   const [isRoomActive, setIsRoomActive] = useState(false);
+  const [isNpcActive, setIsNpcActive] = useState(false);
+  const [isItemActive, setIsItemActive] = useState(false);
 
   const [buildingName, setBuildingName] = useState("");
   const [buildingNames, setBuildingNames] = useState("");
@@ -95,9 +98,16 @@ const BuildingGen = () => {
   const [roomTypeOptions, setRoomTypeOptions] = useState("");
   const [selectedRoomType, setSelectedRoomType] = useState(null);
   const [dialogVisibleRoomType, setDialogVisibleRoomType] = useState(false);
-  const [roomTypeList, setRoomTypeList]=useState([])
+  const [roomTypeList, setRoomTypeList] = useState([]);
 
   const [roomCount, setRoomCount] = useState("");
+
+  const [item, setItem] = useState("");
+  const [items, setItems] = useState("");
+  const [itemOptions, setItemOptions] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [dialogVisibleItem, setDialogVisibleItem] = useState(false);
+  const [itemList, setItemList] = useState([]);
 
   const [housingOptions, setHousingOptions] = useState("");
   const [tradeOptions, setTradeOptions] = useState("");
@@ -218,6 +228,12 @@ const BuildingGen = () => {
   };
   const showRooms = (e) => {
     setIsRoomActive((current) => !current);
+  };
+  const showNpcs = (e) => {
+    setIsNpcActive((current) => !current);
+  };
+  const showItems = (e) => {
+    setIsItemActive((current) => !current);
   };
   //InputTexts
   const customInputText = (title, value, change, placeholder, click) => (
@@ -554,11 +570,11 @@ const BuildingGen = () => {
     "Set Count",
     onRandomBuildingRoom
   );
-  useEffect(()=> {
-    for(let i = 0; buildingRoom > i; i++){
-        setRoomCount(i)
+  useEffect(() => {
+    for (let i = 0; buildingRoom > i; i++) {
+      setRoomCount(i);
     }
-  }, [buildingRoom])
+  }, [buildingRoom]);
 
   //Room Type
   useEffect(() => {
@@ -584,12 +600,10 @@ const BuildingGen = () => {
   const onRandomRoomType = (e) => {
     const max = roomTypeOptions.length - 1;
     let r = Math.round(Math.random() * (max - 0));
-    if(roomTypeList.includes(roomTypeOptions[r])){
-
-    }else {
-        setRoomTypeList((saveArray) => [...saveArray, roomTypeOptions[r]]);
+    if (roomTypeList.includes(roomTypeOptions[r])) {
+    } else {
+      setRoomTypeList((saveArray) => [...saveArray, roomTypeOptions[r]]);
     }
-    
   };
   const randomRoomTypeBtn = (
     <Button onClick={onRandomRoomType} className={style.btnName}>
@@ -659,13 +673,106 @@ const BuildingGen = () => {
     </div>
   );
   const roomTypeDisplay = roomTypeList.map((i) => {
-    return (
-        <h4>
-          {`${i.name},`}
-        </h4>
-    );
+    return <h4>{`${i.name},`}</h4>;
   });
- 
+
+  //NPCs
+
+  //Items
+  const openDialogItem = () => {
+    setDialogVisibleItem(true);
+  };
+  const closeDialogItem = () => {
+    setDialogVisibleItem(false);
+    for (let i = 0; i < selectedItem.length; i++) {
+      if (itemList.includes(selectedItem[i])) {
+      } else {
+        setItemList((saveArray) => [...saveArray, selectedItem[i]]);
+      }
+    }
+  };
+  const dialogFooterItem = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogItem} />;
+  };
+  const onRandomItem = (e) => {
+    const max = itemOptions.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
+    if (itemList.includes(itemOptions[r])) {
+    } else {
+      setItemList((saveArray) => [...saveArray, itemOptions[r]]);
+    }
+  };
+  const randomItemBtn = (
+    <Button onClick={onRandomItem} className={style.btnName}>
+      Random
+    </Button>
+  );
+  const itemDialog = (
+    <div className="card">
+      <h2 className={style.monstergenTitles}>Items</h2>
+      <>
+        <Button onClick={openDialogItem} className={style.btnAddRemove}>
+          Add / Remove
+        </Button>
+        {randomItemBtn}
+      </>
+      <Dialog
+        header="Items"
+        visible={dialogVisibleItem}
+        maximizable
+        modal
+        onHide={closeDialogItem}
+        footer={dialogFooterItem}
+      >
+        <DataTable
+          value={itemOptions}
+          scrollable
+          scrollHeight="60vh"
+          rows={20}
+          dataKey="name"
+          selection={selectedItem}
+          onSelectionChange={(e) => {
+            setSelectedItem(e.value);
+          }}
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+          <Column
+            field="type"
+            header="Type"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
+  );
+  const itemDisplay = itemList.map((i) => {
+    return <h4>{`${i.name},`}</h4>;
+  });
+
   //Buttons
   const onGenerate = (e) => {
     if (buildingCategory === "") {
@@ -692,12 +799,11 @@ const BuildingGen = () => {
     if (buildingWindow === "") {
       onRandomBuildingWindow();
     }
-    if (roomType === ""){
-        let r = Math.round(Math.random() * (2 - 0));
-        if(r === 1){
-            onRandomRoomType();
-        }
-      
+    if (roomType === "") {
+      let r = Math.round(Math.random() * (2 - 0));
+      if (r === 1) {
+        onRandomRoomType();
+      }
     }
     if (buildingFloor === "") {
       onRandomBuildingFloor();
@@ -712,7 +818,7 @@ const BuildingGen = () => {
     //     const max = buildingList.length - 1;
     //     let r = Math.round(Math.random() * (max - 0));
     //     setBuildingType(buildingList[r].name);
-    // } 
+    // }
   };
   const onClear = (e) => {
     setBuildingName("");
@@ -728,8 +834,8 @@ const BuildingGen = () => {
     setBuildingRoom("");
     setBuildingFloor("");
     setRoomType("");
-    setBuildingList("")
-    setRoomTypeList([])
+    setBuildingList("");
+    setRoomTypeList([]);
   };
 
   return (
@@ -784,6 +890,20 @@ const BuildingGen = () => {
             {roomNumber}
             {roomTypeDialog}
           </div>
+          <h1 className={style.subHeader} onClick={showNpcs}>
+            NPCs Details
+          </h1>
+          <div className={isNpcActive ? style.subsection : style.hidden}>
+            {}
+            {}
+          </div>
+          <h1 className={style.subHeader} onClick={showItems}>
+            Items Details
+          </h1>
+          <div className={isItemActive ? style.subsection : style.hidden}>
+            {}
+            {}
+          </div>
         </div>
         {/* Main Display */}
         <div className={style.display}>
@@ -827,7 +947,8 @@ const BuildingGen = () => {
             Room Count: <span className={style.minorText2}>{buildingRoom}</span>
           </h2>
           <h2>
-            Specific Rooms: <div className={style.detesContainer}>{roomTypeDisplay}</div>
+            Specific Rooms:{" "}
+            <div className={style.detesContainer}>{roomTypeDisplay}</div>
           </h2>
         </div>
       </div>
