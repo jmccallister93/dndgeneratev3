@@ -5,6 +5,9 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
+import { DataTable } from "primereact/datatable";
+import { Column } from "jspdf-autotable";
+import { Dialog } from "primereact/dialog";
 
 const Npcs = (props) => {
   const [fetchError, setFetchError] = useState();
@@ -403,25 +406,87 @@ const Npcs = (props) => {
 //     console.log(npcList)
 //   }, [props.openDialogNpc])
 
-
+const npc = {
+    Name: name,
+    Race: race,
+    Sex: sex,
+    Alignment: align,
+    Profession: prof,
+    Feature: feature,
+    Talent: talent,
+    Mannerism: mannerism,
+    Interaction: interaction,
+    Bond: bond,
+    STR: str,
+    DEX: dex,
+    CON: con,
+    INT: int,
+    WIS: wis,
+    CHA: cha,
+    Hook: hook,
+  };
 
   return (
     <>
-      {props.dialogVisibleNpc === false ? (
-        <div>
-          <Button onClick={onGenerate} className={styleB.btnAddRemove}>
-            Add / Remove
-          </Button>
-          {props.randomItemBtn}
-        </div>
-      ) : (
         <div>
           <Button onClick={props.openDialogNpc} className={styleB.btnAddRemove}>
-            Loading...
+            Add / Remove
           </Button>
-          {props.randomItemBtn}
-        </div>
-      )}
+         
+          <Dialog
+        header="NPCs"
+        visible={props.dialogVisibleNpc}
+        maximizable
+        modal
+        onHide={props.closeDialogNpc}
+        footer={props.dialogFooterNpc}
+        transitionOptions
+      >
+        
+        <DataTable
+          value={abilityModOption}
+          scrollable
+          scrollHeight="60vh"
+          rows={20}
+          dataKey="name"
+          selection={props.selectedNpc}
+          onSelectionChange={(e) => {
+            props.setSelectedNpc(e.value);
+          }}
+        //   filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={props.header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            field="name"
+            header="Name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+          <Column
+            field="type"
+            header="Type"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </div>
     </>
   );
 };
