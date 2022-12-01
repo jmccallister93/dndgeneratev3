@@ -759,6 +759,9 @@ const BuildingGen = () => {
     //     let r = Math.round(Math.random() * (max - 0));
     //     setBuildingType(buildingList[r].name);
     // }
+    if(itemList === []){
+        onRandomItem()
+    }
   };
   const onClear = (e) => {
     setBuildingName("");
@@ -776,6 +779,17 @@ const BuildingGen = () => {
     setRoomType("");
     setBuildingList("");
     setRoomTypeList([]);
+    setItemList([])
+    setSelectedBuildingColor("")
+    setSelectedBuildingRoom("")
+    setSelectedBuildingSmell("")
+    setSelectedBuildingSound("")
+    setSelectedBuildingStyle("")
+    setSelectedBuildingType("")
+    setSelectedItem("")
+    setSelectedRoomType("")
+    // setNpcList([])
+    // setSelectedNpc("")
   };
 
   return (
@@ -816,7 +830,7 @@ const BuildingGen = () => {
             {windowNumber}
           </div>
           <h1 className={style.subHeader} onClick={showDetails}>
-            Building Details
+            Building Features
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             {buildingStyleDrop}
@@ -824,21 +838,21 @@ const BuildingGen = () => {
             {buildingSoundDrop}
           </div>
           <h1 className={style.subHeader} onClick={showRooms}>
-            Rooms Details
+            Rooms
           </h1>
           <div className={isRoomActive ? style.subsection : style.hidden}>
             {roomNumber}
             {roomTypeDialog}
           </div>
           <h1 className={style.subHeader} onClick={showNpcs}>
-            NPCs Details
+            NPCs
           </h1>
           <div className={isNpcActive ? style.subsection : style.hidden}>
             {}
             {}
           </div>
           <h1 className={style.subHeader} onClick={showItems}>
-            Items Details
+            Items
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <Items

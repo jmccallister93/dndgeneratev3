@@ -561,6 +561,20 @@ const Items = (props) => {
     vehicleOptions,
     weaponOptions,
   ]);
+  //Random Item
+//   const onRandomItem = (e) => {
+//     const max = itemOptions.length - 1;
+//     let r = Math.round(Math.random() * (max - 0));
+//     if (itemList.includes(itemOptions[r])) {
+//     } else {
+//       setItemList((saveArray) => [...saveArray, itemOptions[r]]);
+//     }
+//   };
+//   const randomItemBtn = (
+//     <Button onClick={onRandomItem} className={style.btnName}>
+//       Random
+//     </Button>
+//   );
 
   //Dialog Vairable
   const itemDialog = (
