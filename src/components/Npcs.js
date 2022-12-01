@@ -161,6 +161,7 @@ const Npcs = (props) => {
     };
     fetchData();
   }, []);
+
   //Manual Data
   const hookVerb = [
     { id: 1, name: "Random", value: "Random" },
@@ -231,7 +232,7 @@ const Npcs = (props) => {
       setName(firstName + " " + epiphet_b + noun_a);
     }
   };
-//   console.log(nameOptions)
+  //   console.log(nameOptions)
 
   //Generation
   const onGenerate = (e) => {
@@ -375,38 +376,18 @@ const Npcs = (props) => {
       );
     }
   };
-//   //Clear
-//   const onClear = (e) => {
-//     setName("");
-//     setAlign("");
-//     setBond("");
-//     setFeature("");
-//     setProf("");
-//     setName("");
-//     setTalent("");
-//     setRace("");
-//     setSex("");
-//     setMannerism("");
-//     setInteraction("");
-//     setBond("");
-//     setStr("");
-//     setDex("");
-//     setCon("");
-//     setInt("");
-//     setWis("");
-//     setCha("");
-//     setHook("");
-//   };
-//   useEffect(()=> {
-//     let r = Math.round(Math.random() * (10 - 1) + 1);
-//     for(let i=0; r; i++){
-//         let newNpc = onGenerate()
-//         setNpcList(prev => [...prev, newNpc])
-//     }
-//     console.log(npcList)
-//   }, [props.openDialogNpc])
 
-const npc = {
+//   ISSUES ARE HERE 
+// ON GEN CANNOT RUN BECAUSE OPTIONS ARE NOT YET SET 
+// useEffect(()=>{
+//     onGenerate()
+//   }, [])
+  useEffect(()=> {
+    
+    setNpcOptions(race)
+  }, [race])
+
+  const npc = {
     Name: name,
     Race: race,
     Sex: sex,
@@ -428,65 +409,63 @@ const npc = {
 
   return (
     <>
-        <div>
-          <Button onClick={props.openDialogNpc} className={styleB.btnAddRemove}>
-            Add / Remove
-          </Button>
-         
-          <Dialog
-        header="NPCs"
-        visible={props.dialogVisibleNpc}
-        maximizable
-        modal
-        onHide={props.closeDialogNpc}
-        footer={props.dialogFooterNpc}
-        transitionOptions
-      >
-        
-        <DataTable
-          value={abilityModOption}
-          scrollable
-          scrollHeight="60vh"
-          rows={20}
-          dataKey="name"
-          selection={props.selectedNpc}
-          onSelectionChange={(e) => {
-            props.setSelectedNpc(e.value);
-          }}
-        //   filters={filters}
-          filterDisplay="row"
-          responsiveLayout="scroll"
-          globalFilterFields={["name"]}
-          header={props.header}
-          emptyMessage="No items found."
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          rowHover
-          resizableColumns
-          reorderableColumns
-          reorderableRows
+      <div>
+        <Button onClick={props.openDialogNpc} className={styleB.btnAddRemove}>
+          Add / Remove
+        </Button>
+        <Dialog
+          header="NPCs"
+          visible={props.dialogVisibleNpc}
+          maximizable
+          modal
+          onHide={props.closeDialogNpc}
+          footer={props.dialogFooterNpc}
+          transitionOptions
         >
-          <Column
-            selectionMode="multiple"
-            selectionAriaLabel="name"
-            headerStyle={{ width: "6em" }}
-          ></Column>
-          <Column
-            field="name"
-            header="Name"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
-          <Column
-            field="type"
-            header="Type"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
-        </DataTable>
-      </Dialog>
-    </div>
+          <DataTable
+            value={npcOptions}
+            scrollable
+            scrollHeight="60vh"
+            rows={20}
+            dataKey="name"
+            selection={props.selectedNpc}
+            onSelectionChange={(e) => {
+              props.setSelectedNpc(e.value);
+            }}
+            //   filters={filters}
+            filterDisplay="row"
+            responsiveLayout="scroll"
+            globalFilterFields={["name"]}
+            header={props.header}
+            emptyMessage="No items found."
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            rowHover
+            resizableColumns
+            reorderableColumns
+            reorderableRows
+          >
+            <Column
+              selectionMode="multiple"
+              selectionAriaLabel="name"
+              headerStyle={{ width: "6em" }}
+            ></Column>
+            <Column
+              field="name"
+              header="Name"
+              sortable
+              filter
+              filterPlaceholder="Search"
+            ></Column>
+            <Column
+              field="type"
+              header="Type"
+              sortable
+              filter
+              filterPlaceholder="Search"
+            ></Column>
+          </DataTable>
+        </Dialog>
+      </div>
     </>
   );
 };
