@@ -562,19 +562,19 @@ const Items = (props) => {
     weaponOptions,
   ]);
   //Random Item
-//   const onRandomItem = (e) => {
-//     const max = itemOptions.length - 1;
-//     let r = Math.round(Math.random() * (max - 0));
-//     if (itemList.includes(itemOptions[r])) {
-//     } else {
-//       setItemList((saveArray) => [...saveArray, itemOptions[r]]);
-//     }
-//   };
-//   const randomItemBtn = (
-//     <Button onClick={onRandomItem} className={style.btnName}>
-//       Random
-//     </Button>
-//   );
+  const onRandomItem = (e) => {
+    const max = itemOptions.length - 1;
+    let r = Math.round(Math.random() * (max - 0));
+    if (props.itemList.includes(itemOptions[r])) {
+    } else {
+      props.setItemList((saveArray) => [...saveArray, itemOptions[r]]);
+    }
+  };
+  const randomItemBtn = (
+    <Button onClick={onRandomItem} className={style.btnName}>
+      Random
+    </Button>
+  );
 
   //Dialog Vairable
   const itemDialog = (
@@ -586,16 +586,17 @@ const Items = (props) => {
           <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
             Add / Remove
           </Button>
-          {props.randomItemBtn}
+          {randomItemBtn}
         </div>
       ) : (
         <div>
           <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
             Loading...
           </Button>
-          {props.randomItemBtn}
+          {randomItemBtn}
         </div>
       )}
+      {/* {randomItemBtn} */}
 
       <Dialog
         header="Items"

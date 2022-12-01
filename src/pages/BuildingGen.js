@@ -188,6 +188,7 @@ const BuildingGen = () => {
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    type: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     representative: { value: null, matchMode: FilterMatchMode.IN },
     status: { value: null, matchMode: FilterMatchMode.EQUALS },
     verified: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -857,8 +858,10 @@ const BuildingGen = () => {
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
               header={header}
+              setItemList={setItemList}
+             itemList={itemList}
             />
-            {}
+           
           </div>
         </div>
         {/* Main Display */}
