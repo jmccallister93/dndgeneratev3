@@ -17,6 +17,7 @@ import { InputNumber } from "primereact/inputnumber";
 import Items from "../components/Items";
 import { Toast } from "primereact/toast";
 
+
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -105,10 +106,12 @@ const BuildingGen = () => {
 
   const [item, setItem] = useState("");
   const [items, setItems] = useState("");
-  const [itemOptions, setItemOptions] = useState("");
+  const [itemOptions, setItemOptions] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [dialogVisibleItem, setDialogVisibleItem] = useState(false);
   const [itemList, setItemList] = useState([]);
+//   const [itemDisplay, setItemDisplay] = useState();
+
 
   const [housingOptions, setHousingOptions] = useState("");
   const [tradeOptions, setTradeOptions] = useState("");
@@ -689,13 +692,22 @@ const BuildingGen = () => {
   const dialogFooterItem = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogItem} />;
   };
+
+    useEffect(() => {
+    setItemOptions(
+        
+    );
+  }, [<Items/>]);
+
   const onRandomItem = (e) => {
-    const max = itemOptions.length - 1;
-    let r = Math.round(Math.random() * (max - 0));
-    if (itemList.includes(itemOptions[r])) {
-    } else {
-      setItemList((saveArray) => [...saveArray, itemOptions[r]]);
-    }
+    // const max = itemOptions.length - 1;
+    // let r = Math.round(Math.random() * (max - 0));
+    // if (itemList.includes(itemOptions[r])) {
+    // } else {
+    //   setItemList((saveArray) => [...saveArray, itemOptions[r]]);
+    // }
+    console.log(itemOptions)
+    // setItemList([itemOptions[23].name])
   };
   const randomItemBtn = (
     <Button onClick={onRandomItem} className={style.btnName}>
@@ -703,9 +715,11 @@ const BuildingGen = () => {
     </Button>
   );
 
-  const itemDisplay = itemList.map((i) => {
-    return <h4>{`${i.name},`}</h4>;
-  });
+
+const itemDisplay = 
+    itemList.map((i) => {
+      return <h4>{`${i.name},`}</h4>;
+    });
 
   //Buttons
   const onGenerate = (e) => {
@@ -748,15 +762,8 @@ const BuildingGen = () => {
         onRandomBuildingType();
       }, 100);
     }
-    // if(buildingType === ""){
-    //     const max = buildingList.length - 1;
-    //     let r = Math.round(Math.random() * (max - 0));
-    //     setBuildingType(buildingList[r].name);
-    // }
-    if(itemList === []){
-        onRandomItem()
-    }
   };
+
   const onClear = (e) => {
     setBuildingName("");
     setBuildingCategory("");
@@ -773,15 +780,15 @@ const BuildingGen = () => {
     setRoomType("");
     setBuildingList("");
     setRoomTypeList([]);
-    setItemList([])
-    setSelectedBuildingColor("")
-    setSelectedBuildingRoom("")
-    setSelectedBuildingSmell("")
-    setSelectedBuildingSound("")
-    setSelectedBuildingStyle("")
-    setSelectedBuildingType("")
-    setSelectedItem("")
-    setSelectedRoomType("")
+    setItemList([]);
+    setSelectedBuildingColor("");
+    setSelectedBuildingRoom("");
+    setSelectedBuildingSmell("");
+    setSelectedBuildingSound("");
+    setSelectedBuildingStyle("");
+    setSelectedBuildingType("");
+    setSelectedRoomType("");
+    setSelectedItem("");
     // setNpcList([])
     // setSelectedNpc("")
   };
@@ -851,17 +858,18 @@ const BuildingGen = () => {
           <div className={isItemActive ? style.subsection : style.hidden}>
             <Items
               openDialogItem={openDialogItem}
-              randomItemBtn={randomItemBtn}
+              //   randomItemBtn={randomItemBtn}
               dialogVisibleItem={dialogVisibleItem}
               closeDialogItem={closeDialogItem}
               dialogFooterItem={dialogFooterItem}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
               header={header}
-              setItemList={setItemList}
-             itemList={itemList}
-            />
-           
+              setItemLsit={setItemList}
+              randomItemBtn={randomItemBtn}
+              itemOptions={itemOptions}
+              //   onRandomItem={onRandomItem}
+            ></Items>
           </div>
         </div>
         {/* Main Display */}

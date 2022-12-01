@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import supabase from "../config/supabaseClient";
 
-const useFetch = (name) => {
+const useFetch = (name, setFetchError, setSingular, setPlural, setOptions) => {
     return ( 
         useEffect(() => {
             const fetchData = async () => {
@@ -9,12 +9,16 @@ const useFetch = (name) => {
                 .from(name)
                 .select()
                    
-              if (error) {
-                console.log(error)
-              }
-              if (data) {
-                console.log(data)
-              }
+                if (error) {
+                  setFetchError("Could not fetch the data");
+                  console.log(error);
+                  setSingular(null);
+                }
+                if (data) {
+                  setPlural(data);
+                  setFetchError(null);
+                  setOptions(data.map((r) => ({ name: r.name, value: r.value})));
+                }
             }
           
             fetchData()

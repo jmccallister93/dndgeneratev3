@@ -21,6 +21,10 @@ import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
+import GetData from "../components/GetData";
+import { Get } from "react-axios";
+import useFetch from "../components/useFetch";
+import Items from "../components/Items";
 
 const ItemGen = () => {
   // Set state variables
@@ -29,6 +33,7 @@ const ItemGen = () => {
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isLayoutActive, setIsLayoutActive] = useState(false);
   const [isRoomActive, setIsRoomActive] = useState(false);
+  const [isItemActive, setIsItemActive] = useState(false);
 
   const [allItems, setAllItems] = useState();
 
@@ -130,423 +135,15 @@ const ItemGen = () => {
   const [mountSpeed, setMountSpeed] = useState("");
   const [mountCapacity, setMountCapacity] = useState("");
 
+  const [itemOptions, setItemOptions] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [dialogVisibleItem, setDialogVisibleItem] = useState(false);
+  const [itemList, setItemList] = useState([]);
+
   const [genItem, setGenItem] = useState();
 
-  //Export Logic
-  const [selectedItems, setSelectedItems] = useState(null);
-  const dt = useRef(null);
-
-  const exportPdf = () => {
-    import("jspdf").then((jsPDF) => {
-      import("jspdf-autotable").then(() => {
-        const doc = new jsPDF.default(0, 0);
-        doc.autoTable(exportColumns, allItems);
-        doc.save("products.pdf");
-      });
-    });
-  };
-  const cols = [
-    { field: "name", header: "Name" },
-    { field: "cost", header: "Cost" },
-    { field: "type", header: "Type" },
-  ];
-  const exportColumns = cols.map((col) => ({
-    title: col.header,
-    dataKey: col.field,
-  }));
-
-  const exportCSV = (selectionOnly) => {
-    dt.current.exportCSV({ selectionOnly });
-  };
-
-  const exportExcel = () => {
-    import("xlsx").then((xlsx) => {
-      const worksheet = xlsx.utils.json_to_sheet(allItems);
-      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-      const excelBuffer = xlsx.write(workbook, {
-        bookType: "xlsx",
-        type: "array",
-      });
-      saveAsExcelFile(excelBuffer, "products");
-    });
-  };
-
-  const saveAsExcelFile = (buffer, fileName) => {
-    import("file-saver").then((module) => {
-      if (module && module.default) {
-        let EXCEL_TYPE =
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-        let EXCEL_EXTENSION = ".xlsx";
-        const data = new Blob([buffer], {
-          type: EXCEL_TYPE,
-        });
-
-        module.default.saveAs(
-          data,
-          fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
-        );
-      }
-    });
-  };
-
-  //Export Buttons
-  const exportBtns = (
-    <div className="flex align-items-end export-buttons">
-      <Button
-        type="button"
-        icon="pi pi-file"
-        onClick={() => exportCSV(true)}
-        className="p-button-info mr-2 "
-        data-pr-tooltip="Export CSV"
-      />
-      <Button
-        type="button"
-        icon="pi pi-file-excel"
-        onClick={exportExcel}
-        className="p-button-success mr-2"
-        data-pr-tooltip="Export XLS"
-      />
-      <Button
-        type="button"
-        icon="pi pi-file-pdf"
-        onClick={exportPdf}
-        className="p-button-warning mr-2"
-        data-pr-tooltip="Export PDF"
-      />
-    </div>
-  );
-
-  //Pull supabase data
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsAdventuringGear")
-
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setAdventuringGear(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setAdventuringGear(data);
-        setAdventuringGearOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsArmor")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setArmor(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setArmor(data);
-        setArmorOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsArt")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setArt(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setArt(data);
-        setArtOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsContainers")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setContainer(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setContainer(data);
-        setContainerOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsEquipmentPacks")
-
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setPack(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setPack(data);
-        setPackOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsExpenses")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setExpense(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setExpense(data);
-        setExpenseOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsGemstones")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setGemstone(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setGemstone(data);
-        setGemstoneOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsMagicAll")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setMagic(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setMagic(data);
-        setMagicOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsMountItems")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setMountItem(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setMountItem(data);
-        setMountItemOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsMounts")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setMount(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setMount(data);
-        setMountOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsTools")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setTool(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setTool(data);
-        setToolOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsTradeGoods")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setTradeGood(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setTradeGood(data);
-        setTradeGoodOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsTrinkets")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setTrinket(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setTrinket(data);
-        setTrinketOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsVehicles")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setVehicle(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setVehicle(data);
-        setVehicleOptions(
-          data.map((r) => ({
-            name: r.name,
-            value: r.value,
-            cost: r.cost,
-            type: r.type,
-          }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsWeapons")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setWeapon(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setWeapon(data);
-        setWeaponOptions(
-          data.map((r) => ({
-            id: r.id,
-            name: r.name,
-            value: r.value,
-            cost: r.cost,
-            type: r.type,
-          }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    setAllItems(weaponOptions);
-    // console.log(allItems);
-  });
-
+  //Pull Data
+  //Item Types
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -566,7 +163,7 @@ const ItemGen = () => {
     };
     fetchData();
   }, []);
-
+  //Rarities
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -586,7 +183,7 @@ const ItemGen = () => {
     };
     fetchData();
   }, []);
-
+  //Currencies
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -606,7 +203,7 @@ const ItemGen = () => {
     };
     fetchData();
   }, []);
-
+  //damageTypes
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -626,7 +223,7 @@ const ItemGen = () => {
     };
     fetchData();
   }, []);
-
+  //Ability Modifiers
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -649,7 +246,7 @@ const ItemGen = () => {
     };
     fetchData();
   }, []);
-
+  //Abilities
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -671,6 +268,41 @@ const ItemGen = () => {
     };
     fetchData();
   }, []);
+  //Datatable
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    type: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    representative: { value: null, matchMode: FilterMatchMode.IN },
+    status: { value: null, matchMode: FilterMatchMode.EQUALS },
+    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
+  });
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+  const renderHeader = () => {
+    return (
+      <div>
+        <span className="p-input-icon-left">
+          <i className="pi pi-search mr-2" />
+          <InputText
+            value={globalFilterValue}
+            onChange={onGlobalFilterChange}
+            placeholder="Keyword Search"
+          />
+        </span>
+      </div>
+    );
+  };
+  const header = (
+    <div className="flex justify-content-between">{renderHeader()}</div>
+  );
 
   const weaponTypes = [
     "Random",
@@ -1012,9 +644,51 @@ const ItemGen = () => {
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
-  const showDetails = (e) => {
-    setIsDetailActive((current) => !current);
+  const showItems = (e) => {
+    setIsItemActive((current) => !current);
   };
+
+  //Item List
+
+  const openDialogItem = (e) => {
+    setDialogVisibleItem(true);
+  };
+  const closeDialogItem = () => {
+    setDialogVisibleItem(false);
+    for (let i = 0; i < selectedItem.length; i++) {
+      if (itemList.includes(selectedItem[i])) {
+      } else {
+        setItemList((saveArray) => [...saveArray, selectedItem[i]]);
+      }
+    }
+  };
+  const dialogFooterItem = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogItem} />;
+  };
+
+  useEffect(() => {
+    setItemOptions();
+  }, [<Items />]);
+
+  const onRandomItem = (e) => {
+    // const max = itemOptions.length - 1;
+    // let r = Math.round(Math.random() * (max - 0));
+    // if (itemList.includes(itemOptions[r])) {
+    // } else {
+    //   setItemList((saveArray) => [...saveArray, itemOptions[r]]);
+    // }
+    console.log(itemOptions);
+    // setItemList([itemOptions[23].name])
+  };
+  const randomItemBtn = (
+    <Button onClick={onRandomItem} className={style.btnName}>
+      Random
+    </Button>
+  );
+
+  const itemDisplay = itemList.map((i) => {
+    return <h4>{`${i.name},`}</h4>;
+  });
 
   return (
     <div className={styleB.mainWrapper}>
@@ -1319,6 +993,25 @@ const ItemGen = () => {
                 </div>
               ) : null}
             </div>
+          </div>
+          <h1 className={styleB.subHeader} onClick={showItems}>
+            Item Preset
+          </h1>
+          <div className={isItemActive ? styleB.subsection : styleB.hidden}>
+            <Items
+              openDialogItem={openDialogItem}
+              //   randomItemBtn={randomItemBtn}
+              dialogVisibleItem={dialogVisibleItem}
+              closeDialogItem={closeDialogItem}
+              dialogFooterItem={dialogFooterItem}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              header={header}
+              setItemLsit={setItemList}
+              randomItemBtn={randomItemBtn}
+              itemOptions={itemOptions}
+              //   onRandomItem={onRandomItem}
+            ></Items>
           </div>
         </div>
 
