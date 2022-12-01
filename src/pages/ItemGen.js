@@ -762,16 +762,6 @@ const ItemGen = () => {
                 Randomize
               </button>
             </div>
-            <div>
-              <h1>Description</h1>
-              <InputTextarea value={itemDesc} onChange={onDescChange} placeholder="Item Description"/>
-              <button
-                className={style.itemgenBtnName}
-                onClick={onRandomDescription}
-              >
-                Randomize
-              </button>
-            </div>
             <div className={style.itemgenWeaponAdditionalWrapper}>
               {type === "Weapon" ||
               type === "Vehicle" ||
@@ -955,6 +945,16 @@ const ItemGen = () => {
                   </button>
                 </div>
               ) : null}
+              <div>
+              <h1>Description</h1>
+              <InputTextarea value={itemDesc} onChange={onDescChange} placeholder="Item Description"/>
+              <button
+                className={style.itemgenBtnName}
+                onClick={onRandomDescription}
+              >
+                Randomize
+              </button>
+            </div>
             </div>
           </div>
         </div>
@@ -978,11 +978,11 @@ const ItemGen = () => {
           {type === "Weapon" ? (
             <>
               <h2>
-                Damage
+                Damage{" "}
                 <span className={styleB.minorText2}>{weaponDmg}</span>
               </h2>
               <h2>
-                Damage Type
+                Damage Type{" "}
                 <span className={styleB.minorText2}>{dmgType}</span>
               </h2>
               <h2>
@@ -995,15 +995,35 @@ const ItemGen = () => {
               </h2>
             </>
           ) : null}
+             {type === "Armor" ? (
+            <>
+              <h2>
+                AC{" "}
+                <span className={styleB.minorText2}>{armorAc}</span>
+              </h2>
+              <h2>
+                Modifier{" "}
+                <span className={styleB.minorText2}>{armorMod}</span>
+              </h2>
+              <h2>
+                Strength Requirement{" "}
+                <span className={styleB.minorText2}>{armorStr}</span>
+              </h2>
+              <h2>
+                Stealth Disadvantage{" "}
+                <span className={styleB.minorText2}>{armorStealth}</span>
+              </h2>
+            </>
+          ) : null}
 
           {type === "Vehicle" ? (
             <>
               <h2>
-                Speed
+                Speed{" "}
                 <span className={styleB.minorText2}>{vehicleSpeed}</span>
               </h2>
               <h2>
-                Carry Capacity
+                Carry Capacity{" "}
                 <span className={styleB.minorText2}>{vehicleCapacity}</span>
               </h2>
             </>
@@ -1012,11 +1032,11 @@ const ItemGen = () => {
           {type === "Mount" ? (
             <>
               <h2>
-                Speed
+                Speed{" "}
                 <span className={styleB.minorText2}>{mountSpeed}</span>
               </h2>
               <h2>
-                Speed
+                Carry Capcity{" "}
                 <span className={styleB.minorText2}>{mountCapacity}</span>
               </h2>
             </>
@@ -1025,7 +1045,7 @@ const ItemGen = () => {
           {type === "Equipment Pack" ? (
             <>
               <h2>
-                Items
+                Items{" "}
                 <span className={styleB.minorText2}>{}</span>
               </h2>
             </>
