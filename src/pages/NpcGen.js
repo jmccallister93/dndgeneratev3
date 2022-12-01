@@ -69,163 +69,37 @@ const NpcGen = () => {
 
   const [hook, setHook] = useState("");
 
-  useEffect(() => {
+//Get Data function
+  const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("aligns").select();
-      if (error) {
+      const { data: dataName, error: errorName } = await supabase
+        .from(tableName)
+        .select();
+      if (errorName) {
         setFetchError("Could not fetch the data");
-        setAlign(null);
-        console.log(error);
+        console.log(errorName);
+        setSingular(null);
       }
-      if (data) {
-        setAligns(data);
+      if (dataName) {
+        setPlural(dataName);
         setFetchError(null);
-        setAlignOptions(data.map((r) => ({ name: r.name, value: r.value })));
+        setOptions(dataName.map((r) => ({ name: r.name, value: r.value })));
       }
     };
     fetchData();
-  }, []);
+  };
 
+  //Import data via getData
   useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("bonds").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setBond(null);
-        console.log(error);
-      }
-      if (data) {
-        setBonds(data);
-        setFetchError(null);
-        setBondOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("features").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setFeature(null);
-        console.log(error);
-      }
-      if (data) {
-        setFeatures(data);
-        setFetchError(null);
-        setFeatureOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("interactions").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setInteraction(null);
-        console.log(error);
-      }
-      if (data) {
-        setInteractions(data);
-        setFetchError(null);
-        setInteractionOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("mannerisms").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setMannerism(null);
-        console.log(error);
-      }
-      if (data) {
-        setMannerisms(data);
-        setFetchError(null);
-        setMannerismOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("professions").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setProf(null);
-        console.log(error);
-      }
-      if (data) {
-        setProfs(data);
-        setFetchError(null);
-        setProfOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("races").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setRaces(null);
-        console.log(error);
-      }
-      if (data) {
-        setRaces(data);
-        setRaceOptions(data.map((d) => ({ name: d.name, value: d.value })));
-        setFetchError(null);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("sexes").select();
-
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setSex(null);
-        console.log(error);
-      }
-      if (data) {
-        setSexes(data);
-        setSexOptions(data.map((d) => ({ name: d.name, value: d.value })));
-        setFetchError(null);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("talents").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setTalent(null);
-        console.log(error);
-      }
-      if (data) {
-        setTalents(data);
-        setFetchError(null);
-        setTalentOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
+    getData("aligns", setAlign, setAligns, setAlignOptions);
+    getData("bonds", setBond, setBonds, setBondOptions);
+    getData("features", setFeature, setFeatures, setFeatureOptions);
+    getData("interactions", setInteraction, setInteractions, setInteractionOptions);
+    getData("mannerisms", setMannerism, setMannerisms, setMannerismOptions);
+    getData("professions", setProf, setProfs, setProfOptions);
+    getData("races", setRace, setRaces, setRaceOptions);
+    getData("sexes", setSex, setSexes, setSexOptions);
+    getData("talents", setTalent, setTalents, setTalentOptions);
   }, []);
 
   useEffect(() => {
