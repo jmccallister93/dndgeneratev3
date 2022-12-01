@@ -16,6 +16,7 @@ import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { InputNumber } from "primereact/inputnumber";
 import Items from "../components/Items";
 import { Toast } from "primereact/toast";
+import Npcs from "../components/Npcs";
 
 
 const BuildingGen = () => {
@@ -849,8 +850,7 @@ const itemDisplay =
             NPCs
           </h1>
           <div className={isNpcActive ? style.subsection : style.hidden}>
-            {}
-            {}
+            <Npcs/>
           </div>
           <h1 className={style.subHeader} onClick={showItems}>
             Items

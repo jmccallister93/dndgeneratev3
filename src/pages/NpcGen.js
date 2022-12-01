@@ -88,7 +88,6 @@ const NpcGen = () => {
     };
     fetchData();
   };
-
   //Import data via getData
   useEffect(() => {
     getData("aligns", setAlign, setAligns, setAlignOptions);
@@ -101,7 +100,7 @@ const NpcGen = () => {
     getData("sexes", setSex, setSexes, setSexOptions);
     getData("talents", setTalent, setTalents, setTalentOptions);
   }, []);
-
+//Name Data
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("names").select();
@@ -179,7 +178,7 @@ const NpcGen = () => {
     { id: 7, name: "Angelic", value: "Angelic" },
     { id: 8, name: "Natural", value: "Natural" },
     { id: 9, name: "Profuse", value: "Profuse" },
-    { id: 10, name: "wild", value: "Wild" },
+    { id: 10, name: "Wild", value: "Wild" },
     { id: 11, name: "Unusual", value: "Unusual" },
     { id: 12, name: "Bizarre", value: "Bizarre" },
   ];
@@ -557,6 +556,7 @@ const NpcGen = () => {
   };
 
   const onClear = (e) => {
+    setName("");
     setAlign("");
     setBond("");
     setFeature("");
