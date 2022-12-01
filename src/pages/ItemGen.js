@@ -644,51 +644,7 @@ const ItemGen = () => {
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
-  const showItems = (e) => {
-    setIsItemActive((current) => !current);
-  };
 
-  //Item List
-
-  const openDialogItem = (e) => {
-    setDialogVisibleItem(true);
-  };
-  const closeDialogItem = () => {
-    setDialogVisibleItem(false);
-    for (let i = 0; i < selectedItem.length; i++) {
-      if (itemList.includes(selectedItem[i])) {
-      } else {
-        setItemList((saveArray) => [...saveArray, selectedItem[i]]);
-      }
-    }
-  };
-  const dialogFooterItem = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogItem} />;
-  };
-
-  useEffect(() => {
-    setItemOptions();
-  }, [<Items />]);
-
-  const onRandomItem = (e) => {
-    // const max = itemOptions.length - 1;
-    // let r = Math.round(Math.random() * (max - 0));
-    // if (itemList.includes(itemOptions[r])) {
-    // } else {
-    //   setItemList((saveArray) => [...saveArray, itemOptions[r]]);
-    // }
-    console.log(itemOptions);
-    // setItemList([itemOptions[23].name])
-  };
-  const randomItemBtn = (
-    <Button onClick={onRandomItem} className={style.btnName}>
-      Random
-    </Button>
-  );
-
-  const itemDisplay = itemList.map((i) => {
-    return <h4>{`${i.name},`}</h4>;
-  });
 
   return (
     <div className={styleB.mainWrapper}>
@@ -993,25 +949,6 @@ const ItemGen = () => {
                 </div>
               ) : null}
             </div>
-          </div>
-          <h1 className={styleB.subHeader} onClick={showItems}>
-            Item Preset
-          </h1>
-          <div className={isItemActive ? styleB.subsection : styleB.hidden}>
-            <Items
-              openDialogItem={openDialogItem}
-              //   randomItemBtn={randomItemBtn}
-              dialogVisibleItem={dialogVisibleItem}
-              closeDialogItem={closeDialogItem}
-              dialogFooterItem={dialogFooterItem}
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-              header={header}
-              setItemLsit={setItemList}
-              randomItemBtn={randomItemBtn}
-              itemOptions={itemOptions}
-              //   onRandomItem={onRandomItem}
-            ></Items>
           </div>
         </div>
 
