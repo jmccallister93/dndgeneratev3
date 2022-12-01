@@ -37,6 +37,8 @@ const ItemGen = () => {
 
   const [allItems, setAllItems] = useState();
 
+  const [itemName, setItemName] = useState("");
+
   const [adventuringGear, setAdventuringGear] = useState();
   const [adventuringGearOptions, setAdventuringGearOptions] = useState();
 
@@ -135,10 +137,7 @@ const ItemGen = () => {
   const [mountSpeed, setMountSpeed] = useState("");
   const [mountCapacity, setMountCapacity] = useState("");
 
-  const [itemOptions, setItemOptions] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [dialogVisibleItem, setDialogVisibleItem] = useState(false);
-  const [itemList, setItemList] = useState([]);
+  const [itemDesc, setItemDesc] = useState("")
 
   const [genItem, setGenItem] = useState();
 
@@ -333,6 +332,9 @@ const ItemGen = () => {
   }
 
   //On change events
+  const onNameChange = (e) => {
+    setItemName(e.target.value)
+  }
 
   const onTypeChange = (e) => {
     setType(e.value);
@@ -515,6 +517,9 @@ const ItemGen = () => {
     setMountCapacity(r);
   };
 
+  const onDescChange = (e) => {
+    setItemDesc(e.target.value)
+  }
   //Todo Searching
   const onSearchPack = (e) => {};
 
@@ -622,6 +627,7 @@ const ItemGen = () => {
 
   //Clear
   const onClear = (e) => {
+    setItemName("");
     setType("");
     setRarity("");
     setCurrency("");
@@ -640,6 +646,7 @@ const ItemGen = () => {
     setArmorStr("");
     setMountSpeed("");
     setMountCapacity("");
+    setItemDesc("")
   };
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -672,7 +679,7 @@ const ItemGen = () => {
           <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
             <div>
               <h1>Name</h1>
-              <InputText placeholder="Name" />
+              <InputText placeholder="Name" onChange={onNameChange}/>
               <button className={style.itemgenBtnName}>Randomize</button>
             </div>
 
@@ -757,7 +764,7 @@ const ItemGen = () => {
             </div>
             <div>
               <h1>Description</h1>
-              <InputTextarea value={description} />
+              <InputTextarea value={itemDesc} onChange={onDescChange} placeholder="Item Description"/>
               <button
                 className={style.itemgenBtnName}
                 onClick={onRandomDescription}
@@ -954,7 +961,7 @@ const ItemGen = () => {
 
         {/* Main Display */}
         <div className={styleB.display}>
-          <h1>Placeholder Name</h1>
+          <h1>{itemName}</h1>
           <h2>
             Type <span className={styleB.minorText2}>{type}</span>
           </h2>
@@ -1023,15 +1030,13 @@ const ItemGen = () => {
               </h2>
             </>
           ) : null}
-        </div>
-
-        {/* <div>
+          <h2>
+            Description 
             <div>
-              <h1 >Description: </h1>
-              <InputTextarea value={description} />
-              <h1 className={style.itemgenDetailOutput}>{description}</h1>
+            <span className={styleB.minorText2}>{itemDesc}</span>
             </div>
-          </div> */}
+          </h2>
+        </div>
       </div>
     </div>
   );
