@@ -662,13 +662,6 @@ const BuildingGen = () => {
             filter
             filterPlaceholder="Search"
           ></Column>
-          <Column
-            field="type"
-            header="Type"
-            sortable
-            filter
-            filterPlaceholder="Search"
-          ></Column>
         </DataTable>
       </Dialog>
     </div>
