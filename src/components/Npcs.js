@@ -68,6 +68,9 @@ const Npcs = (props) => {
 
   const [hook, setHook] = useState("");
 
+  const [npcOptions, setNpcOptions] = useState("");
+  const [npcList, setNpcList] = useState("");
+
   //Get Data function
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -225,14 +228,15 @@ const Npcs = (props) => {
       setName(firstName + " " + epiphet_b + noun_a);
     }
   };
+//   console.log(nameOptions)
+
   //Generation
   const onGenerate = (e) => {
     if (name === "") {
       onRandomName();
     }
     if (bond === "") {
-      let max = bondOptions.length - 1;
-      let r = Math.round(Math.random() * (max - 1) + 1);
+      let r = Math.round(Math.random() * (9 - 1) + 1);
       setBond(bondOptions[r].name);
     } else {
       setBond(bond);
@@ -368,41 +372,51 @@ const Npcs = (props) => {
       );
     }
   };
-  //Clear
-  const onClear = (e) => {
-    setName("");
-    setAlign("");
-    setBond("");
-    setFeature("");
-    setProf("");
-    setName("");
-    setTalent("");
-    setRace("");
-    setSex("");
-    setMannerism("");
-    setInteraction("");
-    setBond("");
-    setStr("");
-    setDex("");
-    setCon("");
-    setInt("");
-    setWis("");
-    setCha("");
-    setHook("");
-  };
+//   //Clear
+//   const onClear = (e) => {
+//     setName("");
+//     setAlign("");
+//     setBond("");
+//     setFeature("");
+//     setProf("");
+//     setName("");
+//     setTalent("");
+//     setRace("");
+//     setSex("");
+//     setMannerism("");
+//     setInteraction("");
+//     setBond("");
+//     setStr("");
+//     setDex("");
+//     setCon("");
+//     setInt("");
+//     setWis("");
+//     setCha("");
+//     setHook("");
+//   };
+//   useEffect(()=> {
+//     let r = Math.round(Math.random() * (10 - 1) + 1);
+//     for(let i=0; r; i++){
+//         let newNpc = onGenerate()
+//         setNpcList(prev => [...prev, newNpc])
+//     }
+//     console.log(npcList)
+//   }, [props.openDialogNpc])
+
+
 
   return (
     <>
-         {props.dialogVisibleItem === false ? (
+      {props.dialogVisibleNpc === false ? (
         <div>
-          <Button onClick={props.openDialogItem} className={styleB.btnAddRemove}>
+          <Button onClick={onGenerate} className={styleB.btnAddRemove}>
             Add / Remove
           </Button>
           {props.randomItemBtn}
         </div>
       ) : (
         <div>
-          <Button onClick={props.openDialogItem} className={styleB.btnAddRemove}>
+          <Button onClick={props.openDialogNpc} className={styleB.btnAddRemove}>
             Loading...
           </Button>
           {props.randomItemBtn}

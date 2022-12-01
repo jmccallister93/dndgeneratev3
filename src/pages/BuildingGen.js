@@ -18,7 +18,6 @@ import Items from "../components/Items";
 import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 
-
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -105,14 +104,20 @@ const BuildingGen = () => {
 
   const [roomCount, setRoomCount] = useState("");
 
+  const [npc, setNpc] = useState("");
+  const [npcs, setNpcs] = useState("");
+  const [npcOptions, setNpcOptions] = useState([]);
+  const [selectedNpc, setSelectedNpc] = useState(null);
+  const [dialogVisibleNpc, setDialogVisibleNpc] = useState(false);
+  const [npcList, setNpcList] = useState([]);
+
   const [item, setItem] = useState("");
   const [items, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [dialogVisibleItem, setDialogVisibleItem] = useState(false);
   const [itemList, setItemList] = useState([]);
-//   const [itemDisplay, setItemDisplay] = useState();
-
+  //   const [itemDisplay, setItemDisplay] = useState();
 
   const [housingOptions, setHousingOptions] = useState("");
   const [tradeOptions, setTradeOptions] = useState("");
@@ -676,6 +681,45 @@ const BuildingGen = () => {
   });
 
   //NPCs
+  const openDialogNpc = (e) => {
+    setDialogVisibleNpc(true);
+  };
+  const closeDialogNpc = () => {
+    setDialogVisibleNpc(false);
+    for (let i = 0; i < selectedNpc.length; i++) {
+      if (npcList.includes(selectedNpc[i])) {
+      } else {
+        setNpcList((saveArray) => [...saveArray, selectedNpc[i]]);
+      }
+    }
+  };
+  const dialogFooterNpc = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogNpc} />;
+  };
+
+  useEffect(() => {
+    setNpcOptions();
+  }, [<Npcs />]);
+
+  const onRandomNpc = (e) => {
+    // const max = NpcOptions.length - 1;
+    // let r = Math.round(Math.random() * (max - 0));
+    // if (NpcList.includes(NpcOptions[r])) {
+    // } else {
+    //   setNpcList((saveArray) => [...saveArray, NpcOptions[r]]);
+    // }
+    console.log(npcOptions);
+    // setNpcList([NpcOptions[23].name])
+  };
+  const randomNpcBtn = (
+    <Button onClick={onRandomNpc} className={style.btnName}>
+      Random
+    </Button>
+  );
+
+  const npcDisplay = npcList.map((i) => {
+    return <h4>{`${i.name},`}</h4>;
+  });
 
   //Items
   const openDialogItem = (e) => {
@@ -694,11 +738,9 @@ const BuildingGen = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialogItem} />;
   };
 
-    useEffect(() => {
-    setItemOptions(
-        
-    );
-  }, [<Items/>]);
+  useEffect(() => {
+    setItemOptions();
+  }, [<Items />]);
 
   const onRandomItem = (e) => {
     // const max = itemOptions.length - 1;
@@ -707,7 +749,7 @@ const BuildingGen = () => {
     // } else {
     //   setItemList((saveArray) => [...saveArray, itemOptions[r]]);
     // }
-    console.log(itemOptions)
+    console.log(itemOptions);
     // setItemList([itemOptions[23].name])
   };
   const randomItemBtn = (
@@ -716,11 +758,9 @@ const BuildingGen = () => {
     </Button>
   );
 
-
-const itemDisplay = 
-    itemList.map((i) => {
-      return <h4>{`${i.name},`}</h4>;
-    });
+  const itemDisplay = itemList.map((i) => {
+    return <h4>{`${i.name},`}</h4>;
+  });
 
   //Buttons
   const onGenerate = (e) => {
@@ -850,7 +890,19 @@ const itemDisplay =
             NPCs
           </h1>
           <div className={isNpcActive ? style.subsection : style.hidden}>
-            <Npcs/>
+            <Npcs
+              openDialogNpc={openDialogNpc}
+              //   randomItemBtn={randomItemBtn}
+              dialogVisibleNpc={dialogVisibleNpc}
+              closeDialogNpc={closeDialogNpc}
+              dialogFooterNpc={dialogFooterNpc}
+              selectedNpc={selectedNpc}
+              setSelectedNpc={setSelectedNpc}
+              header={header}
+              setNpcList={setNpcList}
+              randomNpcBtn={randomNpcBtn}
+              npcOptions={npcOptions}
+            />
           </div>
           <h1 className={style.subHeader} onClick={showItems}>
             Items
