@@ -3926,8 +3926,24 @@ const MonsterGen = () => {
     return `${i.name}`;
   });
 
+  //Prop functions to pass down to child
   const strChangeProp = (str) => {
     setStr(str)
+  }
+  const dexChangeProp = (dex) => {
+    setDex(dex)
+  }
+  const conChangeProp = (con) => {
+    setCon(con)
+  }
+  const wisChangeProp = (wis) => {
+    setWis(wis)
+  }
+  const intChangeProp = (int) => {
+    setInt(int)
+  }
+  const chaChangeProp = (cha) => {
+    setCha(cha)
   }
 
   return (
@@ -3976,7 +3992,14 @@ const MonsterGen = () => {
             {moveDialog}
             <div className={style.detesContainer}>{extraSpeedDispaly}</div>
           </div>
-          <AbilityModifier onStrChangeProp={strChangeProp}/>
+          <AbilityModifier 
+          onStrChangeProp={strChangeProp}
+          onDexChangeProp={dexChangeProp}
+          onConChangeProp={conChangeProp}
+          onWisChangeProp={wisChangeProp}
+          onIntChangeProp={intChangeProp}
+          onChaChangeProp={chaChangeProp}
+          />
           {/* <h1 className={style.monstergenSubHeader} onClick={showAbility}>
             Ability Scores
           </h1>

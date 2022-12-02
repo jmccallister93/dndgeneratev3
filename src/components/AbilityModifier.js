@@ -30,21 +30,25 @@ const AbilityModifier = (props) => {
     objectChange(e.value, setStr);
     props.onStrChangeProp(e.value)
   };
-
   const onDexChange = (e) => {
     objectChange(e.value, setDex);
+    props.onDexChangeProp(e.value)
   };
   const onConChange = (e) => {
     objectChange(e.value, setCon);
+    props.onIntChangeProp(e.value)
   };
   const onIntChange = (e) => {
     objectChange(e.value, setInt);
+    props.onIntChangeProp(e.value)
   };
   const onWisChange = (e) => {
     objectChange(e.value, setWis);
+    props.onWisChangeProp(e.value)
   };
   const onChaChange = (e) => {
     objectChange(e.value, setCha);
+    props.onChaChangeProp(e.value)
   };
 
   //Custom Input
@@ -113,35 +117,40 @@ const AbilityModifier = (props) => {
     dex,
     onDexChange,
     "Set DEX",
-    onRandomDex
+    onRandomDex,
+    props.onDexChangeProp(dex)
   );
   const conInput = customInputNumber(
     "Constituion",
     con,
     onConChange,
     "Set CON",
-    onRandomCon
+    onRandomCon,
+    props.onConChangeProp(con)
   );
   const intInput = customInputNumber(
     "Intelligence",
     int,
     onIntChange,
     "Set INT",
-    onRandomInt
+    onRandomInt,
+    props.onIntChangeProp(str)
   );
   const wisInput = customInputNumber(
     "Wisdom",
     wis,
     onWisChange,
     "Set WIS",
-    onRandomWis
+    onRandomWis,
+    props.onWisChangeProp(int)
   );
   const chaInput = customInputNumber(
     "Charisma",
     cha,
     onChaChange,
     "Set CHA",
-    onRandomCha
+    onRandomCha,
+    props.onChaChangeProp(cha)
   );
 
   //Setup show
