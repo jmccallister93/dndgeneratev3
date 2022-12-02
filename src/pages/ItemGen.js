@@ -25,6 +25,7 @@ import GetData from "../components/GetData";
 import { Get } from "react-axios";
 import useFetch from "../components/useFetch";
 import Items from "../components/Items";
+import ClearButton from "../components/ClearButton";
 
 const ItemGen = () => {
   // Set state variables
@@ -628,11 +629,11 @@ const ItemGen = () => {
   //Clear
   const onClear = (e) => {
     setItemName("");
-    setType("");
+    // setType("");
     setRarity("");
     setCurrency("");
     setCurrencyValue("");
-    setWeight("");
+    // setWeight("");
     setDescription("");
     setWeaponDmg("");
     setWeaponProperty("");
@@ -652,6 +653,9 @@ const ItemGen = () => {
     setIsBasicActive((current) => !current);
   };
 
+  const emptyArray = ()=>{
+
+  }
 
   return (
     <div className={styleB.mainWrapper}>
@@ -664,9 +668,14 @@ const ItemGen = () => {
             <button onClick={onGenerate} className={styleB.btnGen}>
               Generate
             </button>
-            <button onClick={onClear} className={styleB.btnClear}>
+            <ClearButton 
+            setStringState={[setWeight, setType]}
+            setArrayState={emptyArray}
+            amountOfStates={20}
+            />
+            {/* <button onClick={onClear} className={styleB.btnClear}>
               Clear
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
