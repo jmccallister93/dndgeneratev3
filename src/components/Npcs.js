@@ -1,5 +1,5 @@
 import styleB from "../stylesheets/BuildingGen.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -243,40 +243,34 @@ const Npcs = ({
       setName(firstName + " " + epiphet_b + noun_a);
     }
   };
-
+  //Create NPC object with setnpc
   useEffect(() => {
-        setNpc(
-      {Name: name,
-      Race: race,
-      Sex: sex,
-      Alignment: align,
-      Profession: prof,
-      Feature: feature,
-      Talent: talent,
-      Mannerism: mannerism,
-      Interaction: interaction,
-      Bond: bond,
-      STR: str,
-      DEX: dex,
-      CON: con,
-      INT: int,
-      WIS: wis,
-      CHA: cha,
-      Hook: hook,}
-        );
-  }, []);
-
-  //   if(alignOptions !== undefined){
-  //     let r = Math.round(Math.random() * (9 - 1) + 1);
-  //     setAlign(alignOptions[r].name);
-  //     console.log(align)
-  //   }
+    setNpc({
+        Name: name,
+        Race: race,
+        Sex: sex,
+        Alignment: align,
+        Profession: prof,
+        Feature: feature,
+        Talent: talent,
+        Mannerism: mannerism,
+        Interaction: interaction,
+        Bond: bond,
+        STR: str,
+        DEX: dex,
+        CON: con,
+        INT: int,
+        WIS: wis,
+        CHA: cha,
+        Hook: hook,
+      });
+  }, [])
 
   //Generation
   const onGenerate = (e) => {
     if (align === "") {
       let r = Math.round(Math.random() * (9 - 1) + 1);
-      setAlign(alignOptions[r].name);
+      setAlignOptions(alignOptions[r].name);
     } else {
       setAlign(align);
     }
@@ -300,7 +294,6 @@ const Npcs = ({
     if (sex === "") {
       let r = Math.round(Math.random() * (2 - 1) + 1);
       setSex(sexOptions[r].name);
-      console.log(r);
     } else {
       setSex(sex);
     }
@@ -411,27 +404,16 @@ const Npcs = ({
       );
     }
   };
-  //   ISSUES ARE HERE
-  // ON GEN CANNOT RUN BECAUSE OPTIONS ARE NOT YET SET
 
-  //   useEffect(() => {
-  //     setNpcOptions(npc)
-  //     setNpcOptions((prevState) => [...prevState, npc]
-  //   }, []);
-
-  //   console.log(npc)
-  const onBtnClick = (e) => {
-    openDialogNpc();
-    for (let i = 0; i < 5; i++) {
-      onGenerate();
-    }
-    // setNpcOptions(npc)
-  };
+  const test = useCallback(()=> {
+    onGenerate()
+  }, [])
 
   return (
     <>
       <div>
-        <Button onClick={onBtnClick} className={styleB.btnAddRemove}>
+        <Button onClick={test} className={styleB.btnAddRemove}>Generate NPC List</Button>
+        <Button onClick={openDialogNpc} className={styleB.btnAddRemove}>
           Add / Remove
         </Button>
         <Dialog
@@ -444,7 +426,7 @@ const Npcs = ({
           transitionOptions
         >
           <DataTable
-            value={npcOptions}
+            value={npcList}
             scrollable
             scrollHeight="60vh"
             rows={20}
@@ -473,13 +455,6 @@ const Npcs = ({
             <Column
               field="name"
               header="Name"
-              sortable
-              filter
-              filterPlaceholder="Search"
-            ></Column>
-            <Column
-              field="type"
-              header="Type"
               sortable
               filter
               filterPlaceholder="Search"

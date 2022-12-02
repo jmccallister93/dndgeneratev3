@@ -835,7 +835,7 @@ const BuildingGen = () => {
     // setNpcList([])
     // setSelectedNpc("")
   };
-console.log(npc)
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
