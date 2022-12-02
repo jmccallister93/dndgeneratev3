@@ -213,50 +213,9 @@ const Npcs = ({
 
 
 
-  const onProfChange = (e) => {
-    setProf(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (49 - 1) + 1);
-      setProf(profOptions[r].name);
-    }
-  };
 
-  const onFeatureChange = (e) => {
-    setFeature(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setFeature(featureOptions[r].name);
-    }
-  };
 
-  const onTalentChange = (e) => {
-    setTalent(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setTalent(talentOptions[r].name);
-    }
-  };
-  const onMannerismChange = (e) => {
-    setMannerism(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setMannerism(mannerismOptions[r].name);
-    }
-  };
-  const onInteractionChange = (e) => {
-    setInteraction(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
-      setInteraction(interactionOptions[r].name);
-    }
-  };
-  const onBondChange = (e) => {
-    setBond(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setBond(bondOptions[r].name);
-    }
-  };
+
 
   useEffect(() => {
     let modifierList = [
@@ -421,6 +380,100 @@ const Npcs = ({
     onAlignChange,
     "Choose Alignment"
   );
+  //NPC Prof
+  const onProfChange = (e) => {
+    setProf(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (49 - 1) + 1);
+      setProf(profOptions[r].name);
+    }
+  };
+  const profDropdown = customDrop(
+    "Profession",
+    prof,
+    profOptions,
+    onProfChange,
+    "Choose Profession"
+  );
+  //NPC Feature
+  const onFeatureChange = (e) => {
+    setFeature(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (20 - 1) + 1);
+      setFeature(featureOptions[r].name);
+    }
+  };
+  const featureDropdown = customDrop(
+    "Feature",
+    feature,
+    featureOptions,
+    onFeatureChange,
+    "Choose Feature"
+  );
+  //NPC Talent
+  const onTalentChange = (e) => {
+    setTalent(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (20 - 1) + 1);
+      setTalent(talentOptions[r].name);
+    }
+  };
+  const talentDropdown = customDrop(
+    "Talent",
+    talent,
+    talentOptions,
+    onTalentChange,
+    "Choose Talent"
+  );
+  //NPC Mannerism
+  const onMannerismChange = (e) => {
+    setMannerism(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (20 - 1) + 1);
+      setMannerism(mannerismOptions[r].name);
+    }
+  };
+  const mannersimDropdown = customDrop(
+    "Mannerism",
+    mannerism,
+    mannerismOptions,
+    onMannerismChange,
+    "Choose Mannerism"
+  );
+
+  //NPC Interaction
+  const onInteractionChange = (e) => {
+    setInteraction(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (11 - 1) + 1);
+      setInteraction(interactionOptions[r].name);
+    }
+  };
+  const interactionDropdown = customDrop(
+    "Interaction",
+    interaction,
+    interactionOptions,
+    onInteractionChange,
+    "Choose Interaction"
+  );
+
+  //NPC Bond
+  const onBondChange = (e) => {
+    setBond(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (9 - 1) + 1);
+      setBond(bondOptions[r].name);
+    }
+  };
+  const bondDropdown = customDrop(
+    "Bond",
+    bond,
+    bondOptions,
+    onBondChange,
+    "Choose Bond"
+  );
+  //NPC Hook TODO
+
   const onGenerate = (e) => {
     if (bond === "") {
       let r = Math.round(Math.random() * (9 - 1) + 1);
