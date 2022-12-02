@@ -8,6 +8,9 @@ import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Column } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
+import { e } from "mathjs";
+import { InputText } from "primereact/inputtext";
+import { Dropdown } from "primereact/dropdown";
 
 const Npcs = ({
   npc,
@@ -19,8 +22,11 @@ const Npcs = ({
   selectedNpc,
   setSelectedNpc,
   header,
+  isNpcActive,
 }) => {
-  const [fetchError, setFetchError] = useState();
+  const [fetchError, setFetchError] = useState(null);
+  const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isDetailActive, setIsDetailActive] = useState(false);
 
   const [align, setAlign] = useState("");
   const [aligns, setAligns] = useState();
@@ -62,10 +68,6 @@ const Npcs = ({
   const [names, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
 
-  const [abilityMod, setAbilityMod] = useState();
-  const [abilityMods, setAbilityMods] = useState();
-  const [abilityModOption, setAbilityModOption] = useState();
-
   const [str, setStr] = useState("");
   const [strMod, setStrMod] = useState("");
   const [dex, setDex] = useState("");
@@ -80,9 +82,6 @@ const Npcs = ({
   const [chaMod, setChaMod] = useState("");
 
   const [hook, setHook] = useState("");
-
-  const [npcOptions, setNpcOptions] = useState("");
-  const [npcList, setNpcList] = useState("");
 
   //Get Data function
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -103,7 +102,6 @@ const Npcs = ({
     };
     fetchData();
   };
-
   //Import data via getData
   useEffect(() => {
     getData("aligns", setAlign, setAligns, setAlignOptions);
@@ -121,8 +119,7 @@ const Npcs = ({
     getData("sexes", setSex, setSexes, setSexOptions);
     getData("talents", setTalent, setTalents, setTalentOptions);
   }, []);
-
-  //name get data
+  //Name Data
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("names").select();
@@ -147,33 +144,19 @@ const Npcs = ({
     };
     fetchData();
   }, []);
-  //AbilityScore
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("abilitiesModifiers")
-        .select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setAbilityMod(null);
-        console.log(error);
-      }
-      if (data) {
-        setAbilityMods(data);
-        setFetchError(null);
-        setAbilityModOption(
-          data.map((r) => ({
-            name: r.name,
-            value: r.value,
-            modifier: r.modifier,
-          }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
 
-  //Manual Data
+  const abilityScoreValues = [
+    { id: 1, name: "Random", value: "Random" },
+    { id: 2, name: "6 (-2)", value: "6 (-2)" },
+    { id: 3, name: "8 (-1)", value: "8 (-1)" },
+    { id: 4, name: "10 (+0)", value: "10 (+0)" },
+    { id: 5, name: "12 (+1)", value: "12 (+1)" },
+    { id: 6, name: "14 (+2)", value: "14 (+2)" },
+    { id: 7, name: "16 (+3)", value: "16 (+3)" },
+    { id: 8, name: "18 (+4)", value: "18 (+4)" },
+    { id: 9, name: "20 (+5)", value: "20 (+5)" },
+  ];
+
   const hookVerb = [
     { id: 1, name: "Random", value: "Random" },
     { id: 2, name: "Lost", value: "Lost" },
@@ -218,7 +201,88 @@ const Npcs = ({
     { id: 11, name: "Unusual", value: "Unusual" },
     { id: 12, name: "Bizarre", value: "Bizarre" },
   ];
-  //Random values
+
+  //OnChange
+  const objectChange = (value, setObject, max, min, floor, objectOptions) => {
+    setObject(value);
+    if (value === "Random") {
+      let r = Math.round(Math.random() * (max - min) + floor);
+      setObject(objectOptions[r].name);
+    }
+  };
+
+  const onRaceChange = (e) => {
+    setRace(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (28 - 1) + 1);
+      setRace(raceOptions[r].name);
+    }
+  };
+
+  const onSexChange = (e) => {
+    setSex(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (2 - 1) + 1);
+      setSex(sexOptions[r].name);
+    }
+  };
+
+  const onAlignChange = (e) => {
+    setAlign(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (9 - 1) + 1);
+      setAlign(alignOptions[r].name);
+    }
+  };
+
+  const onProfChange = (e) => {
+    setProf(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (49 - 1) + 1);
+      setProf(profOptions[r].name);
+    }
+  };
+
+  const onFeatureChange = (e) => {
+    setFeature(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (20 - 1) + 1);
+      setFeature(featureOptions[r].name);
+    }
+  };
+
+  const onTalentChange = (e) => {
+    setTalent(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (20 - 1) + 1);
+      setTalent(talentOptions[r].name);
+    }
+  };
+  const onMannerismChange = (e) => {
+    setMannerism(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (20 - 1) + 1);
+      setMannerism(mannerismOptions[r].name);
+    }
+  };
+  const onInteractionChange = (e) => {
+    setInteraction(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (11 - 1) + 1);
+      setInteraction(interactionOptions[r].name);
+    }
+  };
+  const onBondChange = (e) => {
+    setBond(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (9 - 1) + 1);
+      setBond(bondOptions[r].name);
+    }
+  };
+
+  const onNameChange = (e) => {
+    setName(e.target.value);
+  };
   const onRandomName = (e) => {
     let f = Math.floor(Math.random() * 208);
     let firstName = [nameOptions[f].first_name];
@@ -243,40 +307,69 @@ const Npcs = ({
       setName(firstName + " " + epiphet_b + noun_a);
     }
   };
-  //Create NPC object with setnpc
   useEffect(() => {
-    setNpc({
-        Name: name,
-        Race: race,
-        Sex: sex,
-        Alignment: align,
-        Profession: prof,
-        Feature: feature,
-        Talent: talent,
-        Mannerism: mannerism,
-        Interaction: interaction,
-        Bond: bond,
-        STR: str,
-        DEX: dex,
-        CON: con,
-        INT: int,
-        WIS: wis,
-        CHA: cha,
-        Hook: hook,
-      });
-  }, [])
+    let modifierList = [
+      "-5",
+      "-4",
+      "-3",
+      "-2",
+      "-1",
+      "+0",
+      "+1",
+      "+2",
+      "+3",
+      "+4",
+      "+5",
+      "+6",
+      "+7",
+      "+8",
+      "+9",
+      "+10",
+    ];
 
-  //Generation
+    const onAbilityModChange = (abilityType, setAbilityMod) => {
+      if (abilityType <= 1) {
+        setAbilityMod(modifierList[0]);
+      } else if (abilityType <= 3) {
+        setAbilityMod(modifierList[0]);
+      } else if (abilityType <= 5) {
+        setAbilityMod(modifierList[1]);
+      } else if (abilityType <= 7) {
+        setAbilityMod(modifierList[2]);
+      } else if (abilityType <= 9) {
+        setAbilityMod(modifierList[3]);
+      } else if (abilityType <= 11) {
+        setAbilityMod(modifierList[4]);
+      } else if (abilityType <= 13) {
+        setAbilityMod(modifierList[5]);
+      } else if (abilityType <= 15) {
+        setAbilityMod(modifierList[6]);
+      } else if (abilityType <= 17) {
+        setAbilityMod(modifierList[7]);
+      } else if (abilityType <= 19) {
+        setAbilityMod(modifierList[8]);
+      } else if (abilityType <= 21) {
+        setAbilityMod(modifierList[9]);
+      } else if (abilityType <= 23) {
+        setAbilityMod(modifierList[10]);
+      } else if (abilityType <= 25) {
+        setAbilityMod(modifierList[11]);
+      } else if (abilityType <= 27) {
+        setAbilityMod(modifierList[12]);
+      } else if (abilityType <= 29) {
+        setAbilityMod(modifierList[13]);
+      } else if (abilityType <= 30) {
+        setAbilityMod(modifierList[14]);
+      }
+    };
+    onAbilityModChange(str, setStrMod);
+    onAbilityModChange(dex, setDexMod);
+    onAbilityModChange(con, setConMod);
+    onAbilityModChange(int, setIntMod);
+    onAbilityModChange(wis, setWisMod);
+    onAbilityModChange(cha, setChaMod);
+  }, [str, dex, con, int, wis, cha]);
   const onGenerate = (e) => {
-    if (align === "") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setAlignOptions(alignOptions[r].name);
-    } else {
-      setAlign(align);
-    }
-    if (name === "") {
-      onRandomName();
-    }
     if (bond === "") {
       let r = Math.round(Math.random() * (9 - 1) + 1);
       setBond(bondOptions[r].name);
@@ -294,8 +387,16 @@ const Npcs = ({
     if (sex === "") {
       let r = Math.round(Math.random() * (2 - 1) + 1);
       setSex(sexOptions[r].name);
+      console.log(r);
     } else {
       setSex(sex);
+    }
+
+    if (align === "") {
+      let r = Math.round(Math.random() * (9 - 1) + 1);
+      setAlign(alignOptions[r].name);
+    } else {
+      setAlign(align);
     }
 
     if (prof === "") {
@@ -332,6 +433,7 @@ const Npcs = ({
     } else {
       setInteraction(interaction);
     }
+
     if (name === "") {
       let f = Math.floor(Math.random() * 208);
       let firstName = [nameOptions[f].first_name];
@@ -358,39 +460,40 @@ const Npcs = ({
     } else {
       setName(name);
     }
+
     if (str === "") {
       let r = Math.round(Math.random() * (8 - 1) + 1);
-      setStr(abilityModOption[r].name);
+      setStr(abilityScoreValues[r].name);
     } else {
       setStr(str);
     }
     if (dex === "") {
       let r = Math.round(Math.random() * (8 - 1) + 1);
-      setDex(abilityModOption[r].name);
+      setDex(abilityScoreValues[r].name);
     } else {
       setDex(dex);
     }
     if (con === "") {
       let r = Math.round(Math.random() * (8 - 1) + 1);
-      setCon(abilityModOption[r].name);
+      setCon(abilityScoreValues[r].name);
     } else {
       setCon(con);
     }
     if (int === "") {
       let r = Math.round(Math.random() * (8 - 1) + 1);
-      setInt(abilityModOption[r].name);
+      setInt(abilityScoreValues[r].name);
     } else {
       setInt(int);
     }
     if (wis === "") {
       let r = Math.round(Math.random() * (8 - 1) + 1);
-      setWis(abilityModOption[r].name);
+      setWis(abilityScoreValues[r].name);
     } else {
       setWis(wis);
     }
     if (cha === "") {
       let r = Math.round(Math.random() * (8 - 1) + 1);
-      setCha(abilityModOption[r].name);
+      setCha(abilityScoreValues[r].name);
     } else {
       setCha(cha);
     }
@@ -405,63 +508,201 @@ const Npcs = ({
     }
   };
 
-  const test = useCallback(()=> {
-    onGenerate()
-  }, [])
+  const onClear = (e) => {
+    setName("");
+    setAlign("");
+    setBond("");
+    setFeature("");
+    setProf("");
+    setName("");
+    setTalent("");
+    setRace("");
+    setSex("");
+    setMannerism("");
+    setInteraction("");
+    setBond("");
+    setStr("");
+    setDex("");
+    setCon("");
+    setInt("");
+    setWis("");
+    setCha("");
+    setHook("");
+  };
+
+  const onExport = () => {
+    const npcExport = Object.entries(npc)
+      .map(([name, value]) => `${name}: ${value}`)
+      .join("\n");
+
+    // file object
+    const file = new Blob([npcExport], { type: "text/plain" });
+
+    // anchor link
+    const element = document.createElement("a");
+    element.href = URL.createObjectURL(file);
+    element.download = name + ".txt";
+
+    // simulate link click
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  };
+  //Show Options
+  const showBasics = (e) => {
+    setIsBasicActive((current) => !current);
+  };
+  //Show Options
+  const showDetails = (e) => {
+    setIsDetailActive((current) => !current);
+  };
+  //------------------TEST SECTION-----------------------
+  //   const [fetchError, setFetchError] = useState();
+
+  //   const [align, setAlign] = useState("");
+  //   const [aligns, setAligns] = useState();
+  //   const [alignOptions, setAlignOptions] = useState("");
+  //   const [alignList, setAlignList] = useState([])
+
+  //   //Get Data function
+  //   const getData = (tableName, setSingular, setPlural, setOptions) => {
+  //     const fetchData = async () => {
+  //       const { data: dataName, error: errorName } = await supabase
+  //         .from(tableName)
+  //         .select();
+  //       if (errorName) {
+  //         setFetchError("Could not fetch the data");
+  //         console.log(errorName);
+  //         setSingular(null);
+  //       }
+  //       if (dataName) {
+  //         setPlural(dataName);
+  //         setFetchError(null);
+  //         setOptions(dataName.map((r) => ({ name: r.name, value: r.value })));
+  //       }
+  //     };
+  //     fetchData();
+  //   };
+
+  //   //Import data via getData
+  //   useEffect(() => {
+  //     getData("aligns", setAlign, setAligns, setAlignOptions);
+  //   },[]);
+
+  // const onGenerate = (e) => {
+  //     let r = Math.round(Math.random() * (9 - 0));
+  //     setAlign(alignOptions[r].name)
+  //     setAlignList(prev => [...prev, align])
+  // }
+  // useEffect(()=>{
+  //     console.log(align)
+  // }, [align])
+  //------------------TEST SECTION-----------------------
 
   return (
     <>
-      <div>
-        <Button onClick={test} className={styleB.btnAddRemove}>Generate NPC List</Button>
-        <Button onClick={openDialogNpc} className={styleB.btnAddRemove}>
-          Add / Remove
-        </Button>
-        <Dialog
-          header="NPCs"
-          visible={dialogVisibleNpc}
-          maximizable
-          modal
-          onHide={closeDialogNpc}
-          footer={dialogFooterNpc}
-          transitionOptions
-        >
-          <DataTable
-            value={npcList}
-            scrollable
-            scrollHeight="60vh"
-            rows={20}
-            dataKey="name"
-            selection={selectedNpc}
-            onSelectionChange={(e) => {
-              setSelectedNpc(e.value);
-            }}
-            //   filters={filters}
-            filterDisplay="row"
-            responsiveLayout="scroll"
-            globalFilterFields={["name"]}
-            header={header}
-            emptyMessage="No items found."
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            rowHover
-            resizableColumns
-            reorderableColumns
-            reorderableRows
-          >
-            <Column
-              selectionMode="multiple"
-              selectionAriaLabel="name"
-              headerStyle={{ width: "6em" }}
-            ></Column>
-            <Column
-              field="name"
-              header="Name"
-              sortable
-              filter
-              filterPlaceholder="Search"
-            ></Column>
-          </DataTable>
-        </Dialog>
-      </div>
+      {/* Options */}
+      <div className={styleB.optionsWrapper}>
+        <div>
+          <div>
+            <h1>Name</h1>
+            <InputText value={name} onChange={onNameChange} />
+            <button onClick={onRandomName} className={styleB.npcgenBtnName}>
+              Randomize
+            </button>
+          </div>
+          <div>
+            <h1>Race</h1>
+            <Dropdown
+              optionLabel="name"
+              value={race}
+              options={raceOptions}
+              onChange={onRaceChange}
+              placeholder="Choose Race"
+            />
+          </div>
+          <div>
+            <h1>Sex</h1>
+            <Dropdown
+              optionLabel="name"
+              value={sex}
+              options={sexOptions}
+              onChange={onSexChange}
+              placeholder="Choose Sex"
+            />
+          </div>
+          <div>
+            <h1>Alignment</h1>
+            <Dropdown
+              optionLabel="name"
+              value={align}
+              options={alignOptions}
+              onChange={onAlignChange}
+              placeholder="Choose Alignment"
+            />
+          </div>
+        </div>
+          <div>
+            <h1>Profession</h1>
+            <Dropdown
+              optionLabel="name"
+              value={prof}
+              options={profOptions}
+              onChange={onProfChange}
+              placeholder="Choose Profession"
+            />
+          </div>
+          <div>
+            <h1>Feature</h1>
+            <Dropdown
+              optionLabel="name"
+              value={feature}
+              options={featureOptions}
+              onChange={onFeatureChange}
+              placeholder="Choose Feature"
+            />
+          </div>
+          <div>
+            <h1>Talent</h1>
+            <Dropdown
+              optionLabel="name"
+              value={talent}
+              options={talentOptions}
+              onChange={onTalentChange}
+              placeholder="Choose Talent"
+            />
+          </div>
+          <div>
+            <h1>Mannerism</h1>
+            <Dropdown
+              optionLabel="name"
+              value={mannerism}
+              options={mannerismOptions}
+              onChange={onMannerismChange}
+              placeholder="Choose Mannerism"
+            />
+          </div>
+          <div>
+            <h1>Interaction</h1>
+            <Dropdown
+              optionLabel="name"
+              value={interaction}
+              options={interactionOptions}
+              onChange={onInteractionChange}
+              placeholder="Choose Interaction"
+            />
+          </div>
+          <div>
+            <h1>Bond</h1>
+            <Dropdown
+              optionLabel="name"
+              value={bond}
+              options={bondOptions}
+              onChange={onBondChange}
+              placeholder="Choose Bond"
+            />
+          </div>
+        </div>
+      
     </>
   );
 };

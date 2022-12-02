@@ -194,6 +194,7 @@ const BuildingGen = () => {
     );
     getData("buildingRoomsAll", setRoomType, setRoomTypes, setRoomTypeOptions);
   }, []);
+ 
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -893,6 +894,7 @@ const BuildingGen = () => {
           </h1>
           <div className={isNpcActive ? style.subsection : style.hidden}>
             <Npcs
+              isNpcActive={isNpcActive}
               openDialogNpc={openDialogNpc}
               //   randomItemBtn={randomItemBtn}
               dialogVisibleNpc={dialogVisibleNpc}
