@@ -284,7 +284,7 @@ const BuildingGen = () => {
   //DropDowns
   const customDrop = (title, value, options, change, placeholder, click) => (
     <div className={style.dropContainer}>
-      <h2 className={style.monstergenTitles}>{title}</h2>
+      <h2 className={style.dropTitle}>{title}</h2>
       <Dropdown
         optionLabel="name"
         value={value}

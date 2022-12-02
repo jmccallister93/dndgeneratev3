@@ -8,6 +8,7 @@ import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
+import { Button } from "primereact/button";
 
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -69,7 +70,7 @@ const NpcGen = () => {
 
   const [hook, setHook] = useState("");
 
-//Get Data function
+  //Get Data function
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -93,14 +94,19 @@ const NpcGen = () => {
     getData("aligns", setAlign, setAligns, setAlignOptions);
     getData("bonds", setBond, setBonds, setBondOptions);
     getData("features", setFeature, setFeatures, setFeatureOptions);
-    getData("interactions", setInteraction, setInteractions, setInteractionOptions);
+    getData(
+      "interactions",
+      setInteraction,
+      setInteractions,
+      setInteractionOptions
+    );
     getData("mannerisms", setMannerism, setMannerisms, setMannerismOptions);
     getData("professions", setProf, setProfs, setProfOptions);
     getData("races", setRace, setRaces, setRaceOptions);
     getData("sexes", setSex, setSexes, setSexOptions);
     getData("talents", setTalent, setTalents, setTalentOptions);
   }, []);
-//Name Data
+  //Name Data
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("names").select();
@@ -368,53 +374,30 @@ const NpcGen = () => {
   const onChaChange = (e) => {
     objectChange(e.value, setCha);
   };
-  // const onStrChange = (e) => {
-  //   setStr(e.value);
-  //   if (e.value === "Random") {
-  //     let r = Math.round(Math.random() * (8 - 1) + 1);
-  //     setStr(abilityScoreValues[r].name);
-  //   }
-  // };
+  //Dropdown Template
+  const customDrop = (title, value, options, change, placeholder, click) => (
+    <div className={styleB.dropContainer}>
+      <h2 className={styleB.dropTitle}>{title}</h2>
+      <Dropdown
+        optionLabel="name"
+        value={value}
+        options={options}
+        onChange={change}
+        placeholder={placeholder}
+      />
+      <Button onClick={click} className={style.btnName}>
+        Random
+      </Button>
+    </div>
+  );
 
-  // const onDexChange = (e) => {
-  //   setDex(e.value);
-  //   if (e.value === "Random") {
-  //     let r = Math.round(Math.random() * (8 - 1) + 1);
-  //     setDex(abilityScoreValues[r].name);
-  //   }
-  // };
-
-  // const onConChange = (e) => {
-  //   setCon(e.value);
-  //   if (e.value === "Random") {
-  //     let r = Math.round(Math.random() * (8 - 1));
-  //     setCon(abilityScoreValues[r].name);
-  //   }
-  // };
-
-  // const onIntChange = (e) => {
-  //   setInt(e.value);
-  //   if (e.value === "Random") {
-  //     let r = Math.round(Math.random() * (8 - 1) + 1);
-  //     setInt(abilityScoreValues[r].name);
-  //   }
-  // };
-
-  // const onWisChange = (e) => {
-  //   setWis(e.value);
-  //   if (e.value === "Random") {
-  //     let r = Math.round(Math.random() * (8 - 1) + 1);
-  //     setWis(abilityScoreValues[r].name);
-  //   }
-  // };
-
-  // const onChaChange = (e) => {
-  //   setCha(e.value);
-  //   if (e.value === "Random") {
-  //     let r = Math.round(Math.random() * (8 - 1) + 1);
-  //     setCha(abilityScoreValues[r].name);
-  //   }
-  // };
+  const raceDropdown = customDrop(
+    "Race",
+    race,
+    raceOptions,
+    onRaceChange,
+    "Choose Race"
+  );
 
   const onGenerate = (e) => {
     if (bond === "") {
@@ -622,6 +605,7 @@ const NpcGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
+  
 
   return (
     <div className={styleB.mainWrapper}>
@@ -655,7 +639,10 @@ const NpcGen = () => {
                 Randomize
               </button>
             </div>
-            <div>
+            
+            {raceDropdown}
+            
+            {/* <div>
               <h1>Race</h1>
               <Dropdown
                 optionLabel="name"
@@ -664,7 +651,7 @@ const NpcGen = () => {
                 onChange={onRaceChange}
                 placeholder="Choose Race"
               />
-            </div>
+            </div> */}
             <div>
               <h1>Sex</h1>
               <Dropdown

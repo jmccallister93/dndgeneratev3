@@ -211,29 +211,7 @@ const Npcs = ({
     }
   };
 
-  const onRaceChange = (e) => {
-    setRace(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (28 - 1) + 1);
-      setRace(raceOptions[r].name);
-    }
-  };
 
-  const onSexChange = (e) => {
-    setSex(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (2 - 1) + 1);
-      setSex(sexOptions[r].name);
-    }
-  };
-
-  const onAlignChange = (e) => {
-    setAlign(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setAlign(alignOptions[r].name);
-    }
-  };
 
   const onProfChange = (e) => {
     setProf(e.value);
@@ -280,33 +258,6 @@ const Npcs = ({
     }
   };
 
-  const onNameChange = (e) => {
-    setName(e.target.value);
-  };
-  const onRandomName = (e) => {
-    let f = Math.floor(Math.random() * 208);
-    let firstName = [nameOptions[f].first_name];
-    let eA = Math.floor(Math.random() * 208);
-    let epiphet_a = [nameOptions[eA].epithet_a];
-    let eB = Math.floor(Math.random() * 208);
-    let epiphet_b = [nameOptions[eB].epithet_b];
-    let nA = Math.floor(Math.random() * 208);
-    let noun_a = [nameOptions[nA].noun_a];
-    let nB = Math.floor(Math.random() * 208);
-    let noun_b = [nameOptions[nB].noun_b];
-
-    let random = Math.round(Math.random() * 3);
-
-    if (random === 0) {
-      setName(firstName + " " + epiphet_a + noun_a);
-    } else if (random === 1) {
-      setName(firstName + " " + epiphet_a + noun_b);
-    } else if (random === 2) {
-      setName(firstName + " " + epiphet_b + noun_b);
-    } else {
-      setName(firstName + " " + epiphet_b + noun_a);
-    }
-  };
   useEffect(() => {
     let modifierList = [
       "-5",
@@ -369,6 +320,107 @@ const Npcs = ({
     onAbilityModChange(wis, setWisMod);
     onAbilityModChange(cha, setChaMod);
   }, [str, dex, con, int, wis, cha]);
+
+  //Dropdown Template
+  const customDrop = (title, value, options, change, placeholder, click) => (
+    <div className={styleB.dropContainer}>
+      <h2 className={styleB.dropTitle}>{title}</h2>
+      <Dropdown
+        optionLabel="name"
+        value={value}
+        options={options}
+        onChange={change}
+        placeholder={placeholder}
+      />
+      <Button onClick={click} className={styleB.btnName}>
+        Random
+      </Button>
+    </div>
+  );
+  //Input Template
+  const customTextInput = (title, value, onchange, onrandom) => (
+    <div className={styleB.dropContainer}>
+      <h2 className={styleB.dropTitle}>{title}</h2>
+      <InputText value={value} onChange={onchange} />
+      <Button onClick={onrandom} className={styleB.btnName}>
+        Randomize
+      </Button>
+    </div>
+  );
+  //NPC Name
+  const onNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const onRandomName = (e) => {
+    let f = Math.floor(Math.random() * 208);
+    let firstName = [nameOptions[f].first_name];
+    let eA = Math.floor(Math.random() * 208);
+    let epiphet_a = [nameOptions[eA].epithet_a];
+    let eB = Math.floor(Math.random() * 208);
+    let epiphet_b = [nameOptions[eB].epithet_b];
+    let nA = Math.floor(Math.random() * 208);
+    let noun_a = [nameOptions[nA].noun_a];
+    let nB = Math.floor(Math.random() * 208);
+    let noun_b = [nameOptions[nB].noun_b];
+
+    let random = Math.round(Math.random() * 3);
+
+    if (random === 0) {
+      setName(firstName + " " + epiphet_a + noun_a);
+    } else if (random === 1) {
+      setName(firstName + " " + epiphet_a + noun_b);
+    } else if (random === 2) {
+      setName(firstName + " " + epiphet_b + noun_b);
+    } else {
+      setName(firstName + " " + epiphet_b + noun_a);
+    }
+  };
+  const nameInput = customTextInput("Name", name, onNameChange, onRandomName);
+  //NPC Race
+  const onRaceChange = (e) => {
+    setRace(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (28 - 1) + 1);
+      setRace(raceOptions[r].name);
+    }
+  };
+  const raceDropdown = customDrop(
+    "Race",
+    race,
+    raceOptions,
+    onRaceChange,
+    "Choose Race"
+  );
+  //NPC Sex
+  const onSexChange = (e) => {
+    setSex(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (2 - 1) + 1);
+      setSex(sexOptions[r].name);
+    }
+  };
+  const sexDropdown = customDrop(
+    "Sex",
+    sex,
+    sexOptions,
+    onSexChange,
+    "Choose Sex"
+  );
+  //NPC Align
+  const onAlignChange = (e) => {
+    setAlign(e.value);
+    if (e.value === "Random") {
+      let r = Math.round(Math.random() * (9 - 1) + 1);
+      setAlign(alignOptions[r].name);
+    }
+  };
+  const alignDropdown = customDrop(
+    "Alignment",
+    align,
+    alignOptions,
+    onAlignChange,
+    "Choose Alignment"
+  );
   const onGenerate = (e) => {
     if (bond === "") {
       let r = Math.round(Math.random() * (9 - 1) + 1);
@@ -530,23 +582,6 @@ const Npcs = ({
     setHook("");
   };
 
-  const onExport = () => {
-    const npcExport = Object.entries(npc)
-      .map(([name, value]) => `${name}: ${value}`)
-      .join("\n");
-
-    // file object
-    const file = new Blob([npcExport], { type: "text/plain" });
-
-    // anchor link
-    const element = document.createElement("a");
-    element.href = URL.createObjectURL(file);
-    element.download = name + ".txt";
-
-    // simulate link click
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
-  };
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -555,92 +590,25 @@ const Npcs = ({
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
-  //------------------TEST SECTION-----------------------
-  //   const [fetchError, setFetchError] = useState();
-
-  //   const [align, setAlign] = useState("");
-  //   const [aligns, setAligns] = useState();
-  //   const [alignOptions, setAlignOptions] = useState("");
-  //   const [alignList, setAlignList] = useState([])
-
-  //   //Get Data function
-  //   const getData = (tableName, setSingular, setPlural, setOptions) => {
-  //     const fetchData = async () => {
-  //       const { data: dataName, error: errorName } = await supabase
-  //         .from(tableName)
-  //         .select();
-  //       if (errorName) {
-  //         setFetchError("Could not fetch the data");
-  //         console.log(errorName);
-  //         setSingular(null);
-  //       }
-  //       if (dataName) {
-  //         setPlural(dataName);
-  //         setFetchError(null);
-  //         setOptions(dataName.map((r) => ({ name: r.name, value: r.value })));
-  //       }
-  //     };
-  //     fetchData();
-  //   };
-
-  //   //Import data via getData
-  //   useEffect(() => {
-  //     getData("aligns", setAlign, setAligns, setAlignOptions);
-  //   },[]);
-
-  // const onGenerate = (e) => {
-  //     let r = Math.round(Math.random() * (9 - 0));
-  //     setAlign(alignOptions[r].name)
-  //     setAlignList(prev => [...prev, align])
-  // }
-  // useEffect(()=>{
-  //     console.log(align)
-  // }, [align])
-  //------------------TEST SECTION-----------------------
 
   return (
     <>
       {/* Options */}
       <div className={styleB.optionsWrapper}>
-        <div>
-          <div>
-            <h1>Name</h1>
-            <InputText value={name} onChange={onNameChange} />
-            <button onClick={onRandomName} className={styleB.npcgenBtnName}>
-              Randomize
-            </button>
-          </div>
-          <div>
-            <h1>Race</h1>
-            <Dropdown
-              optionLabel="name"
-              value={race}
-              options={raceOptions}
-              onChange={onRaceChange}
-              placeholder="Choose Race"
-            />
-          </div>
-          <div>
-            <h1>Sex</h1>
-            <Dropdown
-              optionLabel="name"
-              value={sex}
-              options={sexOptions}
-              onChange={onSexChange}
-              placeholder="Choose Sex"
-            />
-          </div>
-          <div>
-            <h1>Alignment</h1>
-            <Dropdown
-              optionLabel="name"
-              value={align}
-              options={alignOptions}
-              onChange={onAlignChange}
-              placeholder="Choose Alignment"
-            />
-          </div>
+        <h1>NPC Options</h1>
+        <h1 className={styleB.subHeader} onClick={showBasics}>
+          Basic Info
+        </h1>
+        <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
+          {nameInput}
+          {raceDropdown}
+          {sexDropdown}
+          {alignDropdown}
         </div>
+        <h1 className={styleB.subHeader} onClick={showDetails}>
+          NPC Details
+        </h1>
+        <div className={isDetailActive ? styleB.subsection : styleB.hidden}>
           <div>
             <h1>Profession</h1>
             <Dropdown
@@ -702,7 +670,7 @@ const Npcs = ({
             />
           </div>
         </div>
-      
+      </div>
     </>
   );
 };
