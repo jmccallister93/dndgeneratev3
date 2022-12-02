@@ -210,13 +210,6 @@ const Npcs = ({
       setObject(objectOptions[r].name);
     }
   };
-
-
-
-
-
-
-
   useEffect(() => {
     let modifierList = [
       "-5",
@@ -440,7 +433,6 @@ const Npcs = ({
     onMannerismChange,
     "Choose Mannerism"
   );
-
   //NPC Interaction
   const onInteractionChange = (e) => {
     setInteraction(e.value);
@@ -456,7 +448,6 @@ const Npcs = ({
     onInteractionChange,
     "Choose Interaction"
   );
-
   //NPC Bond
   const onBondChange = (e) => {
     setBond(e.value);
@@ -635,6 +626,10 @@ const Npcs = ({
     setHook("");
   };
 
+  useEffect(()=>{
+    setNpc({name: name, align: align, race:race, sex:sex})
+  },[name, align, race, sex])
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -650,7 +645,7 @@ const Npcs = ({
       <div className={styleB.optionsWrapper}>
         <h1>NPC Options</h1>
         <h1 className={styleB.subHeader} onClick={showBasics}>
-          Basic Info
+          NPC Basic Info
         </h1>
         <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
           {nameInput}
@@ -662,66 +657,12 @@ const Npcs = ({
           NPC Details
         </h1>
         <div className={isDetailActive ? styleB.subsection : styleB.hidden}>
-          <div>
-            <h1>Profession</h1>
-            <Dropdown
-              optionLabel="name"
-              value={prof}
-              options={profOptions}
-              onChange={onProfChange}
-              placeholder="Choose Profession"
-            />
-          </div>
-          <div>
-            <h1>Feature</h1>
-            <Dropdown
-              optionLabel="name"
-              value={feature}
-              options={featureOptions}
-              onChange={onFeatureChange}
-              placeholder="Choose Feature"
-            />
-          </div>
-          <div>
-            <h1>Talent</h1>
-            <Dropdown
-              optionLabel="name"
-              value={talent}
-              options={talentOptions}
-              onChange={onTalentChange}
-              placeholder="Choose Talent"
-            />
-          </div>
-          <div>
-            <h1>Mannerism</h1>
-            <Dropdown
-              optionLabel="name"
-              value={mannerism}
-              options={mannerismOptions}
-              onChange={onMannerismChange}
-              placeholder="Choose Mannerism"
-            />
-          </div>
-          <div>
-            <h1>Interaction</h1>
-            <Dropdown
-              optionLabel="name"
-              value={interaction}
-              options={interactionOptions}
-              onChange={onInteractionChange}
-              placeholder="Choose Interaction"
-            />
-          </div>
-          <div>
-            <h1>Bond</h1>
-            <Dropdown
-              optionLabel="name"
-              value={bond}
-              options={bondOptions}
-              onChange={onBondChange}
-              placeholder="Choose Bond"
-            />
-          </div>
+          {profDropdown}
+          {featureDropdown}
+          {talentDropdown}
+          {mannersimDropdown}
+          {interactionDropdown}
+          {bondDropdown}
         </div>
       </div>
     </>

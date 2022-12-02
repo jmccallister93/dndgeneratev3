@@ -977,7 +977,7 @@ const BuildingGen = () => {
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            NPCs <div className={style.detesContainer}>{}</div>
+            NPCs <div className={style.detesContainer}>{npc.name}</div>
           </h2>
           <hr className={style.lineBreak} />
           <h2>
