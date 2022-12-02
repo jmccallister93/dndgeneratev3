@@ -28,7 +28,7 @@ const AbilityModifier = (props) => {
   };
   const onStrChange = (e) => {
     objectChange(e.value, setStr);
-    props.onStrChangeProp(str)
+    props.onStrChangeProp(e.value)
   };
 
   const onDexChange = (e) => {
@@ -70,12 +70,14 @@ const AbilityModifier = (props) => {
       <Button onClick={click} className={style.btnName}>
         Random
       </Button>
+      
     </div>
   );
   //Random Button
   const randomButton = (setObject, max, min) => {
     let r = Math.floor(Math.random() * (max - min));
     setObject(r);
+    
   };
   //OnRandoms
   const onRandomStr = (e) => {
@@ -103,7 +105,8 @@ const AbilityModifier = (props) => {
     str,
     onStrChange,
     "Set STR",
-    onRandomStr
+    onRandomStr,
+    props.onStrChangeProp(str)
   );
   const dexInput = customInputNumber(
     "Dexterity",
