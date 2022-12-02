@@ -1,5 +1,5 @@
 import styleB from "../stylesheets/BuildingGen.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -9,7 +9,17 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
 
-const Npcs = (props) => {
+const Npcs = ({
+  npc,
+  setNpc,
+  openDialogNpc,
+  dialogVisibleNpc,
+  closeDialogNpc,
+  dialogFooterNpc,
+  selectedNpc,
+  setSelectedNpc,
+  header,
+}) => {
   const [fetchError, setFetchError] = useState();
 
   const [align, setAlign] = useState("");
@@ -110,7 +120,7 @@ const Npcs = (props) => {
     getData("races", setRace, setRaces, setRaceOptions);
     getData("sexes", setSex, setSexes, setSexOptions);
     getData("talents", setTalent, setTalents, setTalentOptions);
-  },[]);
+  }, []);
 
   //name get data
   useEffect(() => {
@@ -233,16 +243,43 @@ const Npcs = (props) => {
       setName(firstName + " " + epiphet_b + noun_a);
     }
   };
-  //   console.log(nameOptions)
+
+  useEffect(() => {
+        setNpc(
+      {Name: name,
+      Race: race,
+      Sex: sex,
+      Alignment: align,
+      Profession: prof,
+      Feature: feature,
+      Talent: talent,
+      Mannerism: mannerism,
+      Interaction: interaction,
+      Bond: bond,
+      STR: str,
+      DEX: dex,
+      CON: con,
+      INT: int,
+      WIS: wis,
+      CHA: cha,
+      Hook: hook,}
+        );
+  }, []);
+
+  //   if(alignOptions !== undefined){
+  //     let r = Math.round(Math.random() * (9 - 1) + 1);
+  //     setAlign(alignOptions[r].name);
+  //     console.log(align)
+  //   }
 
   //Generation
   const onGenerate = (e) => {
     if (align === "") {
-        let r = Math.round(Math.random() * (9 - 1) + 1);
-        setAlign(alignOptions[r].name);
-      } else {
-        setAlign(align);
-      }
+      let r = Math.round(Math.random() * (9 - 1) + 1);
+      setAlign(alignOptions[r].name);
+    } else {
+      setAlign(align);
+    }
     if (name === "") {
       onRandomName();
     }
@@ -373,42 +410,23 @@ const Npcs = (props) => {
         hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
       );
     }
-  }
+  };
   //   ISSUES ARE HERE
   // ON GEN CANNOT RUN BECAUSE OPTIONS ARE NOT YET SET
 
-//   useEffect(() => {
-//     setNpcOptions(npc)
-//     setNpcOptions((prevState) => [...prevState, npc]
-//   }, []);
+  //   useEffect(() => {
+  //     setNpcOptions(npc)
+  //     setNpcOptions((prevState) => [...prevState, npc]
+  //   }, []);
 
-  const npc = {
-    Name: name,
-    Race: race,
-    Sex: sex,
-    Alignment: align,
-    Profession: prof,
-    Feature: feature,
-    Talent: talent,
-    Mannerism: mannerism,
-    Interaction: interaction,
-    Bond: bond,
-    STR: str,
-    DEX: dex,
-    CON: con,
-    INT: int,
-    WIS: wis,
-    CHA: cha,
-    Hook: hook,
-  };
-  console.log(npc)
-  const onBtnClick = (e)=>{ 
-    props.openDialogNpc()
-    for(let i =0; i < 5; i++){
-        onGenerate()
+  //   console.log(npc)
+  const onBtnClick = (e) => {
+    openDialogNpc();
+    for (let i = 0; i < 5; i++) {
+      onGenerate();
     }
     // setNpcOptions(npc)
-};
+  };
 
   return (
     <>
@@ -418,11 +436,11 @@ const Npcs = (props) => {
         </Button>
         <Dialog
           header="NPCs"
-          visible={props.dialogVisibleNpc}
+          visible={dialogVisibleNpc}
           maximizable
           modal
-          onHide={props.closeDialogNpc}
-          footer={props.dialogFooterNpc}
+          onHide={closeDialogNpc}
+          footer={dialogFooterNpc}
           transitionOptions
         >
           <DataTable
@@ -431,15 +449,15 @@ const Npcs = (props) => {
             scrollHeight="60vh"
             rows={20}
             dataKey="name"
-            selection={props.selectedNpc}
+            selection={selectedNpc}
             onSelectionChange={(e) => {
-              props.setSelectedNpc(e.value);
+              setSelectedNpc(e.value);
             }}
             //   filters={filters}
             filterDisplay="row"
             responsiveLayout="scroll"
             globalFilterFields={["name"]}
-            header={props.header}
+            header={header}
             emptyMessage="No items found."
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             rowHover

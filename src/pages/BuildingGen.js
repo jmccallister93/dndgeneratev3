@@ -130,6 +130,8 @@ const BuildingGen = () => {
   const [mineOptions, setMineOptions] = useState("");
   const [agricultureOptions, setAgricultureOptions] = useState("");
 
+  
+
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -833,7 +835,7 @@ const BuildingGen = () => {
     // setNpcList([])
     // setSelectedNpc("")
   };
-
+console.log(npc)
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -902,6 +904,8 @@ const BuildingGen = () => {
               setNpcList={setNpcList}
               randomNpcBtn={randomNpcBtn}
               npcOptions={npcOptions}
+              npc={npc}
+              setNpc={setNpc}
             />
           </div>
           <h1 className={style.subHeader} onClick={showItems}>
