@@ -19,16 +19,19 @@ import { Document, Page } from 'react-pdf';
 import AbilityModifier from "../components/AbilityModifier";
 
 const MonsterGen = () => {
-  const [monster, setMonster] = useState({
-    name:"", 
-    size: "", 
-    type: "",
-    align: "",
-    ac: "",
-    armorType: "",
-    hp: "",
-    speed: "",
-});
+//   const [monster, setMonster] = useState({
+//     name:"", 
+//     size: "", 
+//     type: "",
+//     align: "",
+//     ac: "",
+//     armorType: "",
+//     hp: "",
+//     speed: "",
+//     speedExtraList: [],
+//     str: "",
+//     strMod: "",
+// });
 
   //Set States
   const [fetchError, setFetchError] = useState();
@@ -477,9 +480,9 @@ const MonsterGen = () => {
   }, []);
 
   //TODO Monster Object
-  useEffect(() => {
-    setMonster((monster) => ({ ...monster, size: size, type: type }));
-  }, [size, type]);
+  // useEffect(() => {
+  //   setMonster((monster) => ({ ...monster, size: size, type: type }));
+  // }, [size, type]);
 
   //TODO
   //   useEffect(() => {
@@ -591,7 +594,10 @@ const MonsterGen = () => {
 
   //OnChanges
   const onNameChange = (e) => {
-    setName(e.target.value);
+    // setMonster((prev) => {
+    //   return {...prev,name: e.target.value}
+    // });
+    setName(e.target.value)
   };
   const onRandomName = (e) => {
     const a = Math.round(Math.random() * (139 - 0));
@@ -3706,6 +3712,7 @@ const MonsterGen = () => {
     setLegendList([]);
     setLairList([]);
     setGearList([]);
+    strChangeProp("") 
   };
   //Showoptions
   const showBasics = (e) => {
@@ -3999,6 +4006,7 @@ const MonsterGen = () => {
           onWisChangeProp={wisChangeProp}
           onIntChangeProp={intChangeProp}
           onChaChangeProp={chaChangeProp}
+          onClear={onClear}
           />
           {/* <h1 className={style.monstergenSubHeader} onClick={showAbility}>
             Ability Scores

@@ -134,7 +134,7 @@ const AbilityModifier = (props) => {
     onIntChange,
     "Set INT",
     onRandomInt,
-    props.onIntChangeProp(str)
+    props.onIntChangeProp(int)
   );
   const wisInput = customInputNumber(
     "Wisdom",
@@ -142,7 +142,7 @@ const AbilityModifier = (props) => {
     onWisChange,
     "Set WIS",
     onRandomWis,
-    props.onWisChangeProp(int)
+    props.onWisChangeProp(wis)
   );
   const chaInput = customInputNumber(
     "Charisma",
@@ -153,6 +153,17 @@ const AbilityModifier = (props) => {
     props.onChaChangeProp(cha)
   );
 
+  const onClear = (e) => {
+    props.onClear(
+        setCha(""),
+    setCon(""),
+    setDex(""),
+    setInt(""),
+    setStr(""),
+    setWis("")
+    )
+    
+  }
   //Setup show
   const showAbility = (e) => {
     setIsAbilityActive((current) => !current);
