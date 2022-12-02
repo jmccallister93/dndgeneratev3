@@ -110,7 +110,8 @@ const Npcs = (props) => {
     getData("races", setRace, setRaces, setRaceOptions);
     getData("sexes", setSex, setSexes, setSexOptions);
     getData("talents", setTalent, setTalents, setTalentOptions);
-  }, []);
+  },[]);
+
   //name get data
   useEffect(() => {
     const fetchData = async () => {
@@ -236,6 +237,12 @@ const Npcs = (props) => {
 
   //Generation
   const onGenerate = (e) => {
+    if (align === "") {
+        let r = Math.round(Math.random() * (9 - 1) + 1);
+        setAlign(alignOptions[r].name);
+      } else {
+        setAlign(align);
+      }
     if (name === "") {
       onRandomName();
     }
@@ -259,13 +266,6 @@ const Npcs = (props) => {
       console.log(r);
     } else {
       setSex(sex);
-    }
-
-    if (align === "") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setAlign(alignOptions[r].name);
-    } else {
-      setAlign(align);
     }
 
     if (prof === "") {
@@ -302,7 +302,6 @@ const Npcs = (props) => {
     } else {
       setInteraction(interaction);
     }
-
     if (name === "") {
       let f = Math.floor(Math.random() * 208);
       let firstName = [nameOptions[f].first_name];
@@ -329,7 +328,6 @@ const Npcs = (props) => {
     } else {
       setName(name);
     }
-
     if (str === "") {
       let r = Math.round(Math.random() * (8 - 1) + 1);
       setStr(abilityModOption[r].name);
@@ -375,17 +373,14 @@ const Npcs = (props) => {
         hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
       );
     }
-  };
+  }
+  //   ISSUES ARE HERE
+  // ON GEN CANNOT RUN BECAUSE OPTIONS ARE NOT YET SET
 
-//   ISSUES ARE HERE 
-// ON GEN CANNOT RUN BECAUSE OPTIONS ARE NOT YET SET 
-// useEffect(()=>{
-//     onGenerate()
-//   }, [])
-  useEffect(()=> {
-    
-    setNpcOptions(race)
-  }, [race])
+//   useEffect(() => {
+//     setNpcOptions(npc)
+//     setNpcOptions((prevState) => [...prevState, npc]
+//   }, []);
 
   const npc = {
     Name: name,
@@ -406,11 +401,19 @@ const Npcs = (props) => {
     CHA: cha,
     Hook: hook,
   };
+  console.log(npc)
+  const onBtnClick = (e)=>{ 
+    props.openDialogNpc()
+    for(let i =0; i < 5; i++){
+        onGenerate()
+    }
+    // setNpcOptions(npc)
+};
 
   return (
     <>
       <div>
-        <Button onClick={props.openDialogNpc} className={styleB.btnAddRemove}>
+        <Button onClick={onBtnClick} className={styleB.btnAddRemove}>
           Add / Remove
         </Button>
         <Dialog
