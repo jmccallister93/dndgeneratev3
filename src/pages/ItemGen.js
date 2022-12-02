@@ -138,7 +138,7 @@ const ItemGen = () => {
   const [mountSpeed, setMountSpeed] = useState("");
   const [mountCapacity, setMountCapacity] = useState("");
 
-  const [itemDesc, setItemDesc] = useState("")
+  const [itemDesc, setItemDesc] = useState("");
 
   const [genItem, setGenItem] = useState();
 
@@ -334,8 +334,8 @@ const ItemGen = () => {
 
   //On change events
   const onNameChange = (e) => {
-    setItemName(e.target.value)
-  }
+    setItemName(e.target.value);
+  };
 
   const onTypeChange = (e) => {
     setType(e.value);
@@ -519,8 +519,8 @@ const ItemGen = () => {
   };
 
   const onDescChange = (e) => {
-    setItemDesc(e.target.value)
-  }
+    setItemDesc(e.target.value);
+  };
   //Todo Searching
   const onSearchPack = (e) => {};
 
@@ -626,36 +626,11 @@ const ItemGen = () => {
     }
   };
 
-  //Clear
-  const onClear = (e) => {
-    setItemName("");
-    // setType("");
-    setRarity("");
-    setCurrency("");
-    setCurrencyValue("");
-    // setWeight("");
-    setDescription("");
-    setWeaponDmg("");
-    setWeaponProperty("");
-    setWeaponType("");
-    setDmgType("");
-    setVehicleSpeed("");
-    setVehicleCapacity("");
-    setArmorAc("");
-    setArmorMod("");
-    setArmorStealth("");
-    setArmorStr("");
-    setMountSpeed("");
-    setMountCapacity("");
-    setItemDesc("")
-  };
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
 
-  const emptyArray = ()=>{
-
-  }
+  const emptyArray = () => {};
 
   return (
     <div className={styleB.mainWrapper}>
@@ -668,10 +643,31 @@ const ItemGen = () => {
             <button onClick={onGenerate} className={styleB.btnGen}>
               Generate
             </button>
-            <ClearButton 
-            setStringState={[setWeight, setType]}
-            setArrayState={emptyArray}
-            amountOfStates={20}
+            <ClearButton
+              setStringState={[
+                setItemName,
+                setType,
+                setRarity,
+                setCurrency,
+                setCurrencyValue,
+                setWeight,
+                setDescription,
+                setWeaponDmg,
+                setWeaponProperty,
+                setWeaponType,
+                setDmgType,
+                setVehicleSpeed,
+                setVehicleCapacity,
+                setArmorAc,
+                setArmorMod,
+                setArmorStealth,
+                setArmorStr,
+                setMountSpeed,
+                setMountCapacity,
+                setItemDesc,
+              ]}
+              setArrayState={emptyArray}
+              amountOfStates={20}
             />
             {/* <button onClick={onClear} className={styleB.btnClear}>
               Clear
@@ -688,7 +684,7 @@ const ItemGen = () => {
           <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
             <div>
               <h1>Name</h1>
-              <InputText placeholder="Name" onChange={onNameChange}/>
+              <InputText placeholder="Name" onChange={onNameChange} />
               <button className={style.itemgenBtnName}>Randomize</button>
             </div>
 
@@ -955,15 +951,19 @@ const ItemGen = () => {
                 </div>
               ) : null}
               <div>
-              <h1>Description</h1>
-              <InputTextarea value={itemDesc} onChange={onDescChange} placeholder="Item Description"/>
-              <button
-                className={style.itemgenBtnName}
-                onClick={onRandomDescription}
-              >
-                Randomize
-              </button>
-            </div>
+                <h1>Description</h1>
+                <InputTextarea
+                  value={itemDesc}
+                  onChange={onDescChange}
+                  placeholder="Item Description"
+                />
+                <button
+                  className={style.itemgenBtnName}
+                  onClick={onRandomDescription}
+                >
+                  Randomize
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -987,12 +987,10 @@ const ItemGen = () => {
           {type === "Weapon" ? (
             <>
               <h2>
-                Damage{" "}
-                <span className={styleB.minorText2}>{weaponDmg}</span>
+                Damage <span className={styleB.minorText2}>{weaponDmg}</span>
               </h2>
               <h2>
-                Damage Type{" "}
-                <span className={styleB.minorText2}>{dmgType}</span>
+                Damage Type <span className={styleB.minorText2}>{dmgType}</span>
               </h2>
               <h2>
                 Weapon Type{" "}
@@ -1004,15 +1002,13 @@ const ItemGen = () => {
               </h2>
             </>
           ) : null}
-             {type === "Armor" ? (
+          {type === "Armor" ? (
             <>
               <h2>
-                AC{" "}
-                <span className={styleB.minorText2}>{armorAc}</span>
+                AC <span className={styleB.minorText2}>{armorAc}</span>
               </h2>
               <h2>
-                Modifier{" "}
-                <span className={styleB.minorText2}>{armorMod}</span>
+                Modifier <span className={styleB.minorText2}>{armorMod}</span>
               </h2>
               <h2>
                 Strength Requirement{" "}
@@ -1028,8 +1024,7 @@ const ItemGen = () => {
           {type === "Vehicle" ? (
             <>
               <h2>
-                Speed{" "}
-                <span className={styleB.minorText2}>{vehicleSpeed}</span>
+                Speed <span className={styleB.minorText2}>{vehicleSpeed}</span>
               </h2>
               <h2>
                 Carry Capacity{" "}
@@ -1041,8 +1036,7 @@ const ItemGen = () => {
           {type === "Mount" ? (
             <>
               <h2>
-                Speed{" "}
-                <span className={styleB.minorText2}>{mountSpeed}</span>
+                Speed <span className={styleB.minorText2}>{mountSpeed}</span>
               </h2>
               <h2>
                 Carry Capcity{" "}
@@ -1054,15 +1048,14 @@ const ItemGen = () => {
           {type === "Equipment Pack" ? (
             <>
               <h2>
-                Items{" "}
-                <span className={styleB.minorText2}>{}</span>
+                Items <span className={styleB.minorText2}>{}</span>
               </h2>
             </>
           ) : null}
           <h2>
-            Description 
+            Description
             <div>
-            <span className={styleB.minorText2}>{itemDesc}</span>
+              <span className={styleB.minorText2}>{itemDesc}</span>
             </div>
           </h2>
         </div>
