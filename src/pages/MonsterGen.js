@@ -16,6 +16,7 @@ import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
 import { Document, Page } from 'react-pdf';
+import AbilityModifier from "../components/AbilityModifier";
 
 const MonsterGen = () => {
   const [monster, setMonster] = useState({
@@ -3925,6 +3926,10 @@ const MonsterGen = () => {
     return `${i.name}`;
   });
 
+  const strChangeProp = (str) => {
+    setStr(str)
+  }
+
   return (
     <div className={style.monstergenWrapper}>
       <Navbar />
@@ -3971,7 +3976,8 @@ const MonsterGen = () => {
             {moveDialog}
             <div className={style.detesContainer}>{extraSpeedDispaly}</div>
           </div>
-          <h1 className={style.monstergenSubHeader} onClick={showAbility}>
+          <AbilityModifier onStrChangeProp={strChangeProp}/>
+          {/* <h1 className={style.monstergenSubHeader} onClick={showAbility}>
             Ability Scores
           </h1>
           <div
@@ -3985,7 +3991,7 @@ const MonsterGen = () => {
             {intInput}
             {wisInput}
             {chaInput}
-          </div>
+          </div> */}
           <h1 className={style.monstergenSubHeader} onClick={showSSD}>
             Saves & Skills
           </h1>
