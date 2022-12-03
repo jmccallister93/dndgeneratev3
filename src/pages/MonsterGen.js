@@ -3965,6 +3965,13 @@ const MonsterGen = () => {
   const chaChangeProp = (cha) => {
     setCha(cha);
   };
+  // const clearProp = (e) => {
+  //   setStr("")
+  //   setDex("")
+  //   setWis("")
+  //   setInt("")
+  //   setCha("")
+  // }
 
   return (
     <div className={style.monstergenWrapper}>
@@ -4043,6 +4050,7 @@ const MonsterGen = () => {
                 setSenseBlindsight,
                 setSenseTremorsense,
                 setSenseTruesight,
+                
               ]}
               setArrayState={[
                 setSpeedExtraList,
@@ -4061,6 +4069,7 @@ const MonsterGen = () => {
                 setLairList,
                 setGearList,
               ]}
+              
             />
           </div>
         </div>
@@ -4100,6 +4109,13 @@ const MonsterGen = () => {
             onWisChangeProp={wisChangeProp}
             onIntChangeProp={intChangeProp}
             onChaChangeProp={chaChangeProp}
+            // onClearProp={<ClearButton setStringState={[setStr,
+            //   setDex,
+            //   setCon,
+            //   setInt,
+            //   setWis,
+            //   setCha]}/>
+            // }
           />
           {/* <h1 className={style.monstergenSubHeader} onClick={showAbility}>
             Ability Scores

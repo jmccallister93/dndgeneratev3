@@ -1,7 +1,8 @@
 import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../stylesheets/BuildingGen.module.scss";
+import ClearButton from "./ClearButton";
 
 const AbilityModifier = (props) => {
   const [str, setStr] = useState("");
@@ -28,27 +29,27 @@ const AbilityModifier = (props) => {
   };
   const onStrChange = (e) => {
     objectChange(e.value, setStr);
-    props.onStrChangeProp(e.value)
+    props.onStrChangeProp(e.value);
   };
   const onDexChange = (e) => {
     objectChange(e.value, setDex);
-    props.onDexChangeProp(e.value)
+    props.onDexChangeProp(e.value);
   };
   const onConChange = (e) => {
     objectChange(e.value, setCon);
-    props.onIntChangeProp(e.value)
+    props.onIntChangeProp(e.value);
   };
   const onIntChange = (e) => {
     objectChange(e.value, setInt);
-    props.onIntChangeProp(e.value)
+    props.onIntChangeProp(e.value);
   };
   const onWisChange = (e) => {
     objectChange(e.value, setWis);
-    props.onWisChangeProp(e.value)
+    props.onWisChangeProp(e.value);
   };
   const onChaChange = (e) => {
     objectChange(e.value, setCha);
-    props.onChaChangeProp(e.value)
+    props.onChaChangeProp(e.value);
   };
 
   //Custom Input
@@ -74,14 +75,12 @@ const AbilityModifier = (props) => {
       <Button onClick={click} className={style.btnName}>
         Random
       </Button>
-      
     </div>
   );
   //Random Button
   const randomButton = (setObject, max, min) => {
     let r = Math.floor(Math.random() * (max - min));
     setObject(r);
-    
   };
   //OnRandoms
   const onRandomStr = (e) => {
@@ -153,17 +152,17 @@ const AbilityModifier = (props) => {
     props.onChaChangeProp(cha)
   );
 
-  const onClear = (e) => {
-    props.onClear(
-        setCha(""),
-    setCon(""),
-    setDex(""),
-    setInt(""),
-    setStr(""),
-    setWis("")
-    )
-    
-  }
+  // useEffect(() => {
+  //   props.onClearProp(
+  //     setCha(""),
+  //     setCon(""),
+  //     setDex(""),
+  //     setInt(""),
+  //     setStr(""),
+  //     setWis("")
+  //   );
+  // },[]);
+
   //Setup show
   const showAbility = (e) => {
     setIsAbilityActive((current) => !current);
@@ -174,9 +173,7 @@ const AbilityModifier = (props) => {
       <h1 className={style.subHeader} onClick={showAbility}>
         Ability Scores
       </h1>
-      <div
-        className={isAbilityActive ? style.genSubsection : style.hidden}
-      >
+      <div className={isAbilityActive ? style.genSubsection : style.hidden}>
         {strInput}
         {dexInput}
         {conInput}

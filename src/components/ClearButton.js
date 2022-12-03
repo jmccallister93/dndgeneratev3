@@ -9,7 +9,9 @@ const ClearButton = (props) => {
       for (let i = 0; props.setArrayState.length > i; i++) {
         props.setArrayState[i]([]);
       }
+      props.setStr("")
   };
+  
 
   
   return (
