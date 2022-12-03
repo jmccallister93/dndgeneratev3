@@ -663,6 +663,16 @@ const NpcGen = () => {
       <div className={styleB.body}>
         <Npcs 
         onNameChangeProp={nameChangeProp}
+        onRaceChangeProp={raceChangeProp}
+        onSexChangeProp={sexChangeProp}
+        onAlignChangeProp={alignChangeProp}
+        onProfChangeProp={profChangeProp}
+        onFeatureChangeProp={featureChangeProp}
+        onTalentChangeProp={talentChangeProp}
+        onMannerismChangeProp={mannerismChangeProp}
+        onInteractionChangeProp={interactionChangeProp}
+        onBondChangeProp={bondChangeProp}
+        onDescChangeProp={descChangeProp}
         />
         {/* <div className={styleB.optionsWrapper}>
           <h1>NPC Options</h1>

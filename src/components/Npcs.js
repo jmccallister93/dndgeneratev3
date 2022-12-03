@@ -291,7 +291,7 @@ const Npcs = (props) => {
   //NPC Name
   const onNameChange = (e) => {
     setName(e.target.value);
-    props.onNameChangeProp(e.target.value)
+    props.onNameChangeProp(e.target.value);
   };
   const onRandomName = (e) => {
     let f = Math.floor(Math.random() * 208);
@@ -317,7 +317,13 @@ const Npcs = (props) => {
       setName(firstName + " " + epiphet_b + noun_a);
     }
   };
-  const nameInput = customTextInput("Name", name, onNameChange, onRandomName);
+  const nameInput = customTextInput(
+    "Name",
+    name,
+    onNameChange,
+    onRandomName,
+    props.onNameChangeProp(name)
+  );
   //NPC Race
   const onRaceChange = (e) => {
     setRace(e.value);
@@ -325,13 +331,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (28 - 1) + 1);
       setRace(raceOptions[r].name);
     }
+    props.onRaceChangeProp(e.value)
   };
   const raceDropdown = customDrop(
     "Race",
     race,
     raceOptions,
     onRaceChange,
-    "Choose Race"
+    "Choose Race",
+    props.onRaceChangeProp(race)
   );
   //NPC Sex
   const onSexChange = (e) => {
@@ -340,13 +348,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (2 - 1) + 1);
       setSex(sexOptions[r].name);
     }
+    props.onSexChangeProp(e.value)
   };
   const sexDropdown = customDrop(
     "Sex",
     sex,
     sexOptions,
     onSexChange,
-    "Choose Sex"
+    "Choose Sex",
+    props.onSexChangeProp(sex)
   );
   //NPC Align
   const onAlignChange = (e) => {
@@ -355,13 +365,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (9 - 1) + 1);
       setAlign(alignOptions[r].name);
     }
+    props.onAlignChangeProp(e.value)
   };
   const alignDropdown = customDrop(
     "Alignment",
     align,
     alignOptions,
     onAlignChange,
-    "Choose Alignment"
+    "Choose Alignment",
+    props.onAlignChangeProp(e.value)
   );
   //NPC Prof
   const onProfChange = (e) => {
@@ -370,13 +382,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (49 - 1) + 1);
       setProf(profOptions[r].name);
     }
+    props.onProfChangeProp(e.value)
   };
   const profDropdown = customDrop(
     "Profession",
     prof,
     profOptions,
     onProfChange,
-    "Choose Profession"
+    "Choose Profession",
+    props.onProfChangeProp(prof)
   );
   //NPC Feature
   const onFeatureChange = (e) => {
@@ -385,13 +399,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (20 - 1) + 1);
       setFeature(featureOptions[r].name);
     }
+    props.onFeatureChangeProp(e.value)
   };
   const featureDropdown = customDrop(
     "Feature",
     feature,
     featureOptions,
     onFeatureChange,
-    "Choose Feature"
+    "Choose Feature",
+    props.onFeatureChangeProp(feature)
   );
   //NPC Talent
   const onTalentChange = (e) => {
@@ -400,13 +416,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (20 - 1) + 1);
       setTalent(talentOptions[r].name);
     }
+    props.onTalentChangeProp(e.value)
   };
   const talentDropdown = customDrop(
     "Talent",
     talent,
     talentOptions,
     onTalentChange,
-    "Choose Talent"
+    "Choose Talent",
+    props.onTalentChangeProp(talent)
   );
   //NPC Mannerism
   const onMannerismChange = (e) => {
@@ -415,13 +433,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (20 - 1) + 1);
       setMannerism(mannerismOptions[r].name);
     }
+    props.onMannerismChangeProp(e.value)
   };
   const mannersimDropdown = customDrop(
     "Mannerism",
     mannerism,
     mannerismOptions,
     onMannerismChange,
-    "Choose Mannerism"
+    "Choose Mannerism",
+    props.onMannerismChangeProp(mannerism)
   );
   //NPC Interaction
   const onInteractionChange = (e) => {
@@ -430,13 +450,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (11 - 1) + 1);
       setInteraction(interactionOptions[r].name);
     }
+    props.onInteractionChangeProp(e.value)
   };
   const interactionDropdown = customDrop(
     "Interaction",
     interaction,
     interactionOptions,
     onInteractionChange,
-    "Choose Interaction"
+    "Choose Interaction",
+    props.onInteractionChangeProp(interaction)
   );
   //NPC Bond
   const onBondChange = (e) => {
@@ -445,13 +467,15 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (9 - 1) + 1);
       setBond(bondOptions[r].name);
     }
+    props.onBondChangeProp(e.value)
   };
   const bondDropdown = customDrop(
     "Bond",
     bond,
     bondOptions,
     onBondChange,
-    "Choose Bond"
+    "Choose Bond",
+    props.onBondChangeProp(bond)
   );
   //NPC Hook TODO
 
