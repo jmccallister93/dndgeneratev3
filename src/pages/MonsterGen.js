@@ -15,23 +15,24 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
-import { Document, Page } from 'react-pdf';
+import { Document, Page } from "react-pdf";
 import AbilityModifier from "../components/AbilityModifier";
+import ClearButton from "../components/ClearButton";
 
 const MonsterGen = () => {
-//   const [monster, setMonster] = useState({
-//     name:"", 
-//     size: "", 
-//     type: "",
-//     align: "",
-//     ac: "",
-//     armorType: "",
-//     hp: "",
-//     speed: "",
-//     speedExtraList: [],
-//     str: "",
-//     strMod: "",
-// });
+  //   const [monster, setMonster] = useState({
+  //     name:"",
+  //     size: "",
+  //     type: "",
+  //     align: "",
+  //     ac: "",
+  //     armorType: "",
+  //     hp: "",
+  //     speed: "",
+  //     speedExtraList: [],
+  //     str: "",
+  //     strMod: "",
+  // });
 
   //Set States
   const [fetchError, setFetchError] = useState();
@@ -502,102 +503,100 @@ const MonsterGen = () => {
   //     fetchData();
   //   }, []);
   //Export Logic
-//   const [selectedItems, setSelectedItems] = useState(null);
-//   const [allSelection, setAllSelection] = useState();
-//   const dt = useRef(null);
+  //   const [selectedItems, setSelectedItems] = useState(null);
+  //   const [allSelection, setAllSelection] = useState();
+  //   const dt = useRef(null);
 
-//   const exportPdf = () => {
-//     import("jspdf").then((jsPDF) => {
-//       import("jspdf-autotable").then(() => {
-//         const doc = new jsPDF.default(0, 0);
-//         doc.autoTable(exportColumns, allSelection);
-//         doc.save({name} + ".pdf");
-//       });
-//     });
-//   };
-//   const cols = [
-//     { field: "name", header: "Name" },
-//     { field: "size", header: "Size" },
-//     { field: "type", header: "Type" },
-//     { field: "alignment", header: "Alignment" },
-//   ];
-//   const exportColumns = cols.map((col) => ({
-//     title: col.header,
-//     dataKey: col.field,
-//   }));
+  //   const exportPdf = () => {
+  //     import("jspdf").then((jsPDF) => {
+  //       import("jspdf-autotable").then(() => {
+  //         const doc = new jsPDF.default(0, 0);
+  //         doc.autoTable(exportColumns, allSelection);
+  //         doc.save({name} + ".pdf");
+  //       });
+  //     });
+  //   };
+  //   const cols = [
+  //     { field: "name", header: "Name" },
+  //     { field: "size", header: "Size" },
+  //     { field: "type", header: "Type" },
+  //     { field: "alignment", header: "Alignment" },
+  //   ];
+  //   const exportColumns = cols.map((col) => ({
+  //     title: col.header,
+  //     dataKey: col.field,
+  //   }));
 
-//   const exportCSV = (selectionOnly) => {
-//     dt.current.exportCSV({ selectionOnly });
-//   };
+  //   const exportCSV = (selectionOnly) => {
+  //     dt.current.exportCSV({ selectionOnly });
+  //   };
 
-//   const exportExcel = () => {
-//     import("xlsx").then((xlsx) => {
-//       const worksheet = xlsx.utils.json_to_sheet(allSelection);
-//       const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
-//       const excelBuffer = xlsx.write(workbook, {
-//         bookType: "xlsx",
-//         type: "array",
-//       });
-//       saveAsExcelFile(excelBuffer, "products");
-//     });
-//   };
+  //   const exportExcel = () => {
+  //     import("xlsx").then((xlsx) => {
+  //       const worksheet = xlsx.utils.json_to_sheet(allSelection);
+  //       const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+  //       const excelBuffer = xlsx.write(workbook, {
+  //         bookType: "xlsx",
+  //         type: "array",
+  //       });
+  //       saveAsExcelFile(excelBuffer, "products");
+  //     });
+  //   };
 
-//   const saveAsExcelFile = (buffer, fileName) => {
-//     import("file-saver").then((module) => {
-//       if (module && module.default) {
-//         let EXCEL_TYPE =
-//           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-//         let EXCEL_EXTENSION = ".xlsx";
-//         const data = new Blob([buffer], {
-//           type: EXCEL_TYPE,
-//         });
+  //   const saveAsExcelFile = (buffer, fileName) => {
+  //     import("file-saver").then((module) => {
+  //       if (module && module.default) {
+  //         let EXCEL_TYPE =
+  //           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+  //         let EXCEL_EXTENSION = ".xlsx";
+  //         const data = new Blob([buffer], {
+  //           type: EXCEL_TYPE,
+  //         });
 
-//         module.default.saveAs(
-//           data,
-//           fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
-//         );
-//       }
-//     });
-//   };
+  //         module.default.saveAs(
+  //           data,
+  //           fileName + "_export_" + new Date().getTime() + EXCEL_EXTENSION
+  //         );
+  //       }
+  //     });
+  //   };
 
-//   //Export Buttons
-//   const exportBtns = (
-//     <div >
-//       <Button
-//         type="button"
-//         icon="pi pi-file"
-//         onClick={() => exportCSV(true)}
-//         className="p-button-info mr-2 "
-//         data-pr-tooltip="Export CSV"
-//         tooltip="CSV"
-//       />
-//       <Button
-//         type="button"
-//         icon="pi pi-file-excel"
-//         onClick={exportExcel}
-//         className="p-button-success mr-2"
-//         data-pr-tooltip="Export XLS"
-//         tooltip="XLS"
-//       />
-//       <Button
-//         type="button"
-//         icon="pi pi-file-pdf"
-//         onClick={exportPdf}
-//         className="p-button-warning mr-2"
-//         data-pr-tooltip="Export PDF"
-//         tooltip="PDF"
-//       />
-//     </div>
-//   );
-
-
+  //   //Export Buttons
+  //   const exportBtns = (
+  //     <div >
+  //       <Button
+  //         type="button"
+  //         icon="pi pi-file"
+  //         onClick={() => exportCSV(true)}
+  //         className="p-button-info mr-2 "
+  //         data-pr-tooltip="Export CSV"
+  //         tooltip="CSV"
+  //       />
+  //       <Button
+  //         type="button"
+  //         icon="pi pi-file-excel"
+  //         onClick={exportExcel}
+  //         className="p-button-success mr-2"
+  //         data-pr-tooltip="Export XLS"
+  //         tooltip="XLS"
+  //       />
+  //       <Button
+  //         type="button"
+  //         icon="pi pi-file-pdf"
+  //         onClick={exportPdf}
+  //         className="p-button-warning mr-2"
+  //         data-pr-tooltip="Export PDF"
+  //         tooltip="PDF"
+  //       />
+  //     </div>
+  //   );
 
   //OnChanges
   const onNameChange = (e) => {
     // setMonster((prev) => {
     //   return {...prev,name: e.target.value}
     // });
-    setName(e.target.value)
+    setName(e.target.value);
   };
   const onRandomName = (e) => {
     const a = Math.round(Math.random() * (139 - 0));
@@ -3633,87 +3632,101 @@ const MonsterGen = () => {
     }
   };
 
-  const onClear = (e) => {
-    setName("");
-    setSize("");
-    setType("");
-    setAlign("");
-    setAc("");
-    setArmorType("");
-    setHp("");
-    setSpeed("");
-    setSpeedType("");
-    setSpeedExtra("");
-    setStr("");
-    setDex("");
-    setCon("");
-    setInt("");
-    setWis("");
-    setCha("");
-    setSave("");
-    setSkill("");
-    setVuln("");
-    setImmune("");
-    setResist("");
-    setCondition("");
-    setSense("");
-    setLang("");
-    setSpecial("");
-    setAction("");
-    setReaction("");
-    setLegend("");
-    setLair("");
-    setGear("");
-    setSpeedExtraList([]);
-    setBurrow("");
-    setClimb("");
-    setHover("");
-    setFly("");
-    setSwim("");
-    setSaveList([]);
-    setSaveStr("");
-    setSaveDex("");
-    setSaveCon("");
-    setSaveInt("");
-    setSaveWis("");
-    setSaveCha("");
-    setSkillList([]);
-    setSkillAcrobatics("");
-    setSkillAnimal("");
-    setSkillArcana("");
-    setSkillAthletics("");
-    setSkillDeception("");
-    setSkillHistory("");
-    setSkillInsight("");
-    setSkillIntimidation("");
-    setSkillInvestigation("");
-    setSkillMedicine("");
-    setSkillNature("");
-    setSkillPerception("");
-    setSkillPerformance("");
-    setSkillPersuasion("");
-    setSkillReligion("");
-    setSkillSleight("");
-    setSkillStealth("");
-    setSkillSurvival("");
-    setVulnList([]);
-    setImmuneList([]);
-    setResistList([]);
-    setConditionList([]);
-    setSenseList([]);
-    setSenseDarkvision("");
-    setSenseBlindsight("");
-    setSenseTremorsense("");
-    setSenseTruesight("");
-    setLangList([]);
-    setSpecialList([]);
-    setActionList([]);
-    setReactionList([]);
-    setLegendList([]);
-    setLairList([]);
-    setGearList([]);
-    strChangeProp("") 
-  };
+  // const onClear = (e) => {
+  //   setName("");
+  //   setSize("");
+  //   setType("");
+  //   setAlign("");
+  //   setAc("");
+  //   setArmorType("");
+  //   setHp("");
+  //   setSpeed("");
+  //   setSpeedType("");
+  //   setSpeedExtra("");
+  //   setStr("");
+  //   setDex("");
+  //   setCon("");
+  //   setInt("");
+  //   setWis("");
+  //   setCha("");
+  //   setSave("");
+  //   setSkill("");
+  //   setVuln("");
+  //   setImmune("");
+  //   setResist("");
+  //   setCondition("");
+  //   setSense("");
+  //   setLang("");
+  //   setSpecial("");
+  //   setAction("");
+  //   setReaction("");
+  //   setLegend("");
+  //   setLair("");
+  //   setGear("");
+  //   setSpeedExtraList([]);
+  //   setBurrow("");
+  //   setClimb("");
+  //   setHover("");
+  //   setFly("");
+  //   setSwim("");
+  //   setSpeedExtraList
+  //   setSaveList([]);
+  //   setSaveStr("");
+  //   setSaveDex("");
+  //   setSaveCon("");
+  //   setSaveInt("");
+  //   setSaveWis("");
+  //   setSaveCha("");
+  //   setSpeedExtraList
+  //   setSaveList
+  //   setSkillList([]);
+  //   setSkillAcrobatics("");
+  //   setSkillAnimal("");
+  //   setSkillArcana("");
+  //   setSkillAthletics("");
+  //   setSkillDeception("");
+  //   setSkillHistory("");
+  //   setSkillInsight("");
+  //   setSkillIntimidation("");
+  //   setSkillInvestigation("");
+  //   setSkillMedicine("");
+  //   setSkillNature("");
+  //   setSkillPerception("");
+  //   setSkillPerformance("");
+  //   setSkillPersuasion("");
+  //   setSkillReligion("");
+  //   setSkillSleight("");
+  //   setSkillStealth("");
+  //   setSkillSurvival("");
+  //   setSpeedExtraList
+  //   setSaveList
+  //   setSkillList
+  //   setVulnList([]);
+  //   setImmuneList([]);
+  //   setResistList([]);
+  //   setConditionList([]);
+  //   setSenseList([]);
+  //   setSenseDarkvision("");
+  //   setSenseBlindsight("");
+  //   setSenseTremorsense("");
+  //   setSenseTruesight("");
+  //   setSpeedExtraList
+  //   setSaveList
+  //   setSkillList
+  //   setVulnList([]);
+  //   setImmuneList([]);
+  //   setResistList([]);
+  //   setConditionList([]);
+  //   setSenseList([]);
+  //   setLangList([]);
+  //   setSpecialList([]);
+  //   setActionList([]);
+  //   setReactionList([]);
+  //   setLegendList([]);
+  //   setLairList([]);
+  //   setGearList([]);
+  //   strChangeProp("");
+  // };
   //Showoptions
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -3935,23 +3948,23 @@ const MonsterGen = () => {
 
   //Prop functions to pass down to child
   const strChangeProp = (str) => {
-    setStr(str)
-  }
+    setStr(str);
+  };
   const dexChangeProp = (dex) => {
-    setDex(dex)
-  }
+    setDex(dex);
+  };
   const conChangeProp = (con) => {
-    setCon(con)
-  }
+    setCon(con);
+  };
   const wisChangeProp = (wis) => {
-    setWis(wis)
-  }
+    setWis(wis);
+  };
   const intChangeProp = (int) => {
-    setInt(int)
-  }
+    setInt(int);
+  };
   const chaChangeProp = (cha) => {
-    setCha(cha)
-  }
+    setCha(cha);
+  };
 
   return (
     <div className={style.monstergenWrapper}>
@@ -3965,9 +3978,90 @@ const MonsterGen = () => {
             <button onClick={onGenerate} className={style.monstergenBtnGen}>
               Generate
             </button>
-            <button onClick={onClear} className={style.monstergenBtnClear}>
-              Clear
-            </button>
+            <ClearButton
+              setStringState={[
+                setName,
+                setSize,
+                setType,
+                setAlign,
+                setAc,
+                setArmorType,
+                setHp,
+                setSpeed,
+                setSpeedType,
+                setSpeedExtra,
+                setStr,
+                setDex,
+                setCon,
+                setInt,
+                setWis,
+                setCha,
+                setSave,
+                setSkill,
+                setVuln,
+                setImmune,
+                setResist,
+                setCondition,
+                setSense,
+                setLang,
+                setSpecial,
+                setAction,
+                setReaction,
+                setLegend,
+                setLair,
+                setGear,
+                setBurrow,
+                setClimb,
+                setHover,
+                setFly,
+                setSwim,
+                setSaveStr,
+                setSaveDex,
+                setSaveCon,
+                setSaveInt,
+                setSaveWis,
+                setSaveCha,
+                setSkillAcrobatics,
+                setSkillAnimal,
+                setSkillArcana,
+                setSkillAthletics,
+                setSkillDeception,
+                setSkillHistory,
+                setSkillInsight,
+                setSkillIntimidation,
+                setSkillInvestigation,
+                setSkillMedicine,
+                setSkillNature,
+                setSkillPerception,
+                setSkillPerformance,
+                setSkillPersuasion,
+                setSkillReligion,
+                setSkillSleight,
+                setSkillStealth,
+                setSkillSurvival,
+                setSenseDarkvision,
+                setSenseBlindsight,
+                setSenseTremorsense,
+                setSenseTruesight,
+              ]}
+              setArrayState={[
+                setSpeedExtraList,
+                setSaveList,
+                setSkillList,
+                setVulnList,
+                setImmuneList,
+                setResistList,
+                setConditionList,
+                setSenseList,
+                setLangList,
+                setSpecialList,
+                setActionList,
+                setReactionList,
+                setLegendList,
+                setLairList,
+                setGearList,
+              ]}
+            />
           </div>
         </div>
       </div>
@@ -3999,14 +4093,13 @@ const MonsterGen = () => {
             {moveDialog}
             <div className={style.detesContainer}>{extraSpeedDispaly}</div>
           </div>
-          <AbilityModifier 
-          onStrChangeProp={strChangeProp}
-          onDexChangeProp={dexChangeProp}
-          onConChangeProp={conChangeProp}
-          onWisChangeProp={wisChangeProp}
-          onIntChangeProp={intChangeProp}
-          onChaChangeProp={chaChangeProp}
-          onClear={onClear}
+          <AbilityModifier
+            onStrChangeProp={strChangeProp}
+            onDexChangeProp={dexChangeProp}
+            onConChangeProp={conChangeProp}
+            onWisChangeProp={wisChangeProp}
+            onIntChangeProp={intChangeProp}
+            onChaChangeProp={chaChangeProp}
           />
           {/* <h1 className={style.monstergenSubHeader} onClick={showAbility}>
             Ability Scores

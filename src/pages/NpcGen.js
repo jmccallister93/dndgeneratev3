@@ -9,6 +9,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
+import ClearButton from "../components/ClearButton";
 
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -618,9 +619,7 @@ const NpcGen = () => {
             <button onClick={onGenerate} className={styleB.btnGen}>
               Generate
             </button>
-            <button onClick={onClear} className={styleB.btnClear}>
-              Clear
-            </button>
+           <ClearButton />
           </div>
         </div>
       </div>

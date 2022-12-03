@@ -667,7 +667,6 @@ const ItemGen = () => {
                 setItemDesc,
               ]}
               setArrayState={emptyArray}
-              amountOfStates={20}
             />
             {/* <button onClick={onClear} className={styleB.btnClear}>
               Clear

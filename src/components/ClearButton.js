@@ -6,8 +6,9 @@ const ClearButton = (props) => {
     for (let i = 0; props.setStringState.length > i; i++) {
         props.setStringState[i]("");
       }
-    // props.setStringState("");
-    props.setArrayState([]);
+      for (let i = 0; props.setArrayState.length > i; i++) {
+        props.setArrayState[i]([]);
+      }
   };
 
   
