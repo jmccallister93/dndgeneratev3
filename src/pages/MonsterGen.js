@@ -4050,7 +4050,6 @@ const MonsterGen = () => {
                 setSenseBlindsight,
                 setSenseTremorsense,
                 setSenseTruesight,
-                
               ]}
               setArrayState={[
                 setSpeedExtraList,
@@ -4069,7 +4068,6 @@ const MonsterGen = () => {
                 setLairList,
                 setGearList,
               ]}
-              
             />
           </div>
         </div>

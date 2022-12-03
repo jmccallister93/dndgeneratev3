@@ -13,50 +13,16 @@ import ClearButton from "../components/ClearButton";
 import Npcs from "../components/Npcs";
 
 const NpcGen = () => {
-  const [fetchError, setFetchError] = useState(null);
-  const [isBasicActive, setIsBasicActive] = useState(false);
-  const [isDetailActive, setIsDetailActive] = useState(false);
-
   const [align, setAlign] = useState("");
-  const [aligns, setAligns] = useState();
-  const [alignOptions, setAlignOptions] = useState();
-
   const [bond, setBond] = useState("");
-  const [bonds, setBonds] = useState();
-  const [bondOptions, setBondOptions] = useState();
-
   const [feature, setFeature] = useState("");
-  const [features, setFeatures] = useState();
-  const [featureOptions, setFeatureOptions] = useState();
-
   const [interaction, setInteraction] = useState("");
-  const [interactions, setInteractions] = useState();
-  const [interactionOptions, setInteractionOptions] = useState();
-
   const [prof, setProf] = useState("");
-  const [profs, setProfs] = useState();
-  const [profOptions, setProfOptions] = useState();
-
   const [mannerism, setMannerism] = useState("");
-  const [mannerisms, setMannerisms] = useState();
-  const [mannerismOptions, setMannerismOptions] = useState();
-
   const [race, setRace] = useState("");
-  const [races, setRaces] = useState();
-  const [raceOptions, setRaceOptions] = useState();
-
   const [sex, setSex] = useState("");
-  const [sexes, setSexes] = useState();
-  const [sexOptions, setSexOptions] = useState();
-
   const [talent, setTalent] = useState("");
-  const [talents, setTalents] = useState();
-  const [talentOptions, setTalentOptions] = useState();
-
   const [name, setName] = useState("");
-  const [names, setNames] = useState();
-  const [nameOptions, setNameOptions] = useState();
-
   const [str, setStr] = useState("");
   const [strMod, setStrMod] = useState("");
   const [dex, setDex] = useState("");
@@ -69,72 +35,8 @@ const NpcGen = () => {
   const [wisMod, setWisMod] = useState("");
   const [cha, setCha] = useState("");
   const [chaMod, setChaMod] = useState("");
-
   const [hook, setHook] = useState("");
-
   const [desc, setDesc] = useState("")
-
-  //Get Data function
-  const getData = (tableName, setSingular, setPlural, setOptions) => {
-    const fetchData = async () => {
-      const { data: dataName, error: errorName } = await supabase
-        .from(tableName)
-        .select();
-      if (errorName) {
-        setFetchError("Could not fetch the data");
-        console.log(errorName);
-        setSingular(null);
-      }
-      if (dataName) {
-        setPlural(dataName);
-        setFetchError(null);
-        setOptions(dataName.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  };
-  //Import data via getData
-  useEffect(() => {
-    getData("aligns", setAlign, setAligns, setAlignOptions);
-    getData("bonds", setBond, setBonds, setBondOptions);
-    getData("features", setFeature, setFeatures, setFeatureOptions);
-    getData(
-      "interactions",
-      setInteraction,
-      setInteractions,
-      setInteractionOptions
-    );
-    getData("mannerisms", setMannerism, setMannerisms, setMannerismOptions);
-    getData("professions", setProf, setProfs, setProfOptions);
-    getData("races", setRace, setRaces, setRaceOptions);
-    getData("sexes", setSex, setSexes, setSexOptions);
-    getData("talents", setTalent, setTalents, setTalentOptions);
-  }, []);
-  //Name Data
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("names").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setName(null);
-        console.log(error);
-      }
-      if (data) {
-        setNames(data);
-        setFetchError(null);
-        setNameOptions(
-          data.map((r) => ({
-            first_name: r.first_name,
-            epithet_a: r.epithet_a,
-            noun_a: r.noun_a,
-            epithet_b: r.epithet_b,
-            noun_b: r.noun_b,
-          }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
 
   const abilityScoreValues = [
     { id: 1, name: "Random", value: "Random" },
@@ -202,102 +104,6 @@ const NpcGen = () => {
     }
   };
 
-  const onRaceChange = (e) => {
-    setRace(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (28 - 1) + 1);
-      setRace(raceOptions[r].name);
-    }
-  };
-
-  const onSexChange = (e) => {
-    setSex(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (2 - 1) + 1);
-      setSex(sexOptions[r].name);
-    }
-  };
-
-  const onAlignChange = (e) => {
-    setAlign(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setAlign(alignOptions[r].name);
-    }
-  };
-
-  const onProfChange = (e) => {
-    setProf(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (49 - 1) + 1);
-      setProf(profOptions[r].name);
-    }
-  };
-
-  const onFeatureChange = (e) => {
-    setFeature(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setFeature(featureOptions[r].name);
-    }
-  };
-
-  const onTalentChange = (e) => {
-    setTalent(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setTalent(talentOptions[r].name);
-    }
-  };
-  const onMannerismChange = (e) => {
-    setMannerism(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setMannerism(mannerismOptions[r].name);
-    }
-  };
-  const onInteractionChange = (e) => {
-    setInteraction(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (11 - 1) + 1);
-      setInteraction(interactionOptions[r].name);
-    }
-  };
-  const onBondChange = (e) => {
-    setBond(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setBond(bondOptions[r].name);
-    }
-  };
-
-  const onNameChange = (e) => {
-    setName(e.target.value);
-  };
-  const onRandomName = (e) => {
-    let f = Math.floor(Math.random() * 208);
-    let firstName = [nameOptions[f].first_name];
-    let eA = Math.floor(Math.random() * 208);
-    let epiphet_a = [nameOptions[eA].epithet_a];
-    let eB = Math.floor(Math.random() * 208);
-    let epiphet_b = [nameOptions[eB].epithet_b];
-    let nA = Math.floor(Math.random() * 208);
-    let noun_a = [nameOptions[nA].noun_a];
-    let nB = Math.floor(Math.random() * 208);
-    let noun_b = [nameOptions[nB].noun_b];
-
-    let random = Math.round(Math.random() * 3);
-
-    if (random === 0) {
-      setName(firstName + " " + epiphet_a + noun_a);
-    } else if (random === 1) {
-      setName(firstName + " " + epiphet_a + noun_b);
-    } else if (random === 2) {
-      setName(firstName + " " + epiphet_b + noun_b);
-    } else {
-      setName(firstName + " " + epiphet_b + noun_a);
-    }
-  };
   useEffect(() => {
     let modifierList = [
       "-5",
@@ -378,169 +184,145 @@ const NpcGen = () => {
   const onChaChange = (e) => {
     objectChange(e.value, setCha);
   };
-  //Dropdown Template
-  const customDrop = (title, value, options, change, placeholder, click) => (
-    <div className={styleB.dropContainer}>
-      <h2 className={styleB.dropTitle}>{title}</h2>
-      <Dropdown
-        optionLabel="name"
-        value={value}
-        options={options}
-        onChange={change}
-        placeholder={placeholder}
-      />
-      <Button onClick={click} className={style.btnName}>
-        Random
-      </Button>
-    </div>
-  );
 
-  const raceDropdown = customDrop(
-    "Race",
-    race,
-    raceOptions,
-    onRaceChange,
-    "Choose Race"
-  );
+  // const onGenerate = (e) => {
+  //   if (bond === "") {
+  //     let r = Math.round(Math.random() * (9 - 1) + 1);
+  //     setBond(bondOptions[r].name);
+  //   } else {
+  //     setBond(bond);
+  //   }
 
-  const onGenerate = (e) => {
-    if (bond === "") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setBond(bondOptions[r].name);
-    } else {
-      setBond(bond);
-    }
+  //   if (race === "") {
+  //     let r = Math.round(Math.random() * (28 - 1) + 1);
+  //     setRace(raceOptions[r].name);
+  //   } else {
+  //     setRace(race);
+  //   }
 
-    if (race === "") {
-      let r = Math.round(Math.random() * (28 - 1) + 1);
-      setRace(raceOptions[r].name);
-    } else {
-      setRace(race);
-    }
+  //   if (sex === "") {
+  //     let r = Math.round(Math.random() * (2 - 1) + 1);
+  //     setSex(sexOptions[r].name);
+  //     console.log(r);
+  //   } else {
+  //     setSex(sex);
+  //   }
 
-    if (sex === "") {
-      let r = Math.round(Math.random() * (2 - 1) + 1);
-      setSex(sexOptions[r].name);
-      console.log(r);
-    } else {
-      setSex(sex);
-    }
+  //   if (align === "") {
+  //     let r = Math.round(Math.random() * (9 - 1) + 1);
+  //     setAlign(alignOptions[r].name);
+  //   } else {
+  //     setAlign(align);
+  //   }
 
-    if (align === "") {
-      let r = Math.round(Math.random() * (9 - 1) + 1);
-      setAlign(alignOptions[r].name);
-    } else {
-      setAlign(align);
-    }
+  //   if (prof === "") {
+  //     let r = Math.round(Math.random() * (49 - 1) + 1);
+  //     setProf(profOptions[r].name);
+  //   } else {
+  //     setProf(prof);
+  //   }
 
-    if (prof === "") {
-      let r = Math.round(Math.random() * (49 - 1) + 1);
-      setProf(profOptions[r].name);
-    } else {
-      setProf(prof);
-    }
+  //   if (feature === "") {
+  //     let r = Math.round(Math.random() * (20 - 1) + 1);
+  //     setFeature(featureOptions[r].name);
+  //   } else {
+  //     setFeature(feature);
+  //   }
 
-    if (feature === "") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setFeature(featureOptions[r].name);
-    } else {
-      setFeature(feature);
-    }
+  //   if (talent === "") {
+  //     let r = Math.round(Math.random() * (20 - 1));
+  //     setTalent(talentOptions[r].name);
+  //   } else {
+  //     setTalent(talent);
+  //   }
 
-    if (talent === "") {
-      let r = Math.round(Math.random() * (20 - 1));
-      setTalent(talentOptions[r].name);
-    } else {
-      setTalent(talent);
-    }
+  //   if (mannerism === "") {
+  //     let r = Math.round(Math.random() * (20 - 1) + 1);
+  //     setMannerism(mannerismOptions[r].name);
+  //   } else {
+  //     setMannerism(mannerism);
+  //   }
 
-    if (mannerism === "") {
-      let r = Math.round(Math.random() * (20 - 1) + 1);
-      setMannerism(mannerismOptions[r].name);
-    } else {
-      setMannerism(mannerism);
-    }
+  //   if (interaction === "") {
+  //     let r = Math.round(Math.random() * (12 - 1) + 1);
+  //     setInteraction(interactionOptions[r].name);
+  //   } else {
+  //     setInteraction(interaction);
+  //   }
 
-    if (interaction === "") {
-      let r = Math.round(Math.random() * (12 - 1) + 1);
-      setInteraction(interactionOptions[r].name);
-    } else {
-      setInteraction(interaction);
-    }
+  //   if (name === "") {
+  //     let f = Math.floor(Math.random() * 208);
+  //     let firstName = [nameOptions[f].first_name];
+  //     let eA = Math.floor(Math.random() * 208);
+  //     let epiphet_a = [nameOptions[eA].epithet_a];
+  //     let eB = Math.floor(Math.random() * 208);
+  //     let epiphet_b = [nameOptions[eB].epithet_b];
+  //     let nA = Math.floor(Math.random() * 208);
+  //     let noun_a = [nameOptions[nA].noun_a];
+  //     let nB = Math.floor(Math.random() * 208);
+  //     let noun_b = [nameOptions[nB].noun_b];
 
-    if (name === "") {
-      let f = Math.floor(Math.random() * 208);
-      let firstName = [nameOptions[f].first_name];
-      let eA = Math.floor(Math.random() * 208);
-      let epiphet_a = [nameOptions[eA].epithet_a];
-      let eB = Math.floor(Math.random() * 208);
-      let epiphet_b = [nameOptions[eB].epithet_b];
-      let nA = Math.floor(Math.random() * 208);
-      let noun_a = [nameOptions[nA].noun_a];
-      let nB = Math.floor(Math.random() * 208);
-      let noun_b = [nameOptions[nB].noun_b];
+  //     let random = Math.round(Math.random() * 3);
 
-      let random = Math.round(Math.random() * 3);
+  //     if (random === 0) {
+  //       setName(firstName + " " + epiphet_a + noun_a);
+  //     } else if (random === 1) {
+  //       setName(firstName + " " + epiphet_a + noun_b);
+  //     } else if (random === 2) {
+  //       setName(firstName + " " + epiphet_b + noun_b);
+  //     } else {
+  //       setName(firstName + " " + epiphet_b + noun_a);
+  //     }
+  //   } else {
+  //     setName(name);
+  //   }
 
-      if (random === 0) {
-        setName(firstName + " " + epiphet_a + noun_a);
-      } else if (random === 1) {
-        setName(firstName + " " + epiphet_a + noun_b);
-      } else if (random === 2) {
-        setName(firstName + " " + epiphet_b + noun_b);
-      } else {
-        setName(firstName + " " + epiphet_b + noun_a);
-      }
-    } else {
-      setName(name);
-    }
+  //   if (str === "") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setStr(abilityScoreValues[r].name);
+  //   } else {
+  //     setStr(str);
+  //   }
+  //   if (dex === "") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setDex(abilityScoreValues[r].name);
+  //   } else {
+  //     setDex(dex);
+  //   }
+  //   if (con === "") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setCon(abilityScoreValues[r].name);
+  //   } else {
+  //     setCon(con);
+  //   }
+  //   if (int === "") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setInt(abilityScoreValues[r].name);
+  //   } else {
+  //     setInt(int);
+  //   }
+  //   if (wis === "") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setWis(abilityScoreValues[r].name);
+  //   } else {
+  //     setWis(wis);
+  //   }
+  //   if (cha === "") {
+  //     let r = Math.round(Math.random() * (8 - 1) + 1);
+  //     setCha(abilityScoreValues[r].name);
+  //   } else {
+  //     setCha(cha);
+  //   }
 
-    if (str === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setStr(abilityScoreValues[r].name);
-    } else {
-      setStr(str);
-    }
-    if (dex === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setDex(abilityScoreValues[r].name);
-    } else {
-      setDex(dex);
-    }
-    if (con === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setCon(abilityScoreValues[r].name);
-    } else {
-      setCon(con);
-    }
-    if (int === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setInt(abilityScoreValues[r].name);
-    } else {
-      setInt(int);
-    }
-    if (wis === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setWis(abilityScoreValues[r].name);
-    } else {
-      setWis(wis);
-    }
-    if (cha === "") {
-      let r = Math.round(Math.random() * (8 - 1) + 1);
-      setCha(abilityScoreValues[r].name);
-    } else {
-      setCha(cha);
-    }
-
-    if (hook === "") {
-      let v = Math.round(Math.random() * (11 - 1) + 1);
-      let n = Math.round(Math.random() * (11 - 1) + 1);
-      let a = Math.round(Math.random() * (11 - 1) + 1);
-      setHook(
-        hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
-      );
-    }
-  };
+  //   if (hook === "") {
+  //     let v = Math.round(Math.random() * (11 - 1) + 1);
+  //     let n = Math.round(Math.random() * (11 - 1) + 1);
+  //     let a = Math.round(Math.random() * (11 - 1) + 1);
+  //     setHook(
+  //       hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
+  //     );
+  //   }
+  // };
 
   const onClear = (e) => {
     setName("");
@@ -564,51 +346,6 @@ const NpcGen = () => {
     setHook("");
   };
 
-  const npc = {
-    Name: name,
-    Race: race,
-    Sex: sex,
-    Alignment: align,
-    Profession: prof,
-    Feature: feature,
-    Talent: talent,
-    Mannerism: mannerism,
-    Interaction: interaction,
-    Bond: bond,
-    STR: str,
-    DEX: dex,
-    CON: con,
-    INT: int,
-    WIS: wis,
-    CHA: cha,
-    Hook: hook,
-  };
-
-  const onExport = () => {
-    const npcExport = Object.entries(npc)
-      .map(([name, value]) => `${name}: ${value}`)
-      .join("\n");
-
-    // file object
-    const file = new Blob([npcExport], { type: "text/plain" });
-
-    // anchor link
-    const element = document.createElement("a");
-    element.href = URL.createObjectURL(file);
-    element.download = name + ".txt";
-
-    // simulate link click
-    document.body.appendChild(element); // Required for this to work in FireFox
-    element.click();
-  };
-  //Show Options
-  const showBasics = (e) => {
-    setIsBasicActive((current) => !current);
-  };
-  //Show Options
-  const showDetails = (e) => {
-    setIsDetailActive((current) => !current);
-  };
   //Prop functions to pass down to child
     const nameChangeProp = (name) => {
       setName(name);
@@ -643,6 +380,7 @@ const NpcGen = () => {
     const descChangeProp = (desc) => {
       setDesc(desc);
     };
+    const emptyArray = []
 
   return (
     <div className={styleB.mainWrapper}>
@@ -652,10 +390,32 @@ const NpcGen = () => {
         {/* Generate Btns */}
         <div>
           <div className={styleB.btnWrapper}>
-            <button onClick={onGenerate} className={styleB.btnGen}>
+            <button  className={styleB.btnGen}>
               Generate
             </button>
-           <ClearButton />
+           <ClearButton 
+           setStringState={[
+            setAlign,
+            setBond,
+            setCha,
+            setCon,
+            setDesc,
+            setDex,
+            setFeature,
+            setHook,
+            setInt,
+            setInteraction,
+            setMannerism,
+            setName,
+            setProf,
+            setRace,
+            setSex,
+            setStr,
+            setTalent,
+            setWis
+           ]}
+           setArrayState={emptyArray}
+           />
           </div>
         </div>
       </div>
@@ -674,119 +434,6 @@ const NpcGen = () => {
         onBondChangeProp={bondChangeProp}
         onDescChangeProp={descChangeProp}
         />
-        {/* <div className={styleB.optionsWrapper}>
-          <h1>NPC Options</h1>
-          <h1 className={styleB.subHeader} onClick={showBasics}>
-            Basic Info
-          </h1>
-          <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
-            <div>
-              <h1>Name</h1>
-              <InputText value={name} onChange={onNameChange} />
-              <button onClick={onRandomName} className={style.npcgenBtnName}>
-                Randomize
-              </button>
-            </div>
-            
-            {raceDropdown}
-            
-            <div>
-              <h1>Race</h1>
-              <Dropdown
-                optionLabel="name"
-                value={race}
-                options={raceOptions}
-                onChange={onRaceChange}
-                placeholder="Choose Race"
-              />
-            </div>
-            <div>
-              <h1>Sex</h1>
-              <Dropdown
-                optionLabel="name"
-                value={sex}
-                options={sexOptions}
-                onChange={onSexChange}
-                placeholder="Choose Sex"
-              />
-            </div>
-            <div>
-              <h1>Alignment</h1>
-              <Dropdown
-                optionLabel="name"
-                value={align}
-                options={alignOptions}
-                onChange={onAlignChange}
-                placeholder="Choose Alignment"
-              />
-            </div>
-          </div>
-          <h1 className={styleB.subHeader} onClick={showDetails}>
-            NPC Details
-          </h1>
-          <div className={isDetailActive ? styleB.subsection : styleB.hidden}>
-            <div>
-              <h1>Profession</h1>
-              <Dropdown
-                optionLabel="name"
-                value={prof}
-                options={profOptions}
-                onChange={onProfChange}
-                placeholder="Choose Profession"
-              />
-            </div>
-            <div>
-              <h1>Feature</h1>
-              <Dropdown
-                optionLabel="name"
-                value={feature}
-                options={featureOptions}
-                onChange={onFeatureChange}
-                placeholder="Choose Feature"
-              />
-            </div>
-            <div>
-              <h1>Talent</h1>
-              <Dropdown
-                optionLabel="name"
-                value={talent}
-                options={talentOptions}
-                onChange={onTalentChange}
-                placeholder="Choose Talent"
-              />
-            </div>
-            <div>
-              <h1>Mannerism</h1>
-              <Dropdown
-                optionLabel="name"
-                value={mannerism}
-                options={mannerismOptions}
-                onChange={onMannerismChange}
-                placeholder="Choose Mannerism"
-              />
-            </div>
-            <div>
-              <h1>Interaction</h1>
-              <Dropdown
-                optionLabel="name"
-                value={interaction}
-                options={interactionOptions}
-                onChange={onInteractionChange}
-                placeholder="Choose Interaction"
-              />
-            </div>
-            <div>
-              <h1>Bond</h1>
-              <Dropdown
-                optionLabel="name"
-                value={bond}
-                options={bondOptions}
-                onChange={onBondChange}
-                placeholder="Choose Bond"
-              />
-            </div>
-          </div>
-        </div> */}
 
         {/* Main Display */}
         <div className={styleB.display}>
