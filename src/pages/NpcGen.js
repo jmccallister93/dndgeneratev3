@@ -36,7 +36,7 @@ const NpcGen = () => {
   const [cha, setCha] = useState("");
   const [chaMod, setChaMod] = useState("");
   const [hook, setHook] = useState("");
-  const [desc, setDesc] = useState("")
+  const [desc, setDesc] = useState("");
 
   const abilityScoreValues = [
     { id: 1, name: "Random", value: "Random" },
@@ -347,40 +347,40 @@ const NpcGen = () => {
   };
 
   //Prop functions to pass down to child
-    const nameChangeProp = (name) => {
-      setName(name);
-    };
-    const raceChangeProp = (race) => {
-      setRace(race);
-    };
-    const sexChangeProp = (sex) => {
-      setSex(sex);
-    };
-    const alignChangeProp = (align) => {
-      setAlign(align);
-    };
-    const profChangeProp = (prof) => {
-      setProf(prof);
-    };
-    const featureChangeProp = (feature) => {
-      setFeature(feature);
-    };
-    const talentChangeProp = (talent) => {
-      setTalent(talent);
-    };
-    const mannerismChangeProp = (mannerism) => {
-      setMannerism(mannerism);
-    };
-    const interactionChangeProp = (interaction) => {
-      setInteraction(interaction);
-    };
-    const bondChangeProp = (bond) => {
-      setBond(bond);
-    };
-    const descChangeProp = (desc) => {
-      setDesc(desc);
-    };
-    const emptyArray = []
+  const nameChangeProp = (name) => {
+    setName(name);
+  };
+  const raceChangeProp = (race) => {
+    setRace(race);
+  };
+  const sexChangeProp = (sex) => {
+    setSex(sex);
+  };
+  const alignChangeProp = (align) => {
+    setAlign(align);
+  };
+  const profChangeProp = (prof) => {
+    setProf(prof);
+  };
+  const featureChangeProp = (feature) => {
+    setFeature(feature);
+  };
+  const talentChangeProp = (talent) => {
+    setTalent(talent);
+  };
+  const mannerismChangeProp = (mannerism) => {
+    setMannerism(mannerism);
+  };
+  const interactionChangeProp = (interaction) => {
+    setInteraction(interaction);
+  };
+  const bondChangeProp = (bond) => {
+    setBond(bond);
+  };
+  const descChangeProp = (desc) => {
+    setDesc(desc);
+  };
+  const emptyArray = [];
 
   return (
     <div className={styleB.mainWrapper}>
@@ -390,49 +390,47 @@ const NpcGen = () => {
         {/* Generate Btns */}
         <div>
           <div className={styleB.btnWrapper}>
-            <button  className={styleB.btnGen}>
-              Generate
-            </button>
-           <ClearButton 
-           setStringState={[
-            setAlign,
-            setBond,
-            setCha,
-            setCon,
-            setDesc,
-            setDex,
-            setFeature,
-            setHook,
-            setInt,
-            setInteraction,
-            setMannerism,
-            setName,
-            setProf,
-            setRace,
-            setSex,
-            setStr,
-            setTalent,
-            setWis
-           ]}
-           setArrayState={emptyArray}
-           />
+            <button className={styleB.btnGen}>Generate</button>
+            <ClearButton
+              setStringState={[
+                setAlign,
+                setBond,
+                setCha,
+                setCon,
+                setDesc,
+                setDex,
+                setFeature,
+                setHook,
+                setInt,
+                setInteraction,
+                setMannerism,
+                setName,
+                setProf,
+                setRace,
+                setSex,
+                setStr,
+                setTalent,
+                setWis,
+              ]}
+              setArrayState={emptyArray}
+            />
           </div>
         </div>
       </div>
       {/* Options */}
       <div className={styleB.body}>
-        <Npcs 
-        onNameChangeProp={nameChangeProp}
-        onRaceChangeProp={raceChangeProp}
-        onSexChangeProp={sexChangeProp}
-        onAlignChangeProp={alignChangeProp}
-        onProfChangeProp={profChangeProp}
-        onFeatureChangeProp={featureChangeProp}
-        onTalentChangeProp={talentChangeProp}
-        onMannerismChangeProp={mannerismChangeProp}
-        onInteractionChangeProp={interactionChangeProp}
-        onBondChangeProp={bondChangeProp}
-        onDescChangeProp={descChangeProp}
+        <Npcs
+          onNameChangeProp={nameChangeProp}
+          onRaceChangeProp={raceChangeProp}
+          onSexChangeProp={sexChangeProp}
+          onAlignChangeProp={alignChangeProp}
+          onProfChangeProp={profChangeProp}
+          onFeatureChangeProp={featureChangeProp}
+          onTalentChangeProp={talentChangeProp}
+          onMannerismChangeProp={mannerismChangeProp}
+          onInteractionChangeProp={interactionChangeProp}
+          onBondChangeProp={bondChangeProp}
+          onDescChangeProp={descChangeProp}
         />
 
         {/* Main Display */}

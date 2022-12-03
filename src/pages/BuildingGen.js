@@ -130,7 +130,30 @@ const BuildingGen = () => {
   const [mineOptions, setMineOptions] = useState("");
   const [agricultureOptions, setAgricultureOptions] = useState("");
 
-  
+  const [align, setAlign] = useState("");
+  const [bond, setBond] = useState("");
+  const [feature, setFeature] = useState("");
+  const [interaction, setInteraction] = useState("");
+  const [prof, setProf] = useState("");
+  const [mannerism, setMannerism] = useState("");
+  const [race, setRace] = useState("");
+  const [sex, setSex] = useState("");
+  const [talent, setTalent] = useState("");
+  const [name, setName] = useState("");
+  const [str, setStr] = useState("");
+  const [strMod, setStrMod] = useState("");
+  const [dex, setDex] = useState("");
+  const [dexMod, setDexMod] = useState("");
+  const [con, setCon] = useState("");
+  const [conMod, setConMod] = useState("");
+  const [int, setInt] = useState("");
+  const [intMod, setIntMod] = useState("");
+  const [wis, setWis] = useState("");
+  const [wisMod, setWisMod] = useState("");
+  const [cha, setCha] = useState("");
+  const [chaMod, setChaMod] = useState("");
+  const [hook, setHook] = useState("");
+  const [desc, setDesc] = useState("");
 
   //Get Data
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -194,7 +217,7 @@ const BuildingGen = () => {
     );
     getData("buildingRoomsAll", setRoomType, setRoomTypes, setRoomTypeOptions);
   }, []);
- 
+
   //Datatable
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -684,45 +707,32 @@ const BuildingGen = () => {
   });
 
   //NPCs
-  const openDialogNpc = (e) => {
-    setDialogVisibleNpc(true);
-  };
-  const closeDialogNpc = () => {
-    setDialogVisibleNpc(false);
-    for (let i = 0; i < selectedNpc.length; i++) {
-      if (npcList.includes(selectedNpc[i])) {
-      } else {
-        setNpcList((saveArray) => [...saveArray, selectedNpc[i]]);
-      }
-    }
-  };
-  const dialogFooterNpc = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogNpc} />;
-  };
-
   useEffect(() => {
-    setNpcOptions();
-  }, [<Npcs />]);
-
-  const onRandomNpc = (e) => {
-    // const max = NpcOptions.length - 1;
-    // let r = Math.round(Math.random() * (max - 0));
-    // if (NpcList.includes(NpcOptions[r])) {
-    // } else {
-    //   setNpcList((saveArray) => [...saveArray, NpcOptions[r]]);
-    // }
-    console.log(npcOptions);
-    // setNpcList([NpcOptions[23].name])
-  };
-  const randomNpcBtn = (
-    <Button onClick={onRandomNpc} className={style.btnName}>
-      Random
-    </Button>
-  );
-
-  const npcDisplay = npcList.map((i) => {
-    return <h4>{`${i.name},`}</h4>;
-  });
+    setNpc(align);
+  }, [
+    setAlign,
+    setBond,
+    setCha,
+    setCon,
+    setDesc,
+    setDex,
+    setFeature,
+    setHook,
+    setInt,
+    setInteraction,
+    setMannerism,
+    setName,
+    setProf,
+    setRace,
+    setSex,
+    setStr,
+    setTalent,
+    setWis,
+  ]);
+  const npcDisplay = <h4>{npc}</h4>
+  // const npcDisplay = npcList.map((i) => {
+  //   return <h4>{`${npc},`}</h4>;
+  // });
 
   //Items
   const openDialogItem = (e) => {
@@ -836,6 +846,41 @@ const BuildingGen = () => {
     // setNpcList([])
     // setSelectedNpc("")
   };
+  //Prop functions to pass down to child
+  const nameChangeProp = (name) => {
+    setName(name);
+  };
+  const raceChangeProp = (race) => {
+    setRace(race);
+  };
+  const sexChangeProp = (sex) => {
+    setSex(sex);
+  };
+  const alignChangeProp = (align) => {
+    setAlign(align);
+  };
+  const profChangeProp = (prof) => {
+    setProf(prof);
+  };
+  const featureChangeProp = (feature) => {
+    setFeature(feature);
+  };
+  const talentChangeProp = (talent) => {
+    setTalent(talent);
+  };
+  const mannerismChangeProp = (mannerism) => {
+    setMannerism(mannerism);
+  };
+  const interactionChangeProp = (interaction) => {
+    setInteraction(interaction);
+  };
+  const bondChangeProp = (bond) => {
+    setBond(bond);
+  };
+  const descChangeProp = (desc) => {
+    setDesc(desc);
+  };
+  const emptyArray = [];
 
   return (
     <div className={style.mainWrapper}>
@@ -894,20 +939,17 @@ const BuildingGen = () => {
           </h1>
           <div className={isNpcActive ? style.subsection : style.hidden}>
             <Npcs
-              isNpcActive={isNpcActive}
-              openDialogNpc={openDialogNpc}
-              //   randomItemBtn={randomItemBtn}
-              dialogVisibleNpc={dialogVisibleNpc}
-              closeDialogNpc={closeDialogNpc}
-              dialogFooterNpc={dialogFooterNpc}
-              selectedNpc={selectedNpc}
-              setSelectedNpc={setSelectedNpc}
-              header={header}
-              setNpcList={setNpcList}
-              randomNpcBtn={randomNpcBtn}
-              npcOptions={npcOptions}
-              npc={npc}
-              setNpc={setNpc}
+              onNameChangeProp={nameChangeProp}
+              onRaceChangeProp={raceChangeProp}
+              onSexChangeProp={sexChangeProp}
+              onAlignChangeProp={alignChangeProp}
+              onProfChangeProp={profChangeProp}
+              onFeatureChangeProp={featureChangeProp}
+              onTalentChangeProp={talentChangeProp}
+              onMannerismChangeProp={mannerismChangeProp}
+              onInteractionChangeProp={interactionChangeProp}
+              onBondChangeProp={bondChangeProp}
+              onDescChangeProp={descChangeProp}
             />
           </div>
           <h1 className={style.subHeader} onClick={showItems}>
@@ -977,7 +1019,7 @@ const BuildingGen = () => {
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            NPCs <div className={style.detesContainer}>{npc.name}</div>
+            NPCs <div className={style.detesContainer}>{npcDisplay}</div>
           </h2>
           <hr className={style.lineBreak} />
           <h2>
