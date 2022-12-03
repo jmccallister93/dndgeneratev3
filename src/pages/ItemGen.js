@@ -26,6 +26,7 @@ import { Get } from "react-axios";
 import useFetch from "../components/useFetch";
 import Items from "../components/Items";
 import ClearButton from "../components/ClearButton";
+import DropDown from "../components/DropDown";
 
 const ItemGen = () => {
   // Set state variables
@@ -340,10 +341,6 @@ const ItemGen = () => {
   const onTypeChange = (e) => {
     setType(e.value);
     setShowTypeInput(false);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (22 - 2) + 2);
-      setType(typeOptions[r].name);
-    }
     if (e.value === "Custom") {
       setShowTypeInput(true);
     }
@@ -687,7 +684,8 @@ const ItemGen = () => {
               <button className={style.itemgenBtnName}>Randomize</button>
             </div>
 
-            <div>
+            <DropDown />
+            {/* <div>
               <h1>Type</h1>
               {showTypeInput ? (
                 <InputText onChange={onTypeCustom} placeholder="Type" />
@@ -699,7 +697,7 @@ const ItemGen = () => {
                 onChange={onTypeChange}
                 placeholder={showTypeInput ? "Custom" : "Choose Type"}
               />
-            </div>
+            </div> */}
             <div>
               <h1>Rarity</h1>
               {showRarityInput ? (
