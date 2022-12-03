@@ -10,6 +10,7 @@ import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
 import ClearButton from "../components/ClearButton";
+import Npcs from "../components/Npcs";
 
 const NpcGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -70,6 +71,8 @@ const NpcGen = () => {
   const [chaMod, setChaMod] = useState("");
 
   const [hook, setHook] = useState("");
+
+  const [desc, setDesc] = useState("")
 
   //Get Data function
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -606,7 +609,40 @@ const NpcGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
-  
+  //Prop functions to pass down to child
+    const nameChangeProp = (name) => {
+      setName(name);
+    };
+    const raceChangeProp = (race) => {
+      setRace(race);
+    };
+    const sexChangeProp = (sex) => {
+      setSex(sex);
+    };
+    const alignChangeProp = (align) => {
+      setAlign(align);
+    };
+    const profChangeProp = (prof) => {
+      setProf(prof);
+    };
+    const featureChangeProp = (feature) => {
+      setFeature(feature);
+    };
+    const talentChangeProp = (talent) => {
+      setTalent(talent);
+    };
+    const mannerismChangeProp = (mannerism) => {
+      setMannerism(mannerism);
+    };
+    const interactionChangeProp = (interaction) => {
+      setInteraction(interaction);
+    };
+    const bondChangeProp = (bond) => {
+      setBond(bond);
+    };
+    const descChangeProp = (desc) => {
+      setDesc(desc);
+    };
 
   return (
     <div className={styleB.mainWrapper}>
@@ -625,7 +661,10 @@ const NpcGen = () => {
       </div>
       {/* Options */}
       <div className={styleB.body}>
-        <div className={styleB.optionsWrapper}>
+        <Npcs 
+        onNameChangeProp={nameChangeProp}
+        />
+        {/* <div className={styleB.optionsWrapper}>
           <h1>NPC Options</h1>
           <h1 className={styleB.subHeader} onClick={showBasics}>
             Basic Info
@@ -641,7 +680,7 @@ const NpcGen = () => {
             
             {raceDropdown}
             
-            {/* <div>
+            <div>
               <h1>Race</h1>
               <Dropdown
                 optionLabel="name"
@@ -650,7 +689,7 @@ const NpcGen = () => {
                 onChange={onRaceChange}
                 placeholder="Choose Race"
               />
-            </div> */}
+            </div>
             <div>
               <h1>Sex</h1>
               <Dropdown
@@ -737,7 +776,7 @@ const NpcGen = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Main Display */}
         <div className={styleB.display}>

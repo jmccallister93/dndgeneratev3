@@ -12,18 +12,7 @@ import { e } from "mathjs";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 
-const Npcs = ({
-  npc,
-  setNpc,
-  openDialogNpc,
-  dialogVisibleNpc,
-  closeDialogNpc,
-  dialogFooterNpc,
-  selectedNpc,
-  setSelectedNpc,
-  header,
-  isNpcActive,
-}) => {
+const Npcs = (props) => {
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -302,6 +291,7 @@ const Npcs = ({
   //NPC Name
   const onNameChange = (e) => {
     setName(e.target.value);
+    props.onNameChangeProp(e.target.value)
   };
   const onRandomName = (e) => {
     let f = Math.floor(Math.random() * 208);
@@ -626,9 +616,9 @@ const Npcs = ({
     setHook("");
   };
 
-  useEffect(()=>{
-    setNpc({name: name, align: align, race:race, sex:sex})
-  },[name, align, race, sex])
+  // useEffect(()=>{
+  //   setNpc({name: name, align: align, race:race, sex:sex})
+  // },[name, align, race, sex])
 
   //Show Options
   const showBasics = (e) => {
