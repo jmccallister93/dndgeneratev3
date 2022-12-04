@@ -145,25 +145,25 @@ const ItemGen = () => {
 
   //Pull Data
   //Item Types
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsTypes")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setType(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setTypes(data);
-        setTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const { data, error } = await supabase
+  //       .from("itemsTypes")
+  //       .select()
+  //       .order("id");
+  //     if (error) {
+  //       setFetchError("Could not fetch the data");
+  //       setType(null);
+  //       console.log(error);
+  //     }
+  //     if (data) {
+  //       setFetchError(null);
+  //       setTypes(data);
+  //       setTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   //Rarities
   useEffect(() => {
     const fetchData = async () => {
@@ -684,20 +684,20 @@ const ItemGen = () => {
               <button className={style.itemgenBtnName}>Randomize</button>
             </div>
 
-            <DropDown />
-            {/* <div>
-              <h1>Type</h1>
-              {showTypeInput ? (
-                <InputText onChange={onTypeCustom} placeholder="Type" />
-              ) : null}
-              <Dropdown
-                optionLabel="name"
-                value={type}
-                options={typeOptions}
-                onChange={onTypeChange}
-                placeholder={showTypeInput ? "Custom" : "Choose Type"}
-              />
-            </div> */}
+            <DropDown 
+            tableName={"itemsTypes"}
+            setSingular={setType}
+            setPlural={setTypes}
+            setOptions={setTypeOptions}
+            h1Title={"Type"}
+            showCustomInput={showTypeInput}
+            onCustomInputChange={onTypeCustom}
+            placeholder={"Set Type"}
+            value={type}
+            valueOptions={typeOptions}
+            onValueChange={onTypeChange}
+            // onClear={}
+            />
             <div>
               <h1>Rarity</h1>
               {showRarityInput ? (

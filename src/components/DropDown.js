@@ -1,94 +1,76 @@
+import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
-import style from "../stylesheets/BuildingGen.module.scss"
+import style from "../stylesheets/BuildingGen.module.scss";
 
 const DropDown = (props) => {
   //Set States
   const [fetchError, setFetchError] = useState(null);
-  const [type, setType] = useState("");
-  const [types, setTypes] = useState();
-  const [typeOptions, setTypeOptions] = useState();
-  const [showTypeInput, setShowTypeInput] = useState(false);
+  const [showCustomInput, setShowCustomInput] = useState(false)
 
-  //Template for get Data
-  //Get Data function
-  const getData = (tableName, setSingular, setPlural, setOptions) => {
+  //Get Data from supabase
+  useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
-        .from(tableName)
+        .from(props.tableName)
         .select();
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);
-        setSingular(null);
+        props.setSingular(null);
       }
       if (dataName) {
-        setPlural(dataName);
+        props.setPlural(dataName);
         setFetchError(null);
-        setOptions(dataName.map((r) => ({ name: r.name, value: r.value })));
+        props.setOptions(
+          dataName.map((r) => ({ name: r.name, value: r.value }))
+        );
       }
     };
     fetchData();
-  };
+  }, []);
 
-  //Use GetData function
-  useEffect(()=>{
-    getData("itemsTypes",setType, setTypes, setTypeOptions)
-  },[])
+    //On Custom Type Change
+    const onChangeCustom = (e) => {
+      props.setSingular(e.target.value);
+    };
+  //On Type Change
+    const onChange = (e) => {
+      props.setSingular(e.value);
+      setShowCustomInput(false);
+      if (e.value === "Custom") {
+        setShowCustomInput(true);
+      }
+    };
 
-  //On Custom Type Change
-  const onTypeCustom = (e) => {
-    setType(e.target.value);
-  };
-//On Type Change
-  const onTypeChange = (e) => {
-    setType(e.value);
-    setShowTypeInput(false);
-    if (e.value === "Custom") {
-      setShowTypeInput(true);
-    }
-  };
-
-  //Template for Dropdown
   const templateDropdown = (
-    h1Title,
-    showCustomInput,
-    onCustomInputChange,
-    placeholder,
-    value,
-    valueOptions,
-    onValueChange
-  ) => (
     <div>
-      <h1>{h1Title}</h1>
-      {showCustomInput ? (
-        <InputText onChange={onCustomInputChange} placeholder={placeholder} />
+      <h1>{props.h1Title}</h1>
+      {showCustomInput? (
+        <InputText
+          onChange={onChangeCustom}
+          placeholder={props.placeholder}
+        />
       ) : null}
       <Dropdown
         optionLabel="name"
-        value={value}
-        options={valueOptions}
-        onChange={onValueChange}
+        value={props.value}
+        options={props.valueOptions}
+        onChange={onChange}
         placeholder={showCustomInput ? "Custom" : "Choose Type"}
       />
+      <Button>Random</Button>
     </div>
   );
 
+//   const onClear = () => {
+//     props.onClear()
+//   }
 
-  const typeDropdown = templateDropdown(
-    "Type",
-    showTypeInput,
-    onTypeCustom,
-    "Type",
-    type,
-    typeOptions,
-    onTypeChange
-  );
-
-  return <>{typeDropdown}</>;
+  return <>{templateDropdown}</>;
 };
 
 export default DropDown;
