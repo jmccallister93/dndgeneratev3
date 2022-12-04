@@ -39,6 +39,19 @@ const DropDown = (props) => {
     getData("itemsTypes",setType, setTypes, setTypeOptions)
   },[])
 
+  //On Custom Type Change
+  const onTypeCustom = (e) => {
+    setType(e.target.value);
+  };
+//On Type Change
+  const onTypeChange = (e) => {
+    setType(e.value);
+    setShowTypeInput(false);
+    if (e.value === "Custom") {
+      setShowTypeInput(true);
+    }
+  };
+
   //Template for Dropdown
   const templateDropdown = (
     h1Title,
@@ -48,7 +61,7 @@ const DropDown = (props) => {
     value,
     valueOptions,
     onValueChange
-  ) => {
+  ) => (
     <div>
       <h1>{h1Title}</h1>
       {showCustomInput ? (
@@ -61,20 +74,9 @@ const DropDown = (props) => {
         onChange={onValueChange}
         placeholder={showCustomInput ? "Custom" : "Choose Type"}
       />
-    </div>;
-  };
+    </div>
+  );
 
-  const onTypeCustom = (e) => {
-    setType(e.target.value);
-  };
-
-  const onTypeChange = (e) => {
-    setType(e.value);
-    setShowTypeInput(false);
-    if (e.value === "Custom") {
-      setShowTypeInput(true);
-    }
-  };
 
   const typeDropdown = templateDropdown(
     "Type",
