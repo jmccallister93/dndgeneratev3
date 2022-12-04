@@ -118,8 +118,8 @@ const ItemGen = () => {
 
   const [weaponDmg, setWeaponDmg] = useState("");
   const [weaponType, setWeaponType] = useState("");
-  const [weaponTypes, setWeaponTypes] = useState("")
-  const [weaponTypeOptions, setWeaponTypeOptions] = useState("")
+  const [weaponTypes, setWeaponTypes] = useState("");
+  const [weaponTypeOptions, setWeaponTypeOptions] = useState("");
   const [weaponProperty, setWeaponProperty] = useState("");
   const [weaponProperties, setWeaponProperties] = useState("");
   const [weaponPropertyOptions, setWeaponPropertyOptions] = useState("");
@@ -133,8 +133,12 @@ const ItemGen = () => {
 
   const [armorAc, setArmorAc] = useState("");
   const [armorMod, setArmorMod] = useState("");
+  const [armorMods, setArmorMods] = useState("");
+  const [armorModOptions, setArmorModOptions] = useState("");
   const [armorStr, setArmorStr] = useState("");
-  const [armorStealth, setArmorStealth] = useState("");
+  const [stealth, setStealth] = useState("");
+  const [stealths, setStealths] = useState("");
+  const [stealthOptions, setStealthOptions] = useState("");
 
   const [abilities, setAbilities] = useState("");
   const [abilitiesOptions, setAbilitiesOptions] = useState("");
@@ -270,7 +274,6 @@ const ItemGen = () => {
     <div className="flex justify-content-between">{renderHeader()}</div>
   );
 
-
   const speeds = [];
   for (let n = 0; n <= 500; n += 10) {
     speeds.push(n);
@@ -322,35 +325,6 @@ const ItemGen = () => {
     setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
   };
 
-  const onWeaponPropertyChange = (e) => {
-    setWeaponProperty(e.value);
-    if (e.value === "Random") {
-      let wp = Math.floor(Math.random() * (9 - 1) + 1);
-      let wpChoice = weaponProperties[wp];
-      setWeaponProperty(wpChoice);
-    } else {
-      setWeaponProperty(e.value);
-    }
-  };
-  const onWeaponTypeChange = (e) => {
-    setWeaponType(e.value);
-    if (e.value === "Random") {
-      let wt = Math.floor(Math.random() * (5 - 1) + 1);
-      let wtChoice = weaponTypes[wt];
-      setWeaponType(wtChoice);
-    } else {
-      setWeaponType(e.value);
-    }
-  };
-
-  const onDmgTypeChange = (e) => {
-    setDmgType(e.value);
-    if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (17 - 1) + 1);
-      setDmgType(dmgTypeOptions[r].name);
-    }
-  };
-
   const onRandomVehicleSpeed = (e) => {
     let r = Math.floor(Math.random() * 50);
     setVehicleSpeed(speeds[r]);
@@ -365,14 +339,6 @@ const ItemGen = () => {
     setArmorAc(acOptions[r]);
   };
 
-  const onChangeArmorMod = (e) => {
-    setArmorMod(e.value);
-    if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (7 - 1) + 1);
-      setArmorMod(abilitiesOptions[r].name);
-    }
-  };
-
   const strReq = [
     "Random",
     "12",
@@ -385,24 +351,6 @@ const ItemGen = () => {
     "19",
     "20",
   ];
-
-  const onChangeArmorStr = (e) => {
-    setArmorStr(e.value);
-    if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (10 - 1) + 1);
-      setArmorStr(strReq[r]);
-    }
-  };
-
-  const stealthDisadvantage = ["Random", "Yes", "No"];
-
-  const onChangeArmorStealth = (e) => {
-    setArmorStealth(e.value);
-    if (e.value === "Random") {
-      let r = Math.round(Math.random() * (2 - 1) + 1);
-      setArmorStealth(stealthDisadvantage[r]);
-    }
-  };
 
   const onRandomMountSpeed = (e) => {
     let r = Math.floor(Math.random() * 50);
@@ -504,9 +452,9 @@ const ItemGen = () => {
         let r = Math.floor(Math.random() * 9);
         setArmorStr(strReq[r]);
       }
-      if (armorStealth === "") {
+      if (stealth === "") {
         let r = Math.floor(Math.random() * (2 - 1) + 1);
-        setArmorStealth(stealthDisadvantage[r]);
+        setStealth(stealthOptions[r]);
       }
     }
     if (type === "Mount") {
@@ -555,7 +503,7 @@ const ItemGen = () => {
                 setVehicleCapacity,
                 setArmorAc,
                 setArmorMod,
-                setArmorStealth,
+                setStealth,
                 setArmorStr,
                 setMountSpeed,
                 setMountCapacity,
@@ -693,7 +641,10 @@ const ItemGen = () => {
                     value={dmgType}
                     valueOptions={dmgTypeOptions}
                   />
-                  <RandomButton options={dmgTypeOptions} setValue={setDmgType} />
+                  <RandomButton
+                    options={dmgTypeOptions}
+                    setValue={setDmgType}
+                  />
                   <DropDown
                     tableName={"itemsWeaponTypes"}
                     setSingular={setWeaponType}
@@ -704,7 +655,11 @@ const ItemGen = () => {
                     value={weaponType}
                     valueOptions={weaponTypeOptions}
                   />
-                  <RandomButton options={weaponTypeOptions} setValue={setWeaponType} />
+                  <RandomButton
+                    options={weaponTypeOptions}
+                    setValue={setWeaponType}
+                  />
+                  {/*TODO Multiple Weapon Properties  */}
                   <DropDown
                     tableName={"itemsWeaponProperties"}
                     setSingular={setWeaponProperty}
@@ -715,14 +670,10 @@ const ItemGen = () => {
                     value={weaponProperty}
                     valueOptions={weaponPropertyOptions}
                   />
-                  <RandomButton options={weaponPropertyOptions} setValue={setWeaponProperty} />
-                
-                  {/* <Dropdown
-                    value={weaponProperty}
-                    options={weaponProperties}
-                    onChange={onWeaponPropertyChange}
-                    placeholder="Weapon Property"
-                  /> */}
+                  <RandomButton
+                    options={weaponPropertyOptions}
+                    setValue={setWeaponProperty}
+                  />
                 </div>
               ) : null}
               {type === "Vehicle" ? (
@@ -772,41 +723,75 @@ const ItemGen = () => {
               ) : null}
               {type === "Armor" ? (
                 <div>
-                  <InputNumber
-                    style={{ display: "flex" }}
-                    value={armorAc}
-                    placeholder="Armor Class"
-                    mode="decimal"
-                    showButtons
-                    buttonLayout="currency"
-                    decrementButtonClassName="p-button-secondary"
-                    incrementButtonClassName="p-button-secondary"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    minFractionDigits={0}
-                    maxFractionDigits={2}
-                  />
-                  <button className={style.itemgenBtnName} onClick={onRandomAc}>
-                    Randomize
-                  </button>
-                  <Dropdown
-                    optionLabel="name"
+                  <div>
+                    <h1>Armor Class</h1>
+                    <InputNumber
+                      style={{ display: "flex" }}
+                      value={armorAc}
+                      placeholder="Armor Class"
+                      mode="decimal"
+                      showButtons
+                      buttonLayout="currency"
+                      decrementButtonClassName="p-button-secondary"
+                      incrementButtonClassName="p-button-secondary"
+                      incrementButtonIcon="pi pi-plus"
+                      decrementButtonIcon="pi pi-minus"
+                      minFractionDigits={0}
+                      maxFractionDigits={2}
+                    />
+                    <button
+                      className={style.itemgenBtnName}
+                      onClick={onRandomAc}
+                    >
+                      Randomize
+                    </button>
+                  </div>
+                  <DropDown
+                    tableName={"abilities"}
+                    setSingular={setArmorMod}
+                    setPlural={setArmorMods}
+                    setOptions={setArmorModOptions}
+                    h1Title={"Armor Modifier"}
+                    placeholder={"Set Armor Modifier"}
                     value={armorMod}
-                    options={abilitiesOptions}
-                    onChange={onChangeArmorMod}
-                    placeholder="Modifier"
+                    valueOptions={armorModOptions}
                   />
-                  <Dropdown
-                    value={armorStr}
-                    options={strReq}
-                    placeholder="Strength Req."
-                    onChange={onChangeArmorStr}
+                  <RandomButton
+                    options={armorModOptions}
+                    setValue={setArmorMod}
                   />
-                  <Dropdown
-                    value={armorStealth}
-                    options={stealthDisadvantage}
-                    placeholder="Stealth Disadvantage"
-                    onChange={onChangeArmorStealth}
+                  <div>
+                    {/* TODO Str Req of Armor */}
+                    <h1>Strength Requirement</h1>
+                    <InputNumber
+                      style={{ display: "flex" }}
+                      value={armorStr}
+                      placeholder="Armor Str Req"
+                      mode="decimal"
+                      showButtons
+                      buttonLayout="currency"
+                      decrementButtonClassName="p-button-secondary"
+                      incrementButtonClassName="p-button-secondary"
+                      incrementButtonIcon="pi pi-plus"
+                      decrementButtonIcon="pi pi-minus"
+                      minFractionDigits={0}
+                      maxFractionDigits={2}
+                    />
+                    <button className={style.itemgenBtnName}>Randomize</button>
+                  </div>
+                  <DropDown
+                    tableName={"yesOrNo"}
+                    setSingular={setStealth}
+                    setPlural={setStealths}
+                    setOptions={setStealthOptions}
+                    h1Title={"Stealth Disadvantage"}
+                    placeholder={"Set Stealth Disadvantage"}
+                    value={stealth}
+                    valueOptions={stealthOptions}
+                  />
+                  <RandomButton
+                    options={stealthOptions}
+                    setValue={setStealth}
                   />
                 </div>
               ) : null}
@@ -930,7 +915,7 @@ const ItemGen = () => {
               </h2>
               <h2>
                 Stealth Disadvantage{" "}
-                <span className={styleB.minorText2}>{armorStealth}</span>
+                <span className={styleB.minorText2}>{stealth}</span>
               </h2>
             </>
           ) : null}
