@@ -133,10 +133,15 @@ const ItemGen = () => {
   const [vehicleCapacity, setVehicleCapacity] = useState("");
 
   const [armorAc, setArmorAc] = useState("");
+
   const [armorMod, setArmorMod] = useState("");
   const [armorMods, setArmorMods] = useState("");
   const [armorModOptions, setArmorModOptions] = useState("");
+
   const [armorStr, setArmorStr] = useState("");
+  const [armorStrs, setArmorStrs] = useState("");
+  const [armorStrOptions, setArmorStrOptions] = useState("");
+  
   const [stealth, setStealth] = useState("");
   const [stealths, setStealths] = useState("");
   const [stealthOptions, setStealthOptions] = useState("");
@@ -762,30 +767,19 @@ const ItemGen = () => {
                     setValue={setArmorMod}
                   />
                   <CustomInputNumber
+                  tableName={"armorStrReq"}
                     h1Title={"Strength Requirement"}
                     value={armorStr}
                     placeholder={"Armor Str Req"}
                     setSingular={setArmorStr}
+                    setPlural={setArmorStrs}
+                    setOptions={setArmorStrOptions}
                   />
-                  <div>
-                    {/* TODO Str Req of Armor as input text*/}
-                    {/* <h1>Strength Requirement</h1>
-                    <InputNumber
-                      style={{ display: "flex" }}
-                      value={armorStr}
-                      placeholder="Armor Str Req"
-                      mode="decimal"
-                      showButtons
-                      buttonLayout="currency"
-                      decrementButtonClassName="p-button-secondary"
-                      incrementButtonClassName="p-button-secondary"
-                      incrementButtonIcon="pi pi-plus"
-                      decrementButtonIcon="pi pi-minus"
-                      minFractionDigits={0}
-                      maxFractionDigits={2}
-                    /> */}
-                    <button className={style.itemgenBtnName}>Randomize</button>
-                  </div>
+                  <RandomButton
+                    options={armorStrOptions}
+                    setValue={setArmorStr}
+                  />
+                
                   <DropDown
                     tableName={"yesOrNo"}
                     setSingular={setStealth}
