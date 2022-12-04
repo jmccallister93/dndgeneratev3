@@ -677,22 +677,25 @@ const ItemGen = () => {
           <h1 className={styleB.subHeader} onClick={showBasics}>
             Basic Info
           </h1>
-          <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
+          <div className={isBasicActive ? style.subsection : styleB.hidden}>
             <div>
               <h1>Name</h1>
               <InputText placeholder="Name" onChange={onNameChange} />
               <button className={style.itemgenBtnName}>Randomize</button>
             </div>
-            <DropDown 
-            tableName={"itemsTypes"}
-            setSingular={setType}
-            setPlural={setTypes}
-            setOptions={setTypeOptions}
-            h1Title={"Type"}
-            placeholder={"Set Type"}
-            value={type}
-            valueOptions={typeOptions}
-            />
+            <div>
+              <DropDown
+                tableName={"itemsTypes"}
+                setSingular={setType}
+                setPlural={setTypes}
+                setOptions={setTypeOptions}
+                h1Title={"Type"}
+                placeholder={"Set Type"}
+                value={type}
+                valueOptions={typeOptions}
+              />
+              <Button className={style.itemgenBtnName}>Random</Button>
+            </div>
             <div>
               <h1>Rarity</h1>
               {showRarityInput ? (

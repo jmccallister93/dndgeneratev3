@@ -9,7 +9,7 @@ import style from "../stylesheets/BuildingGen.module.scss";
 const DropDown = (props) => {
   //Set States
   const [fetchError, setFetchError] = useState(null);
-  const [showCustomInput, setShowCustomInput] = useState(false)
+  const [showCustomInput, setShowCustomInput] = useState(false);
 
   //Get Data from supabase
   useEffect(() => {
@@ -33,27 +33,24 @@ const DropDown = (props) => {
     fetchData();
   }, []);
 
-    //On Custom Type Change
-    const onChangeCustom = (e) => {
-      props.setSingular(e.target.value);
-    };
+  //On Custom Type Change
+  const onChangeCustom = (e) => {
+    props.setSingular(e.target.value);
+  };
   //On Type Change
-    const onChange = (e) => {
-      props.setSingular(e.value);
-      setShowCustomInput(false);
-      if (e.value === "Custom") {
-        setShowCustomInput(true);
-      }
-    };
+  const onChange = (e) => {
+    props.setSingular(e.value);
+    setShowCustomInput(false);
+    if (e.value === "Custom") {
+      setShowCustomInput(true);
+    }
+  };
 
   const templateDropdown = (
-    <div>
+    <>
       <h1>{props.h1Title}</h1>
-      {showCustomInput? (
-        <InputText
-          onChange={onChangeCustom}
-          placeholder={props.placeholder}
-        />
+      {showCustomInput ? (
+        <InputText onChange={onChangeCustom} placeholder={props.placeholder} />
       ) : null}
       <Dropdown
         optionLabel="name"
@@ -62,13 +59,12 @@ const DropDown = (props) => {
         onChange={onChange}
         placeholder={showCustomInput ? "Custom" : "Choose Type"}
       />
-      <Button>Random</Button>
-    </div>
+    </>
   );
 
-//   const onClear = () => {
-//     props.onClear()
-//   }
+  //   const onClear = () => {
+  //     props.onClear()
+  //   }
 
   return <>{templateDropdown}</>;
 };

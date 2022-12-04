@@ -276,3 +276,13 @@ $secondary-grey: #d6e4e5;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  & div {
+    text-align: center;
+    align-items: left;
+    justify-content: left;
+  }
+}
