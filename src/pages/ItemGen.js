@@ -683,20 +683,15 @@ const ItemGen = () => {
               <InputText placeholder="Name" onChange={onNameChange} />
               <button className={style.itemgenBtnName}>Randomize</button>
             </div>
-
             <DropDown 
             tableName={"itemsTypes"}
             setSingular={setType}
             setPlural={setTypes}
             setOptions={setTypeOptions}
             h1Title={"Type"}
-            showCustomInput={showTypeInput}
-            onCustomInputChange={onTypeCustom}
             placeholder={"Set Type"}
             value={type}
             valueOptions={typeOptions}
-            onValueChange={onTypeChange}
-            // onClear={}
             />
             <div>
               <h1>Rarity</h1>
