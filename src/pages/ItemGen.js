@@ -133,6 +133,8 @@ const ItemGen = () => {
   const [vehicleCapacity, setVehicleCapacity] = useState("");
 
   const [armorAc, setArmorAc] = useState("");
+  const [armorAcs, setArmorAcs] = useState("");
+  const [armorAcOptions, setArmorAcOptions] = useState("");
 
   const [armorMod, setArmorMod] = useState("");
   const [armorMods, setArmorMods] = useState("");
@@ -141,7 +143,7 @@ const ItemGen = () => {
   const [armorStr, setArmorStr] = useState("");
   const [armorStrs, setArmorStrs] = useState("");
   const [armorStrOptions, setArmorStrOptions] = useState("");
-  
+
   const [stealth, setStealth] = useState("");
   const [stealths, setStealths] = useState("");
   const [stealthOptions, setStealthOptions] = useState("");
@@ -728,30 +730,22 @@ const ItemGen = () => {
                 </div>
               ) : null}
               {type === "Armor" ? (
-                <div>
+                
                   <div>
-                    <h1>Armor Class</h1>
-                    <InputNumber
-                      style={{ display: "flex" }}
-                      value={armorAc}
-                      placeholder="Armor Class"
-                      mode="decimal"
-                      showButtons
-                      buttonLayout="currency"
-                      decrementButtonClassName="p-button-secondary"
-                      incrementButtonClassName="p-button-secondary"
-                      incrementButtonIcon="pi pi-plus"
-                      decrementButtonIcon="pi pi-minus"
-                      minFractionDigits={0}
-                      maxFractionDigits={2}
-                    />
-                    <button
-                      className={style.itemgenBtnName}
-                      onClick={onRandomAc}
-                    >
-                      Randomize
-                    </button>
-                  </div>
+                   <CustomInputNumber
+                    tableName={"acs"}
+                    h1Title={"Armor Class"}
+                    value={armorAc}
+                    placeholder={"Armor Class"}
+                    setSingular={setArmorAc}
+                    setPlural={setArmorAcs}
+                    setOptions={setArmorAcOptions}
+                  />
+                  <RandomButton
+                    options={armorAcOptions}
+                    setValue={setArmorAc}
+                  />
+                 
                   <DropDown
                     tableName={"abilities"}
                     setSingular={setArmorMod}
@@ -767,7 +761,7 @@ const ItemGen = () => {
                     setValue={setArmorMod}
                   />
                   <CustomInputNumber
-                  tableName={"armorStrReq"}
+                    tableName={"armorStrReq"}
                     h1Title={"Strength Requirement"}
                     value={armorStr}
                     placeholder={"Armor Str Req"}
@@ -779,7 +773,6 @@ const ItemGen = () => {
                     options={armorStrOptions}
                     setValue={setArmorStr}
                   />
-                
                   <DropDown
                     tableName={"yesOrNo"}
                     setSingular={setStealth}

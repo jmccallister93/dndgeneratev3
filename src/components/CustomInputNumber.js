@@ -34,10 +34,10 @@ const CustomInputNumber = (props) => {
     props.setSingular(e.value);
   };
   const inputNumber = (
-    <div>
+   <>
       <h1>{props.h1Title}</h1>
       <InputNumber
-        style={{ display: "flex" }}
+        // style={{ display: "flex" }}
         value={props.value}
         placeholder={props.placeholder}
         mode="decimal"
@@ -52,7 +52,7 @@ const CustomInputNumber = (props) => {
         min={0}
         onChange={onChange}
       />
-    </div>
+    </>
   );
   return <>{inputNumber}</>;
 };
