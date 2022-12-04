@@ -145,47 +145,6 @@ const ItemGen = () => {
 
   const [genItem, setGenItem] = useState();
 
-  //Pull Data
-  //Item Types
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data, error } = await supabase
-  //       .from("itemsTypes")
-  //       .select()
-  //       .order("id");
-  //     if (error) {
-  //       setFetchError("Could not fetch the data");
-  //       setType(null);
-  //       console.log(error);
-  //     }
-  //     if (data) {
-  //       setFetchError(null);
-  //       setTypes(data);
-  //       setTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-  //Rarities
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsRarities")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setRarity(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setRarities(data);
-        setRarityOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
   //Currencies
   useEffect(() => {
     const fetchData = async () => {
@@ -340,56 +299,6 @@ const ItemGen = () => {
     setItemName(e.target.value);
   };
 
-  const onTypeChange = (e) => {
-    setType(e.value);
-    setShowTypeInput(false);
-    if (e.value === "Custom") {
-      setShowTypeInput(true);
-    }
-  };
-
-  useEffect(() => {
-    if (type === "Weapon") {
-    }
-  }, [type]);
-
-  const onTypeCustom = (e) => {
-    setType(e.target.value);
-  };
-
-  const onRarityChange = (e) => {
-    setRarity(e.value);
-    setShowRarityInput(false);
-    if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (7 - 2) + 2);
-      setRarity(rarityOptions[r].name);
-    }
-    if (e.value === "Custom") {
-      setShowRarityInput(true);
-    }
-  };
-
-  const onRarityCustom = (e) => {
-    setRarity(e.target.value);
-  };
-
-  const onCurrencyChange = (e) => {
-    setCurrency(e.value);
-    setShowCurrencyInput(false);
-    if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (6 - 2) + 2);
-      setCurrency(currencyOptions[r].name);
-      setCurrencyValue(Math.round(Math.random() * (2000 - 1)));
-    }
-    if (e.value === "Custom") {
-      setShowCurrencyInput(true);
-    }
-  };
-
-  const onCurrencyCustom = (e) => {
-    setCurrency(e.target.value);
-  };
-
   const onCurrencyValueChange = (e) => {
     if (e.value === "Random") {
       let r = Math.floor(Math.random() * (6 - 2) + 2);
@@ -523,7 +432,7 @@ const ItemGen = () => {
   //Todo Searching
   const onSearchPack = (e) => {};
 
-  //Generate and Clear
+  //Generate
   const onGenerate = (e) => {
     if (type === "") {
       let r = Math.floor(Math.random() * (22 - 2) + 2);
@@ -631,12 +540,6 @@ const ItemGen = () => {
 
   const emptyArray = () => {};
 
-  const onRandomType = (e)=>{
-    let max = typeOptions.length
-    let r = Math.round(Math.random()*(max -0))
-    setType(typeOptions[r].name)
-  }
-
   return (
     <div className={styleB.mainWrapper}>
       <Navbar />
@@ -702,22 +605,33 @@ const ItemGen = () => {
                 value={type}
                 valueOptions={typeOptions}
               />
-              <RandomButton options={typeOptions} setValue={setType}/>
+              <RandomButton options={typeOptions} setValue={setType} />
             </div>
             <div>
-              <h1>Rarity</h1>
-              {showRarityInput ? (
-                <InputText onChange={onRarityCustom} placeholder="Rarity" />
-              ) : null}
-              <Dropdown
-                optionLabel="name"
+              <DropDown
+                tableName={"itemsRarities"}
+                setSingular={setRarity}
+                setPlural={setRarities}
+                setOptions={setRarityOptions}
+                h1Title={"Rarity"}
+                placeholder={"Set Rarity"}
                 value={rarity}
-                options={rarityOptions}
-                onChange={onRarityChange}
-                placeholder={showRarityInput ? "Custom" : "Choose Rarity"}
+                valueOptions={rarityOptions}
               />
+              <RandomButton options={rarityOptions} setValue={setRarity} />
             </div>
             <div>
+              <DropDown
+                tableName={"itemsRarities"}
+                setSingular={setRarity}
+                setPlural={setRarities}
+                setOptions={setRarityOptions}
+                h1Title={"Rarity"}
+                placeholder={"Set Rarity"}
+                value={rarity}
+                valueOptions={rarityOptions}
+              />
+              <RandomButton options={rarityOptions} setValue={setRarity} />
               <h1>Cost</h1>
               <InputNumber
                 value={currencyValue}
@@ -739,16 +653,16 @@ const ItemGen = () => {
               >
                 Randomize
               </button>
-              {showCurrencyInput ? (
-                <InputText onChange={onCurrencyCustom} placeholder="Currency" />
-              ) : null}
-              <Dropdown
-                optionLabel="name"
+              <DropDown
+                tableName={"itemsCurrencies"}
+                setSingular={setCurrency}
+                setPlural={setCurrencies}
+                setOptions={setCurrencyOptions}
+                placeholder={"Set Currency"}
                 value={currency}
-                options={currencyOptions}
-                onChange={onCurrencyChange}
-                placeholder={showTypeInput ? "Currency" : "Choose Currency"}
+                valueOptions={currencyOptions}
               />
+              <RandomButton options={currencyOptions} setValue={setCurrency} />
             </div>
             <div>
               <h1>Weight</h1>
