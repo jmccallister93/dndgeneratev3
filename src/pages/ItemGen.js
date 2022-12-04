@@ -30,6 +30,7 @@ import { e } from "mathjs";
 import RandomButton from "../components/RandomButton";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDropdown from "../components/CustomDropDown";
+import CustomDataTable from "../components/CustomDataTable";
 
 const ItemGen = () => {
   // Set state variables
@@ -159,6 +160,13 @@ const ItemGen = () => {
   const [mountCapacity, setMountCapacity] = useState("");
 
   const [itemDesc, setItemDesc] = useState("");
+
+  const [selectedItems, setSelectedItems] = useState(null);
+  const [item, setItem] = useState("")
+  const [items, setItems] = useState("")
+  const [itemOptions, setItemOptions] = useState("")
+  const [itemList, setItemList] = useState([])
+  
 
   const [genItem, setGenItem] = useState();
 
@@ -620,14 +628,14 @@ const ItemGen = () => {
               </button>
             </div>
             <h1 className={styleB.subHeader} onClick={showAdditional}>
-                  Additional Info
-                </h1>
+              Additional Info
+            </h1>
             <div className={style.itemgenWeaponAdditionalWrapper}>
               {type === "Weapon" ||
-              type === "Vehicle" ||
-              type === "Armor" ||
-              type === "Equipment Pack" ||
-              type === "Mount" } 
+                type === "Vehicle" ||
+                type === "Armor" ||
+                type === "Equipment Pack" ||
+                type === "Mount"}
               {type === "Weapon" ? (
                 <div
                   className={
@@ -821,16 +829,20 @@ const ItemGen = () => {
                   }
                 >
                   <div className={style.subsection}>
-                    <h1>Pack Contains</h1>
-                    <div>
-                      <InputText placeholder="Contains" />
-                      <button
-                        className={style.itemgenBtnSearch}
-                        onClick={onSearchPack}
-                      >
-                        <i className="pi pi-search"></i>
-                      </button>
-                    </div>
+                    <CustomDataTable 
+                      h1Title={"Pack Contents"}
+                      dialogHeader={"Items"}
+                      tableName={"itemsTools"}
+                      selectedItems={selectedItems}
+                      setSelectedItems={setSelectedItems}
+                      list={itemList}
+                      setList={setItemList}
+                      value={selectedItems}
+                      valueOptions={itemOptions}
+                      setSingular={setItem}
+                      setPlural={setItems}
+                      setOptions={setItemOptions}
+                    />
                   </div>
                 </div>
               ) : null}

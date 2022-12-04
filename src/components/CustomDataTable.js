@@ -91,20 +91,15 @@ const CustomDataTable = (props) => {
    const dialogFooter = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
-//   //On Change
-//   const onChange = (e) => {
-//     props.setSingular(e.value);
-//   };
-
   //JSX Dropdown template
   const templateDatatable = (
     <div className="card">
-      <h2 className={style.titles}>Actions</h2>
+      <h1 className={style.titles}>{props.h1Title}</h1>
       <Button onClick={openDialog} className={style.btnName}>
         Add / Remove
       </Button>
       <Dialog
-        header="Actions"
+        header={props.dialogHeader}
         visible={dialogVisible}
         maximizable
         modal
@@ -112,7 +107,11 @@ const CustomDataTable = (props) => {
         footer={dialogFooter}
       >
         <DataTable
-          value={props.selectedItems}
+          value={props.list}
+          selection={props.selectedItems}
+          onSelectionChange={(e) => {
+            props.setList(e.value);
+          }}
           scrollable
           rows={20}
           dataKey="name"
