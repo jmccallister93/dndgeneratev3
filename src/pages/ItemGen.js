@@ -27,6 +27,8 @@ import useFetch from "../components/useFetch";
 import Items from "../components/Items";
 import ClearButton from "../components/ClearButton";
 import DropDown from "../components/DropDown";
+import { e } from "mathjs";
+import RandomButton from "../components/RandomButton";
 
 const ItemGen = () => {
   // Set state variables
@@ -629,6 +631,12 @@ const ItemGen = () => {
 
   const emptyArray = () => {};
 
+  const onRandomType = (e)=>{
+    let max = typeOptions.length
+    let r = Math.round(Math.random()*(max -0))
+    setType(typeOptions[r].name)
+  }
+
   return (
     <div className={styleB.mainWrapper}>
       <Navbar />
@@ -694,7 +702,7 @@ const ItemGen = () => {
                 value={type}
                 valueOptions={typeOptions}
               />
-              <Button className={style.itemgenBtnName}>Random</Button>
+              <RandomButton options={typeOptions} setValue={setType}/>
             </div>
             <div>
               <h1>Rarity</h1>

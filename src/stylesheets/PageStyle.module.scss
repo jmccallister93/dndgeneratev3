@@ -1,0 +1,236 @@
+$primary-grey: #393e46;
+$secondary-grey: #d6e4e5;
+$header-color: #3e6d9c;
+$display-tan: #f7f1cf;
+$display-red: #9a2818;
+$btn-blue: #2196f3;
+
+.mainWrapper {
+  background: linear-gradient(135deg, $primary-grey 25%, white);
+  height: fit-content;
+  width: 99vw;
+  min-height: 100vh;
+  max-height: fit-content;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: $primary-grey;
+}
+
+.body {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  align-items: flex-start;
+  justify-content: center;
+  place-items: center;
+}
+
+.mainHeader {
+  font-size: 3rem;
+  color: $secondary-grey;
+  margin-top: 2rem;
+  border-bottom: 1px solid #d6e4e5;
+  justify-self: center;
+  text-align: center;
+}
+
+.optionsWrapper {
+  display: flex;
+  flex-direction: column;
+  grid-template-rows: auto;
+  background-color: $secondary-grey;
+  width: fit-content;
+  height: fit-content;
+  padding: 0px;
+  margin: 0;
+  text-align: center;
+  align-items: left;
+  align-self: flex-start;
+  justify-content: left;
+  border-radius: 1rem;
+  & div {
+    padding: 2px;
+  }
+}
+
+.topHeader {
+  display: inline-block;
+  align-items: center;
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10%;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: $secondary-grey;
+  border-radius: 1rem;
+}
+
+.btnClear {
+  font-size: 2rem;
+  color: $secondary-grey;
+  background-color: rgba(255, 0, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgb(255, 0, 0);
+    cursor: pointer;
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0px 0px 5px 5px rgba(255, 0, 0, 0.5);
+  }
+}
+
+.btnGen {
+  font-size: 2rem;
+  color: $secondary-grey;
+  background-color: rgba(0, 128, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgba(0, 128, 0);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
+  }
+}
+
+.btnName {
+  font-size: 1rem;
+  color: $secondary-grey;
+  background-color: rgba(0, 128, 0, 0.75);
+  border-radius: 0.5rem;
+  border: 0px;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  transition: 0.5s;
+  &:hover {
+    background-color: rgba(0, 128, 0);
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
+  }
+}
+
+.btnNull {
+  background-color: #393e46;
+  border: #393e46;
+
+  &:hover {
+    background-color: #393e46;
+    cursor: default;
+  }
+}
+.btnAddRemove {
+  background-color: $btn-blue;
+}
+.subHeader {
+  color: $primary-grey;
+  background-color: white;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid $header-color;
+  width: fit-content;
+  box-shadow: 5px 5px 5px 2px $primary-grey;
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px green;
+    scale: 1.1;
+  }
+}
+
+.subsection {
+  display: flex;
+  flex-direction: column;
+  & div {
+    text-align: center;
+    align-items: left;
+    justify-content: left;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: $display-tan;
+  width: 50%;
+  padding: 10px;
+  margin: 0;
+  margin-left: 1%;
+  text-align: left;
+  align-items: left;
+  align-self: flex-start;
+  justify-content: end;
+  border-radius: 0;
+  color: $display-red;
+  & h1 {
+    padding: 5px;
+  }
+  & h2 {
+    padding: 5px;
+  }
+  & h3 {
+    padding: 5px;
+  }
+}
+
+.minorText2 {
+  font-weight: 350;
+}
+.abilityScores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+}
+
+.lineBreak {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 48vw solid $display-red;
+}
+
+.subLineBreak {
+  border-bottom: 1px solid $display-red;
+  width: 98%;
+  margin-left: 2px;
+}
+
+.detesContainer {
+  display: flex;
+  // grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  flex-wrap: wrap;
+  & h4 {
+    font-weight: 300;
+  }
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .dropTitle{
+    font-size: 1.5rem;
+  }
