@@ -574,7 +574,7 @@ const ItemGen = () => {
                 placeholder="Value"
                 mode="decimal"
                 showButtons
-                // buttonLayout="currency"
+                buttonLayout="currency"
                 decrementButtonClassName="p-button-secondary"
                 incrementButtonClassName="p-button-secondary"
                 incrementButtonIcon="pi pi-plus"
