@@ -107,7 +107,7 @@ const CustomDataTable = (props) => {
         footer={dialogFooter}
       >
         <DataTable
-          value={props.list}
+          value={props.options}
           selection={props.selectedItems}
           onSelectionChange={(e) => {
             props.setList(e.value);

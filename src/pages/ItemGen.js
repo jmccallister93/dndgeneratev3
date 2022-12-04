@@ -162,11 +162,10 @@ const ItemGen = () => {
   const [itemDesc, setItemDesc] = useState("");
 
   const [selectedItems, setSelectedItems] = useState(null);
-  const [item, setItem] = useState("")
-  const [items, setItems] = useState("")
-  const [itemOptions, setItemOptions] = useState("")
-  const [itemList, setItemList] = useState([])
-  
+  const [item, setItem] = useState("");
+  const [items, setItems] = useState("");
+  const [itemOptions, setItemOptions] = useState("");
+  const [itemList, setItemList] = useState([]);
 
   const [genItem, setGenItem] = useState();
 
@@ -829,7 +828,10 @@ const ItemGen = () => {
                   }
                 >
                   <div className={style.subsection}>
-                    <CustomDataTable 
+                    {/* <CustomDataTable
+                      setSingular={setItem}
+                      setPlural={setItems}
+                      setOptions={setItemOptions}
                       h1Title={"Pack Contents"}
                       dialogHeader={"Items"}
                       tableName={"itemsTools"}
@@ -839,10 +841,9 @@ const ItemGen = () => {
                       setList={setItemList}
                       value={selectedItems}
                       valueOptions={itemOptions}
-                      setSingular={setItem}
-                      setPlural={setItems}
-                      setOptions={setItemOptions}
-                    />
+                      options={itemOptions}
+                    /> */}
+                    <Items />
                   </div>
                 </div>
               ) : null}
