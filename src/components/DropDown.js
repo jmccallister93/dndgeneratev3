@@ -33,11 +33,11 @@ const DropDown = (props) => {
     fetchData();
   }, []);
 
-  //On Custom Type Change
+  //On Custom Change
   const onChangeCustom = (e) => {
     props.setSingular(e.target.value);
   };
-  //On Type Change
+  //On Change
   const onChange = (e) => {
     props.setSingular(e.value);
     setShowCustomInput(false);
@@ -61,10 +61,6 @@ const DropDown = (props) => {
       />
     </>
   );
-
-  //   const onClear = () => {
-  //     props.onClear()
-  //   }
 
   return <>{templateDropdown}</>;
 };

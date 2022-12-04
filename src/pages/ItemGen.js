@@ -29,6 +29,7 @@ import ClearButton from "../components/ClearButton";
 import DropDown from "../components/DropDown";
 import { e } from "mathjs";
 import RandomButton from "../components/RandomButton";
+import CustomInputNumber from "../components/CustomInputNumber";
 
 const ItemGen = () => {
   // Set state variables
@@ -760,9 +761,15 @@ const ItemGen = () => {
                     options={armorModOptions}
                     setValue={setArmorMod}
                   />
+                  <CustomInputNumber
+                    h1Title={"Strength Requirement"}
+                    value={armorStr}
+                    placeholder={"Armor Str Req"}
+                    setSingular={setArmorStr}
+                  />
                   <div>
-                    {/* TODO Str Req of Armor */}
-                    <h1>Strength Requirement</h1>
+                    {/* TODO Str Req of Armor as input text*/}
+                    {/* <h1>Strength Requirement</h1>
                     <InputNumber
                       style={{ display: "flex" }}
                       value={armorStr}
@@ -776,7 +783,7 @@ const ItemGen = () => {
                       decrementButtonIcon="pi pi-minus"
                       minFractionDigits={0}
                       maxFractionDigits={2}
-                    />
+                    /> */}
                     <button className={style.itemgenBtnName}>Randomize</button>
                   </div>
                   <DropDown
