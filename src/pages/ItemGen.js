@@ -26,15 +26,16 @@ import { Get } from "react-axios";
 import useFetch from "../components/useFetch";
 import Items from "../components/Items";
 import ClearButton from "../components/ClearButton";
-import DropDown from "../components/DropDown";
 import { e } from "mathjs";
 import RandomButton from "../components/RandomButton";
 import CustomInputNumber from "../components/CustomInputNumber";
+import CustomDropdown from "../components/CustomDropDown";
 
 const ItemGen = () => {
   // Set state variables
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isAdditionalActive, setIsAdditionalActive] = useState(true);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isLayoutActive, setIsLayoutActive] = useState(false);
   const [isRoomActive, setIsRoomActive] = useState(false);
@@ -480,7 +481,9 @@ const ItemGen = () => {
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
-
+  const showAdditional = (e) => {
+    setIsAdditionalActive((current) => !current);
+  };
   const emptyArray = () => {};
 
   return (
@@ -538,7 +541,7 @@ const ItemGen = () => {
               <button className={style.itemgenBtnName}>Random</button>
             </div>
             <div>
-              <DropDown
+              <CustomDropdown
                 tableName={"itemsTypes"}
                 setSingular={setType}
                 setPlural={setTypes}
@@ -551,7 +554,7 @@ const ItemGen = () => {
               <RandomButton options={typeOptions} setValue={setType} />
             </div>
             <div>
-              <DropDown
+              <CustomDropdown
                 tableName={"itemsRarities"}
                 setSingular={setRarity}
                 setPlural={setRarities}
@@ -585,7 +588,7 @@ const ItemGen = () => {
               >
                 Random
               </button>
-              <DropDown
+              <CustomDropdown
                 tableName={"itemsCurrencies"}
                 setSingular={setCurrency}
                 setPlural={setCurrencies}
@@ -616,246 +619,296 @@ const ItemGen = () => {
                 Random
               </button>
             </div>
+            <h1 className={styleB.subHeader} onClick={showAdditional}>
+                  Additional Info
+                </h1>
             <div className={style.itemgenWeaponAdditionalWrapper}>
               {type === "Weapon" ||
               type === "Vehicle" ||
               type === "Armor" ||
               type === "Equipment Pack" ||
-              type === "Mount" ? (
-                <h1>Additional</h1>
-              ) : null}
+              type === "Mount" } 
               {type === "Weapon" ? (
-                <div>
-                  <InputText
-                    value={weaponDmg}
-                    mode="decimal"
-                    showButtons
-                    buttonLayout="currency"
-                    placeholder="Damage Amount"
-                  />
-                  <button
-                    className={style.itemgenBtnName}
-                    onClick={onRandomWeaponDmg}
-                  >
-                    Random
-                  </button>
-                  <DropDown
-                    tableName={"damageTypes"}
-                    setSingular={setDmgType}
-                    setPlural={setDmgTypes}
-                    setOptions={setDmgTypeOptions}
-                    h1Title={"Damage Type"}
-                    placeholder={"Set Damage Type"}
-                    value={dmgType}
-                    valueOptions={dmgTypeOptions}
-                  />
-                  <RandomButton
-                    options={dmgTypeOptions}
-                    setValue={setDmgType}
-                  />
-                  <DropDown
-                    tableName={"itemsWeaponTypes"}
-                    setSingular={setWeaponType}
-                    setPlural={setWeaponTypes}
-                    setOptions={setWeaponTypeOptions}
-                    h1Title={"Weapon Type"}
-                    placeholder={"Set Weapon Type"}
-                    value={weaponType}
-                    valueOptions={weaponTypeOptions}
-                  />
-                  <RandomButton
-                    options={weaponTypeOptions}
-                    setValue={setWeaponType}
-                  />
-                  {/*TODO Multiple Weapon Properties  */}
-                  <DropDown
-                    tableName={"itemsWeaponProperties"}
-                    setSingular={setWeaponProperty}
-                    setPlural={setWeaponProperties}
-                    setOptions={setWeaponPropertyOptions}
-                    h1Title={"Weapon Property"}
-                    placeholder={"Set Weapon Property"}
-                    value={weaponProperty}
-                    valueOptions={weaponPropertyOptions}
-                  />
-                  <RandomButton
-                    options={weaponPropertyOptions}
-                    setValue={setWeaponProperty}
-                  />
+                <div
+                  className={
+                    isAdditionalActive ? style.subsection : styleB.hidden
+                  }
+                >
+                  <div>
+                    <InputText
+                      value={weaponDmg}
+                      mode="decimal"
+                      showButtons
+                      buttonLayout="currency"
+                      placeholder="Damage Amount"
+                    />
+                    <button
+                      className={style.itemgenBtnName}
+                      onClick={onRandomWeaponDmg}
+                    >
+                      Random
+                    </button>
+                    <CustomDropdown
+                      tableName={"damageTypes"}
+                      setSingular={setDmgType}
+                      setPlural={setDmgTypes}
+                      setOptions={setDmgTypeOptions}
+                      h1Title={"Damage Type"}
+                      placeholder={"Set Damage Type"}
+                      value={dmgType}
+                      valueOptions={dmgTypeOptions}
+                    />
+                    <RandomButton
+                      options={dmgTypeOptions}
+                      setValue={setDmgType}
+                    />
+                    <CustomDropdown
+                      tableName={"itemsWeaponTypes"}
+                      setSingular={setWeaponType}
+                      setPlural={setWeaponTypes}
+                      setOptions={setWeaponTypeOptions}
+                      h1Title={"Weapon Type"}
+                      placeholder={"Set Weapon Type"}
+                      value={weaponType}
+                      valueOptions={weaponTypeOptions}
+                    />
+                    <RandomButton
+                      options={weaponTypeOptions}
+                      setValue={setWeaponType}
+                    />
+                    {/*TODO Multiple Weapon Properties  */}
+                    <CustomDropdown
+                      tableName={"itemsWeaponProperties"}
+                      setSingular={setWeaponProperty}
+                      setPlural={setWeaponProperties}
+                      setOptions={setWeaponPropertyOptions}
+                      h1Title={"Weapon Property"}
+                      placeholder={"Set Weapon Property"}
+                      value={weaponProperty}
+                      valueOptions={weaponPropertyOptions}
+                    />
+                    <RandomButton
+                      options={weaponPropertyOptions}
+                      setValue={setWeaponProperty}
+                    />
+                  </div>
                 </div>
               ) : null}
               {type === "Vehicle" ? (
-                <div>
-                  <InputNumber
-                    style={{ display: "flex" }}
-                    value={vehicleSpeed}
-                    placeholder="Speed"
-                    mode="decimal"
-                    showButtons
-                    buttonLayout="currency"
-                    decrementButtonClassName="p-button-secondary"
-                    incrementButtonClassName="p-button-secondary"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    minFractionDigits={0}
-                    maxFractionDigits={3}
-                    step={5}
-                  />
-                  <button
-                    className={style.itemgenBtnName}
-                    onClick={onRandomVehicleSpeed}
-                  >
-                    Randomize
-                  </button>
-                  <InputNumber
-                    style={{ display: "flex" }}
-                    value={vehicleCapacity}
-                    placeholder="Carry Capacity"
-                    mode="decimal"
-                    showButtons
-                    buttonLayout="currency"
-                    decrementButtonClassName="p-button-secondary"
-                    incrementButtonClassName="p-button-secondary"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    minFractionDigits={0}
-                    maxFractionDigits={2}
-                  />
-                  <button
-                    className={style.itemgenBtnName}
-                    onClick={onRandomVehicleCapacity}
-                  >
-                    Randomize
-                  </button>
+                <div
+                  className={
+                    isAdditionalActive ? style.subsection : styleB.hidden
+                  }
+                >
+                  <div className={style.subsection}>
+                    <h1>Vehicle Speed</h1>
+                    <div>
+                      <InputNumber
+                        value={vehicleSpeed}
+                        placeholder="Speed"
+                        mode="decimal"
+                        showButtons
+                        buttonLayout="currency"
+                        decrementButtonClassName="p-button-secondary"
+                        incrementButtonClassName="p-button-secondary"
+                        incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus"
+                        minFractionDigits={0}
+                        maxFractionDigits={3}
+                        step={5}
+                      />
+                      <button
+                        className={style.itemgenBtnName}
+                        onClick={onRandomVehicleSpeed}
+                      >
+                        Random
+                      </button>
+                    </div>
+                    <div>
+                      <h1>Vehicle Carry Capacity</h1>
+                      <InputNumber
+                        value={vehicleCapacity}
+                        placeholder="Carry Capacity"
+                        mode="decimal"
+                        showButtons
+                        buttonLayout="currency"
+                        decrementButtonClassName="p-button-secondary"
+                        incrementButtonClassName="p-button-secondary"
+                        incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus"
+                        minFractionDigits={0}
+                        maxFractionDigits={2}
+                        step={5}
+                      />
+                      <button
+                        className={style.itemgenBtnName}
+                        onClick={onRandomVehicleCapacity}
+                      >
+                        Random
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : null}
               {type === "Armor" ? (
-                
+                <div
+                  className={
+                    isAdditionalActive ? style.subsection : styleB.hidden
+                  }
+                >
                   <div>
-                   <CustomInputNumber
-                    tableName={"acs"}
-                    h1Title={"Armor Class"}
-                    value={armorAc}
-                    placeholder={"Armor Class"}
-                    setSingular={setArmorAc}
-                    setPlural={setArmorAcs}
-                    setOptions={setArmorAcOptions}
-                  />
-                  <RandomButton
-                    options={armorAcOptions}
-                    setValue={setArmorAc}
-                  />
-                 
-                  <DropDown
-                    tableName={"abilities"}
-                    setSingular={setArmorMod}
-                    setPlural={setArmorMods}
-                    setOptions={setArmorModOptions}
-                    h1Title={"Armor Modifier"}
-                    placeholder={"Set Armor Modifier"}
-                    value={armorMod}
-                    valueOptions={armorModOptions}
-                  />
-                  <RandomButton
-                    options={armorModOptions}
-                    setValue={setArmorMod}
-                  />
-                  <CustomInputNumber
-                    tableName={"armorStrReq"}
-                    h1Title={"Strength Requirement"}
-                    value={armorStr}
-                    placeholder={"Armor Str Req"}
-                    setSingular={setArmorStr}
-                    setPlural={setArmorStrs}
-                    setOptions={setArmorStrOptions}
-                  />
-                  <RandomButton
-                    options={armorStrOptions}
-                    setValue={setArmorStr}
-                  />
-                  <DropDown
-                    tableName={"yesOrNo"}
-                    setSingular={setStealth}
-                    setPlural={setStealths}
-                    setOptions={setStealthOptions}
-                    h1Title={"Stealth Disadvantage"}
-                    placeholder={"Set Stealth Disadvantage"}
-                    value={stealth}
-                    valueOptions={stealthOptions}
-                  />
-                  <RandomButton
-                    options={stealthOptions}
-                    setValue={setStealth}
-                  />
+                    <CustomInputNumber
+                      tableName={"acs"}
+                      h1Title={"Armor Class"}
+                      value={armorAc}
+                      placeholder={"Armor Class"}
+                      setSingular={setArmorAc}
+                      setPlural={setArmorAcs}
+                      setOptions={setArmorAcOptions}
+                    />
+                    <RandomButton
+                      options={armorAcOptions}
+                      setValue={setArmorAc}
+                    />
+                    <CustomDropdown
+                      tableName={"abilities"}
+                      setSingular={setArmorMod}
+                      setPlural={setArmorMods}
+                      setOptions={setArmorModOptions}
+                      h1Title={"Armor Modifier"}
+                      placeholder={"Set Armor Modifier"}
+                      value={armorMod}
+                      valueOptions={armorModOptions}
+                    />
+                    <RandomButton
+                      options={armorModOptions}
+                      setValue={setArmorMod}
+                    />
+                    <CustomInputNumber
+                      tableName={"armorStrReq"}
+                      h1Title={"Strength Requirement"}
+                      value={armorStr}
+                      placeholder={"Armor Str Req"}
+                      setSingular={setArmorStr}
+                      setPlural={setArmorStrs}
+                      setOptions={setArmorStrOptions}
+                    />
+                    <RandomButton
+                      options={armorStrOptions}
+                      setValue={setArmorStr}
+                    />
+                    <CustomDropdown
+                      tableName={"yesOrNo"}
+                      setSingular={setStealth}
+                      setPlural={setStealths}
+                      setOptions={setStealthOptions}
+                      h1Title={"Stealth Disadvantage"}
+                      placeholder={"Set Stealth Disadvantage"}
+                      value={stealth}
+                      valueOptions={stealthOptions}
+                    />
+                    <RandomButton
+                      options={stealthOptions}
+                      setValue={setStealth}
+                    />
+                  </div>
                 </div>
               ) : null}
               {type === "Equipment Pack" ? (
-                <div>
-                  <InputText placeholder="Contains" />
-                  <button
-                    className={style.itemgenBtnSearch}
-                    onClick={onSearchPack}
-                  >
-                    <i className="pi pi-search"></i>
-                  </button>
+                <div
+                  className={
+                    isAdditionalActive ? style.subsection : styleB.hidden
+                  }
+                >
+                  <div className={style.subsection}>
+                    <h1>Pack Contains</h1>
+                    <div>
+                      <InputText placeholder="Contains" />
+                      <button
+                        className={style.itemgenBtnSearch}
+                        onClick={onSearchPack}
+                      >
+                        <i className="pi pi-search"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : null}
               {type === "Mount" ? (
-                <div>
-                  <InputNumber
-                    value={mountSpeed}
-                    placeholder="Speed"
-                    mode="decimal"
-                    showButtons
-                    buttonLayout="currency"
-                    decrementButtonClassName="p-button-secondary"
-                    incrementButtonClassName="p-button-secondary"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    step={5}
-                    minFractionDigits={0}
-                    maxFractionDigits={2}
-                  />
-                  <button
-                    className={style.itemgenBtnName}
-                    onClick={onRandomMountSpeed}
-                  >
-                    Randomize
-                  </button>
-                  <InputNumber
-                    value={mountCapacity}
-                    placeholder="Carry Capacity"
-                    mode="decimal"
-                    showButtons
-                    // buttonLayout="currency"
-                    decrementButtonClassName="p-button-secondary"
-                    incrementButtonClassName="p-button-secondary"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    minFractionDigits={0}
-                    maxFractionDigits={2}
-                  />
-                  <button
-                    className={style.itemgenBtnName}
-                    onClick={onRandomMountCapacity}
-                  >
-                    Randomize
-                  </button>
+                <div
+                  className={
+                    isAdditionalActive ? style.subsection : styleB.hidden
+                  }
+                >
+                  <div className={style.subsection}>
+                    <h1>Mount Speed</h1>
+                    <div>
+                      <InputNumber
+                        value={mountSpeed}
+                        placeholder="Speed"
+                        mode="decimal"
+                        showButtons
+                        buttonLayout="currency"
+                        decrementButtonClassName="p-button-secondary"
+                        incrementButtonClassName="p-button-secondary"
+                        incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus"
+                        step={5}
+                        minFractionDigits={0}
+                        maxFractionDigits={2}
+                      />
+                      <button
+                        className={style.itemgenBtnName}
+                        onClick={onRandomMountSpeed}
+                      >
+                        Random
+                      </button>
+                    </div>
+                    <h1>Mount Carry Capacity</h1>
+                    <div>
+                      <InputNumber
+                        value={mountCapacity}
+                        placeholder="Carry Capacity"
+                        mode="decimal"
+                        showButtons
+                        buttonLayout="currency"
+                        decrementButtonClassName="p-button-secondary"
+                        incrementButtonClassName="p-button-secondary"
+                        incrementButtonIcon="pi pi-plus"
+                        decrementButtonIcon="pi pi-minus"
+                        step={5}
+                        minFractionDigits={0}
+                        maxFractionDigits={2}
+                      />
+                      <button
+                        className={style.itemgenBtnName}
+                        onClick={onRandomMountCapacity}
+                      >
+                        Random
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : null}
-              <div>
-                <h1>Description</h1>
-                <InputTextarea
-                  value={itemDesc}
-                  onChange={onDescChange}
-                  placeholder="Item Description"
-                />
-                <button
-                  className={style.itemgenBtnName}
-                  onClick={onRandomDescription}
-                >
-                  Randomize
-                </button>
+              <div
+                className={
+                  isAdditionalActive ? style.subsection : styleB.hidden
+                }
+              >
+                <div>
+                  <h1>Description</h1>
+                  <InputTextarea
+                    value={itemDesc}
+                    onChange={onDescChange}
+                    placeholder="Item Description"
+                  />
+                  <button
+                    className={style.itemgenBtnName}
+                    onClick={onRandomDescription}
+                  >
+                    Random
+                  </button>
+                </div>
               </div>
             </div>
           </div>

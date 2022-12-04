@@ -37,7 +37,6 @@ const CustomInputNumber = (props) => {
    <>
       <h1>{props.h1Title}</h1>
       <InputNumber
-        // style={{ display: "flex" }}
         value={props.value}
         placeholder={props.placeholder}
         mode="decimal"

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
 import style from "../stylesheets/BuildingGen.module.scss";
 
-const DropDown = (props) => {
+const CustomDropdown = (props) => {
   //Set States
   const [fetchError, setFetchError] = useState(null);
   const [showCustomInput, setShowCustomInput] = useState(false);
@@ -45,7 +45,7 @@ const DropDown = (props) => {
       setShowCustomInput(true);
     }
   };
-
+//JSX Dropdown template
   const templateDropdown = (
     <>
       <h1>{props.h1Title}</h1>
@@ -57,7 +57,7 @@ const DropDown = (props) => {
         value={props.value}
         options={props.valueOptions}
         onChange={onChange}
-        placeholder={showCustomInput ? "Custom" : "Choose Type"}
+        placeholder={showCustomInput ? "Custom" : props.placeholder}
       />
     </>
   );
@@ -65,4 +65,4 @@ const DropDown = (props) => {
   return <>{templateDropdown}</>;
 };
 
-export default DropDown;
+export default CustomDropdown;
