@@ -118,7 +118,11 @@ const ItemGen = () => {
 
   const [weaponDmg, setWeaponDmg] = useState("");
   const [weaponType, setWeaponType] = useState("");
+  const [weaponTypes, setWeaponTypes] = useState("")
+  const [weaponTypeOptions, setWeaponTypeOptions] = useState("")
   const [weaponProperty, setWeaponProperty] = useState("");
+  const [weaponProperties, setWeaponProperties] = useState("");
+  const [weaponPropertyOptions, setWeaponPropertyOptions] = useState("");
   const [weaponDmgType, setWeaponDmgType] = useState("");
   const [dmgType, setDmgType] = useState("");
   const [dmgTypes, setDmgTypes] = useState("");
@@ -266,24 +270,7 @@ const ItemGen = () => {
     <div className="flex justify-content-between">{renderHeader()}</div>
   );
 
-  const weaponTypes = [
-    "Random",
-    "Simple Melee",
-    "Simple Ranged",
-    "Martial Melee",
-    "Martial Ranged",
-  ];
-  const weaponProperties = [
-    "Random",
-    "Finesse",
-    "Heavy",
-    "Light",
-    "Range",
-    "Reach",
-    "Thrown",
-    "Two-handed",
-    "Versatile",
-  ];
+
   const speeds = [];
   for (let n = 0; n <= 500; n += 10) {
     speeds.push(n);
@@ -592,7 +579,7 @@ const ItemGen = () => {
             <div>
               <h1>Name</h1>
               <InputText placeholder="Name" onChange={onNameChange} />
-              <button className={style.itemgenBtnName}>Randomize</button>
+              <button className={style.itemgenBtnName}>Random</button>
             </div>
             <div>
               <DropDown
@@ -621,17 +608,6 @@ const ItemGen = () => {
               <RandomButton options={rarityOptions} setValue={setRarity} />
             </div>
             <div>
-              <DropDown
-                tableName={"itemsRarities"}
-                setSingular={setRarity}
-                setPlural={setRarities}
-                setOptions={setRarityOptions}
-                h1Title={"Rarity"}
-                placeholder={"Set Rarity"}
-                value={rarity}
-                valueOptions={rarityOptions}
-              />
-              <RandomButton options={rarityOptions} setValue={setRarity} />
               <h1>Cost</h1>
               <InputNumber
                 value={currencyValue}
@@ -651,7 +627,7 @@ const ItemGen = () => {
                 className={style.itemgenBtnName}
                 onClick={onRandomCurrencyValue}
               >
-                Randomize
+                Random
               </button>
               <DropDown
                 tableName={"itemsCurrencies"}
@@ -681,7 +657,7 @@ const ItemGen = () => {
                 maxFractionDigits={2}
               />
               <button className={style.itemgenBtnName} onClick={onRandomWeight}>
-                Randomize
+                Random
               </button>
             </div>
             <div className={style.itemgenWeaponAdditionalWrapper}>
@@ -705,27 +681,48 @@ const ItemGen = () => {
                     className={style.itemgenBtnName}
                     onClick={onRandomWeaponDmg}
                   >
-                    Randomize
+                    Random
                   </button>
-                  <Dropdown
-                    optionLabel="name"
+                  <DropDown
+                    tableName={"damageTypes"}
+                    setSingular={setDmgType}
+                    setPlural={setDmgTypes}
+                    setOptions={setDmgTypeOptions}
+                    h1Title={"Damage Type"}
+                    placeholder={"Set Damage Type"}
                     value={dmgType}
-                    options={dmgTypeOptions}
-                    onChange={onDmgTypeChange}
-                    placeholder="Damage Type"
+                    valueOptions={dmgTypeOptions}
                   />
-                  <Dropdown
+                  <RandomButton options={dmgTypeOptions} setValue={setDmgType} />
+                  <DropDown
+                    tableName={"itemsWeaponTypes"}
+                    setSingular={setWeaponType}
+                    setPlural={setWeaponTypes}
+                    setOptions={setWeaponTypeOptions}
+                    h1Title={"Weapon Type"}
+                    placeholder={"Set Weapon Type"}
                     value={weaponType}
-                    options={weaponTypes}
-                    onChange={onWeaponTypeChange}
-                    placeholder="Weapon Type"
+                    valueOptions={weaponTypeOptions}
                   />
-                  <Dropdown
+                  <RandomButton options={weaponTypeOptions} setValue={setWeaponType} />
+                  <DropDown
+                    tableName={"itemsWeaponProperties"}
+                    setSingular={setWeaponProperty}
+                    setPlural={setWeaponProperties}
+                    setOptions={setWeaponPropertyOptions}
+                    h1Title={"Weapon Property"}
+                    placeholder={"Set Weapon Property"}
+                    value={weaponProperty}
+                    valueOptions={weaponPropertyOptions}
+                  />
+                  <RandomButton options={weaponPropertyOptions} setValue={setWeaponProperty} />
+                
+                  {/* <Dropdown
                     value={weaponProperty}
                     options={weaponProperties}
                     onChange={onWeaponPropertyChange}
                     placeholder="Weapon Property"
-                  />
+                  /> */}
                 </div>
               ) : null}
               {type === "Vehicle" ? (
