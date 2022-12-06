@@ -23,9 +23,11 @@ import CustomInputText from "../components/CustomInputText";
 import SingleDisplay from "../components/SingleDisplay";
 import CustomDropdown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
+import CustomDataTable from "../components/CustomDataTable";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isFeatureActive, setIsFeatureActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
 
   const [cityName, setCityName] = useState("");
@@ -49,7 +51,7 @@ const CityGen = () => {
   const [atmoshpereOptions, setAtmoshpereOptions] = useState("");
 
   const [culture, setCulture] = useState("");
-  const [cultures, setCultres] = useState("");
+  const [cultures, setCultures] = useState("");
   const [cultureOptions, setCultureOptions] = useState("");
 
   const [terrain, setTerrain] = useState("");
@@ -67,10 +69,14 @@ const CityGen = () => {
   const [guild, setGuild] = useState("");
   const [guilds, setGuilds] = useState("");
   const [guildOptions, setGuildOptions] = useState("");
+  const [selectedGuild, setSelectedGuild] = useState([]);
+  const [guildList, setGuildList] = useState([]);
 
   const [event, setEvent] = useState("");
   const [events, setEvents] = useState("");
   const [eventOptions, setEventOptions] = useState("");
+  const [selectedEvent, setSelectedEvent] = useState([]);
+  const [eventList, setEventList] = useState([]);
 
   const [faction, setFaction] = useState("");
   const [factions, setFactions] = useState("");
@@ -91,6 +97,9 @@ const CityGen = () => {
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
+  };
+  const showFeature = (e) => {
+    setIsFeatureActive((current) => !current);
   };
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
@@ -147,21 +156,110 @@ const CityGen = () => {
                 valueOptions={sizeOptions}
               />
               <CustomInputNumber
-                // tablename
-                setSingular ={setPopulation}
-                // setPlural
-                // setOptions
+                setSingular={setPopulation}
                 h1Title={"Population"}
                 value={population}
                 placeholder={"Set Population"}
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showDetails}>
+          <h1 className={style.subHeader} onClick={showFeature}>
             City Features
           </h1>
-          <div className={isDetailActive ? style.subsection : style.hidden}>
-            Details to fill out
+          <div className={isFeatureActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setAtmoshpere}
+                setPlural={setAtmoshperes}
+                setOptions={setAtmoshpereOptions}
+                options={atmoshpereOptions}
+                h1Title={"City Atmosphere"}
+                placeholder={"Set Atmosphere"}
+                value={atmosphere}
+                valueOptions={atmoshpereOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setCulture}
+                setPlural={setCultures}
+                setOptions={setCultureOptions}
+                options={cultureOptions}
+                h1Title={"City Culture"}
+                placeholder={"Set Culture"}
+                value={culture}
+                valueOptions={cultureOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setTerrain}
+                setPlural={setTerrains}
+                setOptions={setTerrainOptions}
+                options={terrainOptions}
+                h1Title={"City Terrain"}
+                placeholder={"Set Terrain"}
+                value={terrain}
+                valueOptions={terrainOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setLandmark}
+                setPlural={setLandmarks}
+                setOptions={setLandmarkOptions}
+                options={landmarkOptions}
+                h1Title={"City Landmark"}
+                placeholder={"Set Landmark"}
+                value={landmark}
+                valueOptions={landmarkOptions}
+              />
+            </div>
+            </div>
+            <h1 className={style.subHeader} onClick={showDetails}>
+              City Details
+            </h1>
+            <div className={isDetailActive ? style.subsection : style.hidden}>
+              <div>
+                <CustomDropdown
+                  tableName={"itemsTypes"}
+                  setSingular={setGovern}
+                  setPlural={setGoverns}
+                  setOptions={setGovernOptions}
+                  options={governOptions}
+                  h1Title={"City Government"}
+                  placeholder={"Set Government"}
+                  value={govern}
+                  valueOptions={governOptions}
+                />
+                <CustomDataTable
+                  tableName={"itemsTypes"}
+                  setSingular={setGuild}
+                  setPlural={setGuilds}
+                  setOptions={setGuildOptions}
+                  h1Title={"Guilds"}
+                  dialogHeader={"Guilds"}
+                  selectedItem={selectedGuild}
+                  setSelectedItem={setSelectedGuild}
+                  list={guildList}
+                  setList={setGuildList}
+                  valueOptions={guildOptions}
+                  options={guildOptions}
+                />
+                <CustomDataTable
+                  tableName={"itemsTypes"}
+                  setSingular={setEvent}
+                  setPlural={setEvents}
+                  setOptions={setEventOptions}
+                  h1Title={"Events"}
+                  dialogHeader={"Events"}
+                  selectedItem={selectedEvent}
+                  setSelectedItem={setSelectedEvent}
+                  list={eventList}
+                  setList={setEventList}
+                  valueOptions={eventOptions}
+                  options={eventOptions}
+                />
+              </div>
+            
           </div>
         </div>
 
@@ -172,7 +270,8 @@ const CityGen = () => {
             City Type <span className={style.minorText2}>{type}</span>
           </h2>
           <h2>
-            City Population <span className={style.minorText2}>{population}</span>
+            City Population{" "}
+            <span className={style.minorText2}>{population}</span>
           </h2>
         </div>
       </div>

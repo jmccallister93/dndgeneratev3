@@ -5,6 +5,7 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
 import style from "../stylesheets/BuildingGen.module.scss";
+import SingleRandomButton from "./SingleRandomButton";
 
 const CustomInputNumber = (props) => {
   //---PROPS---
@@ -16,7 +17,7 @@ const CustomInputNumber = (props) => {
   //value
   //placeholder
   //---PROPS---
-   const [fetchError, setFetchError] = useState(false) 
+  const [fetchError, setFetchError] = useState(false);
   //Get Data from supabase
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +44,7 @@ const CustomInputNumber = (props) => {
     props.setSingular(e.value);
   };
   const inputNumber = (
-   <>
+    <>
       <h1>{props.h1Title}</h1>
       <InputNumber
         value={props.value}
@@ -62,7 +63,15 @@ const CustomInputNumber = (props) => {
       />
     </>
   );
-  return <>{inputNumber}</>;
+  return (
+    <>
+      {inputNumber}{" "}
+      <SingleRandomButton
+        options={props.options}
+        setSingular={props.setSingular}
+      />
+    </>
+  );
 };
 
 export default CustomInputNumber;

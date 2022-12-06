@@ -5,7 +5,7 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
-import SingleRandomButton from "./SingleRandomButton"
+import SingleRandomButton from "./SingleRandomButton";
 
 const CustomDropdown = (props) => {
   //---PROPS ---
@@ -73,7 +73,15 @@ const CustomDropdown = (props) => {
     </>
   );
 
-  return <>{templateDropdown}<SingleRandomButton options={props.options} setSingular={props.setSingular}/></>;
+  return (
+    <>
+      {templateDropdown}
+      <SingleRandomButton
+        options={props.options}
+        setSingular={props.setSingular}
+      />
+    </>
+  );
 };
 
 export default CustomDropdown;

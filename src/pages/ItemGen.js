@@ -23,7 +23,6 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { Checkbox } from "primereact/checkbox";
 import GetData from "../components/GetData";
 import { Get } from "react-axios";
-import useFetch from "../components/useFetch";
 import Items from "../components/Items";
 import ClearButton from "../components/ClearButton";
 import { e } from "mathjs";

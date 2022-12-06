@@ -9,22 +9,23 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
+import SingleRandomButton from "./SingleRandomButton";
 
 const CustomDataTable = (props) => {
-    //-----SAMPLE PROPS-------
-    // tableName={"itemsTools"}
-    // setSingular={setItem}
-    // setPlural={setItems}
-    // setOptions={setItemOptions}
-    // h1Title={"Pack Contents"}
-    // dialogHeader={"Items"}
-    // selectedItem={selectedItem}
-    // setSelectedItem={setSelectedItem}
-    // list={itemList}
-    // setList={setItemList}
-    // valueOptions={itemOptions}
-    // options={itemOptions}
-    //-----SAMPLE PROPS-------
+  //-----SAMPLE PROPS-------
+  // tableName={"itemsTools"}
+  // setSingular={setItem}
+  // setPlural={setItems}
+  // setOptions={setItemOptions}
+  // h1Title={"Pack Contents"}
+  // dialogHeader={"Items"}
+  // selectedItem={selectedItem}
+  // setSelectedItem={setSelectedItem}
+  // list={itemList}
+  // setList={setItemList}
+  // valueOptions={itemOptions}
+  // options={itemOptions}
+  //-----SAMPLE PROPS-------
 
   //Set States
   const [fetchError, setFetchError] = useState(null);
@@ -186,7 +187,15 @@ const CustomDataTable = (props) => {
   //   ></Column>
   // </DataTable>
 
-  return <>{templateDatatable}</>;
+  return (
+    <>
+      {templateDatatable}{" "}
+      <SingleRandomButton
+        options={props.options}
+        setSingular={props.setSingular}
+      />
+    </>
+  );
 };
 
 export default CustomDataTable;
