@@ -1,5 +1,7 @@
 const SingleDisplay = (props) => {
-    return ( <></> );
+    //PROPS
+    //item
+    return ( <>{props.item}</> );
 }
  
 export default SingleDisplay;

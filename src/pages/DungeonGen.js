@@ -19,10 +19,15 @@ import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
+import CustomInputText from "../components/CustomInputText";
 
 const DungeonGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
+
+    const [dungeonName, setDungeonName] = useState("");
+  const [dungeonNames, setDungeonNames] = useState("");
+  const [dungeonNameOptions, setDungeonNameOptions] = useState("");
   
     //Show Options
     const showBasics = (e) => {
@@ -52,10 +57,15 @@ const DungeonGen = () => {
               Basic Info
             </h1>
             <div className={isBasicActive ? style.subsection : style.hidden}>
-              Basics to fill in.
+            <CustomInputText 
+           title={"Dungeon Name"}
+           input={dungeonName}
+           setInput={setDungeonName}
+           placeholder={"Set Dungeon Name"}
+           />
             </div>
             <h1 className={style.subHeader} onClick={showDetails}>
-              Building Features
+              Dungeon Features
             </h1>
             <div className={isDetailActive ? style.subsection : style.hidden}>
               Details to fill out
@@ -64,7 +74,7 @@ const DungeonGen = () => {
   
           {/* Main Display */}
           <div className={style.display}>
-            <h1>Name Placeholder</h1>
+            <h1>{dungeonName}</h1>
             <h2>First thing</h2>
             <span className={style.minorText2}>display selected thing</span>
           </div>

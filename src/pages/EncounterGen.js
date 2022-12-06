@@ -23,6 +23,10 @@ import ClearButton from "../components/ClearButton";
 const EncounterGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
+
+    const [encounterName, setEncounterName] = useState("");
+    const [encounterNames, setEncounterNames] = useState("");
+    const [encounterNameOptions, setEncounterNameOptions] = useState("");
   
     //Show Options
     const showBasics = (e) => {
@@ -52,10 +56,15 @@ const EncounterGen = () => {
               Basic Info
             </h1>
             <div className={isBasicActive ? style.subsection : style.hidden}>
-              Basics to fill in.
+            <customInputText 
+           title={"Encounter Name"}
+           input={encounterName}
+           setInput={setEncounterName}
+           placeholder={"Set City Name"}
+           />
             </div>
             <h1 className={style.subHeader} onClick={showDetails}>
-              Building Features
+              Encounter Features
             </h1>
             <div className={isDetailActive ? style.subsection : style.hidden}>
               Details to fill out
@@ -64,7 +73,7 @@ const EncounterGen = () => {
   
           {/* Main Display */}
           <div className={style.display}>
-            <h1>Name Placeholder</h1>
+            <h1>{encounterName}</h1>
             <h2>First thing</h2>
             <span className={style.minorText2}>display selected thing</span>
           </div>

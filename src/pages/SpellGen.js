@@ -19,10 +19,15 @@ import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
+import CustomInputText from "../components/CustomInputText";
 
 const SpellGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
+
+    const [spellName, setSpellName] = useState("");
+  const [spellNames, setSpellNames] = useState("");
+  const [spellNameOptions, setSpellNameOptions] = useState("");
   
     //Show Options
     const showBasics = (e) => {
@@ -52,7 +57,12 @@ const SpellGen = () => {
               Basic Info
             </h1>
             <div className={isBasicActive ? style.subsection : style.hidden}>
-              Basics to fill in.
+            <CustomInputText 
+           title={"Spell Name"}
+           input={spellName}
+           setInput={setSpellName}
+           placeholder={"Set Spell Name"}
+           />
             </div>
             <h1 className={style.subHeader} onClick={showDetails}>
               Building Features
@@ -64,7 +74,7 @@ const SpellGen = () => {
   
           {/* Main Display */}
           <div className={style.display}>
-            <h1>Name Placeholder</h1>
+            <h1>{spellName}</h1>
             <h2>First thing</h2>
             <span className={style.minorText2}>display selected thing</span>
           </div>

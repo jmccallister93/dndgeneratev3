@@ -19,10 +19,15 @@ import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 import ClearButton from "../components/ClearButton";
 import GenerateButton from "../components/GenerateButton";
+import CustomInputText from "../components/CustomInputText";
 
 const TrapGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
+
+    const [trapName, setTrapName] = useState("");
+  const [trapNames, setTrapNames] = useState("");
+  const [trapNameOptions, setTrapNameOptions] = useState("");
   
     //Show Options
     const showBasics = (e) => {
@@ -52,7 +57,12 @@ const TrapGen = () => {
               Basic Info
             </h1>
             <div className={isBasicActive ? style.subsection : style.hidden}>
-              Basics to fill in.
+            <CustomInputText 
+           title={"Trap Name"}
+           input={trapName}
+           setInput={setTrapName}
+           placeholder={"Set Trap Name"}
+           />
             </div>
             <h1 className={style.subHeader} onClick={showDetails}>
               Building Features
@@ -64,7 +74,7 @@ const TrapGen = () => {
   
           {/* Main Display */}
           <div className={style.display}>
-            <h1>Name Placeholder</h1>
+            <h1>{trapName}</h1>
             <h2>First thing</h2>
             <span className={style.minorText2}>display selected thing</span>
           </div>

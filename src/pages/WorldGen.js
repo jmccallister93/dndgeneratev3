@@ -19,10 +19,15 @@ import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
+import CustomInputText from "../components/CustomInputText";
 
 const WorldGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
+
+    const [worldName, setWorldName] = useState("");
+    const [worldNames, setWorldNames] = useState("");
+    const [worldNameOptions, setWorldNameOptions] = useState("");
   
     //Show Options
     const showBasics = (e) => {
@@ -52,7 +57,12 @@ const WorldGen = () => {
               Basic Info
             </h1>
             <div className={isBasicActive ? style.subsection : style.hidden}>
-              Basics to fill in.
+            <CustomInputText 
+           title={"World Name"}
+           input={worldName}
+           setInput={setWorldName}
+           placeholder={"Set World Name"}
+           />
             </div>
             <h1 className={style.subHeader} onClick={showDetails}>
               Building Features
@@ -64,7 +74,7 @@ const WorldGen = () => {
   
           {/* Main Display */}
           <div className={style.display}>
-            <h1>Name Placeholder</h1>
+            <h1>{worldName}</h1>
             <h2>First thing</h2>
             <span className={style.minorText2}>display selected thing</span>
           </div>

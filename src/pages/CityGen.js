@@ -19,10 +19,16 @@ import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
+import CustomInputText from "../components/CustomInputText";
+import SingleDisplay from "../components/SingleDisplay";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+
+  const [cityName, setCityName] = useState("");
+  const [cityNames, setCityNames] = useState("");
+  const [cityNameOptions, setCityNameOptions] = useState("");
 
   //Show Options
   const showBasics = (e) => {
@@ -31,6 +37,7 @@ const CityGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
+  console.log(cityName)
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -52,10 +59,15 @@ const CityGen = () => {
             Basic Info
           </h1>
           <div className={isBasicActive ? style.subsection : style.hidden}>
-            Basics to fill in.
+           <CustomInputText 
+           title={"City Name"}
+           input={cityName}
+           setInput={setCityName}
+           placeholder={"Set City Name"}
+           />
           </div>
           <h1 className={style.subHeader} onClick={showDetails}>
-            Building Features
+            City Features
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             Details to fill out
@@ -64,7 +76,9 @@ const CityGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-          <h1>Name Placeholder</h1>
+          <h1>
+            {cityName}
+          </h1>
           <h2>First thing</h2>
           <span className={style.minorText2}>display selected thing</span>
         </div>

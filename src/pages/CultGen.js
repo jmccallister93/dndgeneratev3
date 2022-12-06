@@ -19,10 +19,15 @@ import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
+import CustomInputText from "../components/CustomInputText";
 
 const CultGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+
+  const [cultName, setCultName] = useState("");
+  const [cultNames, setCultNames] = useState("");
+  const [cultNameOptions, setCultNameOptions] = useState("");
 
   //Show Options
   const showBasics = (e) => {
@@ -52,7 +57,12 @@ const CultGen = () => {
             Basic Info
           </h1>
           <div className={isBasicActive ? style.subsection : style.hidden}>
-            Basics to fill in.
+          <CustomInputText
+           title={"Cult Name"}
+           input={cultName}
+           setInput={setCultName}
+           placeholder={"Set Cult Name"}
+           />
           </div>
           <h1 className={style.subHeader} onClick={showDetails}>
             Building Features
@@ -64,7 +74,7 @@ const CultGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-          <h1>Name Placeholder</h1>
+          <h1>{cultName}</h1>
           <h2>First thing</h2>
           <span className={style.minorText2}>display selected thing</span>
         </div>

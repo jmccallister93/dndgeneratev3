@@ -23,6 +23,10 @@ import GenerateButton from "../components/GenerateButton";
 const GuildGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
+
+    const [guildName, setGuildName] = useState("");
+  const [guildNames, setGuildNames] = useState("");
+  const [guildNameOptions, setGuildNameOptions] = useState("");
   
     //Show Options
     const showBasics = (e) => {
@@ -52,7 +56,12 @@ const GuildGen = () => {
               Basic Info
             </h1>
             <div className={isBasicActive ? style.subsection : style.hidden}>
-              Basics to fill in.
+            <customInputText 
+           title={"Guild Name"}
+           input={guildName}
+           setInput={setGuildName}
+           placeholder={"Set Guild Name"}
+           />
             </div>
             <h1 className={style.subHeader} onClick={showDetails}>
               Building Features
@@ -64,7 +73,7 @@ const GuildGen = () => {
   
           {/* Main Display */}
           <div className={style.display}>
-            <h1>Name Placeholder</h1>
+            <h1>{guildName}</h1>
             <h2>First thing</h2>
             <span className={style.minorText2}>display selected thing</span>
           </div>

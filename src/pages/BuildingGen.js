@@ -257,12 +257,13 @@ const BuildingGen = () => {
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
-  const showLayout = (e) => {
-    setIsLayoutActive((current) => !current);
-  };
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
+  const showLayout = (e) => {
+    setIsLayoutActive((current) => !current);
+  };
+  
   const showRooms = (e) => {
     setIsRoomActive((current) => !current);
   };

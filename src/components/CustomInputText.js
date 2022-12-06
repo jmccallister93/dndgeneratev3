@@ -7,22 +7,32 @@ import style from "../stylesheets/PageStyle.module.scss";
 const CustomInputText = (props) => {
     // ----SAMPLE PROPS----
     //title
-    //value
+    //input
+    //setInput
     //onchange
     //placeholder
     //onclick
     // ----SAMPLE PROPS----
-
-    const customInputText = (title, value, change, placeholder, click) => (
+    const onInputChange = (e) => {
+        props.setInput(e.target.value);
+      }
+    const onRandom = (e) => {
+        if(props.input === ""){
+            let r = Math.round(Math.random() * (1-0))
+            props.setInput(r)
+        }
+    }
+    const customInputText = (
         <div>
           <h2 className={style.titles}>{props.title}</h2>
-          <InputText value={props.value} onChange={props.onchange} placeholder={props.placeholder} />
-          <Button onClick={props.onclick} className={style.btnName}>
+          <InputText value={props.input} onChange={onInputChange} placeholder={props.placeholder} />
+          <Button onClick={props.onRandom} className={style.btnName}>
             Random
           </Button>
-          
         </div>
       );
+
+     
     return ( <>{customInputText}</> );
 }
  
