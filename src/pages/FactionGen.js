@@ -21,6 +21,14 @@ import Npcs from "../components/Npcs";
 const FactionGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
+
+      //Show Options
+  const showBasics = (e) => {
+    setIsBasicActive((current) => !current);
+  };
+  const showDetails = (e) => {
+    setIsDetailActive((current) => !current);
+  };
     return ( <></> );
 }
  

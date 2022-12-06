@@ -150,6 +150,15 @@ const Create = () => {
       </p>
     </Card>
   );
+  const cardEncounterGen = (
+    <Card className={style.createCard}>
+      <h3>Encounter Generator</h3>
+      <p>
+        Generate Encounters with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
 
   return (
     <div className={style.createWrapper}>
@@ -203,6 +212,9 @@ const Create = () => {
         </Link>
         <Link className={style.createLink} to="/puzzlegen">
           {cardPuzzleGen}
+        </Link>
+        <Link className={style.createLink} to="/puzzlegen">
+          {cardEncounterGen}
         </Link>
       </div>
     </div>
