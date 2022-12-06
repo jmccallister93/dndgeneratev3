@@ -1,9 +1,13 @@
 import style from "../stylesheets/PageStyle.module.scss"
+
 const RandomButton = (props) => {
+  //---PROPS---
+  //options
+  //setValue
   const onRandomClick= (e) => {
     let max = props.options.length;
     let r = Math.round(Math.random() * (max - 0));
-    props.setValue(props.options[r].name);
+    props.setSingular(props.options[r].name);
   };
   
   return (

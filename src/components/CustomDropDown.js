@@ -5,8 +5,19 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
+import RandomButton from "../components/RandomButton"
 
 const CustomDropdown = (props) => {
+  //---PROPS ---
+  // tableName={"itemsTypes"}
+  //  setSingular={setType}
+  //  setPlural={setTypes}
+  //  setOptions={setTypeOptions}
+  //  h1Title={"Type"}
+  //  placeholder={"Set Type"}
+  //  value={type}
+  //  valueOptions={typeOptions}
+
   //Set States
   const [fetchError, setFetchError] = useState(null);
   const [showCustomInput, setShowCustomInput] = useState(false);
@@ -45,7 +56,7 @@ const CustomDropdown = (props) => {
       setShowCustomInput(true);
     }
   };
-//JSX Dropdown template
+  //JSX Dropdown template
   const templateDropdown = (
     <>
       <h1>{props.h1Title}</h1>
@@ -62,7 +73,7 @@ const CustomDropdown = (props) => {
     </>
   );
 
-  return <>{templateDropdown}</>;
+  return <>{templateDropdown}<RandomButton options={props.options} setSingular={props.setSingular}/></>;
 };
 
 export default CustomDropdown;

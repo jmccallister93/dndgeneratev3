@@ -7,6 +7,15 @@ import supabase from "../config/supabaseClient";
 import style from "../stylesheets/BuildingGen.module.scss";
 
 const CustomInputNumber = (props) => {
+  //---PROPS---
+  //tablename
+  //setSingular
+  //setPlural
+  //setOptions
+  //h1Title
+  //value
+  //placeholder
+  //---PROPS---
    const [fetchError, setFetchError] = useState(false) 
   //Get Data from supabase
   useEffect(() => {

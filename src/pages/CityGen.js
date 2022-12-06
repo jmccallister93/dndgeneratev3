@@ -22,6 +22,7 @@ import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
 import SingleDisplay from "../components/SingleDisplay";
 import CustomDropdown from "../components/CustomDropDown";
+import CustomInputNumber from "../components/CustomInputNumber";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -39,34 +40,53 @@ const CityGen = () => {
   const [sizes, setSizes] = useState("");
   const [sizeOptions, setSizeOptions] = useState("");
 
-  const [culture, setCulture] = useState("")
+  const [population, setPopulation] = useState("");
+  const [populations, setPopulations] = useState("");
+  const [populationOptions, setPopulationOptions] = useState("");
+
+  const [atmosphere, setAtmoshpere] = useState("");
+  const [atmoshperes, setAtmoshperes] = useState("");
+  const [atmoshpereOptions, setAtmoshpereOptions] = useState("");
+
+  const [culture, setCulture] = useState("");
   const [cultures, setCultres] = useState("");
   const [cultureOptions, setCultureOptions] = useState("");
 
-  const [govern, setGovern] = useState("")
+  const [terrain, setTerrain] = useState("");
+  const [terrains, setTerrains] = useState("");
+  const [terrainOptions, setTerrainOptions] = useState("");
+
+  const [landmark, setLandmark] = useState("");
+  const [landmarks, setLandmarks] = useState("");
+  const [landmarkOptions, setLandmarkOptions] = useState("");
+
+  const [govern, setGovern] = useState("");
   const [governs, setGoverns] = useState("");
   const [governOptions, setGovernOptions] = useState("");
 
-  const [guild, setGuild] = useState("")
+  const [guild, setGuild] = useState("");
   const [guilds, setGuilds] = useState("");
   const [guildOptions, setGuildOptions] = useState("");
 
-  const [event, setEvent] = useState("")
+  const [event, setEvent] = useState("");
   const [events, setEvents] = useState("");
   const [eventOptions, setEventOptions] = useState("");
 
-  const [faction, setFaction] = useState("")
+  const [faction, setFaction] = useState("");
   const [factions, setFactions] = useState("");
   const [factionOptions, setFactionOptions] = useState("");
 
-  const [building, setBuilding] = useState("")
+  const [building, setBuilding] = useState("");
   const [buildings, setBuildings] = useState("");
   const [buildingOptions, setBuildingOptions] = useState("");
 
-  const [npc, setNpc] = useState("")
+  const [district, setDistrict] = useState("");
+  const [districts, setDistrics] = useState("");
+  const [districtOptions, setDistrictOptions] = useState("");
+
+  const [npc, setNpc] = useState("");
   const [npcs, setNpcs] = useState("");
   const [npcOptions, setNpcOptions] = useState("");
-
 
   //Show Options
   const showBasics = (e) => {
@@ -109,10 +129,30 @@ const CityGen = () => {
                 setSingular={setType}
                 setPlural={setTypes}
                 setOptions={setTypeOptions}
+                options={typeOptions}
                 h1Title={"City Type"}
                 placeholder={"Set Type"}
                 value={type}
                 valueOptions={typeOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setSize}
+                setPlural={setSizes}
+                setOptions={setSizeOptions}
+                h1Title={"City Size"}
+                placeholder={"Set Size"}
+                value={size}
+                valueOptions={sizeOptions}
+              />
+              <CustomInputNumber
+                // tablename
+                setSingular ={setPopulation}
+                // setPlural
+                // setOptions
+                h1Title={"Population"}
+                value={population}
+                placeholder={"Set Population"}
               />
             </div>
           </div>
@@ -129,6 +169,9 @@ const CityGen = () => {
           <h1>{cityName}</h1>
           <h2>
             City Type <span className={style.minorText2}>{type}</span>
+          </h2>
+          <h2>
+            City Population <span className={style.minorText2}>{population}</span>
           </h2>
         </div>
       </div>
