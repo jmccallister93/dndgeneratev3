@@ -35,7 +35,7 @@ const CityGen = () => {
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
-        <h1 className={style.mainHeader}>Building Generator</h1>
+        <h1 className={style.mainHeader}>City Generator</h1>
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton />
@@ -43,7 +43,7 @@ const CityGen = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>

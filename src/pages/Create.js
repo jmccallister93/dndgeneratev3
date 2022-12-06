@@ -213,7 +213,7 @@ const Create = () => {
         <Link className={style.createLink} to="/puzzlegen">
           {cardPuzzleGen}
         </Link>
-        <Link className={style.createLink} to="/puzzlegen">
+        <Link className={style.createLink} to="/encountergen">
           {cardEncounterGen}
         </Link>
       </div>
