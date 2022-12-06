@@ -114,7 +114,7 @@ const BuildingGen = () => {
   const [item, setItem] = useState("");
   const [items, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState([]);
   const [dialogVisibleItem, setDialogVisibleItem] = useState(false);
   const [itemList, setItemList] = useState([]);
   //   const [itemDisplay, setItemDisplay] = useState();
@@ -773,7 +773,7 @@ const BuildingGen = () => {
 
   const itemDisplay = selectedItem.map((i) => {
     return <span>{`${i.name},`}</span>;
-  });
+  }); 
 
   //Buttons
   const onGenerate = (e) => {

@@ -37,7 +37,70 @@ const Create = () => {
     <Card className={style.createCard}>
       <h3>Building Generator</h3>
       <p>
-        Generate Taverns, Inns, Shops, etc. with the click of a button or customize and hand pick
+        Generate Taverns, Shops, etc. with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardCityGen = (
+    <Card className={style.createCard}>
+      <h3>City Generator</h3>
+      <p>
+        Generate fully stocked Cities with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardGuildGen = (
+    <Card className={style.createCard}>
+      <h3>Guild Generator</h3>
+      <p>
+        Generate Guilds with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardFactionGen = (
+    <Card className={style.createCard}>
+      <h3>Faction Generator</h3>
+      <p>
+        Generate Factions with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardCultGen = (
+    <Card className={style.createCard}>
+      <h3>Cult Generator</h3>
+      <p>
+        Generate Cults with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardWorldGen = (
+    <Card className={style.createCard}>
+      <h3>World Generator</h3>
+      <p>
+        Generate Worlds with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardQuestGen = (
+    <Card className={style.createCard}>
+      <h3>Quest Generator</h3>
+      <p>
+        Generate Quests with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardVillainGen = (
+    <Card className={style.createCard}>
+      <h3>Villain Generator</h3>
+      <p>
+        Generate Villains with the click of a button or customize and hand pick
         your own!
       </p>
     </Card>
@@ -59,6 +122,27 @@ const Create = () => {
         </Link>
         <Link className={style.createLink} to="/buildinggen">
           {cardBuildingGen}
+        </Link>
+        <Link className={style.createLink} to="/citygen">
+          {cardCityGen}
+        </Link>
+        <Link className={style.createLink} to="/guildgen">
+          {cardGuildGen}
+        </Link>
+        <Link className={style.createLink} to="/factiongen">
+          {cardFactionGen}
+        </Link>
+        <Link className={style.createLink} to="/cultgen">
+          {cardCultGen}
+        </Link>
+        <Link className={style.createLink} to="/worldgen">
+          {cardWorldGen}
+        </Link>
+        <Link className={style.createLink} to="/questgen">
+          {cardQuestGen}
+        </Link>
+        <Link className={style.createLink} to="/villaingen">
+          {cardVillainGen}
         </Link>
       </div>
     </div>
