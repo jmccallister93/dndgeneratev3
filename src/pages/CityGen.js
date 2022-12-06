@@ -119,6 +119,9 @@ const CityGen = () => {
   };
 
   //Display
+//   const guildDisplay = selectedGuild.map((i) => {
+//     return <span>{`${i.name},`}</span>;
+//   });
 
   return (
     <div className={style.mainWrapper}>
@@ -364,52 +367,54 @@ const CityGen = () => {
               <MultipleDisplay
                 setSelectedItem={selectedGuild}
                 valueOptions={guildOptions}
+                itemList={guildList}
               />
+              {/* {guildDisplay} */}
             </span>
           </h2>
           <h2>
             Factions{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
+              {/* <MultipleDisplay
                 setSelectedItem={selectedFaction}
                 valueOptions={factionOptions}
-              />
+              /> */}
             </span>
           </h2>
           <h2>
             Events{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
+              {/* <MultipleDisplay
                 setSelectedItem={selectedEvent}
                 valueOptions={eventOptions}
-              />
+              /> */}
             </span>
           </h2>
           <h2>
             NPCs{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
+              {/* <MultipleDisplay
                 setSelectedItem={selectedNpc}
                 valueOptions={npcOptions}
-              />
+              /> */}
             </span>
           </h2>
           <h2>
             Districts{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
+              {/* <MultipleDisplay
                 setSelectedItem={selectedDistrict}
                 valueOptions={districtOptions}
-              />
+              /> */}
             </span>
           </h2>
           <h2>
             Buildings{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
+              {/* <MultipleDisplay
                 setSelectedItem={selectedBuilding}
                 valueOptions={buildingOptions}
-              />
+              /> */}
             </span>
           </h2>
         </div>

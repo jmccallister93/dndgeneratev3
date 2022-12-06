@@ -4,16 +4,18 @@ const MultipleDisplay = (props) => {
     //---PROPS NEEDED---
     //selectedItem
     //---PROPS NEEDED---
-    const multipleDisplay = []
+    // const multipleDisplay = []
 
-    if(props.selectedItem === undefined){
+    // if(props.selectedItem === undefined){
 
-    }else{
-      multipleDisplay = props.selectedItem.map((i) => {
+    // }else{
+    const  multipleDisplay = props.itemList.map((i) => {
         return <span>{`${i.name},`}</span>;
       });
-    }
-    
+    // }
+    // const multipleDisplay = (
+    //   <span>{`${props.selectedItem},`}</span>
+    // );
       
     return ( <>{multipleDisplay}</> );
 }
