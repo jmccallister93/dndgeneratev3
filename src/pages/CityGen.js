@@ -21,6 +21,7 @@ import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
 import SingleDisplay from "../components/SingleDisplay";
+import CustomDropdown from "../components/CustomDropDown";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -30,6 +31,10 @@ const CityGen = () => {
   const [cityNames, setCityNames] = useState("");
   const [cityNameOptions, setCityNameOptions] = useState("");
 
+  const [type, setType] = useState("");
+  const [types, setTypes] = useState("");
+  const [typeOptions, setTypeOptions] = useState("");
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -37,7 +42,7 @@ const CityGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
-  
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -59,12 +64,24 @@ const CityGen = () => {
             Basic Info
           </h1>
           <div className={isBasicActive ? style.subsection : style.hidden}>
-           <CustomInputText 
-           title={"City Name"}
-           input={cityName}
-           setInput={setCityName}
-           placeholder={"Set City Name"}
-           />
+            <div>
+              <CustomInputText
+                title={"City Name"}
+                input={cityName}
+                setInput={setCityName}
+                placeholder={"Set City Name"}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setType}
+                setPlural={setTypes}
+                setOptions={setTypeOptions}
+                h1Title={"City Type"}
+                placeholder={"Set Type"}
+                value={type}
+                valueOptions={typeOptions}
+              />
+            </div>
           </div>
           <h1 className={style.subHeader} onClick={showDetails}>
             City Features
@@ -76,11 +93,10 @@ const CityGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-          <h1>
-            {cityName}
-          </h1>
-          <h2>First thing</h2>
-          <span className={style.minorText2}>display selected thing</span>
+          <h1>{cityName}</h1>
+          <h2>
+            City Type <span className={style.minorText2}>{type}</span>
+          </h2>
         </div>
       </div>
     </div>

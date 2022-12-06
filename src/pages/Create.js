@@ -159,6 +159,24 @@ const Create = () => {
       </p>
     </Card>
   );
+  const cardClassGen = (
+    <Card className={style.createCard}>
+      <h3>Class Generator</h3>
+      <p>
+        Generate Classes with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardRaceGen = (
+    <Card className={style.createCard}>
+      <h3>Race Generator</h3>
+      <p>
+        Generate Races with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
 
   return (
     <div className={style.createWrapper}>
@@ -215,6 +233,12 @@ const Create = () => {
         </Link>
         <Link className={style.createLink} to="/encountergen">
           {cardEncounterGen}
+        </Link>
+        <Link className={style.createLink} to="/classgen">
+          {cardClassGen}
+        </Link>
+        <Link className={style.createLink} to="/racegen">
+          {cardRaceGen}
         </Link>
       </div>
     </div>

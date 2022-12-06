@@ -23,6 +23,8 @@ import DungeonGen from "./pages/DungeonGen";
 import TrapGen from "./pages/TrapGen";
 import PuzzleGen from "./pages/PuzzleGen";
 import EncounterGen from "./pages/EncounterGen";
+import ClassGen from "./pages/ClassGen";
+import RaceGen from "./pages/RaceGen";
 
 
 function App() {
@@ -54,6 +56,8 @@ function App() {
           <Route path="/trapgen" element={<TrapGen />} />
           <Route path="/puzzlegen" element={<PuzzleGen />} />
           <Route path="/encountergen" element={<EncounterGen />} />
+          <Route path="/classgen" element={<ClassGen />} />
+          <Route path="/racegen" element={<RaceGen />} />
         </Routes>
       </BrowserRouter>
     </div>
