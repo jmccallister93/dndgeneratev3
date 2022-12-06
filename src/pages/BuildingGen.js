@@ -771,7 +771,7 @@ const BuildingGen = () => {
     </Button>
   );
 
-  const itemDisplay = itemList.map((i) => {
+  const itemDisplay = selectedItem.map((i) => {
     return <span>{`${i.name},`}</span>;
   });
 

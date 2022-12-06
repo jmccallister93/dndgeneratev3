@@ -145,8 +145,8 @@ const Items = (props) => {
   const dialogFooter = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
-  //On Selection change 
-  const onSelectionChange =(e) => {
+  //On Selection change
+  const onSelectionChange = (e) => {
     props.setSelectedItem(e.value);
     // for (let i = 0; i < e.value.length; i++) {
     //   if (props.itemList.includes(e.value[i])) {
@@ -155,7 +155,7 @@ const Items = (props) => {
     //   }
     // }
     // console.log("Selected items" + props.itemList)
-  }
+  };
   useEffect(() => {
     props.setSelectedItem(props.itemList);
   }, [props.itemList]);
@@ -594,19 +594,16 @@ const Items = (props) => {
     weaponOptions,
   ]);
   //Random Item
-    const onRandomItem = (e) => {
-      const max = itemOptions.length - 1;
-      let r = Math.round(Math.random() * (max - 0));
-      if (props.itemList.includes(itemOptions[r])) {
-      } else {
-        props.setItemList((saveArray) => [...saveArray, itemOptions[r]]);
-      }
-    };
-    const randomItemBtn = (
-      <Button onClick={onRandomItem} className={style.btnName}>
-        Random
-      </Button>
-    );
+  const onRandomItem = (e) => {
+    const max = itemOptions.length;
+    let r = Math.round(Math.random() * (max - 0));
+    props.setSelectedItem((saveArray) => [...saveArray, itemOptions[r]]);
+  };
+  const randomItemBtn = (
+    <Button onClick={onRandomItem} className={style.btnName}>
+      Random
+    </Button>
+  );
   const itemOptions2 = useRef();
 
   //JSX Dialog Vairable
@@ -642,11 +639,12 @@ const Items = (props) => {
           rows={20}
           dataKey="name"
           selection={props.selectedItem}
-          onSelectionChange={onSelectionChange
-          //   (e) => {
-          //   props.setSelectedItem(e.value);
-          // }
-        }
+          onSelectionChange={
+            onSelectionChange
+            //   (e) => {
+            //   props.setSelectedItem(e.value);
+            // }
+          }
           filters={filters}
           filterDisplay="row"
           responsiveLayout="scroll"

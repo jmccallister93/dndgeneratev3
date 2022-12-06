@@ -161,7 +161,7 @@ const ItemGen = () => {
 
   const [itemDesc, setItemDesc] = useState("");
 
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState([]);
   const [item, setItem] = useState("");
   const [items, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState("");
@@ -532,7 +532,7 @@ const ItemGen = () => {
                 setItemDesc,
                 
               ]}
-              setArrayState={[setItemList]}
+              setArrayState={[setItemList, setSelectedItem]}
             />
           </div>
         </div>
