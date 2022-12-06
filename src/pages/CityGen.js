@@ -35,6 +35,20 @@ const CityGen = () => {
   const [types, setTypes] = useState("");
   const [typeOptions, setTypeOptions] = useState("");
 
+  const [size, setSize] = useState("");
+  const [sizes, setSizes] = useState("");
+  const [sizeOptions, setSizeOptions] = useState("");
+
+  const [culture, setCulture] = useState("")
+  const [cultures, setCultres] = useState("");
+  const [cultureOptions, setCultureOptions] = useState("");
+
+  const [govern, setGovern] = useState("")
+  const [governs, setGoverns] = useState("");
+  const [governOptions, setGovernOptions] = useState("");
+
+
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
