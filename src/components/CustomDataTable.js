@@ -13,7 +13,7 @@ import style from "../stylesheets/PageStyle.module.scss";
 const CustomDataTable = (props) => {
   //Set States
   const [fetchError, setFetchError] = useState(null);
-  const [dialogVisible, setDialogVisible] = useState(false)
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   //DataTable filters
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -73,25 +73,25 @@ const CustomDataTable = (props) => {
     };
     fetchData();
   }, []);
-//Open dialog
+  //Open dialog
   const openDialog = () => {
     setDialogVisible(true);
   };
-//Close Dialog
-  const closeDialog= () => {
+  //Close Dialog
+  const closeDialog = () => {
     setDialogVisible(false);
-    for (let i = 0; i < props.selectedItems.length; i++) {
-      if (props.list.includes(props.selectedItems[i])) {
+    for (let i = 0; i < props.selectedItem.length; i++) {
+      if (props.list.includes(props.selectedItem[i])) {
       } else {
-        props.setList((oldArray) => [...oldArray, props.selectedItems[i]]);
+        props.setList((oldArray) => [...oldArray, props.selectedItem[i]]);
       }
     }
   };
-   //Dialog Footer
-   const dialogFooter = () => {
+  //Dialog Footer
+  const dialogFooter = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
-  //JSX Dropdown template
+  //JSX Dialog template
   const templateDatatable = (
     <div className="card">
       <h1 className={style.titles}>{props.h1Title}</h1>
@@ -105,16 +105,18 @@ const CustomDataTable = (props) => {
         modal
         onHide={closeDialog}
         footer={dialogFooter}
+        transitionOptions
       >
         <DataTable
           value={props.options}
-          selection={props.selectedItems}
-          onSelectionChange={(e) => {
-            props.setList(e.value);
-          }}
           scrollable
+          scrollHeight="60vh"
           rows={20}
           dataKey="name"
+          selection={props.selectedItem}
+          onSelectionChange={(e) => {
+            props.setSelectedItem(e.value);
+          }}
           filters={filters}
           filterDisplay="row"
           responsiveLayout="scroll"
@@ -126,6 +128,11 @@ const CustomDataTable = (props) => {
           reorderableColumns
           reorderableRows
         >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
           <Column
             header={header}
             field="name"

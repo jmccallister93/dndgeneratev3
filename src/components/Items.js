@@ -76,9 +76,9 @@ const Items = (props) => {
   const [itemList, setItemList] = useState([]);
 
   //Datatable settings
-  const [selectedItems, setSelectedItems] = useState(null);
-  const dt = useRef(null);
-
+  //Dialog Visible State
+  const [dialogVisible, setDialogVisible] = useState(false);
+  //Set Filters
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -87,31 +87,16 @@ const Items = (props) => {
     status: { value: null, matchMode: FilterMatchMode.EQUALS },
     verified: { value: null, matchMode: FilterMatchMode.EQUALS },
   });
-
+  //On filter change
   const [globalFilterValue, setGlobalFilterValue] = useState("");
-  const [dialogVisible, setDialogVisible] = useState(false);
-
-  const openDialog = () => {
-    setDialogVisible(true);
-  };
-
-  const closeDialog = () => {
-    setDialogVisible(false);
-  };
-
-  const dialogFooterTemplate = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
-  };
-
   const onGlobalFilterChange = (e) => {
     const value = e.target.value;
     let _filters = { ...filters };
     _filters["global"].value = value;
-
     setFilters(_filters);
     setGlobalFilterValue(value);
   };
-
+  //Render header
   const renderHeader = () => {
     return (
       <div>
@@ -125,6 +110,29 @@ const Items = (props) => {
         </span>
       </div>
     );
+  };
+  //Set Header
+  const header = (
+    <div className="flex justify-content-between">{renderHeader()}</div>
+  );
+  //Open dialog
+  const openDialog = () => {
+    setDialogVisible(true);
+  };
+  //Close Dialog
+  const closeDialog = () => {
+    setDialogVisible(false);
+    for (let i = 0; i < props.selectedItem.length; i++) {
+      if (props.itemList.includes(props.selectedItem[i])) {
+      } else {
+        props.setItemList((oldArray) => [...oldArray, props.selectedItem[i]]);
+      }
+    }
+  };
+
+  //Dialog Footer
+  const dialogFooter = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
 
   //Pull supabase data
@@ -563,50 +571,45 @@ const Items = (props) => {
     weaponOptions,
   ]);
   //Random Item
-//   const onRandomItem = (e) => {
-//     const max = itemOptions.length - 1;
-//     let r = Math.round(Math.random() * (max - 0));
-//     if (itemList.includes(itemOptions[r])) {
-//     } else {
-//       setItemList((saveArray) => [...saveArray, itemOptions[r]]);
-//     }
-//   };
-//   const randomItemBtn = (
-//     <Button onClick={onRandomItem} className={style.btnName}>
-//       Random
-//     </Button>
-//   );
-const itemOptions2 = useRef()
+  //   const onRandomItem = (e) => {
+  //     const max = itemOptions.length - 1;
+  //     let r = Math.round(Math.random() * (max - 0));
+  //     if (itemList.includes(itemOptions[r])) {
+  //     } else {
+  //       setItemList((saveArray) => [...saveArray, itemOptions[r]]);
+  //     }
+  //   };
+  //   const randomItemBtn = (
+  //     <Button onClick={onRandomItem} className={style.btnName}>
+  //       Random
+  //     </Button>
+  //   );
+  const itemOptions2 = useRef();
 
-
-  //Dialog Vairable
+  //JSX Dialog Vairable
   const itemDialog = (
     <div className="card">
-      <h2 className={style.monstergenTitles}>Items</h2>
-
-      {props.dialogVisibleItem === false ? (
-        <div>
-          <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
-            Add / Remove
+      <h1 className={style.titles}>{props.h1Title}</h1>
+      <Button onClick={openDialog} className={style.btnName}>
+        Add / Remove
+      </Button>
+      {/* {props.randomItemBtn} */}
+      {/* {props.dialogVisibleItem === false ? ( 
+       DIV WOULD GO HERE ) : (
+         <div>
+           <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
+             Loading...
           </Button>
           {props.randomItemBtn}
-        </div>
-      ) : (
-        <div>
-          <Button onClick={props.openDialogItem} className={style.btnAddRemove}>
-            Loading...
-          </Button>
-          {props.randomItemBtn}
-        </div>
-      )}
-
+         </div>
+       )} */}
       <Dialog
-        header="Items"
-        visible={props.dialogVisibleItem}
+        header={props.dialogHeader}
+        visible={dialogVisible}
         maximizable
         modal
-        onHide={props.closeDialogItem}
-        footer={props.dialogFooterItem}
+        onHide={closeDialog}
+        footer={dialogFooter}
         transitionOptions
       >
         <DataTable
@@ -623,7 +626,7 @@ const itemOptions2 = useRef()
           filterDisplay="row"
           responsiveLayout="scroll"
           globalFilterFields={["name"]}
-          header={props.header}
+          // header={props.header}
           emptyMessage="No items found."
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
           rowHover
@@ -645,7 +648,7 @@ const itemOptions2 = useRef()
           ></Column>
           <Column
             field="type"
-            header="Type"
+            header={header}
             sortable
             filter
             filterPlaceholder="Search"
@@ -655,11 +658,7 @@ const itemOptions2 = useRef()
     </div>
   );
 
-  return (
-    <>
-      {itemDialog}
-    </>
-  );
+  return <>{itemDialog}</>;
 };
 
 export default Items;

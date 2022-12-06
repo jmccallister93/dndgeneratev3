@@ -735,21 +735,21 @@ const BuildingGen = () => {
   // });
 
   //Items
-  const openDialogItem = (e) => {
-    setDialogVisibleItem(true);
-  };
-  const closeDialogItem = () => {
-    setDialogVisibleItem(false);
-    for (let i = 0; i < selectedItem.length; i++) {
-      if (itemList.includes(selectedItem[i])) {
-      } else {
-        setItemList((saveArray) => [...saveArray, selectedItem[i]]);
-      }
-    }
-  };
-  const dialogFooterItem = () => {
-    return <Button label="Ok" icon="pi pi-check" onClick={closeDialogItem} />;
-  };
+  // const openDialogItem = (e) => {
+  //   setDialogVisibleItem(true);
+  // };
+  // const closeDialogItem = () => {
+  //   setDialogVisibleItem(false);
+  //   for (let i = 0; i < selectedItem.length; i++) {
+  //     if (itemList.includes(selectedItem[i])) {
+  //     } else {
+  //       setItemList((saveArray) => [...saveArray, selectedItem[i]]);
+  //     }
+  //   }
+  // };
+  // const dialogFooterItem = () => {
+  //   return <Button label="Ok" icon="pi pi-check" onClick={closeDialogItem} />;
+  // };
 
   useEffect(() => {
     setItemOptions();
@@ -772,7 +772,7 @@ const BuildingGen = () => {
   );
 
   const itemDisplay = itemList.map((i) => {
-    return <h4>{`${i.name},`}</h4>;
+    return <span>{`${i.name},`}</span>;
   });
 
   //Buttons
@@ -957,17 +957,21 @@ const BuildingGen = () => {
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <Items
-              openDialogItem={openDialogItem}
+              
               //   randomItemBtn={randomItemBtn}
-              dialogVisibleItem={dialogVisibleItem}
-              closeDialogItem={closeDialogItem}
-              dialogFooterItem={dialogFooterItem}
+              // dialogVisibleItem={dialogVisibleItem}
+              // closeDialogItem={closeDialogItem}
+              // dialogFooterItem={dialogFooterItem}
+              h1Title={"Items"}
+              dialogHeader={"Items"}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
               header={header}
-              setItemLsit={setItemList}
-              randomItemBtn={randomItemBtn}
-              itemOptions={itemOptions}
+              itemList={itemList}
+              setItemList={setItemList}
+              valueOptions={itemOptions}
+              options={itemOptions}
+              // randomItemBtn={randomItemBtn}
               //   onRandomItem={onRandomItem}
             ></Items>
           </div>
@@ -1023,7 +1027,7 @@ const BuildingGen = () => {
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            Items <div className={style.detesContainer}>{itemDisplay}</div>
+            Items <span className={style.minorText2}>{itemDisplay}</span>
           </h2>
         </div>
       </div>

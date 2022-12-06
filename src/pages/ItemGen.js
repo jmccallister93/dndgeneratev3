@@ -161,7 +161,7 @@ const ItemGen = () => {
 
   const [itemDesc, setItemDesc] = useState("");
 
-  const [selectedItems, setSelectedItems] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [item, setItem] = useState("");
   const [items, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState("");
@@ -493,6 +493,10 @@ const ItemGen = () => {
   };
   const emptyArray = () => {};
 
+  const itemDisplay = itemList.map((i) => {
+    return <span>{`${i.name},`}</span>;
+  });
+
   return (
     <div className={styleB.mainWrapper}>
       <Navbar />
@@ -526,12 +530,10 @@ const ItemGen = () => {
                 setMountSpeed,
                 setMountCapacity,
                 setItemDesc,
+                
               ]}
-              setArrayState={emptyArray}
+              setArrayState={[setItemList]}
             />
-            {/* <button onClick={onClear} className={styleB.btnClear}>
-              Clear
-            </button> */}
           </div>
         </div>
       </div>
@@ -828,22 +830,20 @@ const ItemGen = () => {
                   }
                 >
                   <div className={style.subsection}>
-                    {/* <CustomDataTable
+                    <CustomDataTable
+                      tableName={"itemsTools"}
                       setSingular={setItem}
                       setPlural={setItems}
                       setOptions={setItemOptions}
                       h1Title={"Pack Contents"}
                       dialogHeader={"Items"}
-                      tableName={"itemsTools"}
-                      selectedItems={selectedItems}
-                      setSelectedItems={setSelectedItems}
+                      selectedItem={selectedItem}
+                      setSelectedItem={setSelectedItem}
                       list={itemList}
                       setList={setItemList}
-                      value={selectedItems}
                       valueOptions={itemOptions}
                       options={itemOptions}
-                    /> */}
-                    <Items />
+                    />
                   </div>
                 </div>
               ) : null}
@@ -1007,7 +1007,7 @@ const ItemGen = () => {
           {type === "Equipment Pack" ? (
             <>
               <h2>
-                Items <span className={styleB.minorText2}>{}</span>
+                Items <span className={styleB.minorText2}>{itemDisplay}</span>
               </h2>
             </>
           ) : null}
