@@ -1,6 +1,6 @@
 import style from "../stylesheets/PageStyle.module.scss"
 
-const RandomButton = (props) => {
+const SingleRandomButton = (props) => {
   //---PROPS---
   //options
   //setValue
@@ -19,4 +19,4 @@ const RandomButton = (props) => {
   );
 };
 
-export default RandomButton;
+export default SingleRandomButton;

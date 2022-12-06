@@ -27,7 +27,7 @@ import useFetch from "../components/useFetch";
 import Items from "../components/Items";
 import ClearButton from "../components/ClearButton";
 import { e } from "mathjs";
-import RandomButton from "../components/RandomButton";
+import SingleRandomButton from "../components/SingleRandomButton";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDropdown from "../components/CustomDropDown";
 import CustomDataTable from "../components/CustomDataTable";
@@ -560,7 +560,7 @@ const ItemGen = () => {
                 value={type}
                 valueOptions={typeOptions}
               />
-              <RandomButton options={typeOptions} setValue={setType} />
+              <SingleRandomButton options={typeOptions} setSingluar={setType} />
             </div>
             <div>
               <CustomDropdown
@@ -573,7 +573,7 @@ const ItemGen = () => {
                 value={rarity}
                 valueOptions={rarityOptions}
               />
-              <RandomButton options={rarityOptions} setValue={setRarity} />
+              <SingleRandomButton options={rarityOptions} setSingular={setRarity} />
             </div>
             <div>
               <h1>Cost</h1>
@@ -606,7 +606,7 @@ const ItemGen = () => {
                 value={currency}
                 valueOptions={currencyOptions}
               />
-              <RandomButton options={currencyOptions} setValue={setCurrency} />
+              <SingleRandomButton options={currencyOptions} setSingluar={setCurrency} />
             </div>
             <div>
               <h1>Weight</h1>
@@ -667,9 +667,9 @@ const ItemGen = () => {
                       value={dmgType}
                       valueOptions={dmgTypeOptions}
                     />
-                    <RandomButton
+                    <SingleRandomButton
                       options={dmgTypeOptions}
-                      setValue={setDmgType}
+                      setSingluar={setDmgType}
                     />
                     <CustomDropdown
                       tableName={"itemsWeaponTypes"}
@@ -681,9 +681,9 @@ const ItemGen = () => {
                       value={weaponType}
                       valueOptions={weaponTypeOptions}
                     />
-                    <RandomButton
+                    <SingleRandomButton
                       options={weaponTypeOptions}
-                      setValue={setWeaponType}
+                      setSingular={setWeaponType}
                     />
                     {/*TODO Multiple Weapon Properties  */}
                     <CustomDropdown
@@ -696,9 +696,9 @@ const ItemGen = () => {
                       value={weaponProperty}
                       valueOptions={weaponPropertyOptions}
                     />
-                    <RandomButton
+                    <SingleRandomButton
                       options={weaponPropertyOptions}
-                      setValue={setWeaponProperty}
+                      setSingluar={setWeaponProperty}
                     />
                   </div>
                 </div>
@@ -775,9 +775,9 @@ const ItemGen = () => {
                       setPlural={setArmorAcs}
                       setOptions={setArmorAcOptions}
                     />
-                    <RandomButton
+                    <SingleRandomButton
                       options={armorAcOptions}
-                      setValue={setArmorAc}
+                      setSingular={setArmorAc}
                     />
                     <CustomDropdown
                       tableName={"abilities"}
@@ -789,9 +789,9 @@ const ItemGen = () => {
                       value={armorMod}
                       valueOptions={armorModOptions}
                     />
-                    <RandomButton
+                    <singleRandomButton
                       options={armorModOptions}
-                      setValue={setArmorMod}
+                      setSingluar={setArmorMod}
                     />
                     <CustomInputNumber
                       tableName={"armorStrReq"}
@@ -802,9 +802,9 @@ const ItemGen = () => {
                       setPlural={setArmorStrs}
                       setOptions={setArmorStrOptions}
                     />
-                    <RandomButton
+                    <SingleRandomButton
                       options={armorStrOptions}
-                      setValue={setArmorStr}
+                      setSingular={setArmorStr}
                     />
                     <CustomDropdown
                       tableName={"yesOrNo"}
@@ -816,9 +816,9 @@ const ItemGen = () => {
                       value={stealth}
                       valueOptions={stealthOptions}
                     />
-                    <RandomButton
+                    <SingleRandomButton
                       options={stealthOptions}
-                      setValue={setStealth}
+                      setSingular={setStealth}
                     />
                   </div>
                 </div>

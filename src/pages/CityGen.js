@@ -140,6 +140,7 @@ const CityGen = () => {
                 setSingular={setSize}
                 setPlural={setSizes}
                 setOptions={setSizeOptions}
+                options={sizeOptions}
                 h1Title={"City Size"}
                 placeholder={"Set Size"}
                 value={size}
