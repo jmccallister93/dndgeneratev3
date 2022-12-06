@@ -24,6 +24,7 @@ import SingleDisplay from "../components/SingleDisplay";
 import CustomDropdown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
+import MultipleDisplay from "../components/MultipleDisplay";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -103,8 +104,6 @@ const CityGen = () => {
   const [selectedDistrict, setSelectedDistrict] = useState([]);
   const [districtList, setDistrictList] = useState([]);
 
-  
-
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -118,6 +117,8 @@ const CityGen = () => {
   const showLayout = (e) => {
     setIsLayoutActive((current) => !current);
   };
+
+  //Display
 
   return (
     <div className={style.mainWrapper}>
@@ -227,117 +228,115 @@ const CityGen = () => {
                 valueOptions={landmarkOptions}
               />
             </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showDetails}>
+            City Details
+          </h1>
+          <div className={isDetailActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setGovern}
+                setPlural={setGoverns}
+                setOptions={setGovernOptions}
+                options={governOptions}
+                h1Title={"City Government"}
+                placeholder={"Set Government"}
+                value={govern}
+                valueOptions={governOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setGuild}
+                setPlural={setGuilds}
+                setOptions={setGuildOptions}
+                h1Title={"Guilds"}
+                dialogHeader={"Guilds"}
+                selectedItem={selectedGuild}
+                setSelectedItem={setSelectedGuild}
+                list={guildList}
+                setList={setGuildList}
+                valueOptions={guildOptions}
+                options={guildOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setFaction}
+                setPlural={setFactions}
+                setOptions={setFactionOptions}
+                h1Title={"Factions"}
+                dialogHeader={"Factions"}
+                selectedItem={selectedFaction}
+                setSelectedItem={setSelectedFaction}
+                list={factionList}
+                setList={setFactionList}
+                valueOptions={factionOptions}
+                options={factionOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setEvent}
+                setPlural={setEvents}
+                setOptions={setEventOptions}
+                h1Title={"Events"}
+                dialogHeader={"Events"}
+                selectedItem={selectedEvent}
+                setSelectedItem={setSelectedEvent}
+                list={eventList}
+                setList={setEventList}
+                valueOptions={eventOptions}
+                options={eventOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setNpc}
+                setPlural={setNpcs}
+                setOptions={setNpcOptions}
+                h1Title={"NPCs"}
+                dialogHeader={"NPCs"}
+                selectedItem={selectedNpc}
+                setSelectedItem={setSelectedNpc}
+                list={npcList}
+                setList={setNpcList}
+                valueOptions={npcOptions}
+                options={npcOptions}
+              />
             </div>
-            <h1 className={style.subHeader} onClick={showDetails}>
-              City Details
-            </h1>
-            <div className={isDetailActive ? style.subsection : style.hidden}>
-              <div>
-                <CustomDropdown
-                  tableName={"itemsTypes"}
-                  setSingular={setGovern}
-                  setPlural={setGoverns}
-                  setOptions={setGovernOptions}
-                  options={governOptions}
-                  h1Title={"City Government"}
-                  placeholder={"Set Government"}
-                  value={govern}
-                  valueOptions={governOptions}
-                />
-                <CustomDataTable
-                  tableName={"itemsTypes"}
-                  setSingular={setGuild}
-                  setPlural={setGuilds}
-                  setOptions={setGuildOptions}
-                  h1Title={"Guilds"}
-                  dialogHeader={"Guilds"}
-                  selectedItem={selectedGuild}
-                  setSelectedItem={setSelectedGuild}
-                  list={guildList}
-                  setList={setGuildList}
-                  valueOptions={guildOptions}
-                  options={guildOptions}
-                />
-                <CustomDataTable
-                  tableName={"itemsTypes"}
-                  setSingular={setFaction}
-                  setPlural={setFactions}
-                  setOptions={setFactionOptions}
-                  h1Title={"Factions"}
-                  dialogHeader={"Factions"}
-                  selectedItem={selectedFaction}
-                  setSelectedItem={setSelectedFaction}
-                  list={factionList}
-                  setList={setFactionList}
-                  valueOptions={factionOptions}
-                  options={factionOptions}
-                />
-                <CustomDataTable
-                  tableName={"itemsTypes"}
-                  setSingular={setEvent}
-                  setPlural={setEvents}
-                  setOptions={setEventOptions}
-                  h1Title={"Events"}
-                  dialogHeader={"Events"}
-                  selectedItem={selectedEvent}
-                  setSelectedItem={setSelectedEvent}
-                  list={eventList}
-                  setList={setEventList}
-                  valueOptions={eventOptions}
-                  options={eventOptions}
-                />
-                <CustomDataTable
-                  tableName={"itemsTypes"}
-                  setSingular={setNpc}
-                  setPlural={setNpcs}
-                  setOptions={setNpcOptions}
-                  h1Title={"NPCs"}
-                  dialogHeader={"NPCs"}
-                  selectedItem={selectedNpc}
-                  setSelectedItem={setSelectedNpc}
-                  list={npcList}
-                  setList={setNpcList}
-                  valueOptions={npcOptions}
-                  options={npcOptions}
-                />
-              </div>
-              <h1 className={style.subHeader} onClick={showLayout}>
-              City Layout
-            </h1>
-            <div className={isLayoutActive ? style.subsection : style.hidden}>
-                <div>
-                <CustomDataTable
-                  tableName={"itemsTypes"}
-                  setSingular={setDistrict}
-                  setPlural={setDistricts}
-                  setOptions={setDistrictOptions}
-                  h1Title={"Districts"}
-                  dialogHeader={"Districts"}
-                  selectedItem={selectedDistrict}
-                  setSelectedItem={setSelectedDistrict}
-                  list={districtList}
-                  setList={setDistrictList}
-                  valueOptions={districtOptions}
-                  options={districtOptions}
-                />
-                <CustomDataTable
-                  tableName={"itemsTypes"}
-                  setSingular={setBuilding}
-                  setPlural={setBuildings}
-                  setOptions={setBuildingOptions}
-                  h1Title={"Buildings"}
-                  dialogHeader={"Buildings"}
-                  selectedItem={selectedBuilding}
-                  setSelectedItem={setSelectedBuilding}
-                  list={buildingList}
-                  setList={setBuildingList}
-                  valueOptions={buildingOptions}
-                  options={buildingOptions}
-                />
-                
-                </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showLayout}>
+            City Layout
+          </h1>
+          <div className={isLayoutActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setDistrict}
+                setPlural={setDistricts}
+                setOptions={setDistrictOptions}
+                h1Title={"Districts"}
+                dialogHeader={"Districts"}
+                selectedItem={selectedDistrict}
+                setSelectedItem={setSelectedDistrict}
+                list={districtList}
+                setList={setDistrictList}
+                valueOptions={districtOptions}
+                options={districtOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setBuilding}
+                setPlural={setBuildings}
+                setOptions={setBuildingOptions}
+                h1Title={"Buildings"}
+                dialogHeader={"Buildings"}
+                selectedItem={selectedBuilding}
+                setSelectedItem={setSelectedBuilding}
+                list={buildingList}
+                setList={setBuildingList}
+                valueOptions={buildingOptions}
+                options={buildingOptions}
+              />
             </div>
-            
           </div>
         </div>
 
@@ -345,11 +344,56 @@ const CityGen = () => {
         <div className={style.display}>
           <h1>{cityName}</h1>
           <h2>
-            City Type <span className={style.minorText2}>{type}</span>
+            Type <span className={style.minorText2}>{type}</span>
           </h2>
           <h2>
-            City Population{" "}
-            <span className={style.minorText2}>{population}</span>
+            Size <span className={style.minorText2}>{size}</span>
+          </h2>
+          <h2>
+            Population <span className={style.minorText2}>{population}</span>
+          </h2>
+          <h2>
+            Atmoshpere <span className={style.minorText2}>{atmosphere}</span>
+          </h2>
+          <h2>
+            City Terrain <span className={style.minorText2}>{terrain}</span>
+          </h2>
+          <h2>
+            Landmark <span className={style.minorText2}>{landmark}</span>
+          </h2>
+          <h2>
+            Government <span className={style.minorText2}>{govern}</span>
+          </h2>
+          <h2>
+            Guilds{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay selectedItem={selectedGuild} />
+            </span>
+          </h2>
+          <h2>
+            Factions <span className={style.minorText2}>
+            <MultipleDisplay selectedItem={selectedFaction} />
+            </span>
+          </h2>
+          <h2>
+            Events <span className={style.minorText2}>
+            <MultipleDisplay selectedItem={selectedEvent} />
+            </span>
+          </h2>
+          <h2>
+            NPCs <span className={style.minorText2}>
+            <MultipleDisplay selectedItem={selectedNpc} />
+            </span>
+          </h2>
+          <h2>
+            Districts <span className={style.minorText2}>
+            <MultipleDisplay selectedItem={selectedDistrict} />
+            </span>
+          </h2>
+          <h2>
+            Buildings <span className={style.minorText2}>
+            <MultipleDisplay selectedItem={selectedBuilding} />
+            </span>
           </h2>
         </div>
       </div>
