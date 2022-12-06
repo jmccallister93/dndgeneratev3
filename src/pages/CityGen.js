@@ -37,7 +37,7 @@ const CityGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
-  console.log(cityName)
+  
   return (
     <div className={style.mainWrapper}>
       <Navbar />
