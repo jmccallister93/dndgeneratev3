@@ -20,6 +20,18 @@ import { Toast } from "primereact/toast";
 import { e } from "mathjs";
 
 const Items = (props) => {
+  //---SAMPLE PROPS----
+  // h1Title={"Items"}
+  // dialogHeader={"Items"}
+  // selectedItem={selectedItem}
+  // setSelectedItem={setSelectedItem}
+  // header={header}
+  // itemList={itemList}
+  // setItemList={setItemList}
+  // valueOptions={itemOptions}
+  // options={itemOptions}
+  //---SAMPLE PROPS----
+
   const [fetchError, setFetchError] = useState(null);
 
   const [allItems, setAllItems] = useState();
@@ -129,12 +141,10 @@ const Items = (props) => {
       }
     }
   };
-
   //Dialog Footer
   const dialogFooter = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
-
   //Pull supabase data
   //adventure gear
   useEffect(() => {
@@ -532,8 +542,7 @@ const Items = (props) => {
     };
     fetchData();
   }, []);
-
-  //   Set all items together
+  //Set all items together
   useEffect(() => {
     // const items = [...weaponOptions,...armorOptions]
     setItemOptions(weaponOptions);
@@ -571,19 +580,19 @@ const Items = (props) => {
     weaponOptions,
   ]);
   //Random Item
-  //   const onRandomItem = (e) => {
-  //     const max = itemOptions.length - 1;
-  //     let r = Math.round(Math.random() * (max - 0));
-  //     if (itemList.includes(itemOptions[r])) {
-  //     } else {
-  //       setItemList((saveArray) => [...saveArray, itemOptions[r]]);
-  //     }
-  //   };
-  //   const randomItemBtn = (
-  //     <Button onClick={onRandomItem} className={style.btnName}>
-  //       Random
-  //     </Button>
-  //   );
+    const onRandomItem = (e) => {
+      const max = itemOptions.length - 1;
+      let r = Math.round(Math.random() * (max - 0));
+      if (props.itemList.includes(itemOptions[r])) {
+      } else {
+        props.setItemList((saveArray) => [...saveArray, itemOptions[r]]);
+      }
+    };
+    const randomItemBtn = (
+      <Button onClick={onRandomItem} className={style.btnName}>
+        Random
+      </Button>
+    );
   const itemOptions2 = useRef();
 
   //JSX Dialog Vairable
@@ -593,7 +602,7 @@ const Items = (props) => {
       <Button onClick={openDialog} className={style.btnName}>
         Add / Remove
       </Button>
-      {/* {props.randomItemBtn} */}
+      {randomItemBtn}
       {/* {props.dialogVisibleItem === false ? ( 
        DIV WOULD GO HERE ) : (
          <div>

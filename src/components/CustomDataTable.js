@@ -11,6 +11,21 @@ import supabase from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const CustomDataTable = (props) => {
+    //-----SAMPLE PROPS-------
+    // tableName={"itemsTools"}
+    // setSingular={setItem}
+    // setPlural={setItems}
+    // setOptions={setItemOptions}
+    // h1Title={"Pack Contents"}
+    // dialogHeader={"Items"}
+    // selectedItem={selectedItem}
+    // setSelectedItem={setSelectedItem}
+    // list={itemList}
+    // setList={setItemList}
+    // valueOptions={itemOptions}
+    // options={itemOptions}
+    //-----SAMPLE PROPS-------
+
   //Set States
   const [fetchError, setFetchError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);

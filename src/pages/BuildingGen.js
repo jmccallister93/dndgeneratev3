@@ -957,11 +957,6 @@ const BuildingGen = () => {
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <Items
-              
-              //   randomItemBtn={randomItemBtn}
-              // dialogVisibleItem={dialogVisibleItem}
-              // closeDialogItem={closeDialogItem}
-              // dialogFooterItem={dialogFooterItem}
               h1Title={"Items"}
               dialogHeader={"Items"}
               selectedItem={selectedItem}
@@ -971,8 +966,6 @@ const BuildingGen = () => {
               setItemList={setItemList}
               valueOptions={itemOptions}
               options={itemOptions}
-              // randomItemBtn={randomItemBtn}
-              //   onRandomItem={onRandomItem}
             ></Items>
           </div>
         </div>
