@@ -257,7 +257,6 @@ const CityGen = () => {
                 list={guildList}
                 setList={setGuildList}
                 valueOptions={guildOptions}
-                options={guildOptions}
               />
               <CustomDataTable
                 tableName={"itemsTypes"}
@@ -271,7 +270,6 @@ const CityGen = () => {
                 list={factionList}
                 setList={setFactionList}
                 valueOptions={factionOptions}
-                options={factionOptions}
               />
               <CustomDataTable
                 tableName={"itemsTypes"}
@@ -285,7 +283,6 @@ const CityGen = () => {
                 list={eventList}
                 setList={setEventList}
                 valueOptions={eventOptions}
-                options={eventOptions}
               />
               <CustomDataTable
                 tableName={"itemsTypes"}
@@ -299,7 +296,6 @@ const CityGen = () => {
                 list={npcList}
                 setList={setNpcList}
                 valueOptions={npcOptions}
-                options={npcOptions}
               />
             </div>
           </div>
@@ -320,7 +316,6 @@ const CityGen = () => {
                 list={districtList}
                 setList={setDistrictList}
                 valueOptions={districtOptions}
-                options={districtOptions}
               />
               <CustomDataTable
                 tableName={"itemsTypes"}
@@ -334,7 +329,6 @@ const CityGen = () => {
                 list={buildingList}
                 setList={setBuildingList}
                 valueOptions={buildingOptions}
-                options={buildingOptions}
               />
             </div>
           </div>
@@ -367,32 +361,55 @@ const CityGen = () => {
           <h2>
             Guilds{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedGuild} />
+              <MultipleDisplay
+                setSelectedItem={selectedGuild}
+                valueOptions={guildOptions}
+              />
             </span>
           </h2>
           <h2>
-            Factions <span className={style.minorText2}>
-            <MultipleDisplay selectedItem={selectedFaction} />
+            Factions{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                setSelectedItem={selectedFaction}
+                valueOptions={factionOptions}
+              />
             </span>
           </h2>
           <h2>
-            Events <span className={style.minorText2}>
-            <MultipleDisplay selectedItem={selectedEvent} />
+            Events{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                setSelectedItem={selectedEvent}
+                valueOptions={eventOptions}
+              />
             </span>
           </h2>
           <h2>
-            NPCs <span className={style.minorText2}>
-            <MultipleDisplay selectedItem={selectedNpc} />
+            NPCs{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                setSelectedItem={selectedNpc}
+                valueOptions={npcOptions}
+              />
             </span>
           </h2>
           <h2>
-            Districts <span className={style.minorText2}>
-            <MultipleDisplay selectedItem={selectedDistrict} />
+            Districts{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                setSelectedItem={selectedDistrict}
+                valueOptions={districtOptions}
+              />
             </span>
           </h2>
           <h2>
-            Buildings <span className={style.minorText2}>
-            <MultipleDisplay selectedItem={selectedBuilding} />
+            Buildings{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                setSelectedItem={selectedBuilding}
+                valueOptions={buildingOptions}
+              />
             </span>
           </h2>
         </div>

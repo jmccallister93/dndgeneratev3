@@ -9,6 +9,8 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
+import MultipleDisplay from "./MultipleDisplay";
+import MultipleRandomButton from "./MultipleRandomButton";
 import SingleRandomButton from "./SingleRandomButton";
 
 const CustomDataTable = (props) => {
@@ -190,9 +192,9 @@ const CustomDataTable = (props) => {
   return (
     <>
       {templateDatatable}{" "}
-      <SingleRandomButton
-        options={props.options}
-        setSingular={props.setSingular}
+      <MultipleRandomButton
+        valueOptions={props.valueOptions}
+        setSelectedItem={props.setSelectedItem}
       />
     </>
   );

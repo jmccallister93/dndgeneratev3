@@ -77,7 +77,7 @@ const CustomDropdown = (props) => {
     <>
       {templateDropdown}
       <SingleRandomButton
-        options={props.options}
+        valueOptions={props.valueOptions}
         setSingular={props.setSingular}
       />
     </>

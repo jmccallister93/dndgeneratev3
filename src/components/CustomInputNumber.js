@@ -5,6 +5,7 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import supabase from "../config/supabaseClient";
 import style from "../stylesheets/BuildingGen.module.scss";
+import NumberRandomButton from "./NumberRandomButton";
 import SingleRandomButton from "./SingleRandomButton";
 
 const CustomInputNumber = (props) => {
@@ -19,26 +20,26 @@ const CustomInputNumber = (props) => {
   //---PROPS---
   const [fetchError, setFetchError] = useState(false);
   //Get Data from supabase
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data: dataName, error: errorName } = await supabase
-        .from(props.tableName)
-        .select();
-      if (errorName) {
-        setFetchError("Could not fetch the data");
-        console.log(errorName);
-        props.setSingular(null);
-      }
-      if (dataName) {
-        props.setPlural(dataName);
-        setFetchError(null);
-        props.setOptions(
-          dataName.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const { data: dataName, error: errorName } = await supabase
+  //       .from(props.tableName)
+  //       .select();
+  //     if (errorName) {
+  //       setFetchError("Could not fetch the data");
+  //       console.log(errorName);
+  //       props.setSingular(null);
+  //     }
+  //     if (dataName) {
+  //       props.setPlural(dataName);
+  //       setFetchError(null);
+  //       props.setOptions(
+  //         dataName.map((r) => ({ name: r.name, value: r.value }))
+  //       );
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   //On Change
   const onChange = (e) => {
     props.setSingular(e.value);
@@ -66,8 +67,7 @@ const CustomInputNumber = (props) => {
   return (
     <>
       {inputNumber}{" "}
-      <SingleRandomButton
-        options={props.options}
+      <NumberRandomButton
         setSingular={props.setSingular}
       />
     </>
