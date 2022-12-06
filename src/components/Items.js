@@ -19,6 +19,8 @@ import { Dialog } from "primereact/dialog";
 import { Toast } from "primereact/toast";
 import { e } from "mathjs";
 
+
+
 const Items = (props) => {
   //---SAMPLE PROPS----
   // h1Title={"Items"}
@@ -31,6 +33,7 @@ const Items = (props) => {
   // valueOptions={itemOptions}
   // options={itemOptions}
   //---SAMPLE PROPS----
+  
 
   const [fetchError, setFetchError] = useState(null);
 
@@ -641,9 +644,6 @@ const Items = (props) => {
           selection={props.selectedItem}
           onSelectionChange={
             onSelectionChange
-            //   (e) => {
-            //   props.setSelectedItem(e.value);
-            // }
           }
           filters={filters}
           filterDisplay="row"
