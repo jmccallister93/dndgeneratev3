@@ -29,6 +29,7 @@ const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isLayoutActive, setIsLayoutActive] = useState(false);
 
   const [cityName, setCityName] = useState("");
   const [cityNames, setCityNames] = useState("");
@@ -81,18 +82,28 @@ const CityGen = () => {
   const [faction, setFaction] = useState("");
   const [factions, setFactions] = useState("");
   const [factionOptions, setFactionOptions] = useState("");
-
-  const [building, setBuilding] = useState("");
-  const [buildings, setBuildings] = useState("");
-  const [buildingOptions, setBuildingOptions] = useState("");
-
-  const [district, setDistrict] = useState("");
-  const [districts, setDistrics] = useState("");
-  const [districtOptions, setDistrictOptions] = useState("");
+  const [selectedFaction, setSelectedFaction] = useState([]);
+  const [factionList, setFactionList] = useState([]);
 
   const [npc, setNpc] = useState("");
   const [npcs, setNpcs] = useState("");
   const [npcOptions, setNpcOptions] = useState("");
+  const [selectedNpc, setSelectedNpc] = useState([]);
+  const [npcList, setNpcList] = useState([]);
+
+  const [building, setBuilding] = useState("");
+  const [buildings, setBuildings] = useState("");
+  const [buildingOptions, setBuildingOptions] = useState("");
+  const [selectedBuilding, setSelectedBuilding] = useState([]);
+  const [buildingList, setBuildingList] = useState([]);
+
+  const [district, setDistrict] = useState("");
+  const [districts, setDistricts] = useState("");
+  const [districtOptions, setDistrictOptions] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState([]);
+  const [districtList, setDistrictList] = useState([]);
+
+  
 
   //Show Options
   const showBasics = (e) => {
@@ -103,6 +114,9 @@ const CityGen = () => {
   };
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
+  };
+  const showLayout = (e) => {
+    setIsLayoutActive((current) => !current);
   };
 
   return (
@@ -246,6 +260,20 @@ const CityGen = () => {
                 />
                 <CustomDataTable
                   tableName={"itemsTypes"}
+                  setSingular={setFaction}
+                  setPlural={setFactions}
+                  setOptions={setFactionOptions}
+                  h1Title={"Factions"}
+                  dialogHeader={"Factions"}
+                  selectedItem={selectedFaction}
+                  setSelectedItem={setSelectedFaction}
+                  list={factionList}
+                  setList={setFactionList}
+                  valueOptions={factionOptions}
+                  options={factionOptions}
+                />
+                <CustomDataTable
+                  tableName={"itemsTypes"}
                   setSingular={setEvent}
                   setPlural={setEvents}
                   setOptions={setEventOptions}
@@ -258,7 +286,57 @@ const CityGen = () => {
                   valueOptions={eventOptions}
                   options={eventOptions}
                 />
+                <CustomDataTable
+                  tableName={"itemsTypes"}
+                  setSingular={setNpc}
+                  setPlural={setNpcs}
+                  setOptions={setNpcOptions}
+                  h1Title={"NPCs"}
+                  dialogHeader={"NPCs"}
+                  selectedItem={selectedNpc}
+                  setSelectedItem={setSelectedNpc}
+                  list={npcList}
+                  setList={setNpcList}
+                  valueOptions={npcOptions}
+                  options={npcOptions}
+                />
               </div>
+              <h1 className={style.subHeader} onClick={showLayout}>
+              City Layout
+            </h1>
+            <div className={isLayoutActive ? style.subsection : style.hidden}>
+                <div>
+                <CustomDataTable
+                  tableName={"itemsTypes"}
+                  setSingular={setDistrict}
+                  setPlural={setDistricts}
+                  setOptions={setDistrictOptions}
+                  h1Title={"Districts"}
+                  dialogHeader={"Districts"}
+                  selectedItem={selectedDistrict}
+                  setSelectedItem={setSelectedDistrict}
+                  list={districtList}
+                  setList={setDistrictList}
+                  valueOptions={districtOptions}
+                  options={districtOptions}
+                />
+                <CustomDataTable
+                  tableName={"itemsTypes"}
+                  setSingular={setBuilding}
+                  setPlural={setBuildings}
+                  setOptions={setBuildingOptions}
+                  h1Title={"Buildings"}
+                  dialogHeader={"Buildings"}
+                  selectedItem={selectedBuilding}
+                  setSelectedItem={setSelectedBuilding}
+                  list={buildingList}
+                  setList={setBuildingList}
+                  valueOptions={buildingOptions}
+                  options={buildingOptions}
+                />
+                
+                </div>
+            </div>
             
           </div>
         </div>
