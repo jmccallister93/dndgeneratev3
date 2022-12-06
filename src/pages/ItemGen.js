@@ -493,7 +493,7 @@ const ItemGen = () => {
   };
   const emptyArray = () => {};
 
-  const itemDisplay = itemList.map((i) => {
+  const itemDisplay = selectedItem.map((i) => {
     return <span>{`${i.name},`}</span>;
   });
 
@@ -830,17 +830,14 @@ const ItemGen = () => {
                   }
                 >
                   <div className={style.subsection}>
-                    <CustomDataTable
-                      tableName={"itemsTools"}
-                      setSingular={setItem}
-                      setPlural={setItems}
-                      setOptions={setItemOptions}
-                      h1Title={"Pack Contents"}
+                    <Items
+                      h1Title={"Items"}
                       dialogHeader={"Items"}
                       selectedItem={selectedItem}
                       setSelectedItem={setSelectedItem}
-                      list={itemList}
-                      setList={setItemList}
+                      header={header}
+                      itemList={itemList}
+                      setItemList={setItemList}
                       valueOptions={itemOptions}
                       options={itemOptions}
                     />

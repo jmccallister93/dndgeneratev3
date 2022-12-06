@@ -145,6 +145,20 @@ const Items = (props) => {
   const dialogFooter = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
+  //On Selection change 
+  const onSelectionChange =(e) => {
+    props.setSelectedItem(e.value);
+    // for (let i = 0; i < e.value.length; i++) {
+    //   if (props.itemList.includes(e.value[i])) {
+    //   } else {
+    //     props.setItemList((oldArray) => [...oldArray, e.value[i]]);
+    //   }
+    // }
+    // console.log("Selected items" + props.itemList)
+  }
+  useEffect(() => {
+    props.setSelectedItem(props.itemList);
+  }, [props.itemList]);
   //Pull supabase data
   //adventure gear
   useEffect(() => {
@@ -628,9 +642,11 @@ const Items = (props) => {
           rows={20}
           dataKey="name"
           selection={props.selectedItem}
-          onSelectionChange={(e) => {
-            props.setSelectedItem(e.value);
-          }}
+          onSelectionChange={onSelectionChange
+          //   (e) => {
+          //   props.setSelectedItem(e.value);
+          // }
+        }
           filters={filters}
           filterDisplay="row"
           responsiveLayout="scroll"
