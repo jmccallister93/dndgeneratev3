@@ -9,7 +9,7 @@ const MultipleDisplay = (props) => {
     if(props.selectedItem === undefined){
 
     }else{
-      return multipleDisplay = props.selectedItem.map((i) => {
+      multipleDisplay = props.selectedItem.map((i) => {
         return <span>{`${i.name},`}</span>;
       });
     }
