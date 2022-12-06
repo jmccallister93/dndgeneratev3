@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/PageStyle.module.scss";
+import style from "../stylesheets/BuildingGen.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
@@ -18,10 +18,10 @@ import Items from "../components/Items";
 import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
 
-const CityGen = () => {
+const TrapGen = () => {
     const [isBasicActive, setIsBasicActive] = useState(false);
     const [isDetailActive, setIsDetailActive] = useState(false);
     return ( <></> );
 }
  
-export default CityGen;
+export default TrapGen;

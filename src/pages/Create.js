@@ -105,6 +105,51 @@ const Create = () => {
       </p>
     </Card>
   );
+  const cardGodGen = (
+    <Card className={style.createCard}>
+      <h3>God Generator</h3>
+      <p>
+        Generate Gods with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardSpellGen = (
+    <Card className={style.createCard}>
+      <h3>Spell Generator</h3>
+      <p>
+        Generate Spells with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardDungeonGen = (
+    <Card className={style.createCard}>
+      <h3>Dungeon Generator</h3>
+      <p>
+        Generate Dungeons with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardTrapGen = (
+    <Card className={style.createCard}>
+      <h3>Trap Generator</h3>
+      <p>
+        Generate Traps with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
+  const cardPuzzleGen = (
+    <Card className={style.createCard}>
+      <h3>Puzzle Generator</h3>
+      <p>
+        Generate Puzzles with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
 
   return (
     <div className={style.createWrapper}>
@@ -143,6 +188,21 @@ const Create = () => {
         </Link>
         <Link className={style.createLink} to="/villaingen">
           {cardVillainGen}
+        </Link>
+        <Link className={style.createLink} to="/godgen">
+          {cardGodGen}
+        </Link>
+        <Link className={style.createLink} to="/spellgen">
+          {cardSpellGen}
+        </Link>
+        <Link className={style.createLink} to="/dungeongen">
+          {cardDungeonGen}
+        </Link>
+        <Link className={style.createLink} to="/trapgen">
+          {cardTrapGen}
+        </Link>
+        <Link className={style.createLink} to="/puzzlegen">
+          {cardPuzzleGen}
         </Link>
       </div>
     </div>

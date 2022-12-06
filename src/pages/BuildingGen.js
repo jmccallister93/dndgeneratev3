@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
