@@ -47,6 +47,25 @@ const CityGen = () => {
   const [governs, setGoverns] = useState("");
   const [governOptions, setGovernOptions] = useState("");
 
+  const [guild, setGuild] = useState("")
+  const [guilds, setGuilds] = useState("");
+  const [guildOptions, setGuildOptions] = useState("");
+
+  const [event, setEvent] = useState("")
+  const [events, setEvents] = useState("");
+  const [eventOptions, setEventOptions] = useState("");
+
+  const [faction, setFaction] = useState("")
+  const [factions, setFactions] = useState("");
+  const [factionOptions, setFactionOptions] = useState("");
+
+  const [building, setBuilding] = useState("")
+  const [buildings, setBuildings] = useState("");
+  const [buildingOptions, setBuildingOptions] = useState("");
+
+  const [npc, setNpc] = useState("")
+  const [npcs, setNpcs] = useState("");
+  const [npcOptions, setNpcOptions] = useState("");
 
 
   //Show Options
