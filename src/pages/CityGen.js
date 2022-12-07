@@ -384,37 +384,41 @@ const CityGen = () => {
           <h2>
             Events{" "}
             <span className={style.minorText2}>
-              {/* <MultipleDisplay
+              <MultipleDisplay
                 setSelectedItem={selectedEvent}
                 valueOptions={eventOptions}
-              /> */}
+                itemList={eventList}
+              />
             </span>
           </h2>
           <h2>
             NPCs{" "}
             <span className={style.minorText2}>
-              {/* <MultipleDisplay
+              <MultipleDisplay
                 setSelectedItem={selectedNpc}
                 valueOptions={npcOptions}
-              /> */}
+                itemList={npcList}
+              />
             </span>
           </h2>
           <h2>
             Districts{" "}
             <span className={style.minorText2}>
-              {/* <MultipleDisplay
+              <MultipleDisplay
                 setSelectedItem={selectedDistrict}
                 valueOptions={districtOptions}
-              /> */}
+                itemList={districtList}
+              />
             </span>
           </h2>
           <h2>
             Buildings{" "}
             <span className={style.minorText2}>
-              {/* <MultipleDisplay
+              <MultipleDisplay
                 setSelectedItem={selectedBuilding}
                 valueOptions={buildingOptions}
-              /> */}
+                itemList={buildingList}
+              />
             </span>
           </h2>
         </div>
