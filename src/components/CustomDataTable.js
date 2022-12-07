@@ -101,7 +101,7 @@ const CustomDataTable = (props) => {
     for (let i = 0; i < props.selectedItem.length; i++) {
       if (props.list.includes(props.selectedItem[i])) {
       } else {
-        props.setList((oldArray) => [...oldArray, props.selectedItem[i]]);
+        props.setList((old) => [...old, props.selectedItem[i]]);
       }
     }
   };
@@ -109,6 +109,11 @@ const CustomDataTable = (props) => {
   const dialogFooter = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
+  //Use effect to set list
+  useEffect(() => {
+    props.setSelectedItem(props.list);
+  }, [props.list]);
+  
   //JSX Dialog template
   const templateDatatable = (
     <div className="card">
@@ -133,12 +138,13 @@ const CustomDataTable = (props) => {
           dataKey="name"
           selection={props.selectedItem}
           onSelectionChange={(e) => {
-            props.setSelectedItem(e.value);
+            props.setList(e.value);
           }}
           filters={filters}
           filterDisplay="row"
           responsiveLayout="scroll"
           globalFilterFields={["name"]}
+          header={header}
           emptyMessage="No items found."
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
           rowHover
@@ -152,7 +158,7 @@ const CustomDataTable = (props) => {
             headerStyle={{ width: "6em" }}
           ></Column>
           <Column
-            header={header}
+            header={props.h1Title}
             field="name"
             sortable
             filter

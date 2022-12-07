@@ -365,20 +365,20 @@ const CityGen = () => {
             Guilds{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                setSelectedItem={selectedGuild}
+                setSelectedItem={setSelectedGuild}
                 valueOptions={guildOptions}
                 itemList={guildList}
               />
-              {/* {guildDisplay} */}
             </span>
           </h2>
           <h2>
             Factions{" "}
             <span className={style.minorText2}>
-              {/* <MultipleDisplay
-                setSelectedItem={selectedFaction}
+              <MultipleDisplay
+                setSelectedItem={setSelectedFaction}
                 valueOptions={factionOptions}
-              /> */}
+                itemList={factionList}
+              />
             </span>
           </h2>
           <h2>
