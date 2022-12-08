@@ -29,48 +29,16 @@ const GenerateButton = (props) => {
       }
     }
     //DataTable generate
+
     for (let i = 0; i < props.selectedItems.length; i++) {
-      let max = props.itemOptions[i].length - 1;
-      let set = props.setSelectedItem[i];
-      let r = Math.round(Math.random() * (max - 0));
-      if (props.selectedItems[i].length <= 0) {
-        if (props.selectedItem === undefined) {
-          set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
-        }
-        let n1 = Math.round(Math.random() * (1 - 0));
-        let x1 = Math.round(Math.random() * (max - 0));
-        if (n1 === 0) {
-          if (
-            props.selectedItems[i].includes(props.itemOptions[i][r]) ||
-            props.selectedItems[i].includes(props.itemOptions[i][x1])
-          ) {
-          } else {
-            set((oldArray) => [...oldArray, props.itemOptions[i][x1]]);
-          }
-        }
-        let n2 = Math.round(Math.random() * (1 - 0));
-        let x2 = Math.round(Math.random() * (max - 0));
-        if (n2 === 0) {
-          if (
-            props.selectedItems[i].includes(props.itemOptions[i][r]) ||
-            props.selectedItems[i].includes(props.itemOptions[i][x1]) ||
-            props.selectedItems[i].includes(props.itemOptions[i][x2])
-          ) {
-          } else {
-            set((oldArray) => [...oldArray, props.itemOptions[i][x2]]);
-          }
-        }
-        let n3 = Math.round(Math.random() * (1 - 0));
-        let x3 = Math.round(Math.random() * (max - 0));
-        if (n3 === 0) {
-          if (
-            props.selectedItems[i].includes(props.itemOptions[i][r]) ||
-            props.selectedItems[i].includes(props.itemOptions[i][x1]) ||
-            props.selectedItems[i].includes(props.itemOptions[i][x2]) ||
-            props.selectedItems[i].includes(props.itemOptions[i][x3])
-          ) {
-          } else {
-            set((oldArray) => [...oldArray, props.itemOptions[i][x3]]);
+      let n = Math.round(Math.random() * (6 - 0));
+      for (let x = 0; x <= n; x++) {
+        let max = props.itemOptions[i].length - 1;
+        let set = props.setSelectedItem[i];
+        let r = Math.round(Math.random() * (max - 0));
+        if (props.selectedItems[i].length <= 0) {
+          if (props.selectedItem === undefined) {
+            set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
           }
         }
       }
