@@ -8,7 +8,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
-import { e, i } from "mathjs";
+import { e, i, number } from "mathjs";
 import { DataTable } from "primereact/datatable";
 import { Column } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
@@ -104,6 +104,8 @@ const CityGen = () => {
   const [selectedDistrict, setSelectedDistrict] = useState([]);
   const [districtList, setDistrictList] = useState([]);
 
+  const[numberSize, setNumebrSize] = useState("")
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -127,6 +129,10 @@ const CityGen = () => {
   //     console.log("Loaded")
   //   }, [setSelectedGuild]);
 
+  useState(()=> {
+    console.log(size)
+  })
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -134,10 +140,36 @@ const CityGen = () => {
         <h1 className={style.mainHeader}>City Generator</h1>
         <div>
           <div className={style.btnWrapper}>
-            <GenerateButton 
-            itemOptions={[typeOptions, sizeOptions]}
-            generateItems={[type,size]}
-            setItem={[setType, setSize]}
+            <GenerateButton
+            generateItems={[
+                type,
+                size,
+                atmosphere,
+                culture,
+                terrain,
+                landmark,
+                govern,
+              ]}
+              itemOptions={[
+                typeOptions,
+                sizeOptions,
+                atmoshpereOptions,
+                cultureOptions,
+                terrainOptions,
+                landmarkOptions,
+                governOptions,
+              ]}
+              numberItem={[population]}
+              setNumberItem={[setPopulation]}
+              setItem={[
+                setType,
+                setSize,
+                setAtmoshpere,
+                setCulture,
+                setTerrain,
+                setLandmark,
+                setGovern,
+              ]}
             />
             <ClearButton
               setStringState={[
@@ -150,7 +182,6 @@ const CityGen = () => {
                 setTerrain,
                 setLandmark,
                 setGovern,
-                setGuild,
               ]}
               setArrayState={[
                 setSelectedGuild,
@@ -192,7 +223,7 @@ const CityGen = () => {
                 valueOptions={typeOptions}
               />
               <CustomDropdown
-                tableName={"itemsTypes"}
+                tableName={"citySize"}
                 setSingular={setSize}
                 setPlural={setSizes}
                 setOptions={setSizeOptions}
@@ -400,41 +431,31 @@ const CityGen = () => {
           <h2>
             Factions{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedFaction}
-              />
+              <MultipleDisplay selectedItem={selectedFaction} />
             </span>
           </h2>
           <h2>
             Events{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedEvent}
-              />
+              <MultipleDisplay selectedItem={selectedEvent} />
             </span>
           </h2>
           <h2>
             NPCs{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedNpc}
-              />
+              <MultipleDisplay selectedItem={selectedNpc} />
             </span>
           </h2>
           <h2>
             Districts{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedDistrict}
-              />
+              <MultipleDisplay selectedItem={selectedDistrict} />
             </span>
           </h2>
           <h2>
             Buildings{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedBuilding}
-              />
+              <MultipleDisplay selectedItem={selectedBuilding} />
             </span>
           </h2>
         </div>
