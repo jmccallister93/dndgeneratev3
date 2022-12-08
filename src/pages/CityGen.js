@@ -134,7 +134,11 @@ const CityGen = () => {
         <h1 className={style.mainHeader}>City Generator</h1>
         <div>
           <div className={style.btnWrapper}>
-            <GenerateButton />
+            <GenerateButton 
+            itemOptions={[typeOptions, sizeOptions]}
+            generateItems={[type,size]}
+            setItem={[setType, setSize]}
+            />
             <ClearButton
               setStringState={[
                 setCityName,
