@@ -122,6 +122,9 @@ const CityGen = () => {
 //   const guildDisplay = selectedGuild.map((i) => {
 //     return <span>{`${i.name},`}</span>;
 //   });
+useEffect(()=>{
+    console.log(guildList)
+},[guildList])
 
   return (
     <div className={style.mainWrapper}>
@@ -260,7 +263,9 @@ const CityGen = () => {
                 list={guildList}
                 setList={setGuildList}
                 valueOptions={guildOptions}
+                
               />
+              
               <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setFaction}
@@ -367,7 +372,7 @@ const CityGen = () => {
               <MultipleDisplay
                 setSelectedItem={setSelectedGuild}
                 valueOptions={guildOptions}
-                itemList={guildList}
+                list={guildList}
               />
             </span>
           </h2>
@@ -377,7 +382,7 @@ const CityGen = () => {
               <MultipleDisplay
                 setSelectedItem={setSelectedFaction}
                 valueOptions={factionOptions}
-                itemList={factionList}
+                list={factionList}
               />
             </span>
           </h2>
@@ -387,7 +392,7 @@ const CityGen = () => {
               <MultipleDisplay
                 setSelectedItem={selectedEvent}
                 valueOptions={eventOptions}
-                itemList={eventList}
+                list={eventList}
               />
             </span>
           </h2>
@@ -397,7 +402,7 @@ const CityGen = () => {
               <MultipleDisplay
                 setSelectedItem={selectedNpc}
                 valueOptions={npcOptions}
-                itemList={npcList}
+                list={npcList}
               />
             </span>
           </h2>
@@ -407,7 +412,7 @@ const CityGen = () => {
               <MultipleDisplay
                 setSelectedItem={selectedDistrict}
                 valueOptions={districtOptions}
-                itemList={districtList}
+                list={districtList}
               />
             </span>
           </h2>
@@ -417,7 +422,7 @@ const CityGen = () => {
               <MultipleDisplay
                 setSelectedItem={selectedBuilding}
                 valueOptions={buildingOptions}
-                itemList={buildingList}
+                list={buildingList}
               />
             </span>
           </h2>

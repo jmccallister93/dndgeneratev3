@@ -194,6 +194,7 @@ const CustomDataTable = (props) => {
   //     filterPlaceholder="Search"
   //   ></Column>
   // </DataTable>
+  
 
   return (
     <>
@@ -201,6 +202,9 @@ const CustomDataTable = (props) => {
       <MultipleRandomButton
         valueOptions={props.valueOptions}
         setSelectedItem={props.setSelectedItem}
+        list={props.list}
+        selectedItem={props.selectedItem}
+        setList={props.setList}
       />
     </>
   );
