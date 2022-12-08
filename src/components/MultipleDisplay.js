@@ -4,14 +4,20 @@ const MultipleDisplay = (props) => {
   //---PROPS NEEDED---
   //selectedItem
   //---PROPS NEEDED---
-  // const multipleDisplay = []
+  const [multipleDisplay, setMultipleDisplay] = useState([])
 
-  const multipleDisplay = props.list.map((i) => {
-    return <span>{`${i}, `}</span>;
+  useEffect(()=>{
+    if(props.selectedItem === undefined ){
+    } else if(props.selectedItem.length >= 0){ 
+      setMultipleDisplay(props.selectedItem)
+    }
+  },[props.selectedItem])
+  
+  const display = multipleDisplay.map((i) => {
+    return <span>{`${i.name}, `}</span>;
   });
-  // const multipleDisplay = props.list
 
-  return <>{multipleDisplay}</>;
+  return <>{display}</>;
 };
 
 export default MultipleDisplay;

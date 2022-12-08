@@ -122,9 +122,10 @@ const CityGen = () => {
 //   const guildDisplay = selectedGuild.map((i) => {
 //     return <span>{`${i.name},`}</span>;
 //   });
-useEffect(()=>{
-    console.log(guildList)
-},[guildList])
+//   useEffect(() => {
+//     setGuildList(selectedGuild);
+//     console.log("Loaded")
+//   }, [setSelectedGuild]);
 
   return (
     <div className={style.mainWrapper}>
@@ -370,9 +371,7 @@ useEffect(()=>{
             Guilds{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                setSelectedItem={setSelectedGuild}
-                valueOptions={guildOptions}
-                list={guildList}
+                selectedItem={selectedGuild}
               />
             </span>
           </h2>

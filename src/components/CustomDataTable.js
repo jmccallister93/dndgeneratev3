@@ -113,6 +113,7 @@ const CustomDataTable = (props) => {
   useEffect(() => {
     props.setSelectedItem(props.list);
   }, [props.list]);
+
   
   //JSX Dialog template
   const templateDatatable = (
@@ -167,34 +168,7 @@ const CustomDataTable = (props) => {
         </DataTable>
       </Dialog>
     </div>
-  );
-  //PROPS: selectedValues, header
-
-  //   <DataTable
-  //   value={selectedItemsSpecial}
-  //   scrollable
-  //   rows={20}
-  //   dataKey="name"
-  //   filters={filters}
-  //   filterDisplay="row"
-  //   responsiveLayout="scroll"
-  //   globalFilterFields={["name"]}
-  //   emptyMessage="No items found."
-  //   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  //   rowHover
-  //   resizableColumns
-  //   reorderableColumns
-  //   reorderableRows
-  // >
-  //   <Column
-  //     header="Special Abilities"
-  //     field="name"
-  //     sortable
-  //     filter
-  //     filterPlaceholder="Search"
-  //   ></Column>
-  // </DataTable>
-  
+  );  
 
   return (
     <>
