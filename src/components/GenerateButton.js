@@ -38,13 +38,15 @@ const GenerateButton = (props) => {
           set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
         } 
       } else if(props.selectedItems[i].length >= 1){
-        console.log("Ping me")
+        let n = Math.round(Math.random() * (1 - 0));
+        let r = Math.round(Math.random() * (max - 0));
+        if(n === 0){
+          if (props.selectedItems[i].includes(props.itemOptions[i][r])){
+          } else {
+            set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
+          }
+        }
       }
-      
-      // if (props.selectedItem.includes(props.itemOptions[r])) {
-      // } else {
-      //   set((oldArray) => [...oldArray, props.itemOptions[r]]);
-      // }
     }
 
     //Number generate
