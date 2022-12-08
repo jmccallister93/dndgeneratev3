@@ -19,9 +19,11 @@ const MultipleRandomButton = (props) => {
 
 
   return (
+    <>
     <button className={style.btnName} onClick={onRandomClick}>
       Random
     </button>
+    </>
   );
 };
 

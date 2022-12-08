@@ -117,7 +117,7 @@ const CustomDataTable = (props) => {
   
   //JSX Dialog template
   const templateDatatable = (
-    <div className="card">
+    <>
       <h1 className={style.titles}>{props.h1Title}</h1>
       <Button onClick={openDialog} className={style.btnName}>
         Add / Remove
@@ -167,11 +167,12 @@ const CustomDataTable = (props) => {
           ></Column>
         </DataTable>
       </Dialog>
-    </div>
+      </>
   );  
 
   return (
     <>
+    <div>
       {templateDatatable}{" "}
       <MultipleRandomButton
         valueOptions={props.valueOptions}
@@ -180,6 +181,7 @@ const CustomDataTable = (props) => {
         selectedItem={props.selectedItem}
         setList={props.setList}
       />
+      </div>
     </>
   );
 };
