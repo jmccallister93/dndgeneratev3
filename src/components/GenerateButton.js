@@ -60,6 +60,19 @@ const GenerateButton = (props) => {
             set((oldArray) => [...oldArray, props.itemOptions[i][x2]]);
           }
         }
+        let n3 = Math.round(Math.random() * (1 - 0));
+        let x3 = Math.round(Math.random() * (max - 0));
+        if (n3 === 0) {
+          if (
+            props.selectedItems[i].includes(props.itemOptions[i][r]) ||
+            props.selectedItems[i].includes(props.itemOptions[i][x1]) ||
+            props.selectedItems[i].includes(props.itemOptions[i][x2]) ||
+            props.selectedItems[i].includes(props.itemOptions[i][x3])
+          ) {
+          } else {
+            set((oldArray) => [...oldArray, props.itemOptions[i][x3]]);
+          }
+        }
       }
     }
 
