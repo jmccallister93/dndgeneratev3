@@ -12,12 +12,6 @@ const MultipleRandomButton = (props) => {
     }
   };
 
-//   useEffect(() => {
-//     props.setList(props.selectedItem);
-//     console.log("Loaded")
-//   }, [props.selectedItem]);
-
-
   return (
     <>
     <button className={style.btnName} onClick={onRandomClick}>

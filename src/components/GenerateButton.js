@@ -11,7 +11,7 @@ const GenerateButton = (props) => {
   const onGenerate = (e) => {
     //DropDown Generate
     for (let i = 0; i < props.generateItems.length; i++) {
-      let max = props.itemOptions[i].length -1;
+      let max = props.itemOptions[i].length - 1;
       let set = props.setItem[i];
       if (
         props.generateItems[i] === "" ||
@@ -21,15 +21,28 @@ const GenerateButton = (props) => {
         set(props.itemOptions[i][r].name);
       }
     }
-    
+    //DataTable generate
+    for (let i = 0; i < props.selectedItems.length; i++) {
+      let max = props.itemOptions[i].length - 1;
+      let set = props.setSelectedItem[i];
+      let r = Math.round(Math.random() * (max - 0));
+      console.log("Selected loop")
+      if (
+        props.selectedItems[i] === "" ||
+        props.selectedItems[i] === undefined
+      ) {
+        if (props.selectedItem.includes(props.itemOptions[r])) {
+        } else {
+          set((oldArray) => [...oldArray, props.itemOptions[r]]);
+        }
+      }
+    }
+
     //Number generate
     //Standard
     if (props.numberItem) {
       for (let i = 0; i < props.numberItem.length; i++) {
-        if (
-          props.numberItem[i] === "" ||
-          props.numberItem[i] === undefined
-        ) {
+        if (props.numberItem[i] === "" || props.numberItem[i] === undefined) {
           let r = Math.floor(Math.random() * (2000 - 50) + 50);
           props.setNumberItem[i](r);
         }
@@ -91,9 +104,8 @@ const GenerateButton = (props) => {
         }
       }
     }
- 
-    //DataTable generate
 
+    //DataTable generate
   };
 
   // const onGenerate = (e) => {

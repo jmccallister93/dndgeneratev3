@@ -104,7 +104,7 @@ const CityGen = () => {
   const [selectedDistrict, setSelectedDistrict] = useState([]);
   const [districtList, setDistrictList] = useState([]);
 
-  const[numberSize, setNumebrSize] = useState("")
+  const [numberSize, setNumebrSize] = useState("");
 
   //Show Options
   const showBasics = (e) => {
@@ -129,9 +129,9 @@ const CityGen = () => {
   //     console.log("Loaded")
   //   }, [setSelectedGuild]);
 
-  useState(()=> {
-    console.log(size)
-  })
+  useState(() => {
+    console.log(size);
+  });
 
   return (
     <div className={style.mainWrapper}>
@@ -141,7 +141,7 @@ const CityGen = () => {
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton
-            generateItems={[
+              generateItems={[
                 type,
                 size,
                 atmosphere,
@@ -158,9 +158,13 @@ const CityGen = () => {
                 terrainOptions,
                 landmarkOptions,
                 governOptions,
+                guildOptions,
+                factionOptions,
+                eventOptions,
+                npcOptions,
+                districtOptions,
+                buildingOptions,
               ]}
-              numberItem={[population]}
-              setNumberItem={[setPopulation]}
               setItem={[
                 setType,
                 setSize,
@@ -170,6 +174,24 @@ const CityGen = () => {
                 setLandmark,
                 setGovern,
               ]}
+              selectedItems={[
+                selectedGuild,
+                selectedFaction,
+                selectedEvent,
+                selectedNpc,
+                selectedDistrict,
+                selectedBuilding,
+              ]}
+              setSelectedItem={[
+                setSelectedGuild,
+                setSelectedFaction,
+                setSelectedEvent,
+                setSelectedNpc,
+                setSelectedDistrict,
+                setSelectedBuilding,
+              ]}
+              numberItem={[population]}
+              setNumberItem={[setPopulation]}
             />
             <ClearButton
               setStringState={[
