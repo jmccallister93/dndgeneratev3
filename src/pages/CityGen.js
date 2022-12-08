@@ -25,6 +25,7 @@ import CustomDropdown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
+import ExportButtons from "../components/ExportButtons";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -221,6 +222,7 @@ const CityGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
+        <ExportButtons />
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
