@@ -222,7 +222,28 @@ const CityGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-        <ExportButtons />
+          <ExportButtons
+            objectName={cityName}
+            objectSingular={[
+              cityName,
+              type,
+              size,
+              population,
+              atmosphere,
+              culture,
+              terrain,
+              landmark,
+              govern,
+            ]}
+            objectPlural={[
+              selectedGuild,
+              selectedFaction,
+              selectedEvent,
+              selectedNpc,
+              selectedDistrict,
+              selectedBuilding,
+            ]}
+          />
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
