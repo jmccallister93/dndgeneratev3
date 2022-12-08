@@ -5,7 +5,7 @@ const SingleRandomButton = (props) => {
   //options
   //setValue
   const onRandomClick= (e) => {
-    let max = props.valueOptions.length;
+    let max = props.valueOptions.length -1;
     let r = Math.round(Math.random() * (max - 0));
     props.setSingular(props.valueOptions[r].name);
   };

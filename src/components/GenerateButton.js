@@ -36,14 +36,28 @@ const GenerateButton = (props) => {
       if (props.selectedItems[i].length <= 0) {
         if (props.selectedItem === undefined) {
           set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
-        } 
-      } else if(props.selectedItems[i].length >= 1){
-        let n = Math.round(Math.random() * (1 - 0));
-        let r = Math.round(Math.random() * (max - 0));
-        if(n === 0){
-          if (props.selectedItems[i].includes(props.itemOptions[i][r])){
+        }
+        let n1 = Math.round(Math.random() * (1 - 0));
+        let x1 = Math.round(Math.random() * (max - 0));
+        if (n1 === 0) {
+          if (
+            props.selectedItems[i].includes(props.itemOptions[i][r]) ||
+            props.selectedItems[i].includes(props.itemOptions[i][x1])
+          ) {
           } else {
-            set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
+            set((oldArray) => [...oldArray, props.itemOptions[i][x1]]);
+          }
+        }
+        let n2 = Math.round(Math.random() * (1 - 0));
+        let x2 = Math.round(Math.random() * (max - 0));
+        if (n2 === 0) {
+          if (
+            props.selectedItems[i].includes(props.itemOptions[i][r]) ||
+            props.selectedItems[i].includes(props.itemOptions[i][x1]) ||
+            props.selectedItems[i].includes(props.itemOptions[i][x2])
+          ) {
+          } else {
+            set((oldArray) => [...oldArray, props.itemOptions[i][x2]]);
           }
         }
       }
