@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 const GenerateButton = (props) => {
   //----PROPS NEEDED----
@@ -7,6 +7,13 @@ const GenerateButton = (props) => {
   //itemOptions
   //numberItem
   //---PROPS NEEDED----
+  const [multipleDisplay, setMultipleDisplay] = useState([]);
+  useEffect(() => {
+    if (props.selectedItem === undefined) {
+    } else if (props.selectedItem.length >= 0) {
+      setMultipleDisplay(props.selectedItem);
+    }
+  }, [props.selectedItem]);
 
   const onGenerate = (e) => {
     //DropDown Generate
@@ -26,16 +33,18 @@ const GenerateButton = (props) => {
       let max = props.itemOptions[i].length - 1;
       let set = props.setSelectedItem[i];
       let r = Math.round(Math.random() * (max - 0));
-      console.log("Selected loop")
-      if (
-        props.selectedItems[i] === "" ||
-        props.selectedItems[i] === undefined
-      ) {
-        if (props.selectedItem.includes(props.itemOptions[r])) {
-        } else {
-          set((oldArray) => [...oldArray, props.itemOptions[r]]);
-        }
+      if (props.selectedItems[i].length <= 0) {
+        if (props.selectedItem === undefined) {
+          set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
+        } 
+      } else if(props.selectedItems[i].length >= 1){
+        console.log("Ping me")
       }
+      
+      // if (props.selectedItem.includes(props.itemOptions[r])) {
+      // } else {
+      //   set((oldArray) => [...oldArray, props.itemOptions[r]]);
+      // }
     }
 
     //Number generate
