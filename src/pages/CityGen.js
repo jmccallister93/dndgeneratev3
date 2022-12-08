@@ -119,13 +119,13 @@ const CityGen = () => {
   };
 
   //Display
-//   const guildDisplay = selectedGuild.map((i) => {
-//     return <span>{`${i.name},`}</span>;
-//   });
-//   useEffect(() => {
-//     setGuildList(selectedGuild);
-//     console.log("Loaded")
-//   }, [setSelectedGuild]);
+  //   const guildDisplay = selectedGuild.map((i) => {
+  //     return <span>{`${i.name},`}</span>;
+  //   });
+  //   useEffect(() => {
+  //     setGuildList(selectedGuild);
+  //     console.log("Loaded")
+  //   }, [setSelectedGuild]);
 
   return (
     <div className={style.mainWrapper}>
@@ -135,7 +135,28 @@ const CityGen = () => {
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton />
-            <ClearButton />
+            <ClearButton
+              setStringState={[
+                setCityName,
+                setType,
+                setSize,
+                setPopulation,
+                setAtmoshpere,
+                setCulture,
+                setTerrain,
+                setLandmark,
+                setGovern,
+                setGuild,
+              ]}
+              setArrayState={[
+                setSelectedGuild,
+                setSelectedEvent,
+                setSelectedFaction,
+                setSelectedNpc,
+                setSelectedBuilding,
+                setSelectedDistrict,
+              ]}
+            />
           </div>
         </div>
       </div>
@@ -264,9 +285,8 @@ const CityGen = () => {
                 list={guildList}
                 setList={setGuildList}
                 valueOptions={guildOptions}
-                
               />
-              
+
               <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setFaction}
@@ -370,18 +390,14 @@ const CityGen = () => {
           <h2>
             Guilds{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedGuild}
-              />
+              <MultipleDisplay selectedItem={selectedGuild} />
             </span>
           </h2>
           <h2>
             Factions{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                setSelectedItem={setSelectedFaction}
-                valueOptions={factionOptions}
-                list={factionList}
+                selectedItem={selectedFaction}
               />
             </span>
           </h2>
@@ -389,9 +405,7 @@ const CityGen = () => {
             Events{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                setSelectedItem={selectedEvent}
-                valueOptions={eventOptions}
-                list={eventList}
+                selectedItem={selectedEvent}
               />
             </span>
           </h2>
@@ -399,9 +413,7 @@ const CityGen = () => {
             NPCs{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                setSelectedItem={selectedNpc}
-                valueOptions={npcOptions}
-                list={npcList}
+                selectedItem={selectedNpc}
               />
             </span>
           </h2>
@@ -409,9 +421,7 @@ const CityGen = () => {
             Districts{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                setSelectedItem={selectedDistrict}
-                valueOptions={districtOptions}
-                list={districtList}
+                selectedItem={selectedDistrict}
               />
             </span>
           </h2>
@@ -419,9 +429,7 @@ const CityGen = () => {
             Buildings{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                setSelectedItem={selectedBuilding}
-                valueOptions={buildingOptions}
-                list={buildingList}
+                selectedItem={selectedBuilding}
               />
             </span>
           </h2>
