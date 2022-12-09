@@ -243,6 +243,22 @@ const CityGen = () => {
               selectedDistrict,
               selectedBuilding,
             ]}
+            fields={[]}
+            headers={[
+              "City Name",
+              "Type",
+              "Population",
+              "Atmosphere",
+              "Terrain",
+              "Landmark",
+              "Government",
+              "Guilds",
+              "Factions",
+              "Events",
+              "NPCs",
+              "Districts",
+              "Buildings"
+            ]}
           />
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
