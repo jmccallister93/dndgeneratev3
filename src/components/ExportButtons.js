@@ -6,18 +6,23 @@ import { Button } from "primereact/button";
 const ExportButtons = (props) => {
   const [object, setObject] = useState([]);
   const [allSelection, setAllSelection] = useState();
+  const [test, setTest] = useState()
   useEffect(() => {
     // setObject((oldArray) => ({ ...oldArray, name: props.name, type: props.type }));
     setObject([]);
     for (let i = 0; i < props.objectSingular.length; i++) {
       setObject((oldArray) => [...oldArray, props.objectSingular[i]]);
     }
-    for (let i = 0; i < props.objectPlural.length; i++) {
-      setObject((oldArray) => [...oldArray, props.objectPlural[i]]);
-      for (let i = 0; i < props.objectPlural[i].length; i++) {
-        console.log(props.objectPlural[i]);
-      }
+    // if(props.objectPlural > 0){
+    //     setTest((oldArray) => [...oldArray, props.objectPlural])
+    // }
+    for(let i = 0; i < props.objectPlural.length; i++){
+        for(let j = 0; j < props.objectPlural[i].length; j++){
+    
+            console.log(props.objectPlural[i][j].name);
+        }
     }
+    // console.log(props.objectPlural[0][0].name)
   }, [props.objectSingular, props.objectPlural]);
 
   //Export Logic
