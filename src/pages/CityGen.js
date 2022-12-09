@@ -121,6 +121,9 @@ const CityGen = () => {
   const showLayout = (e) => {
     setIsLayoutActive((current) => !current);
   };
+  useState(()=>{
+    console.log(selectedGuild)
+  },[selectedGuild])
 
   const onExport = () => {
     var doc = new jsPDF("portrait");
@@ -234,29 +237,8 @@ const CityGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <ExportButtons
-            objectName={cityName}
-            objectSingular={[
-              cityName,
-              type,
-              size,
-              population,
-              atmosphere,
-              culture,
-              terrain,
-              landmark,
-              govern,
-            ]}
-            objectPlural={[
-              selectedGuild,
-              selectedFaction,
-              selectedEvent,
-              selectedNpc,
-              selectedDistrict,
-              selectedBuilding,
-            ]}
-            fields={[]}
-            headers={[
+          {/* <ExportButtons
+            headersSingular={[
               "City Name",
               "Type",
               "Population",
@@ -264,12 +246,15 @@ const CityGen = () => {
               "Terrain",
               "Landmark",
               "Government",
-              "Guilds",
-              "Factions",
-              "Events",
-              "NPCs",
-              "Districts",
-              "Buildings",
+              
+            ]}
+            headersPlural={[
+                "Guilds",
+                "Factions",
+                "Events",
+                "NPCs",
+                "Districts",
+                "Buildings",
             ]}
             combinedObj={
               { Name: cityName ,
@@ -286,14 +271,13 @@ const CityGen = () => {
                Districts: selectedDistrict ,
                Buildings: selectedBuilding }
             }
-            selectedItem={[selectedBuilding,selectedDistrict]}
-          />
-          {/* <div>
+          /> */}
+          <div>
             <h1>Export to PDF</h1>
             <button className={style.btnName} onClick={onExport}>
               PDF
             </button>
-          </div> */}
+          </div>
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
