@@ -17,7 +17,7 @@ const GetData = (props) => {
       if (dataName) {
         props.setPlural(dataName);
         setFetchError(null);
-        props.setOptions(dataName.map((r) => ({ name: r.name, value: r.value})));
+        props.setOptions(dataName.map((r) => ({ name: r.name})));
       }
     };
 

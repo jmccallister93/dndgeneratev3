@@ -121,19 +121,6 @@ const CityGen = () => {
     setIsLayoutActive((current) => !current);
   };
 
-  //Display
-  //   const guildDisplay = selectedGuild.map((i) => {
-  //     return <span>{`${i.name},`}</span>;
-  //   });
-  //   useEffect(() => {
-  //     setGuildList(selectedGuild);
-  //     console.log("Loaded")
-  //   }, [setSelectedGuild]);
-
-  useState(() => {
-    console.log(size);
-  });
-
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -257,8 +244,23 @@ const CityGen = () => {
               "Events",
               "NPCs",
               "Districts",
-              "Buildings"
+              "Buildings",
             ]}
+            combinedObj={
+              { Name: cityName ,
+               Type: type,
+               Population: population,
+               Atmosphere: atmosphere,
+               Terrain: terrain,
+               Landmark: landmark,
+               Government: govern,
+               Guilds: selectedGuild,
+               Factions: selectedFaction,
+               Events: selectedEvent ,
+               NPCs: selectedNpc ,
+               Districts: selectedDistrict ,
+               Buildings: selectedBuilding }
+            }
           />
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
@@ -486,37 +488,55 @@ const CityGen = () => {
           <h2>
             Guilds{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedGuild} />
+              <MultipleDisplay
+                selectedItem={selectedGuild}
+                setList={setGuildList}
+              />
             </span>
           </h2>
           <h2>
             Factions{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedFaction} />
+              <MultipleDisplay
+                selectedItem={selectedFaction}
+                setList={setFactionList}
+              />
             </span>
           </h2>
           <h2>
             Events{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedEvent} />
+              <MultipleDisplay
+                selectedItem={selectedEvent}
+                setList={setEventList}
+              />
             </span>
           </h2>
           <h2>
             NPCs{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedNpc} />
+              <MultipleDisplay
+                selectedItem={selectedNpc}
+                setList={setNpcList}
+              />
             </span>
           </h2>
           <h2>
             Districts{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedDistrict} />
+              <MultipleDisplay
+                selectedItem={selectedDistrict}
+                setList={setDistrictList}
+              />
             </span>
           </h2>
           <h2>
             Buildings{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedBuilding} />
+              <MultipleDisplay
+                selectedItem={selectedBuilding}
+                setList={setBuildingList}
+              />
             </span>
           </h2>
         </div>

@@ -45,24 +45,25 @@ const ExportButtons = (props) => {
 //     dataKey: col.field,
 //   }));
 //------------------
-const [saveme, setSaveme] = useState({})
-useState(()=>{
-    const obj = props.headers.reduce((accumulator, element, index) => {
-        return {...accumulator, [element]: props.objectSingular[index]}
-    },{})
-// setSaveme({header: props.headers})
-console.log(obj)
-},[props.objectSingular, props.objectPlural])
-const onClick=()=>{
-    var doc = new jsPDF('landscape');
-    doc.text(20, 20, 
-        `${props.headers}`);
-    
-    doc.save('Test.pdf');
+
+
+
+const onClick = ()=> {
+  let keys = Object.keys(props.combinedObj)
+  let values = Object.values(props.combinedObj)
+
+  console.log(values)
+
+    // console.log(props.combinedObj[8]["Factions"][0].name)
+   
+//     var doc = new jsPDF('landscape');
+//     doc.text(20, 20, 
+//         `${props.headers}`);
+//     doc.save('Test.pdf');
 }
-
-
-
+ // const objSingular = props.headers.reduce((accumulator, element, index) => {
+    //     return {...accumulator, [element]: props.objectSingular[index]}
+    // },{})
 
   // const exportCSV = (selectionOnly) => {
   //   dt.current.exportCSV({ selectionOnly });
