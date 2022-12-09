@@ -46,7 +46,8 @@ const ExportButtons = (props) => {
 //   }));
 //------------------
 
-
+const [obj, setObj] = useState({})
+const [k, setK] = useState()
 
 const onClick = ()=> {
   let keys = Object.keys(props.combinedObj)
@@ -54,20 +55,23 @@ const onClick = ()=> {
   
   for(let i=0;i < values.length; i++){
     if(Array.isArray(values[i])){
-      let arrayLength = values[i].length
-      for(let j =0; j<arrayLength; j++)
-      console.log(values[i][j].name)
+      for(let j =0; j<values[i].length; j++){
+         let multi = {[keys[i]]: values[i][j].name}
+        // console.log(multi)
+      }
+    } else if(typeof values[i] === 'string'){
+      let singles = {[keys[i]]: values[i]}
+      // console.log(singles)      
     }
   }
-  // if(values.lengt > )
+  console.log(props.combinedObj[1])
   
-
     // console.log(props.combinedObj[8]["Factions"][0].name)
    
-//     var doc = new jsPDF('landscape');
-//     doc.text(20, 20, 
-//         `${props.headers}`);
-//     doc.save('Test.pdf');
+    var doc = new jsPDF('landscape');
+    doc.text(20, 20, 
+        `${props.combinedObj["Name"]}`);
+    doc.save('Test.pdf');
 }
  // const objSingular = props.headers.reduce((accumulator, element, index) => {
     //     return {...accumulator, [element]: props.objectSingular[index]}

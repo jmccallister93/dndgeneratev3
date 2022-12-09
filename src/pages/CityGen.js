@@ -26,6 +26,7 @@ import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
 import ExportButtons from "../components/ExportButtons";
+import { jsPDF } from "jspdf";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -121,6 +122,30 @@ const CityGen = () => {
     setIsLayoutActive((current) => !current);
   };
 
+  const onExport = () => {
+    var doc = new jsPDF("portrait");
+    doc.text(
+      20,
+      20,
+      `Name: ${cityName} 
+        Type: ${type} 
+        Size: ${size} 
+        Population: ${population} 
+        Atmosphere: ${atmosphere} 
+        Culture: ${culture} 
+        Terrain: ${terrain} 
+        Landmark: ${landmark} 
+        Government: ${govern} 
+        Guilds: ${guildList}
+        Factions: ${factionList}
+        Events: ${eventList}
+        NPCs: ${npcList}
+        Districts: ${districtList}
+        Buildings: ${buildingList} `
+    );
+    doc.save("Test.pdf");
+  };
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -209,7 +234,7 @@ const CityGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <ExportButtons
+          {/* <ExportButtons
             objectName={cityName}
             objectSingular={[
               cityName,
@@ -261,7 +286,13 @@ const CityGen = () => {
                Districts: selectedDistrict ,
                Buildings: selectedBuilding }
             }
-          />
+          /> */}
+          <div>
+            <h1>Export to PDF</h1>
+            <button className={style.btnName} onClick={onExport}>
+              PDF
+            </button>
+          </div>
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
