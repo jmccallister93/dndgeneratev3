@@ -13,6 +13,7 @@
     "file-saver": "^2.0.5",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.25",
+    "jspdf-react": "^1.0.11",
     "mathjs": "^11.3.3",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",

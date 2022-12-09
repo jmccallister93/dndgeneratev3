@@ -234,7 +234,7 @@ const CityGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          {/* <ExportButtons
+          <ExportButtons
             objectName={cityName}
             objectSingular={[
               cityName,
@@ -286,13 +286,14 @@ const CityGen = () => {
                Districts: selectedDistrict ,
                Buildings: selectedBuilding }
             }
-          /> */}
-          <div>
+            selectedItem={[selectedBuilding,selectedDistrict]}
+          />
+          {/* <div>
             <h1>Export to PDF</h1>
             <button className={style.btnName} onClick={onExport}>
               PDF
             </button>
-          </div>
+          </div> */}
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
@@ -493,7 +494,7 @@ const CityGen = () => {
         </div>
 
         {/* Main Display */}
-        <div className={style.display}>
+        <div id="mainDisplay" className={style.display}>
           <h1>{cityName}</h1>
           <h2>
             Type <span className={style.minorText2}>{type}</span>
