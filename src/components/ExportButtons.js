@@ -51,8 +51,14 @@ const ExportButtons = (props) => {
 const onClick = ()=> {
   let keys = Object.keys(props.combinedObj)
   let values = Object.values(props.combinedObj)
-
-  console.log(values)
+  
+  for(let i=0;i < values.length; i++){
+    if(Array.isArray(values[i])){
+      console.log(values[i])
+    }
+  }
+  // if(values.lengt > )
+  
 
     // console.log(props.combinedObj[8]["Factions"][0].name)
    
