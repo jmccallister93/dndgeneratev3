@@ -29,7 +29,7 @@ const ExportButtons = (props) => {
     const innerdiv = document.getElementById("mainDisplay").textContent
     // console.log(innerdiv)
     var doc = new jsPDF("portrait");
-    doc.text(20, 20, `${innerdiv}`);
+    doc.text(20, 20, `${props.headers}\n`);
     doc.save(`Best.pdf`);
   };
 
