@@ -2,7 +2,7 @@ import style from "../stylesheets/PageStyle.module.scss";
 import { jsPDF } from "jspdf";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
-import PDF, { Text, AddPage, Line, Image, Table, Html } from 'jspdf-react'
+import PDF, { Text, AddPage, Line, Image, Table, Html } from "jspdf-react";
 
 const ExportButtons = (props) => {
   // const [obj, setObj] = useState([]);
@@ -25,20 +25,40 @@ const ExportButtons = (props) => {
   //   }
   // },[])
 
-  const onClick = () => {
-    const innerdiv = document.getElementById("mainDisplay").textContent
+  const onClickPdf = () => {
+    const innerdiv = document.getElementById("mainDisplay").textContent;
     // console.log(innerdiv)
     var doc = new jsPDF("portrait");
     doc.text(20, 20, `${props.headers}\n`);
     doc.save(`Best.pdf`);
   };
 
+  const [obj, setObj] = useState();
+  useEffect(() => {
+    let values = Object.values(props.combinedObj);
+    for (let i = 0; i < values.length; i++) {
+      if (Array.isArray(values[i])) {
+        for (let j = 0; j < values[i].length; j++) {
+          delete values[i][j].value
+        }
+      }
+    }
+  });
+  const onClickTxt = () => {
+    const fileData = JSON.stringify(props.combinedObj);
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "props.combineObject.json";
+    link.click();
+  };
+
   return (
     <div>
       <h1>Export</h1>
-      <button className={style.btnName} onClick={onClick}>
-        PDF
-        </button>
+      <button className={style.btnName} onClick={onClickTxt}>
+        .Txt
+      </button>
     </div>
   );
 };
