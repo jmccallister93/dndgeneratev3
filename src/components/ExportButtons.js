@@ -54,7 +54,9 @@ const onClick = ()=> {
   
   for(let i=0;i < values.length; i++){
     if(Array.isArray(values[i])){
-      console.log(values[i])
+      let arrayLength = values[i].length
+      for(let j =0; j<arrayLength; j++)
+      console.log(values[i][j].name)
     }
   }
   // if(values.lengt > )
