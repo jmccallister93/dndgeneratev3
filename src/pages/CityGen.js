@@ -148,6 +148,7 @@ const CityGen = () => {
     );
     doc.save("Test.pdf");
   };
+  
 
   return (
     <div className={style.mainWrapper}>
@@ -272,12 +273,12 @@ const CityGen = () => {
                Buildings: selectedBuilding }
             }
           /> */}
-          <div>
+          {/* <div>
             <h1>Export to PDF</h1>
             <button className={style.btnName} onClick={onExport}>
               PDF
             </button>
-          </div>
+          </div> */}
           <h1>City Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
