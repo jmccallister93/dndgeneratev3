@@ -400,10 +400,20 @@ const CultGen = () => {
             />
           </div>
           <h1 className={style.subHeader} onClick={showDetails}>
-            Building Features
+              Cult Details
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
-            Details to fill out
+            <div>
+
+            </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showFeature}>
+              Cult Features
+          </h1>
+          <div className={isFeatureActive ? style.subsection : style.hidden}>
+            <div>
+
+            </div>
           </div>
         </div>
 
