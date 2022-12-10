@@ -463,49 +463,345 @@ const ClassGen = () => {
           </h1>
           <div className={isProfActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropdown
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setArmorProf}
                 setPlural={setArmorProfs}
                 setOptions={setArmorProfOptions}
-                options={armorProfOptions}
                 h1Title={"Armor Proficiencies"}
-                placeholder={"Set Armor Prof"}
-                value={armorProf}
+                dialogHeader={"Armor Proficiencies"}
+                selectedItem={selectedArmorProf}
+                setSelectedItem={setSelectedArmorProf}
+                list={armorProfList}
+                setList={setArmorProfList}
                 valueOptions={armorProfOptions}
               />
-              <CustomDropdown
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setWeaponProf}
                 setPlural={setWeaponProfs}
                 setOptions={setWeaponProfOptions}
-                options={weaponProfOptions}
                 h1Title={"Weapon Proficiencies"}
-                placeholder={"Set Weapon Prof"}
-                value={weaponProf}
+                dialogHeader={"Weapon Proficiencies"}
+                selectedItem={selectedWeaponProf}
+                setSelectedItem={setSelectedWeaponProf}
+                list={weaponProfList}
+                setList={setWeaponProfList}
                 valueOptions={weaponProfOptions}
               />
-              <CustomDropdown
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setToolProf}
                 setPlural={setToolProfs}
                 setOptions={setToolProfOptions}
-                options={toolProfOptions}
                 h1Title={"Tool Proficiencies"}
-                placeholder={"Set Tool Prof"}
-                value={toolProf}
+                dialogHeader={"Tool Proficiencies"}
+                selectedItem={selectedToolProf}
+                setSelectedItem={setSelectedToolProf}
+                list={toolProfList}
+                setList={setToolProfList}
                 valueOptions={toolProfOptions}
               />
-              <CustomDropdown
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setSkillProf}
                 setPlural={setSkillProfs}
                 setOptions={setSkillProfOptions}
-                options={skillProfOptions}
                 h1Title={"Skill Proficiencies"}
-                placeholder={"Set Skill Prof"}
-                value={skillProf}
+                dialogHeader={"Skill Proficiencies"}
+                selectedItem={selectedSkillProf}
+                setSelectedItem={setSelectedSkillProf}
+                list={skillProfList}
+                setList={setSkillProfList}
                 valueOptions={skillProfOptions}
+              />
+            </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showFive}>
+            Levels 1-5
+          </h1>
+          <div className={isFiveActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setFirstLvl}
+                setPlural={setFirstLvls}
+                setOptions={setFirstLvlOptions}
+                h1Title={"1st Level"}
+                dialogHeader={"1st Level"}
+                selectedItem={selectedFirstLvl}
+                setSelectedItem={setSelectedFirstLvl}
+                list={firstLvlList}
+                setList={setFirstLvlList}
+                valueOptions={firstLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setSecondLvl}
+                setPlural={setSecondLvls}
+                setOptions={setSecondLvlOptions}
+                h1Title={"2nd Level"}
+                dialogHeader={"2nd Level"}
+                selectedItem={selectedSecondLvl}
+                setSelectedItem={setSelectedSecondLvl}
+                list={secondLvlList}
+                setList={setSecondLvlList}
+                valueOptions={secondLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setThirdLvl}
+                setPlural={setThirdLvls}
+                setOptions={setThirdLvlOptions}
+                h1Title={"3rd Level"}
+                dialogHeader={"3rd Level"}
+                selectedItem={selectedThirdLvl}
+                setSelectedItem={setSelectedThirdLvl}
+                list={thirdLvlList}
+                setList={setThirdLvlList}
+                valueOptions={thirdLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setFourthLvl}
+                setPlural={setFourthLvls}
+                setOptions={setFourthLvlOptions}
+                h1Title={"4th Level"}
+                dialogHeader={"4th Level"}
+                selectedItem={selectedFourthLvl}
+                setSelectedItem={setSelectedFourthLvl}
+                list={fourthLvlList}
+                setList={setFourthLvlList}
+                valueOptions={fourthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setFifthLvl}
+                setPlural={setFifthLvls}
+                setOptions={setFifthLvlOptions}
+                h1Title={"5th Level"}
+                dialogHeader={"5th Level"}
+                selectedItem={selectedFifthLvl}
+                setSelectedItem={setSelectedFifthLvl}
+                list={fifthLvlList}
+                setList={setFifthLvlList}
+                valueOptions={fifthLvlOptions}
+              />
+            </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showTen}>
+            Levels 6-10
+          </h1>
+          <div className={isTenActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setSixthLvl}
+                setPlural={setSixthLvls}
+                setOptions={setSixthLvlOptions}
+                h1Title={"6th Level"}
+                dialogHeader={"6th Level"}
+                selectedItem={selectedSixthLvl}
+                setSelectedItem={setSelectedSixthLvl}
+                list={sixthLvlList}
+                setList={setSixthLvlList}
+                valueOptions={sixthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setSeventhLvl}
+                setPlural={setSeventhLvls}
+                setOptions={setSeventhLvlOptions}
+                h1Title={"7th Level"}
+                dialogHeader={"7th Level"}
+                selectedItem={selectedSeventhLvl}
+                setSelectedItem={setSelectedSeventhLvl}
+                list={seventhLvlList}
+                setList={setSeventhLvlList}
+                valueOptions={seventhLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setEighthLvl}
+                setPlural={setEighthLvls}
+                setOptions={setEighthLvlOptions}
+                h1Title={"8th Level"}
+                dialogHeader={"8th Level"}
+                selectedItem={selectedEighthLvl}
+                setSelectedItem={setSelectedEighthLvl}
+                list={eighthLvlList}
+                setList={setEighthLvlList}
+                valueOptions={eighthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setNinthLvl}
+                setPlural={setNinthLvls}
+                setOptions={setNinthLvlOptions}
+                h1Title={"9th Level"}
+                dialogHeader={"9th Level"}
+                selectedItem={selectedNinthLvl}
+                setSelectedItem={setSelectedNinthLvl}
+                list={ninthLvlList}
+                setList={setNinthLvlList}
+                valueOptions={ninthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setTenthLvl}
+                setPlural={setTenthLvls}
+                setOptions={setTenthLvlOptions}
+                h1Title={"10th Level"}
+                dialogHeader={"10th Level"}
+                selectedItem={selectedTenthLvl}
+                setSelectedItem={setSelectedTenthLvl}
+                list={tenthLvlList}
+                setList={setTenthLvlList}
+                valueOptions={tenthLvlOptions}
+              />
+            </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showFifteen}>
+            Levels 11-15
+          </h1>
+          <div className={isFifteenActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setEleventhLvl}
+                setPlural={setEleventhLvls}
+                setOptions={setEleventhLvlOptions}
+                h1Title={"11th Level"}
+                dialogHeader={"11th Level"}
+                selectedItem={selectedEleventhLvl}
+                setSelectedItem={setSelectedEleventhLvl}
+                list={eleventhLvlList}
+                setList={setEleventhLvlList}
+                valueOptions={eleventhLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setTwelthLvl}
+                setPlural={setTwelthLvls}
+                setOptions={setTwelthLvlOptions}
+                h1Title={"12th Level"}
+                dialogHeader={"12th Level"}
+                selectedItem={selectedTwelthLvl}
+                setSelectedItem={setSelectedTwelthLvl}
+                list={twelthLvlList}
+                setList={setTwelthLvlList}
+                valueOptions={twelthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setThirteenthLvl}
+                setPlural={setThirteenthLvls}
+                setOptions={setThirteenthLvlOptions}
+                h1Title={"13th Level"}
+                dialogHeader={"13th Level"}
+                selectedItem={selectedThirteenthLvl}
+                setSelectedItem={setSelectedThirteenthLvl}
+                list={thirteenthLvlList}
+                setList={setThirteenthLvlList}
+                valueOptions={thirteenthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setFourteenthLvl}
+                setPlural={setFourteenthLvls}
+                setOptions={setFourteenthLvlOptions}
+                h1Title={"14th Level"}
+                dialogHeader={"14th Level"}
+                selectedItem={selectedFourteenthLvl}
+                setSelectedItem={setSelectedFourteenthLvl}
+                list={fourteenthLvlList}
+                setList={setFourteenthLvlList}
+                valueOptions={fourteenthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setFifteenthLvl}
+                setPlural={setFifteenthLvls}
+                setOptions={setFifteenthLvlOptions}
+                h1Title={"15th Level"}
+                dialogHeader={"15th Level"}
+                selectedItem={selectedFifteenthLvl}
+                setSelectedItem={setSelectedFifteenthLvl}
+                list={fifteenthLvlList}
+                setList={setFifteenthLvlList}
+                valueOptions={fifteenthLvlOptions}
+              />
+            </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showTwenty}>
+            Levels 16-20
+          </h1>
+          <div className={isTwentyActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setSixteenthLvl}
+                setPlural={setSixteenthLvls}
+                setOptions={setSixteenthLvlOptions}
+                h1Title={"16th Level"}
+                dialogHeader={"16th Level"}
+                selectedItem={selectedSixteenthLvl}
+                setSelectedItem={setSelectedSixteenthLvl}
+                list={sixteenthLvlList}
+                setList={setSixteenthLvlList}
+                valueOptions={sixteenthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setSeventeenthLvl}
+                setPlural={setSeventeenthLvls}
+                setOptions={setSeventeenthLvlOptions}
+                h1Title={"17th Level"}
+                dialogHeader={"17th Level"}
+                selectedItem={selectedSeventeenthLvl}
+                setSelectedItem={setSelectedSeventeenthLvl}
+                list={seventeenthLvlList}
+                setList={setSeventeenthLvlList}
+                valueOptions={seventeenthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setEighteenthLvl}
+                setPlural={setEighteenthLvls}
+                setOptions={setEighteenthLvlOptions}
+                h1Title={"18th Level"}
+                dialogHeader={"18th Level"}
+                selectedItem={selectedEighteenthLvl}
+                setSelectedItem={setSelectedEighteenthLvl}
+                list={eighteenthLvlList}
+                setList={setEighteenthLvlList}
+                valueOptions={eighteenthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setNineteenthLvl}
+                setPlural={setNineteenthLvls}
+                setOptions={setNineteenthLvlOptions}
+                h1Title={"19th Level"}
+                dialogHeader={"19th Level"}
+                selectedItem={selectedNineteenthLvl}
+                setSelectedItem={setSelectedNineteenthLvl}
+                list={nineteenthLvlList}
+                setList={setNineteenthLvlList}
+                valueOptions={nineteenthLvlOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setTwentithLvl}
+                setPlural={setTwentithLvls}
+                setOptions={setTwentithLvlOptions}
+                h1Title={"20th Level"}
+                dialogHeader={"20th Level"}
+                selectedItem={selectedTwentithLvl}
+                setSelectedItem={setSelectedTwentithLvl}
+                list={twentithLvlList}
+                setList={setTwentithLvlList}
+                valueOptions={twentithLvlOptions}
               />
             </div>
           </div>
