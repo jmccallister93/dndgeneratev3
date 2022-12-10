@@ -137,8 +137,8 @@ const ClassGen = () => {
   const [eighthLvl, setEighthLvl] = useState("");
   const [eighthLvls, setEighthLvls] = useState("");
   const [eighthLvlOptions, setEighthLvlOptions] = useState("");
-  const [eighthLvlList, setEighthLvlList] = useState("");
-  const [selectedEighthLvl, setSelectedEighthLvl] = useState("");
+  const [eighthLvlList, setEighthLvlList] = useState([]);
+  const [selectedEighthLvl, setSelectedEighthLvl] = useState([]);
 
   const [ninthLvl, setNinthLvl] = useState("");
   const [ninthLvls, setNinthLvls] = useState("");
@@ -239,9 +239,8 @@ const ClassGen = () => {
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton
-              generateItems={[className, hitDie]}
+              generateItems={[hitDie, hpStart,spell]}
               itemOptions={[
-                classNameOptions,
                 diceOptions,
                 hpStartOptions,
                 primaryAbilityOptions,
@@ -274,36 +273,9 @@ const ClassGen = () => {
                 twentithLvlOptions,
               ]}
               setItem={[
-                setClassName,
                 setHitDie,
                 setHpStart,
-                setPrimaryAbility,
-                setArmorProf,
-                setWeaponProf,
-                setToolProf,
-                setSaveProf,
-                setSkillProf,
-                setLanguage,
-                setSpell,
-                setFirstLvl,
-                setSecondLvl,
-                setThirdLvl,
-                setFourthLvl,
-                setFifthLvl,
-                setSixthLvl,
-                setSeventhLvl,
-                setEighthLvl,
-                setNinthLvl,
-                setTenthLvl,
-                setEleventhLvl,
-                setTwelthLvl,
-                setThirteenthLvl,
-                setFourteenthLvl,
-                setFifteenthLvl,
-                setSixteenthLvl,
-                setEighteenthLvl,
-                setNineteenthLvl,
-                setTwentithLvl,
+                setSpell
               ]}
               selectedItems={[
                 selectedPrimaryAbility,
@@ -313,7 +285,7 @@ const ClassGen = () => {
                 selectedSaveProf,
                 selectedSkillProf,
                 selectedLanguage,
-                selectedSpell,
+                // selectedSpell,
                 selectedFirstLvl,
                 selectedSecondLvl,
                 selectedThirdLvl,
@@ -335,7 +307,7 @@ const ClassGen = () => {
                 selectedNineteenthLvl,
                 selectedTwentithLvl,
               ]}
-              setSelctedItems={[
+              setSelectedItem={[
                 setSelectedPrimaryAbility,
                 setSelectedArmorProf,
                 setSelectedWeaponProf,
@@ -343,7 +315,7 @@ const ClassGen = () => {
                 setSelectedSaveProf,
                 setSelectedSkillProf,
                 setSelectedLanguage,
-                setSelectedSpell,
+                // setSelectedSpell,
                 setSelectedFirstLvl,
                 setSelectedSecondLvl,
                 setSelectedThirdLvl,
@@ -365,11 +337,11 @@ const ClassGen = () => {
                 setSelectedNineteenthLvl,
                 setSelectedTwentithLvl,
               ]}
-              numberItem={[]}
-              setNumberItem={[]}
+              // numberItem={[]}
+              // setNumberItem={[]}
             />
             <ClearButton
-              setStringState={[setClassName, setHitDie]}
+              setStringState={[setClassName, setHitDie, setHpStart]}
               setArrayState={[
                 setSelectedPrimaryAbility,
                 setSelectedArmorProf,
@@ -539,6 +511,17 @@ const ClassGen = () => {
                 list={languageList}
                 setList={setLanguageList}
                 valueOptions={languageOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setSpell}
+                setPlural={setSpells}
+                setOptions={setSpellOptions}
+                options={spellOptions}
+                h1Title={"Spell School"}
+                placeholder={"Set Spell School"}
+                value={spell}
+                valueOptions={spellOptions}
               />
             </div>
           </div>
@@ -908,10 +891,11 @@ const ClassGen = () => {
           <h2>
             Spell School{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
+              {/* <MultipleDisplay
                 selectedItem={selectedSpell}
                 setList={setSpellList}
-              />
+              /> */}
+              {spell}
             </span>
           </h2>
           <h2>

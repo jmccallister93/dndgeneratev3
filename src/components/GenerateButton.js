@@ -28,8 +28,8 @@ const GenerateButton = (props) => {
         set(props.itemOptions[i][r].name);
       }
     }
-    //DataTable generate
 
+    //DataTable generate
     for (let i = 0; i < props.selectedItems.length; i++) {
       let n = Math.round(Math.random() * (6 - 0));
       for (let x = 0; x <= n; x++) {

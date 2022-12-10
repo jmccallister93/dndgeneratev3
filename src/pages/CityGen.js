@@ -121,9 +121,7 @@ const CityGen = () => {
   const showLayout = (e) => {
     setIsLayoutActive((current) => !current);
   };
-  useState(()=>{
-    console.log(selectedGuild)
-  },[selectedGuild])
+
 
   const onExport = () => {
     var doc = new jsPDF("portrait");
