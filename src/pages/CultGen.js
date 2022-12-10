@@ -24,6 +24,7 @@ import CustomInputText from "../components/CustomInputText";
 const CultGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isFeatureActive, setIsFeatureActive] = useState(false);
 
   const [cultName, setCultName] = useState("");
   const [cultNames, setCultNames] = useState("");
@@ -65,31 +66,31 @@ const CultGen = () => {
   const [positives, setPositives] = useState("");
   const [positiveOptions, setPositiveOptions] = useState("");
   const [selectedPositive, setSelectedPositive] = useState([]);
-  const [positiveList, setPositiveList] = useState([]); 
+  const [positiveList, setPositiveList] = useState([]);
 
   const [neutral, setNeutral] = useState("");
   const [neutrals, setNeutrals] = useState("");
   const [neutralOptions, setNeutralOptions] = useState("");
   const [selectedNeutral, setSelectedNeutral] = useState([]);
-  const [neutralList, setNeutralList] = useState([]); 
+  const [neutralList, setNeutralList] = useState([]);
 
   const [unwelcome, setUnwelcome] = useState("");
   const [unwelcomes, setUnwelcomes] = useState("");
   const [unwelcomeOptions, setUnwelcomeOptions] = useState("");
   const [selectedUnwelcome, setSelectedUnwelcome] = useState([]);
-  const [unwelcomeList, setUnwelcomeList] = useState([]); 
+  const [unwelcomeList, setUnwelcomeList] = useState([]);
 
   const [intolerant, setIntolerant] = useState("");
   const [intolerants, setIntolerants] = useState("");
   const [intolerantOptions, setIntolerantOptions] = useState("");
   const [selectedIntolerant, setSelectedIntolerant] = useState([]);
-  const [intolerantList, setIntolerantList] = useState([]); 
+  const [intolerantList, setIntolerantList] = useState([]);
 
   const [service, setService] = useState("");
   const [services, setServices] = useState("");
   const [serviceOptions, setServiceOptions] = useState("");
   const [selectedService, setSelectedService] = useState([]);
-  const [serviceList, setServiceList] = useState([]); 
+  const [serviceList, setServiceList] = useState([]);
 
   const [structure, setStructure] = useState("");
   const [structures, setStructures] = useState("");
@@ -99,79 +100,79 @@ const CultGen = () => {
   const [initiations, setInitiations] = useState("");
   const [initiationOptions, setInitiationOptions] = useState("");
   const [selectedInitiation, setSelectedInitiation] = useState([]);
-  const [initiationList, setInitiationList] = useState([]); 
+  const [initiationList, setInitiationList] = useState([]);
 
   const [lowRole, setLowRole] = useState("");
   const [lowRoles, setLowRoles] = useState("");
   const [lowRoleOptions, setLowRoleOptions] = useState("");
   const [selectedLowRole, setSelectedLowRole] = useState([]);
-  const [lowRoleList, setLowRoleList] = useState([]); 
+  const [lowRoleList, setLowRoleList] = useState([]);
 
   const [mediumRole, setMediumRole] = useState("");
   const [mediumRoles, setMediumRoles] = useState("");
   const [mediumRoleOptions, setMediumRoleOptions] = useState("");
   const [selectedMediumRole, setSelectedMediumRole] = useState([]);
-  const [mediumRoleList, setMediumRoleList] = useState([]); 
+  const [mediumRoleList, setMediumRoleList] = useState([]);
 
   const [highRole, setHighRole] = useState("");
   const [highRoles, setHighRoles] = useState("");
   const [highRoleOptions, setHighRoleOptions] = useState("");
   const [selectedHighRole, setSelectedHighRole] = useState([]);
-  const [highRoleList, setHighRoleList] = useState([]); 
+  const [highRoleList, setHighRoleList] = useState([]);
 
   const [quest, setQuest] = useState("");
   const [quests, setQuests] = useState("");
   const [questOptions, setQuestOptions] = useState("");
   const [selectedQuest, setSelectedQuest] = useState([]);
-  const [questList, setQuestList] = useState([]); 
+  const [questList, setQuestList] = useState([]);
 
   const [advance, setAdvance] = useState("");
   const [advances, setAdvances] = useState("");
   const [advanceOptions, setAdvanceOptions] = useState("");
   const [selectedAdvance, setSelectedAdvance] = useState([]);
-  const [advanceList, setAdvanceList] = useState([]); 
+  const [advanceList, setAdvanceList] = useState([]);
 
   const [belief, setBelief] = useState("");
   const [beliefs, setBeliefs] = useState("");
   const [beliefOptions, setBeliefOptions] = useState("");
   const [selectedBelief, setSelectedBelief] = useState([]);
-  const [beliefList, setBeliefList] = useState([]); 
+  const [beliefList, setBeliefList] = useState([]);
 
   const [orgType, setOrgType] = useState("");
   const [orgTypes, setOrgTypes] = useState("");
   const [orgTypeOptions, setOrgTypeOptions] = useState("");
   const [selectedOrgType, setSelectedOrgType] = useState([]);
-  const [orgTypeList, setOrgTypeList] = useState([]); 
+  const [orgTypeList, setOrgTypeList] = useState([]);
 
   const [headquater, setHeadquater] = useState("");
   const [headquaters, setHeadquaters] = useState("");
   const [headquaterOptions, setHeadquaterOptions] = useState("");
   const [selectedHeadquater, setSelectedHeadquater] = useState([]);
-  const [headquaterList, setHeadquaterList] = useState([]); 
+  const [headquaterList, setHeadquaterList] = useState([]);
 
   const [building, setBuilding] = useState("");
   const [buildings, setBuildings] = useState("");
   const [buildingOptions, setBuildingOptions] = useState("");
   const [selectedBuilding, setSelectedBuilding] = useState([]);
-  const [buildingList, setBuildingList] = useState([]); 
+  const [buildingList, setBuildingList] = useState([]);
 
   const [location, setLocation] = useState("");
   const [locations, setLocations] = useState("");
   const [locationOptions, setLocationOptions] = useState("");
   const [selectedLocation, setSelectedLocation] = useState([]);
-  const [locationList, setLocationList] = useState([]); 
+  const [locationList, setLocationList] = useState([]);
 
   const [stronghold, setStronghold] = useState("");
   const [strongholds, setStrongholds] = useState("");
   const [strongholdOptions, setStrongholdOptions] = useState("");
   const [selectedStronghold, setSelectedStronghold] = useState([]);
-  const [strongholdList, setStrongholdList] = useState([]); 
+  const [strongholdList, setStrongholdList] = useState([]);
 
   const [resource, setResource] = useState("");
   const [resources, setResources] = useState("");
   const [resourceOptions, setResourceOptions] = useState("");
   const [selectedResource, setSelectedResource] = useState([]);
-  const [resourceList, setResourceList] = useState([]); 
+  const [resourceList, setResourceList] = useState([]);
 
   const [defence, setDefence] = useState("");
   const [defences, setDefences] = useState("");
@@ -185,25 +186,25 @@ const CultGen = () => {
   const [motives, setMotives] = useState("");
   const [motiveOptions, setMotiveOptions] = useState("");
   const [selectedMotive, setSelectedMotive] = useState([]);
-  const [motiveList, setMotiveList] = useState([]); 
+  const [motiveList, setMotiveList] = useState([]);
 
   const [power, setPower] = useState("");
   const [powers, setPowers] = useState("");
   const [powerOptions, setPowerOptions] = useState("");
   const [selectedPower, setSelectedPower] = useState([]);
-  const [powerList, setPowerList] = useState([]); 
+  const [powerList, setPowerList] = useState([]);
 
   const [specialty, setSpecialty] = useState("");
   const [specialtys, setSpecialtys] = useState("");
   const [specialtyOptions, setSpecialtyOptions] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState([]);
-  const [specialtyList, setSpecialtyList] = useState([]); 
+  const [specialtyList, setSpecialtyList] = useState([]);
 
   const [weakness, setWeakness] = useState("");
   const [weaknesss, setWeaknesss] = useState("");
   const [weaknessOptions, setWeaknessOptions] = useState("");
   const [selectedWeakness, setSelectedWeakness] = useState([]);
-  const [weaknessList, setWeaknessList] = useState([]); 
+  const [weaknessList, setWeaknessList] = useState([]);
 
   const [logo, setLogo] = useState("");
   const [logos, setLogos] = useState("");
@@ -219,6 +220,9 @@ const CultGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
+  const showFeature = (e) => {
+    setIsFeatureActive((current) => !current);
+  };
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -226,7 +230,63 @@ const CultGen = () => {
         <h1 className={style.mainHeader}>Cult Generator</h1>
         <div>
           <div className={style.btnWrapper}>
-            <GenerateButton />
+            <GenerateButton
+              generateItems={[
+                wealth,
+                influence,
+                structure,
+                defence,
+                origin,
+                logo,
+                leader,
+              ]}
+              itemOptions={[
+                wealthOptions,
+                incomeOptions,
+                itemOptions,
+                influenceOptions,
+                influenceTacticOptions,
+                favoredOptions,
+                positiveOptions,
+                neutralOptions,
+                unwelcomeOptions,
+                intolerantOptions,
+                serviceOptions,
+                structureOptions,
+                initiationOptions,
+                lowRoleOptions,
+                mediumRoleOptions,
+                highRoleOptions,
+                questOptions,
+                advanceOptions,
+                beliefOptions,
+                orgTypeOptions,
+                headquaterOptions,
+                buildingOptions,
+                locationOptions,
+                strongholdOptions,
+                resourceOptions,
+                defenceOptions,
+                originOptions,
+                motiveOptions,
+                powerOptions,
+                specialtyOptions,
+                weaknessOptions,
+                logoOptions,
+                leaderOptions
+              ]}
+              setItem={[
+                setWealth,
+                setInfluence,
+                setStructure,
+                setDefence,
+                setOrigin,
+                setLogo,
+                setLeader
+              ]}
+              selectedItems={[]}
+              setSelectedItem={[]}
+            />
             <ClearButton />
           </div>
         </div>
