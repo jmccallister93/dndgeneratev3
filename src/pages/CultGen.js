@@ -273,7 +273,7 @@ const CultGen = () => {
                 specialtyOptions,
                 weaknessOptions,
                 logoOptions,
-                leaderOptions
+                leaderOptions,
               ]}
               setItem={[
                 setWealth,
@@ -282,10 +282,64 @@ const CultGen = () => {
                 setDefence,
                 setOrigin,
                 setLogo,
-                setLeader
+                setLeader,
               ]}
-              selectedItems={[]}
-              setSelectedItem={[]}
+              selectedItems={[
+                selectedIncome,
+                selectedItem,
+                selectedInfluenceTactic,
+                selectedFavored,
+                selectedPositive,
+                selectedNeutral,
+                selectedUnwelcome,
+                selectedIntolerant,
+                selectedService,
+                selectedInitiation,
+                selectedLowRole,
+                selectedMediumRole,
+                selectedHighRole,
+                selectedQuest,
+                selectedAdvance,
+                selectedBelief,
+                selectedOrgType,
+                selectedHeadquater,
+                selectedBuilding,
+                selectedLocation,
+                selectedStronghold,
+                selectedResource,
+                selectedMotive,
+                selectedPower,
+                selectedSpecialty,
+                selectedWeakness,
+              ]}
+              setSelectedItem={[
+                setSelectedIncome,
+                setSelectedItem,
+                setSelectedInfluenceTactic,
+                setSelectedFavored,
+                setSelectedPositive,
+                setSelectedNeutral,
+                setSelectedUnwelcome,
+                setSelectedIntolerant,
+                setSelectedService,
+                setSelectedInitiation,
+                setSelectedLowRole,
+                setSelectedMediumRole,
+                setSelectedHighRole,
+                setSelectedQuest,
+                setSelectedAdvance,
+                setSelectedBelief,
+                setSelectedOrgType,
+                setSelectedHeadquater,
+                setSelectedBuilding,
+                setSelectedLocation,
+                setSelectedStronghold,
+                setSelectedResource,
+                setSelectedMotive,
+                setSelectedPower,
+                setSelectedSpecialty,
+                setSelectedWeakness,
+              ]}
             />
             <ClearButton />
           </div>
