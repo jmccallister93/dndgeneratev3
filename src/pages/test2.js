@@ -1,5 +1,5 @@
-const [saveProf, setsaveProf] = useState("");
-const [saveProfs, setsaveProfs] = useState("");
-const [saveProfOptions, setsaveProfOptions] = useState("");
-const [saveProfList, setsaveProfList] = useState("");
-const [selectedsaveProf, setSelectedsaveProf] = useState("");
+const [TwentithLvl, setTwentithLvl] = useState("");
+  const [TwentithLvls, setTwentithLvls] = useState("");
+  const [TwentithLvlOptions, setTwentithLvlOptions] = useState("");
+  const [TwentithLvlList, setTwentithLvlList] = useState("");
+  const [selectedTwentithLvl, setSelectedTwentithLvl] = useState("");

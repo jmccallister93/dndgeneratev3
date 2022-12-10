@@ -23,9 +23,11 @@ import CustomInputText from "../components/CustomInputText";
 
 const ClassGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
-  const [isFeatureActive, setIsFeatureActive] = useState(false);
-  const [isDetailActive, setIsDetailActive] = useState(false);
-  const [isLayoutActive, setIsLayoutActive] = useState(false);
+  const [isProfActive, setIsProfActive] = useState(false);
+  const [isFiveActive, setIsFiveActive] = useState(false);
+  const [isTenActive, setIsTenActive] = useState(false);
+  const [isFifteenActive, setIsFifteenActive] = useState(false);
+  const [isTwentyActive, setIsTwentyActive] = useState(false);
 
   const [className, setClassName] = useState("");
   const [classNames, setClassNames] = useState("");
@@ -42,6 +44,8 @@ const ClassGen = () => {
   const [primaryAbility, setPrimaryAbility] = useState("");
   const [primaryAbilitys, setPrimaryAbilitys] = useState("");
   const [primaryAbilityOptions, setPrimaryAbilityOptions] = useState("");
+  const [primaryAbilityList, setPrimaryAbilityList] = useState("");
+  const [selectedPrimaryAbility, setSelectedPrimaryAbility] = useState("");
 
   const [armorProf, setArmorProf] = useState("");
   const [armorProfs, setArmorProfs] = useState("");
@@ -209,8 +213,20 @@ const ClassGen = () => {
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
-  const showDetails = (e) => {
-    setIsDetailActive((current) => !current);
+  const showProfs = (e) => {
+    setIsProfActive((current) => !current);
+  };
+  const showFive = (e) => {
+    setIsFiveActive((current) => !current);
+  };
+  const showTen = (e) => {
+    setIsTenActive((current) => !current);
+  };
+  const showFifteen = (e) => {
+    setIsFifteenActive((current) => !current);
+  };
+  const showTwenty = (e) => {
+    setIsTwentyActive((current) => !current);
   };
   return (
     <div className={style.mainWrapper}>
@@ -219,7 +235,25 @@ const ClassGen = () => {
         <h1 className={style.mainHeader}>Class Generator</h1>
         <div>
           <div className={style.btnWrapper}>
-            <GenerateButton />
+            <GenerateButton 
+            generateItems={[
+              className,
+              hitDie
+            ]}
+            itemOptions={[]}
+            setItem={[
+              setClassName,
+              setHitDie
+            ]}
+            selectedItems={[
+
+            ]}
+            setSelctedItems={[
+
+            ]}
+            numberItem={[]}
+            setNumberItem={[]}
+            />
             <ClearButton />
           </div>
         </div>
