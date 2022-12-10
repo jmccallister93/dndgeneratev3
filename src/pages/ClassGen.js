@@ -22,6 +22,7 @@ import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
 import CustomDropdown from "../components/CustomDropDown";
 import CustomDataTable from "../components/CustomDataTable";
+import MultipleDisplay from "../components/MultipleDisplay";
 
 const ClassGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -430,6 +431,17 @@ const ClassGen = () => {
                 value={hitDie}
                 valueOptions={diceOptions}
               />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setHpStart}
+                setPlural={setHpStarts}
+                setOptions={setHpStartOptions}
+                options={hpStartOptions}
+                h1Title={"Starting HP"}
+                placeholder={"Set Starting HP"}
+                value={hpStart}
+                valueOptions={hpStartOptions}
+              />
               <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setPrimaryAbility}
@@ -810,8 +822,85 @@ const ClassGen = () => {
         {/* Main Display */}
         <div className={style.display}>
           <h1>{className}</h1>
-          <h2>First thing</h2>
-          <span className={style.minorText2}>display selected thing</span>
+          <h2>
+            Hit Dice <span className={style.minorText2}>{hitDie}</span>
+          </h2>
+          <h2>
+            Hit Points at 1st Level{" "}
+            <span className={style.minorText2}>{hpStart}</span>
+          </h2>
+          <h2>
+            Primary Ability{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedPrimaryAbility}
+                setList={setPrimaryAbilityList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Armor Proficiencies{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedArmorProf}
+                setList={setArmorProfList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Weapon Proficiencies{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedWeaponProf}
+                setList={setWeaponProfList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Tool Proficiencies{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedToolProf}
+                setList={setToolProfList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Save Proficiencies{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedSaveProf}
+                setList={setSaveProfList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Skill Proficiencies{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedSkillProf}
+                setList={setSkillProfList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Languages{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedLanguage}
+                setList={setLanguageList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Spell Options{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedWeaponProf}
+                setList={setWeaponProfList}
+              />
+            </span>
+          </h2>
         </div>
       </div>
     </div>
