@@ -1,11 +1,13 @@
-<CustomDropdown
-tableName={"itemsTypes"}
-setSingular={setWeaponProf}
-setPlural={setWeaponProfs}
-setOptions={setWeaponProfOptions}
-options={weaponProfOptions}
-h1Title={"Weapon Proficiencies"}
-placeholder={"Set Weapon Prof"}
-value={weaponProf}
-valueOptions={weaponProfOptions}
+<CustomDataTable
+  tableName={"itemsTypes"}
+  setSingular={setTwentithLvl}
+  setPlural={setTwentithLvls}
+  setOptions={setTwentithLvlOptions}
+  h1Title={"20th Level"}
+  dialogHeader={"20th Level"}
+  selectedItem={selectedTwentithLvl}
+  setSelectedItem={setSelectedTwentithLvl}
+  list={twentithLvlList}
+  setList={setTwentithLvlList}
+  valueOptions={twentithLvlOptions}
 />
