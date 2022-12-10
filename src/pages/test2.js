@@ -1,5 +1,11 @@
-const [TwentithLvl, setTwentithLvl] = useState("");
-  const [TwentithLvls, setTwentithLvls] = useState("");
-  const [TwentithLvlOptions, setTwentithLvlOptions] = useState("");
-  const [TwentithLvlList, setTwentithLvlList] = useState("");
-  const [selectedTwentithLvl, setSelectedTwentithLvl] = useState("");
+<CustomDropdown
+tableName={"itemsTypes"}
+setSingular={setWeaponProf}
+setPlural={setWeaponProfs}
+setOptions={setWeaponProfOptions}
+options={weaponProfOptions}
+h1Title={"Weapon Proficiencies"}
+placeholder={"Set Weapon Prof"}
+value={weaponProf}
+valueOptions={weaponProfOptions}
+/>

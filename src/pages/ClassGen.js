@@ -20,6 +20,8 @@ import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
+import CustomDropdown from "../components/CustomDropDown";
+import CustomDataTable from "../components/CustomDataTable";
 
 const ClassGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -235,140 +237,169 @@ const ClassGen = () => {
         <h1 className={style.mainHeader}>Class Generator</h1>
         <div>
           <div className={style.btnWrapper}>
-            <GenerateButton 
-            generateItems={[
-              className,
-              hitDie
-            ]}
-            itemOptions={[
-              classNameOptions,
-              diceOptions,
-              hpStartOptions,
-              primaryAbilityOptions,
-              armorProfOptions,
-              weaponProfOptions,
-              toolProfOptions,
-              saveProfOptions,
-              skillProfOptions,
-              languageOptions,
-              spellOptions,
-              firstLvlOptions,
-              secondLvlOptions,
-              thirdLvlOptions,
-              fourthLvlOptions,
-              fifthLvlOptions,
-              sixthLvlOptions,
-              seventhLvlOptions,
-              eighthLvlOptions,
-              ninthLvlOptions,
-              tenthLvlOptions,
-              eleventhLvlOptions,
-              twelthLvlOptions,
-              thirteenthLvlOptions,
-              fourteenthLvlOptions,
-              fifteenthLvlOptions,
-              sixteenthLvlOptions,
-              seventeenthLvlOptions,
-              eighteenthLvlOptions,
-              nineteenthLvlOptions,
-              twentithLvlOptions,
-            ]}
-            setItem={[
-              setClassName,
-              setHitDie,
-              setHpStart,
-              setPrimaryAbility,
-              setArmorProf,
-              setWeaponProf,
-              setToolProf,
-              setSaveProf,
-              setSkillProf,
-              setLanguage,
-              setSpell,
-              setFirstLvl,
-              setSecondLvl,
-              setThirdLvl,
-              setFourthLvl,
-              setFifthLvl,
-              setSixthLvl,
-              setSeventhLvl,
-              setEighthLvl,
-              setNinthLvl,
-              setTenthLvl,
-              setEleventhLvl,
-              setTwelthLvl,
-              setThirteenthLvl,
-              setFourteenthLvl,
-              setFifteenthLvl,
-              setSixteenthLvl,
-              setEighteenthLvl,
-              setNineteenthLvl,
-              setTwentithLvl
-            ]}
-            selectedItems={[
-              selectedPrimaryAbility,
-              selectedArmorProf,
-              selectedWeaponProf,
-              selectedToolProf,
-              selectedSaveProf,
-              selectedSkillProf,
-              selectedLanguage,
-              selectedSpell,
-              selectedFirstLvl,
-              selectedSecondLvl,
-              selectedThirdLvl,
-              selectedFourthLvl,
-              selectedFifthLvl,
-              selectedSixthLvl,
-              selectedSeventhLvl,
-              selectedEighthLvl,
-              selectedNinthLvl,
-              selectedTenthLvl,
-              selectedEleventhLvl,
-              selectedTwelthLvl,
-              selectedThirteenthLvl,
-              selectedFourteenthLvl,
-              selectedFifteenthLvl,
-              selectedSixteenthLvl,
-              selectedSeventeenthLvl,
-              selectedEighteenthLvl,
-              selectedNineteenthLvl,
-              selectedTwentithLvl
-            ]}
-            setSelctedItems={[
-              setSelectedPrimaryAbility,
-              setSelectedArmorProf,
-              setSelectedWeaponProf,
-              setSelectedToolProf,
-              setSelectedSaveProf,
-              setSelectedSkillProf,
-              setSelectedLanguage,
-              setSelectedSpell,
-              setSelectedFirstLvl,
-              setSelectedSecondLvl,
-              setSelectedThirdLvl,
-              setSelectedFourthLvl,
-              setSelectedFifthLvl,
-              setSelectedSixthLvl,
-              setSelectedSeventhLvl,
-              setSelectedEighthLvl,
-              setSelectedNinthLvl,
-              setSelectedTenthLvl,
-              setSelectedEleventhLvl,
-              setSelectedTwelthLvl,
-              setSelectedThirteenthLvl,
-              setSelectedFourteenthLvl,
-              setSelectedFifteenthLvl,
-              setSelectedSixteenthLvl,
-              setSelectedSeventeenthLvl,
-              setSelectedEighteenthLvl,
-              setSelectedNineteenthLvl,
-              setSelectedTwentithLvl
-            ]}
-            numberItem={[]}
-            setNumberItem={[]}
+            <GenerateButton
+              generateItems={[className, hitDie]}
+              itemOptions={[
+                classNameOptions,
+                diceOptions,
+                hpStartOptions,
+                primaryAbilityOptions,
+                armorProfOptions,
+                weaponProfOptions,
+                toolProfOptions,
+                saveProfOptions,
+                skillProfOptions,
+                languageOptions,
+                spellOptions,
+                firstLvlOptions,
+                secondLvlOptions,
+                thirdLvlOptions,
+                fourthLvlOptions,
+                fifthLvlOptions,
+                sixthLvlOptions,
+                seventhLvlOptions,
+                eighthLvlOptions,
+                ninthLvlOptions,
+                tenthLvlOptions,
+                eleventhLvlOptions,
+                twelthLvlOptions,
+                thirteenthLvlOptions,
+                fourteenthLvlOptions,
+                fifteenthLvlOptions,
+                sixteenthLvlOptions,
+                seventeenthLvlOptions,
+                eighteenthLvlOptions,
+                nineteenthLvlOptions,
+                twentithLvlOptions,
+              ]}
+              setItem={[
+                setClassName,
+                setHitDie,
+                setHpStart,
+                setPrimaryAbility,
+                setArmorProf,
+                setWeaponProf,
+                setToolProf,
+                setSaveProf,
+                setSkillProf,
+                setLanguage,
+                setSpell,
+                setFirstLvl,
+                setSecondLvl,
+                setThirdLvl,
+                setFourthLvl,
+                setFifthLvl,
+                setSixthLvl,
+                setSeventhLvl,
+                setEighthLvl,
+                setNinthLvl,
+                setTenthLvl,
+                setEleventhLvl,
+                setTwelthLvl,
+                setThirteenthLvl,
+                setFourteenthLvl,
+                setFifteenthLvl,
+                setSixteenthLvl,
+                setEighteenthLvl,
+                setNineteenthLvl,
+                setTwentithLvl,
+              ]}
+              selectedItems={[
+                selectedPrimaryAbility,
+                selectedArmorProf,
+                selectedWeaponProf,
+                selectedToolProf,
+                selectedSaveProf,
+                selectedSkillProf,
+                selectedLanguage,
+                selectedSpell,
+                selectedFirstLvl,
+                selectedSecondLvl,
+                selectedThirdLvl,
+                selectedFourthLvl,
+                selectedFifthLvl,
+                selectedSixthLvl,
+                selectedSeventhLvl,
+                selectedEighthLvl,
+                selectedNinthLvl,
+                selectedTenthLvl,
+                selectedEleventhLvl,
+                selectedTwelthLvl,
+                selectedThirteenthLvl,
+                selectedFourteenthLvl,
+                selectedFifteenthLvl,
+                selectedSixteenthLvl,
+                selectedSeventeenthLvl,
+                selectedEighteenthLvl,
+                selectedNineteenthLvl,
+                selectedTwentithLvl,
+              ]}
+              setSelctedItems={[
+                setSelectedPrimaryAbility,
+                setSelectedArmorProf,
+                setSelectedWeaponProf,
+                setSelectedToolProf,
+                setSelectedSaveProf,
+                setSelectedSkillProf,
+                setSelectedLanguage,
+                setSelectedSpell,
+                setSelectedFirstLvl,
+                setSelectedSecondLvl,
+                setSelectedThirdLvl,
+                setSelectedFourthLvl,
+                setSelectedFifthLvl,
+                setSelectedSixthLvl,
+                setSelectedSeventhLvl,
+                setSelectedEighthLvl,
+                setSelectedNinthLvl,
+                setSelectedTenthLvl,
+                setSelectedEleventhLvl,
+                setSelectedTwelthLvl,
+                setSelectedThirteenthLvl,
+                setSelectedFourteenthLvl,
+                setSelectedFifteenthLvl,
+                setSelectedSixteenthLvl,
+                setSelectedSeventeenthLvl,
+                setSelectedEighteenthLvl,
+                setSelectedNineteenthLvl,
+                setSelectedTwentithLvl,
+              ]}
+              numberItem={[]}
+              setNumberItem={[]}
             />
-            <ClearButton />
+            <ClearButton
+              setStringState={[setClassName, setHitDie]}
+              setArrayState={[
+                setSelectedPrimaryAbility,
+                setSelectedArmorProf,
+                setSelectedWeaponProf,
+                setSelectedToolProf,
+                setSelectedSaveProf,
+                setSelectedSkillProf,
+                setSelectedLanguage,
+                setSelectedSpell,
+                setSelectedFirstLvl,
+                setSelectedSecondLvl,
+                setSelectedThirdLvl,
+                setSelectedFourthLvl,
+                setSelectedFifthLvl,
+                setSelectedSixthLvl,
+                setSelectedSeventhLvl,
+                setSelectedEighthLvl,
+                setSelectedNinthLvl,
+                setSelectedTenthLvl,
+                setSelectedEleventhLvl,
+                setSelectedTwelthLvl,
+                setSelectedThirteenthLvl,
+                setSelectedFourteenthLvl,
+                setSelectedFifteenthLvl,
+                setSelectedSixteenthLvl,
+                setSelectedSeventeenthLvl,
+                setSelectedEighteenthLvl,
+                setSelectedNineteenthLvl,
+                setSelectedTwentithLvl,
+              ]}
+            />
           </div>
         </div>
       </div>
@@ -381,18 +412,102 @@ const ClassGen = () => {
             Basic Info
           </h1>
           <div className={isBasicActive ? style.subsection : style.hidden}>
-            <CustomInputText
-              title={"Class Name"}
-              input={className}
-              setInput={setClassName}
-              placeholder={"Set Class Name"}
-            />
+            <div>
+              <CustomInputText
+                title={"Class Name"}
+                input={className}
+                setInput={setClassName}
+                placeholder={"Set Class Name"}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setHitDie}
+                setPlural={setHitDices}
+                setOptions={setDiceOptions}
+                options={diceOptions}
+                h1Title={"Hit Die"}
+                placeholder={"Set Hit Die"}
+                value={hitDie}
+                valueOptions={diceOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setPrimaryAbility}
+                setPlural={setPrimaryAbilitys}
+                setOptions={setPrimaryAbilityOptions}
+                h1Title={"Primary Ability"}
+                dialogHeader={"Primary Ability"}
+                selectedItem={selectedPrimaryAbility}
+                setSelectedItem={setSelectedPrimaryAbility}
+                list={primaryAbilityList}
+                setList={setPrimaryAbilityList}
+                valueOptions={primaryAbilityOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setSaveProf}
+                setPlural={setSaveProfs}
+                setOptions={setSaveProfOptions}
+                h1Title={"Saves"}
+                dialogHeader={"Saves"}
+                selectedItem={selectedSaveProf}
+                setSelectedItem={setSelectedSaveProf}
+                list={saveProfList}
+                setList={setSaveProfList}
+                valueOptions={saveProfOptions}
+              />
+            </div>
           </div>
-          <h1 className={style.subHeader} onClick={showDetails}>
-            Class Features
+          <h1 className={style.subHeader} onClick={showProfs}>
+            Proficiencies
           </h1>
-          <div className={isDetailActive ? style.subsection : style.hidden}>
-            Details to fill out
+          <div className={isProfActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setArmorProf}
+                setPlural={setArmorProfs}
+                setOptions={setArmorProfOptions}
+                options={armorProfOptions}
+                h1Title={"Armor Proficiencies"}
+                placeholder={"Set Armor Prof"}
+                value={armorProf}
+                valueOptions={armorProfOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setWeaponProf}
+                setPlural={setWeaponProfs}
+                setOptions={setWeaponProfOptions}
+                options={weaponProfOptions}
+                h1Title={"Weapon Proficiencies"}
+                placeholder={"Set Weapon Prof"}
+                value={weaponProf}
+                valueOptions={weaponProfOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setToolProf}
+                setPlural={setToolProfs}
+                setOptions={setToolProfOptions}
+                options={toolProfOptions}
+                h1Title={"Tool Proficiencies"}
+                placeholder={"Set Tool Prof"}
+                value={toolProf}
+                valueOptions={toolProfOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setSkillProf}
+                setPlural={setSkillProfs}
+                setOptions={setSkillProfOptions}
+                options={skillProfOptions}
+                h1Title={"Skill Proficiencies"}
+                placeholder={"Set Skill Prof"}
+                value={skillProf}
+                valueOptions={skillProfOptions}
+              />
+            </div>
           </div>
         </div>
 
