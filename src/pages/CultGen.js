@@ -341,7 +341,45 @@ const CultGen = () => {
                 setSelectedWeakness,
               ]}
             />
-            <ClearButton />
+            <ClearButton
+              setStringState={[
+                setWealth,
+                setInfluence,
+                setStructure,
+                setDefence,
+                setOrigin,
+                setLogo,
+                setLeader,
+              ]}
+              setArrayState={[
+                setSelectedIncome,
+                setSelectedItem,
+                setSelectedInfluenceTactic,
+                setSelectedFavored,
+                setSelectedPositive,
+                setSelectedNeutral,
+                setSelectedUnwelcome,
+                setSelectedIntolerant,
+                setSelectedService,
+                setSelectedInitiation,
+                setSelectedLowRole,
+                setSelectedMediumRole,
+                setSelectedHighRole,
+                setSelectedQuest,
+                setSelectedAdvance,
+                setSelectedBelief,
+                setSelectedOrgType,
+                setSelectedHeadquater,
+                setSelectedBuilding,
+                setSelectedLocation,
+                setSelectedStronghold,
+                setSelectedResource,
+                setSelectedMotive,
+                setSelectedPower,
+                setSelectedSpecialty,
+                setSelectedWeakness,
+              ]}
+            />
           </div>
         </div>
       </div>
