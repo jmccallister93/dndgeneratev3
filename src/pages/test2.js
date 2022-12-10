@@ -1,15 +1,5 @@
-setSpeedExtraList,
-setSaveList,
-setSkillList,
-setVulnList,
-setImmuneList,
-setResistList,
-setConditionList,
-setSenseList,
-setLangList,
-setSpecialList,
-setActionList,
-setReactionList,
-setLegendList,
-setLairList,
-setGearList
+const [saveProf, setsaveProf] = useState("");
+const [saveProfs, setsaveProfs] = useState("");
+const [saveProfOptions, setsaveProfOptions] = useState("");
+const [saveProfList, setsaveProfList] = useState("");
+const [selectedsaveProf, setSelectedsaveProf] = useState("");
