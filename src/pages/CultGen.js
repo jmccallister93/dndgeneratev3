@@ -146,11 +146,11 @@ const CultGen = () => {
   const [selectedOrgType, setSelectedOrgType] = useState([]);
   const [orgTypeList, setOrgTypeList] = useState([]);
 
-  const [headquater, setHeadquater] = useState("");
-  const [headquaters, setHeadquaters] = useState("");
-  const [headquaterOptions, setHeadquaterOptions] = useState("");
-  const [selectedHeadquater, setSelectedHeadquater] = useState([]);
-  const [headquaterList, setHeadquaterList] = useState([]);
+  const [headquarter, setHeadquarter] = useState("");
+  const [headquarters, setHeadquarters] = useState("");
+  const [headquarterOptions, setHeadquarterOptions] = useState("");
+  const [selectedHeadquarter, setSelectedHeadquarter] = useState([]);
+  const [headquarterList, setHeadquarterList] = useState([]);
 
   const [building, setBuilding] = useState("");
   const [buildings, setBuildings] = useState("");
@@ -263,7 +263,7 @@ const CultGen = () => {
                 advanceOptions,
                 beliefOptions,
                 orgTypeOptions,
-                headquaterOptions,
+                headquarterOptions,
                 buildingOptions,
                 locationOptions,
                 strongholdOptions,
@@ -304,7 +304,7 @@ const CultGen = () => {
                 selectedAdvance,
                 selectedBelief,
                 selectedOrgType,
-                selectedHeadquater,
+                selectedHeadquarter,
                 selectedBuilding,
                 selectedLocation,
                 selectedStronghold,
@@ -332,7 +332,7 @@ const CultGen = () => {
                 setSelectedAdvance,
                 setSelectedBelief,
                 setSelectedOrgType,
-                setSelectedHeadquater,
+                setSelectedHeadquarter,
                 setSelectedBuilding,
                 setSelectedLocation,
                 setSelectedStronghold,
@@ -371,7 +371,7 @@ const CultGen = () => {
                 setSelectedAdvance,
                 setSelectedBelief,
                 setSelectedOrgType,
-                setSelectedHeadquater,
+                setSelectedHeadquarter,
                 setSelectedBuilding,
                 setSelectedLocation,
                 setSelectedStronghold,
@@ -518,52 +518,311 @@ const CultGen = () => {
                 setOptions={setInfluenceTacticOptions}
                 h1Title={"Influence Tactics"}
                 dialogHeader={"Influence Tactics"}
-                selectedInfluenceTactic={selectedInfluenceTactic}
-                setSelectedInfluenceTactic={setSelectedInfluenceTactic}
+                selectedItem={selectedInfluenceTactic}
+                setSelectedItem={setSelectedInfluenceTactic}
                 list={influenceTacticList}
                 setList={setInfluenceTacticList}
                 valueOptions={influenceTacticOptions}
               />
               <CustomDataTable
-                tableName={"itemTypes"}
+                tableName={"itemsTypes"}
                 setSingular={setFavored}
                 setPlural={setFavoreds}
                 setOptions={setFavoredOptions}
                 h1Title={"Favored Members"}
                 dialogHeader={"Favored Members"}
-                selectedFavored={selectedFavored}
-                setSelectedFavored={setSelectedFavored}
+                selectedItem={selectedFavored}
+                setSelectedItem={setSelectedFavored}
                 list={favoredList}
                 setList={setFavoredList}
                 valueOptions={favoredOptions}
               />
               <CustomDataTable
-                tableName={"itemTypes"}
+                tableName={"itemsTypes"}
                 setSingular={setPositive}
                 setPlural={setPositives}
                 setOptions={setPositiveOptions}
                 h1Title={"Positive Members"}
                 dialogHeader={"Positive Members"}
-                selectedPositive={selectedPositive}
-                setSelectedPositive={setSelectedPositive}
+                selectedItem={selectedPositive}
+                setSelectedItem={setSelectedPositive}
                 list={positiveList}
                 setList={setPositiveList}
                 valueOptions={positiveOptions}
               />
               <CustomDataTable
-                tableName={"itemTypes"}
+                tableName={"itemsTypes"}
                 setSingular={setNeutral}
                 setPlural={setNeutrals}
                 setOptions={setNeutralOptions}
                 h1Title={"Neutral Members"}
                 dialogHeader={"Neutral Members"}
-                selectedNeutral={selectedNeutral}
-                setSelectedNeutral={setSelectedNeutral}
+                selectedItem={selectedNeutral}
+                setSelectedItem={setSelectedNeutral}
                 list={neutralList}
                 setList={setNeutralList}
                 valueOptions={neutralOptions}
               />
-              
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setUnwelcome}
+                setPlural={setUnwelcomes}
+                setOptions={setUnwelcomeOptions}
+                h1Title={"Unwelcome Members"}
+                dialogHeader={"Unwelcome Members"}
+                selectedItem={selectedUnwelcome}
+                setSelectedItem={setSelectedUnwelcome}
+                list={unwelcomeList}
+                setList={setUnwelcomeList}
+                valueOptions={unwelcomeOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setIntolerant}
+                setPlural={setIntolerants}
+                setOptions={setIntolerantOptions}
+                h1Title={"Intolerant Members"}
+                dialogHeader={"Intolerant Members"}
+                selectedItem={selectedIntolerant}
+                setSelectedItem={setSelectedIntolerant}
+                list={intolerantList}
+                setList={setIntolerantList}
+                valueOptions={intolerantOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setService}
+                setPlural={setServices}
+                setOptions={setServiceOptions}
+                h1Title={"Services"}
+                dialogHeader={"Services"}
+                selectedItem={selectedService}
+                setSelectedItem={setSelectedService}
+                list={serviceList}
+                setList={setServiceList}
+                valueOptions={serviceOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setInitiation}
+                setPlural={setInitiations}
+                setOptions={setInitiationOptions}
+                h1Title={"Initiation"}
+                dialogHeader={"Initiation"}
+                selectedItem={selectedInitiation}
+                setSelectedItem={setSelectedInitiation}
+                list={initiationList}
+                setList={setInitiationList}
+                valueOptions={initiationOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setLowRole}
+                setPlural={setLowRoles}
+                setOptions={setLowRoleOptions}
+                h1Title={"Low Rank Roles"}
+                dialogHeader={"Low Rank Roles"}
+                selectedItem={selectedLowRole}
+                setSelectedItem={setSelectedLowRole}
+                list={lowRoleList}
+                setList={setLowRoleList}
+                valueOptions={lowRoleOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setMediumRole}
+                setPlural={setMediumRoles}
+                setOptions={setMediumRoleOptions}
+                h1Title={"Medium Rank Roles"}
+                dialogHeader={"Medium Rank Roles"}
+                selectedItem={selectedMediumRole}
+                setSelectedItem={setSelectedMediumRole}
+                list={mediumRoleList}
+                setList={setMediumRoleList}
+                valueOptions={mediumRoleOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setHighRole}
+                setPlural={setHighRoles}
+                setOptions={setHighRoleOptions}
+                h1Title={"High Rank Roles"}
+                dialogHeader={"High Rank Roles"}
+                selectedItem={selectedHighRole}
+                setSelectedItem={setSelectedHighRole}
+                list={highRoleList}
+                setList={setHighRoleList}
+                valueOptions={highRoleOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setQuest}
+                setPlural={setQuests}
+                setOptions={setQuestOptions}
+                h1Title={"Quest"}
+                dialogHeader={"Quest"}
+                selectedItem={selectedQuest}
+                setSelectedItem={setSelectedQuest}
+                list={questList}
+                setList={setQuestList}
+                valueOptions={questOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setAdvance}
+                setPlural={setAdvances}
+                setOptions={setAdvanceOptions}
+                h1Title={"Advancement"}
+                dialogHeader={"Advancement"}
+                selectedItem={selectedAdvance}
+                setSelectedItem={setSelectedAdvance}
+                list={advanceList}
+                setList={setAdvanceList}
+                valueOptions={advanceOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setBelief}
+                setPlural={setBeliefs}
+                setOptions={setBeliefOptions}
+                h1Title={"Beliefs"}
+                dialogHeader={"Beliefs"}
+                selectedItem={selectedBelief}
+                setSelectedItem={setSelectedBelief}
+                list={beliefList}
+                setList={setBeliefList}
+                valueOptions={beliefOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setOrgType}
+                setPlural={setOrgTypes}
+                setOptions={setOrgTypeOptions}
+                h1Title={"Organization Type"}
+                dialogHeader={"Organization Type"}
+                selectedItem={selectedOrgType}
+                setSelectedItem={setSelectedOrgType}
+                list={orgTypeList}
+                setList={setOrgTypeList}
+                valueOptions={orgTypeOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setHeadquarter}
+                setPlural={setHeadquarters}
+                setOptions={setHeadquarterOptions}
+                h1Title={"Headquarters"}
+                dialogHeader={"Headquarters"}
+                selectedItem={selectedHeadquarter}
+                setSelectedItem={setSelectedHeadquarter}
+                list={headquarterList}
+                setList={setHeadquarterList}
+                valueOptions={headquarterOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setBuilding}
+                setPlural={setBuildings}
+                setOptions={setBuildingOptions}
+                h1Title={"Buildings"}
+                dialogHeader={"Buildings"}
+                selectedItem={selectedBuilding}
+                setSelectedItem={setSelectedBuilding}
+                list={buildingList}
+                setList={setBuildingList}
+                valueOptions={buildingOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setLocation}
+                setPlural={setLocations}
+                setOptions={setLocationOptions}
+                h1Title={"Locations"}
+                dialogHeader={"Locations"}
+                selectedItem={selectedLocation}
+                setSelectedItem={setSelectedLocation}
+                list={locationList}
+                setList={setLocationList}
+                valueOptions={locationOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setStronghold}
+                setPlural={setStrongholds}
+                setOptions={setStrongholdOptions}
+                h1Title={"Strongholds"}
+                dialogHeader={"Strongholds"}
+                selectedItem={selectedStronghold}
+                setSelectedItem={setSelectedStronghold}
+                list={strongholdList}
+                setList={setStrongholdList}
+                valueOptions={strongholdOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setResource}
+                setPlural={setResources}
+                setOptions={setResourceOptions}
+                h1Title={"Resources"}
+                dialogHeader={"Resources"}
+                selectedItem={selectedResource}
+                setSelectedItem={setSelectedResource}
+                list={resourceList}
+                setList={setResourceList}
+                valueOptions={resourceOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setMotive}
+                setPlural={setMotives}
+                setOptions={setMotiveOptions}
+                h1Title={"Motives"}
+                dialogHeader={"Motives"}
+                selectedItem={selectedMotive}
+                setSelectedItem={setSelectedMotive}
+                list={motiveList}
+                setList={setMotiveList}
+                valueOptions={motiveOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setPower}
+                setPlural={setPowers}
+                setOptions={setPowerOptions}
+                h1Title={"Power Sources"}
+                dialogHeader={"Power Sources"}
+                selectedItem={selectedPower}
+                setSelectedItem={setSelectedPower}
+                list={powerList}
+                setList={setPowerList}
+                valueOptions={powerOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setSpecialty}
+                setPlural={setSpecialtys}
+                setOptions={setSpecialtyOptions}
+                h1Title={"Specialties"}
+                dialogHeader={"Specialties"}
+                selectedItem={selectedSpecialty}
+                setSelectedItem={setSelectedSpecialty}
+                list={specialtyList}
+                setList={setSpecialtyList}
+                valueOptions={specialtyOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setWeakness}
+                setPlural={setWeaknesss}
+                setOptions={setWeaknessOptions}
+                h1Title={"Weakness"}
+                dialogHeader={"Weakness"}
+                selectedItem={selectedWeakness}
+                setSelectedItem={setSelectedWeakness}
+                list={weaknessList}
+                setList={setWeaknessList}
+                valueOptions={weaknessOptions}
+              />
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showFeature}>
