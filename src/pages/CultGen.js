@@ -20,6 +20,8 @@ import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
+import CustomDropdown from "../components/CustomDropDown";
+import CustomDataTable from "../components/CustomDataTable";
 
 const CultGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -392,28 +394,183 @@ const CultGen = () => {
             Basic Info
           </h1>
           <div className={isBasicActive ? style.subsection : style.hidden}>
-            <CustomInputText
-              title={"Cult Name"}
-              input={cultName}
-              setInput={setCultName}
-              placeholder={"Set Cult Name"}
-            />
+            <div>
+              <CustomInputText
+                title={"Cult Name"}
+                input={cultName}
+                setInput={setCultName}
+                placeholder={"Set Cult Name"}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setWealth}
+                setPlural={setWealths}
+                setOptions={setWealthOptions}
+                options={wealthOptions}
+                h1Title={"Wealth"}
+                placeholder={"Set Wealth"}
+                value={wealth}
+                valueOptions={wealthOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setInfluence}
+                setPlural={setInfluences}
+                setOptions={setInfluenceOptions}
+                options={influenceOptions}
+                h1Title={"Influence"}
+                placeholder={"Set Influence"}
+                value={influence}
+                valueOptions={influenceOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setStructure}
+                setPlural={setStructures}
+                setOptions={setStructureOptions}
+                options={structureOptions}
+                h1Title={"Organization Structure"}
+                placeholder={"Set Structure"}
+                value={structure}
+                valueOptions={structureOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setDefence}
+                setPlural={setDefences}
+                setOptions={setDefenceOptions}
+                options={defenceOptions}
+                h1Title={"Defence Level"}
+                placeholder={"Set Defence"}
+                value={defence}
+                valueOptions={defenceOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setOrigin}
+                setPlural={setOrigins}
+                setOptions={setOriginOptions}
+                options={originOptions}
+                h1Title={"Origin"}
+                placeholder={"Set Origin"}
+                value={origin}
+                valueOptions={originOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setLogo}
+                setPlural={setLogos}
+                setOptions={setLogoOptions}
+                options={logoOptions}
+                h1Title={"Logo"}
+                placeholder={"Set Logo"}
+                value={logo}
+                valueOptions={logoOptions}
+              />
+              <CustomDropdown
+                tableName={"itemsTypes"}
+                setSingular={setLeader}
+                setPlural={setLeaders}
+                setOptions={setLeaderOptions}
+                options={leaderOptions}
+                h1Title={"Leader"}
+                placeholder={"Set Leader"}
+                value={leader}
+                valueOptions={leaderOptions}
+              />
+            </div>
           </div>
           <h1 className={style.subHeader} onClick={showDetails}>
-              Cult Details
+            Cult Details
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
-
+            <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setIncome}
+                setPlural={setIncomes}
+                setOptions={setIncomeOptions}
+                h1Title={"Income"}
+                dialogHeader={"Income"}
+                selectedItem={selectedIncome}
+                setSelectedItem={setSelectedIncome}
+                list={incomeList}
+                setList={setIncomeList}
+                valueOptions={incomeOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setItem}
+                setPlural={setItems}
+                setOptions={setItemOptions}
+                h1Title={"Item"}
+                dialogHeader={"Item"}
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                list={itemList}
+                setList={setItemList}
+                valueOptions={itemOptions}
+              />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setInfluenceTactic}
+                setPlural={setInfluenceTactics}
+                setOptions={setInfluenceTacticOptions}
+                h1Title={"Influence Tactics"}
+                dialogHeader={"Influence Tactics"}
+                selectedInfluenceTactic={selectedInfluenceTactic}
+                setSelectedInfluenceTactic={setSelectedInfluenceTactic}
+                list={influenceTacticList}
+                setList={setInfluenceTacticList}
+                valueOptions={influenceTacticOptions}
+              />
+              <CustomDataTable
+                tableName={"itemTypes"}
+                setSingular={setFavored}
+                setPlural={setFavoreds}
+                setOptions={setFavoredOptions}
+                h1Title={"Favored Members"}
+                dialogHeader={"Favored Members"}
+                selectedFavored={selectedFavored}
+                setSelectedFavored={setSelectedFavored}
+                list={favoredList}
+                setList={setFavoredList}
+                valueOptions={favoredOptions}
+              />
+              <CustomDataTable
+                tableName={"itemTypes"}
+                setSingular={setPositive}
+                setPlural={setPositives}
+                setOptions={setPositiveOptions}
+                h1Title={"Positive Members"}
+                dialogHeader={"Positive Members"}
+                selectedPositive={selectedPositive}
+                setSelectedPositive={setSelectedPositive}
+                list={positiveList}
+                setList={setPositiveList}
+                valueOptions={positiveOptions}
+              />
+              <CustomDataTable
+                tableName={"itemTypes"}
+                setSingular={setNeutral}
+                setPlural={setNeutrals}
+                setOptions={setNeutralOptions}
+                h1Title={"Neutral Members"}
+                dialogHeader={"Neutral Members"}
+                selectedNeutral={selectedNeutral}
+                setSelectedNeutral={setSelectedNeutral}
+                list={neutralList}
+                setList={setNeutralList}
+                valueOptions={neutralOptions}
+              />
+              
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showFeature}>
-              Cult Features
+            Cult Features
           </h1>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
-            <div>
-
-            </div>
+            <div></div>
           </div>
         </div>
 
