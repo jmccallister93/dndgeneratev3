@@ -22,6 +22,7 @@ import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
 import CustomDropdown from "../components/CustomDropDown";
 import CustomDataTable from "../components/CustomDataTable";
+import MultipleDisplay from "../components/MultipleDisplay";
 
 const CultGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -229,9 +230,9 @@ const CultGen = () => {
   const showMembers = (e) => {
     setIsMemberActive((current) => !current);
   };
-   const showMemberships = (e) => {
+  const showMemberships = (e) => {
     setIsMembershipActive((current) => !current);
-  }
+  };
   const showBuildings = (e) => {
     setIsBuildingActive((current) => !current);
   };
@@ -447,7 +448,7 @@ const CultGen = () => {
                 value={logo}
                 valueOptions={logoOptions}
               />
-               <CustomDataTable
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setOrgType}
                 setPlural={setOrgTypes}
@@ -493,7 +494,7 @@ const CultGen = () => {
           </h1>
           <div className={isResourceActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDropdown
+              <CustomDropdown
                 tableName={"itemsTypes"}
                 setSingular={setWealth}
                 setPlural={setWealths}
@@ -504,7 +505,7 @@ const CultGen = () => {
                 value={wealth}
                 valueOptions={wealthOptions}
               />
-               <CustomDataTable
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setIncome}
                 setPlural={setIncomes}
@@ -543,8 +544,6 @@ const CultGen = () => {
                 setList={setResourceList}
                 valueOptions={resourceOptions}
               />
-
-            
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showMembers}>
@@ -552,7 +551,7 @@ const CultGen = () => {
           </h1>
           <div className={isMemberActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDropdown
+              <CustomDropdown
                 tableName={"itemsTypes"}
                 setSingular={setLeader}
                 setPlural={setLeaders}
@@ -570,7 +569,7 @@ const CultGen = () => {
           </h1>
           <div className={isMembershipActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDataTable
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setFavored}
                 setPlural={setFavoreds}
@@ -635,7 +634,7 @@ const CultGen = () => {
                 setList={setIntolerantList}
                 valueOptions={intolerantOptions}
               />
-                <CustomDataTable
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setInitiation}
                 setPlural={setInitiations}
@@ -687,7 +686,7 @@ const CultGen = () => {
                 setList={setHighRoleList}
                 valueOptions={highRoleOptions}
               />
-               <CustomDataTable
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setAdvance}
                 setPlural={setAdvances}
@@ -707,7 +706,7 @@ const CultGen = () => {
           </h1>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDropdown
+              <CustomDropdown
                 tableName={"itemsTypes"}
                 setSingular={setInfluence}
                 setPlural={setInfluences}
@@ -731,7 +730,7 @@ const CultGen = () => {
                 setList={setInfluenceTacticList}
                 valueOptions={influenceTacticOptions}
               />
-               <CustomDataTable
+              <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setService}
                 setPlural={setServices}
@@ -796,7 +795,6 @@ const CultGen = () => {
                 setList={setWeaknessList}
                 valueOptions={weaknessOptions}
               />
-            
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showBuildings}>
@@ -804,7 +802,7 @@ const CultGen = () => {
           </h1>
           <div className={isBuildingActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDropdown
+              <CustomDropdown
                 tableName={"itemsTypes"}
                 setSingular={setDefence}
                 setPlural={setDefences}
@@ -874,8 +872,292 @@ const CultGen = () => {
         {/* Main Display */}
         <div className={style.display}>
           <h1>{cultName}</h1>
-          <h2>First thing</h2>
-          <span className={style.minorText2}>display selected thing</span>
+          <h2>
+            Org. Structure
+            <span className={style.minorText2}>{structure}</span>
+          </h2>
+          <h2>
+            Origin
+            <span className={style.minorText2}>{origin}</span>
+          </h2>
+          <h2>
+            Logo
+            <span className={style.minorText2}>{logo}</span>
+          </h2>
+          <h2>
+            Org. Type{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedOrgType}
+                setList={setOrgTypeList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Motives{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedMotive}
+                setList={setMotiveList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Beliefs{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedBelief}
+                setList={setBeliefList}
+              />
+            </span>
+          </h2>
+          <h1>Resources</h1>
+          <hr className={style.subLineBreak} />
+          <h2>
+            Wealth{" "}
+            <span className={style.minorText2}>
+              {wealth}
+            </span>
+          </h2>
+          <h2>
+            Income Source{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedIncome}
+                setList={setIncomeList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Items{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedItem}
+                setList={setItemList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Resources{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedResource}
+                setList={setResourceList}
+              />
+            </span>
+          </h2>
+          <h1>Members</h1>
+          <hr className={style.subLineBreak} />
+          <h2>
+            Leader{" "}
+            <span className={style.minorText2}>
+              {leader}
+            </span>
+          </h2>
+          <h2>
+            Important Members{" "}
+            <span className={style.minorText2}>
+              
+            </span>
+          </h2>
+          <h1>Membership</h1>
+          <hr className={style.subLineBreak} />
+          <h2>
+            Favored Members{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedFavored}
+                setList={setFavoredList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Positive Members{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedPositive}
+                setList={setPositiveList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Neutral Members{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedNeutral}
+                setList={setNeutralList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Unwelcome Members{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedUnwelcome}
+                setList={setUnwelcomeList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Intolerant Members{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedIntolerant}
+                setList={setIntolerantList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Initiation{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedInitiation}
+                setList={setInitiationList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Low Rank Roles{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedLowRole}
+                setList={setLowRoleList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Medium Rank Roles{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedMediumRole}
+                setList={setMediumRoleList}
+              />
+            </span>
+          </h2>
+          <h2>
+            High Rank Roles{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedHighRole}
+                setList={setHighRoleList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Advancement{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedAdvance}
+                setList={setAdvanceList}
+              />
+            </span>
+          </h2>
+          <h1>Features</h1>
+          <hr className={style.subLineBreak} />
+          <h2>
+            Influence Level{" "}
+            <span className={style.minorText2}>
+              {influence}
+            </span>
+          </h2>
+          <h2>
+            Influence Tactics{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedInfluenceTactic}
+                setList={setInfluenceTacticList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Services{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedService}
+                setList={setServiceList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Quests{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedQuest}
+                setList={setQuestList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Power Sources{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedPower}
+                setList={setPowerList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Specialties{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedSpecialty}
+                setList={setSpecialtyList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Weakness{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedWeakness}
+                setList={setWeaknessList}
+              />
+            </span>
+          </h2>
+          <h1>Buildings</h1>
+          <hr className={style.subLineBreak} />
+          <h2>
+            Defence Level{" "}
+            <span className={style.minorText2}>
+             {defence}
+            </span>
+          </h2>
+          <h2>
+            Headquarters{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedHeadquarter}
+                setList={setHeadquarterList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Owned Buildings{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedBuilding}
+                setList={setBuildingList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Locations{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedLocation}
+                setList={setLocationList}
+              />
+            </span>
+          </h2>
+          <h2>
+            Strongholds{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedStronghold}
+                setList={setStrongholdList}
+              />
+            </span>
+          </h2>
         </div>
       </div>
     </div>
