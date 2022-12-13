@@ -7,7 +7,7 @@ import supabase from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 import SingleRandomButton from "./SingleRandomButton";
 
-const CustomDropdown = (props) => {
+const CustomDropDown = (props) => {
   //---PROPS ---
   // tableName={"itemsTypes"}
   //  setSingular={setType}
@@ -84,4 +84,4 @@ const CustomDropdown = (props) => {
   );
 };
 
-export default CustomDropdown;
+export default CustomDropDown;

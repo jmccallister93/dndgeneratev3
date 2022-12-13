@@ -21,7 +21,7 @@ import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
 import SingleDisplay from "../components/SingleDisplay";
-import CustomDropdown from "../components/CustomDropDown";
+import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
@@ -289,7 +289,7 @@ const CityGen = () => {
                 setInput={setCityName}
                 placeholder={"Set City Name"}
               />
-              <CustomDropdown
+              <CustomDropDown
                 tableName={"itemsTypes"}
                 setSingular={setType}
                 setPlural={setTypes}
@@ -300,7 +300,7 @@ const CityGen = () => {
                 value={type}
                 valueOptions={typeOptions}
               />
-              <CustomDropdown
+              <CustomDropDown
                 tableName={"citySize"}
                 setSingular={setSize}
                 setPlural={setSizes}
@@ -324,7 +324,7 @@ const CityGen = () => {
           </h1>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropdown
+              <CustomDropDown
                 tableName={"itemsTypes"}
                 setSingular={setAtmoshpere}
                 setPlural={setAtmoshperes}
@@ -335,7 +335,7 @@ const CityGen = () => {
                 value={atmosphere}
                 valueOptions={atmoshpereOptions}
               />
-              <CustomDropdown
+              <CustomDropDown
                 tableName={"itemsTypes"}
                 setSingular={setCulture}
                 setPlural={setCultures}
@@ -346,7 +346,7 @@ const CityGen = () => {
                 value={culture}
                 valueOptions={cultureOptions}
               />
-              <CustomDropdown
+              <CustomDropDown
                 tableName={"itemsTypes"}
                 setSingular={setTerrain}
                 setPlural={setTerrains}
@@ -357,7 +357,7 @@ const CityGen = () => {
                 value={terrain}
                 valueOptions={terrainOptions}
               />
-              <CustomDropdown
+              <CustomDropDown
                 tableName={"itemsTypes"}
                 setSingular={setLandmark}
                 setPlural={setLandmarks}
@@ -375,7 +375,7 @@ const CityGen = () => {
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropdown
+              <CustomDropDown
                 tableName={"itemsTypes"}
                 setSingular={setGovern}
                 setPlural={setGoverns}

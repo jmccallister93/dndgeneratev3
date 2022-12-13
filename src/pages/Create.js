@@ -105,11 +105,11 @@ const Create = () => {
       </p>
     </Card>
   );
-  const cardGodGen = (
+  const cardPantheonGen = (
     <Card className={style.createCard}>
-      <h3>God Generator</h3>
+      <h3>Pantheon Generator</h3>
       <p>
-        Generate Gods with the click of a button or customize and hand pick
+        Generate Pantheons with the click of a button or customize and hand pick
         your own!
       </p>
     </Card>
@@ -216,8 +216,8 @@ const Create = () => {
         <Link className={style.createLink} to="/villaingen">
           {cardVillainGen}
         </Link>
-        <Link className={style.createLink} to="/godgen">
-          {cardGodGen}
+        <Link className={style.createLink} to="/pantheongen">
+          {cardPantheonGen}
         </Link>
         <Link className={style.createLink} to="/spellgen">
           {cardSpellGen}

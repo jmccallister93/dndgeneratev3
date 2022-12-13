@@ -17,7 +17,6 @@ import CultGen from "./pages/CultGen";
 import WorldGen from "./pages/WorldGen";
 import QuestGen from "./pages/QuestGen";
 import VillainGen from "./pages/VillainGen";
-import GodGen from "./pages/GodGen";
 import SpellGen from "./pages/SpellGen";
 import DungeonGen from "./pages/DungeonGen";
 import TrapGen from "./pages/TrapGen";
@@ -25,6 +24,7 @@ import PuzzleGen from "./pages/PuzzleGen";
 import EncounterGen from "./pages/EncounterGen";
 import ClassGen from "./pages/ClassGen";
 import RaceGen from "./pages/RaceGen";
+import PantheonGen from "./pages/PantheonGen";
 
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
           <Route path="/worldgen" element={<WorldGen />} />
           <Route path="/questgen" element={<QuestGen />} />
           <Route path="/villaingen" element={<VillainGen />} />
-          <Route path="/godgen" element={<GodGen />} />
+          <Route path="/pantheongen" element={<PantheonGen />} />
           <Route path="/spellgen" element={<SpellGen />} />
           <Route path="/dungeongen" element={<DungeonGen />} />
           <Route path="/trapgen" element={<TrapGen />} />

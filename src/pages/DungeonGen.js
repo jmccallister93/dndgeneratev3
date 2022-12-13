@@ -357,12 +357,14 @@ const DungeonGen = () => {
           <div className={isSettingActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
+              tableName={"itemsTypes"}
                 setSingular={setAtmosphereType}
                 h1Title={"Atmosphere Type"}
                 value={atmosphereType}
                 valueOptions={atmosphereTypeOptions}
               />
               <CustomDropDown
+              tableName={"itemsTypes"}
                 setSingular={setTerrainType}
                 h1Title={"Terrain Type"}
                 value={terrainType}
@@ -467,7 +469,7 @@ const DungeonGen = () => {
           <h2>
             Terrain Type <span className={style.minorText2}>{terrainType}</span>
           </h2>
-          
+
         </div>
       </div>
     </div>
