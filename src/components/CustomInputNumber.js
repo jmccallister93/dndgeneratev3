@@ -19,27 +19,7 @@ const CustomInputNumber = (props) => {
   //placeholder
   //---PROPS---
   const [fetchError, setFetchError] = useState(false);
-  //Get Data from supabase
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data: dataName, error: errorName } = await supabase
-  //       .from(props.tableName)
-  //       .select();
-  //     if (errorName) {
-  //       setFetchError("Could not fetch the data");
-  //       console.log(errorName);
-  //       props.setSingular(null);
-  //     }
-  //     if (dataName) {
-  //       props.setPlural(dataName);
-  //       setFetchError(null);
-  //       props.setOptions(
-  //         dataName.map((r) => ({ name: r.name, value: r.value }))
-  //       );
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+
   //On Change
   const onChange = (e) => {
     props.setSingular(e.value);
@@ -69,6 +49,7 @@ const CustomInputNumber = (props) => {
       {inputNumber}{" "}
       <NumberRandomButton
         setSingular={props.setSingular}
+        maxNumber={props.maxNumber}
       />
     </>
   );

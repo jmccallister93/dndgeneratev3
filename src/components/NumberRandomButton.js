@@ -3,10 +3,12 @@ import style from "../stylesheets/PageStyle.module.scss";
 const NumberRandomButton = (props) => {
   //---PROPS---
   //setSingluar
+  //maxNumber
   //---PROPS---
 
   const onRandomClick = (e) => {
-    let r = Math.floor(Math.random() * (2000 - 0));
+    console.log(props.maxNumber)
+    let r = Math.floor(Math.random() * (props.maxNumber - 0));
     props.setSingular(r);
   };
   return (

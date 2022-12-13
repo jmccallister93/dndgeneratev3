@@ -23,6 +23,7 @@ import CustomInputText from "../components/CustomInputText";
 import MultipleDisplay from "../components/MultipleDisplay";
 import CustomDataTable from "../components/CustomDataTable";
 import CustomDropdown from "../components/CustomDropDown";
+import CustomInputNumber from "../components/CustomInputNumber";
 
 const WorldGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -354,6 +355,7 @@ const WorldGen = () => {
                 setInput={setWorldName}
                 placeholder={"Set World Name"}
               />
+             
               <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setPlain}
