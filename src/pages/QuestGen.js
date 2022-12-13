@@ -37,6 +37,13 @@ const QuestGen = () => {
   const [questTypes, setQuestTypes] = useState("");
   const [questTypeOptions, setQuestTypeOptions] = useState("");
 
+  const [quest, setQuest] = useState("");
+  const [quests, setQuests] = useState([]);
+  const [questOptions, setQuestOptions] = useState([])
+  const [questList, setQuestList] = useState([]);
+  const [selectedQuest, setSelectedQuest] = useState([]);
+  
+
   const [bounty, setBounty] = useState("");
   const [bounties, setBounties] = useState("");
   const [bountyOptions, setBountyOptions] = useState("");
@@ -97,6 +104,37 @@ const QuestGen = () => {
   const [rewards, setRewards] = useState("");
   const [rewardOptions, setRewardOptions] = useState("");
 
+  //useeffect to set the values for datatable based on questype state
+  useEffect(() => {
+    if (questType === "Bounty") {
+      setQuestOptions(bountyOptions);
+    } else if (questType === "Capture") {
+      setQuestOptions(captureOptions);
+    } else if (questType === "Delivery") {
+      setQuestOptions(deliveryOptions);
+    } else if (questType === "Escort") {
+      setQuestOptions(escortOptions);
+    } else if (questType === "Exploration") {
+      setQuestOptions(explorationOptions);
+    } else if (questType === "Gather") {
+      setQuestOptions(gatherOptions);
+    } else if (questType === "Investigate") {
+      setQuestOptions(investigateOptions);
+    } else if (questType === "Kill") {
+      setQuestOptions(killOptions);
+    } else if (questType === "Negotiate") {
+      setQuestOptions(negotiateOptions);
+    } else if (questType === "Protect") {
+      setQuestOptions(protectOptions);
+    } else if (questType === "Rescue") {
+      setQuestOptions(rescueOptions);
+    } else {
+      setQuestOptions([]);
+    }
+  }, [questType]);
+
+
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -153,7 +191,7 @@ const QuestGen = () => {
                 placeholder={"Set Quest Name"}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"questTypes"}
                 setSingular={setQuestType}
                 setPlural={setQuestTypes}
                 setOptions={setQuestTypeOptions}
@@ -162,14 +200,7 @@ const QuestGen = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-            </div>
-          </div>
-          <h1 className={style.subHeader} onClick={showDetails}>
-            Quest Details
-          </h1>
-          <div className={isDetailActive ? style.subsection : style.hidden}>
-            <div>
-              <CustomDropDown
+               <CustomDropDown
                 tableName={"itemsTypes"}
                 setSingular={setReward}
                 setPlural={setRewards}
@@ -179,6 +210,30 @@ const QuestGen = () => {
                 value={reward}
                 valueOptions={rewardOptions}
               />
+              <CustomDataTable
+                tableName={"itemsTypes"}
+                setSingular={setQuest}
+                setPlural={setQuests}
+                setOptions={setQuestOptions}
+                h1Title={"Quest"}
+                dialogHeader={"Set Quest"}
+                placeholder={"Set Quest"}
+                valueOptions={questOptions}
+                list={questList}
+                setList={setQuestList}
+                selectedItem={selectedQuest}
+                setSelectedItem={setSelectedQuest}
+                options={questOptions}
+              />
+            </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showDetails}>
+            Quest Details
+          </h1>
+          <div className={isDetailActive ? style.subsection : style.hidden}>
+            <div>
+             
+              
             </div>
           </div>
         </div>
