@@ -22,65 +22,65 @@ import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
 
 const SpellGen = () => {
-    const [isBasicActive, setIsBasicActive] = useState(false);
-    const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isDetailActive, setIsDetailActive] = useState(false);
 
-    const [spellName, setSpellName] = useState("");
+  const [spellName, setSpellName] = useState("");
   const [spellNames, setSpellNames] = useState("");
   const [spellNameOptions, setSpellNameOptions] = useState("");
-  
-    //Show Options
-    const showBasics = (e) => {
-      setIsBasicActive((current) => !current);
-    };
-    const showDetails = (e) => {
-      setIsDetailActive((current) => !current);
-    };
-    return (
-      <div className={style.mainWrapper}>
-        <Navbar />
-        <div className={style.topHeader}>
-          <h1 className={style.mainHeader}>Spell Generator</h1>
-          <div>
-            <div className={style.btnWrapper}>
-              <GenerateButton />
-              <ClearButton />
-            </div>
-          </div>
-        </div>
-        
-        {/* Options */}
-        <div className={style.body}>
-          <div className={style.optionsWrapper}>
-            <h1>Spell Options</h1>
-            <h1 className={style.subHeader} onClick={showBasics}>
-              Basic Info
-            </h1>
-            <div className={isBasicActive ? style.subsection : style.hidden}>
-            <CustomInputText 
-           title={"Spell Name"}
-           input={spellName}
-           setInput={setSpellName}
-           placeholder={"Set Spell Name"}
-           />
-            </div>
-            <h1 className={style.subHeader} onClick={showDetails}>
-              Building Features
-            </h1>
-            <div className={isDetailActive ? style.subsection : style.hidden}>
-              Details to fill out
-            </div>
-          </div>
-  
-          {/* Main Display */}
-          <div className={style.display}>
-            <h1>{spellName}</h1>
-            <h2>First thing</h2>
-            <span className={style.minorText2}>display selected thing</span>
+
+  //Show Options
+  const showBasics = (e) => {
+    setIsBasicActive((current) => !current);
+  };
+  const showDetails = (e) => {
+    setIsDetailActive((current) => !current);
+  };
+  return (
+    <div className={style.mainWrapper}>
+      <Navbar />
+      <div className={style.topHeader}>
+        <h1 className={style.mainHeader}>Spell Generator</h1>
+        <div>
+          <div className={style.btnWrapper}>
+            <GenerateButton />
+            <ClearButton />
           </div>
         </div>
       </div>
-    );
-}
- 
+
+      {/* Options */}
+      <div className={style.body}>
+        <div className={style.optionsWrapper}>
+          <h1>Spell Options</h1>
+          <h1 className={style.subHeader} onClick={showBasics}>
+            Basic Info
+          </h1>
+          <div className={isBasicActive ? style.subsection : style.hidden}>
+            <CustomInputText
+              title={"Spell Name"}
+              input={spellName}
+              setInput={setSpellName}
+              placeholder={"Set Spell Name"}
+            />
+          </div>
+          <h1 className={style.subHeader} onClick={showDetails}>
+            Building Features
+          </h1>
+          <div className={isDetailActive ? style.subsection : style.hidden}>
+            Details to fill out
+          </div>
+        </div>
+
+        {/* Main Display */}
+        <div className={style.display}>
+          <h1>{spellName}</h1>
+          <h2>First thing</h2>
+          <span className={style.minorText2}>display selected thing</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default SpellGen;
