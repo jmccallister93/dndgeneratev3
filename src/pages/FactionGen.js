@@ -912,7 +912,7 @@ const FactionGen = () => {
             </span>
           </h2>
           <h1>Resources</h1>
-          <hr className={style.subLineBreak} />
+          <hr className={style.lineBreak} />
           <h2>
             Wealth{" "}
             <span className={style.minorText2}>
@@ -947,7 +947,7 @@ const FactionGen = () => {
             </span>
           </h2>
           <h1>Members</h1>
-          <hr className={style.subLineBreak} />
+          <hr className={style.lineBreak} />
           <h2>
             Leader{" "}
             <span className={style.minorText2}>
@@ -961,7 +961,7 @@ const FactionGen = () => {
             </span>
           </h2>
           <h1>Membership</h1>
-          <hr className={style.subLineBreak} />
+          <hr className={style.lineBreak} />
           <h2>
             Favored Members{" "}
             <span className={style.minorText2}>
@@ -1053,7 +1053,7 @@ const FactionGen = () => {
             </span>
           </h2>
           <h1>Features</h1>
-          <hr className={style.subLineBreak} />
+          <hr className={style.lineBreak} />
           <h2>
             Influence Level{" "}
             <span className={style.minorText2}>
@@ -1115,7 +1115,7 @@ const FactionGen = () => {
             </span>
           </h2>
           <h1>Buildings</h1>
-          <hr className={style.subLineBreak} />
+          <hr className={style.lineBreak} />
           <h2>
             Defence Level{" "}
             <span className={style.minorText2}>
