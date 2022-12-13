@@ -39,10 +39,9 @@ const QuestGen = () => {
 
   const [quest, setQuest] = useState("");
   const [quests, setQuests] = useState([]);
-  const [questOptions, setQuestOptions] = useState([])
+  const [questOptions, setQuestOptions] = useState([]);
   const [questList, setQuestList] = useState([]);
   const [selectedQuest, setSelectedQuest] = useState([]);
-  
 
   const [bounty, setBounty] = useState("");
   const [bounties, setBounties] = useState("");
@@ -133,8 +132,6 @@ const QuestGen = () => {
     }
   }, [questType]);
 
-
-
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -200,16 +197,8 @@ const QuestGen = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-               <CustomDropDown
-                tableName={"itemsTypes"}
-                setSingular={setReward}
-                setPlural={setRewards}
-                setOptions={setRewardOptions}
-                h1Title={"Reward"}
-                placeholder={"Set Reward"}
-                value={reward}
-                valueOptions={rewardOptions}
-              />
+             
+              {/* Need to make this into a regular single select table */}
               <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setQuest}
@@ -232,8 +221,46 @@ const QuestGen = () => {
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
-             
-              
+            <CustomDropDown
+                tableName={"itemsTypes"}
+                setSingular={setReward}
+                setPlural={setRewards}
+                setOptions={setRewardOptions}
+                h1Title={"Reward"}
+                placeholder={"Set Reward"}
+                value={reward}
+                valueOptions={rewardOptions}
+              />
+              <CustomDropDown
+                tableName={"itemTypes"}
+                setSingular={setLocation}
+                setPlural={setLocations}
+                setOptions={setLocationOptions}
+                h1Title={"Location"}
+                placeholder={"Set Location"}
+                value={location}
+                valueOptions={locationOptions}
+              />
+              <CustomDropDown
+                tableName={"itemTypes"}
+                setSingular={setMotive}
+                setPlural={setMotives}
+                setOptions={setMotiveOptions}
+                h1Title={"Motive"}
+                placeholder={"Set Motive"}
+                value={motive}
+                valueOptions={motiveOptions}
+              />
+              <CustomDropDown
+                tableName={"itemTypes"}
+                setSingular={setTwist}
+                setPlural={setTwists}
+                setOptions={setTwistOptions}
+                h1Title={"Twist"}
+                placeholder={"Set Twist"}
+                value={twist}
+                valueOptions={twistOptions}
+              />
             </div>
           </div>
         </div>
@@ -245,7 +272,19 @@ const QuestGen = () => {
             Quest Type <span className={style.minorText2}>{questType}</span>
           </h2>
           <h2>
+            Quest <span className={style.minorText2}>{quest}</span>
+          </h2>
+          <h2>
             Reward <span className={style.minorText2}>{reward}</span>
+          </h2>
+          <h2>
+            Location <span className={style.minorText2}>{location}</span>
+          </h2>
+          <h2>
+            Motive <span className={style.minorText2}>{motive}</span>
+          </h2>
+          <h2>
+            Twist <span className={style.minorText2}>{twist}</span>
           </h2>
         </div>
       </div>
