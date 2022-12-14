@@ -285,7 +285,6 @@ const SpellGen = () => {
           <h2>
             Description <span className={style.minorText2}>{description}</span>
           </h2>
-          
         </div>
       </div>
     </div>
