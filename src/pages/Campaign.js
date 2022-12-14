@@ -42,11 +42,11 @@ const Campaign = () => {
 
 //return the list of campaigns
     return (
-        <div>
+        <div className={style.createWrapper}>
             <Navbar />
             <div className={style.createContainer}>
-                <h1>Campaigns</h1>
-                <div className={style.createCards}>{campaignList}</div>
+                <h1 className={style.createHeader}>Campaign Managment</h1>
+                <div className={style.createCardWrapper}>{campaignList}</div>
             </div>
         </div>
     );
