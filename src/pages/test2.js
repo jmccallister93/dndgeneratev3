@@ -1,13 +1,9 @@
-<CustomDataTable
-                tableName={"itemTypes"}
-                setSingular={setWeakness}
-                setPlural={setWeaknesss}
-                setOptions={setWeaknessOptions}
-                h1Title={"Weakness"}
-                dialogHeader={"Weakness"}
-                selectedWeakness={selectedWeakness}
-                setSelectedWeakness={setSelectedWeakness}
-                list={WeaknessList}
-                setList={setWeaknessList}
-                valueOptions={WeaknessOptions}
-              />
+const [roomCount, setRoomCount] = useState("");
+const [roomCounts, setRoomCounts] = useState("");
+const [roomCountOptions, setRoomCountOptions] = useState("");
+
+const [roomType, setRoomType] = useState("");
+const [roomTypes, setRoomTypes] = useState("");
+const [roomTypeOptions, setRoomTypeOptions] = useState("");
+const [roomTypeList, setEnterenaceTypeList] = useState([]);
+const [selectedRoomType, setSelectedRoomType] = useState([]);

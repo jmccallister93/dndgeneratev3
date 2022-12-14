@@ -11,12 +11,16 @@ const Navbar = () => {
         <Link to="/create">
           <li className={style.navbarLi}>Create</li>
         </Link>
+        <Link to="/campaign">
+          <li className={style.navbarLi}>Campaign</li>
+        </Link>
         <Link to="/collections">
           <li className={style.navbarLi}>Collections</li>
         </Link>
         <Link to="/about">
           <li className={style.navbarLi}>About</li>
         </Link>
+        
       </ul>
 
       <div className={style.navbarLoginWrapper}>

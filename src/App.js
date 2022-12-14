@@ -25,6 +25,7 @@ import EncounterGen from "./pages/EncounterGen";
 import ClassGen from "./pages/ClassGen";
 import RaceGen from "./pages/RaceGen";
 import PantheonGen from "./pages/PantheonGen";
+import Campaign from "./pages/Campaign";
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           <Route path="/encountergen" element={<EncounterGen />} />
           <Route path="/classgen" element={<ClassGen />} />
           <Route path="/racegen" element={<RaceGen />} />
+          <Route path="/campaign" element={<Campaign />} />
         </Routes>
       </BrowserRouter>
     </div>
