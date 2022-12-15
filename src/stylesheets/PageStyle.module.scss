@@ -279,3 +279,10 @@ $btn-blue: #2196f3;
   .dropTitle{
     font-size: 1.5rem;
   }
+
+  //add highlight to selected option
+  .highlight
+  {
+    background-color: $header-color;
+    // transition: 5s;
+  }

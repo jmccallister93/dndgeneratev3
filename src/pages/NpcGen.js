@@ -17,6 +17,9 @@ import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
 import CustomName from "../components/CustomName";
+import EditText from "../components/EditText";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplay from "../components/SingleDisplay";
 
 const NpcGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(true);
@@ -127,19 +130,6 @@ const NpcGen = () => {
     }
   };
 
-  //Create onclick function that allows text editing and sets state to new value
-  const editName = (e) => {
-    e.target.contentEditable = true;
-    //When user clicks out of the text box, set state to new value
-    e.target.onblur = () => {
-      e.target.contentEditable = false;
-      setName(e.target.textContent);
-    }
-      //If user clicks out of text box and it is empty, set state to "Name"
-      if (e.target.textContent === "") {
-        setName("Name");
-      }
-  };
 
   return (
     <div className={style.mainWrapper}>
@@ -409,9 +399,9 @@ const NpcGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-          <h1 onClick={editName}>{name}</h1>
+          <NameDisplay value={name} setNewValue={setName}/>
           <h2>
-            <span className={style.minorText2}>
+            <span className={style.minorText2} >
               {race} {sex}, {align}
             </span>
           </h2>
@@ -470,7 +460,8 @@ const NpcGen = () => {
           </h3>
           <hr className={style.lineBreak} />
           <h2>
-            Profession <span className={style.minorText2}>{prof}</span>
+            Profession <span className={style.minorText2}>
+              <SingleDisplay value={prof} setNewValue={setProf} /></span>
           </h2>
           <h2>
             Feature {" "}

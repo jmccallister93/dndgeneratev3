@@ -1,6 +1,5 @@
-import style from "../stylesheets/PageStyle.module.scss";
-
-const SingleDisplay = (props) => {
+const EditText = (props) => {
+    //Create onclick function that allows text editing and sets state to new value. When user clicks out of the text box, set state to new value If user clicks out of text box and it is empty, set state to "" (empty string)
     const onClick = (e) => {
         e.target.contentEditable = true;
         e.target.focus();
@@ -14,14 +13,15 @@ const SingleDisplay = (props) => {
         };
     };
     return (
-        <span className={style.minorText2}
+        <div
+            className="editText"
             onClick={onClick}
             contentEditable="false"
             suppressContentEditableWarning={true}
         >
             {props.value}
-        </span>
+        </div>
     );
 }
  
-export default SingleDisplay;
+export default EditText;
