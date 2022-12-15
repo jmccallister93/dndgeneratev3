@@ -516,21 +516,39 @@ const NpcGen = () => {
             </span>
           </h2>
           <h2>
-            Talent <span className={style.minorText2}>{talent}</span>
+            Talent{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={talent} setNewValue={setTalent} />
+            </span>
           </h2>
           <h2>
-            Mannerism <span className={style.minorText2}>{mannerism}</span>
+            Mannerism{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={mannerism} setNewValue={setMannerism} />
+            </span>
           </h2>
           <h2>
-            Interaction <span className={style.minorText2}>{interaction}</span>
+            Interaction{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText
+                value={interaction}
+                setNewValue={setInteraction}
+              />
+            </span>
           </h2>
           <h2>
-            Bond <span className={style.minorText2}>{bond}</span>
+            Bond{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={bond} setNewValue={setBond} />
+            </span>
           </h2>
           <h1>Plot Hook</h1>
           <hr className={style.subLineBreak} />
           <h2>
-            Hook <span className={style.minorText2}>{hook}</span>
+            Hook{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={hook} setNewValue={setHook} />
+            </span>
           </h2>
         </div>
       </div>

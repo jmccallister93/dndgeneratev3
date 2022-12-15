@@ -2,6 +2,7 @@ import style from "../stylesheets/PageStyle.module.scss";
 
 const SingleDisplayNumber = (props) => {
   //Create on click function that allows for number change and sets state to new number value
+  
 
   const onClick = (e) => {
     e.target.contentEditable = true;
