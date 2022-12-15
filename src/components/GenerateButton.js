@@ -56,6 +56,7 @@ const GenerateButton = (props) => {
       for (let i = 0; i < props.numberItem.length; i++) {
         if (props.numberItem[i] === "" || props.numberItem[i] === undefined) {
           let r = Math.floor(Math.random() * (props.maxNumber - props.minNumber));
+          r = r.toString();
           props.setNumberItem[i](r);
         }
       }

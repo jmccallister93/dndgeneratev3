@@ -199,7 +199,12 @@ const NpcGen = () => {
                 setRace,
                 setSex,
                 setTalent,
+                setCha,
+                setCon,
+                setDex,
+                setInt,
                 setWis,
+                setStr,
               ]}
               setArrayState={[setSelectedFeature]}
               setNumberState={[setCha, setCon, setDex, setInt, setWis, setStr]}
@@ -411,8 +416,13 @@ const NpcGen = () => {
               <h3>STR</h3>
               <div>
                 <span className={style.minorText2}>
-                  <SingleDisplayNumber value={str} setNewValue={setStr} min={0} max={30}/>{" "}
-                   {setMod(str)}
+                  <SingleDisplayNumber
+                    value={str}
+                    setNewValue={setStr}
+                    min={0}
+                    max={30}
+                  />{" "}
+                  {setMod(str)}
                 </span>
               </div>
             </div>
@@ -420,7 +430,13 @@ const NpcGen = () => {
               <h3>DEX</h3>
               <div>
                 <span className={style.minorText2}>
-                  {dex} {setMod(dex)}
+                  <SingleDisplayNumber
+                    value={dex}
+                    setNewValue={setDex}
+                    min={0}
+                    max={30}
+                  />{" "}
+                  {setMod(dex)}
                 </span>
               </div>
             </div>
@@ -428,7 +444,13 @@ const NpcGen = () => {
               <h3>CON</h3>
               <div>
                 <span className={style.minorText2}>
-                  {con} {setMod(con)}
+                  <SingleDisplayNumber
+                    value={con}
+                    setNewValue={setCon}
+                    min={0}
+                    max={30}
+                  />{" "}
+                  {setMod(con)}
                 </span>
               </div>
             </div>
@@ -438,7 +460,13 @@ const NpcGen = () => {
               <h3>INT</h3>
               <div>
                 <span className={style.minorText2}>
-                  {int} {setMod(int)}
+                  <SingleDisplayNumber
+                    value={int}
+                    setNewValue={setInt}
+                    min={0}
+                    max={30}
+                  />{" "}
+                  {setMod(int)}
                 </span>
               </div>
             </div>
@@ -446,7 +474,13 @@ const NpcGen = () => {
               <h3>WIS</h3>
               <div>
                 <span className={style.minorText2}>
-                  {wis} {setMod(wis)}
+                  <SingleDisplayNumber
+                    value={wis}
+                    setNewValue={setWis}
+                    min={0}
+                    max={30}
+                  />{" "}
+                  {setMod(wis)}
                 </span>
               </div>
             </div>
@@ -454,7 +488,13 @@ const NpcGen = () => {
               <h3>CHA</h3>
               <div>
                 <span className={style.minorText2}>
-                  {cha} {setMod(cha)}
+                  <SingleDisplayNumber
+                    value={cha}
+                    setNewValue={setCha}
+                    min={0}
+                    max={30}
+                  />{" "}
+                  {setMod(cha)}
                 </span>
               </div>
             </div>
