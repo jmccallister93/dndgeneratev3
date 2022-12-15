@@ -16,12 +16,15 @@ import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
+import CustomName from "../components/CustomName";
 
 const NpcGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(true);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isHookActive, setIsHookActive] = useState(false);
   const [isStatsActive, setIsStatsActive] = useState(false);
+
+  const [fetchError, setFetchError] = useState(false);
 
   const [name, setName] = useState("");
   const [names, setNames] = useState("");
@@ -66,17 +69,11 @@ const NpcGen = () => {
   const [interactionOptions, setInteractionOptions] = useState("");
 
   const [str, setStr] = useState("");
-  const [strMod, setStrMod] = useState("");
   const [dex, setDex] = useState("");
-  const [dexMod, setDexMod] = useState("");
   const [con, setCon] = useState("");
-  const [conMod, setConMod] = useState("");
   const [int, setInt] = useState("");
-  const [intMod, setIntMod] = useState("");
   const [wis, setWis] = useState("");
-  const [wisMod, setWisMod] = useState("");
   const [cha, setCha] = useState("");
-  const [chaMod, setChaMod] = useState("");
   const [hook, setHook] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -129,6 +126,8 @@ const NpcGen = () => {
       return "(+10)";
     }
   };
+
+  
 
   return (
     <div className={style.mainWrapper}>
@@ -213,11 +212,15 @@ const NpcGen = () => {
           </h1>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputText
+              <CustomName
+              tableName={"names"}
                 title={"Name"}
-                input={name}
-                setInput={setName}
+                name={name}
+                setName={setName}
+                setNames={setNames}
+                setNameOptions={setNameOptions}
                 placeholder={"Set Name"}
+
               />
               <CustomDropDown
                 tableName={"races"}

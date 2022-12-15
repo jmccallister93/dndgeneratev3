@@ -13,6 +13,7 @@ const CustomInputText = (props) => {
     //placeholder
     //onclick
     // ----SAMPLE PROPS----
+    
     const onInputChange = (e) => {
         props.setInput(e.target.value);
       }
