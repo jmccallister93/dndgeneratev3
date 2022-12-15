@@ -20,7 +20,7 @@ import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
-import SingleDisplay from "../components/SingleDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
 import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";

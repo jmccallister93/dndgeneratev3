@@ -1,6 +1,6 @@
 import style from "../stylesheets/PageStyle.module.scss";
 
-const SingleDisplay = (props) => {
+const SingleDisplayText = (props) => {
     const onClick = (e) => {
         e.target.contentEditable = true;
         e.target.focus();
@@ -12,6 +12,12 @@ const SingleDisplay = (props) => {
                 props.setNewValue(e.target.innerText);
             }
         };
+        //Add a listener for the enter key
+        e.target.onkeypress = (e) => {
+            if (e.key === "Enter") {
+                e.target.blur();
+            }
+        }
     };
     return (
         <span className={style.minorText2}
@@ -24,4 +30,4 @@ const SingleDisplay = (props) => {
     );
 }
  
-export default SingleDisplay;
+export default SingleDisplayText;

@@ -11,6 +11,12 @@ const NameDisplay = (props) => {
                 props.setNewValue(e.target.innerText);
             }
         };
+        //Add a listener for the enter key
+        e.target.onkeypress = (e) => {
+            if (e.key === "Enter") {
+                e.target.blur();
+            }
+        }
     };
     return (
         <h1

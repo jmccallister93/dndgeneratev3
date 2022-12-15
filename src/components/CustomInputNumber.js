@@ -20,6 +20,8 @@ const CustomInputNumber = (props) => {
 
   //On Change
   const onChange = (e) => {
+    //convert e.value to string
+    e.value = e.value.toString();
     props.setSingular(e.value);
   };
   const inputNumber = (

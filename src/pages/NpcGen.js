@@ -19,7 +19,8 @@ import MultipleDisplay from "../components/MultipleDisplay";
 import CustomName from "../components/CustomName";
 import EditText from "../components/EditText";
 import NameDisplay from "../components/NameDisplay";
-import SingleDisplay from "../components/SingleDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
+import SingleDisplayNumber from "../components/SingleDisplayNumber";
 
 const NpcGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(true);
@@ -95,41 +96,40 @@ const NpcGen = () => {
 
   //Function to set ability modifier based on ability score
   const setMod = (score) => {
-    if (score === 0 || score === 1) {
+    if (score === "0" || score === "1") {
       return "(-5)";
-    } else if (score === 2 || score === 3) {
+    } else if (score === "2" || score === "3") {
       return "(-4)";
-    } else if (score === 4 || score === 5) {
+    } else if (score === "4" || score === "5") {
       return "(-3)";
-    } else if (score === 6 || score === 7) {
+    } else if (score === "6" || score === "7") {
       return "(-2)";
-    } else if (score === 8 || score === 9) {
+    } else if (score === "8" || score === "9") {
       return "(-1)";
-    } else if (score === 10 || score === 11) {
+    } else if (score === "10" || score === "11") {
       return "(+0)";
-    } else if (score === 12 || score === 13) {
+    } else if (score === "12" || score === "13") {
       return "(+1)";
-    } else if (score === 14 || score === 15) {
+    } else if (score === "14" || score === "15") {
       return "(+2)";
-    } else if (score === 16 || score === 17) {
+    } else if (score === "16" || score === "17") {
       return "(+3)";
-    } else if (score === 18 || score === 19) {
+    } else if (score === "18" || score === "19") {
       return "(+4)";
-    } else if (score === 20 || score === 21) {
+    } else if (score === "20" || score === "21") {
       return "(+5)";
-    } else if (score === 22 || score === 23) {
+    } else if (score === "22" || score === "23") {
       return "(+6)";
-    } else if (score === 24 || score === 25) {
+    } else if (score === "24" || score === "25") {
       return "(+7)";
-    } else if (score === 26 || score === 27) {
+    } else if (score === "26" || score === "27") {
       return "(+8)";
-    } else if (score === 28 || score === 29) {
+    } else if (score === "28" || score === "29") {
       return "(+9)";
-    } else if (score === 30) {
+    } else if (score === "30") {
       return "(+10)";
     }
   };
-
 
   return (
     <div className={style.mainWrapper}>
@@ -177,7 +177,6 @@ const NpcGen = () => {
               setNumberItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
               maxNumber={30}
               minNumber={0}
-
               nameItem={[name]}
               nameItemOptions={[nameOptions]}
               setNameItem={[setName]}
@@ -399,11 +398,12 @@ const NpcGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-          <NameDisplay value={name} setNewValue={setName}/>
+          <NameDisplay value={name} setNewValue={setName} />
           <h2>
-            <span className={style.minorText2} >
-              {race} {sex}, {align}
-            </span>
+            <SingleDisplayText value={race} setNewValue={setRace} />{" "}
+            <SingleDisplayText value={sex} setNewValue={setSex} />
+            {", "}
+            <SingleDisplayText value={align} setNewValue={setAlign} />
           </h2>
           <hr className={style.lineBreak} />
           <h3 className={style.abilityScores}>
@@ -411,7 +411,8 @@ const NpcGen = () => {
               <h3>STR</h3>
               <div>
                 <span className={style.minorText2}>
-                  {str} {setMod(str)}
+                  <SingleDisplayNumber value={str} setNewValue={setStr} min={0} max={30}/>{" "}
+                   {setMod(str)}
                 </span>
               </div>
             </div>
@@ -460,16 +461,18 @@ const NpcGen = () => {
           </h3>
           <hr className={style.lineBreak} />
           <h2>
-            Profession <span className={style.minorText2}>
-              <SingleDisplay value={prof} setNewValue={setProf} /></span>
+            Profession{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={prof} setNewValue={setProf} />
+            </span>
           </h2>
           <h2>
-            Feature {" "}
+            Feature{" "}
             <span className={style.minorText2}>
-            <MultipleDisplay
-              selectedItem={selectedFeature}
-              setList={setFeatureList}
-            />
+              <MultipleDisplay
+                selectedItem={selectedFeature}
+                setList={setFeatureList}
+              />
             </span>
           </h2>
           <h2>
