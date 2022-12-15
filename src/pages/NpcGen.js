@@ -14,6 +14,8 @@ import GenerateButton from "../components/GenerateButton";
 import CustomInputText from "../components/CustomInputText";
 import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
+import CustomDataTable from "../components/CustomDataTable";
+import MultipleDisplay from "../components/MultipleDisplay";
 
 const NpcGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(true);
@@ -25,45 +27,43 @@ const NpcGen = () => {
   const [names, setNames] = useState("");
   const [nameOptions, setNameOptions] = useState("");
 
-  const [align, setAlign] = useState("");
-  const [aligns, setAligns] = useState("");
-  const [alignOptions, setAlignOptions] = useState("");
-
   const [race, setRace] = useState("");
   const [races, setRaces] = useState("");
   const [raceOptions, setRaceOptions] = useState("");
-
-  const [bond, setBond] = useState("");
-  const [bonds, setBonds] = useState("");
-  const [bondOptions, setBondOptions] = useState("");
-  const [bondList, setBondList] = useState("");
-  const [selectedBond, setSelectedBond] = useState("");
-
-  const [feature, setFeature] = useState("");
-  const [features, setFeatures] = useState("");
-  const [featureOptions, setFeatureOptions] = useState("");
-  const [featureList, setFeatureList] = useState("");
-  const [selectedFeature, setSelectedFeature] = useState("");
-
-  const [interaction, setInteraction] = useState("");
-  const [interactions, setInteractions] = useState("");
-  const [interactionOptions, setInteractionOptions] = useState("");
-
-  const [prof, setProf] = useState("");
-  const [profs, setProfs] = useState("");
-  const [profOptions, setProfOptions] = useState("");
-
-  const [mannerism, setMannerism] = useState("");
-  const [mannerisms, setMannerisms] = useState("");
-  const [mannerismOptions, setMannerismOptions] = useState("");
 
   const [sex, setSex] = useState("");
   const [sexs, setSexs] = useState("");
   const [sexOptions, setSexOptions] = useState("");
 
+  const [align, setAlign] = useState("");
+  const [aligns, setAligns] = useState("");
+  const [alignOptions, setAlignOptions] = useState("");
+
+  const [bond, setBond] = useState("");
+  const [bonds, setBonds] = useState("");
+  const [bondOptions, setBondOptions] = useState("");
+
+  const [feature, setFeature] = useState("");
+  const [features, setFeatures] = useState("");
+  const [featureOptions, setFeatureOptions] = useState("");
+  const [featureList, setFeatureList] = useState([]);
+  const [selectedFeature, setSelectedFeature] = useState([]);
+
+  const [prof, setProf] = useState("");
+  const [profs, setProfs] = useState("");
+  const [profOptions, setProfOptions] = useState("");
+
   const [talent, setTalent] = useState("");
   const [talents, setTalents] = useState("");
   const [talentOptions, setTalentOptions] = useState("");
+
+  const [mannerism, setMannerism] = useState("");
+  const [mannerisms, setMannerisms] = useState("");
+  const [mannerismOptions, setMannerismOptions] = useState("");
+
+  const [interaction, setInteraction] = useState("");
+  const [interactions, setInteractions] = useState("");
+  const [interactionOptions, setInteractionOptions] = useState("");
 
   const [str, setStr] = useState("");
   const [strMod, setStrMod] = useState("");
@@ -140,47 +140,42 @@ const NpcGen = () => {
           <div className={style.btnWrapper}>
             <GenerateButton
               generateItems={[
-                name,
                 race,
+                sex,
                 align,
                 prof,
-                feature,
                 talent,
                 mannerism,
                 interaction,
                 bond,
               ]}
-              setItem={[
-                setName,
-                setRace,
-                setAlign,
-                setProf,
-                setFeature,
-                setTalent,
-                setMannerism,
-                setInteraction,
-                setBond,
-              ]}
-              numberItem={[ 
-                setStr,
-                setDex,
-                setCon,
-                setInt,
-                setWis,
-                setCha,
-              ]}
-              maxNumber={30}
               itemOptions={[
-                sexOptions,
                 raceOptions,
+                sexOptions,
                 alignOptions,
                 profOptions,
-                featureOptions,
                 talentOptions,
                 mannerismOptions,
                 interactionOptions,
                 bondOptions,
               ]}
+              setItem={[
+                setRace,
+                setSex,
+                setAlign,
+                setProf,
+                setTalent,
+                setMannerism,
+                setInteraction,
+                setBond,
+              ]}
+              selectItemOptions={[featureOptions]}
+              selectedItems={[selectedFeature]}
+              setSelectedItem={[setSelectedFeature]}
+              numberItem={[str, dex, con, int, wis, cha]}
+              setNumberItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
+              maxNumber={30}
+              minNumber={0}
             />
             <ClearButton
               setStringState={[
@@ -199,18 +194,11 @@ const NpcGen = () => {
                 setProf,
                 setRace,
                 setSex,
-                setStr,
                 setTalent,
                 setWis,
               ]}
-              setArrayState={[setSelectedBond, setSelectedFeature]}
-              setNumberState={[
-                setCha,
-                setCon,
-                setDex,
-                setInt,
-                setWis,
-              ]}
+              setArrayState={[setSelectedFeature]}
+              setNumberState={[setCha, setCon, setDex, setInt, setWis, setStr]}
             />
           </div>
         </div>
@@ -319,7 +307,78 @@ const NpcGen = () => {
             NPC Details
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
-            <div></div>
+            <div>
+              <CustomDropDown
+                tableName={"professions"}
+                setSingular={setProf}
+                setPlural={setProfs}
+                setOptions={setProfOptions}
+                options={profOptions}
+                h1Title={"Profession"}
+                placeholder={"Set Profession"}
+                value={prof}
+                valueOptions={profOptions}
+              />
+              <CustomDataTable
+                tableName={"features"}
+                setSingular={setFeature}
+                setPlural={setFeatures}
+                setOptions={setFeatureOptions}
+                h1Title={"Features"}
+                dialogHeader={"Set Features"}
+                selectedItem={selectedFeature}
+                setSelectedItem={setSelectedFeature}
+                list={featureList}
+                setList={setFeatureList}
+                valueOptions={featureOptions}
+                // options={featureOptions}
+              />
+
+              <CustomDropDown
+                tableName={"talents"}
+                setSingular={setTalent}
+                setPlural={setTalents}
+                setOptions={setTalentOptions}
+                options={talentOptions}
+                h1Title={"Talent"}
+                placeholder={"Set Talent"}
+                value={talent}
+                valueOptions={talentOptions}
+              />
+              <CustomDropDown
+                tableName={"mannerisms"}
+                setSingular={setMannerism}
+                setPlural={setMannerisms}
+                setOptions={setMannerismOptions}
+                options={mannerismOptions}
+                h1Title={"Mannerism"}
+                placeholder={"Set Mannerism"}
+                value={mannerism}
+                valueOptions={mannerismOptions}
+              />
+              <CustomDropDown
+                tableName={"interactions"}
+                setSingular={setInteraction}
+                setPlural={setInteractions}
+                setOptions={setInteractionOptions}
+                options={interactionOptions}
+                h1Title={"Interaction"}
+                placeholder={"Set Interaction"}
+                value={interaction}
+                valueOptions={interactionOptions}
+              />
+              <CustomDropDown
+                tableName={"bonds"}
+                setSingular={setBond}
+                setPlural={setBonds}
+                setOptions={setBondOptions}
+                options={bondOptions}
+                h1Title={"Bond"}
+                placeholder={"Set Bond"}
+                value={bond}
+                valueOptions={bondOptions}
+              />
+            </div>
           </div>
           <h1 className={style.subHeader} onClick={showHook}>
             NPC Hook
@@ -350,7 +409,7 @@ const NpcGen = () => {
             <div>
               <h3>DEX</h3>
               <div>
-              <span className={style.minorText2}>
+                <span className={style.minorText2}>
                   {dex} {setMod(dex)}
                 </span>
               </div>
@@ -358,7 +417,7 @@ const NpcGen = () => {
             <div>
               <h3>CON</h3>
               <div>
-              <span className={style.minorText2}>
+                <span className={style.minorText2}>
                   {con} {setMod(con)}
                 </span>
               </div>
@@ -368,7 +427,7 @@ const NpcGen = () => {
             <div>
               <h3>INT</h3>
               <div>
-              <span className={style.minorText2}>
+                <span className={style.minorText2}>
                   {int} {setMod(int)}
                 </span>
               </div>
@@ -376,7 +435,7 @@ const NpcGen = () => {
             <div>
               <h3>WIS</h3>
               <div>
-              <span className={style.minorText2}>
+                <span className={style.minorText2}>
                   {wis} {setMod(wis)}
                 </span>
               </div>
@@ -384,7 +443,7 @@ const NpcGen = () => {
             <div>
               <h3>CHA</h3>
               <div>
-              <span className={style.minorText2}>
+                <span className={style.minorText2}>
                   {cha} {setMod(cha)}
                 </span>
               </div>
@@ -395,7 +454,13 @@ const NpcGen = () => {
             Profession <span className={style.minorText2}>{prof}</span>
           </h2>
           <h2>
-            Feature <span className={style.minorText2}>{feature}</span>
+            Feature {" "}
+            <span className={style.minorText2}>
+            <MultipleDisplay
+              selectedItem={selectedFeature}
+              setList={setFeatureList}
+            />
+            </span>
           </h2>
           <h2>
             Talent <span className={style.minorText2}>{talent}</span>

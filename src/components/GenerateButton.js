@@ -3,9 +3,15 @@ import style from "../stylesheets/PageStyle.module.scss";
 const GenerateButton = (props) => {
   //----PROPS NEEDED----
   //generateItems
-  //setItem
   //itemOptions
+  //setItem
+  //selectedItemOptions
+  //selectedItem
+  //setSelectedItem
   //numberItem
+  //setNumberItem
+  //maxNumber
+  //minNumber
   //---PROPS NEEDED----
   const [multipleDisplay, setMultipleDisplay] = useState([]);
   useEffect(() => {
@@ -33,12 +39,13 @@ const GenerateButton = (props) => {
     for (let i = 0; i < props.selectedItems.length; i++) {
       let n = Math.round(Math.random() * (6 - 0));
       for (let x = 0; x <= n; x++) {
-        let max = props.itemOptions[i].length - 1;
+        //check if props.seleceteditems[i] already has the item
+        let max = props.selectItemOptions[i].length - 1;
         let set = props.setSelectedItem[i];
         let r = Math.round(Math.random() * (max - 0));
         if (props.selectedItems[i].length <= 0) {
           if (props.selectedItem === undefined) {
-            set((oldArray) => [...oldArray, props.itemOptions[i][r]]);
+            set((oldArray) => [...oldArray, props.selectItemOptions[i][r]]);
           }
         }
       }
@@ -49,7 +56,7 @@ const GenerateButton = (props) => {
     if (props.numberItem) {
       for (let i = 0; i < props.numberItem.length; i++) {
         if (props.numberItem[i] === "" || props.numberItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.maxNumber - 0));
+          let r = Math.floor(Math.random() * (props.maxNumber - props.minNumber));
           props.setNumberItem[i](r);
         }
       }
