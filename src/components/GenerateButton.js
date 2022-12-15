@@ -49,7 +49,7 @@ const GenerateButton = (props) => {
     if (props.numberItem) {
       for (let i = 0; i < props.numberItem.length; i++) {
         if (props.numberItem[i] === "" || props.numberItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (2000 - 50) + 50);
+          let r = Math.floor(Math.random() * (props.maxNumber - 0));
           props.setNumberItem[i](r);
         }
       }

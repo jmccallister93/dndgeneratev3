@@ -10,13 +10,11 @@ import SingleRandomButton from "./SingleRandomButton";
 
 const CustomInputNumber = (props) => {
   //---PROPS---
-  //tablename
   //setSingular
-  //setPlural
-  //setOptions
   //h1Title
   //value
   //placeholder
+  //maxNumber
   //---PROPS---
   const [fetchError, setFetchError] = useState(false);
 
@@ -40,6 +38,7 @@ const CustomInputNumber = (props) => {
         minFractionDigits={0}
         maxFractionDigits={2}
         min={0}
+        max={props.maxNumber}
         onChange={onChange}
       />
     </>

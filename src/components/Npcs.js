@@ -1,4 +1,4 @@
-import styleB from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -220,8 +220,8 @@ const Npcs = (props) => {
 
   //Dropdown Template
   const customDrop = (title, value, options, change, placeholder, onrandom) => (
-    <div className={styleB.dropContainer}>
-      <h2 className={styleB.dropTitle}>{title}</h2>
+    <div className={style.dropContainer}>
+      <h2 className={style.dropTitle}>{title}</h2>
       <Dropdown
         optionLabel="name"
         value={value}
@@ -229,18 +229,18 @@ const Npcs = (props) => {
         onChange={change}
         placeholder={placeholder}
       />
-      <Button onClick={onrandom} className={styleB.btnName}>
+      <Button onClick={onrandom} className={style.btnName}>
         Random
       </Button>
     </div>
   );
   //Input Template
   const customTextInput = (title, value, onchange, placeholder, onrandom) => (
-    <div className={styleB.dropContainer}>
-      <h2 className={styleB.dropTitle}>{title}</h2>
+    <div className={style.dropContainer}>
+      <h2 className={style.dropTitle}>{title}</h2>
       <InputText value={value} onChange={onchange} placeholder={placeholder} />
-      <Button onClick={onrandom} className={styleB.btnName}>
-        Randomize
+      <Button onClick={onrandom} className={style.btnName}>
+        Random
       </Button>
     </div>
   );
@@ -284,12 +284,12 @@ const Npcs = (props) => {
   //NPC Race
   const onRaceChange = (e) => {
     setRace(e.value);
-    props.onRaceChangeProp(e.value)
+    props.onRaceChangeProp(e.value);
   };
-  const onRandomRace = (e) =>{
-      let r = Math.round(Math.random() * (27 - 0));
-      setRace(raceOptions[r].name);
-  }
+  const onRandomRace = (e) => {
+    let r = Math.round(Math.random() * (27 - 0));
+    setRace(raceOptions[r].name);
+  };
   const raceDropdown = customDrop(
     "Race",
     race,
@@ -306,12 +306,12 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (2 - 1) + 1);
       setSex(sexOptions[r].name);
     }
-    props.onSexChangeProp(e.value)
+    props.onSexChangeProp(e.value);
   };
-  const onRandomSex = (e) =>{
+  const onRandomSex = (e) => {
     let r = Math.round(Math.random() * (1 - 0));
     setSex(sexOptions[r].name);
-}
+  };
   const sexDropdown = customDrop(
     "Sex",
     sex,
@@ -328,12 +328,12 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (9 - 1) + 1);
       setAlign(alignOptions[r].name);
     }
-    props.onAlignChangeProp(e.value)
+    props.onAlignChangeProp(e.value);
   };
-  const onRandomAlign = (e) =>{
+  const onRandomAlign = (e) => {
     let r = Math.round(Math.random() * (8 - 0));
     setAlign(alignOptions[r].name);
-}
+  };
   const alignDropdown = customDrop(
     "Alignment",
     align,
@@ -350,12 +350,12 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (49 - 1) + 1);
       setProf(profOptions[r].name);
     }
-    props.onProfChangeProp(e.value)
+    props.onProfChangeProp(e.value);
   };
-  const onRandomProf = (e) =>{
+  const onRandomProf = (e) => {
     let r = Math.round(Math.random() * (48 - 0));
     setProf(profOptions[r].name);
-}
+  };
   const profDropdown = customDrop(
     "Profession",
     prof,
@@ -372,12 +372,12 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (20 - 1) + 1);
       setFeature(featureOptions[r].name);
     }
-    props.onFeatureChangeProp(e.value)
+    props.onFeatureChangeProp(e.value);
   };
-  const onRandomFeature = (e) =>{
+  const onRandomFeature = (e) => {
     let r = Math.round(Math.random() * (19 - 0));
     setFeature(featureOptions[r].name);
-}
+  };
   const featureDropdown = customDrop(
     "Feature",
     feature,
@@ -394,12 +394,12 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (20 - 1) + 1);
       setTalent(talentOptions[r].name);
     }
-    props.onTalentChangeProp(e.value)
+    props.onTalentChangeProp(e.value);
   };
-  const onRandomTalent = (e) =>{
+  const onRandomTalent = (e) => {
     let r = Math.round(Math.random() * (19 - 0));
     setTalent(talentOptions[r].name);
-}
+  };
   const talentDropdown = customDrop(
     "Talent",
     talent,
@@ -416,12 +416,12 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (20 - 1) + 1);
       setMannerism(mannerismOptions[r].name);
     }
-    props.onMannerismChangeProp(e.value)
+    props.onMannerismChangeProp(e.value);
   };
-  const onRandomMannerism = (e) =>{
+  const onRandomMannerism = (e) => {
     let r = Math.round(Math.random() * (19 - 0));
     setMannerism(mannerismOptions[r].name);
-}
+  };
   const mannersimDropdown = customDrop(
     "Mannerism",
     mannerism,
@@ -438,12 +438,12 @@ const Npcs = (props) => {
       let r = Math.round(Math.random() * (11 - 1) + 1);
       setInteraction(interactionOptions[r].name);
     }
-    props.onInteractionChangeProp(e.value)
+    props.onInteractionChangeProp(e.value);
   };
-  const onRandomInteraction = (e) =>{
+  const onRandomInteraction = (e) => {
     let r = Math.round(Math.random() * (11 - 0));
     setInteraction(interactionOptions[r].name);
-}
+  };
   const interactionDropdown = customDrop(
     "Interaction",
     interaction,
@@ -456,12 +456,12 @@ const Npcs = (props) => {
   //NPC Bond
   const onBondChange = (e) => {
     setBond(e.value);
-    props.onBondChangeProp(e.value)
+    props.onBondChangeProp(e.value);
   };
-  const onRandomBond = (e) =>{
+  const onRandomBond = (e) => {
     let r = Math.round(Math.random() * (8 - 0));
     setBond(bondOptions[r].name);
-}
+  };
   const bondDropdown = customDrop(
     "Bond",
     bond,
@@ -520,11 +520,11 @@ const Npcs = (props) => {
   //   let v = Math.round(Math.random() * (11 - 1) + 1);
   //     let n = Math.round(Math.random() * (11 - 1) + 1);
   //     let a = Math.round(Math.random() * (11 - 1) + 1);
-      
+
   //     setHook(
   //       hookVerb[v].name + " " + hookAdjective[a].name + " " + hookNoun[n].name
   //     );
-    
+
   // },[])
   // const onHookChange = (e) => {
   //   setHook(e.value)
@@ -723,34 +723,36 @@ const Npcs = (props) => {
   return (
     <>
       {/* Options */}
-      <div className={styleB.optionsWrapper}>
+      <div className={style.optionsWrapper}>
         <h1>NPC Options</h1>
-        <h1 className={styleB.subHeader} onClick={showBasics}>
+        <h1 className={style.subHeader} onClick={showBasics}>
           NPC Basic Info
         </h1>
-        <div className={isBasicActive ? styleB.subsection : styleB.hidden}>
-          {nameInput}
-          {raceDropdown}
-          {sexDropdown}
-          {alignDropdown}
+        <div className={isBasicActive ? style.subsection : style.hidden}>
+          <div>
+            {nameInput}
+            {raceDropdown}
+            {sexDropdown}
+            {alignDropdown}
+          </div>
         </div>
-        <h1 className={styleB.subHeader} onClick={showDetails}>
+        <h1 className={style.subHeader} onClick={showDetails}>
           NPC Details
         </h1>
-        <div className={isDetailActive ? styleB.subsection : styleB.hidden}>
-          {profDropdown}
-          {featureDropdown}
-          {talentDropdown}
-          {mannersimDropdown}
-          {interactionDropdown}
-          {bondDropdown}
+        <div className={isDetailActive ? style.subsection : style.hidden}>
+          <div>
+            {profDropdown}
+            {featureDropdown}
+            {talentDropdown}
+            {mannersimDropdown}
+            {interactionDropdown}
+            {bondDropdown}
+          </div>
         </div>
-        <h1 className={styleB.subHeader} onClick={showHook}>
+        <h1 className={style.subHeader} onClick={showHook}>
           NPC Hook
         </h1>
-        <div className={isHookActive ? styleB.subsection : styleB.hidden}>
-          {}
-        </div>
+        <div className={isHookActive ? style.subsection : style.hidden}>{}</div>
       </div>
     </>
   );
