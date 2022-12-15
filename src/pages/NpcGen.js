@@ -127,6 +127,20 @@ const NpcGen = () => {
     }
   };
 
+  //Create onclick function that allows text editing and sets state to new value
+  const editName = (e) => {
+    e.target.contentEditable = true;
+    //When user clicks out of the text box, set state to new value
+    e.target.onblur = () => {
+      e.target.contentEditable = false;
+      setName(e.target.textContent);
+    }
+      //If user clicks out of text box and it is empty, set state to "Name"
+      if (e.target.textContent === "") {
+        setName("Name");
+      }
+  };
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -395,7 +409,7 @@ const NpcGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-          <h1>{name}</h1>
+          <h1 onClick={editName}>{name}</h1>
           <h2>
             <span className={style.minorText2}>
               {race} {sex}, {align}
