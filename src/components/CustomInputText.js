@@ -27,9 +27,9 @@ const CustomInputText = (props) => {
         <div>
           <h2 className={style.titles}>{props.title}</h2>
           <InputText value={props.input} onChange={onInputChange} placeholder={props.placeholder} />
-          <Button onClick={props.onRandom} className={style.btnName}>
+          <button onClick={props.onRandom} className={style.btnName}>
             Random
-          </Button>
+          </button>
         </div>
       );
 

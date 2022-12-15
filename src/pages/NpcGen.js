@@ -127,8 +127,6 @@ const NpcGen = () => {
     }
   };
 
-  
-
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -175,6 +173,10 @@ const NpcGen = () => {
               setNumberItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
               maxNumber={30}
               minNumber={0}
+
+              nameItem={[name]}
+              nameItemOptions={[nameOptions]}
+              setNameItem={[setName]}
             />
             <ClearButton
               setStringState={[
@@ -213,14 +215,14 @@ const NpcGen = () => {
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
-              tableName={"names"}
-                title={"Name"}
+                tableName={"names"}
                 name={name}
                 setName={setName}
                 setNames={setNames}
                 setNameOptions={setNameOptions}
+                nameOptions={nameOptions}
+                title={"Name"}
                 placeholder={"Set Name"}
-
               />
               <CustomDropDown
                 tableName={"races"}

@@ -52,7 +52,6 @@ const GenerateButton = (props) => {
     }
 
     //Number generate
-    //Standard
     if (props.numberItem) {
       for (let i = 0; i < props.numberItem.length; i++) {
         if (props.numberItem[i] === "" || props.numberItem[i] === undefined) {
@@ -61,74 +60,39 @@ const GenerateButton = (props) => {
         }
       }
     }
-    //Based on size
-    if (props.numberItemHuge) {
-      for (let i = 0; i < props.numberItemHuge.length; i++) {
-        if (
-          props.numberItemHuge[i] === "" ||
-          props.numberItemHuge[i] === undefined
-        ) {
-          let r = Math.floor(Math.random() * (1000000 - 99999) + 99999);
-          props.setNumberItem[i](r);
-        }
-      }
-    }
-    if (props.numberItemLarge) {
-      for (let i = 0; i < props.numberItemLarge.length; i++) {
-        if (
-          props.numberItemLarge[i] === "" ||
-          props.numberItemLarge[i] === undefined
-        ) {
-          let r = Math.floor(Math.random() * (100000 - 9999) + 9999);
-          props.setNumberItem[i](r);
-        }
-      }
-    }
-    if (props.numberItemMedium) {
-      for (let i = 0; i < props.numberItemMedium.length; i++) {
-        if (
-          props.numberItemMedium[i] === "" ||
-          props.numberItemMedium[i] === undefined
-        ) {
-          let r = Math.floor(Math.random() * (10000 - 999) + 999);
-          props.setNumberItem[i](r);
-        }
-      }
-    }
-    if (props.numberItemSmall) {
-      for (let i = 0; i < props.numberItemSmall.length; i++) {
-        if (
-          props.numberItemSmall[i] === "" ||
-          props.numberItemSmall[i] === undefined
-        ) {
-          let r = Math.floor(Math.random() * (1000 - 99) + 99);
-          props.setNumberItem[i](r);
-        }
-      }
-    }
-    if (props.numberItemTiny) {
-      for (let i = 0; i < props.numberItemTiny.length; i++) {
-        if (
-          props.numberItemTiny[i] === "" ||
-          props.numberItemTiny[i] === undefined
-        ) {
-          let r = Math.floor(Math.random() * (120 - 0));
-          props.setNumberItem[i](r);
-        }
-      }
-    }
 
-    //DataTable generate
+    //Generate a random name for each props.nameItem in the array
+    if (props.nameItem) {
+      for (let i = 0; i < props.nameItem.length; i++) {
+        if (props.nameItem[i] === "" || props.nameItem[i] === undefined) {
+          let f = Math.floor(Math.random() * 208);
+          let firstName = [props.nameItemOptions[i][f].first_name];
+          let eA = Math.floor(Math.random() * 208);
+          let epiphet_a = [props.nameItemOptions[i][eA].epithet_a];
+          let eB = Math.floor(Math.random() * 208);
+          let epiphet_b = [props.nameItemOptions[i][eB].epithet_b];
+          let nA = Math.floor(Math.random() * 208);
+          let noun_a = [props.nameItemOptions[i][nA].noun_a];
+          let nB = Math.floor(Math.random() * 208);
+          let noun_b = [props.nameItemOptions[i][nB].noun_b];
+  
+          let random = Math.round(Math.random() * 3);
+
+          if (random === 0) {
+            props.setNameItem[i](firstName + " " + epiphet_a + noun_a);
+          } else if (random === 1) {
+            props.setNameItem[i](firstName + " " + epiphet_a + noun_b);
+          } else if (random === 2) {
+            props.setNameItem[i](firstName + " " + epiphet_b + noun_a);
+          } else if (random === 3) {
+            props.setNnameItem[i](firstName + " " + epiphet_b + noun_b);
+          }
+        }
+      }
+    }
   };
 
-  // const onGenerate = (e) => {
-  //   let max = props.itemOptions.length;
-  //   let r = Math.round(Math.random() * (max - 0));
-  //   if (props.singularItem === ""){
-  //     props.setSingularItem(props.itemOptions[r].name)
-  //   }
 
-  // }
   return (
     <>
       <button onClick={onGenerate} className={style.btnGen}>
