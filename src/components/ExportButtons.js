@@ -56,9 +56,8 @@ const ExportButtons = (props) => {
 
   const exportToPdf = () => {
     if (isPdfReady) {
-      pdf.save("export.pdf");
+      pdf.save(`${props.data.name}.pdf`);
     }
-    console.log(props.data.race)
   };
 
   const exportToText = () => {
@@ -68,18 +67,18 @@ const ExportButtons = (props) => {
       const element = document.createElement("a");
       const file = new Blob([text], { type: "text/plain" });
       element.href = URL.createObjectURL(file);
-      element.download = "export.txt";
+      element.download = `${props.data.name}.txt`;
       document.body.appendChild(element); // Required for this to work in FireFox
       element.click();
     }
   };
 
   const exportToExcel = () => {
-    if (data && data.length > 0) {
+    if (data) {
       const element = document.createElement("a");
       const file = new Blob([JSON.stringify(data)], { type: "text/plain" });
       element.href = URL.createObjectURL(file);
-      element.download = "export.json";
+      element.download = `${props.data.name}.xlsx`;
       document.body.appendChild(element); // Required for this to work in FireFox
       element.click();
     }
