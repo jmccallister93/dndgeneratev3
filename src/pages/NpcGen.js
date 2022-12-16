@@ -79,8 +79,16 @@ const NpcGen = () => {
   const [int, setInt] = useState("");
   const [wis, setWis] = useState("");
   const [cha, setCha] = useState("");
-  const [hook, setHook] = useState("");
+ 
   const [desc, setDesc] = useState("");
+
+  const [questType, setQuestType] = useState("");
+  const [questTypes, setQuestTypes] = useState("");
+  const [questTypeOptions, setQuestTypeOptions] = useState("");
+
+  const [hook, setHook] = useState("");
+  const [hooks, setHooks] = useState("");
+  const [hookOptions, setHookOptions] = useState("");
 
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -150,6 +158,8 @@ const NpcGen = () => {
                 mannerism,
                 interaction,
                 bond,
+                questType,
+                hook,
               ]}
               itemOptions={[
                 raceOptions,
@@ -160,6 +170,8 @@ const NpcGen = () => {
                 mannerismOptions,
                 interactionOptions,
                 bondOptions,
+                questTypeOptions,
+                hookOptions,
               ]}
               setItem={[
                 setRace,
@@ -170,6 +182,8 @@ const NpcGen = () => {
                 setMannerism,
                 setInteraction,
                 setBond,
+                setQuestType,
+                setHook,
               ]}
               selectItemOptions={[featureOptions]}
               selectedItems={[selectedFeature]}
@@ -191,7 +205,6 @@ const NpcGen = () => {
                 setDesc,
                 setDex,
                 setFeature,
-                setHook,
                 setInt,
                 setInteraction,
                 setMannerism,
@@ -206,6 +219,8 @@ const NpcGen = () => {
                 setInt,
                 setWis,
                 setStr,
+                setQuestType,
+                setHook,
               ]}
               setArrayState={[setSelectedFeature]}
               setNumberState={[setCha, setCon, setDex, setInt, setWis, setStr]}
@@ -398,7 +413,46 @@ const NpcGen = () => {
             NPC Hook
           </h1>
           <div className={isHookActive ? style.subsection : style.hidden}>
-            {}
+            <div>
+          <CustomDropDown
+                tableName={"questTypes"}
+                setSingular={setQuestType}
+                setPlural={setQuestTypes}
+                setOptions={setQuestTypeOptions}
+                options={questTypeOptions}
+                h1Title={"Quest Type"}
+                placeholder={"Set Quest Type"}
+                value={questType}
+                valueOptions={questTypeOptions}
+              />
+              {questType === "None" ? "" : 
+              questType === "Bounty" ?
+              "Bounty" :
+              questType === "Capture" ?
+              "Capture" :
+              questType === "Delivery" ?
+              "Delivery" :
+              questType === "Escort" ?
+              "Escort" :
+              questType === "Exploration" ?
+              "Exploration" :
+              questType === "Gather" ?
+              "Gather" :
+              questType === "Investigation" ?
+              "Investigation" :
+              questType === "Kill" ?
+              "Kill" :
+              questType === "Negotiation" ?
+              "Negotiation" :
+              questType === "Protect" ?
+              "Protect" :
+              questType === "Rescue" ?
+              "Rescue" :
+              questType === "Custom" ?
+              "Custom" :
+              "Error"
+              }
+              </div>
           </div>
         </div>
 
@@ -547,10 +601,9 @@ const NpcGen = () => {
           <hr className={style.subLineBreak} />
           <h2>
             Hook{" "}
-            <RandomHooks />
             <span className={style.minorText2}>
-              
-              {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
+              <RandomHooks value={questType} setValue={setQuestType}/>
+              <SingleDisplayText value={bond} setNewValue={setBond} />
             </span>
           </h2>
           
