@@ -25,7 +25,7 @@ const RandomHooks = (props) => {
   const [npcNames, setNpcNames] = useState("");
   const [npcNameOptions, setNpcNameOptions] = useState("");
 
-  const [capture, setCapture] = useState([]);
+  const [capture, setCapture] = useState("");
 
   const [item, setItem] = useState("");
   const [items, setItems] = useState("");
@@ -77,15 +77,10 @@ const RandomHooks = (props) => {
   const [materialOptions, setMaterialOptions] = useState("");
 
   const [gather, setGather] = useState("");
-
   const [investigate, setInvestigate] = useState("");
-
   const [kill, setKill] = useState("");
-
   const [negotiation, setNegotiation] = useState("");
-
   const [protect, setProtect] = useState("");
-
   const [rescue, setRescue] = useState("");
 
   //Get Data from supabase
@@ -107,7 +102,6 @@ const RandomHooks = (props) => {
     };
     fetchData();
   };
-
   useEffect(() => {
     getData(
       "questsBounty",
@@ -169,13 +163,13 @@ const RandomHooks = (props) => {
     let random = Math.round(Math.random() * 3);
 
     if (random === 0) {
-      setNpcName(firstName + " " + epiphet_a + noun_a);
+      return (firstName + " " + epiphet_a + noun_a);
     } else if (random === 1) {
-      setNpcName(firstName + " " + epiphet_a + noun_b);
+      return (firstName + " " + epiphet_a + noun_b);
     } else if (random === 2) {
-      setNpcName(firstName + " " + epiphet_b + noun_b);
+      return (firstName + " " + epiphet_b + noun_b);
     } else {
-      setNpcName(firstName + " " + epiphet_b + noun_a);
+      return (firstName + " " + epiphet_b + noun_a);
     }
   };
   //Random Monster
@@ -225,7 +219,6 @@ const RandomHooks = (props) => {
     let r = Math.floor(Math.random() * exploreLocationOptions.length);
     setExploreLocation(exploreLocationOptions[r].name);
   };
-
   //Random Material
   const onRandomMaterial = (e) => {
     let r = Math.floor(Math.random() * materialOptions.length);
@@ -236,7 +229,6 @@ const RandomHooks = (props) => {
   useEffect(() => {
     //Random Bounty
     if (props.type === "Bounty") {
-      onRandomName();
       let bW = Math.floor(Math.random() * bountyWantedOptions.length);
       let bC = Math.floor(Math.random() * bountyCrimeOptions.length);
       setBounty(
@@ -250,35 +242,28 @@ const RandomHooks = (props) => {
     }
     //Random Capture
     if (props.type === "Capture") {
-      onRandomName();
-      onRandomMonster();
+      let m = Math.floor(Math.random() * monsterOptions.length);
       let r = Math.floor(Math.random() * 2);
       if (r === 0) {
-        setCapture("Capture the monster; " + monster);
+        props.setValue("Capture the monster: " + monsterOptions[m].name);
       } else {
-        setCapture("Capture the NPC; " + npcName);
+        props.setValue("Capture the NPC: " + onRandomName());
       }
-      props.setValue(capture);
     }
     //Random Delivery
     if (props.type === "Delivery") {
-      onRandomItem();
       onRandomName();
       setDelivery("Deliver the " + item + " to " + npcName);
       props.setValue(delivery);
     }
     //Random Escort
     if (props.type === "Escort") {
-      onRandomLocation();
       onRandomName();
-      onRandomBuilding();
       setEscort("Escort " + npcName + " to " + building + " in " + location);
       props.setValue(escort);
     }
     //Random Exploration
     if (props.type === "Exploration") {
-      onRandomExploreLocation();
-      //choose random direction
       let r = Math.floor(Math.random() * 4);
       if (r === 0) {
         setExploration("Explore " + exploreLocation + " to the North");
@@ -293,57 +278,53 @@ const RandomHooks = (props) => {
     }
     //Random Gather
     if (props.type === "Gather") {
-      onRandomMaterial();
-      //randomly choose between 1 and 5
       let r = Math.floor(Math.random() * 5) + 1;
       setGather("Gather " + r + " " + material);
       props.setValue(gather);
     }
     //Random Investigation
     if (props.type === "Investigate") {
-        onRandomLocation();
-        let r = Math.floor(Math.random() * 4);
-        if (r === 0) {
-            onRandomName();
-            setInvestigate("Investigate NPC: " + npcName);
-        } else if (r === 1) {
-            setInvestigate("Investigate the Guild: " + location );
-        } else if (r === 2) {
-            setInvestigate("Investigate the Cult: " + location);
-        } else {
-            setInvestigate("Investigate the Faction: " + location);
-        }
-        props.setValue(investigate);
+      onRandomName();
+      let r = Math.floor(Math.random() * 4);
+      if (r === 0) {
+        onRandomName();
+        setInvestigate("Investigate NPC: " + npcName);
+      } else if (r === 1) {
+        setInvestigate("Investigate the Guild: " + location);
+      } else if (r === 2) {
+        setInvestigate("Investigate the Cult: " + location);
+      } else {
+        setInvestigate("Investigate the Faction: " + location);
+      }
+      props.setValue(investigate);
     }
     if (props.type === "Kill") {
-        onRandomName();
-        setKill("Kill: " + npcName);
-        props.setValue(kill);
+      onRandomName();
+      setKill("Kill: " + npcName);
+      props.setValue(kill);
     }
     if (props.type === "Negotiation") {
-        onRandomName();
-        onRandomLocation();
-        let r = Math.floor(Math.random() * 4);
-        if (r === 0) {
-            setNegotiation("Negotiate with NPC: " + npcName);
-        } else if (r === 1) {
-            setNegotiation("Negotiate with Faction: " + location);
-        } else if (r === 2) {
-            setNegotiation("Negotiate with Cult: " + location);
-        } else {
-            setNegotiation("Negotiate with Guild: " + location);
-        }
-        props.setValue(negotiation);
+      onRandomName();
+      let r = Math.floor(Math.random() * 4);
+      if (r === 0) {
+        setNegotiation("Negotiate with NPC: " + npcName);
+      } else if (r === 1) {
+        setNegotiation("Negotiate with Faction: " + location);
+      } else if (r === 2) {
+        setNegotiation("Negotiate with Cult: " + location);
+      } else {
+        setNegotiation("Negotiate with Guild: " + location);
+      }
+      props.setValue(negotiation);
     }
     if (props.type === "Protect") {
-        onRandomName()
-        setProtect("Protect: " + npcName);
+      onRandomName();
+      setProtect("Protect: " + npcName);
     }
     if (props.type === "Rescue") {
-        onRandomName();
-        setRescue("Rescue: " + npcName);
-    }
-    if (props.type === "Custom") {
+      onRandomName();
+      setRescue("Rescue: " + npcName);
+    } else {
     }
   }, [props.type]);
 
