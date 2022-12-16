@@ -1,63 +1,172 @@
 import { useEffect, useState } from "react";
+import SingleDisplayText from "./SingleDisplayText";
+import supabase from "../config/supabaseClient";
+import CustomName from "./CustomName";
 
 const RandomHooks = (props) => {
   //Get data
   const [fetchError, setFetchError] = useState(null);
-  const [bountyWanted, setBountyWanted] = useState([]);
-  const [bountyCrime, setBountyCrime] = useState([]);
+
+  const [bountyWanted, setBountyWanted] = useState("");
+  const [bountyWanteds, setBountyWanteds] = useState("");
+  const [bountyWantedOptions, setBountyWantedOptions] = useState("");
+
+  const [bountyCrime, setBountyCrime] = useState("");
+  const [bountyCrimes, setBountyCrimes] = useState("");
+  const [bountyCrimeOptions, setBountyCrimeOptions] = useState("");
+
+  const [bounty, setBounty] = useState("");
+
+  const [monster, setMonster] = useState("");
+  const [monsters, setMonsters] = useState("");
+  const [monsterOptions, setMonsterOptions] = useState("");
+
+  const [npcName, setNpcName] = useState("");
+  const [npcNames, setNpcNames] = useState("");
+  const [npcNameOptions, setNpcNameOptions] = useState("");
+
+  const [captureOptions, setCaptureOptions] = useState("");
   const [capture, setCapture] = useState([]);
 
-  useEffect(() => {
-    if (props.value === "Bounty") {
-        setBountyWanted(["Alive", "Dead or Alive"]);
-        setBountyCrime([
-          "Murder",
-          "Theft",
-          "Terrorism",
-          "Necromancy",
-          "Conjuration",
-          "Witchcraft",
-          "Insurrection",
-          "Arson",
-          "Assault",
-          "Kidnapping",
-        ]);
-        let bW = Math.floor(Math.random() * bountyWanted.length);
-        let bC = Math.floor(Math.random() * bountyCrime.length);
-        props.setValue(
-          "Wanted: " + bountyWanted[bW] + " for " + bountyCrime[bC]
-        );
-    }
-    if (props.value === "Capture") {
-        setCapture(["Monster", "NPC"])
-        let r = Math.floor(Math.random() * capture.length)
-        props.setValue(
-            "Capture " + capture[r]
-        )
-    }
-    if (props.value === "Delivery") {
-    }
-    if (props.value === "Escort") {
-    }
-    if (props.value === "Exploration") {
-    }
-    if (props.value === "Gather") {
-    }
-    if (props.value === "Investigate") {
-    }
-    if (props.value === "Kill") {
-    }
-    if (props.value === "Negotiation") {
-    }
-    if (props.value === "Protect") {
-    }
-    if (props.value === "Rescue") {
-    }
-    if (props.value === "Custom") {
-    }
-  }, [props.value]);
+  //Get Data from supabase
+  const getData = (tableName, setSingular, setPlural, setOptions) => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from(tableName)
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setSingular(null);
+      }
+      if (dataName) {
+        setPlural(dataName);
+        setFetchError(null);
+        setOptions(dataName.map((r) => ({ name: r.name })));
+      }
+    };
+    fetchData();
+  };
 
-  return <>{props.value} </>;
+  useEffect(() => {
+    getData(
+      "questsBounty",
+      setBountyCrime,
+      setBountyCrimes,
+      setBountyCrimeOptions
+    );
+    setBountyWantedOptions(["Alive", "Dead or Alive"]);
+    getData("monsters", setMonster, setMonsters, setMonsterOptions);
+  }, []);
+
+  //NPC names
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("names").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setNpcName(null);
+        console.log(error);
+      }
+      if (data) {
+        setNpcNames(data);
+        setFetchError(null);
+        setNpcNameOptions(
+          data.map((r) => ({
+            first_name: r.first_name,
+            epithet_a: r.epithet_a,
+            noun_a: r.noun_a,
+            epithet_b: r.epithet_b,
+            noun_b: r.noun_b,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+  //Random NPC name
+  const onRandomName = (e) => {
+    let f = Math.floor(Math.random() * 208);
+    let firstName = [npcNameOptions[f].first_name];
+    let eA = Math.floor(Math.random() * 208);
+    let epiphet_a = [npcNameOptions[eA].epithet_a];
+    let eB = Math.floor(Math.random() * 208);
+    let epiphet_b = [npcNameOptions[eB].epithet_b];
+    let nA = Math.floor(Math.random() * 208);
+    let noun_a = [npcNameOptions[nA].noun_a];
+    let nB = Math.floor(Math.random() * 208);
+    let noun_b = [npcNameOptions[nB].noun_b];
+
+    let random = Math.round(Math.random() * 3);
+
+    if (random === 0) {
+      setNpcName(firstName + " " + epiphet_a + noun_a);
+    } else if (random === 1) {
+      setNpcName(firstName + " " + epiphet_a + noun_b);
+    } else if (random === 2) {
+      setNpcName(firstName + " " + epiphet_b + noun_b);
+    } else {
+      setNpcName(firstName + " " + epiphet_b + noun_a);
+    }
+  };
+  //Random Monster
+  const onRandomMonster = (e) => {
+    let r = Math.floor(Math.random() * monsterOptions.length);
+    setMonster(monsterOptions[r].name);
+  };
+
+  useEffect(() => {
+    if (props.type === "Bounty") {
+        onRandomName()
+      let bW = Math.floor(Math.random() * bountyWantedOptions.length);
+      let bC = Math.floor(Math.random() * bountyCrimeOptions.length);
+      setBounty(
+        npcName +
+        ", Wanted " +
+          bountyWantedOptions[bW] +
+          " for " +
+          bountyCrimeOptions[bC].name
+      );
+      props.setValue(bounty);
+    }
+    if (props.type === "Capture") {
+      onRandomName();
+      onRandomMonster();
+      let r = Math.floor(Math.random() * 2);
+      if (r === 0) {
+        setCapture("Capture the monster " + monster);
+      } else {
+        setCapture("Capture the NPC " + npcName);
+      }
+      props.setValue(capture);
+    }
+    if (props.type === "Delivery") {
+    }
+    if (props.type === "Escort") {
+    }
+    if (props.type === "Exploration") {
+    }
+    if (props.type === "Gather") {
+    }
+    if (props.type === "Investigate") {
+    }
+    if (props.type === "Kill") {
+    }
+    if (props.type === "Negotiation") {
+    }
+    if (props.type === "Protect") {
+    }
+    if (props.type === "Rescue") {
+    }
+    if (props.type === "Custom") {
+    }
+  }, [props.type]);
+
+  return (
+    <>
+      <SingleDisplayText value={props.value} setNewValue={props.setValue} />
+    </>
+  );
 };
 
 export default RandomHooks;

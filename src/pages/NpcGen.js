@@ -602,8 +602,8 @@ const NpcGen = () => {
           <h2>
             Hook{" "}
             <span className={style.minorText2}>
-              <RandomHooks value={questType} setValue={setQuestType}/>
-              <SingleDisplayText value={bond} setNewValue={setBond} />
+              <RandomHooks type={questType} value={hook} setValue={setHook}/>
+              {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
             </span>
           </h2>
           
