@@ -25,14 +25,46 @@ const RandomHooks = (props) => {
   const [npcNames, setNpcNames] = useState("");
   const [npcNameOptions, setNpcNameOptions] = useState("");
 
-  const [captureOptions, setCaptureOptions] = useState("");
   const [capture, setCapture] = useState([]);
 
   const [item, setItem] = useState("");
-    const [items, setItems] = useState("");
-    const [itemOptions, setItemOptions] = useState("");
+  const [items, setItems] = useState("");
+  const [itemOptions, setItemOptions] = useState("");
 
   const [delivery, setDelivery] = useState("");
+
+  const [building, setBuilding] = useState("");
+  const [buildings, setBuildings] = useState("");
+  const [buildingOptions, setBuildingOptions] = useState("");
+
+  const [escort, setEscort] = useState("");
+
+  const [vowel, setVowel] = useState(["a", "e", "i", "o", "u", "y"]);
+  const [consonant, setConsonant] = useState([
+    "b",
+    "c",
+    "d",
+    "f",
+    "g",
+    "h",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ]);
+
+  const [location, setLocation] = useState("");
 
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -64,6 +96,7 @@ const RandomHooks = (props) => {
     setBountyWantedOptions(["Alive", "Dead or Alive"]);
     getData("monsters", setMonster, setMonsters, setMonsterOptions);
     getData("itemsMagicAll", setItem, setItems, setItemOptions);
+    getData("buildingAll", setBuilding, setBuildings, setBuildingOptions);
   }, []);
 
   //NPC names
@@ -121,21 +154,54 @@ const RandomHooks = (props) => {
     let r = Math.floor(Math.random() * monsterOptions.length);
     setMonster(monsterOptions[r].name);
   };
-//Random Item
-const onRandomItem = (e) => {
+  //Random Item
+  const onRandomItem = (e) => {
     let r = Math.floor(Math.random() * itemOptions.length);
     setItem(itemOptions[r].name);
-    };
+  };
+  //Random Building
+  const onRandomBuilding = (e) => {
+    let r = Math.floor(Math.random() * buildingOptions.length);
+    setBuilding(buildingOptions[r].name);
+  };
+  //Random Location
+  const onRandomLocation = (e) => {
+    //create random location name using vowel and consonant arrays
+    let v = Math.floor(Math.random() * 6);
+    let c = Math.floor(Math.random() * 21);
+    let v2 = Math.floor(Math.random() * 6);
+    let c2 = Math.floor(Math.random() * 21);
+    let v3 = Math.floor(Math.random() * 6);
+    let c3 = Math.floor(Math.random() * 21);
+    let v4 = Math.floor(Math.random() * 6);
+    let c4 = Math.floor(Math.random() * 21);
+    let v5 = Math.floor(Math.random() * 6);
+    let c5 = Math.floor(Math.random() * 21);
+    let v6 = Math.floor(Math.random() * 6);
+    let c6 = Math.floor(Math.random() * 21);
+    //set location name based on random values
+    setLocation(
+        vowel[v].toUpperCase() +
+        consonant[c] +
+        vowel[v2] +
+        consonant[c3] +
+        consonant[c4] +
+        vowel[v5] +
+        consonant[c5] +
+        vowel[v6]
+    );
+  };
+
   //Random Quest
   useEffect(() => {
     //Random Bounty
     if (props.type === "Bounty") {
-    onRandomName()
+      onRandomName();
       let bW = Math.floor(Math.random() * bountyWantedOptions.length);
       let bC = Math.floor(Math.random() * bountyCrimeOptions.length);
       setBounty(
         npcName +
-        ", Wanted " +
+          ", Wanted " +
           bountyWantedOptions[bW] +
           " for " +
           bountyCrimeOptions[bC].name
@@ -156,12 +222,18 @@ const onRandomItem = (e) => {
     }
     //Random Delivery
     if (props.type === "Delivery") {
-        onRandomItem();
-        onRandomName();
-        setDelivery("Deliver the " + item + " to " + npcName);
-        props.setValue(delivery);
+      onRandomItem();
+      onRandomName();
+      setDelivery("Deliver the " + item + " to " + npcName);
+      props.setValue(delivery);
     }
+    //Random Escort
     if (props.type === "Escort") {
+      onRandomLocation();
+      onRandomName();
+      onRandomBuilding();
+      setEscort("Escort " + npcName + " to " + building + " in " + location);
+      props.setValue(escort);
     }
     if (props.type === "Exploration") {
     }
