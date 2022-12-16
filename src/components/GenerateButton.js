@@ -23,33 +23,32 @@ const GenerateButton = (props) => {
 
   const onGenerate = (e) => {
     //DropDown Generate
+    if(props.generateItems){
     for (let i = 0; i < props.generateItems.length; i++) {
-      let max = props.itemOptions[i].length - 1;
-      let set = props.setItem[i];
       if (
         props.generateItems[i] === "" ||
         props.generateItems[i] === undefined
       ) {
-        let r = Math.round(Math.random() * (max - 0));
-        set(props.itemOptions[i][r].name);
+        let r = Math.round(Math.random() * props.itemOptions[i].length);
+        props.setItem[i](props.itemOptions[i][r].name);
       }
     }
+  }
 
     //DataTable generate
+    if(props.selectedItem){
     for (let i = 0; i < props.selectedItems.length; i++) {
       let n = Math.round(Math.random() * (6 - 0));
       for (let x = 0; x <= n; x++) {
-        //check if props.seleceteditems[i] already has the item
-        let max = props.selectItemOptions[i].length - 1;
-        let set = props.setSelectedItem[i];
-        let r = Math.round(Math.random() * (max - 0));
+        let r = Math.round(Math.random() * props.selectItemOptions[i].length);
         if (props.selectedItems[i].length <= 0) {
           if (props.selectedItem === undefined) {
-            set((oldArray) => [...oldArray, props.selectItemOptions[i][r]]);
+            props.setSelectedItem[i]((oldArray) => [...oldArray, props.selectItemOptions[i][r]]);
           }
         }
       }
     }
+  }
 
     //Number generate
     if (props.numberItem) {

@@ -54,8 +54,6 @@ const NpcGen = () => {
   const [feature, setFeature] = useState("");
   const [features, setFeatures] = useState("");
   const [featureOptions, setFeatureOptions] = useState("");
-  const [featureList, setFeatureList] = useState([]);
-  const [selectedFeature, setSelectedFeature] = useState([]);
 
   const [prof, setProf] = useState("");
   const [profs, setProfs] = useState("");
@@ -154,62 +152,59 @@ const NpcGen = () => {
                 sex,
                 align,
                 prof,
+                feature,
                 talent,
                 mannerism,
                 interaction,
                 bond,
                 questType,
-                hook,
+                
               ]}
               itemOptions={[
                 raceOptions,
                 sexOptions,
                 alignOptions,
                 profOptions,
+                featureOptions,
                 talentOptions,
                 mannerismOptions,
                 interactionOptions,
                 bondOptions,
                 questTypeOptions,
-                hookOptions,
+                
               ]}
               setItem={[
                 setRace,
                 setSex,
                 setAlign,
                 setProf,
+                setFeature,
                 setTalent,
                 setMannerism,
                 setInteraction,
                 setBond,
                 setQuestType,
-                setHook,
+                
               ]}
-              selectItemOptions={[featureOptions]}
-              selectedItems={[selectedFeature]}
-              setSelectedItem={[setSelectedFeature]}
+              nameItem={[name]}
+              nameItemOptions={[nameOptions]}
+              setNameItem={[setName]}
               numberItem={[str, dex, con, int, wis, cha]}
               setNumberItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
               maxNumber={30}
               minNumber={0}
-              nameItem={[name]}
-              nameItemOptions={[nameOptions]}
-              setNameItem={[setName]}
             />
             <ClearButton
               setStringState={[
                 setAlign,
                 setBond,
-                setCha,
-                setCon,
-                setDesc,
-                setDex,
                 setFeature,
                 setInt,
                 setInteraction,
                 setMannerism,
                 setName,
                 setProf,
+                setFeature,
                 setRace,
                 setSex,
                 setTalent,
@@ -222,7 +217,6 @@ const NpcGen = () => {
                 setQuestType,
                 setHook,
               ]}
-              setArrayState={[setSelectedFeature]}
               setNumberState={[setCha, setCon, setDex, setInt, setWis, setStr]}
             />
           </div>
@@ -348,21 +342,17 @@ const NpcGen = () => {
                 value={prof}
                 valueOptions={profOptions}
               />
-              <CustomDataTable
+              <CustomDropDown
                 tableName={"features"}
                 setSingular={setFeature}
                 setPlural={setFeatures}
                 setOptions={setFeatureOptions}
+                options={featureOptions}
                 h1Title={"Features"}
-                dialogHeader={"Set Features"}
-                selectedItem={selectedFeature}
-                setSelectedItem={setSelectedFeature}
-                list={featureList}
-                setList={setFeatureList}
+                placeholder={"Set Features"}
+                value={feature}
                 valueOptions={featureOptions}
-                // options={featureOptions}
               />
-
               <CustomDropDown
                 tableName={"talents"}
                 setSingular={setTalent}
@@ -564,9 +554,9 @@ const NpcGen = () => {
           <h2>
             Feature{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedFeature}
-                setList={setFeatureList}
+              <SingleDisplayText
+                value={feature}
+                setNewValue={setFeature}
               />
             </span>
           </h2>

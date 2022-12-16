@@ -19,6 +19,7 @@ const GetData = (props) => {
         setFetchError(null);
         props.setOptions(dataName.map((r) => ({ name: r.name})));
       }
+      
     };
 
     return ( fetchData() );
