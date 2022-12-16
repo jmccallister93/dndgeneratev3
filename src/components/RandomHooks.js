@@ -80,6 +80,14 @@ const RandomHooks = (props) => {
 
   const [investigate, setInvestigate] = useState("");
 
+  const [kill, setKill] = useState("");
+
+  const [negotiation, setNegotiation] = useState("");
+
+  const [protect, setProtect] = useState("");
+
+  const [rescue, setRescue] = useState("");
+
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -308,12 +316,32 @@ const RandomHooks = (props) => {
         props.setValue(investigate);
     }
     if (props.type === "Kill") {
+        onRandomName();
+        setKill("Kill: " + npcName);
+        props.setValue(kill);
     }
     if (props.type === "Negotiation") {
+        onRandomName();
+        onRandomLocation();
+        let r = Math.floor(Math.random() * 4);
+        if (r === 0) {
+            setNegotiation("Negotiate with NPC: " + npcName);
+        } else if (r === 1) {
+            setNegotiation("Negotiate with Faction: " + location);
+        } else if (r === 2) {
+            setNegotiation("Negotiate with Cult: " + location);
+        } else {
+            setNegotiation("Negotiate with Guild: " + location);
+        }
+        props.setValue(negotiation);
     }
     if (props.type === "Protect") {
+        onRandomName()
+        setProtect("Protect: " + npcName);
     }
     if (props.type === "Rescue") {
+        onRandomName();
+        setRescue("Rescue: " + npcName);
     }
     if (props.type === "Custom") {
     }
