@@ -25,6 +25,7 @@ import RandomHooks from "../components/RandomHooks";
 import ExportButtons from "../components/ExportButtons";
 import { useRef } from "react";
 import jsPDF from "jspdf";
+import { Html2CanvasOptions } from "jspdf";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -92,8 +93,11 @@ const NpcGen = () => {
   const [hooks, setHooks] = useState("");
   const [hookOptions, setHookOptions] = useState("");
 
+  const [npc, setNpc] = useState("");
+
   const divRef = useRef(null);
   const [isExported, setIsExported] = useState(false);
+  const [doc, setDoc] = useState(null);
 
   // useEffect((tableName, setSingular, setPlural, setOptions) => {
   //   const fetchData = async () => {
@@ -166,22 +170,49 @@ const NpcGen = () => {
     }
   };
 
-  //EXPORT TO PDF
-  const exportToPDF = () => {
-    setIsExported(true);
-  };
-
+  //Create npc object to be exported
   useEffect(() => {
-    if (isExported) {
-      const doc = new jsPDF();
-      doc.html(divRef.current, {
-        callback: function (doc) {
-          doc.save("Testing.pdf");
-        },
-      });
-      setIsExported(false);
-    }
-  }, [isExported]);
+    const npc = {
+      name: name,
+      race: race,
+      sex: sex,
+      align: align,
+      prof: prof,
+      feature: feature,
+      talent: talent,
+      mannerism: mannerism,
+      interaction: interaction,
+      bond: bond,
+      questType: questType,
+      hook: hook,
+      str: str,
+      dex: dex,
+      con: con,
+      int: int,
+      wis: wis,
+      cha: cha,
+    };
+    setNpc(npc);
+  }, [
+    name,
+    race,
+    sex,
+    align,
+    prof,
+    feature,
+    talent,
+    mannerism,
+    interaction,
+    bond,
+    questType,
+    hook,
+    str,
+    dex,
+    con,
+    int,
+    wis,
+    cha,
+  ]);
 
   return (
     <div className={style.mainWrapper}>
@@ -269,12 +300,7 @@ const NpcGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <div>
-            <Button
-              className={style.button}
-              label="Export to PDF"
-              icon="pi pi-file-pdf"
-              onClick={exportToPDF}
-            />
+            <ExportButtons div={divRef} data={npc} />
           </div>
           <h1>NPC Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>

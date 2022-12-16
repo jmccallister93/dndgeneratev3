@@ -5,45 +5,92 @@ import { Button } from "primereact/button";
 import PDF, { Text, AddPage, Line, Image, Table, Html } from "jspdf-react";
 
 const ExportButtons = (props) => {
-  //Create a reference to a specific div and export all it's contents to PDF
-  const divRef = useRef(null);
-  const [isExported, setIsExported] = useState(false);
+  //Create compnent that references to a props.div element and export it's content to a text file and pdf file
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(1);
+  const [pdf, setPdf] = useState(null);
+  const [html, setHtml] = useState(null);
+  const [isPdfReady, setIsPdfReady] = useState(false);
+  const [isHtmlReady, setIsHtmlReady] = useState(false);
+  const doc = new jsPDF();
+  const [data, setData] = useState([]);
+  const [isDataReady, setIsDataReady] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
-  const exportToPDF = () => {
-    setIsExported(true);
-  };
+  const divRef = useRef(null);
 
   useEffect(() => {
-    if (isExported) {
+    if (props.div && props.div.current) {
+      const div = props.div.current;
+      const html = div.innerHTML;
+      setHtml(html);
+      setIsHtmlReady(true);
+    }
+  }, [props.div]);
+
+    useEffect(() => {
+      if (props.data) {
+        setData(props.data);
+        setIsDataReady(true);
+      }
+      
+    }, [props.data]);
+
+  useEffect(() => {
+    if (isHtmlReady && isDataReady) {
+      setIsReady(true);
+    }
+  }, [isHtmlReady, isDataReady]);
+
+  useEffect(() => {
+    if (isReady) {
       const doc = new jsPDF();
-      doc.html(props.divRef.current, {
-        callback: function (doc) {
-          doc.save("Test.pdf");
+      doc.html(html, {
+        callback: (pdf) => {
+          setPdf(pdf);
+          setIsPdfReady(true);
         },
       });
-      setIsExported(false);
     }
-  }, [isExported]);
+  }, [isReady, html]);
+
+  const exportToPdf = () => {
+    if (isPdfReady) {
+      pdf.save("export.pdf");
+    }
+    console.log(props.data.race)
+  };
+
+  const exportToText = () => {
+    if (props.div && props.div.current) {
+      const div = props.div.current;
+      const text = div.innerText;
+      const element = document.createElement("a");
+      const file = new Blob([text], { type: "text/plain" });
+      element.href = URL.createObjectURL(file);
+      element.download = "export.txt";
+      document.body.appendChild(element); // Required for this to work in FireFox
+      element.click();
+    }
+  };
+
+  const exportToExcel = () => {
+    if (data && data.length > 0) {
+      const element = document.createElement("a");
+      const file = new Blob([JSON.stringify(data)], { type: "text/plain" });
+      element.href = URL.createObjectURL(file);
+      element.download = "export.json";
+      document.body.appendChild(element); // Required for this to work in FireFox
+      element.click();
+    }
+  };
 
   return (
-    // <div>
-    //     <div ref={divRef}>
-    //         <div className={style.page}>
-    //             <div className={style.pageContent}>
-    //                 <h1>Test</h1>
-    //                 <p>Test</p>
-    //             </div>
-    //         </div>
-    //     </div>
-    <div>
-      <Button
-        className={style.button}
-        label="Export to PDF"
-        icon="pi pi-file-pdf"
-        onClick={exportToPDF}
-      />
+    <div className={style.exportButtons}>
+      <Button label="Export to pdf" onClick={exportToPdf} />
+      <Button label="Export to text" onClick={exportToText} />
+      <Button label="Export to excel" onClick={exportToExcel} />
     </div>
-    // </div>
   );
 };
 export default ExportButtons;
