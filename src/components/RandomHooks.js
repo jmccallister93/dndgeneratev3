@@ -28,6 +28,12 @@ const RandomHooks = (props) => {
   const [captureOptions, setCaptureOptions] = useState("");
   const [capture, setCapture] = useState([]);
 
+  const [item, setItem] = useState("");
+    const [items, setItems] = useState("");
+    const [itemOptions, setItemOptions] = useState("");
+
+  const [delivery, setDelivery] = useState("");
+
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -57,6 +63,7 @@ const RandomHooks = (props) => {
     );
     setBountyWantedOptions(["Alive", "Dead or Alive"]);
     getData("monsters", setMonster, setMonsters, setMonsterOptions);
+    getData("itemsMagicAll", setItem, setItems, setItemOptions);
   }, []);
 
   //NPC names
@@ -114,10 +121,16 @@ const RandomHooks = (props) => {
     let r = Math.floor(Math.random() * monsterOptions.length);
     setMonster(monsterOptions[r].name);
   };
-
+//Random Item
+const onRandomItem = (e) => {
+    let r = Math.floor(Math.random() * itemOptions.length);
+    setItem(itemOptions[r].name);
+    };
+  //Random Quest
   useEffect(() => {
+    //Random Bounty
     if (props.type === "Bounty") {
-        onRandomName()
+    onRandomName()
       let bW = Math.floor(Math.random() * bountyWantedOptions.length);
       let bC = Math.floor(Math.random() * bountyCrimeOptions.length);
       setBounty(
@@ -129,6 +142,7 @@ const RandomHooks = (props) => {
       );
       props.setValue(bounty);
     }
+    //Random Capture
     if (props.type === "Capture") {
       onRandomName();
       onRandomMonster();
@@ -140,7 +154,12 @@ const RandomHooks = (props) => {
       }
       props.setValue(capture);
     }
+    //Random Delivery
     if (props.type === "Delivery") {
+        onRandomItem();
+        onRandomName();
+        setDelivery("Deliver the " + item + " to " + npcName);
+        props.setValue(delivery);
     }
     if (props.type === "Escort") {
     }
