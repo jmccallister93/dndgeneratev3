@@ -22,6 +22,9 @@ import NameDisplay from "../components/NameDisplay";
 import SingleDisplayText from "../components/SingleDisplayText";
 import SingleDisplayNumber from "../components/SingleDisplayNumber";
 import RandomHooks from "../components/RandomHooks";
+import ExportButtons from "../components/ExportButtons";
+import { useRef } from "react";
+import jsPDF from "jspdf";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -78,7 +81,7 @@ const NpcGen = () => {
   const [int, setInt] = useState("");
   const [wis, setWis] = useState("");
   const [cha, setCha] = useState("");
- 
+
   const [desc, setDesc] = useState("");
 
   const [questType, setQuestType] = useState("");
@@ -88,6 +91,9 @@ const NpcGen = () => {
   const [hook, setHook] = useState("");
   const [hooks, setHooks] = useState("");
   const [hookOptions, setHookOptions] = useState("");
+
+  const divRef = useRef(null);
+  const [isExported, setIsExported] = useState(false);
 
   // useEffect((tableName, setSingular, setPlural, setOptions) => {
   //   const fetchData = async () => {
@@ -121,9 +127,6 @@ const NpcGen = () => {
   };
   const showStats = (e) => {
     setIsStatsActive((current) => !current);
-  };
-  const showButtons = (e) => {
-    setIsButtonsActive((current) => !current);
   };
 
   //Function to set ability modifier based on ability score
@@ -163,16 +166,29 @@ const NpcGen = () => {
     }
   };
 
+  //EXPORT TO PDF
+  const exportToPDF = () => {
+    setIsExported(true);
+  };
+
+  useEffect(() => {
+    if (isExported) {
+      const doc = new jsPDF();
+      doc.html(divRef.current, {
+        callback: function (doc) {
+          doc.save("Testing.pdf");
+        },
+      });
+      setIsExported(false);
+    }
+  }, [isExported]);
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>NPC Generator</h1>
         {/* Generate Btns */}
-        {/* <h1 className={style.subHeader} onClick={showButtons}>
-            Buttons
-          </h1>
-          <div className={isButtonsActive ? style.subsection : style.hidden}></div> */}
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton
@@ -187,7 +203,6 @@ const NpcGen = () => {
                 interaction,
                 bond,
                 questType,
-                
               ]}
               itemOptions={[
                 raceOptions,
@@ -200,7 +215,6 @@ const NpcGen = () => {
                 interactionOptions,
                 bondOptions,
                 questTypeOptions,
-                
               ]}
               setItem={[
                 setRace,
@@ -213,7 +227,6 @@ const NpcGen = () => {
                 setInteraction,
                 setBond,
                 setQuestType,
-                
               ]}
               nameItem={[name]}
               nameItemOptions={[nameOptions]}
@@ -255,6 +268,14 @@ const NpcGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
+          <div>
+            <Button
+              className={style.button}
+              label="Export to PDF"
+              icon="pi pi-file-pdf"
+              onClick={exportToPDF}
+            />
+          </div>
           <h1>NPC Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             NPC Basic Info
@@ -433,7 +454,7 @@ const NpcGen = () => {
           </h1>
           <div className={isHookActive ? style.subsection : style.hidden}>
             <div>
-          <CustomDropDown
+              <CustomDropDown
                 tableName={"questTypes"}
                 setSingular={setQuestType}
                 setPlural={setQuestTypes}
@@ -444,39 +465,39 @@ const NpcGen = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-              {questType === "None" ? "" : 
-              questType === "Bounty" ?
-              "Bounty" :
-              questType === "Capture" ?
-              "Capture" :
-              questType === "Delivery" ?
-              "Delivery" :
-              questType === "Escort" ?
-              "Escort" :
-              questType === "Exploration" ?
-              "Exploration" :
-              questType === "Gather" ?
-              "Gather" :
-              questType === "Investigation" ?
-              "Investigation" :
-              questType === "Kill" ?
-              "Kill" :
-              questType === "Negotiation" ?
-              "Negotiation" :
-              questType === "Protect" ?
-              "Protect" :
-              questType === "Rescue" ?
-              "Rescue" :
-              questType === "Custom" ?
-              "Custom" :
-              "Error"
-              }
-              </div>
+              {questType === "None"
+                ? ""
+                : questType === "Bounty"
+                ? "Bounty"
+                : questType === "Capture"
+                ? "Capture"
+                : questType === "Delivery"
+                ? "Delivery"
+                : questType === "Escort"
+                ? "Escort"
+                : questType === "Exploration"
+                ? "Exploration"
+                : questType === "Gather"
+                ? "Gather"
+                : questType === "Investigation"
+                ? "Investigation"
+                : questType === "Kill"
+                ? "Kill"
+                : questType === "Negotiation"
+                ? "Negotiation"
+                : questType === "Protect"
+                ? "Protect"
+                : questType === "Rescue"
+                ? "Rescue"
+                : questType === "Custom"
+                ? "Custom"
+                : "Error"}
+            </div>
           </div>
         </div>
 
         {/* Main Display */}
-        <div className={style.display}>
+        <div className={style.display} ref={divRef}>
           <NameDisplay value={name} setNewValue={setName} />
           <h2>
             <SingleDisplayText value={race} setNewValue={setRace} />{" "}
@@ -583,10 +604,7 @@ const NpcGen = () => {
           <h2>
             Feature{" "}
             <span className={style.minorText2}>
-              <SingleDisplayText
-                value={feature}
-                setNewValue={setFeature}
-              />
+              <SingleDisplayText value={feature} setNewValue={setFeature} />
             </span>
           </h2>
           <h2>
@@ -621,11 +639,10 @@ const NpcGen = () => {
           <h2>
             Hook{" "}
             <span className={style.minorText2}>
-              <RandomHooks type={questType} value={hook} setValue={setHook}/>
+              <RandomHooks type={questType} value={hook} setValue={setHook} />
               {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
             </span>
           </h2>
-          
         </div>
       </div>
     </div>
