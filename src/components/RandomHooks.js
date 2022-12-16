@@ -66,6 +66,20 @@ const RandomHooks = (props) => {
 
   const [location, setLocation] = useState("");
 
+  const [exploreLocation, setExploreLocation] = useState("");
+  const [exploreLocations, setExploreLocations] = useState("");
+  const [exploreLocationOptions, setExploreLocationOptions] = useState("");
+
+  const [exploration, setExploration] = useState("");
+
+  const [material, setMaterial] = useState("");
+  const [materials, setMaterials] = useState("");
+  const [materialOptions, setMaterialOptions] = useState("");
+
+  const [gather, setGather] = useState("");
+
+  const [investigate, setInvestigate] = useState("");
+
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -97,6 +111,13 @@ const RandomHooks = (props) => {
     getData("monsters", setMonster, setMonsters, setMonsterOptions);
     getData("itemsMagicAll", setItem, setItems, setItemOptions);
     getData("buildingAll", setBuilding, setBuildings, setBuildingOptions);
+    getData(
+      "questsExplore",
+      setExploreLocation,
+      setExploreLocations,
+      setExploreLocationOptions
+    );
+    getData("questsGather", setMaterial, setMaterials, setMaterialOptions);
   }, []);
 
   //NPC names
@@ -181,7 +202,7 @@ const RandomHooks = (props) => {
     let c6 = Math.floor(Math.random() * 21);
     //set location name based on random values
     setLocation(
-        vowel[v].toUpperCase() +
+      vowel[v].toUpperCase() +
         consonant[c] +
         vowel[v2] +
         consonant[c3] +
@@ -190,6 +211,17 @@ const RandomHooks = (props) => {
         consonant[c5] +
         vowel[v6]
     );
+  };
+  //Random Explore Location
+  const onRandomExploreLocation = (e) => {
+    let r = Math.floor(Math.random() * exploreLocationOptions.length);
+    setExploreLocation(exploreLocationOptions[r].name);
+  };
+
+  //Random Material
+  const onRandomMaterial = (e) => {
+    let r = Math.floor(Math.random() * materialOptions.length);
+    setMaterial(materialOptions[r].name);
   };
 
   //Random Quest
@@ -214,9 +246,9 @@ const RandomHooks = (props) => {
       onRandomMonster();
       let r = Math.floor(Math.random() * 2);
       if (r === 0) {
-        setCapture("Capture the monster " + monster);
+        setCapture("Capture the monster; " + monster);
       } else {
-        setCapture("Capture the NPC " + npcName);
+        setCapture("Capture the NPC; " + npcName);
       }
       props.setValue(capture);
     }
@@ -235,11 +267,45 @@ const RandomHooks = (props) => {
       setEscort("Escort " + npcName + " to " + building + " in " + location);
       props.setValue(escort);
     }
+    //Random Exploration
     if (props.type === "Exploration") {
+      onRandomExploreLocation();
+      //choose random direction
+      let r = Math.floor(Math.random() * 4);
+      if (r === 0) {
+        setExploration("Explore " + exploreLocation + " to the North");
+      } else if (r === 1) {
+        setExploration("Explore " + exploreLocation + " to the East");
+      } else if (r === 2) {
+        setExploration("Explore " + exploreLocation + " to the South");
+      } else {
+        setExploration("Explore " + exploreLocation + " to the West");
+      }
+      props.setValue(exploration);
     }
+    //Random Gather
     if (props.type === "Gather") {
+      onRandomMaterial();
+      //randomly choose between 1 and 5
+      let r = Math.floor(Math.random() * 5) + 1;
+      setGather("Gather " + r + " " + material);
+      props.setValue(gather);
     }
+    //Random Investigation
     if (props.type === "Investigate") {
+        onRandomLocation();
+        let r = Math.floor(Math.random() * 4);
+        if (r === 0) {
+            onRandomName();
+            setInvestigate("Investigate NPC: " + npcName);
+        } else if (r === 1) {
+            setInvestigate("Investigate the Guild: " + location );
+        } else if (r === 2) {
+            setInvestigate("Investigate the Cult: " + location);
+        } else {
+            setInvestigate("Investigate the Faction: " + location);
+        }
+        props.setValue(investigate);
     }
     if (props.type === "Kill") {
     }
