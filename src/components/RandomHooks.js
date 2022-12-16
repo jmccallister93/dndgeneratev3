@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SingleDisplayText from "./SingleDisplayText";
 import supabase from "../config/supabaseClient";
 import CustomName from "./CustomName";
+import { prodDependencies } from "mathjs";
 
 const RandomHooks = (props) => {
   //Get data
@@ -15,8 +16,6 @@ const RandomHooks = (props) => {
   const [bountyCrimes, setBountyCrimes] = useState("");
   const [bountyCrimeOptions, setBountyCrimeOptions] = useState("");
 
-  const [bounty, setBounty] = useState("");
-
   const [monster, setMonster] = useState("");
   const [monsters, setMonsters] = useState("");
   const [monsterOptions, setMonsterOptions] = useState("");
@@ -25,19 +24,13 @@ const RandomHooks = (props) => {
   const [npcNames, setNpcNames] = useState("");
   const [npcNameOptions, setNpcNameOptions] = useState("");
 
-  const [capture, setCapture] = useState("");
-
   const [item, setItem] = useState("");
   const [items, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState("");
 
-  const [delivery, setDelivery] = useState("");
-
   const [building, setBuilding] = useState("");
   const [buildings, setBuildings] = useState("");
   const [buildingOptions, setBuildingOptions] = useState("");
-
-  const [escort, setEscort] = useState("");
 
   const [vowel, setVowel] = useState(["a", "e", "i", "o", "u", "y"]);
   const [consonant, setConsonant] = useState([
@@ -64,24 +57,13 @@ const RandomHooks = (props) => {
     "z",
   ]);
 
-  const [location, setLocation] = useState("");
-
   const [exploreLocation, setExploreLocation] = useState("");
   const [exploreLocations, setExploreLocations] = useState("");
   const [exploreLocationOptions, setExploreLocationOptions] = useState("");
 
-  const [exploration, setExploration] = useState("");
-
   const [material, setMaterial] = useState("");
   const [materials, setMaterials] = useState("");
   const [materialOptions, setMaterialOptions] = useState("");
-
-  const [gather, setGather] = useState("");
-  const [investigate, setInvestigate] = useState("");
-  const [kill, setKill] = useState("");
-  const [negotiation, setNegotiation] = useState("");
-  const [protect, setProtect] = useState("");
-  const [rescue, setRescue] = useState("");
 
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -163,32 +145,32 @@ const RandomHooks = (props) => {
     let random = Math.round(Math.random() * 3);
 
     if (random === 0) {
-      return (firstName + " " + epiphet_a + noun_a);
+      return firstName + " " + epiphet_a + noun_a;
     } else if (random === 1) {
-      return (firstName + " " + epiphet_a + noun_b);
+      return firstName + " " + epiphet_a + noun_b;
     } else if (random === 2) {
-      return (firstName + " " + epiphet_b + noun_b);
+      return firstName + " " + epiphet_b + noun_b;
     } else {
-      return (firstName + " " + epiphet_b + noun_a);
+      return firstName + " " + epiphet_b + noun_a;
     }
   };
   //Random Monster
   const onRandomMonster = (e) => {
     let r = Math.floor(Math.random() * monsterOptions.length);
-    setMonster(monsterOptions[r].name);
+    return monsterOptions[r].name;
   };
   //Random Item
   const onRandomItem = (e) => {
     let r = Math.floor(Math.random() * itemOptions.length);
-    setItem(itemOptions[r].name);
+    return itemOptions[r].name;
   };
   //Random Building
   const onRandomBuilding = (e) => {
     let r = Math.floor(Math.random() * buildingOptions.length);
-    setBuilding(buildingOptions[r].name);
+    return buildingOptions[r].name;
   };
   //Random Location
-  const onRandomLocation = (e) => {
+  const onRandomWord = (e) => {
     //create random location name using vowel and consonant arrays
     let v = Math.floor(Math.random() * 6);
     let c = Math.floor(Math.random() * 21);
@@ -203,128 +185,131 @@ const RandomHooks = (props) => {
     let v6 = Math.floor(Math.random() * 6);
     let c6 = Math.floor(Math.random() * 21);
     //set location name based on random values
-    setLocation(
+    return (
       vowel[v].toUpperCase() +
-        consonant[c] +
-        vowel[v2] +
-        consonant[c3] +
-        consonant[c4] +
-        vowel[v5] +
-        consonant[c5] +
-        vowel[v6]
+      consonant[c] +
+      vowel[v2] +
+      consonant[c3] +
+      consonant[c4] +
+      vowel[v5] +
+      consonant[c5] +
+      vowel[v6]
     );
   };
   //Random Explore Location
   const onRandomExploreLocation = (e) => {
     let r = Math.floor(Math.random() * exploreLocationOptions.length);
-    setExploreLocation(exploreLocationOptions[r].name);
+    return exploreLocationOptions[r].name;
   };
   //Random Material
   const onRandomMaterial = (e) => {
     let r = Math.floor(Math.random() * materialOptions.length);
-    setMaterial(materialOptions[r].name);
+    return materialOptions[r].name;
   };
 
   //Random Quest
   useEffect(() => {
-    //Random Bounty
-    if (props.type === "Bounty") {
-      let bW = Math.floor(Math.random() * bountyWantedOptions.length);
-      let bC = Math.floor(Math.random() * bountyCrimeOptions.length);
-      setBounty(
-        npcName +
-          ", Wanted " +
-          bountyWantedOptions[bW] +
-          " for " +
-          bountyCrimeOptions[bC].name
-      );
-      props.setValue(bounty);
-    }
-    //Random Capture
-    if (props.type === "Capture") {
-      let m = Math.floor(Math.random() * monsterOptions.length);
-      let r = Math.floor(Math.random() * 2);
-      if (r === 0) {
-        props.setValue("Capture the monster: " + monsterOptions[m].name);
-      } else {
-        props.setValue("Capture the NPC: " + onRandomName());
-      }
-    }
-    //Random Delivery
-    if (props.type === "Delivery") {
-      onRandomName();
-      setDelivery("Deliver the " + item + " to " + npcName);
-      props.setValue(delivery);
-    }
-    //Random Escort
-    if (props.type === "Escort") {
-      onRandomName();
-      setEscort("Escort " + npcName + " to " + building + " in " + location);
-      props.setValue(escort);
-    }
-    //Random Exploration
-    if (props.type === "Exploration") {
-      let r = Math.floor(Math.random() * 4);
-      if (r === 0) {
-        setExploration("Explore " + exploreLocation + " to the North");
-      } else if (r === 1) {
-        setExploration("Explore " + exploreLocation + " to the East");
-      } else if (r === 2) {
-        setExploration("Explore " + exploreLocation + " to the South");
-      } else {
-        setExploration("Explore " + exploreLocation + " to the West");
-      }
-      props.setValue(exploration);
-    }
-    //Random Gather
-    if (props.type === "Gather") {
-      let r = Math.floor(Math.random() * 5) + 1;
-      setGather("Gather " + r + " " + material);
-      props.setValue(gather);
-    }
-    //Random Investigation
-    if (props.type === "Investigate") {
-      onRandomName();
-      let r = Math.floor(Math.random() * 4);
-      if (r === 0) {
-        onRandomName();
-        setInvestigate("Investigate NPC: " + npcName);
-      } else if (r === 1) {
-        setInvestigate("Investigate the Guild: " + location);
-      } else if (r === 2) {
-        setInvestigate("Investigate the Cult: " + location);
-      } else {
-        setInvestigate("Investigate the Faction: " + location);
-      }
-      props.setValue(investigate);
-    }
-    if (props.type === "Kill") {
-      onRandomName();
-      setKill("Kill: " + npcName);
-      props.setValue(kill);
-    }
-    if (props.type === "Negotiation") {
-      onRandomName();
-      let r = Math.floor(Math.random() * 4);
-      if (r === 0) {
-        setNegotiation("Negotiate with NPC: " + npcName);
-      } else if (r === 1) {
-        setNegotiation("Negotiate with Faction: " + location);
-      } else if (r === 2) {
-        setNegotiation("Negotiate with Cult: " + location);
-      } else {
-        setNegotiation("Negotiate with Guild: " + location);
-      }
-      props.setValue(negotiation);
-    }
-    if (props.type === "Protect") {
-      onRandomName();
-      setProtect("Protect: " + npcName);
-    }
-    if (props.type === "Rescue") {
-      onRandomName();
-      setRescue("Rescue: " + npcName);
+    if (props.type === "") {
     } else {
+      //Random Bounty
+      if (props.type === "Bounty") {
+        let bW = Math.floor(Math.random() * bountyWantedOptions.length);
+        let bC = Math.floor(Math.random() * bountyCrimeOptions.length);
+        props.setValue(
+          onRandomName() +
+            ", Wanted " +
+            bountyWantedOptions[bW] +
+            " for: " +
+            bountyCrimeOptions[bC].name
+        );
+      }
+      //Random Capture
+      if (props.type === "Capture") {
+        let r = Math.floor(Math.random() * 2);
+        if (r === 0) {
+          props.setValue("Capture the monster: " + onRandomMonster());
+        } else {
+          props.setValue("Capture the NPC: " + onRandomName());
+        }
+      }
+      //Random Delivery
+      if (props.type === "Delivery") {
+        props.setValue(
+          "Deliver the " + onRandomItem() + " to " + onRandomName()
+        );
+      }
+      //Random Escort
+      if (props.type === "Escort") {
+        props.setValue(
+          "Escort " +
+            onRandomName() +
+            " to " +
+            onRandomBuilding() +
+            " in " +
+            onRandomWord()
+        );
+      }
+      //Random Exploration
+      if (props.type === "Exploration") {
+        let r = Math.floor(Math.random() * 4);
+        if (r === 0) {
+          props.setValue(
+            "Explore " + onRandomExploreLocation() + " to the North"
+          );
+        } else if (r === 1) {
+          props.setValue(
+            "Explore " + onRandomExploreLocation() + " to the East"
+          );
+        } else if (r === 2) {
+          props.setValue(
+            "Explore " + onRandomExploreLocation() + " to the South"
+          );
+        } else {
+          props.setValue(
+            "Explore " + onRandomExploreLocation() + " to the West"
+          );
+        }
+      }
+      //Random Gather
+      if (props.type === "Gather") {
+        let r = Math.floor(Math.random() * 5) + 1;
+        props.setValue("Gather " + r + " " + onRandomMaterial());
+      }
+      //Random Investigation
+      if (props.type === "Investigate") {
+        let r = Math.floor(Math.random() * 4);
+        if (r === 0) {
+          props.setValue("Investigate NPC: " + onRandomName());
+        } else if (r === 1) {
+          props.setValue("Investigate the Guild: " + onRandomWord());
+        } else if (r === 2) {
+          props.setValue("Investigate the Cult: " + onRandomWord());
+        } else {
+          props.setValue("Investigate the Faction: " + onRandomWord());
+        }
+      }
+      if (props.type === "Kill") {
+        props.setValue("Kill: " + onRandomName());
+      }
+      if (props.type === "Negotiation") {
+        let r = Math.floor(Math.random() * 4);
+        if (r === 0) {
+          props.setValue("Negotiate with NPC: " + onRandomName());
+        } else if (r === 1) {
+          props.setValue("Negotiate with Faction: " + onRandomWord());
+        } else if (r === 2) {
+          props.setValue("Negotiate with Cult: " + onRandomWord());
+        } else {
+          props.setValue("Negotiate with Guild: " + onRandomWord());
+        }
+      }
+      if (props.type === "Protect") {
+        props.setValue("Protect: " + onRandomName());
+      }
+      if (props.type === "Rescue") {
+        props.setValue("Rescue: " + onRandomName());
+      } else {
+      }
     }
   }, [props.type]);
 
