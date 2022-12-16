@@ -21,6 +21,7 @@ import EditText from "../components/EditText";
 import NameDisplay from "../components/NameDisplay";
 import SingleDisplayText from "../components/SingleDisplayText";
 import SingleDisplayNumber from "../components/SingleDisplayNumber";
+import RandomHooks from "../components/RandomHooks";
 
 const NpcGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(true);
@@ -546,10 +547,13 @@ const NpcGen = () => {
           <hr className={style.subLineBreak} />
           <h2>
             Hook{" "}
+            <RandomHooks />
             <span className={style.minorText2}>
-              <SingleDisplayText value={hook} setNewValue={setHook} />
+              
+              {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
             </span>
           </h2>
+          
         </div>
       </div>
     </div>
