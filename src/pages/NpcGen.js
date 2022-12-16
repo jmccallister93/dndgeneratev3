@@ -24,7 +24,8 @@ import SingleDisplayNumber from "../components/SingleDisplayNumber";
 import RandomHooks from "../components/RandomHooks";
 
 const NpcGen = () => {
-  const [isBasicActive, setIsBasicActive] = useState(true);
+  const [isButtonsActive, setIsButtonsActive] = useState(false);
+  const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isHookActive, setIsHookActive] = useState(false);
   const [isStatsActive, setIsStatsActive] = useState(false);
@@ -88,6 +89,27 @@ const NpcGen = () => {
   const [hooks, setHooks] = useState("");
   const [hookOptions, setHookOptions] = useState("");
 
+  // useEffect((tableName, setSingular, setPlural, setOptions) => {
+  //   const fetchData = async () => {
+  //     const { data: dataName, error: errorName } = await supabase
+  //       .from(tableName)
+  //       .select();
+  //     if (errorName) {
+  //       setFetchError("Could not fetch the data");
+  //       console.log(errorName);
+  //       setSingular(null);
+  //     }
+  //     if (dataName) {
+  //       setPlural(dataName);
+  //       setFetchError(null);
+  //       setOptions(
+  //         dataName.map((r) => ({ name: r.name, value: r.value }))
+  //       );
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
@@ -99,6 +121,9 @@ const NpcGen = () => {
   };
   const showStats = (e) => {
     setIsStatsActive((current) => !current);
+  };
+  const showButtons = (e) => {
+    setIsButtonsActive((current) => !current);
   };
 
   //Function to set ability modifier based on ability score
@@ -144,6 +169,10 @@ const NpcGen = () => {
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>NPC Generator</h1>
         {/* Generate Btns */}
+        {/* <h1 className={style.subHeader} onClick={showButtons}>
+            Buttons
+          </h1>
+          <div className={isButtonsActive ? style.subsection : style.hidden}></div> */}
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton

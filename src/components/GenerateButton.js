@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
+import supabase from "../config/supabaseClient";
 const GenerateButton = (props) => {
   //----PROPS NEEDED----
   //generateItems
@@ -14,6 +15,9 @@ const GenerateButton = (props) => {
   //minNumber
   //---PROPS NEEDED----
   const [multipleDisplay, setMultipleDisplay] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
+ 
+
   useEffect(() => {
     if (props.selectedItem === undefined) {
     } else if (props.selectedItem.length >= 0) {
@@ -29,7 +33,12 @@ const GenerateButton = (props) => {
         props.generateItems[i] === "" ||
         props.generateItems[i] === undefined
       ) {
-        let r = Math.round(Math.random() * props.itemOptions[i].length);
+        let r = Math.floor(Math.random() * props.itemOptions[i].length);
+        //----FOUND ERROR----
+        // if (props.itemOptions[i][r] === undefined) {
+        //   console.log(props.itemOptions[i])
+        //   console.log(r)
+        // }
         props.setItem[i](props.itemOptions[i][r].name);
       }
     }
@@ -38,7 +47,7 @@ const GenerateButton = (props) => {
     //DataTable generate
     if(props.selectedItem){
     for (let i = 0; i < props.selectedItems.length; i++) {
-      let n = Math.round(Math.random() * (6 - 0));
+      let n = Math.floor(Math.random() * (6 - 0));
       for (let x = 0; x <= n; x++) {
         let r = Math.round(Math.random() * props.selectItemOptions[i].length);
         if (props.selectedItems[i].length <= 0) {
@@ -76,7 +85,7 @@ const GenerateButton = (props) => {
           let nB = Math.floor(Math.random() * 208);
           let noun_b = [props.nameItemOptions[i][nB].noun_b];
   
-          let random = Math.round(Math.random() * 3);
+          let random = Math.floor(Math.random() * 3);
 
           if (random === 0) {
             props.setNameItem[i](firstName + " " + epiphet_a + noun_a);
