@@ -85,10 +85,10 @@ const ExportButtons = (props) => {
   };
 
   return (
-    <div className={style.exportButtons}>
-      <Button label="Export to pdf" onClick={exportToPdf} />
-      <Button label="Export to text" onClick={exportToText} />
-      <Button label="Export to excel" onClick={exportToExcel} />
+    <div className={style.exportButtonsWrapper}>
+      <Button className={style.btnName} label="PDF" onClick={exportToPdf} />
+      <Button className={style.btnName} label="TXT" onClick={exportToText} />
+      <Button className={style.btnName} label="XLSX" onClick={exportToExcel} />
     </div>
   );
 };

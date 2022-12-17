@@ -300,6 +300,7 @@ const NpcGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <div>
+            <h1>Export Options</h1>
             <ExportButtons div={divRef} data={npc} />
           </div>
           <h1>NPC Options</h1>

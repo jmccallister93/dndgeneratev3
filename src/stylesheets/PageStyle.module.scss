@@ -271,6 +271,13 @@ $btn-blue: #2196f3;
     height: 120px;
     animation: spin 2s linear infinite;
   }
+
+.exportBtns{
+  padding: 5px;
+}
+.exportButtons{
+  margin: 0.25rem;
+}
   
   @keyframes spin {
     0% { transform: rotate(0deg); }
