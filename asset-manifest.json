@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/dndgeneratev3/static/css/main.bfc6a786.css",
-    "main.js": "/dndgeneratev3/static/js/main.fd5ef799.js",
+    "main.css": "/dndgeneratev3/static/css/main.accfcede.css",
+    "main.js": "/dndgeneratev3/static/js/main.7d5841e6.js",
     "static/js/498.71ebd651.chunk.js": "/dndgeneratev3/static/js/498.71ebd651.chunk.js",
     "static/js/703.2ac36c6f.chunk.js": "/dndgeneratev3/static/js/703.2ac36c6f.chunk.js",
     "static/js/257.68697783.chunk.js": "/dndgeneratev3/static/js/257.68697783.chunk.js",
@@ -15,8 +15,8 @@
     "static/media/axios.cjs": "/dndgeneratev3/static/media/axios.cbe1b8033b90ae4c8151.cjs",
     "static/media/primeicons.woff2": "/dndgeneratev3/static/media/primeicons.78172950b335ccdb94e2.woff2",
     "index.html": "/dndgeneratev3/index.html",
-    "main.bfc6a786.css.map": "/dndgeneratev3/static/css/main.bfc6a786.css.map",
-    "main.fd5ef799.js.map": "/dndgeneratev3/static/js/main.fd5ef799.js.map",
+    "main.accfcede.css.map": "/dndgeneratev3/static/css/main.accfcede.css.map",
+    "main.7d5841e6.js.map": "/dndgeneratev3/static/js/main.7d5841e6.js.map",
     "498.71ebd651.chunk.js.map": "/dndgeneratev3/static/js/498.71ebd651.chunk.js.map",
     "703.2ac36c6f.chunk.js.map": "/dndgeneratev3/static/js/703.2ac36c6f.chunk.js.map",
     "257.68697783.chunk.js.map": "/dndgeneratev3/static/js/257.68697783.chunk.js.map",
@@ -24,7 +24,7 @@
     "802.8491365a.chunk.js.map": "/dndgeneratev3/static/js/802.8491365a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bfc6a786.css",
-    "static/js/main.fd5ef799.js"
+    "static/css/main.accfcede.css",
+    "static/js/main.7d5841e6.js"
   ]
 }
