@@ -16,7 +16,6 @@ const GenerateButton = (props) => {
   //---PROPS NEEDED----
   const [multipleDisplay, setMultipleDisplay] = useState([]);
   const [fetchError, setFetchError] = useState(null);
- 
 
   useEffect(() => {
     if (props.selectedItem === undefined) {
@@ -27,37 +26,40 @@ const GenerateButton = (props) => {
 
   const onGenerate = (e) => {
     //DropDown Generate
-    if(props.generateItems){
-    for (let i = 0; i < props.generateItems.length; i++) {
-      if (
-        props.generateItems[i] === "" ||
-        props.generateItems[i] === undefined
-      ) {
-        let r = Math.floor(Math.random() * props.itemOptions[i].length);
-        //----FOUND ERROR----
-        // if (props.itemOptions[i][r] === undefined) {
-        //   console.log(props.itemOptions[i])
-        //   console.log(r)
-        // }
-        props.setItem[i](props.itemOptions[i][r].name);
+    if (props.generateItems) {
+      for (let i = 0; i < props.generateItems.length; i++) {
+        if (
+          props.generateItems[i] === "" ||
+          props.generateItems[i] === undefined
+        ) {
+          let r = Math.floor(Math.random() * props.itemOptions[i].length);
+          //----FOUND ERROR----
+          // if (props.itemOptions[i][r] === undefined) {
+          //   console.log(props.itemOptions[i])
+          //   console.log(r)
+          // }
+          props.setItem[i](props.itemOptions[i][r].name);
+        }
       }
     }
-  }
 
     //DataTable generate
-    if(props.selectedItem){
-    for (let i = 0; i < props.selectedItems.length; i++) {
-      let n = Math.floor(Math.random() * (6 - 0));
-      for (let x = 0; x <= n; x++) {
-        let r = Math.round(Math.random() * props.selectItemOptions[i].length);
-        if (props.selectedItems[i].length <= 0) {
-          if (props.selectedItem === undefined) {
-            props.setSelectedItem[i]((oldArray) => [...oldArray, props.selectItemOptions[i][r]]);
+    if (props.selectedItem) {
+      for (let i = 0; i < props.selectedItems.length; i++) {
+        let n = Math.floor(Math.random() * (6 - 0));
+        for (let x = 0; x <= n; x++) {
+          let r = Math.round(Math.random() * props.selectItemOptions[i].length);
+          if (props.selectedItems[i].length <= 0) {
+            if (props.selectedItem === undefined) {
+              props.setSelectedItem[i]((oldArray) => [
+                ...oldArray,
+                props.selectItemOptions[i][r],
+              ]);
+            }
           }
         }
       }
     }
-  }
 
     //Number generate stats
     if (props.statsItem) {
@@ -83,7 +85,9 @@ const GenerateButton = (props) => {
     if (props.heightItem) {
       for (let i = 0; i < props.heightItem.length; i++) {
         if (props.heightItem[i] === "" || props.heightItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.heightMax - props.heightMin));
+          let r = Math.floor(
+            Math.random() * (props.heightMax - props.heightMin)
+          );
           r = r.toString();
           props.setHeightItem[i](r);
         }
@@ -93,19 +97,20 @@ const GenerateButton = (props) => {
     if (props.weightItem) {
       for (let i = 0; i < props.weightItem.length; i++) {
         if (props.weightItem[i] === "" || props.weightItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.weightMax - props.weightMin));
+          let r = Math.floor(
+            Math.random() * (props.weightMax - props.weightMin)
+          );
           r = r.toString();
           props.setWeightItem[i](r);
         }
       }
     }
- 
 
     //Number generate HP
     if (props.hpItem) {
       for (let i = 0; i < props.hpItem.length; i++) {
         if (props.hpItem[i] === "" || props.hpItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.hpMax - props.hpMin));
+          let r = Math.floor(Math.random() * (props.hpMax - props.hpMin) + props.hpMin);
           r = r.toString();
           props.setHpItem[i](r);
         }
@@ -115,7 +120,7 @@ const GenerateButton = (props) => {
     if (props.acItem) {
       for (let i = 0; i < props.acItem.length; i++) {
         if (props.acItem[i] === "" || props.acItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.acMax - props.acMin));
+          let r = Math.floor(Math.random() * (props.acMax - props.acMin) + props.acMin);
           r = r.toString();
           props.setAcItem[i](r);
         }
@@ -125,15 +130,16 @@ const GenerateButton = (props) => {
     if (props.speedItem) {
       for (let i = 0; i < props.speedItem.length; i++) {
         if (props.speedItem[i] === "" || props.speedItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.speedMax - props.speedMin));
-          //Set r to be a multiple of 5
-          r = r - (r % 5);
+          //set speed to a random number between the min and max that is a multiple of 5
+          let r = Math.floor(
+            Math.random() * (props.speedMax - props.speedMin) + props.speedMin
+          );
+          r = r * 5;
           r = r.toString();
           props.setSpeedItem[i](r);
         }
       }
     }
-    
 
     //Generate a random name for each props.nameItem in the array
     if (props.nameItem) {
@@ -149,7 +155,7 @@ const GenerateButton = (props) => {
           let noun_a = [props.nameItemOptions[i][nA].noun_a];
           let nB = Math.floor(Math.random() * 208);
           let noun_b = [props.nameItemOptions[i][nB].noun_b];
-  
+
           let random = Math.floor(Math.random() * 3);
 
           if (random === 0) {
@@ -165,7 +171,6 @@ const GenerateButton = (props) => {
       }
     }
   };
-
 
   return (
     <>

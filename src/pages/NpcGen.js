@@ -325,8 +325,8 @@ const NpcGen = () => {
               acMin={5}
               speedItem={[speed]}
               setSpeedItem={[setSpeed]}
-              speedMax={60}
-              speedMin={30}
+              speedMax={12}
+              speedMin={6}
             />
             <ClearButton
               setStringState={[
