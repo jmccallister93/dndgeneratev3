@@ -59,16 +59,48 @@ const GenerateButton = (props) => {
     }
   }
 
-    //Number generate
-    if (props.numberItem) {
-      for (let i = 0; i < props.numberItem.length; i++) {
-        if (props.numberItem[i] === "" || props.numberItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.maxNumber - props.minNumber));
+    //Number generate stats
+    if (props.statsItem) {
+      for (let i = 0; i < props.statsItem.length; i++) {
+        if (props.statsItem[i] === "" || props.statsItem[i] === undefined) {
+          let r = Math.floor(Math.random() * (props.statsMax - props.statsMin));
           r = r.toString();
-          props.setNumberItem[i](r);
+          props.setStatsItem[i](r);
         }
       }
     }
+    //Number generate Age
+    if (props.ageItem) {
+      for (let i = 0; i < props.ageItem.length; i++) {
+        if (props.ageItem[i] === "" || props.ageItem[i] === undefined) {
+          let r = Math.floor(Math.random() * (props.ageMax - props.ageMin));
+          r = r.toString();
+          props.setAgeItem[i](r);
+        }
+      }
+    }
+    //Number generate Height
+    if (props.heightItem) {
+      for (let i = 0; i < props.heightItem.length; i++) {
+        if (props.heightItem[i] === "" || props.heightItem[i] === undefined) {
+          let r = Math.floor(Math.random() * (props.heightMax - props.heightMin));
+          r = r.toString();
+          props.setHeightItem[i](r);
+        }
+      }
+    }
+    //Number generate Weight
+    if (props.weightItem) {
+      for (let i = 0; i < props.weightItem.length; i++) {
+        if (props.weightItem[i] === "" || props.weightItem[i] === undefined) {
+          let r = Math.floor(Math.random() * (props.weightMax - props.weightMin));
+          r = r.toString();
+          props.setWeightItem[i](r);
+        }
+      }
+    }
+ 
+
 
     //Generate a random name for each props.nameItem in the array
     if (props.nameItem) {

@@ -26,6 +26,7 @@ import ExportButtons from "../components/ExportButtons";
 import { useRef } from "react";
 import jsPDF from "jspdf";
 import { Html2CanvasOptions } from "jspdf";
+import CustomInputDecimal from "../components/CustomInputDecimal";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -33,6 +34,8 @@ const NpcGen = () => {
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isHookActive, setIsHookActive] = useState(false);
   const [isStatsActive, setIsStatsActive] = useState(false);
+  const [isItemActive, setIsItemActive] = useState(false);
+  const [isScoresActive, setIsScoresActive] = useState(false);
 
   const [fetchError, setFetchError] = useState(false);
 
@@ -47,6 +50,22 @@ const NpcGen = () => {
   const [sex, setSex] = useState("");
   const [sexs, setSexs] = useState("");
   const [sexOptions, setSexOptions] = useState("");
+
+  const [age, setAge] = useState("");
+  const [ages, setAges] = useState("");
+  const [ageOptions, setAgeOptions] = useState("");
+
+  const [heightFt, setHeightFt] = useState("");
+  const [heightFts, setHeightFts] = useState("");
+  const [heightFtOptions, setHeightFtOptions] = useState("");
+
+  const [heightIn, setHeightIn] = useState("");
+  const [heightIns, setHeightIns] = useState("");
+  const [heightInOptions, setHeightInOptions] = useState("");
+
+  const [weight, setWeight] = useState("");
+  const [weights, setWeights] = useState("");
+  const [weightOptions, setWeightOptions] = useState("");
 
   const [align, setAlign] = useState("");
   const [aligns, setAligns] = useState("");
@@ -131,6 +150,12 @@ const NpcGen = () => {
   };
   const showStats = (e) => {
     setIsStatsActive((current) => !current);
+  };
+  const showScores = (e) => {
+    setIsScoresActive((current) => !current);
+  };
+  const showItems = (e) => {
+    setIsItemActive((current) => !current);
   };
 
   //Function to set ability modifier based on ability score
@@ -262,14 +287,27 @@ const NpcGen = () => {
               nameItem={[name]}
               nameItemOptions={[nameOptions]}
               setNameItem={[setName]}
-              numberItem={[str, dex, con, int, wis, cha]}
-              setNumberItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
-              maxNumber={30}
-              minNumber={0}
+              statsItem={[str, dex, con, int, wis, cha]}
+              setStatsItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
+              statsMax={30}
+              statsMin={0}
+              ageItem={[age]}
+              setAgeItem={[setAge]}
+              ageMax={150}
+              ageMin={10}
+              heightItem={[heightFt, heightIn]}
+              setHeightItem={[setHeightFt, setHeightIn]}
+              heightMax={12}
+              heightMin={1}
+              weightItem={[weight]}
+              setWeightItem={[setWeight]}
+              weightMax={500}
+              weightMin={50}
             />
             <ClearButton
               setStringState={[
                 setAlign,
+                setAge,
                 setBond,
                 setFeature,
                 setInt,
@@ -289,6 +327,9 @@ const NpcGen = () => {
                 setStr,
                 setQuestType,
                 setHook,
+                setHeightFt,
+                setHeightIn,
+                setWeight,
               ]}
               setNumberState={[setCha, setCon, setDex, setInt, setWis, setStr]}
             />
@@ -341,6 +382,37 @@ const NpcGen = () => {
                 value={sex}
                 valueOptions={sexOptions}
               />
+              <CustomInputNumber
+                setSingular={setAge}
+                h1Title={"Age"}
+                value={age}
+                placeholder={"Set Age"}
+                maxNumber={1000}
+                minNumber={0}
+              />
+              <CustomInputNumber
+                setSingular={setHeightFt}
+                h1Title={"Height"}
+                value={heightFt}
+                placeholder={"Set Ft."}
+                maxNumber={12}
+                minNumber={1}
+              />
+               <CustomInputNumber
+                setSingular={setHeightIn}
+                value={heightIn}
+                placeholder={"Set In."}
+                maxNumber={12}
+                minNumber={1}
+              />
+              <CustomInputNumber
+                setSingular={setWeight}
+                h1Title={"Weight"}
+                value={weight}
+                placeholder={"Set Weight"}
+                maxNumber={300}
+                minNumber={1}
+              />
               <CustomDropDown
                 tableName={"aligns"}
                 setSingular={setAlign}
@@ -354,55 +426,7 @@ const NpcGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showStats}>
-            NPC Stats
-          </h1>
-          <div className={isStatsActive ? style.subsection : style.hidden}>
-            <div>
-              <CustomInputNumber
-                setSingular={setStr}
-                h1Title={"Strength"}
-                value={str}
-                placeholder={"Set STR"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setDex}
-                h1Title={"Dexterity"}
-                value={dex}
-                placeholder={"Set DEX"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setCon}
-                h1Title={"Constitution"}
-                value={con}
-                placeholder={"Set CON"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setInt}
-                h1Title={"Intelligence"}
-                value={int}
-                placeholder={"Set INT"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setWis}
-                h1Title={"Wisdom"}
-                value={wis}
-                placeholder={"Set WIS"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setCha}
-                h1Title={"Charisma"}
-                value={cha}
-                placeholder={"Set CHA"}
-                maxNumber={30}
-              />
-            </div>
-          </div>
+
           <h1 className={style.subHeader} onClick={showDetails}>
             NPC Details
           </h1>
@@ -492,7 +516,7 @@ const NpcGen = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-              {questType === "None"
+              {/* {questType === "None"
                 ? ""
                 : questType === "Bounty"
                 ? "Bounty"
@@ -518,7 +542,74 @@ const NpcGen = () => {
                 ? "Rescue"
                 : questType === "Custom"
                 ? "Custom"
-                : "Error"}
+                : "Error"} */}
+            </div>
+          </div>
+
+          <h1 className={style.subHeader} onClick={showStats}>
+            NPC Stats
+          </h1>
+          <div className={isStatsActive ? style.subsection : style.hidden}>
+            <div></div>
+          </div>
+          <h1 className={style.subHeader} onClick={showScores}>
+            NPC Ability Scores
+          </h1>
+          <div className={isScoresActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomInputNumber
+                setSingular={setStr}
+                h1Title={"Strength"}
+                value={str}
+                placeholder={"Set STR"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setDex}
+                h1Title={"Dexterity"}
+                value={dex}
+                placeholder={"Set DEX"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setCon}
+                h1Title={"Constitution"}
+                value={con}
+                placeholder={"Set CON"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setInt}
+                h1Title={"Intelligence"}
+                value={int}
+                placeholder={"Set INT"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setWis}
+                h1Title={"Wisdom"}
+                value={wis}
+                placeholder={"Set WIS"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setCha}
+                h1Title={"Charisma"}
+                value={cha}
+                placeholder={"Set CHA"}
+                maxNumber={30}
+              />
+            </div>
+          </div>
+          <h1 className={style.subHeader} onClick={showItems}>
+            NPC Items
+          </h1>
+          <div className={isItemActive ? style.subsection : style.hidden}>
+            <div>
+              {/* <CustomDataTable 
+              tableName={"items"}
+             
+              /> */}
             </div>
           </div>
         </div>
@@ -529,9 +620,67 @@ const NpcGen = () => {
           <h2>
             <SingleDisplayText value={race} setNewValue={setRace} />{" "}
             <SingleDisplayText value={sex} setNewValue={setSex} />
-            {", "}
+            <span className={style.minorText2}>{", "}</span>
             <SingleDisplayText value={align} setNewValue={setAlign} />
+            <div>
+              <SingleDisplayText value={age} setNewValue={setAge} />
+              <span className={style.minorText2}>{" years old, "}</span>
+              <SingleDisplayText value={heightFt} setNewValue={setHeightFt} />
+              <span className={style.minorText2}>{"ft. "}</span>
+              <SingleDisplayText value={heightIn} setNewValue={setHeightIn} />
+              <span className={style.minorText2}>{"in. "}</span>
+              <SingleDisplayText value={weight} setNewValue={setWeight} />
+              <span className={style.minorText2}>{" lbs."}</span>
+            </div>
           </h2>
+          <hr className={style.lineBreak} />
+          <h2>
+            Profession{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={prof} setNewValue={setProf} />
+            </span>
+          </h2>
+          <h2>
+            Feature{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={feature} setNewValue={setFeature} />
+            </span>
+          </h2>
+          <h2>
+            Talent{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={talent} setNewValue={setTalent} />
+            </span>
+          </h2>
+          <h2>
+            Mannerism{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={mannerism} setNewValue={setMannerism} />
+            </span>
+          </h2>
+          <h2>
+            Interaction{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText
+                value={interaction}
+                setNewValue={setInteraction}
+              />
+            </span>
+          </h2>
+          <h2>
+            Bond{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={bond} setNewValue={setBond} />
+            </span>
+          </h2>
+          <h2>
+            Hook{" "}
+            <span className={style.minorText2}>
+              <RandomHooks type={questType} value={hook} setValue={setHook} />
+              {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
+            </span>
+          </h2>
+          <h1>Stats</h1>
           <hr className={style.lineBreak} />
           <h3 className={style.abilityScores}>
             <div>
@@ -621,55 +770,6 @@ const NpcGen = () => {
               </div>
             </div>
           </h3>
-          <hr className={style.lineBreak} />
-          <h2>
-            Profession{" "}
-            <span className={style.minorText2}>
-              <SingleDisplayText value={prof} setNewValue={setProf} />
-            </span>
-          </h2>
-          <h2>
-            Feature{" "}
-            <span className={style.minorText2}>
-              <SingleDisplayText value={feature} setNewValue={setFeature} />
-            </span>
-          </h2>
-          <h2>
-            Talent{" "}
-            <span className={style.minorText2}>
-              <SingleDisplayText value={talent} setNewValue={setTalent} />
-            </span>
-          </h2>
-          <h2>
-            Mannerism{" "}
-            <span className={style.minorText2}>
-              <SingleDisplayText value={mannerism} setNewValue={setMannerism} />
-            </span>
-          </h2>
-          <h2>
-            Interaction{" "}
-            <span className={style.minorText2}>
-              <SingleDisplayText
-                value={interaction}
-                setNewValue={setInteraction}
-              />
-            </span>
-          </h2>
-          <h2>
-            Bond{" "}
-            <span className={style.minorText2}>
-              <SingleDisplayText value={bond} setNewValue={setBond} />
-            </span>
-          </h2>
-          <h1>Plot Hook</h1>
-          <hr className={style.subLineBreak} />
-          <h2>
-            Hook{" "}
-            <span className={style.minorText2}>
-              <RandomHooks type={questType} value={hook} setValue={setHook} />
-              {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
-            </span>
-          </h2>
         </div>
       </div>
     </div>
