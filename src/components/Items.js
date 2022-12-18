@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/ItemCollection.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import supabase from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -578,6 +578,7 @@ const Items = (props) => {
       ...trinketOptions,
       ...vehicleOptions,
     ]);
+    props.setItemOptions(itemOptions)
   }, [
     adventuringGearOptions,
     armorOptions,
@@ -603,9 +604,9 @@ const Items = (props) => {
     props.setSelectedItem((saveArray) => [...saveArray, itemOptions[r]]);
   };
   const randomItemBtn = (
-    <Button onClick={onRandomItem} className={style.btnName}>
+    <button onClick={onRandomItem} className={style.btnName}>
       Random
-    </Button>
+    </button>
   );
   const itemOptions2 = useRef();
 
@@ -613,9 +614,9 @@ const Items = (props) => {
   const itemDialog = (
     <div className="card">
       <h1 className={style.titles}>{props.h1Title}</h1>
-      <Button onClick={openDialog} className={style.btnName}>
+      <button onClick={openDialog} className={style.btnName}>
         Add / Remove
-      </Button>
+      </button>
       {randomItemBtn}
       {/* {props.dialogVisibleItem === false ? ( 
        DIV WOULD GO HERE ) : (

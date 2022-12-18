@@ -221,6 +221,9 @@ const NpcGen = () => {
       name: name,
       race: race,
       sex: sex,
+      age: age,
+      height: [heightFt, heightIn],
+      weight: weight,
       align: align,
       prof: prof,
       feature: feature,
@@ -665,14 +668,15 @@ const NpcGen = () => {
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
               <Items
-                 h1Title={"Items"}
-                 dialogHeader={"Items"}
-                 selectedItem={selectedItem}
-                 setSelectedItem={setSelectedItem}
-                 itemList={itemList}
-                 setItemList={setItemList}
-                 valueOptions={itemOptions}
-                 options={itemOptions}
+              h1Title={"Items"}
+              dialogHeader={"Items"}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              itemList={itemList}
+              setItemList={setItemList}
+              valueOptions={itemOptions}
+              setItemOptions={setItemOptions}
+              options={itemOptions}
               />
             </div>
           </div>

@@ -50,19 +50,18 @@ const GenerateButton = (props) => {
           props.selectedItems[i].length <= 0
         ) {
           let n = Math.floor(Math.random() * (6 - 0));
-          console.log(props.selectedItemOptions)
-          // for (let x = 0; x <= n; x++) {
-          //   let r = Math.round(
-          //     Math.random() * props.selectItemOptions[i].length
-          //   );
-
-          //   if (props.selectedItems[i].length <= 0) {
-          //     props.setSelectedItem[i]((oldArray) => [
-          //       ...oldArray,
-          //       props.selectItemOptions[i][r],
-          //     ]);
-          //   }
-          // }
+          for (let x = 0; x <= n; x++) {
+            let r = Math.round(
+              Math.random() * props.selectedItemOptions[i].length
+            );
+            
+            if (props.selectedItems[i].length <= 0) {
+              props.setSelectedItem[i]((oldArray) => [
+                ...oldArray,
+                props.selectedItemOptions[i][r],
+              ]);
+            }
+          }
         }
       }
     }
