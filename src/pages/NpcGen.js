@@ -36,7 +36,7 @@ const NpcGen = () => {
   const [isHookActive, setIsHookActive] = useState(false);
   const [isStatsActive, setIsStatsActive] = useState(false);
   const [isItemActive, setIsItemActive] = useState(false);
-  const [isAbilitiesActive, setIsAbilitiesActive] = useState(false);
+  const [isFeaturesActive, setIsFeaturesActive] = useState(false);
   const [isScoresActive, setIsScoresActive] = useState(false);
 
   const [fetchError, setFetchError] = useState(false);
@@ -72,6 +72,24 @@ const NpcGen = () => {
   const [align, setAlign] = useState("");
   const [aligns, setAligns] = useState("");
   const [alignOptions, setAlignOptions] = useState("");
+
+  const [hairColor, setHairColor] = useState("");
+  const [hairColors, setHairColors] = useState("");
+  const [hairColorOptions, setHairColorOptions] = useState("");
+
+  const [hairStyle, setHairStyle] = useState("");
+  const [hairStyles, setHairStyles] = useState("");
+  const [hairStyleOptions, setHairStyleOptions] = useState("");
+
+  const [eyeColor, setEyeColor] = useState("");
+  const [eyeColors, setEyeColors] = useState("");
+  const [eyeColorOptions, setEyeColorOptions] = useState("");
+
+  const [skinColor, setSkinColor] = useState("");
+  const [skinColors, setSkinColors] = useState("");
+  const [skinColorOptions, setSkinColorOptions] = useState("");
+
+
 
   const [bond, setBond] = useState("");
   const [bonds, setBonds] = useState("");
@@ -161,6 +179,9 @@ const NpcGen = () => {
 
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
+  };
+  const showFeatures = (e) => {
+    setIsFeaturesActive((current) => !current);
   };
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
@@ -275,6 +296,10 @@ const NpcGen = () => {
                 race,
                 sex,
                 align,
+                hairColor,
+                hairStyle,
+                eyeColor,
+                skinColor,
                 prof,
                 feature,
                 talent,
@@ -287,6 +312,10 @@ const NpcGen = () => {
                 raceOptions,
                 sexOptions,
                 alignOptions,
+                hairColorOptions,
+                hairStyleOptions,
+                eyeColorOptions,
+                skinColorOptions,
                 profOptions,
                 featureOptions,
                 talentOptions,
@@ -299,6 +328,10 @@ const NpcGen = () => {
                 setRace,
                 setSex,
                 setAlign,
+                setHairColor,
+                setHairStyle,
+                setEyeColor,
+                setSkinColor,
                 setProf,
                 setFeature,
                 setTalent,
@@ -371,6 +404,10 @@ const NpcGen = () => {
                 setAc,
                 setHp,
                 setSpeed,
+                setHairColor,
+                setHairStyle,
+                setEyeColor,
+                setSkinColor,
               ]}
               setArrayState={[setSelectedItem]}
             />
@@ -467,6 +504,57 @@ const NpcGen = () => {
               />
             </div>
           </div>
+          <h1 className={style.subHeader} onClick={showFeatures}>
+            NPC Features
+            <div className={isFeaturesActive ? style.subsection : style.hidden}>
+              <div>
+                <CustomDropDown
+                  tableName={"hairColors"}
+                  setSingular={setHairColor}
+                  setPlural={setHairColors}
+                  setOptions={setHairColorOptions}
+                  options={hairColorOptions}
+                  h1Title={"Hair Color"}
+                  placeholder={"Set Hair Color"}
+                  value={hairColor}
+                  valueOptions={hairColorOptions}
+                />
+                <CustomDropDown
+                  tableName={"hairStyles"}
+                  setSingular={setHairStyle}
+                  setPlural={setHairStyles}
+                  setOptions={setHairStyleOptions}
+                  options={hairStyleOptions}
+                  h1Title={"Hair Style"}
+                  placeholder={"Set Hair Style"}
+                  value={hairStyle}
+                  valueOptions={hairStyleOptions}
+                />
+                <CustomDropDown
+                  tableName={"eyeColors"}
+                  setSingular={setEyeColor}
+                  setPlural={setEyeColors}
+                  setOptions={setEyeColorOptions}
+                  options={eyeColorOptions}
+                  h1Title={"Eye Color"}
+                  placeholder={"Set Eye Color"}
+                  value={eyeColor}
+                  valueOptions={eyeColorOptions}
+                />
+                <CustomDropDown
+                  tableName={"skinColors"}
+                  setSingular={setSkinColor}
+                  setPlural={setSkinColors}
+                  setOptions={setSkinColorOptions}
+                  options={skinColorOptions}
+                  h1Title={"Skin Color"}
+                  placeholder={"Set Skin Color"}
+                  value={skinColor}
+                  valueOptions={skinColorOptions}
+                />
+              </div>
+            </div>
+          </h1>
           <h1 className={style.subHeader} onClick={showDetails}>
             NPC Details
           </h1>

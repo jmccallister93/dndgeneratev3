@@ -44,17 +44,18 @@ const GenerateButton = (props) => {
     // }
 
     //DataTable generate
+    //----PROPS----
+    // selectedItemOptions={[itemOptions]}
+    // selectedItems={[selectedItem]}
+    // setSelectedItem={[setSelectedItem]}
     if (props.selectedItems) {
       for (let i = 0; i < props.selectedItems.length; i++) {
-        if (
-          props.selectedItems[i].length <= 0
-        ) {
+        if (props.selectedItems[i].length <= 0) {
           let n = Math.floor(Math.random() * (6 - 0));
           for (let x = 0; x <= n; x++) {
             let r = Math.round(
               Math.random() * props.selectedItemOptions[i].length
             );
-            
             if (props.selectedItems[i].length <= 0) {
               props.setSelectedItem[i]((oldArray) => [
                 ...oldArray,
