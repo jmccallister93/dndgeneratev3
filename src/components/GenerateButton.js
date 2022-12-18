@@ -101,6 +101,39 @@ const GenerateButton = (props) => {
     }
  
 
+    //Number generate HP
+    if (props.hpItem) {
+      for (let i = 0; i < props.hpItem.length; i++) {
+        if (props.hpItem[i] === "" || props.hpItem[i] === undefined) {
+          let r = Math.floor(Math.random() * (props.hpMax - props.hpMin));
+          r = r.toString();
+          props.setHpItem[i](r);
+        }
+      }
+    }
+    //Number generate AC
+    if (props.acItem) {
+      for (let i = 0; i < props.acItem.length; i++) {
+        if (props.acItem[i] === "" || props.acItem[i] === undefined) {
+          let r = Math.floor(Math.random() * (props.acMax - props.acMin));
+          r = r.toString();
+          props.setAcItem[i](r);
+        }
+      }
+    }
+    //Number generate Speed
+    if (props.speedItem) {
+      for (let i = 0; i < props.speedItem.length; i++) {
+        if (props.speedItem[i] === "" || props.speedItem[i] === undefined) {
+          let r = Math.floor(Math.random() * (props.speedMax - props.speedMin));
+          //Set r to be a multiple of 5
+          r = r - (r % 5);
+          r = r.toString();
+          props.setSpeedItem[i](r);
+        }
+      }
+    }
+    
 
     //Generate a random name for each props.nameItem in the array
     if (props.nameItem) {

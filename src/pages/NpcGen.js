@@ -95,6 +95,18 @@ const NpcGen = () => {
   const [interactions, setInteractions] = useState("");
   const [interactionOptions, setInteractionOptions] = useState("");
 
+  const [hp, setHp] = useState("");
+  const [hps, setHps] = useState("");
+  const [hpOptions, setHpOptions] = useState("");
+
+  const [ac, setAc] = useState("");
+  const [acs, setAcs] = useState("");
+  const [acOptions, setAcOptions] = useState("");
+
+  const [speed, setSpeed] = useState("");
+  const [speeds, setSpeeds] = useState("");
+  const [speedOptions, setSpeedOptions] = useState("");
+
   const [str, setStr] = useState("");
   const [dex, setDex] = useState("");
   const [con, setCon] = useState("");
@@ -298,11 +310,23 @@ const NpcGen = () => {
               heightItem={[heightFt, heightIn]}
               setHeightItem={[setHeightFt, setHeightIn]}
               heightMax={12}
-              heightMin={1}
+              heightMin={2}
               weightItem={[weight]}
               setWeightItem={[setWeight]}
               weightMax={500}
               weightMin={50}
+              hpItem={[hp]}
+              setHpItem={[setHp]}
+              hpMax={150}
+              hpMin={5}
+              acItem={[ac]}
+              setAcItem={[setAc]}
+              acMax={30}
+              acMin={5}
+              speedItem={[speed]}
+              setSpeedItem={[setSpeed]}
+              speedMax={60}
+              speedMin={30}
             />
             <ClearButton
               setStringState={[
@@ -330,8 +354,10 @@ const NpcGen = () => {
                 setHeightFt,
                 setHeightIn,
                 setWeight,
+                setAc,
+                setHp,
+                setSpeed,
               ]}
-              setNumberState={[setCha, setCon, setDex, setInt, setWis, setStr]}
             />
           </div>
         </div>
@@ -426,7 +452,6 @@ const NpcGen = () => {
               />
             </div>
           </div>
-
           <h1 className={style.subHeader} onClick={showDetails}>
             NPC Details
           </h1>
@@ -545,12 +570,19 @@ const NpcGen = () => {
                 : "Error"} */}
             </div>
           </div>
-
           <h1 className={style.subHeader} onClick={showStats}>
             NPC Stats
           </h1>
           <div className={isStatsActive ? style.subsection : style.hidden}>
-            <div></div>
+            <div>
+              <CustomInputNumber
+                setSingular={setHp}
+                h1Title={"Hit Points"}
+                value={hp}
+                placeholder={"Set HP"}
+                maxNumber={100}
+              />
+            </div>
           </div>
           <h1 className={style.subHeader} onClick={showScores}>
             NPC Ability Scores
@@ -682,6 +714,23 @@ const NpcGen = () => {
           </h2>
           <h1>Stats</h1>
           <hr className={style.lineBreak} />
+          <h2>HP{" "}
+          <span className={style.minorText2}>
+              <SingleDisplayText value={hp} setNewValue={setHp} />
+            </span>
+          </h2>
+          <h2>AC{" "}
+          <span className={style.minorText2}>
+              <SingleDisplayText value={ac} setNewValue={setAc} />
+            </span>
+          </h2>
+          <h2>Speed{" "}
+          <span className={style.minorText2}>
+              <SingleDisplayText value={speed} setNewValue={setSpeed} />
+              {" ft."}
+            </span>
+          </h2>
+          <hr className={style.lineBreak} />
           <h3 className={style.abilityScores}>
             <div>
               <h3>STR</h3>
@@ -770,6 +819,7 @@ const NpcGen = () => {
               </div>
             </div>
           </h3>
+
         </div>
       </div>
     </div>
