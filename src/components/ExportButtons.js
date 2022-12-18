@@ -28,13 +28,12 @@ const ExportButtons = (props) => {
     }
   }, [props.div]);
 
-    useEffect(() => {
-      if (props.data) {
-        setData(props.data);
-        setIsDataReady(true);
-      }
-      
-    }, [props.data]);
+  useEffect(() => {
+    if (props.data) {
+      setData(props.data);
+      setIsDataReady(true);
+    }
+  }, [props.data]);
 
   useEffect(() => {
     if (isHtmlReady && isDataReady) {
@@ -86,9 +85,15 @@ const ExportButtons = (props) => {
 
   return (
     <div className={style.exportButtonsWrapper}>
-      <Button className={style.btnName} label="PDF" onClick={exportToPdf} />
-      <Button className={style.btnName} label="TXT" onClick={exportToText} />
-      <Button className={style.btnName} label="XLSX" onClick={exportToExcel} />
+      <button className={style.btnName} onClick={exportToPdf}>
+        PDF{" "}
+      </button>
+      <button className={style.btnName} onClick={exportToText}>
+        TXT{" "}
+      </button>
+      <button className={style.btnName} onClick={exportToExcel}>
+        CSV
+      </button>
     </div>
   );
 };

@@ -33,30 +33,36 @@ const GenerateButton = (props) => {
           props.generateItems[i] === undefined
         ) {
           let r = Math.floor(Math.random() * props.itemOptions[i].length);
-          //----FOUND ERROR----
-          // if (props.itemOptions[i][r] === undefined) {
-          //   console.log(props.itemOptions[i])
-          //   console.log(r)
-          // }
           props.setItem[i](props.itemOptions[i][r].name);
         }
       }
     }
+    //----FOUND ERROR----
+    // if (props.itemOptions[i][r] === undefined) {
+    //   console.log(props.itemOptions[i])
+    //   console.log(r)
+    // }
 
     //DataTable generate
-    if (props.selectedItem) {
+    if (props.selectedItems) {
       for (let i = 0; i < props.selectedItems.length; i++) {
-        let n = Math.floor(Math.random() * (6 - 0));
-        for (let x = 0; x <= n; x++) {
-          let r = Math.round(Math.random() * props.selectItemOptions[i].length);
-          if (props.selectedItems[i].length <= 0) {
-            if (props.selectedItem === undefined) {
-              props.setSelectedItem[i]((oldArray) => [
-                ...oldArray,
-                props.selectItemOptions[i][r],
-              ]);
-            }
-          }
+        if (
+          props.selectedItems[i].length <= 0
+        ) {
+          let n = Math.floor(Math.random() * (6 - 0));
+          console.log(props.selectedItemOptions)
+          // for (let x = 0; x <= n; x++) {
+          //   let r = Math.round(
+          //     Math.random() * props.selectItemOptions[i].length
+          //   );
+
+          //   if (props.selectedItems[i].length <= 0) {
+          //     props.setSelectedItem[i]((oldArray) => [
+          //       ...oldArray,
+          //       props.selectItemOptions[i][r],
+          //     ]);
+          //   }
+          // }
         }
       }
     }
@@ -110,7 +116,9 @@ const GenerateButton = (props) => {
     if (props.hpItem) {
       for (let i = 0; i < props.hpItem.length; i++) {
         if (props.hpItem[i] === "" || props.hpItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.hpMax - props.hpMin) + props.hpMin);
+          let r = Math.floor(
+            Math.random() * (props.hpMax - props.hpMin) + props.hpMin
+          );
           r = r.toString();
           props.setHpItem[i](r);
         }
@@ -120,7 +128,9 @@ const GenerateButton = (props) => {
     if (props.acItem) {
       for (let i = 0; i < props.acItem.length; i++) {
         if (props.acItem[i] === "" || props.acItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.acMax - props.acMin) + props.acMin);
+          let r = Math.floor(
+            Math.random() * (props.acMax - props.acMin) + props.acMin
+          );
           r = r.toString();
           props.setAcItem[i](r);
         }

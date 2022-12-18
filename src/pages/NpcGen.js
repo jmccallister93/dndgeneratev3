@@ -27,6 +27,7 @@ import { useRef } from "react";
 import jsPDF from "jspdf";
 import { Html2CanvasOptions } from "jspdf";
 import CustomInputDecimal from "../components/CustomInputDecimal";
+import Items from "../components/Items";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -35,6 +36,7 @@ const NpcGen = () => {
   const [isHookActive, setIsHookActive] = useState(false);
   const [isStatsActive, setIsStatsActive] = useState(false);
   const [isItemActive, setIsItemActive] = useState(false);
+  const [isAbilitiesActive, setIsAbilitiesActive] = useState(false);
   const [isScoresActive, setIsScoresActive] = useState(false);
 
   const [fetchError, setFetchError] = useState(false);
@@ -123,6 +125,12 @@ const NpcGen = () => {
   const [hook, setHook] = useState("");
   const [hooks, setHooks] = useState("");
   const [hookOptions, setHookOptions] = useState("");
+
+  const [item, setItem] = useState("");
+  const [items, setItems] = useState("");
+  const [itemOptions, setItemOptions] = useState("");
+  const [selectedItem, setSelectedItem] = useState([]);
+  const [itemList, setItemList] = useState([]);
 
   const [npc, setNpc] = useState("");
 
@@ -327,6 +335,9 @@ const NpcGen = () => {
               setSpeedItem={[setSpeed]}
               speedMax={12}
               speedMin={6}
+              selectedItemOptions={[itemOptions]}
+              selectedItems={[selectedItem]}
+              setSelectedItem={[setSelectedItem]}
             />
             <ClearButton
               setStringState={[
@@ -358,6 +369,7 @@ const NpcGen = () => {
                 setHp,
                 setSpeed,
               ]}
+              setArrayState={[setSelectedItem]}
             />
           </div>
         </div>
@@ -424,7 +436,7 @@ const NpcGen = () => {
                 maxNumber={12}
                 minNumber={1}
               />
-               <CustomInputNumber
+              <CustomInputNumber
                 setSingular={setHeightIn}
                 value={heightIn}
                 placeholder={"Set In."}
@@ -580,7 +592,21 @@ const NpcGen = () => {
                 h1Title={"Hit Points"}
                 value={hp}
                 placeholder={"Set HP"}
-                maxNumber={100}
+                maxNumber={300}
+              />
+              <CustomInputNumber
+                setSingular={setAc}
+                h1Title={"Armor Class"}
+                value={ac}
+                placeholder={"Set AC"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setSpeed}
+                h1Title={"Speed"}
+                value={speed}
+                placeholder={"Set Speed"}
+                maxNumber={300}
               />
             </div>
           </div>
@@ -638,10 +664,16 @@ const NpcGen = () => {
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
-              {/* <CustomDataTable 
-              tableName={"items"}
-             
-              /> */}
+              <Items
+                 h1Title={"Items"}
+                 dialogHeader={"Items"}
+                 selectedItem={selectedItem}
+                 setSelectedItem={setSelectedItem}
+                 itemList={itemList}
+                 setItemList={setItemList}
+                 valueOptions={itemOptions}
+                 options={itemOptions}
+              />
             </div>
           </div>
         </div>
@@ -714,18 +746,21 @@ const NpcGen = () => {
           </h2>
           <h1>Stats</h1>
           <hr className={style.lineBreak} />
-          <h2>HP{" "}
-          <span className={style.minorText2}>
+          <h2>
+            HP{" "}
+            <span className={style.minorText2}>
               <SingleDisplayText value={hp} setNewValue={setHp} />
             </span>
           </h2>
-          <h2>AC{" "}
-          <span className={style.minorText2}>
+          <h2>
+            AC{" "}
+            <span className={style.minorText2}>
               <SingleDisplayText value={ac} setNewValue={setAc} />
             </span>
           </h2>
-          <h2>Speed{" "}
-          <span className={style.minorText2}>
+          <h2>
+            Speed{" "}
+            <span className={style.minorText2}>
               <SingleDisplayText value={speed} setNewValue={setSpeed} />
               {" ft."}
             </span>
@@ -819,7 +854,13 @@ const NpcGen = () => {
               </div>
             </div>
           </h3>
-
+          <hr className={style.lineBreak} />
+          <h2>
+            Items{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay selectedItem={selectedItem} />
+            </span>
+          </h2>
         </div>
       </div>
     </div>
