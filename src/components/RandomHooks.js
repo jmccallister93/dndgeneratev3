@@ -185,16 +185,56 @@ const RandomHooks = (props) => {
     let v6 = Math.floor(Math.random() * 6);
     let c6 = Math.floor(Math.random() * 21);
     //set location name based on random values
-    return (
-      vowel[v].toUpperCase() +
-      consonant[c] +
-      vowel[v2] +
-      consonant[c3] +
-      consonant[c4] +
-      vowel[v5] +
-      consonant[c5] +
-      vowel[v6]
-    );
+    let x = Math.round(Math.random() * 3);
+    if (x === 0) {
+      return (
+        vowel[v].toUpperCase() +
+        consonant[c] +
+        vowel[v2] +
+        consonant[c3] +
+        consonant[c4] +
+        vowel[v5] +
+        consonant[c5] +
+        vowel[v6]
+      );
+    }
+    else if (x === 1) {
+      return (
+        consonant[c].toUpperCase() +
+        vowel[v2] +
+        consonant[c3] +
+        vowel[v5] +
+        consonant[c4] +
+        consonant[c5] +
+        vowel[v6]
+      );
+    }
+    else if (x === 2) {
+      return (
+        vowel[v].toUpperCase() +
+        consonant[c] +
+        consonant[c3] +
+        vowel[v2] +
+        consonant[c4] +
+        vowel[v5] +
+        consonant[c5] +
+        vowel[v6] +
+        consonant[c6]
+      ) 
+    }
+    else {
+      return (
+        consonant[c].toUpperCase() +
+        vowel[v2] +
+        consonant[c3] +
+        vowel[v5] +
+        consonant[c4] +
+        consonant[c5] +
+        vowel[v6] +
+        consonant[c6] +
+        vowel[v]
+      );
+    }
   };
   //Random Explore Location
   const onRandomExploreLocation = (e) => {
