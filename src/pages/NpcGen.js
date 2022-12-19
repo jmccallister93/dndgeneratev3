@@ -77,9 +77,17 @@ const NpcGen = () => {
   const [hairColors, setHairColors] = useState("");
   const [hairColorOptions, setHairColorOptions] = useState("");
 
+  const [hairType, setHairType] = useState("");
+  const [hairTypes, setHairTypes] = useState("");
+  const [hairTypeOptions, setHairTypeOptions] = useState("");
+
   const [hairStyle, setHairStyle] = useState("");
   const [hairStyles, setHairStyles] = useState("");
   const [hairStyleOptions, setHairStyleOptions] = useState("");
+
+  const [beardStyle, setBeardStyle] = useState("");
+  const [beardStyles, setBeardStyles] = useState("");
+  const [beardStyleOptions, setBeardStyleOptions] = useState("");
 
   const [eyeColor, setEyeColor] = useState("");
   const [eyeColors, setEyeColors] = useState("");
@@ -88,8 +96,6 @@ const NpcGen = () => {
   const [skinColor, setSkinColor] = useState("");
   const [skinColors, setSkinColors] = useState("");
   const [skinColorOptions, setSkinColorOptions] = useState("");
-
-
 
   const [bond, setBond] = useState("");
   const [bonds, setBonds] = useState("");
@@ -297,7 +303,9 @@ const NpcGen = () => {
                 sex,
                 align,
                 hairColor,
+                hairType,
                 hairStyle,
+                beardStyle,
                 eyeColor,
                 skinColor,
                 prof,
@@ -313,7 +321,9 @@ const NpcGen = () => {
                 sexOptions,
                 alignOptions,
                 hairColorOptions,
+                hairTypeOptions,
                 hairStyleOptions,
+                beardStyleOptions,
                 eyeColorOptions,
                 skinColorOptions,
                 profOptions,
@@ -329,7 +339,9 @@ const NpcGen = () => {
                 setSex,
                 setAlign,
                 setHairColor,
+                setHairType,
                 setHairStyle,
+                setBeardStyle,
                 setEyeColor,
                 setSkinColor,
                 setProf,
@@ -408,6 +420,8 @@ const NpcGen = () => {
                 setHairStyle,
                 setEyeColor,
                 setSkinColor,
+                setHairType,
+                setBeardStyle,
               ]}
               setArrayState={[setSelectedItem]}
             />
@@ -506,55 +520,77 @@ const NpcGen = () => {
           </div>
           <h1 className={style.subHeader} onClick={showFeatures}>
             NPC Features
-            <div className={isFeaturesActive ? style.subsection : style.hidden}>
-              <div>
-                <CustomDropDown
-                  tableName={"hairColors"}
-                  setSingular={setHairColor}
-                  setPlural={setHairColors}
-                  setOptions={setHairColorOptions}
-                  options={hairColorOptions}
-                  h1Title={"Hair Color"}
-                  placeholder={"Set Hair Color"}
-                  value={hairColor}
-                  valueOptions={hairColorOptions}
-                />
-                <CustomDropDown
-                  tableName={"hairStyles"}
-                  setSingular={setHairStyle}
-                  setPlural={setHairStyles}
-                  setOptions={setHairStyleOptions}
-                  options={hairStyleOptions}
-                  h1Title={"Hair Style"}
-                  placeholder={"Set Hair Style"}
-                  value={hairStyle}
-                  valueOptions={hairStyleOptions}
-                />
-                <CustomDropDown
-                  tableName={"eyeColors"}
-                  setSingular={setEyeColor}
-                  setPlural={setEyeColors}
-                  setOptions={setEyeColorOptions}
-                  options={eyeColorOptions}
-                  h1Title={"Eye Color"}
-                  placeholder={"Set Eye Color"}
-                  value={eyeColor}
-                  valueOptions={eyeColorOptions}
-                />
-                <CustomDropDown
-                  tableName={"skinColors"}
-                  setSingular={setSkinColor}
-                  setPlural={setSkinColors}
-                  setOptions={setSkinColorOptions}
-                  options={skinColorOptions}
-                  h1Title={"Skin Color"}
-                  placeholder={"Set Skin Color"}
-                  value={skinColor}
-                  valueOptions={skinColorOptions}
-                />
-              </div>
-            </div>
           </h1>
+          <div className={isFeaturesActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDropDown
+                tableName={"colors"}
+                setSingular={setHairColor}
+                setPlural={setHairColors}
+                setOptions={setHairColorOptions}
+                options={hairColorOptions}
+                h1Title={"Hair"}
+                placeholder={"Set Color"}
+                value={hairColor}
+                valueOptions={hairColorOptions}
+              />
+              <CustomDropDown
+                tableName={"hairType"}
+                setSingular={setHairType}
+                setPlural={setHairTypes}
+                setOptions={setHairTypeOptions}
+                options={hairTypeOptions}
+                // h1Title={"Hair Type"}
+                placeholder={"Set Type"}
+                value={hairType}
+                valueOptions={hairTypeOptions}
+              />
+              <CustomDropDown
+                tableName={"hairStyle"}
+                setSingular={setHairStyle}
+                setPlural={setHairStyles}
+                setOptions={setHairStyleOptions}
+                options={hairStyleOptions}
+                // h1Title={"Hair Style"}
+                placeholder={"Set Style"}
+                value={hairStyle}
+                valueOptions={hairStyleOptions}
+              />
+              <CustomDropDown
+               tableName={"beardStyle"}
+               setSingular={setBeardStyle}
+               setPlural={setBeardStyles}
+               setOptions={setBeardStyleOptions}
+               options={beardStyleOptions}
+               h1Title={"Beard Style"}
+               placeholder={"Set Style"}
+               value={beardStyle}
+               valueOptions={beardStyleOptions}
+              />
+              <CustomDropDown
+                tableName={"eyeColor"}
+                setSingular={setEyeColor}
+                setPlural={setEyeColors}
+                setOptions={setEyeColorOptions}
+                options={eyeColorOptions}
+                h1Title={"Eye Color"}
+                placeholder={"Set Eye Color"}
+                value={eyeColor}
+                valueOptions={eyeColorOptions}
+              />
+              <CustomDropDown
+                tableName={"colors"}
+                setSingular={setSkinColor}
+                setPlural={setSkinColors}
+                setOptions={setSkinColorOptions}
+                options={skinColorOptions}
+                h1Title={"Skin Color"}
+                placeholder={"Set Skin Color"}
+                value={skinColor}
+                valueOptions={skinColorOptions}
+              />
+            </div>
+          </div>
           <h1 className={style.subHeader} onClick={showDetails}>
             NPC Details
           </h1>
@@ -577,7 +613,7 @@ const NpcGen = () => {
                 setPlural={setFeatures}
                 setOptions={setFeatureOptions}
                 options={featureOptions}
-                h1Title={"Features"}
+                h1Title={"Unique Feature"}
                 placeholder={"Set Features"}
                 value={feature}
                 valueOptions={featureOptions}
@@ -756,15 +792,15 @@ const NpcGen = () => {
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
               <Items
-              h1Title={"Items"}
-              dialogHeader={"Items"}
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-              itemList={itemList}
-              setItemList={setItemList}
-              valueOptions={itemOptions}
-              setItemOptions={setItemOptions}
-              options={itemOptions}
+                h1Title={"Items"}
+                dialogHeader={"Items"}
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                itemList={itemList}
+                setItemList={setItemList}
+                valueOptions={itemOptions}
+                setItemOptions={setItemOptions}
+                options={itemOptions}
               />
             </div>
           </div>
@@ -791,13 +827,45 @@ const NpcGen = () => {
           </h2>
           <hr className={style.lineBreak} />
           <h2>
+            Hair{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={hairColor} setNewValue={setHairColor} />
+              {", "}
+              <SingleDisplayText value={hairType} setNewValue={setHairType} />
+              {", "}
+              <SingleDisplayText value={hairStyle} setNewValue={setHairStyle} />
+            </span>
+          </h2>
+          <h2>
+            Beard{" "}
+            <span className={style.minorText2}>
+              {sex === "Female" ? "None" : 
+              <SingleDisplayText value={beardStyle} setNewValue={setBeardStyle} />}
+              
+            </span>
+
+          </h2>
+          <h2>
+            Eyes{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={eyeColor} setNewValue={setEyeColor} />
+            </span>
+          </h2>
+          <h2>
+            Skin{" "}
+            <span className={style.minorText2}>
+              <SingleDisplayText value={skinColor} setNewValue={setSkinColor} />
+            </span>
+          </h2>
+          <hr className={style.lineBreak} />
+          <h2>
             Profession{" "}
             <span className={style.minorText2}>
               <SingleDisplayText value={prof} setNewValue={setProf} />
             </span>
           </h2>
           <h2>
-            Feature{" "}
+            Unique Feature{" "}
             <span className={style.minorText2}>
               <SingleDisplayText value={feature} setNewValue={setFeature} />
             </span>
