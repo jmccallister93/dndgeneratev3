@@ -398,11 +398,10 @@ const NpcGen = () => {
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>NPC Generator</h1>
-        {/* Generate Btns */}
+        {/* Generate Clear Btns */}
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
-              id="generateBtn"
               generateItems={[
                 race,
                 sex,
@@ -420,6 +419,7 @@ const NpcGen = () => {
                 interaction,
                 bond,
                 questType,
+                action,
               ]}
               itemOptions={[
                 raceOptions,
@@ -438,6 +438,7 @@ const NpcGen = () => {
                 interactionOptions,
                 bondOptions,
                 questTypeOptions,
+                actionOptions,
               ]}
               setItem={[
                 setRace,
@@ -456,6 +457,7 @@ const NpcGen = () => {
                 setInteraction,
                 setBond,
                 setQuestType,
+                setAction,
               ]}
               nameItem={[name]}
               nameItemOptions={[nameOptions]}
@@ -527,6 +529,11 @@ const NpcGen = () => {
                 setSkinColor,
                 setHairType,
                 setBeardStyle,
+                setAction,
+                setWeapon,
+                setWeaponDamage,
+                setWeaponProperties,
+                setWeaponBonus,
               ]}
               setArrayState={[setSelectedItem]}
             />
@@ -1046,7 +1053,7 @@ const NpcGen = () => {
             </span>
           </h2>
           <h1>Stats</h1>
-          <hr className={style.lineBreak} />
+          <hr className={style.subLineBreak} />
           <h2>
             HP{" "}
             <span className={style.minorText2}>
@@ -1161,8 +1168,7 @@ const NpcGen = () => {
             <div>
               <span className={style.minorText2}>
                 <SingleDisplayText value={action} setNewValue={setAction} />{" "}
-                {/* <SingleDisplayText value={weaponBonus} setNewValue={setWeaponBonus} />{" "} */}
-                {weaponBonus}
+                {weaponBonus} to hit
               </span>
             </div>
             <div>
