@@ -59,18 +59,26 @@ const NpcGen = () => {
   const [age, setAge] = useState("");
   const [ages, setAges] = useState("");
   const [ageOptions, setAgeOptions] = useState("");
+  const [ageMin, setAgeMin] = useState("");
+  const [ageMax, setAgeMax] = useState("");
 
   const [heightFt, setHeightFt] = useState("");
   const [heightFts, setHeightFts] = useState("");
   const [heightFtOptions, setHeightFtOptions] = useState("");
+  const [heightFtMin, setHeightFtMin] = useState("");
+  const [heightFtMax, setHeightFtMax] = useState("");
 
   const [heightIn, setHeightIn] = useState("");
   const [heightIns, setHeightIns] = useState("");
   const [heightInOptions, setHeightInOptions] = useState("");
+  const [heightInMin, setHeightInMin] = useState("");
+  const [heightInMax, setHeightInMax] = useState("");
 
   const [weight, setWeight] = useState("");
   const [weights, setWeights] = useState("");
   const [weightOptions, setWeightOptions] = useState("");
+  const [weightMin, setWeightMin] = useState("");
+  const [weightMax, setWeightMax] = useState("");
 
   const [align, setAlign] = useState("");
   const [aligns, setAligns] = useState("");
@@ -401,6 +409,7 @@ const NpcGen = () => {
         {/* Generate Clear Btns */}
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
+
             <GenerateButton
               generateItems={[
                 race,
@@ -469,15 +478,23 @@ const NpcGen = () => {
               ageItem={[age]}
               setAgeItem={[setAge]}
               ageMax={150}
+              setAgeMax={setAgeMax}
               ageMin={10}
+              setAgeMin={setAgeMin}
               heightItem={[heightFt, heightIn]}
               setHeightItem={[setHeightFt, setHeightIn]}
               heightMax={12}
+              setHeightFtMax={setHeightFtMax}
+              
               heightMin={2}
+              setHeightFtMin={setHeightFtMin}
+              
               weightItem={[weight]}
               setWeightItem={[setWeight]}
               weightMax={500}
+              setWeightMax={setWeightMax}
               weightMin={50}
+              setWeightMin={setWeightMin}
               hpItem={[hp]}
               setHpItem={[setHp]}
               hpMax={150}
@@ -494,7 +511,52 @@ const NpcGen = () => {
               selectedItems={[selectedItem]}
               setSelectedItem={[setSelectedItem]}
             />
-            <ClearButton
+            {/* <ClearButton
+              setStringState={[
+                setAlign,
+                setAge,
+                setBond,
+                setFeature,
+                setInt,
+                setInteraction,
+                setMannerism,
+                setName,
+                setProf,
+                setFeature,
+                setRace,
+                setSex,
+                setTalent,
+                setCha,
+                setCon,
+                setDex,
+                setInt,
+                setWis,
+                setStr,
+                setQuestType,
+                setHook,
+                setHeightFt,
+                setHeightIn,
+                setWeight,
+                setAc,
+                setHp,
+                setSpeed,
+                setHairColor,
+                setHairStyle,
+                setEyeColor,
+                setSkinColor,
+                setHairType,
+                setBeardStyle,
+                setAction,
+                setWeapon,
+                setWeaponDamage,
+                setWeaponProperties,
+                setWeaponBonus,
+              ]}
+              setArrayState={[setSelectedItem]}
+            /> */}
+          </div>
+          <div className={style.btnWrapper}>
+          <ClearButton
               setStringState={[
                 setAlign,
                 setAge,
@@ -541,7 +603,7 @@ const NpcGen = () => {
           {/* Export Btns */}
           <div className={style.btnWrapper}>
             <h1>
-              Export Options
+              Export
               <ExportButtons div={divRef} data={npc} />
             </h1>
           </div>

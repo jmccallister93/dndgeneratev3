@@ -1,4 +1,4 @@
-import style from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 
 const ClearButton = (props) => {
   //PROPS

@@ -79,6 +79,88 @@ const GenerateButton = (props) => {
         }
       }
     }
+    //  //Loop through props.generatedItems and find race
+    //  if (props.itemOptions) {
+    //   for (let i = 0; i < props.itemOptions[0].length; i++) {
+    //     if (props.itemOptions[0][i].name === props.generateItems[0]) {
+    //       //If name is found, set age, height, and weight based on race name
+    //       if(props.generateItems[0] === "Dwarf"){
+    //         props.setAgeMin(50)
+    //         props.setAgeMax(350)
+    //         props.setHeightFtMin(4)
+    //         props.setHeightFtMax(5)
+    //         props.setWeightMin(150)
+    //         props.setWeightMax(250)
+    //       }
+    //       if(props.generateItems[0] === "Elf"){
+    //         props.setAgeMin(100)
+    //         props.setAgeMax(750)
+    //         props.setHeightFtMin(5)
+    //         props.setHeightFtMax(6)
+    //         props.setWeightMin(90)
+    //         props.setWeightMax(150)
+    //       }
+    //       if(props.generateItems[0] === "Halfling"){
+    //         props.setAgeMin(20)
+    //         props.setAgeMax(150)
+    //         props.setHeightFtMin(3)
+    //         props.setHeightFtMax(4)
+    //         props.setWeightMin(35)
+    //         props.setWeightMax(50)
+    //       }
+    //       if(props.generateItems[0] === "Human"){
+    //         props.setAgeMin(15)
+    //         props.setAgeMax(80)
+    //         props.setHeightFtMin(4)
+    //         props.setHeightFtMax(6)
+    //         props.setWeightMin(110)
+    //         props.setWeightMax(200)
+    //       }
+    //       if(props.generateItems[0] === "Dragonborn"){
+    //         props.setAgeMin(15)
+    //         props.setAgeMax(80)
+    //         props.setHeightFtMin(6)
+    //         props.setHeightFtMax(7)
+    //         props.setWeightMin(175)
+    //         props.setWeightMax(300)
+    //       }
+    //       if(props.generateItems[0] === "Gnome"){
+    //         props.setAgeMin(40)
+    //         props.setAgeMax(500)
+    //         props.setHeightFtMin(3)
+    //         props.setHeightFtMax(4)
+    //         props.setWeightMin(35)
+    //         props.setWeightMax(50)
+    //       }
+    //       if(props.generateItems[0] === "Half-Elf"){
+    //         props.setAgeMin(20)
+    //         props.setAgeMax(180)
+    //         props.setHeightFtMin(5)
+    //         props.setHeightFtMax(6)
+    //         props.setWeightMin(90)
+    //         props.setWeightMax(150)
+    //       }
+    //       if(props.generateItems[0] === "Half-Orc"){
+    //         props.setAgeMin(14)
+    //         props.setAgeMax(75)
+    //         props.setHeightFtMin(6)
+    //         props.setHeightFtMax(7)
+    //         props.setWeightMin(175)
+    //         props.setWeightMax(300)
+    //       }
+    //       if(props.generateItems[0] === "Tiefling"){
+    //         props.setAgeMin(18)
+    //         props.setAgeMax(100)
+    //         props.setHeightFtMin(5)
+    //         props.setHeightFtMax(6)
+    //         props.setWeightMin(90)
+    //         props.setWeightMax(150)
+    //       }
+    //       console.log(props.ageMax)
+    //     }
+    //   }
+    // }
+    
     //Number generate Age
     if (props.ageItem) {
       for (let i = 0; i < props.ageItem.length; i++) {
@@ -94,13 +176,16 @@ const GenerateButton = (props) => {
       for (let i = 0; i < props.heightItem.length; i++) {
         if (props.heightItem[i] === "" || props.heightItem[i] === undefined) {
           let r = Math.floor(
-            Math.random() * (props.heightMax - props.heightMin)
+            Math.random() * (props.heightMax - props.heightMin) +
+              props.heightMin
           );
           r = r.toString();
           props.setHeightItem[i](r);
         }
       }
     }
+   
+
     //Number generate Weight
     if (props.weightItem) {
       for (let i = 0; i < props.weightItem.length; i++) {
@@ -185,7 +270,7 @@ const GenerateButton = (props) => {
   };
 
   return (
-    <>
+    <> 
       <button
         onClick={onGenerate}
         className={style.btnGen}
