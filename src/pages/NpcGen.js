@@ -295,7 +295,7 @@ const NpcGen = () => {
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>NPC Generator</h1>
         {/* Generate Btns */}
-        <div>
+        <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
               generateItems={[
@@ -426,16 +426,18 @@ const NpcGen = () => {
               setArrayState={[setSelectedItem]}
             />
           </div>
+          <div className={style.btnWrapper}>
+            <h1>
+              Export Options
+              <ExportButtons div={divRef} data={npc} />
+            </h1>
+          </div>
         </div>
       </div>
 
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <div>
-            <h1>Export Options</h1>
-            <ExportButtons div={divRef} data={npc} />
-          </div>
           <h1>NPC Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
             NPC Basic Info
@@ -557,15 +559,15 @@ const NpcGen = () => {
                 valueOptions={hairStyleOptions}
               />
               <CustomDropDown
-               tableName={"beardStyle"}
-               setSingular={setBeardStyle}
-               setPlural={setBeardStyles}
-               setOptions={setBeardStyleOptions}
-               options={beardStyleOptions}
-               h1Title={"Beard Style"}
-               placeholder={"Set Style"}
-               value={beardStyle}
-               valueOptions={beardStyleOptions}
+                tableName={"beardStyle"}
+                setSingular={setBeardStyle}
+                setPlural={setBeardStyles}
+                setOptions={setBeardStyleOptions}
+                options={beardStyleOptions}
+                h1Title={"Beard Style"}
+                placeholder={"Set Style"}
+                value={beardStyle}
+                valueOptions={beardStyleOptions}
               />
               <CustomDropDown
                 tableName={"eyeColor"}
@@ -839,11 +841,15 @@ const NpcGen = () => {
           <h2>
             Beard{" "}
             <span className={style.minorText2}>
-              {sex === "Female" ? "None" : 
-              <SingleDisplayText value={beardStyle} setNewValue={setBeardStyle} />}
-              
+              {sex === "Female" ? (
+                "None"
+              ) : (
+                <SingleDisplayText
+                  value={beardStyle}
+                  setNewValue={setBeardStyle}
+                />
+              )}
             </span>
-
           </h2>
           <h2>
             Eyes{" "}
