@@ -25,7 +25,9 @@ const SingleDisplayText = (props) => {
             contentEditable="false"
             suppressContentEditableWarning={true}
         >
+            <span className={style.minorText3}>
             {props.value}
+            </span>
         </span>
     );
 }

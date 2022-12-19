@@ -67,7 +67,7 @@ const SingleDisplayNumber = (props) => {
       contentEditable="false"
       suppressContentEditableWarning={true}
     >
-      {props.value}
+      <span className={style.minorText3}>{props.value}</span>
     </span>
   );
 };

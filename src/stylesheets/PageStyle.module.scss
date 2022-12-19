@@ -119,9 +119,6 @@ $btn-blue: #2196f3;
 
 }
 
-
-
-
 .btnName {
   font-size: 1rem;
   color: $secondary-grey;
@@ -195,6 +192,29 @@ $btn-blue: #2196f3;
 .btnAddRemove {
   background-color: $btn-blue;
 }
+
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  & div {
+    padding: 2px;
+  }
+  & p {
+    margin: 0.5rem;
+    font-size: 1.5rem;
+  }
+}
+
+.infoModal{
+  border-radius: 1rem;
+}
+
 .subHeader {
   color: $primary-grey;
   background-color: white;
@@ -254,6 +274,22 @@ $btn-blue: #2196f3;
 .minorText2 {
   font-weight: 350;
 }
+.minorText3 {
+  font-weight: 350;
+  &:hover{
+    background-color: white;
+    cursor: pointer;
+  }
+}
+.nameText {
+  font-weight: 500;
+  &:hover{
+    background-color: white;
+    cursor: pointer;
+  }
+}
+
+
 .abilityScores {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

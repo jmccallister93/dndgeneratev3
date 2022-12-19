@@ -300,12 +300,23 @@ const NpcGen = () => {
   //Info content
   const infoContent = (
     <div className={style.infoContent}>
-      <h2>Info</h2>
+      <p>This is a tool to help you generate NPCs for your games.</p>
       <p>
-        This is a tool to help you generate NPCs for your games.
+        You can use the Generate button in the top left to randomly set all
+        fields to random values.
       </p>
       <p>
-        
+        You can also use the Generate button in each section to randomly set the
+        fields in that section.
+      </p>
+      <p>You can also manually set the fields to whatever you want.</p>
+      <p>
+        Once a value has been set you can click on the field in the display to
+        edit it.
+      </p>
+      <p>
+        Once you have set all the fields to your liking, you can click the
+        Export button to export the NPC to file of your choice.
       </p>
     </div>
   );
@@ -458,14 +469,14 @@ const NpcGen = () => {
           {/* ToolTip */}
           <div className={style.btnWrapper}>
             <div className={style.infoCircle}>
-              <i className="pi pi-info-circle"  onClick={showInfo}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
                 <Tooltip
                   target=".pi-info-circle"
                   position="bottom"
-                  content="Click for more info"
+                  content="How To Use Guide"
                 />
                 <InfoModal
-                  header="NPC Generator"
+                  header={"NPC Generator Info"}
                   content={infoContent}
                   visible={isInfoActive}
                   setVisible={setIsInfoActive}
