@@ -159,6 +159,18 @@ const NpcGen = () => {
   const [selectedItem, setSelectedItem] = useState([]);
   const [itemList, setItemList] = useState([]);
 
+  const [action, setAction] = useState("");
+  const [actions, setActions] = useState("");
+  const [actionOptions, setActionOptions] = useState("");
+
+  const [weapon, setWeapon] = useState("");
+  const [weapons, setWeapons] = useState("");
+  const [weaponOptions, setWeaponOptions] = useState("");
+
+  const [weaponDamage, setWeaponDamage] = useState("");
+
+  const [weaponProperties, setWeaponProperties] = useState("");
+
   const [npc, setNpc] = useState("");
 
   const divRef = useRef(null);
@@ -296,6 +308,52 @@ const NpcGen = () => {
     wis,
     cha,
   ]);
+
+  //Pull damage field from itemsWeapons table in database
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("itemsWeapons")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setWeapons(null);
+      }
+      if (dataName) {
+        setWeapons(dataName);
+        setFetchError(null);
+        setWeaponOptions(
+          dataName.map((r) => ({
+            name: r.name,
+            value: r.damage,
+            properties: r.properties,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+
+  //Match action name to weapon damage
+  useEffect(() => {
+    if (action !== "") {
+      const matchWeapon = (action) => {
+        const weapon = weapons.find((w) => w.name === action);
+        if (weapon) {
+          return weapon.damage;
+        }
+      };
+      const matchProperties = (action) => {
+        const weapon = weapons.find((w) => w.name === action);
+        if (weapon) {
+          return weapon.properties;
+        }
+      };
+      setWeaponDamage(matchWeapon(action));
+      setWeaponProperties(matchProperties(action));
+    }
+  }, [action]);
 
   //Info content
   const infoContent = (
@@ -845,8 +903,19 @@ const NpcGen = () => {
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
+              <CustomDropDown
+                tableName={"itemsWeapons"}
+                setSingular={setAction}
+                setPlural={setActions}
+                setOptions={setActionOptions}
+                options={actionOptions}
+                h1Title={"Weapon Aciton"}
+                placeholder={"Set Weapon"}
+                value={action}
+                valueOptions={actionOptions}
+              />
               <Items
-                h1Title={"Items"}
+                h1Title={"Invnetory"}
                 dialogHeader={"Items"}
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}
@@ -1073,8 +1142,33 @@ const NpcGen = () => {
             </div>
           </h3>
           <hr className={style.lineBreak} />
+          <h2>Action </h2>
+          <h2 className={style.abilityScores}>
+            <div>
+              <span className={style.minorText2}>
+                <SingleDisplayText value={action} setNewValue={setAction} />{" "}
+              </span>
+            </div>
+            <div>
+              <span className={style.minorText2}>
+                <SingleDisplayText
+                  value={weaponDamage}
+                  setNewValue={setWeaponDamage}
+                />{" "}
+              </span>
+            </div>
+            <div>
+              <span className={style.minorText2}>
+                <SingleDisplayText
+                value={weaponProperties}
+                setNewValue={setWeaponProperties}
+              />{" "}
+                </span>
+            </div>
+          </h2>
+          <hr className={style.lineBreak} />
           <h2>
-            Items{" "}
+            Inventory{" "}
             <span className={style.minorText2}>
               <MultipleDisplay selectedItem={selectedItem} />
             </span>
