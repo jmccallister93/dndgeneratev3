@@ -213,7 +213,7 @@ const RandomHooks = (props) => {
     let x = Math.round(Math.random() * 3);
     if (x === 0) {
       return (
-        vowel[v].toUpperCase() +
+        vowel[v3].toUpperCase() +
         consonant[c] +
         vowel[v2] +
         consonant[c3] +
@@ -240,9 +240,9 @@ const RandomHooks = (props) => {
         vowel[v2] +
         consonant[c4] +
         vowel[v5] +
-        consonant[c5] +
         vowel[v6] +
-        consonant[c6]
+        consonant[c6] +
+        consonant[c5] 
       );
     } else {
       return (

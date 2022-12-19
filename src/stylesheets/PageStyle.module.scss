@@ -66,17 +66,20 @@ $btn-blue: #2196f3;
   align-items: center;
 }
 
-.topWrapper{
-  display: flex;
-}
+// .topWrapper{
+//   display: flex;
+//   width: fit-content;
+// }
 
 .btnWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 10%;
+  column-gap: 5%;
   margin: 1rem;
-  padding: 1rem;
+  padding: 0;
+  padding-left: 3rem;
+  padding-right: 3rem;
   background-color: $secondary-grey;
   border-radius: 0.5rem;
   box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.25);
@@ -338,6 +341,7 @@ $btn-blue: #2196f3;
   }
 
 .exportBtns{
+  display: flex;
   padding: 5px;
 }
 .exportButtons{

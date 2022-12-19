@@ -407,10 +407,9 @@ const NpcGen = () => {
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>NPC Generator</h1>
-        {/* Generate Clear Btns */}
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
-
+            {/* Generate Clear Btns */}
             <GenerateButton
               generateItems={[
                 race,
@@ -486,10 +485,8 @@ const NpcGen = () => {
               setHeightItem={[setHeightFt, setHeightIn]}
               heightMax={12}
               setHeightFtMax={setHeightFtMax}
-              
               heightMin={2}
               setHeightFtMin={setHeightFtMin}
-              
               weightItem={[weight]}
               setWeightItem={[setWeight]}
               weightMax={500}
@@ -512,52 +509,7 @@ const NpcGen = () => {
               selectedItems={[selectedItem]}
               setSelectedItem={[setSelectedItem]}
             />
-            {/* <ClearButton
-              setStringState={[
-                setAlign,
-                setAge,
-                setBond,
-                setFeature,
-                setInt,
-                setInteraction,
-                setMannerism,
-                setName,
-                setProf,
-                setFeature,
-                setRace,
-                setSex,
-                setTalent,
-                setCha,
-                setCon,
-                setDex,
-                setInt,
-                setWis,
-                setStr,
-                setQuestType,
-                setHook,
-                setHeightFt,
-                setHeightIn,
-                setWeight,
-                setAc,
-                setHp,
-                setSpeed,
-                setHairColor,
-                setHairStyle,
-                setEyeColor,
-                setSkinColor,
-                setHairType,
-                setBeardStyle,
-                setAction,
-                setWeapon,
-                setWeaponDamage,
-                setWeaponProperties,
-                setWeaponBonus,
-              ]}
-              setArrayState={[setSelectedItem]}
-            /> */}
-          </div>
-          <div className={style.btnWrapper}>
-          <ClearButton
+            <ClearButton
               setStringState={[
                 setAlign,
                 setAge,
@@ -600,16 +552,14 @@ const NpcGen = () => {
               ]}
               setArrayState={[setSelectedItem]}
             />
-          </div>
-          {/* Export Btns */}
-          <div className={style.btnWrapper}>
+            {/* Export Btns */}
             <h1>
               Export
-              <ExportButtons div={divRef} data={npc} />
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef} data={npc} />
+              </div>
             </h1>
-          </div>
-          {/* ToolTip */}
-          <div className={style.btnWrapper}>
+            {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
                 <Tooltip
@@ -1246,10 +1196,10 @@ const NpcGen = () => {
             <div>
               <span className={style.minorText2}>
                 <SingleDisplayText
-                value={weaponProperties}
-                setNewValue={setWeaponProperties}
-              />{" "}
-                </span>
+                  value={weaponProperties}
+                  setNewValue={setWeaponProperties}
+                />{" "}
+              </span>
             </div>
           </h2>
           <hr className={style.lineBreak} />

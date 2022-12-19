@@ -84,17 +84,17 @@ const ExportButtons = (props) => {
   };
 
   return (
-    <div className={style.exportButtonsWrapper}>
+    <>
       <button className={style.btnName} onClick={exportToPdf} title="Export PDF">
-        PDF{" "}
+        PDF
       </button>
       <button className={style.btnName} onClick={exportToText} title="Export TXT">
-        TXT{" "}
+        TXT
       </button>
       <button className={style.btnName} onClick={exportToExcel} title="Export XLSX">
-        XLSX{" "}
+        XLSX
       </button>
-    </div>
+    </>
   );
 };
 export default ExportButtons;
