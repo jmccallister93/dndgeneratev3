@@ -31,6 +31,7 @@ import Items from "../components/Items";
 import { Tooltip } from "primereact/tooltip";
 import ToolTip from "../components/ToolTip";
 import InfoModal from "../components/InfoModal";
+import NameGenerator from "../components/NameGenerator";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -1015,6 +1016,7 @@ const NpcGen = () => {
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
           <NameDisplay value={name} setNewValue={setName} />
+          <NameGenerator />
           <h2>
             <SingleDisplayText value={race} setNewValue={setRace} />{" "}
             <SingleDisplayText value={sex} setNewValue={setSex} />

@@ -3,6 +3,7 @@ import SingleDisplayText from "./SingleDisplayText";
 import supabase from "../config/supabaseClient";
 import CustomName from "./CustomName";
 import { prodDependencies } from "mathjs";
+import NameGenerator from "./NameGenerator";
 
 const RandomHooks = (props) => {
   //Get data
@@ -65,6 +66,26 @@ const RandomHooks = (props) => {
   const [materials, setMaterials] = useState("");
   const [materialOptions, setMaterialOptions] = useState("");
 
+  const [faction, setFaction] = useState("");
+  const [factions, setFactions] = useState("");
+  const [factionOptions, setFactionOptions] = useState("");
+
+  const [nameA, setNameA] = useState("");
+  const [namesA, setNamesA] = useState([]);
+  const [nameAOptions, setNameAOptions] = useState([]);
+  const [nameB, setNameB] = useState("");
+  const [namesB, setNamesB] = useState([]);
+  const [nameBOptions, setNameBOptions] = useState([]);
+  const [nameC, setNameC] = useState("");
+  const [namesC, setNamesC] = useState([]);
+  const [nameCOptions, setNameCOptions] = useState([]);
+  const [nameD, setNameD] = useState("");
+  const [namesD, setNamesD] = useState([]);
+  const [nameDOptions, setNameDOptions] = useState([]);
+  const [factionName, setFactionName] = useState("");
+  const [factionNames, setFactionNames] = useState([]);
+  const [factionNamesOptions, setFactionNamesOptions] = useState([]);
+
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -102,6 +123,10 @@ const RandomHooks = (props) => {
       setExploreLocationOptions
     );
     getData("questsGather", setMaterial, setMaterials, setMaterialOptions);
+    getData("namesA", setNameA, setNamesA, setNameAOptions);
+    getData("namesB", setNameB, setNamesB, setNameBOptions);
+    getData("namesC", setNameC, setNamesC, setNameCOptions);
+    getData("namesD", setNameD, setNamesD, setNameDOptions);
   }, []);
 
   //NPC names
@@ -197,8 +222,7 @@ const RandomHooks = (props) => {
         consonant[c5] +
         vowel[v6]
       );
-    }
-    else if (x === 1) {
+    } else if (x === 1) {
       return (
         consonant[c].toUpperCase() +
         vowel[v2] +
@@ -208,8 +232,7 @@ const RandomHooks = (props) => {
         consonant[c5] +
         vowel[v6]
       );
-    }
-    else if (x === 2) {
+    } else if (x === 2) {
       return (
         vowel[v].toUpperCase() +
         consonant[c] +
@@ -220,9 +243,8 @@ const RandomHooks = (props) => {
         consonant[c5] +
         vowel[v6] +
         consonant[c6]
-      ) 
-    }
-    else {
+      );
+    } else {
       return (
         consonant[c].toUpperCase() +
         vowel[v2] +
@@ -236,6 +258,7 @@ const RandomHooks = (props) => {
       );
     }
   };
+
   //Random Explore Location
   const onRandomExploreLocation = (e) => {
     let r = Math.floor(Math.random() * exploreLocationOptions.length);
@@ -245,6 +268,29 @@ const RandomHooks = (props) => {
   const onRandomMaterial = (e) => {
     let r = Math.floor(Math.random() * materialOptions.length);
     return materialOptions[r].name;
+  };
+
+  //Random Faction Name
+  const onRandomFactionName = (e) => {
+    let rA = Math.floor(Math.random() * nameAOptions.length);
+    let rB = Math.floor(Math.random() * nameBOptions.length);
+    let rC = Math.floor(Math.random() * nameCOptions.length);
+    let rD = Math.floor(Math.random() * nameDOptions.length);
+    setNameA(nameAOptions[rA].name);
+    setNameB(nameBOptions[rB].name);
+    setNameC(nameCOptions[rC].name);
+    setNameD(nameDOptions[rD].name);
+    if (nameA && nameB && nameC && nameD) {
+      return (
+        nameAOptions[rA].name +
+        " " +
+        nameBOptions[rB].name +
+        " " +
+        nameCOptions[rC].name +
+        " " +
+        nameDOptions[rD].name
+      );
+    }
   };
 
   //Random Quest
@@ -275,7 +321,7 @@ const RandomHooks = (props) => {
       //Random Delivery
       if (props.type === "Delivery") {
         props.setValue(
-          "Deliver the " + onRandomItem() + " to " + onRandomName()
+          "Deliver the " + onRandomItem() + " to " + onRandomFactionName()
         );
       }
       //Random Escort
@@ -321,11 +367,11 @@ const RandomHooks = (props) => {
         if (r === 0) {
           props.setValue("Investigate NPC: " + onRandomName());
         } else if (r === 1) {
-          props.setValue("Investigate the Guild: " + onRandomWord());
+          props.setValue("Investigate the Guild: " + onRandomFactionName());
         } else if (r === 2) {
-          props.setValue("Investigate the Cult: " + onRandomWord());
+          props.setValue("Investigate the Cult: "+ onRandomFactionName());
         } else {
-          props.setValue("Investigate the Faction: " + onRandomWord());
+          props.setValue("Investigate the Faction: "+ onRandomFactionName());
         }
       }
       if (props.type === "Kill") {
@@ -336,11 +382,11 @@ const RandomHooks = (props) => {
         if (r === 0) {
           props.setValue("Negotiate with NPC: " + onRandomName());
         } else if (r === 1) {
-          props.setValue("Negotiate with Faction: " + onRandomWord());
+          props.setValue("Negotiate with Faction: " + onRandomFactionName());
         } else if (r === 2) {
-          props.setValue("Negotiate with Cult: " + onRandomWord());
+          props.setValue("Negotiate with Cult: " + onRandomFactionName());
         } else {
-          props.setValue("Negotiate with Guild: " + onRandomWord());
+          props.setValue("Negotiate with Guild: " + onRandomFactionName());
         }
       }
       if (props.type === "Protect") {
