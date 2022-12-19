@@ -970,17 +970,37 @@ const NpcGen = () => {
           <h2>
             <SingleDisplayText value={race} setNewValue={setRace} />{" "}
             <SingleDisplayText value={sex} setNewValue={setSex} />
-            <span className={style.minorText2}>{", "}</span>
+            {race === "" && sex === "" ? (
+              ""
+            ) : (
+              <span className={style.minorText2}>{", "}</span>
+            )}
             <SingleDisplayText value={align} setNewValue={setAlign} />
             <div>
               <SingleDisplayText value={age} setNewValue={setAge} />
-              <span className={style.minorText2}>{" years old, "}</span>
+              {age === "" ? (
+                ""
+              ) : (
+                <span className={style.minorText2}>{" years old, "}</span>
+              )}
               <SingleDisplayText value={heightFt} setNewValue={setHeightFt} />
-              <span className={style.minorText2}>{"ft. "}</span>
+              {heightFt === "" ? (
+                ""
+              ) : (
+                <span className={style.minorText2}>{"ft. "}</span>
+              )}
               <SingleDisplayText value={heightIn} setNewValue={setHeightIn} />
+              {heightIn === "" ? (
+                ""
+              ) : (
               <span className={style.minorText2}>{"in. "}</span>
+              )}
               <SingleDisplayText value={weight} setNewValue={setWeight} />
+              {weight === "" ? (
+                ""
+              ) : (
               <span className={style.minorText2}>{" lbs."}</span>
+              )}
             </div>
           </h2>
           <hr className={style.lineBreak} />
@@ -988,9 +1008,9 @@ const NpcGen = () => {
             Hair{" "}
             <span className={style.minorText2}>
               <SingleDisplayText value={hairColor} setNewValue={setHairColor} />
-              {", "}
+              {hairColor === "" ? "" : ", "}
               <SingleDisplayText value={hairType} setNewValue={setHairType} />
-              {", "}
+              {hairType === "" ? "" : ", "}
               <SingleDisplayText value={hairStyle} setNewValue={setHairStyle} />
             </span>
           </h2>
@@ -1084,7 +1104,7 @@ const NpcGen = () => {
             Speed{" "}
             <span className={style.minorText2}>
               <SingleDisplayText value={speed} setNewValue={setSpeed} />
-              {" ft."}
+              {speed === "" ? "" : " ft."}
             </span>
           </h2>
           <hr className={style.lineBreak} />
@@ -1182,7 +1202,8 @@ const NpcGen = () => {
             <div>
               <span className={style.minorText2}>
                 <SingleDisplayText value={action} setNewValue={setAction} />{" "}
-                {weaponBonus} to hit
+                {weaponBonus} 
+                {weaponBonus === "" ? "" : " to hit"}
               </span>
             </div>
             <div>
