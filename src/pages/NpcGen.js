@@ -168,8 +168,8 @@ const NpcGen = () => {
   const [weaponOptions, setWeaponOptions] = useState("");
 
   const [weaponDamage, setWeaponDamage] = useState("");
-
   const [weaponProperties, setWeaponProperties] = useState("");
+  const [weaponBonus, setWeaponBonus] = useState("");
 
   const [npc, setNpc] = useState("");
 
@@ -327,6 +327,7 @@ const NpcGen = () => {
           dataName.map((r) => ({
             name: r.name,
             value: r.damage,
+            type: r.type,
             properties: r.properties,
           }))
         );
@@ -350,8 +351,21 @@ const NpcGen = () => {
           return weapon.properties;
         }
       };
+      const matchBonus = (action) => {
+        const weapon = weapons.find((w) => w.name === action);
+        if (weapon) {
+          //If weapon type contains "melee" return str mod else return dex mod
+          if (weapon.type.includes("Melee")) {
+            return setMod(str);
+          }
+          if (weapon.type.includes("Ranged")) {
+            return setMod(dex);
+          }
+        }
+      };
       setWeaponDamage(matchWeapon(action));
       setWeaponProperties(matchProperties(action));
+      setWeaponBonus(matchBonus(action));
     }
   }, [action]);
 
@@ -1147,6 +1161,8 @@ const NpcGen = () => {
             <div>
               <span className={style.minorText2}>
                 <SingleDisplayText value={action} setNewValue={setAction} />{" "}
+                {/* <SingleDisplayText value={weaponBonus} setNewValue={setWeaponBonus} />{" "} */}
+                {weaponBonus}
               </span>
             </div>
             <div>
