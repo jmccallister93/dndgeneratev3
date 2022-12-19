@@ -76,6 +76,17 @@ $btn-blue: #2196f3;
   border-radius: 1rem;
 }
 
+// set infoCircle class to large font size and blue
+.infoCircle {
+  color: $header-color;
+  & i{
+    font-size: 4rem;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .btnClear {
   font-size: 2rem;
   color: $secondary-grey;

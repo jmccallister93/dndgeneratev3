@@ -28,6 +28,7 @@ import jsPDF from "jspdf";
 import { Html2CanvasOptions } from "jspdf";
 import CustomInputDecimal from "../components/CustomInputDecimal";
 import Items from "../components/Items";
+import { Tooltip } from "primereact/tooltip";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -289,6 +290,9 @@ const NpcGen = () => {
     cha,
   ]);
 
+  //Add tool tip to multipl components
+
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -298,6 +302,7 @@ const NpcGen = () => {
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
+            id="generateBtn"
               generateItems={[
                 race,
                 sex,
@@ -426,11 +431,24 @@ const NpcGen = () => {
               setArrayState={[setSelectedItem]}
             />
           </div>
+          {/* Export Btns */}
           <div className={style.btnWrapper}>
             <h1>
               Export Options
               <ExportButtons div={divRef} data={npc} />
             </h1>
+          </div>
+          {/* ToolTip */}
+          <div className={style.btnWrapper}>
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle">
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="Click for more info"
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -440,7 +458,7 @@ const NpcGen = () => {
         <div className={style.optionsWrapper}>
           <h1>NPC Options</h1>
           <h1 className={style.subHeader} onClick={showBasics}>
-            NPC Basic Info
+            Basic Info
           </h1>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
@@ -521,7 +539,7 @@ const NpcGen = () => {
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showFeatures}>
-            NPC Features
+            Features
           </h1>
           <div className={isFeaturesActive ? style.subsection : style.hidden}>
             <div>
@@ -594,7 +612,7 @@ const NpcGen = () => {
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showDetails}>
-            NPC Details
+            Details
           </h1>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
@@ -667,7 +685,7 @@ const NpcGen = () => {
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showHook}>
-            NPC Hook
+            Hook
           </h1>
           <div className={isHookActive ? style.subsection : style.hidden}>
             <div>
@@ -712,7 +730,7 @@ const NpcGen = () => {
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showStats}>
-            NPC Stats
+            Stats
           </h1>
           <div className={isStatsActive ? style.subsection : style.hidden}>
             <div>
@@ -740,7 +758,7 @@ const NpcGen = () => {
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showScores}>
-            NPC Ability Scores
+            Ability Scores
           </h1>
           <div className={isScoresActive ? style.subsection : style.hidden}>
             <div>
@@ -789,7 +807,7 @@ const NpcGen = () => {
             </div>
           </div>
           <h1 className={style.subHeader} onClick={showItems}>
-            NPC Items
+            Items
           </h1>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
