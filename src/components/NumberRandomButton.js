@@ -7,16 +7,17 @@ const NumberRandomButton = (props) => {
   //---PROPS---
 
   const onRandomClick = (e) => {
-    
     let r = Math.floor(Math.random() * (props.maxNumber - 0));
     //Convert r to a string
     r = r.toString();
     props.setSingular(r);
-    
-
   };
   return (
-    <button className={style.btnName} onClick={onRandomClick}>
+    <button
+      className={style.btnName}
+      onClick={onRandomClick}
+      title="Generate Random Value"
+    >
       Random
     </button>
   );

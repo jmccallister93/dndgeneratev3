@@ -5,20 +5,19 @@ import supabase from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const CustomName = (props) => {
-//----PROPS NEEDED----
-//tableName
-//name
-//setName
-//setNames
-//setNameOptions
-//nameOptions
-//title
-//placeholder
+  //----PROPS NEEDED----
+  //tableName
+  //name
+  //setName
+  //setNames
+  //setNameOptions
+  //nameOptions
+  //title
+  //placeholder
 
+  const [fetchError, setFetchError] = useState(null);
 
-const [fetchError, setFetchError] = useState(null);
-
-//Name Data
+  //Name Data
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from(props.tableName).select();
@@ -71,18 +70,26 @@ const [fetchError, setFetchError] = useState(null);
 
   const onNameChange = (e) => {
     props.setName(e.target.value);
-  }
+  };
 
   const customInputName = (
     <div>
       <h2 className={style.titles}>{props.title}</h2>
-      <InputText value={props.name} onChange={onNameChange} placeholder={props.placeholder} />
-      <button onClick={onRandomName} className={style.btnName}>
+      <InputText
+        value={props.name}
+        onChange={onNameChange}
+        placeholder={props.placeholder}
+      />
+      <button
+        onClick={onRandomName}
+        className={style.btnName}
+        title="Generate Random Name"
+      >
         Random
       </button>
     </div>
   );
-    return ( <>{customInputName}</> );
-}
- 
+  return <>{customInputName}</>;
+};
+
 export default CustomName;

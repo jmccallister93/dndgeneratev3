@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 import supabase from "../config/supabaseClient";
+import { Tooltip } from "primereact/tooltip";
+import { Button } from "primereact/button";
 const GenerateButton = (props) => {
   //----PROPS NEEDED----
   //generateItems
@@ -184,7 +186,11 @@ const GenerateButton = (props) => {
 
   return (
     <>
-      <button onClick={onGenerate} className={style.btnGen}>
+      <button
+        onClick={onGenerate}
+        className={style.btnGen}
+        title="Generate All Empty Fields"
+      >
         Generate
       </button>
     </>

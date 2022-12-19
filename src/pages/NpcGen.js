@@ -29,6 +29,8 @@ import { Html2CanvasOptions } from "jspdf";
 import CustomInputDecimal from "../components/CustomInputDecimal";
 import Items from "../components/Items";
 import { Tooltip } from "primereact/tooltip";
+import ToolTip from "../components/ToolTip";
+import InfoModal from "../components/InfoModal";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -163,6 +165,8 @@ const NpcGen = () => {
   const [isExported, setIsExported] = useState(false);
   const [doc, setDoc] = useState(null);
 
+  const [isInfoActive, setIsInfoActive] = useState(false);
+
   // useEffect((tableName, setSingular, setPlural, setOptions) => {
   //   const fetchData = async () => {
   //     const { data: dataName, error: errorName } = await supabase
@@ -204,6 +208,9 @@ const NpcGen = () => {
   };
   const showItems = (e) => {
     setIsItemActive((current) => !current);
+  };
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
   };
 
   //Function to set ability modifier based on ability score
@@ -290,8 +297,18 @@ const NpcGen = () => {
     cha,
   ]);
 
-  //Add tool tip to multipl components
-
+  //Info content
+  const infoContent = (
+    <div className={style.infoContent}>
+      <h2>Info</h2>
+      <p>
+        This is a tool to help you generate NPCs for your games.
+      </p>
+      <p>
+        
+      </p>
+    </div>
+  );
 
   return (
     <div className={style.mainWrapper}>
@@ -302,7 +319,7 @@ const NpcGen = () => {
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
-            id="generateBtn"
+              id="generateBtn"
               generateItems={[
                 race,
                 sex,
@@ -441,11 +458,17 @@ const NpcGen = () => {
           {/* ToolTip */}
           <div className={style.btnWrapper}>
             <div className={style.infoCircle}>
-              <i className="pi pi-info-circle">
+              <i className="pi pi-info-circle"  onClick={showInfo}>
                 <Tooltip
                   target=".pi-info-circle"
                   position="bottom"
                   content="Click for more info"
+                />
+                <InfoModal
+                  header="NPC Generator"
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
                 />
               </i>
             </div>
