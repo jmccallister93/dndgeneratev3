@@ -5,16 +5,16 @@ const AgeHeightWeight = (props) => {
     const [ageMax, setAgeMax] = useState(0);
     const [heightFtMin, setHeightFtMin] = useState(0);
     const [heightFtMax, setHeightFtMax] = useState(0);
+
     const [weightMin, setWeightMin] = useState(0);
     const [weightMax, setWeightMax] = useState(0);
 
 
-    if (props.race) {
+    if (props.generateItems[0]) {
       //props.itemOptions[0][i].name  this is list of all names in array 
-      //props.race this is name of generated race
+      //props.generateItems[0] this is name of generated props.generateItems[0]
   
-          if (props.race === "Aasimar") {
-            // console.log("Aasimar");
+          if (props.generateItems[0] === "Aasimar") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(6);
@@ -22,8 +22,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Deep Gnome") {
-            console.log("Deep Gnome");
+          if (props.generateItems[0] === "Deep Gnome") {
             setAgeMin(20);
             setAgeMax(500);
             setHeightFtMin(3);
@@ -31,7 +30,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(35);
             setWeightMax(50);
           }
-          if (props.race === "Dragonborn") {
+          if (props.generateItems[0] === "Dragonborn") {
             setAgeMin(15);
             setAgeMax(80);
             setHeightFtMin(6);
@@ -39,7 +38,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Duergr") {
+          if (props.generateItems[0] === "Duergr") {
             setAgeMin(20);
             setAgeMax(350);
             setHeightFtMin(4);
@@ -47,7 +46,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(150);
             setWeightMax(250);
           }
-          if (props.race === "Drow") {
+          if (props.generateItems[0] === "Drow") {
             setAgeMin(20);
             setAgeMax(750);
             setHeightFtMin(5);
@@ -55,7 +54,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          if (props.race === "Firbolg") {
+          if (props.generateItems[0] === "Firbolg") {
             setAgeMin(20);
             setAgeMax(750);
             setHeightFtMin(6);
@@ -63,7 +62,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Genasi") {
+          if (props.generateItems[0] === "Genasi") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(6);
@@ -71,7 +70,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Gnome") {
+          if (props.generateItems[0] === "Gnome") {
             setAgeMin(20);
             setAgeMax(500);
             setHeightFtMin(3);
@@ -79,7 +78,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(35);
             setWeightMax(50);
           }
-          if (props.race === "Goblin") {
+          if (props.generateItems[0] === "Goblin") {
             setAgeMin(20);
             setAgeMax(350);
             setHeightFtMin(4);
@@ -87,7 +86,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(150);
             setWeightMax(250);
           }
-          if (props.race === "Goliath") {
+          if (props.generateItems[0] === "Goliath") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(6);
@@ -95,7 +94,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Half-Elf") {
+          if (props.generateItems[0] === "Half-Elf") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(5);
@@ -103,7 +102,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          if (props.race === "Half-Orc") {
+          if (props.generateItems[0] === "Half-Orc") {
             setAgeMin(20);
             setAgeMax(75);
             setHeightFtMin(6);
@@ -111,7 +110,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "High Elf") {
+          if (props.generateItems[0] === "High Elf") {
             setAgeMin(20);
             setAgeMax(750);
             setHeightFtMin(5);
@@ -119,7 +118,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          if (props.race === "Hill Dwarf") {
+          if (props.generateItems[0] === "Hill Dwarf") {
             setAgeMin(20);
             setAgeMax(350);
             setHeightFtMin(4);
@@ -127,7 +126,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(150);
             setWeightMax(250);
           }
-          if (props.race === "Hobgoblin") {
+          if (props.generateItems[0] === "Hobgoblin") {
             setAgeMin(20);
             setAgeMax(350);
             setHeightFtMin(4);
@@ -135,7 +134,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(120);
             setWeightMax(250);
           }
-          if (props.race === "Human") {
+          if (props.generateItems[0] === "Human") {
             setAgeMin(15);
             setAgeMax(80);
             setHeightFtMin(4);
@@ -143,7 +142,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(110);
             setWeightMax(200);
           }
-          if (props.race === "Kenku") {
+          if (props.generateItems[0] === "Kenku") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(5);
@@ -151,7 +150,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          if (props.race === "Kobold") {
+          if (props.generateItems[0] === "Kobold") {
             setAgeMin(20);
             setAgeMax(350);
             setHeightFtMin(3);
@@ -159,7 +158,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(35);
             setWeightMax(50);
           }
-          if (props.race === "Lightfoot Halfling") {
+          if (props.generateItems[0] === "Lightfoot Halfling") {
             setAgeMin(20);
             setAgeMax(150);
             setHeightFtMin(3);
@@ -167,7 +166,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(35);
             setWeightMax(50);
           }
-          if (props.race === "Lizardfolk") {
+          if (props.generateItems[0] === "Lizardfolk") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(6);
@@ -175,7 +174,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Mountain Dwarf") {
+          if (props.generateItems[0] === "Mountain Dwarf") {
             setAgeMin(20);
             setAgeMax(350);
             setHeightFtMin(4);
@@ -183,7 +182,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(150);
             setWeightMax(250);
           }
-          if (props.race === "Orc") {
+          if (props.generateItems[0] === "Orc") {
             setAgeMin(20);
             setAgeMax(75);
             setHeightFtMin(6);
@@ -191,7 +190,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Tabaxi") {
+          if (props.generateItems[0] === "Tabaxi") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(5);
@@ -199,7 +198,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          if (props.race === "Tiefling") {
+          if (props.generateItems[0] === "Tiefling") {
             setAgeMin(18);
             setAgeMax(100);
             setHeightFtMin(5);
@@ -207,7 +206,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          if (props.race === "Triton") {
+          if (props.generateItems[0] === "Triton") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(6);
@@ -215,7 +214,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(175);
             setWeightMax(300);
           }
-          if (props.race === "Stout Halfling") {
+          if (props.generateItems[0] === "Stout Halfling") {
             setAgeMin(20);
             setAgeMax(150);
             setHeightFtMin(3);
@@ -223,7 +222,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(35);
             setWeightMax(50);
           }
-          if (props.race === "Wood Elf") {
+          if (props.generateItems[0] === "Wood Elf") {
             setAgeMin(20);
             setAgeMax(750);
             setHeightFtMin(5);
@@ -231,7 +230,7 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          if (props.race === "Yuan-Ti") {
+          if (props.generateItems[0] === "Yuan-Ti") {
             setAgeMin(20);
             setAgeMax(180);
             setHeightFtMin(5);
@@ -239,8 +238,6 @@ const AgeHeightWeight = (props) => {
             setWeightMin(90);
             setWeightMax(150);
           }
-          console.log(props.race)
-        
       }
     return ( <></> );
 }

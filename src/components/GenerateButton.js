@@ -322,7 +322,10 @@ const GenerateButton = (props) => {
     if (props.ageItem) {
       for (let i = 0; i < props.ageItem.length; i++) {
         if (props.ageItem[i] === "" || props.ageItem[i] === undefined) {
-          let r = Math.floor(Math.random() * (props.ageMax - props.ageMin));
+          let r = Math.floor(
+            Math.random() * (props.ageMax[0] - props.ageMin[0]) +
+              props.ageMin[0]
+          );
           r = r.toString();
           props.setAgeItem[i](r);
         }
@@ -362,7 +365,8 @@ const GenerateButton = (props) => {
       for (let i = 0; i < props.weightItem.length; i++) {
         if (props.weightItem[i] === "" || props.weightItem[i] === undefined) {
           let r = Math.floor(
-            Math.random() * (props.weightMax[0] - props.weightMin[0]) + props.weightMin[0]
+            Math.random() * (props.weightMax[0] - props.weightMin[0]) +
+              props.weightMin[0]
           );
           r = r.toString();
           props.setWeightItem[i](r);
