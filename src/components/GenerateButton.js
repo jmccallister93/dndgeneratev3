@@ -32,6 +32,8 @@ const GenerateButton = (props) => {
     }
   }, [props.selectedItem]);
 
+  //TRY IT HERE MAYBE?
+
   const onGenerate = (e) => {
     //DropDown Generate
     if (props.generateItems) {
@@ -42,6 +44,7 @@ const GenerateButton = (props) => {
         ) {
           let r = Math.floor(Math.random() * props.itemOptions[i].length);
           props.setItem[i](props.itemOptions[i][r].name);
+          console.log(props.generateItems[0].name);
         }
       }
     }
@@ -85,293 +88,296 @@ const GenerateButton = (props) => {
         }
       }
     }
-    //  //Loop through props.generatedItems and find race
-    if (props.itemOptions) {
+
+    if (props.generateItems[0] !== undefined) {
       for (let i = 0; i < props.itemOptions[0].length; i++) {
-        if (props.itemOptions[0][i].name === props.generateItems[0]) {
-          //If name is found, set age, height, and weight based on race name
-          if (props.generateItems[0] === "Aasimar") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Deep Gnome") {
-            props.setAgeMin(20);
-            props.setAgeMax(500);
-            props.setHeightFtMin(3);
-            props.setHeightFtMax(4);
-            props.setWeightMin(35);
-            props.setWeightMax(50);
-          }
-          if (props.generateItems[0] === "Dragonborn") {
-            props.setAgeMin(15);
-            props.setAgeMax(80);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Duergr") {
-            props.setAgeMin(20);
-            props.setAgeMax(350);
-            props.setHeightFtMin(4);
-            props.setHeightFtMax(5);
-            props.setWeightMin(150);
-            props.setWeightMax(250);
-          }
-          if (props.generateItems[0] === "Drow") {
-            props.setAgeMin(20);
-            props.setAgeMax(750);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
-          if (props.generateItems[0] === "Firbolg") {
-            props.setAgeMin(20);
-            props.setAgeMax(750);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Genasi") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Gnome") {
-            props.setAgeMin(20);
-            props.setAgeMax(500);
-            props.setHeightFtMin(3);
-            props.setHeightFtMax(4);
-            props.setWeightMin(35);
-            props.setWeightMax(50);
-          }
-          if (props.generateItems[0] === "Goblin") {
-            props.setAgeMin(20);
-            props.setAgeMax(350);
-            props.setHeightFtMin(4);
-            props.setHeightFtMax(5);
-            props.setWeightMin(150);
-            props.setWeightMax(250);
-          }
-          if (props.generateItems[0] === "Goliath") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Half-Elf") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
-          if (props.generateItems[0] === "Half-Orc") {
-            props.setAgeMin(20);
-            props.setAgeMax(75);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "High Elf") {
-            props.setAgeMin(20);
-            props.setAgeMax(750);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
-          if (props.generateItems[0] === "Hill Dwarf") {
-            props.setAgeMin(20);
-            props.setAgeMax(350);
-            props.setHeightFtMin(4);
-            props.setHeightFtMax(5);
-            props.setWeightMin(150);
-            props.setWeightMax(250);
-          }
-          if (props.generateItems[0] === "Hobgoblin") {
-            props.setAgeMin(20);
-            props.setAgeMax(350);
-            props.setHeightFtMin(4);
-            props.setHeightFtMax(5);
-            props.setWeightMin(120);
-            props.setWeightMax(250);
-          }
-          if (props.generateItems[0] === "Human") {
-            props.setAgeMin(15);
-            props.setAgeMax(80);
-            props.setHeightFtMin(4);
-            props.setHeightFtMax(6);
-            props.setWeightMin(110);
-            props.setWeightMax(200);
-          }
-          if (props.generateItems[0] === "Kenku") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
-          if (props.generateItems[0] === "Kobold") {
-            props.setAgeMin(20);
-            props.setAgeMax(350);
-            props.setHeightFtMin(3);
-            props.setHeightFtMax(4);
-            props.setWeightMin(35);
-            props.setWeightMax(50);
-          }
-          if (props.generateItems[0] === "Lightfoot Halfling") {
-            props.setAgeMin(20);
-            props.setAgeMax(150);
-            props.setHeightFtMin(3);
-            props.setHeightFtMax(4);
-            props.setWeightMin(35);
-            props.setWeightMax(50);
-          }
-          if (props.generateItems[0] === "Lizardfolk") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Mountain Dwarf") {
-            props.setAgeMin(20);
-            props.setAgeMax(350);
-            props.setHeightFtMin(4);
-            props.setHeightFtMax(5);
-            props.setWeightMin(150);
-            props.setWeightMax(250);
-          }
-          if (props.generateItems[0] === "Orc") {
-            props.setAgeMin(20);
-            props.setAgeMax(75);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Tabaxi") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
-          if (props.generateItems[0] === "Tiefling") {
-            props.setAgeMin(18);
-            props.setAgeMax(100);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
-          if (props.generateItems[0] === "Triton") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(6);
-            props.setHeightFtMax(7);
-            props.setWeightMin(175);
-            props.setWeightMax(300);
-          }
-          if (props.generateItems[0] === "Stout Halfling") {
-            props.setAgeMin(20);
-            props.setAgeMax(150);
-            props.setHeightFtMin(3);
-            props.setHeightFtMax(4);
-            props.setWeightMin(35);
-            props.setWeightMax(50);
-          }
-          if (props.generateItems[0] === "Wood Elf") {
-            props.setAgeMin(20);
-            props.setAgeMax(750);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
-          if (props.generateItems[0] === "Yuan-Ti") {
-            props.setAgeMin(20);
-            props.setAgeMax(180);
-            props.setHeightFtMin(5);
-            props.setHeightFtMax(6);
-            props.setWeightMin(90);
-            props.setWeightMax(150);
-          }
+        if (props.generateItems[0] === "Aasimar") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+          console.log("Aasimar");
+        }
+        if (props.generateItems[0] === "Deep Gnome") {
+          props.setAgeMin(20);
+          props.setAgeMax(500);
+          props.setHeightFtMin(3);
+          props.setHeightFtMax(4);
+          props.setWeightMin(35);
+          props.setWeightMax(50);
+          console.log("Deep Gnome");
+        }
+        if (props.generateItems[0] === "Dragonborn") {
+          props.setAgeMin(15);
+          props.setAgeMax(80);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+          console.log("Dragonborn");
+        }
+        if (props.generateItems[0] === "Duergar") {
+          props.setAgeMin(20);
+          props.setAgeMax(350);
+          props.setHeightFtMin(4);
+          props.setHeightFtMax(5);
+          props.setWeightMin(150);
+          props.setWeightMax(250);
+          console.log("Duergar");
+        }
+        if (props.generateItems[0] === "Drow") {
+          props.setAgeMin(20);
+          props.setAgeMax(750);
+          props.setHeightFtMin(5);
+          props.setHeightFtMax(6);
+          props.setWeightMin(90);
+          props.setWeightMax(150);
+          console.log("Drow");
+        }
+        if (props.generateItems[0] === "Firbolg") {
+          props.setAgeMin(20);
+          props.setAgeMax(750);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+          console.log("Firbolg");
+        }
+        if (props.generateItems[0] === "Genasi") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+          console.log("Genasi");
+        }
+        if (props.generateItems[0] === "Gnome") {
+          props.setAgeMin(20);
+          props.setAgeMax(500);
+          props.setHeightFtMin(3);
+          props.setHeightFtMax(4);
+          props.setWeightMin(35);
+          props.setWeightMax(50);
+          console.log("Gnome");
+        }
+        if (props.generateItems[0] === "Goblin") {
+          props.setAgeMin(20);
+          props.setAgeMax(350);
+          props.setHeightFtMin(4);
+          props.setHeightFtMax(5);
+          props.setWeightMin(150);
+          props.setWeightMax(250);
+          console.log("Goblin");
+        }
+        if (props.generateItems[0] === "Goliath") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+          console.log("Goliath");
+        }
+        if (props.generateItems[0] === "Half-Elf") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(5);
+          props.setHeightFtMax(6);
+          props.setWeightMin(90);
+          props.setWeightMax(150);
+          console.log("Half-Elf");
+        }
+        if (props.generateItems[0] === "Half-Orc") {
+          props.setAgeMin(20);
+          props.setAgeMax(75);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+          console.log("Half-Orc");
+        }
+        if (props.generateItems[0] === "High Elf") {
+          props.setAgeMin(20);
+          props.setAgeMax(750);
+          props.setHeightFtMin(5);
+          props.setHeightFtMax(6);
+          props.setWeightMin(90);
+          props.setWeightMax(150);
+          console.log("High Elf");
+        }
+        if (props.generateItems[0] === "Hill Dwarf") {
+          props.setAgeMin(20);
+          props.setAgeMax(350);
+          props.setHeightFtMin(4);
+          props.setHeightFtMax(5);
+          props.setWeightMin(150);
+          props.setWeightMax(250);
+          console.log("Hill Dwarf");
+        }
+        if (props.generateItems[0] === "Hobgoblin") {
+          props.setAgeMin(20);
+          props.setAgeMax(350);
+          props.setHeightFtMin(4);
+          props.setHeightFtMax(5);
+          props.setWeightMin(120);
+          props.setWeightMax(250);
+          console.log("Hobgoblin");
+        }
+        if (props.generateItems[0] === "Human") {
+          props.setAgeMin(15);
+          props.setAgeMax(80);
+          props.setHeightFtMin(4);
+          props.setHeightFtMax(6);
+          props.setWeightMin(110);
+          props.setWeightMax(200);
+          console.log("Human");
+        }
+        if (props.generateItems[0] === "Kenku") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(5);
+          props.setHeightFtMax(6);
+          props.setWeightMin(90);
+          props.setWeightMax(150);
+        }
+        if (props.generateItems[0] === "Kobold") {
+          props.setAgeMin(20);
+          props.setAgeMax(350);
+          props.setHeightFtMin(3);
+          props.setHeightFtMax(4);
+          props.setWeightMin(35);
+          props.setWeightMax(50);
+        }
+        if (props.generateItems[0] === "Lightfoot Halfling") {
+          props.setAgeMin(20);
+          props.setAgeMax(150);
+          props.setHeightFtMin(3);
+          props.setHeightFtMax(4);
+          props.setWeightMin(35);
+          props.setWeightMax(50);
+        }
+        if (props.generateItems[0] === "Lizardfolk") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+        }
+        if (props.generateItems[0] === "Mountain Dwarf") {
+          props.setAgeMin(20);
+          props.setAgeMax(350);
+          props.setHeightFtMin(4);
+          props.setHeightFtMax(5);
+          props.setWeightMin(150);
+          props.setWeightMax(250);
+        }
+        if (props.generateItems[0] === "Orc") {
+          props.setAgeMin(20);
+          props.setAgeMax(75);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+        }
+        if (props.generateItems[0] === "Tabaxi") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(5);
+          props.setHeightFtMax(6);
+          props.setWeightMin(90);
+          props.setWeightMax(150);
+        }
+        if (props.generateItems[0] === "Tiefling") {
+          props.setAgeMin(18);
+          props.setAgeMax(100);
+          props.setHeightFtMin(5);
+          props.setHeightFtMax(6);
+          props.setWeightMin(90);
+          props.setWeightMax(150);
+        }
+        if (props.generateItems[0] === "Triton") {
+          props.setAgeMin(20);
+          props.setAgeMax(180);
+          props.setHeightFtMin(6);
+          props.setHeightFtMax(7);
+          props.setWeightMin(175);
+          props.setWeightMax(300);
+        }
+        if (props.generateItems[0] === "Stout Halfling") {
+          return (
+            setAgeMin(20),
+            setAgeMax(150),
+            setHeightFtMin(3),
+            setHeightFtMax(4),
+            setWeightMin(35),
+            setWeightMax(50)
+          );
+          // props.setAgeMin(20);
+          // props.setAgeMax(150);
+          // props.setHeightFtMin(3);
+          // props.setHeightFtMax(4);
+          // props.setWeightMin(35);
+          // props.setWeightMax(50);
+        }
+        if (props.generateItems[0] === "Wood Elf") {
+          return (
+            setAgeMin(20),
+            setAgeMax(750),
+            setHeightFtMin(5),
+            setHeightFtMax(6),
+            setWeightMin(90),
+            setWeightMax(50)
+          );
+          // props.setAgeMin(20);
+          // props.setAgeMax(750);
+          // props.setHeightFtMin(5);
+          // props.setHeightFtMax(6);
+          // props.setWeightMin(90);
+          // props.setWeightMax(150);
+        }
+        if (props.generateItems[0] === "Yuan-Ti") {
+          setAgeMin(20);
+          setAgeMax(180);
+          setHeightFtMin(5);
+          setHeightFtMax(6);
+          setWeightMin(90);
+          setWeightMax(150);
+          // console.log(weightMax)
+          // props.setAgeMin(20);
+          // props.setAgeMax(180);
+          // props.setHeightFtMin(5);
+          // props.setHeightFtMax(6);
+          // props.setWeightMin(90);
+          // props.setWeightMax(150);
         }
       }
     }
 
-    //Number generate Age
-    if (props.ageItem) {
-      for (let i = 0; i < props.ageItem.length; i++) {
-        if (props.ageItem[i] === "" || props.ageItem[i] === undefined) {
-          let r = Math.floor(
-            Math.random() * (props.ageMax[0] - props.ageMin[0]) +
-              props.ageMin[0]
-          );
-          r = r.toString();
-          props.setAgeItem[i](r);
-        }
-      }
+    if (props.ageItem === "" || props.ageItem === undefined) {
+      let r = Math.floor(Math.random() * (ageMax - ageMin) + ageMin);
+      r = r.toString();
+      props.setAgeItem(r);
     }
-    //Number generate Height
-    if (props.heightFtItem) {
-      for (let i = 0; i < props.heightFtItem.length; i++) {
-        if (
-          props.heightFtItem[i] === "" ||
-          props.heightFtItem[i] === undefined
-        ) {
-          let r = Math.floor(
-            Math.random() * (props.heightFtMax[0] - props.heightFtMin[0]) +
-              props.heightFtMin[0]
-          );
-          r = r.toString();
-          props.setHeightFtItem[i](r);
-        }
-      }
+    if (props.heightFtItem === "" || props.heightFtItem === undefined) {
+      let r = Math.floor(
+        Math.random() * (heightFtMax - heightFtMin) + heightFtMin
+      );
+      r = r.toString();
+      props.setHeightFtItem(r);
     }
-    if (props.heightInItem) {
-      for (let i = 0; i < props.heightInItem.length; i++) {
-        if (
-          props.heightInItem[i] === "" ||
-          props.heightInItem[i] === undefined
-        ) {
-          let r = Math.floor(Math.random() * (12 - 0));
-          r = r.toString();
-          props.setHeightInItem[i](r);
-        }
-      }
+    if (props.heightInItem === "" || props.heightInItem === undefined) {
+      let r = Math.floor(Math.random() * 12);
+      r = r.toString();
+      props.setHeightInItem(r);
     }
-
-    //Number generate Weight
-    if (props.weightItem) {
-      for (let i = 0; i < props.weightItem.length; i++) {
-        if (props.weightItem[i] === "" || props.weightItem[i] === undefined) {
-          let r = Math.floor(
-            Math.random() * (props.weightMax[0] - props.weightMin[0]) +
-              props.weightMin[0]
-          );
-          r = r.toString();
-          props.setWeightItem[i](r);
-        }
-      }
+    if (props.weightItem === "" || props.weightItem === undefined) {
+      let r = Math.floor(Math.random() * (weightMax - weightMin) + weightMin);
+      r = r.toString();
+      props.setWeightItem(r);
     }
 
     //Number generate HP

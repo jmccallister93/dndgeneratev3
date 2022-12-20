@@ -628,6 +628,7 @@ const NpcGen = () => {
       setWeightMin(90);
       setWeightMax(150);
     }
+    
   }, [race]);
 
   return (
@@ -703,20 +704,35 @@ const NpcGen = () => {
               setStatsItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
               statsMax={30}
               statsMin={0}
-              ageItem={[age]}
-              ageMin={[ageMin]}
-              ageMax={[ageMax]}
-              setAgeItem={[setAge]}
-              heightFtItem={[heightFt]}
-              heightFtMin={[heightFtMin]}
-              heightFtMax={[heightFtMax]}
-              heightInItem={[heightIn]}
-              setHeightFtItem={[setHeightFt]}
-              setHeightInItem={[setHeightIn]}
-              weightItem={[weight]}
-              weightMin={[weightMin]}
-              weightMax={[weightMax]}
-              setWeightItem={[setWeight]}
+
+              race={race}
+              setRace={setRace}
+              raceOptions={raceOptions}
+
+              ageItem={age}
+              setAgeItem={setAge}
+              ageMax={ageMax}
+              setAgeMax={setAgeMax}
+              ageMin={ageMin}
+              setAgeMin={setAgeMin}
+
+              heightFtItem={heightFt}
+              setHeightFtItem={setHeightFt}
+              heightFtMax={heightFtMax}
+              setHeightFtMax={setHeightFtMax}
+              heightFtMin={heightFtMin}
+              setHeightFtMin={setHeightFtMin}
+
+              heightInItem={heightIn}
+              setHeightInItem={setHeightIn}
+
+              weightItem={weight}
+              setWeightItem={setWeight}
+              weightMax={weightMax}
+              setWeightMax={setWeightMax}
+              weightMin={weightMin}
+              setWeightMin={setWeightMin}
+              
               hpItem={[hp]}
               setHpItem={[setHp]}
               hpMax={150}
@@ -732,9 +748,7 @@ const NpcGen = () => {
               selectedItemOptions={[itemOptions]}
               selectedItems={[selectedItem]}
               setSelectedItem={[setSelectedItem]}
-              race={race}
-              setRace={setRace}
-              raceOptions={raceOptions}
+              
             />
             <ClearButton
               setStringState={[
@@ -776,6 +790,12 @@ const NpcGen = () => {
                 setWeaponDamage,
                 setWeaponProperties,
                 setWeaponBonus,
+                setHeightFtMax,
+                setHeightFtMin,
+                setHeightInMax,
+                setHeightInMin,
+                setWeightMax,
+                setWeightMin,
               ]}
               setArrayState={[setSelectedItem]}
             />
