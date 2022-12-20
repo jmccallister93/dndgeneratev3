@@ -34,230 +34,8 @@ const GenerateButton = (props) => {
   }, [props.selectedItem]);
 
   useEffect(() => {
-    if (props.generateItems[0] === "Aasimar") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Deep Gnome") {
-      props.setAgeMin(20);
-      props.setAgeMax(500);
-      props.setHeightFtMin(3);
-      props.setHeightFtMax(4);
-      props.setWeightMin(35);
-      props.setWeightMax(50);
-    }
-    if (props.generateItems[0] === "Dragonborn") {
-      props.setAgeMin(15);
-      props.setAgeMax(80);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Duergar") {
-      props.setAgeMin(20);
-      props.setAgeMax(350);
-      props.setHeightFtMin(4);
-      props.setHeightFtMax(5);
-      props.setWeightMin(150);
-      props.setWeightMax(250);
-    }
-    if (props.generateItems[0] === "Drow") {
-      props.setAgeMin(20);
-      props.setAgeMax(750);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
-    if (props.generateItems[0] === "Firbolg") {
-      props.setAgeMin(20);
-      props.setAgeMax(750);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Genasi") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Gnome") {
-      props.setAgeMin(20);
-      props.setAgeMax(500);
-      props.setHeightFtMin(3);
-      props.setHeightFtMax(4);
-      props.setWeightMin(35);
-      props.setWeightMax(50);
-    }
-    if (props.generateItems[0] === "Goblin") {
-      props.setAgeMin(20);
-      props.setAgeMax(350);
-      props.setHeightFtMin(4);
-      props.setHeightFtMax(5);
-      props.setWeightMin(150);
-      props.setWeightMax(250);
-    }
-    if (props.generateItems[0] === "Goliath") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Half-Elf") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
-    if (props.generateItems[0] === "Half-Orc") {
-      props.setAgeMin(20);
-      props.setAgeMax(75);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "High Elf") {
-      props.setAgeMin(20);
-      props.setAgeMax(750);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
-    if (props.generateItems[0] === "Hill Dwarf") {
-      props.setAgeMin(20);
-      props.setAgeMax(350);
-      props.setHeightFtMin(4);
-      props.setHeightFtMax(5);
-      props.setWeightMin(150);
-      props.setWeightMax(250);
-    }
-    if (props.generateItems[0] === "Hobgoblin") {
-      props.setAgeMin(20);
-      props.setAgeMax(350);
-      props.setHeightFtMin(4);
-      props.setHeightFtMax(5);
-      props.setWeightMin(120);
-      props.setWeightMax(250);
-    }
-    if (props.generateItems[0] === "Human") {
-      props.setAgeMin(15);
-      props.setAgeMax(80);
-      props.setHeightFtMin(4);
-      props.setHeightFtMax(6);
-      props.setWeightMin(110);
-      props.setWeightMax(200);
-    }
-    if (props.generateItems[0] === "Kenku") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
-    if (props.generateItems[0] === "Kobold") {
-      props.setAgeMin(20);
-      props.setAgeMax(350);
-      props.setHeightFtMin(3);
-      props.setHeightFtMax(4);
-      props.setWeightMin(35);
-      props.setWeightMax(50);
-    }
-    if (props.generateItems[0] === "Lightfoot Halfling") {
-      props.setAgeMin(20);
-      props.setAgeMax(150);
-      props.setHeightFtMin(3);
-      props.setHeightFtMax(4);
-      props.setWeightMin(35);
-      props.setWeightMax(50);
-    }
-    if (props.generateItems[0] === "Lizardfolk") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Mountain Dwarf") {
-      props.setAgeMin(20);
-      props.setAgeMax(350);
-      props.setHeightFtMin(4);
-      props.setHeightFtMax(5);
-      props.setWeightMin(150);
-      props.setWeightMax(250);
-    }
-    if (props.generateItems[0] === "Orc") {
-      props.setAgeMin(20);
-      props.setAgeMax(75);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Tabaxi") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
-    if (props.generateItems[0] === "Tiefling") {
-      props.setAgeMin(18);
-      props.setAgeMax(100);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
-    if (props.generateItems[0] === "Triton") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(6);
-      props.setHeightFtMax(7);
-      props.setWeightMin(175);
-      props.setWeightMax(300);
-    }
-    if (props.generateItems[0] === "Stout Halfling") {
-      props.setAgeMin(20);
-      props.setAgeMax(150);
-      props.setHeightFtMin(3);
-      props.setHeightFtMax(4);
-      props.setWeightMin(35);
-      props.setWeightMax(50);
-    }
-    if (props.generateItems[0] === "Wood Elf") {
-      props.setAgeMin(20);
-      props.setAgeMax(750);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
-    if (props.generateItems[0] === "Yuan-Ti") {
-      props.setAgeMin(20);
-      props.setAgeMax(180);
-      props.setHeightFtMin(5);
-      props.setHeightFtMax(6);
-      props.setWeightMin(90);
-      props.setWeightMax(150);
-    }
+    console.log(props.generateItems[0]);
+    setHeightAgeWeight()
   }, [props.generateItems[0]]);
 
   //DropDown Generate
@@ -387,321 +165,313 @@ const GenerateButton = (props) => {
     }
   };
   const setHeightAgeWeight = (e) => {
-    let ageMax = 0;
-    let ageMin = 0;
-    let heightFtMax = 0;
-    let heightFtMin = 0;
-    let weightMax = 0;
-    let weightMin = 0;
-
     if (props.generateItems[0] === "Aasimar") {
-      ageMin = 20;
-      ageMax = 180;
-      heightFtMin = 6;
-      heightFtMax = 7;
-      weightMin = 175;
-      weightMax = 300;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Deep Gnome") {
-      ageMin = 20;
-      ageMax = 500;
-      heightFtMin = 3;
-      heightFtMax = 4;
-      weightMin = 35;
-      weightMax = 50;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 500;
+      let heightFtMin = 3;
+      let heightFtMax = 4;
+      let weightMin = 35;
+      let weightMax = 50;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Dragonborn") {
-      ageMin = 15;
-      ageMax = 80;
-      heightFtMin = 6;
-      heightFtMax = 7;
-      weightMin = 175;
-      weightMax = 300;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 15;
+      let ageMax = 80;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Duergar") {
-      ageMin = 20;
-      ageMax = 350;
-      heightFtMin = 4;
-      heightFtMax = 5;
-      weightMin = 150;
-      weightMax = 250;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 350;
+      let heightFtMin = 4;
+      let heightFtMax = 5;
+      let weightMin = 150;
+      let weightMax = 250;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Drow") {
-      ageMin = 20;
-      ageMax = 750;
-      heightFtMin = 5;
-      heightFtMax = 6;
-      weightMin = 90;
-      weightMax = 150;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 750;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Firbolg") {
-      ageMin = 20;
-      ageMax = 750;
-      heightFtMin = 6;
-      heightFtMax = 7;
-      weightMin = 175;
-      weightMax = 300;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 750;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Genasi") {
-      ageMin = 20;
-      ageMax = 180;
-      heightFtMin = 6;
-      heightFtMax = 7;
-      weightMin = 175;
-      weightMax = 300;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Gnome") {
-      ageMin = 20;
-      ageMax = 500;
-      heightFtMin = 3;
-      heightFtMax = 4;
-      weightMin = 35;
-      weightMax = 50;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 500;
+      let heightFtMin = 3;
+      let heightFtMax = 4;
+      let weightMin = 35;
+      let weightMax = 50;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Goblin") {
-
-      ageMin = 20;
-      ageMax = 350;
-      heightFtMin = 4;
-      heightFtMax = 5;
-      weightMin = 150;
-      weightMax = 250;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 350;
+      let heightFtMin = 4;
+      let heightFtMax = 5;
+      let weightMin = 150;
+      let weightMax = 250;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Goliath") {
-      ageMin = 20;
-      ageMax = 180;
-      heightFtMin = 6;
-      heightFtMax = 7;
-      weightMin = 175;
-      weightMax = 300;
-      ageGenerate( ageMin, ageMax);
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
+      ageGenerate(ageMin, ageMax);
       heightGenerate(heightFtMin, heightFtMax);
       weightGenerate(weightMin, weightMax);
     }
     if (props.generateItems[0] === "Half-Elf") {
-      ageMin = 20;
-      ageMax = 180;
-      heightFtMin = 5;
-      heightFtMax = 6;
-      weightMin = 90;
-      weightMax = 150;
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
       weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Half-Orc") {
-      ageMin = 20;
-      ageMax = 75;
-      heightFtMin = 6;
-      heightFtMax = 7;
-      weightMin = 175;
-      weightMax = 300;
+      let ageMin = 20;
+      let ageMax = 75;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
       weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "High Elf") {
-      ageMin = 20;
-      ageMax = 750;
-      heightFtMin = 5;
-      heightFtMax = 6;
-      weightMin = 90;
-      weightMax = 150;
+      let ageMin = 20;
+      let ageMax = 750;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
       weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Hill Dwarf") {
-      ageMin = 20
-      ageMax = 350
-      heightFtMin = 4
-      heightFtMax = 5
-      weightMin = 150
-      weightMax = 250
+      let ageMin = 20;
+      let ageMax = 350;
+      let heightFtMin = 4;
+      let heightFtMax = 5;
+      let weightMin = 150;
+      let weightMax = 250;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Hobgoblin") {
-      ageMin = 20
-      ageMax = 350
-      heightFtMin = 4
-      heightFtMax = 5
-      weightMin = 120
-      weightMax = 250
+      let ageMin = 20;
+      let ageMax = 350;
+      let heightFtMin = 4;
+      let heightFtMax = 5;
+      let weightMin = 120;
+      let weightMax = 250;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Human") {
-      ageMin = 15
-      ageMax = 80
-      heightFtMin = 4
-      heightFtMax = 6
-      weightMin = 110
-      weightMax = 200
+      let ageMin = 15;
+      let ageMax = 80;
+      let heightFtMin = 4;
+      let heightFtMax = 6;
+      let weightMin = 110;
+      let weightMax = 200;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Kenku") {
-      ageMin = 20
-      ageMax = 180
-      heightFtMin = 5
-      heightFtMax = 6
-      weightMin = 90
-      weightMax = 150
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Kobold") {
-      ageMin = 20
-      ageMax = 350
-      heightFtMin = 3
-      heightFtMax = 4
-      weightMin = 35
-      weightMax = 50
+      let ageMin = 20;
+      let ageMax = 350;
+      let heightFtMin = 3;
+      let heightFtMax = 4;
+      let weightMin = 35;
+      let weightMax = 50;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Lightfoot Halfling") {
-      ageMin = 20
-      ageMax = 150
-      heightFtMin = 3
-      heightFtMax = 4
-      weightMin = 35
-      weightMax = 50
+      let ageMin = 20;
+      let ageMax = 150;
+      let heightFtMin = 3;
+      let heightFtMax = 4;
+      let weightMin = 35;
+      let weightMax = 50;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Lizardfolk") {
-      ageMin = 20
-      ageMax = 180
-      heightFtMin = 6
-      heightFtMax = 7
-      weightMin = 175
-      weightMax = 300
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Mountain Dwarf") {
-      ageMin = 20
-      ageMax = 350
-      heightFtMin = 4
-      heightFtMax = 5
-      weightMin = 150
-      weightMax = 250
+      let ageMin = 20;
+      let ageMax = 350;
+      let heightFtMin = 4;
+      let heightFtMax = 5;
+      let weightMin = 150;
+      let weightMax = 250;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Orc") {
-      ageMin = 20
-      ageMax = 75
-      heightFtMin = 6
-      heightFtMax = 7
-      weightMin = 175
-      weightMax = 300
+      let ageMin = 20;
+      let ageMax = 75;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Tabaxi") {
-      ageMin = 20
-      ageMax = 180
-      heightFtMin = 5
-      heightFtMax = 6
-      weightMin = 90
-      weightMax = 150
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Tiefling") {
-      ageMin = 18
-      ageMax = 100
-      heightFtMin = 5
-      heightFtMax = 6
-      weightMin = 90
-      weightMax = 150
+      let ageMin = 18;
+      let ageMax = 100;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Triton") {
-      ageMin = 20
-      ageMax = 180
-      heightFtMin = 6
-      heightFtMax = 7
-      weightMin = 175
-      weightMax = 300
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 6;
+      let heightFtMax = 7;
+      let weightMin = 175;
+      let weightMax = 300;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Stout Halfling") {
-      ageMin = 20
-      ageMax = 150
-      heightFtMin = 3
-      heightFtMax = 4
-      weightMin = 35
-      weightMax = 50
+      let ageMin = 20;
+      let ageMax = 150;
+      let heightFtMin = 3;
+      let heightFtMax = 4;
+      let weightMin = 35;
+      let weightMax = 50;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Wood Elf") {
-      ageMin = 20
-      ageMax = 750
-      heightFtMin = 5
-      heightFtMax = 6
-      weightMin = 90
-      weightMax = 150
+      let ageMin = 20;
+      let ageMax = 750;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
     if (props.generateItems[0] === "Yuan-Ti") {
-      ageMin = 20
-      ageMax = 180
-      heightFtMin = 5
-      heightFtMax = 6
-      weightMin = 90
-      weightMax = 150
+      let ageMin = 20;
+      let ageMax = 180;
+      let heightFtMin = 5;
+      let heightFtMax = 6;
+      let weightMin = 90;
+      let weightMax = 150;
       ageGenerate(ageMax, ageMin);
       heightGenerate(heightFtMax, heightFtMin);
-      weightGenerate(weightMax,weightMin);
+      weightGenerate(weightMax, weightMin);
     }
   };
   //Age Generate
@@ -712,7 +482,9 @@ const GenerateButton = (props) => {
   };
   //Height Generate
   const heightGenerate = (heightFtMax, heightFtMin) => {
-    let r = Math.floor(Math.random() * (heightFtMax - heightFtMin) + heightFtMin);
+    let r = Math.floor(
+      Math.random() * (heightFtMax - heightFtMin) + heightFtMin
+    );
     r = r.toString();
     props.setHeightFtItem(r);
 
@@ -721,10 +493,8 @@ const GenerateButton = (props) => {
     props.setHeightInItem(r1);
   };
   //weight Generate
-  const weightGenerate = (weightMax,weightMin) => {
-    let r = Math.floor(
-      Math.random() * (weightMax - weightMin) + weightMin
-    );
+  const weightGenerate = (weightMax, weightMin) => {
+    let r = Math.floor(Math.random() * (weightMax - weightMin) + weightMin);
     r = r.toString();
     props.setWeightItem(r);
   };
@@ -737,11 +507,6 @@ const GenerateButton = (props) => {
     numberGenerateAC();
     numberGenerateSpeed();
     npcNameGenerate();
-    setHeightAgeWeight();
-
-    // ageGenerate();
-    // heightGenerate();
-    // weightGenerate();
   };
 
   return (
