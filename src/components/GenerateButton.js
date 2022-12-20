@@ -18,12 +18,6 @@ const GenerateButton = (props) => {
   //---PROPS NEEDED----
   const [multipleDisplay, setMultipleDisplay] = useState([]);
   const [fetchError, setFetchError] = useState(null);
-  // const [ageMax, setAgeMax] = useState("");
-  // const [ageMin, setAgeMin] = useState("");
-  // const [heightFtMax, setHeightFtMax] = useState("");
-  // const [heightFtMin, setHeightFtMin] = useState("");
-  // const [weightMax, setWeightMax] = useState("");
-  // const [weightMin, setWeightMin] = useState("");
 
   //Set Multiple Display State
   useEffect(() => {
@@ -33,9 +27,9 @@ const GenerateButton = (props) => {
     }
   }, [props.selectedItem]);
 
+  //Useeffect to set height, age, weight
   useEffect(() => {
-    console.log(props.generateItems[0]);
-    setHeightAgeWeight()
+    setHeightAgeWeight();
   }, [props.generateItems[0]]);
 
   //DropDown Generate
@@ -476,27 +470,34 @@ const GenerateButton = (props) => {
   };
   //Age Generate
   const ageGenerate = (ageMax, ageMin) => {
-    let r = Math.floor(Math.random() * (ageMax - ageMin) + ageMin);
-    r = r.toString();
-    props.setAgeItem(r);
+    if (props.ageItem === "" || props.ageItem === undefined) {
+      let r = Math.floor(Math.random() * (ageMax - ageMin) + ageMin);
+      r = r.toString();
+      props.setAgeItem(r);
+    }
   };
   //Height Generate
   const heightGenerate = (heightFtMax, heightFtMin) => {
-    let r = Math.floor(
-      Math.random() * (heightFtMax - heightFtMin) + heightFtMin
-    );
-    r = r.toString();
-    props.setHeightFtItem(r);
-
-    let r1 = Math.floor(Math.random() * 12);
-    r1 = r1.toString();
-    props.setHeightInItem(r1);
+    if (props.heightFtItem === "" || props.heightFtItem === undefined) {
+      let r = Math.floor(
+        Math.random() * (heightFtMax - heightFtMin) + heightFtMin
+      );
+      r = r.toString();
+      props.setHeightFtItem(r);
+    }
+    if (props.heightInItem === "" || props.heightInItem === undefined) {
+      let r = Math.floor(Math.random() * 12);
+      r = r.toString();
+      props.setHeightInItem(r);
+    }
   };
   //weight Generate
   const weightGenerate = (weightMax, weightMin) => {
-    let r = Math.floor(Math.random() * (weightMax - weightMin) + weightMin);
-    r = r.toString();
-    props.setWeightItem(r);
+    if (props.weightItem === "" || props.weightItem === undefined) {
+      let r = Math.floor(Math.random() * (weightMax - weightMin) + weightMin);
+      r = r.toString();
+      props.setWeightItem(r);
+    }
   };
 
   const onGenerate = (e) => {
