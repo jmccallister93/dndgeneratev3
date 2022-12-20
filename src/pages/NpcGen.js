@@ -32,6 +32,7 @@ import { Tooltip } from "primereact/tooltip";
 import ToolTip from "../components/ToolTip";
 import InfoModal from "../components/InfoModal";
 import NameGenerator from "../components/NameGenerator";
+import AgeHeightWeight from "../components/AgeHeightWeight";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -401,6 +402,233 @@ const NpcGen = () => {
       </p>
     </div>
   );
+  //race options
+  useEffect(() => {
+    if (race === "Aasimar") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Deep Gnome") {
+      setAgeMin(20);
+      setAgeMax(500);
+      setHeightFtMin(3);
+      setHeightFtMax(4);
+      setWeightMin(35);
+      setWeightMax(50);
+    }
+    if (race === "Dragonborn") {
+      setAgeMin(15);
+      setAgeMax(80);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Duergr") {
+      setAgeMin(20);
+      setAgeMax(350);
+      setHeightFtMin(4);
+      setHeightFtMax(5);
+      setWeightMin(150);
+      setWeightMax(250);
+    }
+    if (race === "Drow") {
+      setAgeMin(20);
+      setAgeMax(750);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+    if (race === "Firbolg") {
+      setAgeMin(20);
+      setAgeMax(750);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Genasi") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Gnome") {
+      setAgeMin(20);
+      setAgeMax(500);
+      setHeightFtMin(3);
+      setHeightFtMax(4);
+      setWeightMin(35);
+      setWeightMax(50);
+    }
+    if (race === "Goblin") {
+      setAgeMin(20);
+      setAgeMax(350);
+      setHeightFtMin(4);
+      setHeightFtMax(5);
+      setWeightMin(150);
+      setWeightMax(250);
+    }
+    if (race === "Goliath") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Half-Elf") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+    if (race === "Half-Orc") {
+      setAgeMin(20);
+      setAgeMax(75);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "High Elf") {
+      setAgeMin(20);
+      setAgeMax(750);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+    if (race === "Hill Dwarf") {
+      setAgeMin(20);
+      setAgeMax(350);
+      setHeightFtMin(4);
+      setHeightFtMax(5);
+      setWeightMin(150);
+      setWeightMax(250);
+    }
+    if (race === "Hobgoblin") {
+      setAgeMin(20);
+      setAgeMax(350);
+      setHeightFtMin(4);
+      setHeightFtMax(5);
+      setWeightMin(120);
+      setWeightMax(250);
+    }
+    if (race === "Human") {
+      setAgeMin(15);
+      setAgeMax(80);
+      setHeightFtMin(4);
+      setHeightFtMax(6);
+      setWeightMin(110);
+      setWeightMax(200);
+    }
+    if (race === "Kenku") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+    if (race === "Kobold") {
+      setAgeMin(20);
+      setAgeMax(350);
+      setHeightFtMin(3);
+      setHeightFtMax(4);
+      setWeightMin(35);
+      setWeightMax(50);
+    }
+    if (race === "Lightfoot Halfling") {
+      setAgeMin(20);
+      setAgeMax(150);
+      setHeightFtMin(3);
+      setHeightFtMax(4);
+      setWeightMin(35);
+      setWeightMax(50);
+    }
+    if (race === "Lizardfolk") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Mountain Dwarf") {
+      setAgeMin(20);
+      setAgeMax(350);
+      setHeightFtMin(4);
+      setHeightFtMax(5);
+      setWeightMin(150);
+      setWeightMax(250);
+    }
+    if (race === "Orc") {
+      setAgeMin(20);
+      setAgeMax(75);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Tabaxi") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+    if (race === "Tiefling") {
+      setAgeMin(18);
+      setAgeMax(100);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+    if (race === "Triton") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(6);
+      setHeightFtMax(7);
+      setWeightMin(175);
+      setWeightMax(300);
+    }
+    if (race === "Stout Halfling") {
+      setAgeMin(20);
+      setAgeMax(150);
+      setHeightFtMin(3);
+      setHeightFtMax(4);
+      setWeightMin(35);
+      setWeightMax(50);
+    }
+    if (race === "Wood Elf") {
+      setAgeMin(20);
+      setAgeMax(750);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+    if (race === "Yuan-Ti") {
+      setAgeMin(20);
+      setAgeMax(180);
+      setHeightFtMin(5);
+      setHeightFtMax(6);
+      setWeightMin(90);
+      setWeightMax(150);
+    }
+  }, [race]);
 
   return (
     <div className={style.mainWrapper}>
@@ -476,23 +704,19 @@ const NpcGen = () => {
               statsMax={30}
               statsMin={0}
               ageItem={[age]}
+              ageMin={[ageMin]}
+              ageMax={[ageMax]}
               setAgeItem={[setAge]}
-              ageMax={150}
-              setAgeMax={setAgeMax}
-              ageMin={10}
-              setAgeMin={setAgeMin}
-              heightItem={[heightFt, heightIn]}
-              setHeightItem={[setHeightFt, setHeightIn]}
-              heightMax={12}
-              setHeightFtMax={setHeightFtMax}
-              heightMin={2}
-              setHeightFtMin={setHeightFtMin}
+              heightFtItem={[heightFt]}
+              heightFtMin={[heightFtMin]}
+              heightFtMax={[heightFtMax]}
+              heightInItem={[heightIn]}
+              setHeightFtItem={[setHeightFt]}
+              setHeightInItem={[setHeightIn]}
               weightItem={[weight]}
+              weightMin={[weightMin]}
+              weightMax={[weightMax]}
               setWeightItem={[setWeight]}
-              weightMax={500}
-              setWeightMax={setWeightMax}
-              weightMin={50}
-              setWeightMin={setWeightMin}
               hpItem={[hp]}
               setHpItem={[setHp]}
               hpMax={150}
@@ -508,6 +732,9 @@ const NpcGen = () => {
               selectedItemOptions={[itemOptions]}
               selectedItems={[selectedItem]}
               setSelectedItem={[setSelectedItem]}
+              race={race}
+              setRace={setRace}
+              raceOptions={raceOptions}
             />
             <ClearButton
               setStringState={[
@@ -993,13 +1220,13 @@ const NpcGen = () => {
               {heightIn === "" ? (
                 ""
               ) : (
-              <span className={style.minorText2}>{"in. "}</span>
+                <span className={style.minorText2}>{"in. "}</span>
               )}
               <SingleDisplayText value={weight} setNewValue={setWeight} />
               {weight === "" ? (
                 ""
               ) : (
-              <span className={style.minorText2}>{" lbs."}</span>
+                <span className={style.minorText2}>{" lbs."}</span>
               )}
             </div>
           </h2>
@@ -1202,7 +1429,7 @@ const NpcGen = () => {
             <div>
               <span className={style.minorText2}>
                 <SingleDisplayText value={action} setNewValue={setAction} />{" "}
-                {weaponBonus} 
+                {weaponBonus}
                 {weaponBonus === "" ? "" : " to hit"}
               </span>
             </div>
