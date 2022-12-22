@@ -1,9 +1,12 @@
 import { Card } from "primereact/card";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/Create.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 
 const Create = () => {
+  const [isIndividualActive, setIsIndividualActive] = useState(false);
+
   const cardNpcGen = (
     <Card className={style.createCard}>
       <h3>NPC Generator</h3>
@@ -13,7 +16,6 @@ const Create = () => {
       </p>
     </Card>
   );
-
   const cardItemGen = (
     <Card className={style.createCard}>
       <h3>Item Generator</h3>
@@ -23,7 +25,6 @@ const Create = () => {
       </p>
     </Card>
   );
-
   const cardMonsterGen = (
     <Card className={style.createCard}>
       <h3>Monster Generator</h3>
@@ -37,8 +38,8 @@ const Create = () => {
     <Card className={style.createCard}>
       <h3>Building Generator</h3>
       <p>
-        Generate Taverns, Shops, etc. with the click of a button or customize and hand pick
-        your own!
+        Generate Taverns, Shops, etc. with the click of a button or customize
+        and hand pick your own!
       </p>
     </Card>
   );
@@ -46,8 +47,8 @@ const Create = () => {
     <Card className={style.createCard}>
       <h3>City Generator</h3>
       <p>
-        Generate fully stocked Cities with the click of a button or customize and hand pick
-        your own!
+        Generate fully stocked Cities with the click of a button or customize
+        and hand pick your own!
       </p>
     </Card>
   );
@@ -154,8 +155,8 @@ const Create = () => {
     <Card className={style.createCard}>
       <h3>Encounter Generator</h3>
       <p>
-        Generate Encounters with the click of a button or customize and hand pick
-        your own!
+        Generate Encounters with the click of a button or customize and hand
+        pick your own!
       </p>
     </Card>
   );
@@ -177,70 +178,81 @@ const Create = () => {
       </p>
     </Card>
   );
-
+  const showIndividual = () => {
+    setIsIndividualActive((current) => !current);
+  };
   return (
-    <div className={style.createWrapper}>
+    <div className={style.mainWrapper}>
       <Navbar />
       <h1 className={style.createHeader}>Create</h1>
-      <div className={style.createCardWrapper}>
-        <Link className={style.createLink} to="/npcgen">
-          {cardNpcGen}
-        </Link>
-        <Link className={style.createLink} to="/itemgen">
-          {cardItemGen}
-        </Link>
-        <Link className={style.createLink} to="/monstergen">
-          {cardMonsterGen}
-        </Link>
-        <Link className={style.createLink} to="/buildinggen">
-          {cardBuildingGen}
-        </Link>
-        <Link className={style.createLink} to="/citygen">
-          {cardCityGen}
-        </Link>
-        <Link className={style.createLink} to="/guildgen">
-          {cardGuildGen}
-        </Link>
-        <Link className={style.createLink} to="/factiongen">
-          {cardFactionGen}
-        </Link>
-        <Link className={style.createLink} to="/cultgen">
-          {cardCultGen}
-        </Link>
-        <Link className={style.createLink} to="/worldgen">
-          {cardWorldGen}
-        </Link>
-        <Link className={style.createLink} to="/questgen">
-          {cardQuestGen}
-        </Link>
-        <Link className={style.createLink} to="/villaingen">
-          {cardVillainGen}
-        </Link>
-        <Link className={style.createLink} to="/pantheongen">
-          {cardPantheonGen}
-        </Link>
-        <Link className={style.createLink} to="/spellgen">
-          {cardSpellGen}
-        </Link>
-        <Link className={style.createLink} to="/dungeongen">
-          {cardDungeonGen}
-        </Link>
-        <Link className={style.createLink} to="/trapgen">
-          {cardTrapGen}
-        </Link>
-        <Link className={style.createLink} to="/puzzlegen">
-          {cardPuzzleGen}
-        </Link>
-        <Link className={style.createLink} to="/encountergen">
-          {cardEncounterGen}
-        </Link>
-        <Link className={style.createLink} to="/classgen">
-          {cardClassGen}
-        </Link>
-        <Link className={style.createLink} to="/racegen">
-          {cardRaceGen}
-        </Link>
-      </div>
+      <h1 className={style.subHeader} onClick={showIndividual}>
+        Individual Items {" "}
+              {isIndividualActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+      </h1>
+        <div className={isIndividualActive ? style.createCardWrapper : style.hidden}>
+          <Link className={style.createLink} to="/npcgen">
+            {cardNpcGen}
+          </Link>
+          <Link className={style.createLink} to="/itemgen">
+            {cardItemGen}
+          </Link>
+          <Link className={style.createLink} to="/monstergen">
+            {cardMonsterGen}
+          </Link>
+          <Link className={style.createLink} to="/buildinggen">
+            {cardBuildingGen}
+          </Link>
+          <Link className={style.createLink} to="/citygen">
+            {cardCityGen}
+          </Link>
+          <Link className={style.createLink} to="/guildgen">
+            {cardGuildGen}
+          </Link>
+          <Link className={style.createLink} to="/factiongen">
+            {cardFactionGen}
+          </Link>
+          <Link className={style.createLink} to="/cultgen">
+            {cardCultGen}
+          </Link>
+          <Link className={style.createLink} to="/worldgen">
+            {cardWorldGen}
+          </Link>
+          <Link className={style.createLink} to="/questgen">
+            {cardQuestGen}
+          </Link>
+          <Link className={style.createLink} to="/villaingen">
+            {cardVillainGen}
+          </Link>
+          <Link className={style.createLink} to="/pantheongen">
+            {cardPantheonGen}
+          </Link>
+          <Link className={style.createLink} to="/spellgen">
+            {cardSpellGen}
+          </Link>
+          <Link className={style.createLink} to="/dungeongen">
+            {cardDungeonGen}
+          </Link>
+          <Link className={style.createLink} to="/trapgen">
+            {cardTrapGen}
+          </Link>
+          <Link className={style.createLink} to="/puzzlegen">
+            {cardPuzzleGen}
+          </Link>
+          <Link className={style.createLink} to="/encountergen">
+            {cardEncounterGen}
+          </Link>
+          <Link className={style.createLink} to="/classgen">
+            {cardClassGen}
+          </Link>
+          <Link className={style.createLink} to="/racegen">
+            {cardRaceGen}
+          </Link>
+        </div>
+      
     </div>
   );
 };
