@@ -606,27 +606,36 @@ const NpcGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[name, race, sex, align, age, heightFt, heightIn, weight]}
+              value={[
+                race, 
+                sex, 
+                align, 
+                // age, 
+                // heightFt, 
+                // heightIn, 
+                // weight
+              ]}
               valueOptions={[
-                nameOptions,
                 raceOptions,
                 sexOptions,
                 alignOptions,
-                ageOptions,
-                heightFtOptions,
-                heightInOptions,
-                weightOptions,
+                // ageOptions,
+                // heightFtOptions,
+                // heightInOptions,
+                // weightOptions,
               ]}
               setValue={[
-                setName,
                 setRace,
                 setSex,
                 setAlign,
-                setAge,
-                setHeightFt,
-                setHeightIn,
-                setWeight,
+                // setAge,
+                // setHeightFt,
+                // setHeightIn,
+                // setWeight,
               ]}
+              nameItem={[name]}
+              nameItemOptions={[nameOptions]}
+              setNameItem={[setName]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
@@ -979,9 +988,18 @@ const NpcGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[hp, ac, speed]}
-              valueOptions={[hpOptions, acOptions, speedOptions]}
-              setValue={[setHp, setAc, setSpeed]}
+              hpItem={[hp]}
+              setHpItem={[setHp]}
+              hpMax={150}
+              hpMin={5}
+              acItem={[ac]}
+              setAcItem={[setAc]}
+              acMax={30}
+              acMin={5}
+              speedItem={[speed]}
+              setSpeedItem={[setSpeed]}
+              speedMax={12}
+              speedMin={6}
             />
           </div>
           <div className={isStatsActive ? style.subsection : style.hidden}>
@@ -1019,9 +1037,10 @@ const NpcGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[str, dex, con, int, wis, cha]}
-              // valueOptions={[strOptions, dexOptions, conOptions, intOptions, wisOptions, chaOptions]}
-              setValue={[setStr, setDex, setCon, setInt, setWis, setCha]}
+              statValue={[str, dex, con, int, wis, cha]}
+              statMax={30}
+              statMin={1}
+              setStatValue={[setStr, setDex, setCon, setInt, setWis, setCha]}
             />
           </div>
           <div className={isScoresActive ? style.subsection : style.hidden}>
@@ -1088,7 +1107,7 @@ const NpcGen = () => {
               setSelectedValue={[setSelectedItem]}
               selectedValueList={[itemList]}
               setSelectedValueList={[setItemList]}
-              />
+            />
           </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
