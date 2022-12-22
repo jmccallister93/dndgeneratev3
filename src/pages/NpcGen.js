@@ -33,6 +33,7 @@ import ToolTip from "../components/ToolTip";
 import InfoModal from "../components/InfoModal";
 import NameGenerator from "../components/NameGenerator";
 import AgeHeightWeight from "../components/AgeHeightWeight";
+import SectionRandom from "../components/SectionRandom";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -476,35 +477,29 @@ const NpcGen = () => {
               setStatsItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
               statsMax={30}
               statsMin={0}
-
               race={race}
               setRace={setRace}
               raceOptions={raceOptions}
-
               ageItem={age}
               setAgeItem={setAge}
               ageMax={ageMax}
               setAgeMax={setAgeMax}
               ageMin={ageMin}
               setAgeMin={setAgeMin}
-
               heightFtItem={heightFt}
               setHeightFtItem={setHeightFt}
               heightFtMax={heightFtMax}
               setHeightFtMax={setHeightFtMax}
               heightFtMin={heightFtMin}
               setHeightFtMin={setHeightFtMin}
-
               heightInItem={heightIn}
               setHeightInItem={setHeightIn}
-
               weightItem={weight}
               setWeightItem={setWeight}
               weightMax={weightMax}
               setWeightMax={setWeightMax}
               weightMin={weightMin}
               setWeightMin={setWeightMin}
-              
               hpItem={[hp]}
               setHpItem={[setHp]}
               hpMax={150}
@@ -520,7 +515,6 @@ const NpcGen = () => {
               selectedItemOptions={[itemOptions]}
               selectedItems={[selectedItem]}
               setSelectedItem={[setSelectedItem]}
-              
             />
             <ClearButton
               setStringState={[
@@ -756,9 +750,16 @@ const NpcGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showDetails}>
-            Details
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showDetails}>
+              Details
+            </h1>
+            <SectionRandom
+              value={[prof, feature, talent, mannerism, interaction, bond]}
+              valueOptions={[profOptions, featureOptions, talentOptions, mannerismOptions, interactionOptions, bondOptions]}
+              setValue={[setProf, setFeature, setTalent, setMannerism, setInteraction, setBond]}
+            />
+          </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
@@ -968,7 +969,7 @@ const NpcGen = () => {
                 valueOptions={actionOptions}
               />
               <Items
-                h1Title={"Invnetory"}
+                h1Title={"Inventory"}
                 dialogHeader={"Items"}
                 selectedItem={selectedItem}
                 setSelectedItem={setSelectedItem}

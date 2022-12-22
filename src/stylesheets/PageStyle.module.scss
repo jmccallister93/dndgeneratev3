@@ -224,6 +224,14 @@ $btn-blue: #2196f3;
   border-radius: 1rem;
 }
 
+.sectionOption{
+  display: flex;
+  align-items: center;
+  & button{
+    height: 3rem;
+  }
+}
+
 .subHeader {
   color: $primary-grey;
   background-color: white;
