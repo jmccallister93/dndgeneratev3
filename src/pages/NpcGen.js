@@ -978,6 +978,11 @@ const NpcGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
+            <SectionRandom
+              value={[hp, ac, speed]}
+              valueOptions={[hpOptions, acOptions, speedOptions]}
+              setValue={[setHp, setAc, setSpeed]}
+            />
           </div>
           <div className={isStatsActive ? style.subsection : style.hidden}>
             <div>
@@ -1013,6 +1018,11 @@ const NpcGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
+            <SectionRandom
+              value={[str, dex, con, int, wis, cha]}
+              // valueOptions={[strOptions, dexOptions, conOptions, intOptions, wisOptions, chaOptions]}
+              setValue={[setStr, setDex, setCon, setInt, setWis, setCha]}
+            />
           </div>
           <div className={isScoresActive ? style.subsection : style.hidden}>
             <div>
@@ -1069,6 +1079,14 @@ const NpcGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
+            <SectionRandom
+              value={[action]}
+              valueOptions={[actionOptions]}
+              setValue={[setAction]}
+              selectedValue={[selectedItem]}
+              selectedValueOptions={[itemOptions]}
+              setSelectedValue={[setSelectedItem]}
+              />
           </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
