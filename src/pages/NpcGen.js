@@ -1086,6 +1086,8 @@ const NpcGen = () => {
               selectedValue={[selectedItem]}
               selectedValueOptions={[itemOptions]}
               setSelectedValue={[setSelectedItem]}
+              selectedValueList={[itemList]}
+              setSelectedValueList={[setItemList]}
               />
           </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
