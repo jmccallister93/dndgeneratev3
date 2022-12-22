@@ -26,6 +26,7 @@ import ClassGen from "./pages/ClassGen";
 import RaceGen from "./pages/RaceGen";
 import PantheonGen from "./pages/PantheonGen";
 import Campaign from "./pages/Campaign";
+import ModuleGen from "./pages/ModuleGen";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="*" element={<Home />} />
           <Route path="/create" element={<Create />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/about" element={<About />} />
@@ -60,6 +62,7 @@ function App() {
           <Route path="/classgen" element={<ClassGen />} />
           <Route path="/racegen" element={<RaceGen />} />
           <Route path="/campaign" element={<Campaign />} />
+          <Route path="/modulegen" element={<ModuleGen />} />
         </Routes>
       </BrowserRouter>
     </div>

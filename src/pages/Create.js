@@ -6,6 +6,7 @@ import style from "../stylesheets/PageStyle.module.scss";
 
 const Create = () => {
   const [isIndividualActive, setIsIndividualActive] = useState(false);
+  const [isModuleActive, setIsModuleActive] = useState(false);
 
   const cardNpcGen = (
     <Card className={style.createCard}>
@@ -178,22 +179,39 @@ const Create = () => {
       </p>
     </Card>
   );
+  const cardModuleGen = (
+    <Card className={style.createCard}>
+      <h3>Module Generator</h3>
+      <p>
+        Generate Modules with the click of a button or customize and hand pick
+        your own!
+      </p>
+    </Card>
+  );
   const showIndividual = () => {
     setIsIndividualActive((current) => !current);
+  };
+  const showModule = () => {
+    setIsModuleActive((current) => !current);
   };
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <h1 className={style.createHeader}>Create</h1>
-      <h1 className={style.subHeader} onClick={showIndividual}>
-        Individual Items {" "}
-              {isIndividualActive ? (
-                <i className="pi pi-chevron-down"></i>
-              ) : (
-                <i className="pi pi-chevron-right"></i>
-              )}
-      </h1>
-        <div className={isIndividualActive ? style.createCardWrapper : style.hidden}>
+      <div className={style.createWrapper}>
+        <h1 className={style.subHeader} onClick={showIndividual}>
+          Individual Items{" "}
+          {isIndividualActive ? (
+            <i className="pi pi-chevron-down"></i>
+          ) : (
+            <i className="pi pi-chevron-right"></i>
+          )}
+        </h1>
+        <div
+          className={
+            isIndividualActive ? style.createCardWrapper : style.hidden
+          }
+        >
           <Link className={style.createLink} to="/npcgen">
             {cardNpcGen}
           </Link>
@@ -252,7 +270,24 @@ const Create = () => {
             {cardRaceGen}
           </Link>
         </div>
-      
+        <h1 className={style.subHeader} onClick={showModule}>
+          Module{" "}
+          {isModuleActive ? (
+            <i className="pi pi-chevron-down"></i>
+          ) : (
+            <i className="pi pi-chevron-right"></i>
+          )}
+        </h1>
+        <div
+          className={
+            isModuleActive ? style.createCardWrapper : style.hidden
+          }
+        >
+          <Link className={style.createLink} to="/modulegen">
+            {cardModuleGen}
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
