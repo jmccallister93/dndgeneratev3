@@ -596,9 +596,39 @@ const NpcGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>NPC Options</h1>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[name, race, sex, align, age, heightFt, heightIn, weight]}
+              valueOptions={[
+                nameOptions,
+                raceOptions,
+                sexOptions,
+                alignOptions,
+                ageOptions,
+                heightFtOptions,
+                heightInOptions,
+                weightOptions,
+              ]}
+              setValue={[
+                setName,
+                setRace,
+                setSex,
+                setAlign,
+                setAge,
+                setHeightFt,
+                setHeightIn,
+                setWeight,
+              ]}
+            />
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
@@ -677,9 +707,42 @@ const NpcGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showFeatures}>
-            Features
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showFeatures}>
+              Features{" "}
+              {isFeaturesActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[
+                hairColor,
+                hairType,
+                eyeColor,
+                skinColor,
+                beardStyle,
+                hairStyle,
+              ]}
+              valueOptions={[
+                hairColorOptions,
+                hairTypeOptions,
+                eyeColorOptions,
+                skinColorOptions,
+                beardStyleOptions,
+                hairStyleOptions,
+              ]}
+              setValue={[
+                setHairColor,
+                setHairType,
+                setEyeColor,
+                setSkinColor,
+                setBeardStyle,
+                setHairStyle,
+              ]}
+            />
+          </div>
           <div className={isFeaturesActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
@@ -752,12 +815,31 @@ const NpcGen = () => {
           </div>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showDetails}>
-              Details
+              Details{" "}
+              {isDetailActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
             </h1>
             <SectionRandom
               value={[prof, feature, talent, mannerism, interaction, bond]}
-              valueOptions={[profOptions, featureOptions, talentOptions, mannerismOptions, interactionOptions, bondOptions]}
-              setValue={[setProf, setFeature, setTalent, setMannerism, setInteraction, setBond]}
+              valueOptions={[
+                profOptions,
+                featureOptions,
+                talentOptions,
+                mannerismOptions,
+                interactionOptions,
+                bondOptions,
+              ]}
+              setValue={[
+                setProf,
+                setFeature,
+                setTalent,
+                setMannerism,
+                setInteraction,
+                setBond,
+              ]}
             />
           </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
@@ -830,9 +912,21 @@ const NpcGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showHook}>
-            Hook
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showHook}>
+              Hook{" "}
+              {isHookActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[questType]}
+              valueOptions={[questTypeOptions]}
+              setValue={[setQuestType]}
+            />
+          </div>
           <div className={isHookActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
@@ -875,9 +969,16 @@ const NpcGen = () => {
                 : "Error"} */}
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showStats}>
-            Stats
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showStats}>
+              Stats{" "}
+              {isStatsActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+          </div>
           <div className={isStatsActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputNumber
@@ -903,9 +1004,16 @@ const NpcGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showScores}>
-            Ability Scores
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showScores}>
+              Ability Scores{" "}
+              {isScoresActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+          </div>
           <div className={isScoresActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputNumber
@@ -952,9 +1060,16 @@ const NpcGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showItems}>
-            Items
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showItems}>
+              Items{" "}
+              {isItemActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+          </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
