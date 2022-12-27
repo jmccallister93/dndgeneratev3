@@ -357,6 +357,18 @@ const SectionRandom = (props) => {
     }
   };
   //Number Generate HP
+  const numberGenerate = (e) => {
+    if (props.numberItem) {
+      for (let i = 0; i < props.numberItem.length; i++) {
+        let r = Math.floor(
+          Math.random() * (props.numberMax - props.numberMin) + props.numberMin
+        );
+        r = r.toString();
+        props.setNumberItem[i](r);
+      }
+    }
+  };
+  //Number Generate HP
   const numberGenerateHP = (e) => {
     if (props.hpItem) {
       for (let i = 0; i < props.hpItem.length; i++) {
@@ -433,6 +445,7 @@ const SectionRandom = (props) => {
     numberGenerateAC();
     numberGenerateSpeed();
     npcNameGenerate();
+    numberGenerate();
   };
 
   return (
