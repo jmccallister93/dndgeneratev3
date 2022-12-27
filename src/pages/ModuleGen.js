@@ -47,6 +47,30 @@ const ModuleGen = () => {
 
   const [fetchError, setFetchError] = useState(false);
 
+  const [catalyst, setCatalyst] = useState("");
+  const [catalysts, setCatalysts] = useState("");
+  const [catalystOptions, setCatalystOptions] = useState("");
+
+  const [effected, setEffected] = useState("");
+  const [effecteds, setEffecteds] = useState("");
+  const [effectedOptions, setEffectedOptions] = useState("");
+
+  const [resolved, setResolved] = useState("");
+  const [resolveds, setResolveds] = useState("");
+  const [resolvedOptions, setResolvedOptions] = useState("");
+
+  const [location, setLocation] = useState("");
+  const [locations, setLocations] = useState("");
+  const [locationOptions, setLocationOptions] = useState("");
+
+  const [cause, setCause] = useState("");
+  const [causes, setCauses] = useState("");
+  const [causeOptions, setCauseOptions] = useState("");
+
+  const [resolution, setResolution] = useState("");
+  const [resolutions, setResolutions] = useState("");
+  const [resolutionOptions, setResolutionOptions] = useState("");
+
   const [name, setName] = useState("");
   const [names, setNames] = useState("");
   const [nameOptions, setNameOptions] = useState("");
@@ -392,158 +416,18 @@ const ModuleGen = () => {
           <div className={style.btnWrapper}>
             {/* Generate Clear Btns */}
             <GenerateButton
-              generateItems={[
-                race,
-                sex,
-                align,
-                hairColor,
-                hairType,
-                hairStyle,
-                beardStyle,
-                eyeColor,
-                skinColor,
-                prof,
-                feature,
-                talent,
-                mannerism,
-                interaction,
-                bond,
-                questType,
-                action,
-              ]}
-              itemOptions={[
-                raceOptions,
-                sexOptions,
-                alignOptions,
-                hairColorOptions,
-                hairTypeOptions,
-                hairStyleOptions,
-                beardStyleOptions,
-                eyeColorOptions,
-                skinColorOptions,
-                profOptions,
-                featureOptions,
-                talentOptions,
-                mannerismOptions,
-                interactionOptions,
-                bondOptions,
-                questTypeOptions,
-                actionOptions,
-              ]}
-              setItem={[
-                setRace,
-                setSex,
-                setAlign,
-                setHairColor,
-                setHairType,
-                setHairStyle,
-                setBeardStyle,
-                setEyeColor,
-                setSkinColor,
-                setProf,
-                setFeature,
-                setTalent,
-                setMannerism,
-                setInteraction,
-                setBond,
-                setQuestType,
-                setAction,
-              ]}
-              nameItem={[name]}
-              nameItemOptions={[nameOptions]}
-              setNameItem={[setName]}
-              statsItem={[str, dex, con, int, wis, cha]}
-              setStatsItem={[setStr, setDex, setCon, setInt, setWis, setCha]}
-              statsMax={30}
-              statsMin={0}
-              race={race}
-              setRace={setRace}
-              raceOptions={raceOptions}
-              ageItem={age}
-              setAgeItem={setAge}
-              ageMax={ageMax}
-              setAgeMax={setAgeMax}
-              ageMin={ageMin}
-              setAgeMin={setAgeMin}
-              heightFtItem={heightFt}
-              setHeightFtItem={setHeightFt}
-              heightFtMax={heightFtMax}
-              setHeightFtMax={setHeightFtMax}
-              heightFtMin={heightFtMin}
-              setHeightFtMin={setHeightFtMin}
-              heightInItem={heightIn}
-              setHeightInItem={setHeightIn}
-              weightItem={weight}
-              setWeightItem={setWeight}
-              weightMax={weightMax}
-              setWeightMax={setWeightMax}
-              weightMin={weightMin}
-              setWeightMin={setWeightMin}
-              hpItem={[hp]}
-              setHpItem={[setHp]}
-              hpMax={150}
-              hpMin={5}
-              acItem={[ac]}
-              setAcItem={[setAc]}
-              acMax={30}
-              acMin={5}
-              speedItem={[speed]}
-              setSpeedItem={[setSpeed]}
-              speedMax={12}
-              speedMin={6}
-              selectedItemOptions={[itemOptions]}
-              selectedItems={[selectedItem]}
-              setSelectedItem={[setSelectedItem]}
+              generateItems={[]}
+              itemOptions={[]}
+              setItem={[]}
+              nameItem={[]}
+              nameItemOptions={[]}
+              setNameItem={[]}
+              statsItem={[]}
+              selectedItemOptions={[]}
+              selectedItems={[]}
+              setSelectedItem={[]}
             />
-            <ClearButton
-              setStringState={[
-                setAlign,
-                setAge,
-                setBond,
-                setFeature,
-                setInt,
-                setInteraction,
-                setMannerism,
-                setName,
-                setProf,
-                setFeature,
-                setRace,
-                setSex,
-                setTalent,
-                setCha,
-                setCon,
-                setDex,
-                setInt,
-                setWis,
-                setStr,
-                setQuestType,
-                setHook,
-                setHeightFt,
-                setHeightIn,
-                setWeight,
-                setAc,
-                setHp,
-                setSpeed,
-                setHairColor,
-                setHairStyle,
-                setEyeColor,
-                setSkinColor,
-                setHairType,
-                setBeardStyle,
-                setAction,
-                setWeapon,
-                setWeaponDamage,
-                setWeaponProperties,
-                setWeaponBonus,
-                setHeightFtMax,
-                setHeightFtMin,
-                setHeightInMax,
-                setHeightInMin,
-                setWeightMax,
-                setWeightMin,
-              ]}
-              setArrayState={[setSelectedItem]}
-            />
+            <ClearButton setStringState={[]} setArrayState={[]} />
             {/* Export Btns */}
             <h1>
               Export
@@ -560,7 +444,7 @@ const ModuleGen = () => {
                   content="How To Use Guide"
                 />
                 <InfoModal
-                  header={"NPC Generator Info"}
+                  header={"Module Generator Info"}
                   content={infoContent}
                   visible={isInfoActive}
                   setVisible={setIsInfoActive}
@@ -574,10 +458,10 @@ const ModuleGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <h1>NPC Options</h1>
+          <h1>Module Options</h1>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showBasics}>
-              Basic Info{" "}
+              Story{" "}
               {isBasicActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
@@ -585,119 +469,88 @@ const ModuleGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[
-                race, 
-                sex, 
-                align, 
-                // age, 
-                // heightFt, 
-                // heightIn, 
-                // weight
-              ]}
-              valueOptions={[
-                raceOptions,
-                sexOptions,
-                alignOptions,
-                // ageOptions,
-                // heightFtOptions,
-                // heightInOptions,
-                // weightOptions,
-              ]}
-              setValue={[
-                setRace,
-                setSex,
-                setAlign,
-                // setAge,
-                // setHeightFt,
-                // setHeightIn,
-                // setWeight,
-              ]}
-              nameItem={[name]}
-              nameItemOptions={[nameOptions]}
-              setNameItem={[setName]}
+              value={[]}
+              valueOptions={[]}
+              setValue={[]}
+              nameItem={[]}
+              nameItemOptions={[]}
+              setNameItem={[]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomName
-                tableName={"names"}
-                name={name}
-                setName={setName}
-                setNames={setNames}
-                setNameOptions={setNameOptions}
-                nameOptions={nameOptions}
-                title={"Name"}
-                placeholder={"Set Name"}
+            <CustomDropDown
+                tableName={"moduleCatalysts"}
+                setSingular={setCatalyst}
+                setPlural={setCatalysts}
+                setOptions={setCatalystOptions}
+                options={catalystOptions}
+                h1Title={"Catalyst"}
+                placeholder={"Set Catalyst"}
+                value={catalyst}
+                valueOptions={catalystOptions}
               />
               <CustomDropDown
                 tableName={"races"}
-                setSingular={setRace}
-                setPlural={setRaces}
-                setOptions={setRaceOptions}
-                options={raceOptions}
-                h1Title={"Race"}
-                placeholder={"Set Race"}
-                value={race}
-                valueOptions={raceOptions}
+                setSingular={setEffected}
+                setPlural={setEffecteds}
+                setOptions={setEffectedOptions}
+                options={effectedOptions}
+                h1Title={"Effected"}
+                placeholder={"Set Effected"}
+                value={effected}
+                valueOptions={effectedOptions}
               />
               <CustomDropDown
-                tableName={"sexes"}
-                setSingular={setSex}
-                setPlural={setSexs}
-                setOptions={setSexOptions}
-                options={sexOptions}
-                h1Title={"Sex"}
-                placeholder={"Set Sex"}
-                value={sex}
-                valueOptions={sexOptions}
+                tableName={"races"}
+                setSingular={setResolved}
+                setPlural={setResolveds}
+                setOptions={setResolvedOptions}
+                options={resolvedOptions}
+                h1Title={"Resolved"}
+                placeholder={"Set Resolved"}
+                value={resolved}
+                valueOptions={resolvedOptions}
               />
-              <CustomInputNumber
-                setSingular={setAge}
-                h1Title={"Age"}
-                value={age}
-                placeholder={"Set Age"}
-                maxNumber={1000}
-                minNumber={0}
-              />
-              <CustomInputNumber
-                setSingular={setHeightFt}
-                h1Title={"Height"}
-                value={heightFt}
-                placeholder={"Set Ft."}
-                maxNumber={12}
-                minNumber={1}
-              />
-              <CustomInputNumber
-                setSingular={setHeightIn}
-                value={heightIn}
-                placeholder={"Set In."}
-                maxNumber={12}
-                minNumber={1}
-              />
-              <CustomInputNumber
-                setSingular={setWeight}
-                h1Title={"Weight"}
-                value={weight}
-                placeholder={"Set Weight"}
-                maxNumber={300}
-                minNumber={1}
+               <CustomDropDown
+                tableName={"races"}
+                setSingular={setLocation}
+                setPlural={setLocations}
+                setOptions={setLocationOptions}
+                options={locationOptions}
+                h1Title={"Location"}
+                placeholder={"Set Location"}
+                value={location}
+                valueOptions={locationOptions}
               />
               <CustomDropDown
-                tableName={"aligns"}
-                setSingular={setAlign}
-                setPlural={setAligns}
-                setOptions={setAlignOptions}
-                options={alignOptions}
-                h1Title={"Alignment"}
-                placeholder={"Set Alignment"}
-                value={align}
-                valueOptions={alignOptions}
+                tableName={"races"}
+                setSingular={setCause}
+                setPlural={setCauses}
+                setOptions={setCauseOptions}
+                options={causeOptions}
+                h1Title={"Cause"}
+                placeholder={"Set Cause"}
+                value={cause}
+                valueOptions={causeOptions}
               />
+               <CustomDropDown
+                tableName={"races"}
+                setSingular={setResolution}
+                setPlural={setResolutions}
+                setOptions={setResolutionOptions}
+                options={resolutionOptions}
+                h1Title={"Resolution"}
+                placeholder={"Set Resolution"}
+                value={resolution}
+                valueOptions={resolutionOptions}
+              />
+              
             </div>
           </div>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showFeatures}>
-              Features{" "}
+              World{" "}
               {isFeaturesActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
@@ -928,33 +781,6 @@ const ModuleGen = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-              {/* {questType === "None"
-                ? ""
-                : questType === "Bounty"
-                ? "Bounty"
-                : questType === "Capture"
-                ? "Capture"
-                : questType === "Delivery"
-                ? "Delivery"
-                : questType === "Escort"
-                ? "Escort"
-                : questType === "Exploration"
-                ? "Exploration"
-                : questType === "Gather"
-                ? "Gather"
-                : questType === "Investigation"
-                ? "Investigation"
-                : questType === "Kill"
-                ? "Kill"
-                : questType === "Negotiation"
-                ? "Negotiation"
-                : questType === "Protect"
-                ? "Protect"
-                : questType === "Rescue"
-                ? "Rescue"
-                : questType === "Custom"
-                ? "Custom"
-                : "Error"} */}
             </div>
           </div>
           <div className={style.sectionOption}>
