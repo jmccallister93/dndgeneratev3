@@ -239,150 +239,6 @@ const ModuleGen = () => {
     setIsInfoActive((current) => !current);
   };
 
-  //Function to set ability modifier based on ability score
-  const setMod = (score) => {
-    if (score === "0" || score === "1") {
-      return "(-5)";
-    } else if (score === "2" || score === "3") {
-      return "(-4)";
-    } else if (score === "4" || score === "5") {
-      return "(-3)";
-    } else if (score === "6" || score === "7") {
-      return "(-2)";
-    } else if (score === "8" || score === "9") {
-      return "(-1)";
-    } else if (score === "10" || score === "11") {
-      return "(+0)";
-    } else if (score === "12" || score === "13") {
-      return "(+1)";
-    } else if (score === "14" || score === "15") {
-      return "(+2)";
-    } else if (score === "16" || score === "17") {
-      return "(+3)";
-    } else if (score === "18" || score === "19") {
-      return "(+4)";
-    } else if (score === "20" || score === "21") {
-      return "(+5)";
-    } else if (score === "22" || score === "23") {
-      return "(+6)";
-    } else if (score === "24" || score === "25") {
-      return "(+7)";
-    } else if (score === "26" || score === "27") {
-      return "(+8)";
-    } else if (score === "28" || score === "29") {
-      return "(+9)";
-    } else if (score === "30") {
-      return "(+10)";
-    }
-  };
-
-  //Create npc object to be exported
-  useEffect(() => {
-    const npc = {
-      name: name,
-      race: race,
-      sex: sex,
-      age: age,
-      height: [heightFt, heightIn],
-      weight: weight,
-      align: align,
-      prof: prof,
-      feature: feature,
-      talent: talent,
-      mannerism: mannerism,
-      interaction: interaction,
-      bond: bond,
-      questType: questType,
-      hook: hook,
-      str: str,
-      dex: dex,
-      con: con,
-      int: int,
-      wis: wis,
-      cha: cha,
-    };
-    setNpc(npc);
-  }, [
-    name,
-    race,
-    sex,
-    align,
-    prof,
-    feature,
-    talent,
-    mannerism,
-    interaction,
-    bond,
-    questType,
-    hook,
-    str,
-    dex,
-    con,
-    int,
-    wis,
-    cha,
-  ]);
-
-  //Pull damage field from itemsWeapons table in database
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data: dataName, error: errorName } = await supabase
-        .from("itemsWeapons")
-        .select();
-      if (errorName) {
-        setFetchError("Could not fetch the data");
-        console.log(errorName);
-        setWeapons(null);
-      }
-      if (dataName) {
-        setWeapons(dataName);
-        setFetchError(null);
-        setWeaponOptions(
-          dataName.map((r) => ({
-            name: r.name,
-            value: r.damage,
-            type: r.type,
-            properties: r.properties,
-          }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  //Match action name to weapon damage
-  useEffect(() => {
-    if (action !== "") {
-      const matchWeapon = (action) => {
-        const weapon = weapons.find((w) => w.name === action);
-        if (weapon) {
-          return weapon.damage;
-        }
-      };
-      const matchProperties = (action) => {
-        const weapon = weapons.find((w) => w.name === action);
-        if (weapon) {
-          return weapon.properties;
-        }
-      };
-      const matchBonus = (action) => {
-        const weapon = weapons.find((w) => w.name === action);
-        if (weapon) {
-          //If weapon type contains "melee" return str mod else return dex mod
-          if (weapon.type.includes("Melee")) {
-            return setMod(str);
-          }
-          if (weapon.type.includes("Ranged")) {
-            return setMod(dex);
-          }
-        }
-      };
-      setWeaponDamage(matchWeapon(action));
-      setWeaponProperties(matchProperties(action));
-      setWeaponBonus(matchBonus(action));
-    }
-  }, [action]);
-
   //Info content
   const infoContent = (
     <div className={style.infoContent}>
@@ -460,6 +316,24 @@ const ModuleGen = () => {
         <div className={style.optionsWrapper}>
           <h1>Module Options</h1>
           <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showFeatures}>
+              World{" "}
+              {isFeaturesActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+
+            />
+          </div>
+          <div className={isFeaturesActive ? style.subsection : style.hidden}>
+            <div>
+
+            </div>
+          </div>
+          <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showBasics}>
               Story{" "}
               {isBasicActive ? (
@@ -490,6 +364,29 @@ const ModuleGen = () => {
                 value={catalyst}
                 valueOptions={catalystOptions}
               />
+              {catalyst === "Captures" ? "Who is captured?" :
+              catalyst === "Corruption" ? "What or who is corrupted?" :
+              catalyst === "Death" ? "Who died?" :
+              catalyst === "Destruction" ? "What is destroyed?" :
+              catalyst === "Discovery" ? "What is discovered?" :
+              catalyst === "Disease" ? "What is diseased?" :
+              catalyst === "Dispute" ? "What is disputed?" :
+              catalyst === "Fued" ? "Who is feuding?" :
+              catalyst === "Gain of powers" ? "Who gains power?" :
+              catalyst === "Loss of powers" ? "Who loses power?" :
+              catalyst === "Miracle" ? "What is the miracle?" :
+              catalyst === "Missing" ? "What or Who is missing?" :
+              catalyst === "Monster" ? "What is the monster?" :
+              catalyst === "Natural Catastrophe" ? "What is the catastrophe?" :
+              catalyst === "Political" ? "What is the political issue?" :
+              catalyst === "Possesions" ? "Who is possessed?" :
+              catalyst === "Raid" ? "Who is raiding?" :
+              catalyst === "Rebellion" ? "Who is rebelling?" :
+              catalyst === "Religion" ? "What is the religious issue?" :
+              catalyst === "Summonings" ? "What is being summoned?" :
+              catalyst === "Theft" ? "What is being stolen?" :
+              catalyst === "War" ? "Who is at war?" : 
+              "None of the above"}
               <CustomDropDown
                 tableName={"races"}
                 setSingular={setEffected}
@@ -548,112 +445,7 @@ const ModuleGen = () => {
               
             </div>
           </div>
-          <div className={style.sectionOption}>
-            <h1 className={style.subHeader} onClick={showFeatures}>
-              World{" "}
-              {isFeaturesActive ? (
-                <i className="pi pi-chevron-down"></i>
-              ) : (
-                <i className="pi pi-chevron-right"></i>
-              )}
-            </h1>
-            <SectionRandom
-              value={[
-                hairColor,
-                hairType,
-                eyeColor,
-                skinColor,
-                beardStyle,
-                hairStyle,
-              ]}
-              valueOptions={[
-                hairColorOptions,
-                hairTypeOptions,
-                eyeColorOptions,
-                skinColorOptions,
-                beardStyleOptions,
-                hairStyleOptions,
-              ]}
-              setValue={[
-                setHairColor,
-                setHairType,
-                setEyeColor,
-                setSkinColor,
-                setBeardStyle,
-                setHairStyle,
-              ]}
-            />
-          </div>
-          <div className={isFeaturesActive ? style.subsection : style.hidden}>
-            <div>
-              <CustomDropDown
-                tableName={"colors"}
-                setSingular={setHairColor}
-                setPlural={setHairColors}
-                setOptions={setHairColorOptions}
-                options={hairColorOptions}
-                h1Title={"Hair"}
-                placeholder={"Set Color"}
-                value={hairColor}
-                valueOptions={hairColorOptions}
-              />
-              <CustomDropDown
-                tableName={"hairType"}
-                setSingular={setHairType}
-                setPlural={setHairTypes}
-                setOptions={setHairTypeOptions}
-                options={hairTypeOptions}
-                // h1Title={"Hair Type"}
-                placeholder={"Set Type"}
-                value={hairType}
-                valueOptions={hairTypeOptions}
-              />
-              <CustomDropDown
-                tableName={"hairStyle"}
-                setSingular={setHairStyle}
-                setPlural={setHairStyles}
-                setOptions={setHairStyleOptions}
-                options={hairStyleOptions}
-                // h1Title={"Hair Style"}
-                placeholder={"Set Style"}
-                value={hairStyle}
-                valueOptions={hairStyleOptions}
-              />
-              <CustomDropDown
-                tableName={"beardStyle"}
-                setSingular={setBeardStyle}
-                setPlural={setBeardStyles}
-                setOptions={setBeardStyleOptions}
-                options={beardStyleOptions}
-                h1Title={"Beard Style"}
-                placeholder={"Set Style"}
-                value={beardStyle}
-                valueOptions={beardStyleOptions}
-              />
-              <CustomDropDown
-                tableName={"eyeColor"}
-                setSingular={setEyeColor}
-                setPlural={setEyeColors}
-                setOptions={setEyeColorOptions}
-                options={eyeColorOptions}
-                h1Title={"Eye Color"}
-                placeholder={"Set Eye Color"}
-                value={eyeColor}
-                valueOptions={eyeColorOptions}
-              />
-              <CustomDropDown
-                tableName={"colors"}
-                setSingular={setSkinColor}
-                setPlural={setSkinColors}
-                setOptions={setSkinColorOptions}
-                options={skinColorOptions}
-                h1Title={"Skin Color"}
-                placeholder={"Set Skin Color"}
-                value={skinColor}
-                valueOptions={skinColorOptions}
-              />
-            </div>
-          </div>
+          
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showDetails}>
               Details{" "}
@@ -664,93 +456,12 @@ const ModuleGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[prof, feature, talent, mannerism, interaction, bond]}
-              valueOptions={[
-                profOptions,
-                featureOptions,
-                talentOptions,
-                mannerismOptions,
-                interactionOptions,
-                bondOptions,
-              ]}
-              setValue={[
-                setProf,
-                setFeature,
-                setTalent,
-                setMannerism,
-                setInteraction,
-                setBond,
-              ]}
+        
             />
           </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropDown
-                tableName={"professions"}
-                setSingular={setProf}
-                setPlural={setProfs}
-                setOptions={setProfOptions}
-                options={profOptions}
-                h1Title={"Profession"}
-                placeholder={"Set Profession"}
-                value={prof}
-                valueOptions={profOptions}
-              />
-              <CustomDropDown
-                tableName={"features"}
-                setSingular={setFeature}
-                setPlural={setFeatures}
-                setOptions={setFeatureOptions}
-                options={featureOptions}
-                h1Title={"Unique Feature"}
-                placeholder={"Set Features"}
-                value={feature}
-                valueOptions={featureOptions}
-              />
-              <CustomDropDown
-                tableName={"talents"}
-                setSingular={setTalent}
-                setPlural={setTalents}
-                setOptions={setTalentOptions}
-                options={talentOptions}
-                h1Title={"Talent"}
-                placeholder={"Set Talent"}
-                value={talent}
-                valueOptions={talentOptions}
-              />
-              <CustomDropDown
-                tableName={"mannerisms"}
-                setSingular={setMannerism}
-                setPlural={setMannerisms}
-                setOptions={setMannerismOptions}
-                options={mannerismOptions}
-                h1Title={"Mannerism"}
-                placeholder={"Set Mannerism"}
-                value={mannerism}
-                valueOptions={mannerismOptions}
-              />
-              <CustomDropDown
-                tableName={"interactions"}
-                setSingular={setInteraction}
-                setPlural={setInteractions}
-                setOptions={setInteractionOptions}
-                options={interactionOptions}
-                h1Title={"Interaction"}
-                placeholder={"Set Interaction"}
-                value={interaction}
-                valueOptions={interactionOptions}
-              />
-              <CustomDropDown
-                tableName={"bonds"}
-                setSingular={setBond}
-                setPlural={setBonds}
-                setOptions={setBondOptions}
-                options={bondOptions}
-                h1Title={"Bond"}
-                placeholder={"Set Bond"}
-                value={bond}
-                valueOptions={bondOptions}
-              />
+              
             </div>
           </div>
           <div className={style.sectionOption}>
@@ -763,24 +474,14 @@ const ModuleGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[questType]}
-              valueOptions={[questTypeOptions]}
-              setValue={[setQuestType]}
+              value={[]}
+              valueOptions={[]}
+              setValue={[]}
             />
           </div>
           <div className={isHookActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropDown
-                tableName={"questTypes"}
-                setSingular={setQuestType}
-                setPlural={setQuestTypes}
-                setOptions={setQuestTypeOptions}
-                options={questTypeOptions}
-                h1Title={"Quest Type"}
-                placeholder={"Set Quest Type"}
-                value={questType}
-                valueOptions={questTypeOptions}
-              />
+        
             </div>
           </div>
           <div className={style.sectionOption}>
@@ -793,43 +494,12 @@ const ModuleGen = () => {
               )}
             </h1>
             <SectionRandom
-              hpItem={[hp]}
-              setHpItem={[setHp]}
-              hpMax={150}
-              hpMin={5}
-              acItem={[ac]}
-              setAcItem={[setAc]}
-              acMax={30}
-              acMin={5}
-              speedItem={[speed]}
-              setSpeedItem={[setSpeed]}
-              speedMax={12}
-              speedMin={6}
+           
             />
           </div>
           <div className={isStatsActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputNumber
-                setSingular={setHp}
-                h1Title={"Hit Points"}
-                value={hp}
-                placeholder={"Set HP"}
-                maxNumber={300}
-              />
-              <CustomInputNumber
-                setSingular={setAc}
-                h1Title={"Armor Class"}
-                value={ac}
-                placeholder={"Set AC"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setSpeed}
-                h1Title={"Speed"}
-                value={speed}
-                placeholder={"Set Speed"}
-                maxNumber={300}
-              />
+              
             </div>
           </div>
           <div className={style.sectionOption}>
@@ -842,56 +512,12 @@ const ModuleGen = () => {
               )}
             </h1>
             <SectionRandom
-              statValue={[str, dex, con, int, wis, cha]}
-              statMax={30}
-              statMin={1}
-              setStatValue={[setStr, setDex, setCon, setInt, setWis, setCha]}
+              
             />
           </div>
           <div className={isScoresActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputNumber
-                setSingular={setStr}
-                h1Title={"Strength"}
-                value={str}
-                placeholder={"Set STR"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setDex}
-                h1Title={"Dexterity"}
-                value={dex}
-                placeholder={"Set DEX"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setCon}
-                h1Title={"Constitution"}
-                value={con}
-                placeholder={"Set CON"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setInt}
-                h1Title={"Intelligence"}
-                value={int}
-                placeholder={"Set INT"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setWis}
-                h1Title={"Wisdom"}
-                value={wis}
-                placeholder={"Set WIS"}
-                maxNumber={30}
-              />
-              <CustomInputNumber
-                setSingular={setCha}
-                h1Title={"Charisma"}
-                value={cha}
-                placeholder={"Set CHA"}
-                maxNumber={30}
-              />
+           
             </div>
           </div>
           <div className={style.sectionOption}>
@@ -904,40 +530,12 @@ const ModuleGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[action]}
-              valueOptions={[actionOptions]}
-              setValue={[setAction]}
-              selectedValue={[selectedItem]}
-              selectedValueOptions={[itemOptions]}
-              setSelectedValue={[setSelectedItem]}
-              selectedValueList={[itemList]}
-              setSelectedValueList={[setItemList]}
+             
             />
           </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropDown
-                tableName={"itemsWeapons"}
-                setSingular={setAction}
-                setPlural={setActions}
-                setOptions={setActionOptions}
-                options={actionOptions}
-                h1Title={"Weapon Aciton"}
-                placeholder={"Set Weapon"}
-                value={action}
-                valueOptions={actionOptions}
-              />
-              <Items
-                h1Title={"Inventory"}
-                dialogHeader={"Items"}
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-                itemList={itemList}
-                setItemList={setItemList}
-                valueOptions={itemOptions}
-                setItemOptions={setItemOptions}
-                options={itemOptions}
-              />
+              
             </div>
           </div>
         </div>
@@ -1086,95 +684,7 @@ const ModuleGen = () => {
               {speed === "" ? "" : " ft."}
             </span>
           </h2>
-          <hr className={style.lineBreak} />
-          <h3 className={style.abilityScores}>
-            <div>
-              <h3>STR</h3>
-              <div>
-                <span className={style.minorText2}>
-                  <SingleDisplayNumber
-                    value={str}
-                    setNewValue={setStr}
-                    min={0}
-                    max={30}
-                  />{" "}
-                  {setMod(str)}
-                </span>
-              </div>
-            </div>
-            <div>
-              <h3>DEX</h3>
-              <div>
-                <span className={style.minorText2}>
-                  <SingleDisplayNumber
-                    value={dex}
-                    setNewValue={setDex}
-                    min={0}
-                    max={30}
-                  />{" "}
-                  {setMod(dex)}
-                </span>
-              </div>
-            </div>
-            <div>
-              <h3>CON</h3>
-              <div>
-                <span className={style.minorText2}>
-                  <SingleDisplayNumber
-                    value={con}
-                    setNewValue={setCon}
-                    min={0}
-                    max={30}
-                  />{" "}
-                  {setMod(con)}
-                </span>
-              </div>
-            </div>
-          </h3>
-          <h3 className={style.abilityScores}>
-            <div>
-              <h3>INT</h3>
-              <div>
-                <span className={style.minorText2}>
-                  <SingleDisplayNumber
-                    value={int}
-                    setNewValue={setInt}
-                    min={0}
-                    max={30}
-                  />{" "}
-                  {setMod(int)}
-                </span>
-              </div>
-            </div>
-            <div>
-              <h3>WIS</h3>
-              <div>
-                <span className={style.minorText2}>
-                  <SingleDisplayNumber
-                    value={wis}
-                    setNewValue={setWis}
-                    min={0}
-                    max={30}
-                  />{" "}
-                  {setMod(wis)}
-                </span>
-              </div>
-            </div>
-            <div>
-              <h3>CHA</h3>
-              <div>
-                <span className={style.minorText2}>
-                  <SingleDisplayNumber
-                    value={cha}
-                    setNewValue={setCha}
-                    min={0}
-                    max={30}
-                  />{" "}
-                  {setMod(cha)}
-                </span>
-              </div>
-            </div>
-          </h3>
+                
           <hr className={style.lineBreak} />
           <h2>Action </h2>
           <h2 className={style.abilityScores}>
