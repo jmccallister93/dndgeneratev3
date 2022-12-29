@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import supabase from "../config/supabaseClient";
 import CustomInputNumber from "./CustomInputNumber";
 
-const WorldGenComp = (props) => {
+const GenWorld = (props) => {
   const [worldName, setWorldName] = useState("");
   const [worldNames, setWorldNames] = useState("");
   const [worldNameOptions, setWorldNameOptions] = useState("");
@@ -289,4 +289,4 @@ const WorldGenComp = (props) => {
   );
 };
 
-export default WorldGenComp;
+export default GenWorld;

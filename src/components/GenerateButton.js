@@ -500,6 +500,24 @@ const GenerateButton = (props) => {
     }
   };
 
+  //General Number generate
+  const numberGenerate = () => {
+    console.log(props.numberItem)
+    if (props.numberItem) {
+      
+        for (let i = 0; i < props.numberItem.length; i++) {
+          if (props.numberItem[i] === "" || props.numberItem[i] === undefined){
+          let r = Math.floor(
+            Math.random() * (props.maxNumber[i] - props.minNumber[i]) +
+              props.minNumber[i]
+          );
+          r = r.toString();
+          props.setNumberItem[i](r);
+        }
+      }
+    }
+  };
+
   const onGenerate = (e) => {
     dropDownGenerate();
     dataTableGenerate();
@@ -508,6 +526,8 @@ const GenerateButton = (props) => {
     numberGenerateAC();
     numberGenerateSpeed();
     npcNameGenerate();
+
+    numberGenerate();
   };
 
   return (

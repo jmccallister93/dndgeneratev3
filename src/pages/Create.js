@@ -199,15 +199,14 @@ const Create = () => {
       <Navbar />
       <h1 className={style.createHeader}>Create</h1>
       <div className={style.createWrapper}>
-        <h1 className={style.subHeader} onClick={showIndividual}>
+        <h1 className={style.subHeader2} onClick={showIndividual}>
           Individual Items{" "}
           {isIndividualActive ? (
             <i className="pi pi-chevron-down"></i>
           ) : (
             <i className="pi pi-chevron-right"></i>
           )}
-        </h1>
-        <div
+          <div
           className={
             isIndividualActive ? style.createCardWrapper : style.hidden
           }
@@ -270,6 +269,7 @@ const Create = () => {
             {cardRaceGen}
           </Link>
         </div>
+        </h1>
         <h1 className={style.subHeader} onClick={showModule}>
           Module{" "}
           {isModuleActive ? (

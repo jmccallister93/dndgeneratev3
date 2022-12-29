@@ -248,6 +248,22 @@ $btn-blue: #2196f3;
   }
 }
 
+.subHeader2{
+  color: $primary-grey;
+  background-color: white;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid $header-color;
+  width: fit-content;
+  box-shadow: 5px 5px 5px 2px $primary-grey;
+  transition: 0.3s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px green;
+    scale: 1.1;
+  }
+}
+
 .subsection {
   display: flex;
   flex-direction: column;

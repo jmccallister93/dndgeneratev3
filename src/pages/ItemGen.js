@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/ItemGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import styleB from "../stylesheets/BuildingGen.module.scss";
 import supabase from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -30,6 +30,8 @@ import SingleRandomButton from "../components/SingleRandomButton";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDropdown from "../components/CustomDropDown";
 import CustomDataTable from "../components/CustomDataTable";
+import GenerateButton from "../components/GenerateButton";
+import CustomName from "../components/CustomName";
 
 const ItemGen = () => {
   // Set state variables
@@ -44,6 +46,8 @@ const ItemGen = () => {
   const [allItems, setAllItems] = useState();
 
   const [itemName, setItemName] = useState("");
+  const [itemNames, setItemNames] = useState("");
+  const [itemNameOptions, setItemNameOptions] = useState();
 
   const [adventuringGear, setAdventuringGear] = useState();
   const [adventuringGearOptions, setAdventuringGearOptions] = useState();
@@ -119,6 +123,19 @@ const ItemGen = () => {
   const [additionalOptions, setAdditionalOptions] = useState();
 
   const [weaponDmg, setWeaponDmg] = useState("");
+
+  const [dice, setDice] = useState("");
+  const [dices, setDices] = useState("");
+  const [diceOptions, setDiceOptions] = useState();
+
+  const [diceCount, setDiceCount] = useState("");
+  const [diceCounts, setDiceCounts] = useState("");
+  const [diceCountOptions, setDiceCountOptions] = useState();
+
+  const [diceBonus, setDiceBonus] = useState("");
+  const [diceBonuses, setDiceBonuses] = useState("");
+  const [diceBonusOptions, setDiceBonusOptions] = useState();
+
   const [weaponType, setWeaponType] = useState("");
   const [weaponTypes, setWeaponTypes] = useState("");
   const [weaponTypeOptions, setWeaponTypeOptions] = useState("");
@@ -501,12 +518,67 @@ const ItemGen = () => {
       <Navbar />
       <div className={styleB.topHeader}>
         <h1 className={styleB.mainHeader}>Item Generator</h1>
-        {/* Generate Btns */}
-        <div>
+        <div className={style.topWrapper}>
           <div className={styleB.btnWrapper}>
-            <button onClick={onGenerate} className={styleB.btnGen}>
-              Generate
-            </button>
+            {/* Generate Clear Btns */}
+            <GenerateButton
+              generateItems={[
+                type,
+                rarity,
+                currency,
+                dmgType,
+                dice,
+                weaponType,
+                // weaponProperty,
+                armorMod,
+              ]}
+              itemOptions={[
+                typeOptions,
+                rarityOptions,
+                currencyOptions,
+                dmgTypeOptions,
+                diceOptions,
+                weaponTypeOptions,
+                // weaponPropertyOptions,
+                armorModOptions,
+              ]}
+              setItem={[
+                setType,
+                setRarity,
+                setCurrency,
+                setDmgType,
+                setDice,
+                setWeaponType,
+                // setWeaponProperty,
+                setArmorMod,
+              ]}
+              numberItem={[
+                currencyValue,
+                weight,
+                diceCount,
+                diceBonus,
+                mountSpeed,
+                mountCapacity,
+                vehicleSpeed,
+                vehicleCapacity,
+                armorAc,
+                armorStr,
+              ]}
+              setNumberItem={[
+                setCurrencyValue,
+                setWeight,
+                setDiceCount,
+                setDiceBonus,
+                setMountSpeed,
+                setMountCapacity,
+                setVehicleSpeed,
+                setVehicleCapacity,
+                setArmorAc,
+                setArmorStr,
+              ]}
+              maxNumber={[9999, 2000, 10, 20, 500, 2000, 500, 10000, 25, 20]}
+              minNumber={[1, 1, 1, 0, 5, 50, 5, 50, 10, 5]}
+            />
             <ClearButton
               setStringState={[
                 setItemName,
@@ -516,7 +588,9 @@ const ItemGen = () => {
                 setCurrencyValue,
                 setWeight,
                 setDescription,
-                setWeaponDmg,
+                setDiceCount,
+                setDice,
+                setDiceBonus,
                 setWeaponProperty,
                 setWeaponType,
                 setDmgType,
@@ -529,7 +603,6 @@ const ItemGen = () => {
                 setMountSpeed,
                 setMountCapacity,
                 setItemDesc,
-                
               ]}
               setArrayState={[setItemList, setSelectedItem]}
             />
@@ -544,11 +617,16 @@ const ItemGen = () => {
           </h1>
           <div className={isBasicActive ? style.subsection : styleB.hidden}>
             <div>
-              <h1>Name</h1>
-              <InputText placeholder="Name" onChange={onNameChange} />
-              <button className={style.itemgenBtnName}>Random</button>
-            </div>
-            <div>
+              <CustomName
+                tableName={"names"}
+                name={itemName}
+                setName={setItemName}
+                setNames={setItemNames}
+                setNameOptions={setItemNameOptions}
+                nameOptions={itemNameOptions}
+                title={"Name"}
+                placeholder={"Set Name"}
+              />
               <CustomDropdown
                 tableName={"itemsTypes"}
                 setSingular={setType}
@@ -559,7 +637,6 @@ const ItemGen = () => {
                 value={type}
                 valueOptions={typeOptions}
               />
-              <SingleRandomButton options={typeOptions} setSingluar={setType} />
             </div>
             <div>
               <CustomDropdown
@@ -572,30 +649,16 @@ const ItemGen = () => {
                 value={rarity}
                 valueOptions={rarityOptions}
               />
-              <SingleRandomButton options={rarityOptions} setSingular={setRarity} />
             </div>
             <div>
               <h1>Cost</h1>
-              <InputNumber
+              <CustomInputNumber
+                setSingular={setCurrencyValue}
                 value={currencyValue}
-                onChange={onCurrencyValueChange}
-                placeholder="Value"
-                mode="decimal"
-                showButtons
-                buttonLayout="currency"
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
+                placeholder={"Set Value"}
+                maxNumber={10000}
+                minNumber={1}
               />
-              <button
-                className={style.itemgenBtnName}
-                onClick={onRandomCurrencyValue}
-              >
-                Random
-              </button>
               <CustomDropdown
                 tableName={"itemsCurrencies"}
                 setSingular={setCurrency}
@@ -605,27 +668,16 @@ const ItemGen = () => {
                 value={currency}
                 valueOptions={currencyOptions}
               />
-              <SingleRandomButton options={currencyOptions} setSingluar={setCurrency} />
             </div>
             <div>
-              <h1>Weight</h1>
-              <InputNumber
+              <CustomInputNumber
+                setSingular={setWeight}
+                h1Title={"Weight"}
                 value={weight}
-                onChange={onWeightChange}
-                placeholder="Weight"
-                mode="decimal"
-                showButtons
-                buttonLayout="currency"
-                decrementButtonClassName="p-button-secondary"
-                incrementButtonClassName="p-button-secondary"
-                incrementButtonIcon="pi pi-plus"
-                decrementButtonIcon="pi pi-minus"
-                minFractionDigits={0}
-                maxFractionDigits={2}
+                placeholder={"Set Weight"}
+                maxNumber={10000}
+                minNumber={1}
               />
-              <button className={style.itemgenBtnName} onClick={onRandomWeight}>
-                Random
-              </button>
             </div>
             <h1 className={styleB.subHeader} onClick={showAdditional}>
               Additional Info
@@ -643,19 +695,30 @@ const ItemGen = () => {
                   }
                 >
                   <div>
-                    <InputText
-                      value={weaponDmg}
-                      mode="decimal"
-                      showButtons
-                      buttonLayout="currency"
-                      placeholder="Damage Amount"
+                    <CustomInputNumber
+                      setSingular={setDiceCount}
+                      value={diceCount}
+                      placeholder={"Dice Count"}
+                      h1Title={"Damage Dice"}
+                      maxNumber={10}
+                      minNumber={1}
                     />
-                    <button
-                      className={style.itemgenBtnName}
-                      onClick={onRandomWeaponDmg}
-                    >
-                      Random
-                    </button>
+                    <CustomDropdown
+                      tableName={"diceOptions"}
+                      setSingular={setDice}
+                      setPlural={setDices}
+                      setOptions={setDiceOptions}
+                      placeholder={"Dice Type"}
+                      value={dice}
+                      valueOptions={diceOptions}
+                    />
+                    <CustomInputNumber
+                      setSingular={setDiceBonus}
+                      value={diceBonus}
+                      placeholder={"Dmg Bonus"}
+                      maxNumber={20}
+                      minNumber={0}
+                    />
                     <CustomDropdown
                       tableName={"damageTypes"}
                       setSingular={setDmgType}
@@ -665,10 +728,6 @@ const ItemGen = () => {
                       placeholder={"Set Damage Type"}
                       value={dmgType}
                       valueOptions={dmgTypeOptions}
-                    />
-                    <SingleRandomButton
-                      options={dmgTypeOptions}
-                      setSingluar={setDmgType}
                     />
                     <CustomDropdown
                       tableName={"itemsWeaponTypes"}
@@ -680,11 +739,6 @@ const ItemGen = () => {
                       value={weaponType}
                       valueOptions={weaponTypeOptions}
                     />
-                    <SingleRandomButton
-                      options={weaponTypeOptions}
-                      setSingular={setWeaponType}
-                    />
-                    {/*TODO Multiple Weapon Properties  */}
                     <CustomDropdown
                       tableName={"itemsWeaponProperties"}
                       setSingular={setWeaponProperty}
@@ -694,10 +748,6 @@ const ItemGen = () => {
                       placeholder={"Set Weapon Property"}
                       value={weaponProperty}
                       valueOptions={weaponPropertyOptions}
-                    />
-                    <SingleRandomButton
-                      options={weaponPropertyOptions}
-                      setSingluar={setWeaponProperty}
                     />
                   </div>
                 </div>
@@ -709,51 +759,23 @@ const ItemGen = () => {
                   }
                 >
                   <div className={style.subsection}>
-                    <h1>Vehicle Speed</h1>
                     <div>
-                      <InputNumber
+                      <CustomInputNumber
+                        setSingular={setVehicleSpeed}
+                        h1Title={"Speed"}
                         value={vehicleSpeed}
-                        placeholder="Speed"
-                        mode="decimal"
-                        showButtons
-                        buttonLayout="currency"
-                        decrementButtonClassName="p-button-secondary"
-                        incrementButtonClassName="p-button-secondary"
-                        incrementButtonIcon="pi pi-plus"
-                        decrementButtonIcon="pi pi-minus"
-                        minFractionDigits={0}
-                        maxFractionDigits={3}
-                        step={5}
+                        placeholder={"Speed"}
+                        maxNumber={2000}
+                        minNumber={10}
                       />
-                      <button
-                        className={style.itemgenBtnName}
-                        onClick={onRandomVehicleSpeed}
-                      >
-                        Random
-                      </button>
-                    </div>
-                    <div>
-                      <h1>Vehicle Carry Capacity</h1>
-                      <InputNumber
+                      <CustomInputNumber
+                        setSingular={setVehicleCapacity}
+                        h1Title={"Capacity"}
                         value={vehicleCapacity}
-                        placeholder="Carry Capacity"
-                        mode="decimal"
-                        showButtons
-                        buttonLayout="currency"
-                        decrementButtonClassName="p-button-secondary"
-                        incrementButtonClassName="p-button-secondary"
-                        incrementButtonIcon="pi pi-plus"
-                        decrementButtonIcon="pi pi-minus"
-                        minFractionDigits={0}
-                        maxFractionDigits={2}
-                        step={5}
+                        placeholder={"Capacity"}
+                        maxNumber={10000}
+                        minNumber={10}
                       />
-                      <button
-                        className={style.itemgenBtnName}
-                        onClick={onRandomVehicleCapacity}
-                      >
-                        Random
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -774,10 +796,6 @@ const ItemGen = () => {
                       setPlural={setArmorAcs}
                       setOptions={setArmorAcOptions}
                     />
-                    <SingleRandomButton
-                      options={armorAcOptions}
-                      setSingular={setArmorAc}
-                    />
                     <CustomDropdown
                       tableName={"abilities"}
                       setSingular={setArmorMod}
@@ -788,10 +806,6 @@ const ItemGen = () => {
                       value={armorMod}
                       valueOptions={armorModOptions}
                     />
-                    <singleRandomButton
-                      options={armorModOptions}
-                      setSingluar={setArmorMod}
-                    />
                     <CustomInputNumber
                       tableName={"armorStrReq"}
                       h1Title={"Strength Requirement"}
@@ -800,10 +814,6 @@ const ItemGen = () => {
                       setSingular={setArmorStr}
                       setPlural={setArmorStrs}
                       setOptions={setArmorStrOptions}
-                    />
-                    <SingleRandomButton
-                      options={armorStrOptions}
-                      setSingular={setArmorStr}
                     />
                     <CustomDropdown
                       tableName={"yesOrNo"}
@@ -814,10 +824,6 @@ const ItemGen = () => {
                       placeholder={"Set Stealth Disadvantage"}
                       value={stealth}
                       valueOptions={stealthOptions}
-                    />
-                    <SingleRandomButton
-                      options={stealthOptions}
-                      setSingular={setStealth}
                     />
                   </div>
                 </div>
@@ -850,51 +856,23 @@ const ItemGen = () => {
                   }
                 >
                   <div className={style.subsection}>
-                    <h1>Mount Speed</h1>
                     <div>
-                      <InputNumber
+                      <CustomInputNumber
+                        setSingular={setMountSpeed}
+                        h1Title={"Speed"}
                         value={mountSpeed}
-                        placeholder="Speed"
-                        mode="decimal"
-                        showButtons
-                        buttonLayout="currency"
-                        decrementButtonClassName="p-button-secondary"
-                        incrementButtonClassName="p-button-secondary"
-                        incrementButtonIcon="pi pi-plus"
-                        decrementButtonIcon="pi pi-minus"
-                        step={5}
-                        minFractionDigits={0}
-                        maxFractionDigits={2}
+                        placeholder={"Speed"}
+                        maxNumber={200}
+                        minNumber={10}
                       />
-                      <button
-                        className={style.itemgenBtnName}
-                        onClick={onRandomMountSpeed}
-                      >
-                        Random
-                      </button>
-                    </div>
-                    <h1>Mount Carry Capacity</h1>
-                    <div>
-                      <InputNumber
+                      <CustomInputNumber
+                        setSingular={setMountCapacity}
+                        h1Title={"Capacity"}
                         value={mountCapacity}
-                        placeholder="Carry Capacity"
-                        mode="decimal"
-                        showButtons
-                        buttonLayout="currency"
-                        decrementButtonClassName="p-button-secondary"
-                        incrementButtonClassName="p-button-secondary"
-                        incrementButtonIcon="pi pi-plus"
-                        decrementButtonIcon="pi pi-minus"
-                        step={5}
-                        minFractionDigits={0}
-                        maxFractionDigits={2}
+                        placeholder={"Capacity"}
+                        maxNumber={2000}
+                        minNumber={10}
                       />
-                      <button
-                        className={style.itemgenBtnName}
-                        onClick={onRandomMountCapacity}
-                      >
-                        Random
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -911,12 +889,6 @@ const ItemGen = () => {
                     onChange={onDescChange}
                     placeholder="Item Description"
                   />
-                  <button
-                    className={style.itemgenBtnName}
-                    onClick={onRandomDescription}
-                  >
-                    Random
-                  </button>
                 </div>
               </div>
             </div>

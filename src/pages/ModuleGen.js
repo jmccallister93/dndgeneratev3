@@ -423,11 +423,11 @@ const ModuleGen = () => {
               )}
             </h1>
             <SectionRandom
-                numberItem={[]}
-                numberItemOptions={[]}
-                setNumberItem={[]}
-                numberMax={[]}
-                numberMin={[]}
+                numberItem={[marsh]}
+                numberItemOptions={[marshOptions]}
+                setNumberItem={[setMarsh]}
+                numberMax={[5]}
+                numberMin={[0]}
             />
           </div>
           <div className={isFeaturesActive ? style.subsection : style.hidden}>
