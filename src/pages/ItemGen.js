@@ -36,6 +36,8 @@ import NameDisplay from "../components/NameDisplay";
 import SingleDisplayText from "../components/SingleDisplayText";
 import SingleDisplayNumber from "../components/SingleDisplayNumber";
 import MultipleDisplay from "../components/MultipleDisplay";
+import InfoModal from "../components/InfoModal";
+import ExportButtons from "../components/ExportButtons";
 
 const ItemGen = () => {
   // Set state variables
@@ -46,6 +48,7 @@ const ItemGen = () => {
   const [isLayoutActive, setIsLayoutActive] = useState(false);
   const [isRoomActive, setIsRoomActive] = useState(false);
   const [isItemActive, setIsItemActive] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [allItems, setAllItems] = useState();
 
@@ -189,6 +192,10 @@ const ItemGen = () => {
 
   const [genItem, setGenItem] = useState();
 
+  const divRef = useRef(null);
+  const [isExported, setIsExported] = useState(false);
+  const [doc, setDoc] = useState(null);
+
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
@@ -204,13 +211,50 @@ const ItemGen = () => {
     setWeaponDmg(diceCount + dice + "+" + diceBonus);
   }, [diceCount, dice, diceBonus]);
 
+  useEffect(() => {
+    const genItem = {
+      name: itemName,
+      type: type,
+      rarity: rarity,
+      cost: cost,
+      weight: weight,
+      description: description,
+    }
+    setGenItem(genItem)
+  }, [itemName, type, rarity, cost, weight, description])
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
+  };
+  const infoContent = (
+    <div className={style.infoContent}>
+      <p>This is a tool to help you generate Items for your games.</p>
+      <p>
+        You can use the Generate button in the top left to randomly set all
+        fields to random values.
+      </p>
+      <p>
+        You can also use the Generate button in each section to randomly set the
+        fields in that section.
+      </p>
+      <p>You can also manually set the fields to whatever you want.</p>
+      <p>
+        Once a value has been set you can click on the field in the display to
+        edit it.
+      </p>
+      <p>
+        Once you have set all the fields to your liking, you can click the
+        Export button to export the NPC to file of your choice.
+      </p>
+    </div>
+  );
+
   return (
-    <div className={styleB.mainWrapper}>
+    <div className={style.mainWrapper}>
       <Navbar />
-      <div className={styleB.topHeader}>
-        <h1 className={styleB.mainHeader}>Item Generator</h1>
+      <div className={style.topHeader}>
+        <h1 className={style.mainHeader}>Item Generator</h1>
         <div className={style.topWrapper}>
-          <div className={styleB.btnWrapper}>
+          <div className={style.btnWrapper}>
             {/* Generate Clear Btns */}
             <GenerateButton
               generateItems={[
@@ -301,16 +345,40 @@ const ItemGen = () => {
               ]}
               setArrayState={[setItemList, setSelectedItem]}
             />
+            {/* Export Btns */}
+            <h1>
+              Export
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef} 
+                data={genItem} />
+              </div>
+            </h1>
+            {/* ToolTip */}
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="How To Use Guide"
+                />
+                <InfoModal
+                  header={"Item Generator Info"}
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
-      <div className={styleB.body}>
-        <div className={styleB.optionsWrapper}>
+      <div className={style.body}>
+        <div className={style.optionsWrapper}>
           <h1>Item Options</h1>
-          <h1 className={styleB.subHeader} onClick={showBasics}>
+          <h1 className={style.subHeader} onClick={showBasics}>
             Basic Info
           </h1>
-          <div className={isBasicActive ? style.subsection : styleB.hidden}>
+          <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
                 tableName={"names"}
@@ -375,11 +443,11 @@ const ItemGen = () => {
               />
             </div>
           </div>
-          <h1 className={styleB.subHeader} onClick={showAdditional}>
+          <h1 className={style.subHeader} onClick={showAdditional}>
             Additional Info
           </h1>
           {/* Populate all fields */}
-          <div className={styleB.hidden}>
+          <div className={style.hidden}>
             <CustomInputNumber
               setSingular={setDiceCount}
               value={diceCount}
@@ -520,7 +588,7 @@ const ItemGen = () => {
             {type === "Weapon" ? (
               <div
                 className={
-                  isAdditionalActive ? style.subsection : styleB.hidden
+                  isAdditionalActive ? style.subsection : style.hidden
                 }
               >
                 <div>
@@ -584,7 +652,7 @@ const ItemGen = () => {
             {type === "Vehicle" ? (
               <div
                 className={
-                  isAdditionalActive ? style.subsection : styleB.hidden
+                  isAdditionalActive ? style.subsection : style.hidden
                 }
               >
                 <div className={style.subsection}>
@@ -612,7 +680,7 @@ const ItemGen = () => {
             {type === "Armor" ? (
               <div
                 className={
-                  isAdditionalActive ? style.subsection : styleB.hidden
+                  isAdditionalActive ? style.subsection : style.hidden
                 }
               >
                 <div>
@@ -660,7 +728,7 @@ const ItemGen = () => {
             {type === "Equipment Pack" ? (
               <div
                 className={
-                  isAdditionalActive ? style.subsection : styleB.hidden
+                  isAdditionalActive ? style.subsection : style.hidden
                 }
               >
                 <div className={style.subsection}>
@@ -681,7 +749,7 @@ const ItemGen = () => {
             {type === "Mount" ? (
               <div
                 className={
-                  isAdditionalActive ? style.subsection : styleB.hidden
+                  isAdditionalActive ? style.subsection : style.hidden
                 }
               >
                 <div className={style.subsection}>
@@ -707,7 +775,7 @@ const ItemGen = () => {
               </div>
             ) : null}
             <div
-              className={isAdditionalActive ? style.subsection : styleB.hidden}
+              className={isAdditionalActive ? style.subsection : style.hidden}
             >
               <div>
                 <h1>Description</h1>
@@ -721,7 +789,7 @@ const ItemGen = () => {
         </div>
 
         {/* Main Display */}
-        <div className={styleB.display}>
+        <div className={style.display}>
         <NameDisplay value={itemName} setNewValue={setItemName} />
           <h2>
             Type <SingleDisplayText value={type} setNewValue={setType} />
@@ -734,6 +802,7 @@ const ItemGen = () => {
           </h2>
           <h2>
             Weight <SingleDisplayNumber value={weight} setNewValue={setWeight} min={0} max={10000}/>
+            <span className={style.minorText2}> lbs</span>
           </h2>
 
           {type === "Weapon" ? (
@@ -806,7 +875,7 @@ const ItemGen = () => {
           <h2>
             Description
             <div>
-              <span className={styleB.minorText2}>{itemDesc}</span>
+              <span className={style.minorText2}>{itemDesc}</span>
             </div>
           </h2>
         </div>
