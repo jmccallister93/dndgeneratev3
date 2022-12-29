@@ -32,12 +32,16 @@ import CustomDropdown from "../components/CustomDropDown";
 import CustomDataTable from "../components/CustomDataTable";
 import GenerateButton from "../components/GenerateButton";
 import CustomName from "../components/CustomName";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
+import SingleDisplayNumber from "../components/SingleDisplayNumber";
+import MultipleDisplay from "../components/MultipleDisplay";
 
 const ItemGen = () => {
   // Set state variables
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
-  const [isAdditionalActive, setIsAdditionalActive] = useState(true);
+  const [isAdditionalActive, setIsAdditionalActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isLayoutActive, setIsLayoutActive] = useState(false);
   const [isRoomActive, setIsRoomActive] = useState(false);
@@ -185,333 +189,20 @@ const ItemGen = () => {
 
   const [genItem, setGenItem] = useState();
 
-  //Currencies
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("itemsCurrencies")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setCurrency(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setCurrencies(data);
-        setCurrencyOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-  //damageTypes
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("damageTypes")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setDmgTypes(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setDmgTypes(data);
-        setDmgTypeOptions(data.map((r) => ({ name: r.name, value: r.value })));
-      }
-    };
-    fetchData();
-  }, []);
-  //Ability Modifiers
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("abilitiesModifiers")
-
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setAbilityMods(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setAbilityMods(data);
-        setAbilityModOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-  //Abilities
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("abilities")
-        .select()
-        .order("id");
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setAbilities(null);
-        console.log(error);
-      }
-      if (data) {
-        setFetchError(null);
-        setAbilities(data);
-        setAbilitiesOptions(
-          data.map((r) => ({ name: r.name, value: r.value }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-  //Datatable
-  const [globalFilterValue, setGlobalFilterValue] = useState("");
-  const [filters, setFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    type: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    representative: { value: null, matchMode: FilterMatchMode.IN },
-    status: { value: null, matchMode: FilterMatchMode.EQUALS },
-    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
-  });
-  const onGlobalFilterChange = (e) => {
-    const value = e.target.value;
-    let _filters = { ...filters };
-    _filters["global"].value = value;
-
-    setFilters(_filters);
-    setGlobalFilterValue(value);
-  };
-  const renderHeader = () => {
-    return (
-      <div>
-        <span className="p-input-icon-left">
-          <i className="pi pi-search mr-2" />
-          <InputText
-            value={globalFilterValue}
-            onChange={onGlobalFilterChange}
-            placeholder="Keyword Search"
-          />
-        </span>
-      </div>
-    );
-  };
-  const header = (
-    <div className="flex justify-content-between">{renderHeader()}</div>
-  );
-
-  const speeds = [];
-  for (let n = 0; n <= 500; n += 10) {
-    speeds.push(n);
-  }
-
-  const acOptions = [];
-  for (let n = 0; n <= 30; n += 1) {
-    acOptions.push(n);
-  }
-
-  //On change events
-  const onNameChange = (e) => {
-    setItemName(e.target.value);
-  };
-
-  const onCurrencyValueChange = (e) => {
-    if (e.value === "Random") {
-      let r = Math.floor(Math.random() * (6 - 2) + 2);
-      setCurrencyValue(r);
-    }
-    setCurrencyValue(e.value);
-  };
-
-  const onRandomCurrencyValue = (e) => {
-    setCurrencyValue(Math.round(Math.random() * (2000 - 1)));
-  };
-
-  useEffect(() => {
-    setCost(currencyValue + " " + currency);
-  }, [currencyValue][currency]);
-
-  const onWeightChange = (e) => {
-    setWeight(e.value);
-  };
-
-  const onRandomWeight = (e) => {
-    let r = Math.floor(Math.random() * (2000 - 0));
-    setWeight(r);
-  };
-  const onRandomDescription = (e) => {
-    setDescription("Random");
-  };
-  const onRandomWeaponDmg = (e) => {
-    const diceOptions = ["d4", "d6", "d8", "d10", "d12", "d20"];
-    let dice = Math.floor(Math.random() * (6 - 0));
-    let diceChoice = diceOptions[dice];
-    let diceAmount = Math.floor(Math.random() * (8 - 0) + 1);
-    let add = Math.floor(Math.random() * (20 - 1) + 1);
-    setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
-  };
-
-  const onRandomVehicleSpeed = (e) => {
-    let r = Math.floor(Math.random() * 50);
-    setVehicleSpeed(speeds[r]);
-  };
-  const onRandomVehicleCapacity = (e) => {
-    let r = Math.floor(Math.random() * (2000 - 1));
-    setVehicleCapacity(r);
-  };
-
-  const onRandomAc = (e) => {
-    let r = Math.floor(Math.random() * 30);
-    setArmorAc(acOptions[r]);
-  };
-
-  const strReq = [
-    "Random",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-  ];
-
-  const onRandomMountSpeed = (e) => {
-    let r = Math.floor(Math.random() * 50);
-    setMountSpeed(speeds[r]);
-  };
-  const onRandomMountCapacity = (e) => {
-    let r = Math.floor(Math.random() * (2000 - 1));
-    setMountCapacity(r);
-  };
-
-  const onDescChange = (e) => {
-    setItemDesc(e.target.value);
-  };
-  //Todo Searching
-  const onSearchPack = (e) => {};
-
-  //Generate
-  const onGenerate = (e) => {
-    if (type === "") {
-      let r = Math.floor(Math.random() * (22 - 2) + 2);
-      setType(typeOptions[r].name);
-    } else {
-      setType(type);
-    }
-    if (rarity === "") {
-      let r = Math.floor(Math.random() * (5 - 2) + 2);
-      setRarity(rarityOptions[r].name);
-    } else {
-      setRarity(rarity);
-    }
-    if (currency === "") {
-      let r = Math.floor(Math.random() * (6 - 2) + 2);
-      setCurrency(currencyOptions[r].name);
-    } else {
-      setCurrency(currency);
-    }
-    if (currencyValue === "") {
-      setCurrencyValue(Math.round(Math.random() * (2000 - 1)));
-    } else {
-      setCurrencyValue(currencyValue);
-    }
-
-    setCost(currencyValue + " " + currency);
-
-    if (weight === "") {
-      setWeight(Math.round(Math.random() * (2000 - 1)));
-    } else {
-      setWeight(weight);
-    }
-    if (description === "") {
-      setDescription("Random");
-    } else {
-      setDescription(description);
-    }
-    if (type === "Weapon") {
-      if (weaponDmg === "") {
-        const diceOptions = ["d4", "d6", "d8", "d10", "d12", "d20"];
-        let dice = Math.floor(Math.random() * (5 - 0));
-        let diceChoice = diceOptions[dice];
-        let diceAmount = Math.floor(Math.random() * (8 - 0) + 1);
-        let add = Math.floor(Math.random() * (20 - 1) + 1);
-        setWeaponDmg(`${diceAmount} ${diceChoice} + ${add}`);
-      }
-      if (weaponProperty === "") {
-        let wp = Math.floor(Math.random() * (9 - 1) + 1);
-        let wpChoice = weaponProperties[wp];
-        setWeaponProperty(wpChoice);
-      }
-      if (weaponType === "") {
-        let wt = Math.floor(Math.random() * (5 - 1) + 1);
-        let wtChoice = weaponTypes[wt];
-        setWeaponType(wtChoice);
-      }
-      if (dmgType === "") {
-        let r = Math.floor(Math.random() * (17 - 1) + 1);
-        setDmgType(dmgTypeOptions[r].name);
-      }
-    }
-    if (type === "Vehicle") {
-      if (vehicleSpeed === "") {
-        let r = Math.floor(Math.random() * 50);
-        setVehicleSpeed(speeds[r]);
-      }
-      if (vehicleCapacity === "") {
-        let r = Math.floor(Math.random() * (2000 - 1));
-        setVehicleCapacity(r);
-      }
-    }
-    if (type === "Armor") {
-      if (armorAc === "") {
-        let r = Math.floor(Math.random() * 30);
-        setArmorAc(acOptions[r]);
-      }
-      if (armorMod === "") {
-        let r = Math.floor(Math.random() * (7 - 1) + 1);
-        setArmorMod(abilitiesOptions[r].name);
-      }
-      if (armorStr === "") {
-        let r = Math.floor(Math.random() * 9);
-        setArmorStr(strReq[r]);
-      }
-      if (stealth === "") {
-        let r = Math.floor(Math.random() * (2 - 1) + 1);
-        setStealth(stealthOptions[r]);
-      }
-    }
-    if (type === "Mount") {
-      if (mountSpeed === "") {
-        let r = Math.floor(Math.random() * 50);
-        setMountSpeed(speeds[r]);
-      }
-      if (mountCapacity === "") {
-        let r = Math.floor(Math.random() * (2000 - 1));
-        setMountCapacity(r);
-      }
-    }
-  };
-
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
   const showAdditional = (e) => {
     setIsAdditionalActive((current) => !current);
   };
-  const emptyArray = () => {};
 
-  const itemDisplay = selectedItem.map((i) => {
-    return <span>{`${i.name},`}</span>;
-  });
+  useEffect(() => {
+    setCost(currencyValue + " " + currency);
+  }, [currencyValue, currency]);
+
+  useEffect(() => {
+    setWeaponDmg(diceCount + dice + "+" + diceBonus);
+  }, [diceCount, dice, diceBonus]);
 
   return (
     <div className={styleB.mainWrapper}>
@@ -529,8 +220,9 @@ const ItemGen = () => {
                 dmgType,
                 dice,
                 weaponType,
-                // weaponProperty,
+                weaponProperty,
                 armorMod,
+                stealth,
               ]}
               itemOptions={[
                 typeOptions,
@@ -539,8 +231,9 @@ const ItemGen = () => {
                 dmgTypeOptions,
                 diceOptions,
                 weaponTypeOptions,
-                // weaponPropertyOptions,
+                weaponPropertyOptions,
                 armorModOptions,
+                stealthOptions
               ]}
               setItem={[
                 setType,
@@ -549,8 +242,10 @@ const ItemGen = () => {
                 setDmgType,
                 setDice,
                 setWeaponType,
-                // setWeaponProperty,
+
                 setArmorMod,
+                setWeaponProperty,
+                setStealth,
               ]}
               numberItem={[
                 currencyValue,
@@ -679,217 +374,347 @@ const ItemGen = () => {
                 minNumber={1}
               />
             </div>
-            <h1 className={styleB.subHeader} onClick={showAdditional}>
-              Additional Info
-            </h1>
-            <div className={style.itemgenWeaponAdditionalWrapper}>
-              {type === "Weapon" ||
-                type === "Vehicle" ||
-                type === "Armor" ||
-                type === "Equipment Pack" ||
-                type === "Mount"}
-              {type === "Weapon" ? (
-                <div
-                  className={
-                    isAdditionalActive ? style.subsection : styleB.hidden
-                  }
-                >
-                  <div>
-                    <CustomInputNumber
-                      setSingular={setDiceCount}
-                      value={diceCount}
-                      placeholder={"Dice Count"}
-                      h1Title={"Damage Dice"}
-                      maxNumber={10}
-                      minNumber={1}
-                    />
-                    <CustomDropdown
-                      tableName={"diceOptions"}
-                      setSingular={setDice}
-                      setPlural={setDices}
-                      setOptions={setDiceOptions}
-                      placeholder={"Dice Type"}
-                      value={dice}
-                      valueOptions={diceOptions}
-                    />
-                    <CustomInputNumber
-                      setSingular={setDiceBonus}
-                      value={diceBonus}
-                      placeholder={"Dmg Bonus"}
-                      maxNumber={20}
-                      minNumber={0}
-                    />
-                    <CustomDropdown
-                      tableName={"damageTypes"}
-                      setSingular={setDmgType}
-                      setPlural={setDmgTypes}
-                      setOptions={setDmgTypeOptions}
-                      h1Title={"Damage Type"}
-                      placeholder={"Set Damage Type"}
-                      value={dmgType}
-                      valueOptions={dmgTypeOptions}
-                    />
-                    <CustomDropdown
-                      tableName={"itemsWeaponTypes"}
-                      setSingular={setWeaponType}
-                      setPlural={setWeaponTypes}
-                      setOptions={setWeaponTypeOptions}
-                      h1Title={"Weapon Type"}
-                      placeholder={"Set Weapon Type"}
-                      value={weaponType}
-                      valueOptions={weaponTypeOptions}
-                    />
-                    <CustomDropdown
-                      tableName={"itemsWeaponProperties"}
-                      setSingular={setWeaponProperty}
-                      setPlural={setWeaponProperties}
-                      setOptions={setWeaponPropertyOptions}
-                      h1Title={"Weapon Property"}
-                      placeholder={"Set Weapon Property"}
-                      value={weaponProperty}
-                      valueOptions={weaponPropertyOptions}
-                    />
-                  </div>
-                </div>
-              ) : null}
-              {type === "Vehicle" ? (
-                <div
-                  className={
-                    isAdditionalActive ? style.subsection : styleB.hidden
-                  }
-                >
-                  <div className={style.subsection}>
-                    <div>
-                      <CustomInputNumber
-                        setSingular={setVehicleSpeed}
-                        h1Title={"Speed"}
-                        value={vehicleSpeed}
-                        placeholder={"Speed"}
-                        maxNumber={2000}
-                        minNumber={10}
-                      />
-                      <CustomInputNumber
-                        setSingular={setVehicleCapacity}
-                        h1Title={"Capacity"}
-                        value={vehicleCapacity}
-                        placeholder={"Capacity"}
-                        maxNumber={10000}
-                        minNumber={10}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-              {type === "Armor" ? (
-                <div
-                  className={
-                    isAdditionalActive ? style.subsection : styleB.hidden
-                  }
-                >
-                  <div>
-                    <CustomInputNumber
-                      tableName={"acs"}
-                      h1Title={"Armor Class"}
-                      value={armorAc}
-                      placeholder={"Armor Class"}
-                      setSingular={setArmorAc}
-                      setPlural={setArmorAcs}
-                      setOptions={setArmorAcOptions}
-                    />
-                    <CustomDropdown
-                      tableName={"abilities"}
-                      setSingular={setArmorMod}
-                      setPlural={setArmorMods}
-                      setOptions={setArmorModOptions}
-                      h1Title={"Armor Modifier"}
-                      placeholder={"Set Armor Modifier"}
-                      value={armorMod}
-                      valueOptions={armorModOptions}
-                    />
-                    <CustomInputNumber
-                      tableName={"armorStrReq"}
-                      h1Title={"Strength Requirement"}
-                      value={armorStr}
-                      placeholder={"Armor Str Req"}
-                      setSingular={setArmorStr}
-                      setPlural={setArmorStrs}
-                      setOptions={setArmorStrOptions}
-                    />
-                    <CustomDropdown
-                      tableName={"yesOrNo"}
-                      setSingular={setStealth}
-                      setPlural={setStealths}
-                      setOptions={setStealthOptions}
-                      h1Title={"Stealth Disadvantage"}
-                      placeholder={"Set Stealth Disadvantage"}
-                      value={stealth}
-                      valueOptions={stealthOptions}
-                    />
-                  </div>
-                </div>
-              ) : null}
-              {type === "Equipment Pack" ? (
-                <div
-                  className={
-                    isAdditionalActive ? style.subsection : styleB.hidden
-                  }
-                >
-                  <div className={style.subsection}>
-                    <Items
-                      h1Title={"Items"}
-                      dialogHeader={"Items"}
-                      selectedItem={selectedItem}
-                      setSelectedItem={setSelectedItem}
-                      header={header}
-                      itemList={itemList}
-                      setItemList={setItemList}
-                      valueOptions={itemOptions}
-                      options={itemOptions}
-                    />
-                  </div>
-                </div>
-              ) : null}
-              {type === "Mount" ? (
-                <div
-                  className={
-                    isAdditionalActive ? style.subsection : styleB.hidden
-                  }
-                >
-                  <div className={style.subsection}>
-                    <div>
-                      <CustomInputNumber
-                        setSingular={setMountSpeed}
-                        h1Title={"Speed"}
-                        value={mountSpeed}
-                        placeholder={"Speed"}
-                        maxNumber={200}
-                        minNumber={10}
-                      />
-                      <CustomInputNumber
-                        setSingular={setMountCapacity}
-                        h1Title={"Capacity"}
-                        value={mountCapacity}
-                        placeholder={"Capacity"}
-                        maxNumber={2000}
-                        minNumber={10}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ) : null}
+          </div>
+          <h1 className={styleB.subHeader} onClick={showAdditional}>
+            Additional Info
+          </h1>
+          {/* Populate all fields */}
+          <div className={styleB.hidden}>
+            <CustomInputNumber
+              setSingular={setDiceCount}
+              value={diceCount}
+              placeholder={"Dice Count"}
+              h1Title={"Damage Dice"}
+              maxNumber={10}
+              minNumber={1}
+            />
+            <CustomDropdown
+              tableName={"diceOptions"}
+              setSingular={setDice}
+              setPlural={setDices}
+              setOptions={setDiceOptions}
+              placeholder={"Dice Type"}
+              value={dice}
+              valueOptions={diceOptions}
+            />
+            <CustomInputNumber
+              setSingular={setDiceBonus}
+              value={diceBonus}
+              placeholder={"Dmg Bonus"}
+              maxNumber={20}
+              minNumber={0}
+            />
+            <CustomDropdown
+              tableName={"damageTypes"}
+              setSingular={setDmgType}
+              setPlural={setDmgTypes}
+              setOptions={setDmgTypeOptions}
+              h1Title={"Damage Type"}
+              placeholder={"Set Damage Type"}
+              value={dmgType}
+              valueOptions={dmgTypeOptions}
+            />
+            <CustomDropdown
+              tableName={"itemsWeaponTypes"}
+              setSingular={setWeaponType}
+              setPlural={setWeaponTypes}
+              setOptions={setWeaponTypeOptions}
+              h1Title={"Weapon Type"}
+              placeholder={"Set Weapon Type"}
+              value={weaponType}
+              valueOptions={weaponTypeOptions}
+            />
+            <CustomDropdown
+              tableName={"itemsWeaponProperties"}
+              setSingular={setWeaponProperty}
+              setPlural={setWeaponProperties}
+              setOptions={setWeaponPropertyOptions}
+              h1Title={"Weapon Property"}
+              placeholder={"Set Weapon Property"}
+              value={weaponProperty}
+              valueOptions={weaponPropertyOptions}
+            />
+            <CustomInputNumber
+              setSingular={setVehicleSpeed}
+              h1Title={"Speed"}
+              value={vehicleSpeed}
+              placeholder={"Speed"}
+              maxNumber={2000}
+              minNumber={10}
+            />
+            <CustomInputNumber
+              setSingular={setVehicleCapacity}
+              h1Title={"Capacity"}
+              value={vehicleCapacity}
+              placeholder={"Capacity"}
+              maxNumber={10000}
+              minNumber={10}
+            />
+            <CustomInputNumber
+              tableName={"acs"}
+              h1Title={"Armor Class"}
+              value={armorAc}
+              placeholder={"Armor Class"}
+              setSingular={setArmorAc}
+              setPlural={setArmorAcs}
+              setOptions={setArmorAcOptions}
+            />
+            <CustomDropdown
+              tableName={"abilities"}
+              setSingular={setArmorMod}
+              setPlural={setArmorMods}
+              setOptions={setArmorModOptions}
+              h1Title={"Armor Modifier"}
+              placeholder={"Set Armor Modifier"}
+              value={armorMod}
+              valueOptions={armorModOptions}
+            />
+            <CustomInputNumber
+              tableName={"armorStrReq"}
+              h1Title={"Strength Requirement"}
+              value={armorStr}
+              placeholder={"Armor Str Req"}
+              setSingular={setArmorStr}
+              setPlural={setArmorStrs}
+              setOptions={setArmorStrOptions}
+            />
+            <CustomDropdown
+              tableName={"yesOrNo"}
+              setSingular={setStealth}
+              setPlural={setStealths}
+              setOptions={setStealthOptions}
+              h1Title={"Stealth Disadvantage"}
+              placeholder={"Set Stealth Disadvantage"}
+              value={stealth}
+              valueOptions={stealthOptions}
+            />
+            <Items
+              h1Title={"Items"}
+              dialogHeader={"Items"}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              itemList={itemList}
+              setItemList={setItemList}
+              valueOptions={itemOptions}
+              setItemOptions={setItemOptions}
+              options={itemOptions}
+            />
+            <CustomInputNumber
+              setSingular={setMountSpeed}
+              h1Title={"Speed"}
+              value={mountSpeed}
+              placeholder={"Speed"}
+              maxNumber={200}
+              minNumber={10}
+            />
+            <CustomInputNumber
+              setSingular={setMountCapacity}
+              h1Title={"Capacity"}
+              value={mountCapacity}
+              placeholder={"Capacity"}
+              maxNumber={2000}
+              minNumber={10}
+            />
+          </div>
+          <div className={style.itemgenWeaponAdditionalWrapper}>
+            {type === "Weapon" ? (
               <div
                 className={
                   isAdditionalActive ? style.subsection : styleB.hidden
                 }
               >
                 <div>
-                  <h1>Description</h1>
-                  <InputTextarea
-                    value={itemDesc}
-                    onChange={onDescChange}
-                    placeholder="Item Description"
+                  <CustomInputNumber
+                    setSingular={setDiceCount}
+                    value={diceCount}
+                    placeholder={"Dice Count"}
+                    h1Title={"Damage Dice"}
+                    maxNumber={10}
+                    minNumber={1}
+                  />
+                  <CustomDropdown
+                    tableName={"diceOptions"}
+                    setSingular={setDice}
+                    setPlural={setDices}
+                    setOptions={setDiceOptions}
+                    placeholder={"Dice Type"}
+                    value={dice}
+                    valueOptions={diceOptions}
+                  />
+                  <CustomInputNumber
+                    setSingular={setDiceBonus}
+                    value={diceBonus}
+                    placeholder={"Dmg Bonus"}
+                    maxNumber={20}
+                    minNumber={0}
+                  />
+                  <CustomDropdown
+                    tableName={"damageTypes"}
+                    setSingular={setDmgType}
+                    setPlural={setDmgTypes}
+                    setOptions={setDmgTypeOptions}
+                    h1Title={"Damage Type"}
+                    placeholder={"Set Damage Type"}
+                    value={dmgType}
+                    valueOptions={dmgTypeOptions}
+                  />
+                  <CustomDropdown
+                    tableName={"itemsWeaponTypes"}
+                    setSingular={setWeaponType}
+                    setPlural={setWeaponTypes}
+                    setOptions={setWeaponTypeOptions}
+                    h1Title={"Weapon Type"}
+                    placeholder={"Set Weapon Type"}
+                    value={weaponType}
+                    valueOptions={weaponTypeOptions}
+                  />
+                  <CustomDropdown
+                    tableName={"itemsWeaponProperties"}
+                    setSingular={setWeaponProperty}
+                    setPlural={setWeaponProperties}
+                    setOptions={setWeaponPropertyOptions}
+                    h1Title={"Weapon Property"}
+                    placeholder={"Set Weapon Property"}
+                    value={weaponProperty}
+                    valueOptions={weaponPropertyOptions}
                   />
                 </div>
+              </div>
+            ) : null}
+            {type === "Vehicle" ? (
+              <div
+                className={
+                  isAdditionalActive ? style.subsection : styleB.hidden
+                }
+              >
+                <div className={style.subsection}>
+                  <div>
+                    <CustomInputNumber
+                      setSingular={setVehicleSpeed}
+                      h1Title={"Speed"}
+                      value={vehicleSpeed}
+                      placeholder={"Speed"}
+                      maxNumber={2000}
+                      minNumber={10}
+                    />
+                    <CustomInputNumber
+                      setSingular={setVehicleCapacity}
+                      h1Title={"Capacity"}
+                      value={vehicleCapacity}
+                      placeholder={"Capacity"}
+                      maxNumber={10000}
+                      minNumber={10}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : null}
+            {type === "Armor" ? (
+              <div
+                className={
+                  isAdditionalActive ? style.subsection : styleB.hidden
+                }
+              >
+                <div>
+                  <CustomInputNumber
+                    tableName={"acs"}
+                    h1Title={"Armor Class"}
+                    value={armorAc}
+                    placeholder={"Armor Class"}
+                    setSingular={setArmorAc}
+                    setPlural={setArmorAcs}
+                    setOptions={setArmorAcOptions}
+                  />
+                  <CustomDropdown
+                    tableName={"abilities"}
+                    setSingular={setArmorMod}
+                    setPlural={setArmorMods}
+                    setOptions={setArmorModOptions}
+                    h1Title={"Armor Modifier"}
+                    placeholder={"Set Armor Modifier"}
+                    value={armorMod}
+                    valueOptions={armorModOptions}
+                  />
+                  <CustomInputNumber
+                    tableName={"armorStrReq"}
+                    h1Title={"Strength Requirement"}
+                    value={armorStr}
+                    placeholder={"Armor Str Req"}
+                    setSingular={setArmorStr}
+                    setPlural={setArmorStrs}
+                    setOptions={setArmorStrOptions}
+                  />
+                  <CustomDropdown
+                    tableName={"yesOrNo"}
+                    setSingular={setStealth}
+                    setPlural={setStealths}
+                    setOptions={setStealthOptions}
+                    h1Title={"Stealth Disadvantage"}
+                    placeholder={"Set Stealth Disadvantage"}
+                    value={stealth}
+                    valueOptions={stealthOptions}
+                  />
+                </div>
+              </div>
+            ) : null}
+            {type === "Equipment Pack" ? (
+              <div
+                className={
+                  isAdditionalActive ? style.subsection : styleB.hidden
+                }
+              >
+                <div className={style.subsection}>
+                  <Items
+                    h1Title={"Items"}
+                    dialogHeader={"Items"}
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
+                    itemList={itemList}
+                    setItemList={setItemList}
+                    valueOptions={itemOptions}
+                    setItemOptions={setItemOptions}
+                    options={itemOptions}
+                  />
+                </div>
+              </div>
+            ) : null}
+            {type === "Mount" ? (
+              <div
+                className={
+                  isAdditionalActive ? style.subsection : styleB.hidden
+                }
+              >
+                <div className={style.subsection}>
+                  <div>
+                    <CustomInputNumber
+                      setSingular={setMountSpeed}
+                      h1Title={"Speed"}
+                      value={mountSpeed}
+                      placeholder={"Speed"}
+                      maxNumber={200}
+                      minNumber={10}
+                    />
+                    <CustomInputNumber
+                      setSingular={setMountCapacity}
+                      h1Title={"Capacity"}
+                      value={mountCapacity}
+                      placeholder={"Capacity"}
+                      maxNumber={2000}
+                      minNumber={10}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : null}
+            <div
+              className={isAdditionalActive ? style.subsection : styleB.hidden}
+            >
+              <div>
+                <h1>Description</h1>
+                <InputTextarea
+                  value={itemDesc}
+                  placeholder="Item Description"
+                />
               </div>
             </div>
           </div>
@@ -897,53 +722,53 @@ const ItemGen = () => {
 
         {/* Main Display */}
         <div className={styleB.display}>
-          <h1>{itemName}</h1>
+        <NameDisplay value={itemName} setNewValue={setItemName} />
           <h2>
-            Type <span className={styleB.minorText2}>{type}</span>
+            Type <SingleDisplayText value={type} setNewValue={setType} />
           </h2>
           <h2>
-            Rarity <span className={styleB.minorText2}>{rarity}</span>
+            Rarity <SingleDisplayText value={rarity} setNewValue={setRarity} />
           </h2>
           <h2>
-            Cost <span className={styleB.minorText2}>{cost}</span>
+            Cost <SingleDisplayText value={cost} setNewValue={setCost} />
           </h2>
           <h2>
-            Weight <span className={styleB.minorText2}>{weight}</span>
+            Weight <SingleDisplayNumber value={weight} setNewValue={setWeight} min={0} max={10000}/>
           </h2>
 
           {type === "Weapon" ? (
             <>
               <h2>
-                Damage <span className={styleB.minorText2}>{weaponDmg}</span>
+                Damage <SingleDisplayText value={weaponDmg} setNewValue={setWeaponDmg} />
               </h2>
               <h2>
-                Damage Type <span className={styleB.minorText2}>{dmgType}</span>
+                Damage Type <SingleDisplayText value={dmgType} setNewValue={setDmgType} />
               </h2>
               <h2>
                 Weapon Type{" "}
-                <span className={styleB.minorText2}>{weaponType}</span>{" "}
+                <SingleDisplayText value={weaponType} setNewValue={setWeaponType} />
               </h2>
               <h2>
                 Weapon Property{" "}
-                <span className={styleB.minorText2}>{weaponProperty}</span>
+                <SingleDisplayText value={weaponProperty} setNewValue={setWeaponProperty} />
               </h2>
             </>
           ) : null}
           {type === "Armor" ? (
             <>
               <h2>
-                AC <span className={styleB.minorText2}>{armorAc}</span>
+                AC <SingleDisplayNumber value={armorAc} setNewValue={setArmorAc} min={0} max={30}/>
               </h2>
               <h2>
-                Modifier <span className={styleB.minorText2}>{armorMod}</span>
+                Modifier <SingleDisplayText value={armorMod} setNewValue={setArmorMod} />
               </h2>
               <h2>
                 Strength Requirement{" "}
-                <span className={styleB.minorText2}>{armorStr}</span>
+                <SingleDisplayText value={armorStr} setNewValue={setArmorStr} />
               </h2>
               <h2>
                 Stealth Disadvantage{" "}
-                <span className={styleB.minorText2}>{stealth}</span>
+                <SingleDisplayText value={stealth} setNewValue={setStealth} />
               </h2>
             </>
           ) : null}
@@ -951,11 +776,11 @@ const ItemGen = () => {
           {type === "Vehicle" ? (
             <>
               <h2>
-                Speed <span className={styleB.minorText2}>{vehicleSpeed}</span>
+                Speed <SingleDisplayNumber value={vehicleSpeed} setNewValue={setVehicleSpeed} min={0} max={2000}/>
               </h2>
               <h2>
                 Carry Capacity{" "}
-                <span className={styleB.minorText2}>{vehicleCapacity}</span>
+                <SingleDisplayNumber value={vehicleCapacity} setNewValue={setVehicleCapacity} min={0} max={10000}/>
               </h2>
             </>
           ) : null}
@@ -963,19 +788,18 @@ const ItemGen = () => {
           {type === "Mount" ? (
             <>
               <h2>
-                Speed <span className={styleB.minorText2}>{mountSpeed}</span>
+                Speed <SingleDisplayNumber value={mountSpeed} setNewValue={setMountSpeed} min={0} max={500}/>
               </h2>
               <h2>
                 Carry Capcity{" "}
-                <span className={styleB.minorText2}>{mountCapacity}</span>
+                <SingleDisplayNumber value={mountCapacity} setNewValue={setMountCapacity} min={0} max={1000}/>
               </h2>
             </>
           ) : null}
-
           {type === "Equipment Pack" ? (
             <>
               <h2>
-                Items <span className={styleB.minorText2}>{itemDisplay}</span>
+              <MultipleDisplay selectedItem={selectedItem} />
               </h2>
             </>
           ) : null}
