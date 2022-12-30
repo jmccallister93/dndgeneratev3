@@ -1,3 +1,4 @@
+
 $primary-grey: #393e46;
 $secondary-grey: #d6e4e5;
 $header-color: #3e6d9c;
@@ -143,6 +144,49 @@ $btn-blue: #2196f3;
     box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
   }
 }
+
+
+
+.diceBtn {
+  //use d20.png from assests images folder as background image
+  background-image: url("../assests/images/d20_2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  width: 75px;
+  height: 75px;
+  border-radius: 75%;
+  border: 0;
+  margin: 0.1rem;
+  padding: 0;
+  transition: 0.5s;
+  color: rgba(0, 128, 0, 1);
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0px 0px 5px rgb(255, 255, 255);
+  
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
+    background-color: rgb(0, 128, 0, .75);
+  }
+
+}
+.diceBtnText{
+  color: rgb(255, 255, 255);
+  // font-weight: bold;
+  font-size: 1rem;
+  // text-shadow: 1px 1px 10px rgb(0, 128, 0);
+  background-color: rgb(0, 128, 0, .75);
+  box-shadow: 0px 0px 10px 5px rgba(0, 128, 0, 0.5);
+  border-radius: 10%;
+  padding: 2%;
+  letter-spacing: 1.5px;
+  line-height: 1.5px;
+  text-align: center;
+}
+
 .btnPdf {
   font-size: 1rem;
   color: $secondary-grey;

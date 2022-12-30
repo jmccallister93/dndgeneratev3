@@ -13,11 +13,11 @@ const SingleRandomButton = (props) => {
   return (
     <>
       <button
-        className={style.btnName}
+        className={style.diceBtn}
         onClick={onRandomClick}
         title="Generate Random Value"
       >
-        Random
+        <span className={style.diceBtnText}>Random</span>
       </button>
     </>
   );

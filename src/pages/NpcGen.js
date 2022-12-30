@@ -949,33 +949,6 @@ const NpcGen = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-              {/* {questType === "None"
-                ? ""
-                : questType === "Bounty"
-                ? "Bounty"
-                : questType === "Capture"
-                ? "Capture"
-                : questType === "Delivery"
-                ? "Delivery"
-                : questType === "Escort"
-                ? "Escort"
-                : questType === "Exploration"
-                ? "Exploration"
-                : questType === "Gather"
-                ? "Gather"
-                : questType === "Investigation"
-                ? "Investigation"
-                : questType === "Kill"
-                ? "Kill"
-                : questType === "Negotiation"
-                ? "Negotiation"
-                : questType === "Protect"
-                ? "Protect"
-                : questType === "Rescue"
-                ? "Rescue"
-                : questType === "Custom"
-                ? "Custom"
-                : "Error"} */}
             </div>
           </div>
           <div className={style.sectionOption}>

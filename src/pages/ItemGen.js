@@ -219,9 +219,9 @@ const ItemGen = () => {
       cost: cost,
       weight: weight,
       description: description,
-    }
-    setGenItem(genItem)
-  }, [itemName, type, rarity, cost, weight, description])
+    };
+    setGenItem(genItem);
+  }, [itemName, type, rarity, cost, weight, description]);
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
@@ -277,7 +277,7 @@ const ItemGen = () => {
                 weaponTypeOptions,
                 weaponPropertyOptions,
                 armorModOptions,
-                stealthOptions
+                stealthOptions,
               ]}
               setItem={[
                 setType,
@@ -349,8 +349,7 @@ const ItemGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} 
-                data={genItem} />
+                <ExportButtons div={divRef} data={genItem} />
               </div>
             </h1>
             {/* ToolTip */}
@@ -587,9 +586,7 @@ const ItemGen = () => {
           <div className={style.itemgenWeaponAdditionalWrapper}>
             {type === "Weapon" ? (
               <div
-                className={
-                  isAdditionalActive ? style.subsection : style.hidden
-                }
+                className={isAdditionalActive ? style.subsection : style.hidden}
               >
                 <div>
                   <CustomInputNumber
@@ -651,9 +648,7 @@ const ItemGen = () => {
             ) : null}
             {type === "Vehicle" ? (
               <div
-                className={
-                  isAdditionalActive ? style.subsection : style.hidden
-                }
+                className={isAdditionalActive ? style.subsection : style.hidden}
               >
                 <div className={style.subsection}>
                   <div>
@@ -679,9 +674,7 @@ const ItemGen = () => {
             ) : null}
             {type === "Armor" ? (
               <div
-                className={
-                  isAdditionalActive ? style.subsection : style.hidden
-                }
+                className={isAdditionalActive ? style.subsection : style.hidden}
               >
                 <div>
                   <CustomInputNumber
@@ -727,9 +720,7 @@ const ItemGen = () => {
             ) : null}
             {type === "Equipment Pack" ? (
               <div
-                className={
-                  isAdditionalActive ? style.subsection : style.hidden
-                }
+                className={isAdditionalActive ? style.subsection : style.hidden}
               >
                 <div className={style.subsection}>
                   <Items
@@ -748,9 +739,7 @@ const ItemGen = () => {
             ) : null}
             {type === "Mount" ? (
               <div
-                className={
-                  isAdditionalActive ? style.subsection : style.hidden
-                }
+                className={isAdditionalActive ? style.subsection : style.hidden}
               >
                 <div className={style.subsection}>
                   <div>
@@ -790,7 +779,7 @@ const ItemGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-        <NameDisplay value={itemName} setNewValue={setItemName} />
+          <NameDisplay value={itemName} setNewValue={setItemName} />
           <h2>
             Type <SingleDisplayText value={type} setNewValue={setType} />
           </h2>
@@ -801,35 +790,61 @@ const ItemGen = () => {
             Cost <SingleDisplayText value={cost} setNewValue={setCost} />
           </h2>
           <h2>
-            Weight <SingleDisplayNumber value={weight} setNewValue={setWeight} min={0} max={10000}/>
-            <span className={style.minorText2}> lbs</span>
+            Weight{" "}
+            <SingleDisplayNumber
+              value={weight}
+              setNewValue={setWeight}
+              min={0}
+              max={10000}
+            />
+            {weight !== "" ? (
+              <span className={style.minorText2}> lbs</span>
+            ) : null}
           </h2>
 
           {type === "Weapon" ? (
             <>
               <h2>
-                Damage <SingleDisplayText value={weaponDmg} setNewValue={setWeaponDmg} />
+                Damage{" "}
+                <SingleDisplayText
+                  value={weaponDmg}
+                  setNewValue={setWeaponDmg}
+                />
               </h2>
               <h2>
-                Damage Type <SingleDisplayText value={dmgType} setNewValue={setDmgType} />
+                Damage Type{" "}
+                <SingleDisplayText value={dmgType} setNewValue={setDmgType} />
               </h2>
               <h2>
                 Weapon Type{" "}
-                <SingleDisplayText value={weaponType} setNewValue={setWeaponType} />
+                <SingleDisplayText
+                  value={weaponType}
+                  setNewValue={setWeaponType}
+                />
               </h2>
               <h2>
                 Weapon Property{" "}
-                <SingleDisplayText value={weaponProperty} setNewValue={setWeaponProperty} />
+                <SingleDisplayText
+                  value={weaponProperty}
+                  setNewValue={setWeaponProperty}
+                />
               </h2>
             </>
           ) : null}
           {type === "Armor" ? (
             <>
               <h2>
-                AC <SingleDisplayNumber value={armorAc} setNewValue={setArmorAc} min={0} max={30}/>
+                AC{" "}
+                <SingleDisplayNumber
+                  value={armorAc}
+                  setNewValue={setArmorAc}
+                  min={0}
+                  max={30}
+                />
               </h2>
               <h2>
-                Modifier <SingleDisplayText value={armorMod} setNewValue={setArmorMod} />
+                Modifier{" "}
+                <SingleDisplayText value={armorMod} setNewValue={setArmorMod} />
               </h2>
               <h2>
                 Strength Requirement{" "}
@@ -845,11 +860,24 @@ const ItemGen = () => {
           {type === "Vehicle" ? (
             <>
               <h2>
-                Speed <SingleDisplayNumber value={vehicleSpeed} setNewValue={setVehicleSpeed} min={0} max={2000}/>
+                Speed{" "}
+                <SingleDisplayNumber
+                  value={vehicleSpeed}
+                  setNewValue={setVehicleSpeed}
+                  min={0}
+                  max={2000}
+                />
+                <span className={style.minorText2}> ft</span>
               </h2>
               <h2>
                 Carry Capacity{" "}
-                <SingleDisplayNumber value={vehicleCapacity} setNewValue={setVehicleCapacity} min={0} max={10000}/>
+                <SingleDisplayNumber
+                  value={vehicleCapacity}
+                  setNewValue={setVehicleCapacity}
+                  min={0}
+                  max={10000}
+                />
+                <span className={style.minorText2}> lbs</span>
               </h2>
             </>
           ) : null}
@@ -857,18 +885,34 @@ const ItemGen = () => {
           {type === "Mount" ? (
             <>
               <h2>
-                Speed <SingleDisplayNumber value={mountSpeed} setNewValue={setMountSpeed} min={0} max={500}/>
+                Speed{" "}
+                <SingleDisplayNumber
+                  value={mountSpeed}
+                  setNewValue={setMountSpeed}
+                  min={0}
+                  max={500}
+                />
+                <span className={style.minorText2}> ft</span>
               </h2>
               <h2>
                 Carry Capcity{" "}
-                <SingleDisplayNumber value={mountCapacity} setNewValue={setMountCapacity} min={0} max={1000}/>
+                <SingleDisplayNumber
+                  value={mountCapacity}
+                  setNewValue={setMountCapacity}
+                  min={0}
+                  max={1000}
+                />
+                <span className={style.minorText2}> lbs</span>
               </h2>
             </>
           ) : null}
           {type === "Equipment Pack" ? (
             <>
               <h2>
-              <MultipleDisplay selectedItem={selectedItem} />
+                Contents{" "}
+                <span className={style.minorText2}>
+                  <MultipleDisplay selectedItem={selectedItem} />
+                </span>
               </h2>
             </>
           ) : null}

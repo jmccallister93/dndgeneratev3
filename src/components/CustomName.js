@@ -82,10 +82,11 @@ const CustomName = (props) => {
       />
       <button
         onClick={onRandomName}
-        className={style.btnName}
+        className={style.diceBtn}
         title="Generate Random Name"
       >
-        Random
+        <span className={style.diceBtnText}>Random</span>
+        
       </button>
     </div>
   );
