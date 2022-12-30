@@ -38,6 +38,7 @@ import SingleDisplayNumber from "../components/SingleDisplayNumber";
 import MultipleDisplay from "../components/MultipleDisplay";
 import InfoModal from "../components/InfoModal";
 import ExportButtons from "../components/ExportButtons";
+import SectionRandom from "../components/SectionRandom";
 
 const ItemGen = () => {
   // Set state variables
@@ -374,9 +375,47 @@ const ItemGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>Item Options</h1>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
+            Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom
+          value={[
+            itemName,
+            type,
+            rarity,
+            currency,
+          ]}
+          valueOptions={[
+            itemNameOptions,
+            typeOptions,
+            rarityOptions,
+            currencyOptions,
+          ]}
+          setValue={[
+            setItemName,
+            setType,
+            setRarity,
+            setCurrency,
+          ]}
+          numberItem={[
+            currencyValue,
+            weight,
+          ]}
+          setNumberItem={[
+            setCurrencyValue,
+            setWeight,
+          ]}
+          numberMax={[9999, 2000]}
+          numberMin={[1, 1]}
+          />
+          
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
@@ -442,9 +481,82 @@ const ItemGen = () => {
               />
             </div>
           </div>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showAdditional}>
-            Additional Info
+            Additional Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom
+          value={[
+            description,
+            dice,
+            weaponProperty,
+            weaponType,
+            dmgType,
+            armorMod,
+          ]}
+          valueOptions={[
+            descriptionOptions,
+            diceOptions,
+            weaponPropertyOptions,
+            weaponTypeOptions,
+            dmgTypeOptions,
+            armorModOptions
+          ]}
+          setValue={[
+            setDescription,
+            setDice,
+            setWeaponProperty,
+            setWeaponType,
+            setDmgType,
+            setArmorMod
+          ]}
+          numberItems={[
+            diceCount,
+            diceBonus,
+            vehicleSpeed,
+            vehicleCapacity,
+            armorAc,
+            armorStr,
+            mountSpeed,
+            mountCapacity,
+          ]}
+          numberMax={[
+            10,
+            20,
+            1000,
+            10000,
+            30,
+            30,
+            500,
+            1000,
+          ]}
+          numberMin={[
+            1,
+            0,
+            5,
+            5,
+            1,
+            1,
+            5,
+            5,
+          ]}
+          setNumberItems={[
+            setDiceCount,
+            setDiceBonus,
+            setVehicleSpeed,
+            setVehicleCapacity,
+            setArmorAc,
+            setArmorStr,
+            setMountSpeed,
+            setMountCapacity,
+          ]}
+          />
+          </div>
           {/* Populate all fields */}
           <div className={style.hidden}>
             <CustomInputNumber

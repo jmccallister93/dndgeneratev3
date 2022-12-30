@@ -361,7 +361,7 @@ const SectionRandom = (props) => {
     if (props.numberItem) {
       for (let i = 0; i < props.numberItem.length; i++) {
         let r = Math.floor(
-          Math.random() * (props.numberMax - props.numberMin) + props.numberMin
+          Math.random() * (props.numberMax[i] - props.numberMin[i]) + props.numberMin[i]
         );
         r = r.toString();
         props.setNumberItem[i](r);
@@ -437,6 +437,7 @@ const SectionRandom = (props) => {
       }
   };
 
+
   const onRandomClick = (e) => {
     onRandomClickSingle();
     onRandomClickMultiple();
@@ -451,11 +452,11 @@ const SectionRandom = (props) => {
   return (
     <>
       <button
-        className={style.btnName}
+        className={style.diceBtn}
         onClick={onRandomClick}
         title="Generate Random Value"
       >
-        Random
+        <span className={style.diceBtnText}>Random</span>
       </button>
     </>
   );

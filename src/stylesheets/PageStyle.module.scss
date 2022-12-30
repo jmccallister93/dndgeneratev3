@@ -165,13 +165,11 @@ $btn-blue: #2196f3;
   font-weight: bold;
   font-size: 1rem;
   text-shadow: 0px 0px 5px rgb(255, 255, 255);
-  
   &:hover {
     cursor: pointer;
     box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
     background-color: rgb(0, 128, 0, .75);
   }
-
 }
 .diceBtnText{
   color: rgb(255, 255, 255);
@@ -272,7 +270,7 @@ $btn-blue: #2196f3;
   display: flex;
   align-items: center;
   & button{
-    height: 3rem;
+    // height: 3rem;
   }
 }
 
