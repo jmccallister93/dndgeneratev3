@@ -372,49 +372,33 @@ const ItemGen = () => {
           </div>
         </div>
       </div>
+      {/* Main Options Display */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>Item Options</h1>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info{" "}
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
               {isBasicActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
                 <i className="pi pi-chevron-right"></i>
               )}
-          </h1>
-          <SectionRandom
-          value={[
-            itemName,
-            type,
-            rarity,
-            currency,
-          ]}
-          valueOptions={[
-            itemNameOptions,
-            typeOptions,
-            rarityOptions,
-            currencyOptions,
-          ]}
-          setValue={[
-            setItemName,
-            setType,
-            setRarity,
-            setCurrency,
-          ]}
-          numberItem={[
-            currencyValue,
-            weight,
-          ]}
-          setNumberItem={[
-            setCurrencyValue,
-            setWeight,
-          ]}
-          numberMax={[9999, 2000]}
-          numberMin={[1, 1]}
-          />
-          
+            </h1>
+            <SectionRandom
+              value={[itemName, type, rarity, currency]}
+              valueOptions={[
+                itemNameOptions,
+                typeOptions,
+                rarityOptions,
+                currencyOptions,
+              ]}
+              setValue={[setItemName, setType, setRarity, setCurrency]}
+              numberItem={[currencyValue, weight]}
+              setNumberItem={[setCurrencyValue, setWeight]}
+              numberMax={[9999, 2000]}
+              numberMin={[1, 1]}
+            />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
@@ -482,80 +466,53 @@ const ItemGen = () => {
             </div>
           </div>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showAdditional}>
-            Additional Info{" "}
-              {isBasicActive ? (
+            <h1 className={style.subHeader} onClick={showAdditional}>
+              Additional Info{" "}
+              {isAdditionalActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
                 <i className="pi pi-chevron-right"></i>
               )}
-          </h1>
-          <SectionRandom
-          value={[
-            
-            dice,
-            weaponProperty,
-            weaponType,
-            dmgType,
-            armorMod,
-          ]}
-          valueOptions={[
-            
-            diceOptions,
-            weaponPropertyOptions,
-            weaponTypeOptions,
-            dmgTypeOptions,
-            armorModOptions
-          ]}
-          setValue={[
-            
-            setDice,
-            setWeaponProperty,
-            setWeaponType,
-            setDmgType,
-            setArmorMod
-          ]}
-          numberItem={[
-            diceCount,
-            diceBonus,
-            vehicleSpeed,
-            vehicleCapacity,
-            armorAc,
-            armorStr,
-            mountSpeed,
-            mountCapacity,
-          ]}
-          numberMax={[
-            10,
-            20,
-            1000,
-            10000,
-            30,
-            30,
-            500,
-            1000,
-          ]}
-          numberMin={[
-            1,
-            0,
-            5,
-            5,
-            1,
-            1,
-            5,
-            5,
-          ]}
-          setNumberItem={[
-            setDiceCount,
-            setDiceBonus,
-            setVehicleSpeed,
-            setVehicleCapacity,
-            setArmorAc,
-            setArmorStr,
-            setMountSpeed,
-            setMountCapacity,
-          ]}
-          />
+            </h1>
+            <SectionRandom
+              value={[dice, weaponProperty, weaponType, dmgType, armorMod]}
+              valueOptions={[
+                diceOptions,
+                weaponPropertyOptions,
+                weaponTypeOptions,
+                dmgTypeOptions,
+                armorModOptions,
+              ]}
+              setValue={[
+                setDice,
+                setWeaponProperty,
+                setWeaponType,
+                setDmgType,
+                setArmorMod,
+              ]}
+              numberItem={[
+                diceCount,
+                diceBonus,
+                vehicleSpeed,
+                vehicleCapacity,
+                armorAc,
+                armorStr,
+                mountSpeed,
+                mountCapacity,
+              ]}
+              numberMax={[10, 20, 1000, 10000, 30, 30, 500, 1000]}
+              numberMin={[1, 0, 5, 5, 1, 1, 5, 5]}
+              setNumberItem={[
+                setDiceCount,
+                setDiceBonus,
+                setVehicleSpeed,
+                setVehicleCapacity,
+                setArmorAc,
+                setArmorStr,
+                setMountSpeed,
+                setMountCapacity,
+              ]}
+            />
           </div>
           {/* Populate all fields */}
           <div className={style.hidden}>
