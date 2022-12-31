@@ -119,9 +119,9 @@ const CustomDataTable = (props) => {
   const templateDatatable = (
     <>
       <h1 className={style.titles}>{props.h1Title}</h1>
-      <Button onClick={openDialog} className={style.btnName}>
+      <button onClick={openDialog} className={style.btnName}>
         Add / Remove
-      </Button>
+      </button>
       <Dialog
         header={props.dialogHeader}
         visible={dialogVisible}

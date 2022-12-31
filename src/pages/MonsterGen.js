@@ -56,8 +56,6 @@ const MonsterGen = () => {
   const [alignOptions, setAlignOptions] = useState();
 
   const [ac, setAc] = useState("");
-  const [acs, setAcs] = useState("");
-  const [acOptions, setAcOptions] = useState();
 
   const [armorType, setArmorType] = useState("");
   const [armorTypes, setArmorTypes] = useState();
@@ -65,80 +63,31 @@ const MonsterGen = () => {
 
   const [hp, setHp] = useState("");
 
-  const [speed, setSpeed] = useState("");
-  const [speeds, setSpeeds] = useState("");
-  const [speedOptions, setSpeedOptions] = useState();
-
-  const [speedType, setSpeedType] = useState("");
-  const [speedTypes, setSpeedTypes] = useState("");
-  const [speedTypeOptions, setSpeedTypeOptions] = useState();
-
-  const [speedExtra, setSpeedExtra] = useState("");
-  const [speedExtraList, setSpeedExtraList] = useState([]);
-  const [burrow, setBurrow] = useState("");
-  const [climb, setClimb] = useState("");
-  const [fly, setFly] = useState("");
-  const [hover, setHover] = useState("");
-  const [swim, setSwim] = useState("");
-  const [dialogVisibleSpeed, setDialogVisibleSpeed] = useState(false);
-  const [selectedItemsSpeed, setSelectedItemsSpeed] = useState(null);
-
-  const [ability, setAbility] = useState("");
-  const [abilities, setAbilities] = useState("");
-  const [abilityOptions, setAbilityOptions] = useState();
+  const [baseSpeed, setBaseSpeed] = useState("");
+  const [burrowSpeed, setBurrowSpeed] = useState("");
+  const [climbSpeed, setClimbSpeed] = useState("");
+  const [flySpeed, setFlySpeed] = useState("");
+  const [swimSpeed, setSwimSpeed] = useState("");
+  const [hoverSpeed, setHoverSpeed] = useState("");
 
   const [str, setStr] = useState("");
-  const [strMod, setStrMod] = useState("");
   const [dex, setDex] = useState("");
-  const [dexMod, setDexMod] = useState("");
   const [con, setCon] = useState("");
-  const [conMod, setConMod] = useState("");
   const [int, setInt] = useState("");
-  const [intMod, setIntMod] = useState("");
   const [wis, setWis] = useState("");
-  const [wisMod, setWisMod] = useState("");
   const [cha, setCha] = useState("");
-  const [chaMod, setChaMod] = useState("");
 
   const [save, setSave] = useState("");
   const [saves, setSaves] = useState("");
   const [saveOptions, setSaveOptions] = useState();
   const [saveList, setSaveList] = useState([]);
   const [selectedSave, setSelectedSave] = useState([]);
-  const [saveStr, setSaveStr] = useState("");
-  const [saveDex, setSaveDex] = useState("");
-  const [saveCon, setSaveCon] = useState("");
-  const [saveInt, setSaveInt] = useState("");
-  const [saveWis, setSaveWis] = useState("");
-  const [saveCha, setSaveCha] = useState("");
-  const [dialogVisibleSave, setDialogVisibleSave] = useState(false);
-  const [selectedItemsSave, setSelectedItemsSave] = useState(null);
 
   const [skill, setSkill] = useState("");
   const [skills, setSkills] = useState("");
   const [skillOptions, setSkillOptions] = useState();
   const [skillList, setSkillList] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
-  const [dialogVisibleSkill, setDialogVisibleSkill] = useState(false);
-  const [selectedItemsSkill, setSelectedItemsSkill] = useState(null);
-  const [skillAcrobatics, setSkillAcrobatics] = useState("");
-  const [skillAnimal, setSkillAnimal] = useState("");
-  const [skillArcana, setSkillArcana] = useState("");
-  const [skillAthletics, setSkillAthletics] = useState("");
-  const [skillDeception, setSkillDeception] = useState("");
-  const [skillHistory, setSkillHistory] = useState("");
-  const [skillInsight, setSkillInsight] = useState("");
-  const [skillIntimidation, setSkillIntimidation] = useState("");
-  const [skillInvestigation, setSkillInvestigation] = useState("");
-  const [skillMedicine, setSkillMedicine] = useState("");
-  const [skillNature, setSkillNature] = useState("");
-  const [skillPerception, setSkillPerception] = useState("");
-  const [skillPerformance, setSkillPerformance] = useState("");
-  const [skillPersuasion, setSkillPersuasion] = useState("");
-  const [skillReligion, setSkillReligion] = useState("");
-  const [skillSleight, setSkillSleight] = useState("");
-  const [skillStealth, setSkillStealth] = useState("");
-  const [skillSurvival, setSkillSurvival] = useState("");
 
   const [vuln, setVuln] = useState("");
   const [vulns, setVulns] = useState("");
@@ -219,6 +168,7 @@ const MonsterGen = () => {
   const [isDTActive, setIsDTActive] = useState(false);
   const [isGearActive, setIsGearActive] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
+  const [isMovementActive, setIsMovementActive] = useState(false);
 
   //OnChanges
   const onNameChange = (e) => {
@@ -299,6 +249,9 @@ const MonsterGen = () => {
   };
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
+  };
+  const showMovement = (e) => {
+    setIsMovementActive((current) => !current);
   };
 
   //Function to set ability modifier based on ability score
@@ -382,9 +335,12 @@ const MonsterGen = () => {
                 setAc,
                 setArmorType,
                 setHp,
-                setSpeed,
-                setSpeedType,
-                setSpeedExtra,
+                setBaseSpeed,
+                setBurrowSpeed,
+                setClimbSpeed,
+                setFlySpeed,
+                setSwimSpeed,
+                setHoverSpeed,
                 setStr,
                 setDex,
                 setCon,
@@ -405,38 +361,8 @@ const MonsterGen = () => {
                 setLegend,
                 setLair,
                 setGear,
-                setBurrow,
-                setClimb,
-                setHover,
-                setFly,
-                setSwim,
-                setSaveStr,
-                setSaveDex,
-                setSaveCon,
-                setSaveInt,
-                setSaveWis,
-                setSaveCha,
-                setSkillAcrobatics,
-                setSkillAnimal,
-                setSkillArcana,
-                setSkillAthletics,
-                setSkillDeception,
-                setSkillHistory,
-                setSkillInsight,
-                setSkillIntimidation,
-                setSkillInvestigation,
-                setSkillMedicine,
-                setSkillNature,
-                setSkillPerception,
-                setSkillPerformance,
-                setSkillPersuasion,
-                setSkillReligion,
-                setSkillSleight,
-                setSkillStealth,
-                setSkillSurvival,
               ]}
               setArrayState={[
-                setSpeedExtraList,
                 setSaveList,
                 setSkillList,
                 setVulnList,
@@ -493,7 +419,6 @@ const MonsterGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
-            {/* Baby come  back */}
             <SectionRandom
               value={[size, type, align, armorType]}
               setValue={[setSize, setType, setAlign, setArmorType]}
@@ -503,10 +428,10 @@ const MonsterGen = () => {
                 alignOptions,
                 armorTypeOptions,
               ]}
-              numberItem={[ac, hp, speed]}
-              setNumberItem={[setAc, setHp, setSpeed]}
-              maxNumber={[30, 500, 120]}
-              minNumber={[1, 1, 1]}
+              numberItem={[ac, hp]}
+              setNumberItem={[setAc, setHp]}
+              numberMax={[30, 500]}
+              numberMin={[1, 1]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
@@ -542,7 +467,7 @@ const MonsterGen = () => {
                 valueOptions={typeOptions}
               />
               <CustomDropDown
-                tableName={"aligs"}
+                tableName={"aligns"}
                 setSingular={setAlign}
                 setPlural={setAligns}
                 setOptions={setAlignOptions}
@@ -554,12 +479,13 @@ const MonsterGen = () => {
               <CustomInputNumber
                 setSingular={setAc}
                 value={ac}
+                h1Title={"AC"}
                 placeholder={"Set AC"}
                 maxNumber={30}
                 minNumber={1}
               />
               <CustomDropDown
-                tableName={"armorTypes"}
+                tableName={"itemsArmor"}
                 setSingular={setArmorType}
                 setPlural={setArmorTypes}
                 setOptions={setArmorTypeOptions}
@@ -571,18 +497,93 @@ const MonsterGen = () => {
               <CustomInputNumber
                 setSingular={setHp}
                 value={hp}
+                h1Title={"HP"}
                 placeholder={"Set HP"}
                 maxNumber={1000}
                 minNumber={1}
               />
+            </div>
+          </div>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showMovement}>
+              Movement{" "}
+              {isMovementActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              numberItem={[
+                baseSpeed,
+                flySpeed,
+                swimSpeed,
+                climbSpeed,
+                burrowSpeed,
+                hoverSpeed,
+              ]}
+              setNumberItem={[
+                setBaseSpeed,
+                setFlySpeed,
+                setSwimSpeed,
+                setClimbSpeed,
+                setBurrowSpeed,
+                setHoverSpeed,
+              ]}
+              numberMax={[120, 120, 120, 120, 120, 120]}
+              numberMin={[1, 1, 1, 1, 1, 1]}
+            />
+          </div>
+          <div className={isMovementActive ? style.subsection : style.hidden}>
+            <div>
               <CustomInputNumber
-                setSingular={setSpeed}
-                value={speed}
+                setSingular={setBaseSpeed}
+                value={baseSpeed}
+                h1Title={"Speed"}
                 placeholder={"Set Speed"}
                 maxNumber={1000}
-                minNumber={1}
+                minNumber={0}
               />
-              Extra Speed
+              <CustomInputNumber
+                setSingular={setFlySpeed}
+                value={flySpeed}
+                h1Title={"Fly Speed"}
+                placeholder={"Set Speed"}
+                maxNumber={1000}
+                minNumber={0}
+              />
+              <CustomInputNumber
+                setSingular={setSwimSpeed}
+                value={swimSpeed}
+                h1Title={"Swim Speed"}
+                placeholder={"Set Speed"}
+                maxNumber={1000}
+                minNumber={0}
+              />
+              <CustomInputNumber
+                setSingular={setClimbSpeed}
+                value={climbSpeed}
+                h1Title={"Climb Speed"}
+                placeholder={"Set Speed"}
+                maxNumber={1000}
+                minNumber={0}
+              />
+              <CustomInputNumber
+                setSingular={setBurrowSpeed}
+                value={burrowSpeed}
+                h1Title={"Burrow Speed"}
+                placeholder={"Set Speed"}
+                maxNumber={1000}
+                minNumber={0}
+              />
+              <CustomInputNumber
+                setSingular={setHoverSpeed}
+                value={hoverSpeed}
+                h1Title={"Hover Speed"}
+                placeholder={"Set Speed"}
+                maxNumber={1000}
+                minNumber={0}
+              />
             </div>
           </div>
           <div className={style.sectionOption}>
@@ -601,53 +602,53 @@ const MonsterGen = () => {
               setStatValue={[setStr, setDex, setCon, setInt, setWis, setCha]}
             />
           </div>
-            <div className={isAbilityActive ? style.subsection : style.hidden}>
-              <div>
-                <CustomInputNumber
-                  setSingular={setStr}
-                  h1Title={"Strength"}
-                  value={str}
-                  placeholder={"Set STR"}
-                  maxNumber={30}
-                />
-                <CustomInputNumber
-                  setSingular={setDex}
-                  h1Title={"Dexterity"}
-                  value={dex}
-                  placeholder={"Set DEX"}
-                  maxNumber={30}
-                />
-                <CustomInputNumber
-                  setSingular={setCon}
-                  h1Title={"Constitution"}
-                  value={con}
-                  placeholder={"Set CON"}
-                  maxNumber={30}
-                />
-                <CustomInputNumber
-                  setSingular={setInt}
-                  h1Title={"Intelligence"}
-                  value={int}
-                  placeholder={"Set INT"}
-                  maxNumber={30}
-                />
-                <CustomInputNumber
-                  setSingular={setWis}
-                  h1Title={"Wisdom"}
-                  value={wis}
-                  placeholder={"Set WIS"}
-                  maxNumber={30}
-                />
-                <CustomInputNumber
-                  setSingular={setCha}
-                  h1Title={"Charisma"}
-                  value={cha}
-                  placeholder={"Set CHA"}
-                  maxNumber={30}
-                />
-              </div>
+          <div className={isAbilityActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomInputNumber
+                setSingular={setStr}
+                h1Title={"Strength"}
+                value={str}
+                placeholder={"Set STR"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setDex}
+                h1Title={"Dexterity"}
+                value={dex}
+                placeholder={"Set DEX"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setCon}
+                h1Title={"Constitution"}
+                value={con}
+                placeholder={"Set CON"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setInt}
+                h1Title={"Intelligence"}
+                value={int}
+                placeholder={"Set INT"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setWis}
+                h1Title={"Wisdom"}
+                value={wis}
+                placeholder={"Set WIS"}
+                maxNumber={30}
+              />
+              <CustomInputNumber
+                setSingular={setCha}
+                h1Title={"Charisma"}
+                value={cha}
+                placeholder={"Set CHA"}
+                maxNumber={30}
+              />
             </div>
-            <div className={style.sectionOption}>
+          </div>
+          <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showSSD}>
               Saves & Skills{" "}
               {isSSDActive ? (
@@ -683,64 +684,64 @@ const MonsterGen = () => {
                 setLangList,
               ]}
             />
+          </div>
+          <div className={isSSDActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"abilities"}
+                setSingular={setSave}
+                setPlural={setSaves}
+                setOptions={setSaveOptions}
+                h1Title={"Saves"}
+                dialogHeader={"Saves"}
+                selectedItem={selectedSave}
+                setSelectedItem={setSelectedSave}
+                list={saveList}
+                setList={setSaveList}
+                valueOptions={saveOptions}
+              />
+              <CustomDataTable
+                tableName={"skills"}
+                setSingular={setSkill}
+                setPlural={setSkills}
+                setOptions={setSkillOptions}
+                h1Title={"Skills"}
+                dialogHeader={"Skills"}
+                selectedItem={selectedSkill}
+                setSelectedItem={setSelectedSkill}
+                list={skillList}
+                setList={setSkillList}
+                valueOptions={skillOptions}
+              />
+              <CustomDataTable
+                tableName={"senses"}
+                setSingular={setSense}
+                setPlural={setSenses}
+                setOptions={setSenseOptions}
+                h1Title={"Senses"}
+                dialogHeader={"Senses"}
+                selectedItem={selectedSense}
+                setSelectedItem={setSelectedSense}
+                list={senseList}
+                setList={setSenseList}
+                valueOptions={senseOptions}
+              />
+              <CustomDataTable
+                tableName={"languages"}
+                setSingular={setLang}
+                setPlural={setLangs}
+                setOptions={setLangOptions}
+                h1Title={"Languages"}
+                dialogHeader={"Languages"}
+                selectedItem={selectedLang}
+                setSelectedItem={setSelectedLang}
+                list={langList}
+                setList={setLangList}
+                valueOptions={langOptions}
+              />
             </div>
-            <div className={isSSDActive ? style.subsection : style.hidden}>
-              <div>
-                <CustomDataTable
-                  tableName={"abilities"}
-                  setSingular={setSave}
-                  setPlural={setSaves}
-                  setOptions={setSaveOptions}
-                  h1Title={"Saves"}
-                  dialogHeader={"Saves"}
-                  selectedItem={selectedSave}
-                  setSelectedItem={setSelectedSave}
-                  list={saveList}
-                  setList={setSaveList}
-                  valueOptions={saveOptions}
-                />
-                <CustomDataTable
-                  tableName={"skills"}
-                  setSingular={setSkill}
-                  setPlural={setSkills}
-                  setOptions={setSkillOptions}
-                  h1Title={"Skills"}
-                  dialogHeader={"Skills"}
-                  selectedItem={selectedSkill}
-                  setSelectedItem={setSelectedSkill}
-                  list={skillList}
-                  setList={setSkillList}
-                  valueOptions={skillOptions}
-                />
-                <CustomDataTable
-                  tableName={"senses"}
-                  setSingular={setSense}
-                  setPlural={setSenses}
-                  setOptions={setSenseOptions}
-                  h1Title={"Senses"}
-                  dialogHeader={"Senses"}
-                  selectedItem={selectedSense}
-                  setSelectedItem={setSelectedSense}
-                  list={senseList}
-                  setList={setSenseList}
-                  valueOptions={senseOptions}
-                />
-                <CustomDataTable
-                  tableName={"languages"}
-                  setSingular={setLang}
-                  setPlural={setLangs}
-                  setOptions={setLangOptions}
-                  h1Title={"Languages"}
-                  dialogHeader={"Languages"}
-                  selectedItem={selectedLang}
-                  setSelectedItem={setSelectedLang}
-                  list={langList}
-                  setList={setLangList}
-                  valueOptions={langOptions}
-                />
-              </div>
-            </div>
-            <div className={style.sectionOption}>
+          </div>
+          <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showDT}>
               Damage Types{" "}
               {isDTActive ? (
@@ -781,66 +782,66 @@ const MonsterGen = () => {
                 setConditionList,
               ]}
             />
+          </div>
+          <div className={isDTActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"damageTypes"}
+                setSingular={setVuln}
+                setPlural={setVulns}
+                setOptions={setVulnOptions}
+                h1Title={"Vulnerabilities"}
+                dialogHeader={"Vulnerabilities"}
+                selectedItem={selectedVuln}
+                setSelectedItem={setSelectedVuln}
+                list={vulnList}
+                setList={setVulnList}
+                valueOptions={vulnOptions}
+              />
+              <CustomDataTable
+                tableName={"damageTypes"}
+                setSingular={setImmune}
+                setPlural={setImmunes}
+                setOptions={setImmuneOptions}
+                h1Title={"Immunities"}
+                dialogHeader={"Immunities"}
+                selectedItem={selectedImmune}
+                setSelectedItem={setSelectedImmune}
+                list={immuneList}
+                setList={setImmuneList}
+                valueOptions={immuneOptions}
+              />
+              <CustomDataTable
+                tableName={"damageTypes"}
+                setSingular={setResist}
+                setPlural={setResists}
+                setOptions={setResistOptions}
+                h1Title={"Resistances"}
+                dialogHeader={"Resistances"}
+                selectedItem={selectedResist}
+                setSelectedItem={setSelectedResist}
+                list={resistList}
+                setList={setResistList}
+                valueOptions={resistOptions}
+              />
+              <CustomDataTable
+                tableName={"conditions"}
+                setSingular={setCondition}
+                setPlural={setConditions}
+                setOptions={setConditionOptions}
+                h1Title={"Conditions"}
+                dialogHeader={"Conditions"}
+                selectedItem={selectedCondition}
+                setSelectedItem={setSelectedCondition}
+                list={conditionList}
+                setList={setConditionList}
+                valueOptions={conditionOptions}
+              />
             </div>
-            <div className={isDTActive ? style.subsection : style.hidden}>
-              <div>
-                <CustomDataTable
-                  tableName={"damageTypes"}
-                  setSingular={setVuln}
-                  setPlural={setVulns}
-                  setOptions={setVulnOptions}
-                  h1Title={"Vulnerabilities"}
-                  dialogHeader={"Vulnerabilities"}
-                  selectedItem={selectedVuln}
-                  setSelectedItem={setSelectedVuln}
-                  list={vulnList}
-                  setList={setVulnList}
-                  valueOptions={vulnOptions}
-                />
-                <CustomDataTable
-                  tableName={"damageTypes"}
-                  setSingular={setImmune}
-                  setPlural={setImmunes}
-                  setOptions={setImmuneOptions}
-                  h1Title={"Immunities"}
-                  dialogHeader={"Immunities"}
-                  selectedItem={selectedImmune}
-                  setSelectedItem={setSelectedImmune}
-                  list={immuneList}
-                  setList={setImmuneList}
-                  valueOptions={immuneOptions}
-                />
-                <CustomDataTable
-                  tableName={"damageTypes"}
-                  setSingular={setResist}
-                  setPlural={setResists}
-                  setOptions={setResistOptions}
-                  h1Title={"Resistances"}
-                  dialogHeader={"Resistances"}
-                  selectedItem={selectedResist}
-                  setSelectedItem={setSelectedResist}
-                  list={resistList}
-                  setList={setResistList}
-                  valueOptions={resistOptions}
-                />
-                <CustomDataTable
-                  tableName={"conditions"}
-                  setSingular={setCondition}
-                  setPlural={setConditions}
-                  setOptions={setConditionOptions}
-                  h1Title={"Conditions"}
-                  dialogHeader={"Conditions"}
-                  selectedItem={selectedCondition}
-                  setSelectedItem={setSelectedCondition}
-                  list={conditionList}
-                  setList={setConditionList}
-                  valueOptions={conditionOptions}
-                />
-              </div>
-            </div>
-            <div className={style.sectionOption}>
+          </div>
+          <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showAA}>
-              Actions / Abilities{" "}
+              Actions & Abilities{" "}
               {isAAActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
@@ -884,64 +885,64 @@ const MonsterGen = () => {
                 setLairList,
               ]}
             />
+          </div>
+          <div className={isAAActive ? style.subsection : style.hidden}>
+            <div>
+              <CustomDataTable
+                tableName={"monstersAbilities"}
+                setSingular={setSpecial}
+                setPlural={setSpecials}
+                setOptions={setSpecialOptions}
+                h1Title={"Special Abilities"}
+                dialogHeader={"Special Abilities"}
+                selectedItem={selectedSpecial}
+                setSelectedItem={setSelectedSpecial}
+                list={specialList}
+                setList={setSpecialList}
+                valueOptions={specialOptions}
+              />
+              <CustomDataTable
+                tableName={"monstersActions"}
+                setSingular={setAction}
+                setPlural={setActions}
+                setOptions={setActionOptions}
+                h1Title={"Actions"}
+                dialogHeader={"Actions"}
+                selectedItem={selectedAction}
+                setSelectedItem={setSelectedAction}
+                list={actionList}
+                setList={setActionList}
+                valueOptions={actionOptions}
+              />
+              <CustomDataTable
+                tableName={"monstersLegendaryActions"}
+                setSingular={setLegend}
+                setPlural={setLegends}
+                setOptions={setLegendOptions}
+                h1Title={"Legendary Actions"}
+                dialogHeader={"Legendary Actions"}
+                selectedItem={selectedLegend}
+                setSelectedItem={setSelectedLegend}
+                list={legendList}
+                setList={setLegendList}
+                valueOptions={legendOptions}
+              />
+              <CustomDataTable
+                tableName={"monstersLairActions"}
+                setSingular={setLair}
+                setPlural={setLairs}
+                setOptions={setLairOptions}
+                h1Title={"Lair Actions"}
+                dialogHeader={"Lair Actions"}
+                selectedItem={selectedLair}
+                setSelectedItem={setSelectedLair}
+                list={lairList}
+                setList={setLairList}
+                valueOptions={lairOptions}
+              />
             </div>
-            <div className={isAAActive ? style.subsection : style.hidden}>
-              <div>
-                <CustomDataTable
-                  tableName={"monstersAbilities"}
-                  setSingular={setSpecial}
-                  setPlural={setSpecials}
-                  setOptions={setSpecialOptions}
-                  h1Title={"Special Abilities"}
-                  dialogHeader={"Special Abilities"}
-                  selectedItem={selectedSpecial}
-                  setSelectedItem={setSelectedSpecial}
-                  list={specialList}
-                  setList={setSpecialList}
-                  valueOptions={specialOptions}
-                />
-                <CustomDataTable
-                  tableName={"monstersActions"}
-                  setSingular={setAction}
-                  setPlural={setActions}
-                  setOptions={setActionOptions}
-                  h1Title={"Actions"}
-                  dialogHeader={"Actions"}
-                  selectedItem={selectedAction}
-                  setSelectedItem={setSelectedAction}
-                  list={actionList}
-                  setList={setActionList}
-                  valueOptions={actionOptions}
-                />
-                <CustomDataTable
-                  tableName={"monstersLegendaryActions"}
-                  setSingular={setLegend}
-                  setPlural={setLegends}
-                  setOptions={setLegendOptions}
-                  h1Title={"Legendary Actions"}
-                  dialogHeader={"Legendary Actions"}
-                  selectedItem={selectedLegend}
-                  setSelectedItem={setSelectedLegend}
-                  list={legendList}
-                  setList={setLegendList}
-                  valueOptions={legendOptions}
-                />
-                <CustomDataTable
-                  tableName={"monstersLairActions"}
-                  setSingular={setLair}
-                  setPlural={setLairs}
-                  setOptions={setLairOptions}
-                  h1Title={"Lair Actions"}
-                  dialogHeader={"Lair Actions"}
-                  selectedItem={selectedLair}
-                  setSelectedItem={setSelectedLair}
-                  list={lairList}
-                  setList={setLairList}
-                  valueOptions={lairOptions}
-                />
-              </div>
-            </div>
-            <div className={style.sectionOption}>
+          </div>
+          <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showGear}>
               Equipment{" "}
               {isGearActive ? (
@@ -957,29 +958,29 @@ const MonsterGen = () => {
               selectedValueList={[gearList]}
               setSelectedValueList={[setGearList]}
             />
-            </div>
-            <div className={isGearActive ? style.subsection : style.hidden}>
-              <Items
-                h1Title={"Inventory"}
-                dialogHeader={"Items"}
-                selectedItem={selectedGear}
-                setSelectedItem={setSelectedGear}
-                itemList={gearList}
-                setItemList={setGearList}
-                valueOptions={gearOptions}
-                setItemOptions={setGearOptions}
-                options={gearOptions}
-              />
-            </div>
           </div>
-        
+          <div className={isGearActive ? style.subsection : style.hidden}>
+            <Items
+              h1Title={"Inventory"}
+              dialogHeader={"Items"}
+              selectedItem={selectedGear}
+              setSelectedItem={setSelectedGear}
+              itemList={gearList}
+              setItemList={setGearList}
+              valueOptions={gearOptions}
+              setItemOptions={setGearOptions}
+              options={gearOptions}
+            />
+          </div>
+        </div>
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
           <NameDisplay value={name} setNewValue={setName} />
           <h2>
             <SingleDisplayText value={size} setNewValue={setSize} />{" "}
-            <SingleDisplayText value={type} setNewValue={setType} />,{" "}
+            <SingleDisplayText value={type} setNewValue={setType} />
+            <span className={style.minorText2}>, </span>
             <SingleDisplayText value={align} setNewValue={setAlign} />
           </h2>
           <hr className={style.lineBreak} />
@@ -991,8 +992,63 @@ const MonsterGen = () => {
             Hit Points <SingleDisplayNumber value={hp} setNewValue={setHp} />
           </h2>
           <h2>
-            Speed <SingleDisplayNumber value={speed} setNewValue={setSpeed} />
+            Speed{" "}
+            <SingleDisplayNumber value={baseSpeed} setNewValue={setBaseSpeed} />
+            {baseSpeed !== "" ? (
+              <span className={style.minorText2}> ft. </span>
+            ) : null}
+            {flySpeed !== "" ? (
+              <>
+              <span className={style.minorText2}>Fly </span>
+                <SingleDisplayNumber
+                  value={flySpeed}
+                  setNewValue={setFlySpeed}
+                />
+                <span className={style.minorText2}> ft. </span>
+              </>
+            ) : null}
+            {swimSpeed !== "" ? (
+              <>
+              <span className={style.minorText2}>Swim </span>
+                <SingleDisplayNumber
+                  value={swimSpeed}
+                  setNewValue={setSwimSpeed}
+                />
+                <span className={style.minorText2}> ft. </span>
+              </>
+            ) : null}
+            {climbSpeed !== "" ? (
+              <>
+              <span className={style.minorText2}>Climb </span>
+                <SingleDisplayNumber
+                  value={climbSpeed}
+                  setNewValue={setClimbSpeed}
+                />
+                <span className={style.minorText2}> ft. </span>
+              </>
+            ) : null}
+            {burrowSpeed !== "" ? (
+              <>
+              <span className={style.minorText2}>Burrow </span>
+                <SingleDisplayNumber
+                  value={burrowSpeed}
+                  setNewValue={setBurrowSpeed}
+                />
+                <span className={style.minorText2}> ft. </span>
+              </>
+            ) : null}
+            {hoverSpeed !== "" ? (
+              <>
+              <span className={style.minorText2}>Hover </span>
+                <SingleDisplayNumber
+                  value={hoverSpeed}
+                  setNewValue={setHoverSpeed}
+                />
+                <span className={style.minorText2}> ft. </span>
+              </>
+            ) : null}
           </h2>
+          <h2></h2>
           <hr className={style.lineBreak} />
           <h3 className={style.abilityScores}>
             <div>
@@ -1194,8 +1250,7 @@ const MonsterGen = () => {
           )}
         </div>
       </div>
-      </div>
-   
+    </div>
   );
 };
 
