@@ -604,8 +604,8 @@ const Items = (props) => {
     props.setSelectedItem((saveArray) => [...saveArray, itemOptions[r]]);
   };
   const randomItemBtn = (
-    <button onClick={onRandomItem} className={style.btnName}>
-      Random
+    <button onClick={onRandomItem} className={style.diceBtn}>
+      <span className={style.diceBtnText}>Random</span>
     </button>
   );
   const itemOptions2 = useRef();

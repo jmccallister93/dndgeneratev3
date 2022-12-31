@@ -154,8 +154,8 @@ $btn-blue: #2196f3;
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
-  width: 75px;
-  height: 75px;
+  width: 65px;
+  height: 65px;
   border-radius: 75%;
   border: 0;
   margin: 0.1rem;
@@ -173,15 +173,15 @@ $btn-blue: #2196f3;
 }
 .diceBtnText{
   color: rgb(255, 255, 255);
-  // font-weight: bold;
+  font-weight: 400;
   font-size: 1rem;
   // text-shadow: 1px 1px 10px rgb(0, 128, 0);
   background-color: rgb(0, 128, 0, .75);
   box-shadow: 0px 0px 10px 5px rgba(0, 128, 0, 0.5);
   border-radius: 10%;
   padding: 2%;
-  letter-spacing: 1.5px;
-  line-height: 1.5px;
+  letter-spacing: 0.5px;
+  
   text-align: center;
 }
 

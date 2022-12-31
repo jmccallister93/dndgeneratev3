@@ -359,6 +359,7 @@ const SectionRandom = (props) => {
   //Number Generate HP
   const numberGenerate = (e) => {
     if (props.numberItem) {
+      console.log(props.numberItem)
       for (let i = 0; i < props.numberItem.length; i++) {
         let r = Math.floor(
           Math.random() * (props.numberMax[i] - props.numberMin[i]) + props.numberMin[i]

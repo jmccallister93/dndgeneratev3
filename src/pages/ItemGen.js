@@ -492,7 +492,7 @@ const ItemGen = () => {
           </h1>
           <SectionRandom
           value={[
-            description,
+            
             dice,
             weaponProperty,
             weaponType,
@@ -500,7 +500,7 @@ const ItemGen = () => {
             armorMod,
           ]}
           valueOptions={[
-            descriptionOptions,
+            
             diceOptions,
             weaponPropertyOptions,
             weaponTypeOptions,
@@ -508,14 +508,14 @@ const ItemGen = () => {
             armorModOptions
           ]}
           setValue={[
-            setDescription,
+            
             setDice,
             setWeaponProperty,
             setWeaponType,
             setDmgType,
             setArmorMod
           ]}
-          numberItems={[
+          numberItem={[
             diceCount,
             diceBonus,
             vehicleSpeed,
@@ -545,7 +545,7 @@ const ItemGen = () => {
             5,
             5,
           ]}
-          setNumberItems={[
+          setNumberItem={[
             setDiceCount,
             setDiceBonus,
             setVehicleSpeed,
