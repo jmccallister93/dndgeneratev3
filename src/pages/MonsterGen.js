@@ -980,7 +980,7 @@ const MonsterGen = () => {
           <h2>
             <SingleDisplayText value={size} setNewValue={setSize} />{" "}
             <SingleDisplayText value={type} setNewValue={setType} />
-            <span className={style.minorText2}>, </span>
+            {type !== "" ? <span className={style.minorText2}>, </span> : null}
             <SingleDisplayText value={align} setNewValue={setAlign} />
           </h2>
           <hr className={style.lineBreak} />
@@ -999,7 +999,7 @@ const MonsterGen = () => {
             ) : null}
             {flySpeed !== "" ? (
               <>
-              <span className={style.minorText2}>Fly </span>
+                <span className={style.minorText2}>Fly </span>
                 <SingleDisplayNumber
                   value={flySpeed}
                   setNewValue={setFlySpeed}
@@ -1009,7 +1009,7 @@ const MonsterGen = () => {
             ) : null}
             {swimSpeed !== "" ? (
               <>
-              <span className={style.minorText2}>Swim </span>
+                <span className={style.minorText2}>Swim </span>
                 <SingleDisplayNumber
                   value={swimSpeed}
                   setNewValue={setSwimSpeed}
@@ -1019,7 +1019,7 @@ const MonsterGen = () => {
             ) : null}
             {climbSpeed !== "" ? (
               <>
-              <span className={style.minorText2}>Climb </span>
+                <span className={style.minorText2}>Climb </span>
                 <SingleDisplayNumber
                   value={climbSpeed}
                   setNewValue={setClimbSpeed}
@@ -1029,7 +1029,7 @@ const MonsterGen = () => {
             ) : null}
             {burrowSpeed !== "" ? (
               <>
-              <span className={style.minorText2}>Burrow </span>
+                <span className={style.minorText2}>Burrow </span>
                 <SingleDisplayNumber
                   value={burrowSpeed}
                   setNewValue={setBurrowSpeed}
@@ -1039,7 +1039,7 @@ const MonsterGen = () => {
             ) : null}
             {hoverSpeed !== "" ? (
               <>
-              <span className={style.minorText2}>Hover </span>
+                <span className={style.minorText2}>Hover </span>
                 <SingleDisplayNumber
                   value={hoverSpeed}
                   setNewValue={setHoverSpeed}
@@ -1048,7 +1048,6 @@ const MonsterGen = () => {
               </>
             ) : null}
           </h2>
-          <h2></h2>
           <hr className={style.lineBreak} />
           <h3 className={style.abilityScores}>
             <div>
@@ -1139,7 +1138,7 @@ const MonsterGen = () => {
             </div>
           </h3>
           <hr className={style.lineBreak} />
-          {saveList.length === 0 ? null : (
+          {selectedSave.length === 0 ? null : (
             <>
               <h2>
                 Saving Throws{" "}
@@ -1150,7 +1149,7 @@ const MonsterGen = () => {
             </>
           )}
 
-          {skillList.length === 0 ? null : (
+          {selectedSkill.length === 0 ? null : (
             <>
               <h2>
                 Skills{" "}
@@ -1161,7 +1160,7 @@ const MonsterGen = () => {
             </>
           )}
 
-          {vulnList.length === 0 ? null : (
+          {selectedVuln.length === 0 ? null : (
             <>
               <h2>
                 Damage Vulnerabilities{" "}
@@ -1172,7 +1171,7 @@ const MonsterGen = () => {
             </>
           )}
 
-          {immuneList.length === 0 ? null : (
+          {selectedImmune.length === 0 ? null : (
             <>
               <h2>
                 Damage Immunities{" "}
@@ -1183,7 +1182,7 @@ const MonsterGen = () => {
             </>
           )}
 
-          {resistList.length === 0 ? null : (
+          {selectedResist.length === 0 ? null : (
             <>
               <h2>
                 Damage Resistances{" "}
@@ -1193,7 +1192,7 @@ const MonsterGen = () => {
               </h2>
             </>
           )}
-          {conditionList.length === 0 ? null : (
+          {selectedCondition.length === 0 ? null : (
             <>
               <h2>
                 Condition Immunities{" "}
@@ -1203,7 +1202,7 @@ const MonsterGen = () => {
               </h2>
             </>
           )}
-          {senseList.length === 0 ? null : (
+          {selectedSense.length === 0 ? null : (
             <>
               <h2>
                 Senses{" "}
@@ -1215,7 +1214,7 @@ const MonsterGen = () => {
           )}
           <h2>
             Languages{" "}
-            {langList.length === 0 ? (
+            {selectedLang.length === 0 ? (
               "--"
             ) : (
               <span className={style.minorText2}>
@@ -1224,13 +1223,19 @@ const MonsterGen = () => {
             )}
           </h2>
           <hr className={style.lineBreak} />
-          <MultipleDisplay selectedItem={selectedSpecial} />
+          <h2>
+            <span className={style.minorText2}>
+              <MultipleDisplay selectedItem={selectedSpecial} />
+            </span>
+          </h2>
           <h1>Actions</h1>
           <hr className={style.subLineBreak} />
           <h2>
-            <MultipleDisplay selectedItem={selectedAction} />
+            <span className={style.minorText2}>
+              <MultipleDisplay selectedItem={selectedAction} />
+            </span>
           </h2>
-          {legendList.length === 0 ? null : (
+          {selectedLegend.length === 0 ? null : (
             <>
               <h1>Legendary Actions</h1>
               <hr className={style.subLineBreak} />
@@ -1239,7 +1244,7 @@ const MonsterGen = () => {
               </h2>
             </>
           )}
-          {lairList.length === 0 ? null : (
+          {selectedLair.length === 0 ? null : (
             <>
               <h1>Lair Actions</h1>
               <hr className={style.subLineBreak} />

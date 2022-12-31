@@ -1075,7 +1075,7 @@ const NpcGen = () => {
               value={[action]}
               valueOptions={[actionOptions]}
               setValue={[setAction]}
-              selectedValue={[selectedItem]}
+              selectedValue={[selectedItem]} 
               selectedValueOptions={[itemOptions]}
               setSelectedValue={[setSelectedItem]}
               selectedValueList={[itemList]}
