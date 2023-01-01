@@ -31,6 +31,7 @@ import SingleDisplayText from "../components/SingleDisplayText";
 import SingleDisplayNumber from "../components/SingleDisplayNumber";
 import MultipleDisplay from "../components/MultipleDisplay";
 import NameDisplay from "../components/NameDisplay";
+import CustomModifier from "../components/CustomModifier";
 
 const MonsterGen = () => {
   //Set States
@@ -83,6 +84,11 @@ const MonsterGen = () => {
   const [saveList, setSaveList] = useState([]);
   const [selectedSave, setSelectedSave] = useState([]);
   const [strSave, setStrSave] = useState("");
+  const [dexSave, setDexSave] = useState("");
+  const [conSave, setConSave] = useState("");
+  const [intSave, setIntSave] = useState("");
+  const [wisSave, setWisSave] = useState("");
+  const [chaSave, setChaSave] = useState("");
 
   const [skill, setSkill] = useState("");
   const [skills, setSkills] = useState("");
@@ -701,20 +707,12 @@ const MonsterGen = () => {
                 setList={setSaveList}
                 valueOptions={saveOptions}
               />
-              {console.log(Object.values(selectedSave).includes("Strength"))}
-              {selectedSave.includes("Strength") ? (
-                console.log("Yes")
-                // <CustomInputNumber
-                //   setSingular={setStrSave}
-                //   h1Title={"Strength Save"}
-                //   value={strSave}
-                //   placeholder={"Set STR Save"}
-                //   maxNumber={30}
-                // />
-              ) : null}
-              
-
-              
+{/*Working on adding there modifiers  */}
+              <CustomModifier
+                selectedValue={[selectedSave]}
+                value={[strSave, dexSave, conSave, intSave, wisSave, chaSave]}
+                setValue={[setStrSave, setDexSave, setConSave, setIntSave, setWisSave, setChaSave]}
+              />
               <CustomDataTable
                 tableName={"skills"}
                 setSingular={setSkill}
