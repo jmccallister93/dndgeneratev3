@@ -27,12 +27,19 @@ import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
 import ExportButtons from "../components/ExportButtons";
 import { jsPDF } from "jspdf";
+import { Tooltip } from "primereact/tooltip";
+import InfoModal from "../components/InfoModal";
+import SectionRandom from "../components/SectionRandom";
+import CustomName from "../components/CustomName";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayNumber from "../components/SingleDisplayNumber";
 
 const CityGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isLayoutActive, setIsLayoutActive] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [cityName, setCityName] = useState("");
   const [cityNames, setCityNames] = useState("");
@@ -108,6 +115,8 @@ const CityGen = () => {
 
   const [numberSize, setNumebrSize] = useState("");
 
+  const divRef = useRef(null);
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -121,32 +130,33 @@ const CityGen = () => {
   const showLayout = (e) => {
     setIsLayoutActive((current) => !current);
   };
-
-
-  const onExport = () => {
-    var doc = new jsPDF("portrait");
-    doc.text(
-      20,
-      20,
-      `Name: ${cityName} 
-        Type: ${type} 
-        Size: ${size} 
-        Population: ${population} 
-        Atmosphere: ${atmosphere} 
-        Culture: ${culture} 
-        Terrain: ${terrain} 
-        Landmark: ${landmark} 
-        Government: ${govern} 
-        Guilds: ${guildList}
-        Factions: ${factionList}
-        Events: ${eventList}
-        NPCs: ${npcList}
-        Districts: ${districtList}
-        Buildings: ${buildingList} `
-    );
-    doc.save("Test.pdf");
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
   };
-  
+
+  //Info content
+  const infoContent = (
+    <div className={style.infoContent}>
+      <p>This is a tool to help you generate NPCs for your games.</p>
+      <p>
+        You can use the Generate button in the top left to randomly set all
+        fields to random values.
+      </p>
+      <p>
+        You can also use the Generate button in each section to randomly set the
+        fields in that section.
+      </p>
+      <p>You can also manually set the fields to whatever you want.</p>
+      <p>
+        Once a value has been set you can click on the field in the display to
+        edit it.
+      </p>
+      <p>
+        Once you have set all the fields to your liking, you can click the
+        Export button to export the NPC to file of your choice.
+      </p>
+    </div>
+  );
 
   return (
     <div className={style.mainWrapper}>
@@ -229,6 +239,29 @@ const CityGen = () => {
                 setSelectedDistrict,
               ]}
             />
+            {/* Export Btns */}
+            <h1>
+              Export
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef} data={npc} />
+              </div>
+            </h1>
+            {/* ToolTip */}
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="How To Use Guide"
+                />
+                <InfoModal
+                  header={"NPC Generator Info"}
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -236,58 +269,37 @@ const CityGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          {/* <ExportButtons
-            headersSingular={[
-              "City Name",
-              "Type",
-              "Population",
-              "Atmosphere",
-              "Terrain",
-              "Landmark",
-              "Government",
-              
-            ]}
-            headersPlural={[
-                "Guilds",
-                "Factions",
-                "Events",
-                "NPCs",
-                "Districts",
-                "Buildings",
-            ]}
-            combinedObj={
-              { Name: cityName ,
-               Type: type,
-               Population: population,
-               Atmosphere: atmosphere,
-               Terrain: terrain,
-               Landmark: landmark,
-               Government: govern,
-               Guilds: selectedGuild,
-               Factions: selectedFaction,
-               Events: selectedEvent ,
-               NPCs: selectedNpc ,
-               Districts: selectedDistrict ,
-               Buildings: selectedBuilding }
-            }
-          /> */}
-          {/* <div>
-            <h1>Export to PDF</h1>
-            <button className={style.btnName} onClick={onExport}>
-              PDF
-            </button>
-          </div> */}
           <h1>City Options</h1>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[type, size]}
+              valueOptions={[typeOptions, sizeOptions]}
+              setValue={[setType, setSize]}
+              numberItem={[population]}
+              setNumberItem={[setPopulation]}
+              numberMax={[100000]}
+              numberMin={[100]}
+            />
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputText
+              <CustomName
+                tableName={"names"}
+                name={cityName}
+                setName={setCityName}
+                setNames={setCityNames}
+                setNameOptions={setCityNameOptions}
+                nameOptions={cityNameOptions}
                 title={"City Name"}
-                input={cityName}
-                setInput={setCityName}
-                placeholder={"Set City Name"}
+                placeholder={"Set Name"}
               />
               <CustomDropDown
                 tableName={"itemsTypes"}
@@ -313,15 +325,40 @@ const CityGen = () => {
               />
               <CustomInputNumber
                 setSingular={setPopulation}
-                h1Title={"Population"}
                 value={population}
                 placeholder={"Set Population"}
+                maxNumber={100000}
+                minNumber={100}
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showFeature}>
-            City Features
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showFeature}>
+              City Features{" "}
+              {isFeatureActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[atmosphere, culture, terrain, landmark]}
+              valueOptions={[
+                atmoshpereOptions,
+                cultureOptions,
+                terrainOptions,
+                landmarkOptions,
+                
+              ]}
+              setValue={[
+                setAtmoshpere,
+                setCulture,
+                setTerrain,
+                setLandmark,
+                
+              ]}
+            />
+          </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
@@ -370,9 +407,39 @@ const CityGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showDetails}>
-            City Details
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showDetails}>
+              City Details{" "}
+              {isDetailActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[govern]}
+              valueOptions={[governOptions]}
+              setValue={[setGovern]}
+              selectedValue={[
+                selectedGuild,
+                selectedFaction,
+                selectedEvent,
+                selectedNpc,
+              ]}
+              setSelectedValue={[
+                setSelectedGuild,
+                setSelectedFaction,
+                setSelectedEvent,
+                setSelectedNpc,
+              ]}
+              selectedValueOptions={[
+                guildOptions,
+                factionOptions,
+                eventOptions,
+                npcOptions,
+              ]}
+            />
+          </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
@@ -441,9 +508,30 @@ const CityGen = () => {
               />
             </div>
           </div>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showLayout}>
-            City Layout
+            City Layout{" "}
+            {isBasicActive ? (
+              <i className="pi pi-chevron-down"></i>
+            ) : (
+              <i className="pi pi-chevron-right"></i>
+            )}
           </h1>
+          <SectionRandom
+            selectedValue={[
+              selectedDistrict,
+              selectedBuilding,
+            ]}
+            setSelectedValue={[
+              setSelectedDistrict,
+              setSelectedBuilding,
+            ]}
+            selectedValueOptions={[
+              districtOptions,
+              buildingOptions,
+            ]}
+          />
+        </div>
           <div className={isLayoutActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
@@ -477,34 +565,72 @@ const CityGen = () => {
         </div>
 
         {/* Main Display */}
-        <div id="mainDisplay" className={style.display}>
-          <h1>{cityName}</h1>
+        <div ref={divRef} className={style.display}>
+          <NameDisplay value={cityName} setNewValue={setCityName} />
           <h2>
-            Type <span className={style.minorText2}>{type}</span>
+            Type{" "}
+            <SingleDisplayText
+              value={type}
+              setNewValue={setType}
+            />
           </h2>
           <h2>
-            Size <span className={style.minorText2}>{size}</span>
+            Size{" "}
+            <SingleDisplayText
+              value={size}
+              setNewValue={setSize}
+            />
           </h2>
           <h2>
-            Population <span className={style.minorText2}>{population}</span>
+            Population{" "}
+            <SingleDisplayNumber
+              value={population}
+              setNewValue={setPopulation}
+            />
+          </h2>
+          <hr className={style.lineBreak}/>
+          <h2>
+            Atmoshpere{" "}
+            <SingleDisplayText
+              value={atmosphere}
+              setNewValue={setAtmoshpere}
+            />
           </h2>
           <h2>
-            Atmoshpere <span className={style.minorText2}>{atmosphere}</span>
+            Culture{" "}
+            <SingleDisplayText
+              value={culture}
+              setNewValue={setCulture}
+            />
           </h2>
           <h2>
-            City Terrain <span className={style.minorText2}>{terrain}</span>
+            City Terrain{" "}
+            <SingleDisplayText
+              value={terrain}
+              setNewValue={setTerrain}
+            />
           </h2>
           <h2>
-            Landmark <span className={style.minorText2}>{landmark}</span>
+            Landmark{" "}
+            <SingleDisplayText
+              value={landmark}
+              setNewValue={setLandmark}
+            />
           </h2>
+          <hr className={style.lineBreak}/>
           <h2>
-            Government <span className={style.minorText2}>{govern}</span>
+            Government{" "}
+            <SingleDisplayText
+              value={govern}
+              setNewValue={setGoverns}
+            />
           </h2>
           <h2>
             Guilds{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedGuild}
+                list={guildList}
                 setList={setGuildList}
               />
             </span>
@@ -514,6 +640,7 @@ const CityGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedFaction}
+                list={factionList}
                 setList={setFactionList}
               />
             </span>
@@ -523,6 +650,7 @@ const CityGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedEvent}
+                list={eventList}
                 setList={setEventList}
               />
             </span>
@@ -532,15 +660,18 @@ const CityGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedNpc}
+                list={npcList}
                 setList={setNpcList}
               />
             </span>
           </h2>
+          <hr className={style.lineBreak}/>
           <h2>
             Districts{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedDistrict}
+                list={districtList}
                 setList={setDistrictList}
               />
             </span>
@@ -550,6 +681,7 @@ const CityGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedBuilding}
+                list={buildingList}
                 setList={setBuildingList}
               />
             </span>

@@ -7,12 +7,14 @@ const MultipleDisplay = (props) => {
   //selectedItem
   //---PROPS NEEDED---
   const [multipleDisplay, setMultipleDisplay] = useState([]);
+  const [display, setDisplay] = useState();
 
   useEffect(() => {
     if (props.selectedItem === undefined) {
-    } else if (props.selectedItem.length >= 0) {
+    } else {
       setMultipleDisplay(props.selectedItem);
     }
+    console.log(props.selectedItem);
   }, [props.selectedItem]);
 
   const onClick = (e) => {
@@ -34,18 +36,24 @@ const MultipleDisplay = (props) => {
     };
   };
 
-  const display = multipleDisplay.map((i) => {
-    return (
-      <span
-        className="editText"
-        onClick={onClick}
-        contentEditable="false"
-        suppressContentEditableWarning={true}
-      >
-        <span className={style.minorText3}>{`${i.name}, `}</span>
-      </span>
-    );
-  });
+  useEffect(() => {
+      setDisplay(
+        multipleDisplay.map((i) => {
+          return (
+            <span
+              className="editText"
+              onClick={onClick}
+              contentEditable="false"
+              suppressContentEditableWarning={true}
+            >
+              <span className={style.minorText3}>
+                {i === undefined ? null:(`${i.name}, `)}
+                </span>
+            </span>
+          );
+        })
+      );
+  }, [multipleDisplay]);
 
   return <>{display}</>;
 };

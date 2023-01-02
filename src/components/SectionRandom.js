@@ -356,7 +356,7 @@ const SectionRandom = (props) => {
       }
     }
   };
-  //Number Generate HP
+  //Number Generate General
   const numberGenerate = (e) => {
     if (props.numberItem) {
 
