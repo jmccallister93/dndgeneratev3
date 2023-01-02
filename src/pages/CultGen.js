@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
@@ -17,12 +17,18 @@ import { InputNumber } from "primereact/inputnumber";
 import Items from "../components/Items";
 import { Toast } from "primereact/toast";
 import Npcs from "../components/Npcs";
-import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
-import CustomInputText from "../components/CustomInputText";
-import CustomDropdown from "../components/CustomDropDown";
-import CustomDataTable from "../components/CustomDataTable";
+import GenerateButton from "../components/GenerateButton";
 import MultipleDisplay from "../components/MultipleDisplay";
+import CustomDataTable from "../components/CustomDataTable";
+import CustomDropdown from "../components/CustomDropDown";
+import CustomInputText from "../components/CustomInputText";
+import ExportButtons from "../components/ExportButtons";
+import { Tooltip } from "primereact/tooltip";
+import InfoModal from "../components/InfoModal";
+import SectionRandom from "../components/SectionRandom";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
 
 const CultGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -32,6 +38,7 @@ const CultGen = () => {
   const [isBuildingActive, setIsBuildingActive] = useState(false);
   const [isMemberActive, setIsMemberActive] = useState(false);
   const [isMembershipActive, setIsMembershipActive] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [cultName, setCultName] = useState("");
   const [cultNames, setCultNames] = useState("");
@@ -220,6 +227,8 @@ const CultGen = () => {
   const [leader, setLeader] = useState("");
   const [leaders, setLeaders] = useState("");
   const [leaderOptions, setLeaderOptions] = useState("");
+  const divRef = useRef(null);
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -239,12 +248,39 @@ const CultGen = () => {
   const showFeature = (e) => {
     setIsFeatureActive((current) => !current);
   };
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
+  };
+
+  //Info content
+  const infoContent = (
+    <div className={style.infoContent}>
+      <p>This is a tool to help you generate Cults for your games.</p>
+      <p>
+        You can use the Generate button in the top left to randomly set all
+        fields to random values.
+      </p>
+      <p>
+        You can also use the Generate button in each section to randomly set the
+        fields in that section.
+      </p>
+      <p>You can also manually set the fields to whatever you want.</p>
+      <p>
+        Once a value has been set you can click on the field in the display to
+        edit it.
+      </p>
+      <p>
+        Once you have set all the fields to your liking, you can click the
+        Export button to export the NPC to file of your choice.
+      </p>
+    </div>
+  );
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Cult Generator</h1>
-        <div>
+        <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
               generateItems={[
@@ -258,36 +294,10 @@ const CultGen = () => {
               ]}
               itemOptions={[
                 wealthOptions,
-                incomeOptions,
-                itemOptions,
                 influenceOptions,
-                influenceTacticOptions,
-                favoredOptions,
-                positiveOptions,
-                neutralOptions,
-                unwelcomeOptions,
-                intolerantOptions,
-                serviceOptions,
                 structureOptions,
-                initiationOptions,
-                lowRoleOptions,
-                mediumRoleOptions,
-                highRoleOptions,
-                questOptions,
-                advanceOptions,
-                beliefOptions,
-                orgTypeOptions,
-                headquarterOptions,
-                buildingOptions,
-                locationOptions,
-                strongholdOptions,
-                resourceOptions,
                 defenceOptions,
                 originOptions,
-                motiveOptions,
-                powerOptions,
-                specialtyOptions,
-                weaknessOptions,
                 logoOptions,
                 leaderOptions,
               ]}
@@ -356,6 +366,34 @@ const CultGen = () => {
                 setSelectedSpecialty,
                 setSelectedWeakness,
               ]}
+              selectedItemOptions={[
+                incomeOptions,
+                itemOptions,
+                influenceTacticOptions,
+                favoredOptions,
+                positiveOptions,
+                neutralOptions,
+                unwelcomeOptions,
+                intolerantOptions,
+                serviceOptions,
+                initiationOptions,
+                lowRoleOptions,
+                mediumRoleOptions,
+                highRoleOptions,
+                questOptions,
+                advanceOptions,
+                beliefOptions,
+                orgTypeOptions,
+                headquarterOptions,
+                buildingOptions,
+                locationOptions,
+                strongholdOptions,
+                resourceOptions,
+                motiveOptions,
+                powerOptions,
+                specialtyOptions,
+                weaknessOptions,
+              ]}
             />
             <ClearButton
               setStringState={[
@@ -396,6 +434,27 @@ const CultGen = () => {
                 setSelectedWeakness,
               ]}
             />
+            <h1>
+              Export
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef} />
+              </div>
+            </h1>
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="How To Use Guide"
+                />
+                <InfoModal
+                  header={"NPC Generator Info"}
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -404,9 +463,32 @@ const CultGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>Cult Options</h1>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[structure, origin, logo]}
+              setValue={[setStructure, setOrigin, setLogo]}
+              valueOptions={[structureOptions, originOptions, logoOptions]}
+              selectedValue={[selectedOrgType, selectedMotive, selectedBelief]}
+              setSelectedValue={[
+                setSelectedOrgType,
+                setSelectedMotive,
+                setSelectedBelief,
+              ]}
+              selectedValueOptions={[
+                orgTypeOptions,
+                motiveOptions,
+                beliefOptions,
+              ]}
+            />
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputText
@@ -489,9 +571,32 @@ const CultGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showResources}>
-            Resources
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showResources}>
+              Resources{" "}
+              {isResourceActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[wealth]}
+              setValue={[setWealth]}
+              valueOptions={[wealthOptions]}
+              selectedValue={[selectedIncome, selectedItem, selectedResource]}
+              setSelectedValue={[
+                setSelectedIncome,
+                setSelectedItem,
+                setSelectedResource,
+              ]}
+              selectedValueOptions={[
+                incomeOptions,
+                itemOptions,
+                resourceOptions,
+              ]}
+            />
+          </div>
           <div className={isResourceActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -546,9 +651,21 @@ const CultGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showMembers}>
-            Members
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showMembers}>
+              Members{" "}
+              {isMemberActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[leader]}
+              setValue={[setLeader]}
+              valueOptions={[leaderOptions]}
+            />
+          </div>
           <div className={isMemberActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -564,9 +681,54 @@ const CultGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showMemberships}>
-            Membership
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showMemberships}>
+              Membership{" "}
+              {isMembershipActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              selectedValue={[
+                selectedFavored,
+                selectedPositive,
+                selectedNeutral,
+                selectedUnwelcome,
+                selectedIntolerant,
+                selectedInitiation,
+                selectedLowRole,
+                selectedMediumRole,
+                selectedHighRole,
+                selectedAdvance,
+              ]}
+              setSelectedValue={[
+                setSelectedFavored,
+                setSelectedPositive,
+                setSelectedNeutral,
+                setSelectedUnwelcome,
+                setSelectedIntolerant,
+                setSelectedInitiation,
+                setSelectedLowRole,
+                setSelectedMediumRole,
+                setSelectedHighRole,
+                setSelectedAdvance,
+              ]}
+              selectedValueOptions={[
+                favoredOptions,
+                positiveOptions,
+                neutralOptions,
+                unwelcomeOptions,
+                intolerantOptions,
+                initiationOptions,
+                lowRoleOptions,
+                mediumRoleOptions,
+                highRoleOptions,
+                advanceOptions,
+              ]}
+            />
+          </div>
           <div className={isMembershipActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
@@ -701,9 +863,45 @@ const CultGen = () => {
               />
             </div>
           </div>
+            <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showFeature}>
-            Features
+            Features{" "}
+            {isFeatureActive ? (
+               <i className="pi pi-chevron-down"></i>
+               ) : (
+                 <i className="pi pi-chevron-right"></i>
+               )}
           </h1>
+          <SectionRandom 
+            value={[influence,]}
+            setValue={[setInfluence,]}
+            valueOptions={[influenceOptions,]}
+            selectedValue={[
+              selectedInfluenceTactic,
+              selectedService,
+              selectedQuest,
+              selectedPower,
+              selectedSpecialty,
+              selectedWeakness
+            ]}
+            setSelectedValue={[
+              setSelectedInfluenceTactic,
+              setSelectedService,
+              setSelectedQuest,
+              setSelectedPower,
+              setSelectedSpecialty,
+              setSelectedWeakness
+            ]}
+            selectedValueOptions={[
+              influenceTacticOptions,
+              serviceOptions,
+              questOptions,
+              powerOptions,
+              specialtyOptions,
+              weaknessOptions
+            ]}
+          />
+          </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -797,9 +995,39 @@ const CultGen = () => {
               />
             </div>
           </div>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showBuildings}>
-            Buildings
+            Buildings{" "}
+            {isBuildingActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom
+            value={[defence,]}
+            setValue={[setDefence,]}
+            valueOptions={[defenceOptions,]}
+            selectedValue={[
+              selectedHeadquarter,
+              selectedBuilding,
+              selectedLocation,
+              selectedStronghold,
+            ]}
+            setSelectedValue={[
+              setSelectedHeadquarter,
+              setSelectedBuilding,
+              setSelectedLocation,
+              setSelectedStronghold,
+            ]}
+            selectedValueOptions={[
+              headquarterOptions,
+              buildingOptions,
+              locationOptions,
+              strongholdOptions,
+            ]}
+          />
+          </div>
           <div className={isBuildingActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -870,19 +1098,28 @@ const CultGen = () => {
         </div>
 
         {/* Main Display */}
-        <div className={style.display}>
-          <h1>{cultName}</h1>
+        <div className={style.display} ref={divRef}>
+        <NameDisplay value={cultName} setNewValue={setCultName} />
           <h2>
-            Org. Structure
-            <span className={style.minorText2}>{structure}</span>
+            Org. Structure{" "}
+            <SingleDisplayText
+              value={structure}
+              setNewValue={setStructure}
+            />
           </h2>
           <h2>
-            Origin
-            <span className={style.minorText2}>{origin}</span>
+            Origin{" "}
+            <SingleDisplayText
+              value={origin}
+              setNewValue={setOrigin}
+            />
           </h2>
           <h2>
-            Logo
-            <span className={style.minorText2}>{logo}</span>
+            Logo{" "}
+            <SingleDisplayText
+              value={logo}
+              setNewValue={setLogo}
+            />
           </h2>
           <h2>
             Org. Type{" "}
@@ -914,10 +1151,7 @@ const CultGen = () => {
           <h1>Resources</h1>
           <hr className={style.lineBreak} />
           <h2>
-            Wealth{" "}
-            <span className={style.minorText2}>
-              {wealth}
-            </span>
+            Wealth <span className={style.minorText2}>{wealth}</span>
           </h2>
           <h2>
             Income Source{" "}
@@ -950,15 +1184,13 @@ const CultGen = () => {
           <hr className={style.lineBreak} />
           <h2>
             Leader{" "}
-            <span className={style.minorText2}>
-              {leader}
-            </span>
+            <SingleDisplayText
+              value={leader}
+              setNewValue={setLeader}
+            />
           </h2>
           <h2>
-            Important Members{" "}
-            <span className={style.minorText2}>
-              
-            </span>
+            Important Members <span className={style.minorText2}></span>
           </h2>
           <h1>Membership</h1>
           <hr className={style.lineBreak} />
@@ -1056,9 +1288,10 @@ const CultGen = () => {
           <hr className={style.lineBreak} />
           <h2>
             Influence Level{" "}
-            <span className={style.minorText2}>
-              {influence}
-            </span>
+            <SingleDisplayText
+              value={influence}
+              setNewValue={setInfluence}
+            />
           </h2>
           <h2>
             Influence Tactics{" "}
@@ -1118,9 +1351,10 @@ const CultGen = () => {
           <hr className={style.lineBreak} />
           <h2>
             Defence Level{" "}
-            <span className={style.minorText2}>
-             {defence}
-            </span>
+            <SingleDisplayText
+              value={defence}
+              setNewValue={setDefence}
+            />
           </h2>
           <h2>
             Headquarters{" "}
