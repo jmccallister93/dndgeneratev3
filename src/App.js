@@ -27,6 +27,7 @@ import RaceGen from "./pages/RaceGen";
 import PantheonGen from "./pages/PantheonGen";
 import Campaign from "./pages/Campaign";
 import ModuleGen from "./pages/ModuleGen";
+import NotePage from "./notes/pages/NotePage";
 
 
 function App() {
@@ -63,6 +64,8 @@ function App() {
           <Route path="/racegen" element={<RaceGen />} />
           <Route path="/campaign" element={<Campaign />} />
           <Route path="/modulegen" element={<ModuleGen />} />
+          <Route path="/campaign/:id" element={<Campaign />} />
+          <Route path="/notes" element={<NotePage />} />
         </Routes>
       </BrowserRouter>
     </div>

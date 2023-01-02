@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link to="/create">
           <li className={style.navbarLi}>Create</li>
         </Link>
-        <Link to="/campaign">
+        <Link to="/notes">
           <li className={style.navbarLi}>Campaign</li>
         </Link>
         <Link to="/collections">
@@ -24,12 +24,6 @@ const Navbar = () => {
       </ul>
 
       <div className={style.navbarLoginWrapper}>
-        {/* <form className={style.navbarLoginForm}>
-            <label htmlFor="email">Email: </label>
-            <input type="text" id="email"/>
-            <label htmlFor="password">Password: </label>
-            <input type="text" id="password"/>
-        </form> */}
         <div className={style.navbarBtnWrapper}>
           <Link to="/login">
             <button className={style.navbarLoginBtn}>Login</button>

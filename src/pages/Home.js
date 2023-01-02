@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/Home.module.scss";
 import BasicCard from "../components/BasicCard";
+import NotePage from "../notes/pages/NotePage";
 
 const Home = () => {
   return (
