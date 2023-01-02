@@ -14,7 +14,6 @@ const MultipleDisplay = (props) => {
     } else {
       setMultipleDisplay(props.selectedItem);
     }
-    console.log(props.selectedItem);
   }, [props.selectedItem]);
 
   const onClick = (e) => {

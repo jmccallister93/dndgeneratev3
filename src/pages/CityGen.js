@@ -57,9 +57,9 @@ const CityGen = () => {
   const [populations, setPopulations] = useState("");
   const [populationOptions, setPopulationOptions] = useState("");
 
-  const [atmosphere, setAtmoshpere] = useState("");
-  const [atmoshperes, setAtmoshperes] = useState("");
-  const [atmoshpereOptions, setAtmoshpereOptions] = useState("");
+  const [atmosphere, setAtmosphere] = useState("");
+  const [atmospheres, setAtmospheres] = useState("");
+  const [atmosphereOptions, setAtmosphereOptions] = useState("");
 
   const [culture, setCulture] = useState("");
   const [cultures, setCultures] = useState("");
@@ -178,26 +178,28 @@ const CityGen = () => {
               itemOptions={[
                 typeOptions,
                 sizeOptions,
-                atmoshpereOptions,
+                atmosphereOptions,
                 cultureOptions,
                 terrainOptions,
                 landmarkOptions,
                 governOptions,
+              ]}
+              setItem={[
+                setType,
+                setSize,
+                setAtmosphere,
+                setCulture,
+                setTerrain,
+                setLandmark,
+                setGovern,
+              ]}
+              selectedItemOptions={[
                 guildOptions,
                 factionOptions,
                 eventOptions,
                 npcOptions,
                 districtOptions,
                 buildingOptions,
-              ]}
-              setItem={[
-                setType,
-                setSize,
-                setAtmoshpere,
-                setCulture,
-                setTerrain,
-                setLandmark,
-                setGovern,
               ]}
               selectedItems={[
                 selectedGuild,
@@ -215,8 +217,11 @@ const CityGen = () => {
                 setSelectedDistrict,
                 setSelectedBuilding,
               ]}
+              
               numberItem={[population]}
               setNumberItem={[setPopulation]}
+              maxNumber={[100000]}
+              minNumber={[100]}
             />
             <ClearButton
               setStringState={[
@@ -224,7 +229,7 @@ const CityGen = () => {
                 setType,
                 setSize,
                 setPopulation,
-                setAtmoshpere,
+                setAtmosphere,
                 setCulture,
                 setTerrain,
                 setLandmark,
@@ -344,14 +349,14 @@ const CityGen = () => {
             <SectionRandom
               value={[atmosphere, culture, terrain, landmark]}
               valueOptions={[
-                atmoshpereOptions,
+                atmosphereOptions,
                 cultureOptions,
                 terrainOptions,
                 landmarkOptions,
                 
               ]}
               setValue={[
-                setAtmoshpere,
+                setAtmosphere,
                 setCulture,
                 setTerrain,
                 setLandmark,
@@ -363,14 +368,14 @@ const CityGen = () => {
             <div>
               <CustomDropDown
                 tableName={"itemsTypes"}
-                setSingular={setAtmoshpere}
-                setPlural={setAtmoshperes}
-                setOptions={setAtmoshpereOptions}
-                options={atmoshpereOptions}
+                setSingular={setAtmosphere}
+                setPlural={setAtmospheres}
+                setOptions={setAtmosphereOptions}
+                options={atmosphereOptions}
                 h1Title={"City Atmosphere"}
                 placeholder={"Set Atmosphere"}
                 value={atmosphere}
-                valueOptions={atmoshpereOptions}
+                valueOptions={atmosphereOptions}
               />
               <CustomDropDown
                 tableName={"itemsTypes"}
@@ -590,10 +595,10 @@ const CityGen = () => {
           </h2>
           <hr className={style.lineBreak}/>
           <h2>
-            Atmoshpere{" "}
+            Atmosphere{" "}
             <SingleDisplayText
               value={atmosphere}
-              setNewValue={setAtmoshpere}
+              setNewValue={setAtmosphere}
             />
           </h2>
           <h2>
