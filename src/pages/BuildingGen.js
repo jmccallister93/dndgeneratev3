@@ -228,17 +228,55 @@ const BuildingGen = () => {
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
-              generateItems={[]}
-              itemOptions={[]}
-              setItem={[]}
-              selectedItemOptions={[]}
-              selectedItems={[]}
-              setSelectedItems={[]}
+              generateItems={[
+                buildingCategory,
+                buildingType,
+                buildingColor,
+                buildingStyle,
+                buildingSound,
+              ]}
+              itemOptions={[
+                buildingCategoryOptions,
+                buildingTypeOptions,
+                buildingColorOptions,
+                buildingStyleOptions,
+                buildingSoundOptions,
+              ]}
+              setItem={[
+                setBuildingCategory,
+                setBuildingType,
+                setBuildingColor,
+                setBuildingStyle,
+                setBuildingSound,
+              ]}
+              selectedItemOptions={[roomTypeOptions]}
+              selectedItems={[selectedRoomType]}
+              setSelectedItem={[setSelectedRoomType]}
+              numberItem={[buildingFloor, buildingEnterance, buildingWindow]}
+              setNumberItem={[
+                setBuildingFloor,
+                setBuildingEnterance,
+                setBuildingWindow,
+              ]}
+              maxNumber={[100, 100, 100]}
+              minNumber={[1, 0, 0]}
             />
-            <ClearButton setStringState={[]} setArrayState={[]} />
+            <ClearButton
+              setStringState={[
+                setBuildingCategory,
+                setBuildingType,
+                setBuildingColor,
+                setBuildingStyle,
+                setBuildingSound,
+                setBuildingFloor,
+                setBuildingEnterance,
+                setBuildingWindow,
+              ]}
+              setArrayState={[setSelectedRoomType]}
+            />
             <h1>
               Export
-              <div>
+              <div className={style.exportBtns}>
                 <ExportButtons div={divRef} />
               </div>
             </h1>
@@ -274,7 +312,11 @@ const BuildingGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
-            <SectionRandom />
+            <SectionRandom
+              value={[buildingCategory, buildingType]}
+              setValue={[setBuildingCategory, setBuildingType]}
+              valueOptions={[buildingCategoryOptions, buildingTypeOptions]}
+            />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
@@ -321,7 +363,16 @@ const BuildingGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
-            <SectionRandom />
+            <SectionRandom
+              numberItem={[buildingFloor, buildingEnterance, buildingWindow]}
+              setNumberItem={[
+                setBuildingFloor,
+                setBuildingEnterance,
+                setBuildingWindow,
+              ]}
+              numberMax={[100, 100, 100]}
+              numberMin={[0, 0, 0]}
+            />
           </div>
           <div className={isLayoutActive ? style.subsection : style.hidden}>
             <div>
@@ -357,7 +408,15 @@ const BuildingGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
-            <SectionRandom />
+            <SectionRandom
+              value={[buildingStyle, buildingColor, buildingSound]}
+              setValue={[setBuildingStyle, setBuildingColor, setBuildingSound]}
+              valueOptions={[
+                buildingStyleOptions,
+                buildingColorOptions,
+                buildingSoundOptions,
+              ]}
+            />
           </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
@@ -399,10 +458,10 @@ const BuildingGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
-            <SectionRandom 
-            selectedValue={[selectedRoomType]}
-            setSelectedValue={[setSelectedRoomType]}
-            selectedValueOptions={[roomTypeOptions]}
+            <SectionRandom
+              selectedValue={[selectedRoomType]}
+              setSelectedValue={[setSelectedRoomType]}
+              selectedValueOptions={[roomTypeOptions]}
             />
           </div>
           <div className={isRoomActive ? style.subsection : style.hidden}>

@@ -502,9 +502,7 @@ const GenerateButton = (props) => {
 
   //General Number generate
   const numberGenerate = () => {
-    console.log(props.numberItem)
     if (props.numberItem) {
-      
         for (let i = 0; i < props.numberItem.length; i++) {
           if (props.numberItem[i] === "" || props.numberItem[i] === undefined){
           let r = Math.floor(
