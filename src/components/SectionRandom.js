@@ -325,7 +325,7 @@ const SectionRandom = (props) => {
     if (props.value) {
       for (let i = 0; i < props.value.length; i++) {
         let max = props.valueOptions[i].length - 1;
-        let r = Math.round(Math.random() * (max - 0));
+        let r = Math.floor(Math.random() * (max - 0));
         props.setValue[i](props.valueOptions[i][r].name);
       }
     }
@@ -336,7 +336,7 @@ const SectionRandom = (props) => {
         props.setSelectedValue[i]([]);
         let n = Math.floor(Math.random() * (6 - 0));
         for (let x = 0; x <= n; x++) {
-          let r = Math.round(
+          let r = Math.floor(
             Math.random() * props.selectedValueOptions[i].length
           );
           props.setSelectedValue[i]((oldArray) => [
