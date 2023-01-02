@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
@@ -23,6 +23,12 @@ import MultipleDisplay from "../components/MultipleDisplay";
 import CustomDataTable from "../components/CustomDataTable";
 import CustomDropdown from "../components/CustomDropDown";
 import CustomInputText from "../components/CustomInputText";
+import ExportButtons from "../components/ExportButtons";
+import { Tooltip } from "primereact/tooltip";
+import InfoModal from "../components/InfoModal";
+import SectionRandom from "../components/SectionRandom";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
 
 const GuildGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -32,6 +38,7 @@ const GuildGen = () => {
   const [isBuildingActive, setIsBuildingActive] = useState(false);
   const [isMemberActive, setIsMemberActive] = useState(false);
   const [isMembershipActive, setIsMembershipActive] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [guildName, setGuildName] = useState("");
   const [guildNames, setGuildNames] = useState("");
@@ -220,6 +227,8 @@ const GuildGen = () => {
   const [leader, setLeader] = useState("");
   const [leaders, setLeaders] = useState("");
   const [leaderOptions, setLeaderOptions] = useState("");
+  const divRef = useRef(null);
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -239,12 +248,39 @@ const GuildGen = () => {
   const showFeature = (e) => {
     setIsFeatureActive((current) => !current);
   };
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
+  };
+
+  //Info content
+  const infoContent = (
+    <div className={style.infoContent}>
+      <p>This is a tool to help you generate Guilds for your games.</p>
+      <p>
+        You can use the Generate button in the top left to randomly set all
+        fields to random values.
+      </p>
+      <p>
+        You can also use the Generate button in each section to randomly set the
+        fields in that section.
+      </p>
+      <p>You can also manually set the fields to whatever you want.</p>
+      <p>
+        Once a value has been set you can click on the field in the display to
+        edit it.
+      </p>
+      <p>
+        Once you have set all the fields to your liking, you can click the
+        Export button to export the NPC to file of your choice.
+      </p>
+    </div>
+  );
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Guild Generator</h1>
-        <div>
+        <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
               generateItems={[
@@ -396,6 +432,27 @@ const GuildGen = () => {
                 setSelectedWeakness,
               ]}
             />
+            <h1>
+              Export
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef} />
+              </div>
+            </h1>
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="How To Use Guide"
+                />
+                <InfoModal
+                  header={"NPC Generator Info"}
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -404,9 +461,32 @@ const GuildGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>Guild Options</h1>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[structure, origin, logo]}
+              setValue={[setStructure, setOrigin, setLogo]}
+              valueOptions={[structureOptions, originOptions, logoOptions]}
+              selectedValue={[selectedOrgType, selectedMotive, selectedBelief]}
+              setSelectedValue={[
+                setSelectedOrgType,
+                setSelectedMotive,
+                setSelectedBelief,
+              ]}
+              selectedValueOptions={[
+                orgTypeOptions,
+                motiveOptions,
+                beliefOptions,
+              ]}
+            />
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputText
@@ -489,9 +569,32 @@ const GuildGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showResources}>
-            Resources
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showResources}>
+              Resources{" "}
+              {isResourceActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[wealth]}
+              setValue={[setWealth]}
+              valueOptions={[wealthOptions]}
+              selectedValue={[selectedIncome, selectedItem, selectedResource]}
+              setSelectedValue={[
+                setSelectedIncome,
+                setSelectedItem,
+                setSelectedResource,
+              ]}
+              selectedValueOptions={[
+                incomeOptions,
+                itemOptions,
+                resourceOptions,
+              ]}
+            />
+          </div>
           <div className={isResourceActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -546,9 +649,21 @@ const GuildGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showMembers}>
-            Members
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showMembers}>
+              Members{" "}
+              {isMemberActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[leader]}
+              setValue={[setLeader]}
+              valueOptions={[leaderOptions]}
+            />
+          </div>
           <div className={isMemberActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -564,9 +679,54 @@ const GuildGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showMemberships}>
-            Membership
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showMemberships}>
+              Membership{" "}
+              {isMembershipActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              selectedValue={[
+                selectedFavored,
+                selectedPositive,
+                selectedNeutral,
+                selectedUnwelcome,
+                selectedIntolerant,
+                selectedInitiation,
+                selectedLowRole,
+                selectedMediumRole,
+                selectedHighRole,
+                selectedAdvance,
+              ]}
+              setSelectedValue={[
+                setSelectedFavored,
+                setSelectedPositive,
+                setSelectedNeutral,
+                setSelectedUnwelcome,
+                setSelectedIntolerant,
+                setSelectedInitiation,
+                setSelectedLowRole,
+                setSelectedMediumRole,
+                setSelectedHighRole,
+                setSelectedAdvance,
+              ]}
+              selectedValueOptions={[
+                favoredOptions,
+                positiveOptions,
+                neutralOptions,
+                unwelcomeOptions,
+                intolerantOptions,
+                initiationOptions,
+                lowRoleOptions,
+                mediumRoleOptions,
+                highRoleOptions,
+                advanceOptions,
+              ]}
+            />
+          </div>
           <div className={isMembershipActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
@@ -701,9 +861,45 @@ const GuildGen = () => {
               />
             </div>
           </div>
+            <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showFeature}>
-            Features
+            Features{" "}
+            {isFeatureActive ? (
+               <i className="pi pi-chevron-down"></i>
+               ) : (
+                 <i className="pi pi-chevron-right"></i>
+               )}
           </h1>
+          <SectionRandom 
+            value={[influence,]}
+            setValue={[setInfluence,]}
+            valueOptions={[influenceOptions,]}
+            selectedValue={[
+              selectedInfluenceTactic,
+              selectedService,
+              selectedQuest,
+              selectedPower,
+              selectedSpecialty,
+              selectedWeakness
+            ]}
+            setSelectedValue={[
+              setSelectedInfluenceTactic,
+              setSelectedService,
+              setSelectedQuest,
+              setSelectedPower,
+              setSelectedSpecialty,
+              setSelectedWeakness
+            ]}
+            selectedValueOptions={[
+              influenceTacticOptions,
+              serviceOptions,
+              questOptions,
+              powerOptions,
+              specialtyOptions,
+              weaknessOptions
+            ]}
+          />
+          </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -797,9 +993,39 @@ const GuildGen = () => {
               />
             </div>
           </div>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showBuildings}>
-            Buildings
+            Buildings{" "}
+            {isBuildingActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom
+            value={[defence,]}
+            setValue={[setDefence,]}
+            valueOptions={[defenceOptions,]}
+            selectedValue={[
+              selectedHeadquarter,
+              selectedBuilding,
+              selectedLocation,
+              selectedStronghold,
+            ]}
+            setSelectedValue={[
+              setSelectedHeadquarter,
+              setSelectedBuilding,
+              setSelectedLocation,
+              setSelectedStronghold,
+            ]}
+            selectedValueOptions={[
+              headquarterOptions,
+              buildingOptions,
+              locationOptions,
+              strongholdOptions,
+            ]}
+          />
+          </div>
           <div className={isBuildingActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
@@ -870,19 +1096,28 @@ const GuildGen = () => {
         </div>
 
         {/* Main Display */}
-        <div className={style.display}>
-          <h1>{guildName}</h1>
+        <div className={style.display} ref={divRef}>
+        <NameDisplay value={guildName} setNewValue={setGuildName} />
           <h2>
-            Org. Structure
-            <span className={style.minorText2}>{structure}</span>
+            Org. Structure{" "}
+            <SingleDisplayText
+              value={structure}
+              setNewValue={setStructure}
+            />
           </h2>
           <h2>
-            Origin
-            <span className={style.minorText2}>{origin}</span>
+            Origin{" "}
+            <SingleDisplayText
+              value={origin}
+              setNewValue={setOrigin}
+            />
           </h2>
           <h2>
-            Logo
-            <span className={style.minorText2}>{logo}</span>
+            Logo{" "}
+            <SingleDisplayText
+              value={logo}
+              setNewValue={setLogo}
+            />
           </h2>
           <h2>
             Org. Type{" "}
@@ -914,10 +1149,7 @@ const GuildGen = () => {
           <h1>Resources</h1>
           <hr className={style.lineBreak} />
           <h2>
-            Wealth{" "}
-            <span className={style.minorText2}>
-              {wealth}
-            </span>
+            Wealth <span className={style.minorText2}>{wealth}</span>
           </h2>
           <h2>
             Income Source{" "}
@@ -950,15 +1182,13 @@ const GuildGen = () => {
           <hr className={style.lineBreak} />
           <h2>
             Leader{" "}
-            <span className={style.minorText2}>
-              {leader}
-            </span>
+            <SingleDisplayText
+              value={leader}
+              setNewValue={setLeader}
+            />
           </h2>
           <h2>
-            Important Members{" "}
-            <span className={style.minorText2}>
-              
-            </span>
+            Important Members <span className={style.minorText2}></span>
           </h2>
           <h1>Membership</h1>
           <hr className={style.lineBreak} />
@@ -1056,9 +1286,10 @@ const GuildGen = () => {
           <hr className={style.lineBreak} />
           <h2>
             Influence Level{" "}
-            <span className={style.minorText2}>
-              {influence}
-            </span>
+            <SingleDisplayText
+              value={influence}
+              setNewValue={setInfluence}
+            />
           </h2>
           <h2>
             Influence Tactics{" "}
@@ -1118,9 +1349,10 @@ const GuildGen = () => {
           <hr className={style.lineBreak} />
           <h2>
             Defence Level{" "}
-            <span className={style.minorText2}>
-             {defence}
-            </span>
+            <SingleDisplayText
+              value={defence}
+              setNewValue={setDefence}
+            />
           </h2>
           <h2>
             Headquarters{" "}
@@ -1163,5 +1395,5 @@ const GuildGen = () => {
     </div>
   );
 };
- 
+
 export default GuildGen;
