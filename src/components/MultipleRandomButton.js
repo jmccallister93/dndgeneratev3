@@ -9,6 +9,7 @@ const MultipleRandomButton = (props) => {
       let max = props.valueOptions.length - 1;
       let r = Math.round(Math.random() * (max - 0));
       if (props.selectedItem.includes(props.valueOptions[r])) {
+        
       } else {
         props.setSelectedItem((oldArray) => [
           ...oldArray,

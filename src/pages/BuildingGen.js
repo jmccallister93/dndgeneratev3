@@ -26,6 +26,11 @@ import SectionRandom from "../components/SectionRandom";
 import CustomName from "../components/CustomName";
 import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
+import CustomDataTable from "../components/CustomDataTable";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
+import SingleDisplayNumber from "../components/SingleDisplayNumber";
+import MultipleDisplay from "../components/MultipleDisplay";
 
 const BuildingGen = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -100,14 +105,14 @@ const BuildingGen = () => {
   const [buildingRoom, setBuildingRoom] = useState("");
   const [buildingRooms, setBuildingRooms] = useState("");
   const [buildingRoomOptions, setBuildingRoomOptions] = useState("");
-  const [selectedBuildingRoom, setSelectedBuildingRoom] = useState(null);
+  const [selectedBuildingRoom, setSelectedBuildingRoom] = useState([]);
   const [dialogVisibleBuildingRoom, setDialogVisibleBuildingRoom] =
     useState(false);
 
   const [roomType, setRoomType] = useState("");
   const [roomTypes, setRoomTypes] = useState("");
   const [roomTypeOptions, setRoomTypeOptions] = useState("");
-  const [selectedRoomType, setSelectedRoomType] = useState(null);
+  const [selectedRoomType, setSelectedRoomType] = useState([]);
   const [dialogVisibleRoomType, setDialogVisibleRoomType] = useState(false);
   const [roomTypeList, setRoomTypeList] = useState([]);
 
@@ -116,7 +121,7 @@ const BuildingGen = () => {
   const [npc, setNpc] = useState("");
   const [npcs, setNpcs] = useState("");
   const [npcOptions, setNpcOptions] = useState([]);
-  const [selectedNpc, setSelectedNpc] = useState(null);
+  const [selectedNpc, setSelectedNpc] = useState([]);
   const [dialogVisibleNpc, setDialogVisibleNpc] = useState(false);
   const [npcList, setNpcList] = useState([]);
 
@@ -177,7 +182,7 @@ const BuildingGen = () => {
   const showLayout = (e) => {
     setIsLayoutActive((current) => !current);
   };
-  
+
   const showRooms = (e) => {
     setIsRoomActive((current) => !current);
   };
@@ -191,8 +196,8 @@ const BuildingGen = () => {
     setIsInfoActive((current) => !current);
   };
 
-   //Info content
-   const infoContent = (
+  //Info content
+  const infoContent = (
     <div className={style.infoContent}>
       <p>This is a tool to help you generate Buildings for your games.</p>
       <p>
@@ -214,7 +219,7 @@ const BuildingGen = () => {
       </p>
     </div>
   );
-  
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -222,32 +227,15 @@ const BuildingGen = () => {
         <h1 className={style.mainHeader}>Building Generator</h1>
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
-            <GenerateButton 
-            generateItems={[
-
-            ]}
-            itemOptions={[
-
-            ]}
-            setItem={[
-
-            ]}
-            selectedItemOptions={[
-
-            ]}
-            selectedItems={[
-
-            ]}
-            setSelectedItems={[
-
-            ]}
+            <GenerateButton
+              generateItems={[]}
+              itemOptions={[]}
+              setItem={[]}
+              selectedItemOptions={[]}
+              selectedItems={[]}
+              setSelectedItems={[]}
             />
-            <ClearButton 
-            setStringState={[
-            ]}
-            setArrayState={[
-            ]}
-            />
+            <ClearButton setStringState={[]} setArrayState={[]} />
             <h1>
               Export
               <div>
@@ -278,103 +266,183 @@ const BuildingGen = () => {
         <div className={style.optionsWrapper}>
           <h1>Building Options</h1>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info{" "}
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
               {isBasicActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
                 <i className="pi pi-chevron-right"></i>
               )}
-          </h1>
-          <SectionRandom />
+            </h1>
+            <SectionRandom />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
-              tableName={"names"}
-              name={buildingName}
-              setName={setBuildingName}
-              setNames={setBuildingNames}
-              setNameOptions={setBuildingNameOptions}
-              nameOptions={buildingNameOptions}
-              title={"Building Name"}
-              placeholder={"Set Name"} 
+                tableName={"names"}
+                name={buildingName}
+                setName={setBuildingName}
+                setNames={setBuildingNames}
+                setNameOptions={setBuildingNameOptions}
+                nameOptions={buildingNameOptions}
+                title={"Building Name"}
+                placeholder={"Set Name"}
               />
               <CustomDropDown
-               tableName={"buildingCategory"}
-               setSingular={setBuildingCategory}
-               setPlural={setBuildingCategorys}
-               setOptions={setBuildingCategoryOptions}
-               options={buildingCategoryOptions}
-               h1Title={"Category"}
-               placeholder={"Set Category"}
-               value={buildingCategory}
-               valueOptions={buildingCategoryOptions}
-             />
-            <CustomDropDown
-              tableName={"buildingType"}
-              setSingular={setBuildingType}
-              setPlural={setBuildingTypes}
-              setOptions={setBuildingTypeOptions}
-              options={buildingTypeOptions}
-              h1Title={"Type"}
-              placeholder={"Set Type"}
-              value={buildingType}
-              valueOptions={buildingTypeOptions}
-            />
+                tableName={"buildingCategory"}
+                setSingular={setBuildingCategory}
+                setPlural={setBuildingCategorys}
+                setOptions={setBuildingCategoryOptions}
+                options={buildingCategoryOptions}
+                h1Title={"Category"}
+                placeholder={"Set Category"}
+                value={buildingCategory}
+                valueOptions={buildingCategoryOptions}
+              />
+              <CustomDropDown
+                tableName={"buildingAll"}
+                setSingular={setBuildingType}
+                setPlural={setBuildingTypes}
+                setOptions={setBuildingTypeOptions}
+                options={buildingTypeOptions}
+                h1Title={"Type"}
+                placeholder={"Set Type"}
+                value={buildingType}
+                valueOptions={buildingTypeOptions}
+              />
             </div>
           </div>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showLayout}>
-            Building Layout
-          </h1>
-          <SectionRandom />
+            <h1 className={style.subHeader} onClick={showLayout}>
+              Building Layout{" "}
+              {isLayoutActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom />
           </div>
           <div className={isLayoutActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputNumber
-               setSingular={setBuildingFloor}
-               value={buildingFloor}
-               placeholder={"Set Count"}
-               maxNumber={10000}
-               minNumber={0}
-               />
+                setSingular={setBuildingFloor}
+                value={buildingFloor}
+                placeholder={"Set Count"}
+                maxNumber={100}
+                minNumber={0}
+              />
               <CustomInputNumber
                 setSingular={setBuildingEnterance}
                 value={buildingEnterance}
                 placeholder={"Set Count"}
-                maxNumber={10000}
+                maxNumber={100}
                 minNumber={0}
               />
               <CustomInputNumber
                 setSingular={setBuildingWindow}
                 value={buildingWindow}
                 placeholder={"Set Count"}
-                maxNumber={10000}
+                maxNumber={100}
                 minNumber={0}
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showDetails}>
-            Building Features
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showDetails}>
+              Building Features{" "}
+              {isDetailActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom />
+          </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
-            {buildingStyleDrop}
-            {buildingColorDrop}
-            {buildingSoundDrop}
+            <div>
+              <CustomDropDown
+                tableName={"buildingStyle"}
+                setSingular={setBuildingStyle}
+                setPlural={setBuildingStyles}
+                setOptions={setBuildingStyleOptions}
+                placeholder={"Set Style"}
+                value={buildingStyle}
+                valueOptions={buildingStyleOptions}
+              />
+              <CustomDropDown
+                tableName={"buildingColors"}
+                setSingular={setBuildingColor}
+                setPlural={setBuildingColors}
+                setOptions={setBuildingColorOptions}
+                placeholder={"Set Color"}
+                value={buildingColor}
+                valueOptions={buildingColorOptions}
+              />
+              <CustomDropDown
+                tableName={"buildingSound"}
+                setSingular={setBuildingSound}
+                setPlural={setBuildingSounds}
+                setOptions={setBuildingSoundOptions}
+                placeholder={"Set Sound"}
+                value={buildingSound}
+                valueOptions={buildingSoundOptions}
+              />
+            </div>
           </div>
-          <h1 className={style.subHeader} onClick={showRooms}>
-            Rooms
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showRooms}>
+              Rooms{" "}
+              {isRoomActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom 
+            selectedValue={[selectedRoomType]}
+            setSelectedValue={[setSelectedRoomType]}
+            selectedValueOptions={[roomTypeOptions]}
+            />
+          </div>
           <div className={isRoomActive ? style.subsection : style.hidden}>
-            {roomNumber}
-            {roomTypeDialog}
+            <div>
+              {/* <CustomInputNumber
+                setSingular={setBuildingRoomCount}
+                value={buildingRoomCount}
+                placeholder={"Set Count"}
+                maxNumber={100}
+                minNumber={0}
+              /> */}
+              <CustomDataTable
+                tableName={"buildingRoomsAll"}
+                setSingular={setRoomType}
+                setPlural={setRoomTypes}
+                setOptions={setRoomTypeOptions}
+                h1Title={"Room Type"}
+                dialogHeader={"Type"}
+                selectedItem={selectedRoomType}
+                setSelectedItem={setSelectedRoomType}
+                list={roomTypeList}
+                setList={setRoomTypeList}
+                valueOptions={roomTypeOptions}
+              />
+            </div>
           </div>
-          <h1 className={style.subHeader} onClick={showNpcs}>
-            NPCs
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showNpcs}>
+              NPCs{" "}
+              {isNpcActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom />
+          </div>
           <div className={isNpcActive ? style.subsection : style.hidden}>
-            <Npcs
+            <div>
+              {/* <Npcs
               onNameChangeProp={nameChangeProp}
               onRaceChangeProp={raceChangeProp}
               onSexChangeProp={sexChangeProp}
@@ -386,77 +454,129 @@ const BuildingGen = () => {
               onInteractionChangeProp={interactionChangeProp}
               onBondChangeProp={bondChangeProp}
               onDescChangeProp={descChangeProp}
-            />
+            /> */}
+            </div>
           </div>
-          <h1 className={style.subHeader} onClick={showItems}>
-            Items
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showItems}>
+              Items{" "}
+              {isItemActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom />
+          </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
-            <Items
+            <div>
+              {/* <Items
               h1Title={"Items"}
               dialogHeader={"Items"}
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
-              header={header}
+              // header={header}
               itemList={itemList}
               setItemList={setItemList}
               valueOptions={itemOptions}
               options={itemOptions}
-            ></Items>
+            /> */}
+            </div>
           </div>
         </div>
+
         {/* Main Display */}
-        <div className={style.display}>
-          <h1>{buildingName}</h1>
+        <div className={style.display} ref={divRef}>
+          <NameDisplay value={buildingName} setNewValue={setBuildingName} />
           <h2>
             Category{" "}
-            <span className={style.minorText2}>{buildingCategory}</span>
+            <SingleDisplayText
+              value={buildingCategory}
+              setNewValue={setBuildingCategory}
+            />
           </h2>
           <h2>
-            Type <span className={style.minorText2}>{buildingType}</span>
+            Type{" "}
+            <SingleDisplayText
+              value={buildingType}
+              setNewValue={setBuildingType}
+            />
           </h2>
           <hr className={style.lineBreak} />
           <h2>
             Building Floors{" "}
-            <span className={style.minorText2}>{buildingFloor}</span>
+            <SingleDisplayNumber
+              value={buildingFloor}
+              setNewValue={setBuildingFloor}
+            />
           </h2>
           <h2>
             Building Enterances{" "}
-            <span className={style.minorText2}>{buildingEnterance}</span>
+            <SingleDisplayNumber
+              value={buildingEnterance}
+              setNewValue={setBuildingEnterance}
+            />
           </h2>
           <h2>
             Building Windows{" "}
-            <span className={style.minorText2}>{buildingWindow}</span>
+            <SingleDisplayNumber
+              value={buildingWindow}
+              setNewValue={setBuildingWindow}
+            />
           </h2>
           <hr className={style.lineBreak} />
           <h2>
             Building Style{" "}
-            <span className={style.minorText2}>{buildingStyle}</span>
+            <SingleDisplayText
+              value={buildingStyle}
+              setNewValue={setBuildingStyle}
+            />
           </h2>
           <h2>
             Building Color{" "}
-            <span className={style.minorText2}>{buildingColor}</span>
+            <SingleDisplayText
+              value={buildingColor}
+              setNewValue={setBuildingColor}
+            />
           </h2>
           <h2>
             Building Ambiance{" "}
-            <span className={style.minorText2}>{buildingSound}</span>
+            <SingleDisplayText
+              value={buildingSound}
+              setNewValue={setBuildingSound}
+            />
           </h2>
-
           <hr className={style.lineBreak} />
           <h2>
-            Room Count <span className={style.minorText2}>{buildingRoom}</span>
+            {/* Room Count{" "}
+            <SingleDisplayNumber
+              value={buildingRoomCount}
+              setNewValue={setBuildingRoomCount}
+            /> */}
           </h2>
           <h2>
             Specific Rooms{" "}
-            <div className={style.detesContainer}>{roomTypeDisplay}</div>
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedRoomType}
+                list={roomTypeList}
+                setList={setRoomTypeList}
+              />
+            </span>
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            NPCs <div className={style.detesContainer}>{npcDisplay}</div>
+            NPCs{" "}
+            <span className={style.minorText2}>
+              {/* <MultipleDisplay selectedItem={selectedNpc} /> */}
+            </span>
           </h2>
           <hr className={style.lineBreak} />
           <h2>
-            Items <span className={style.minorText2}>{itemDisplay}</span>
+            Items{" "}
+            <span className={style.minorText2}>
+              {/* <MultipleDisplay selectedItem={selectedItem} /> */}
+            </span>
           </h2>
         </div>
       </div>
