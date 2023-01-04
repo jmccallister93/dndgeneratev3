@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
@@ -24,10 +24,14 @@ import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
+import ExportButtons from "../components/ExportButtons";
+import { Tooltip } from "primereact/tooltip";
+import InfoModal from "../components/InfoModal";
 
 const QuestGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [questName, setQuestName] = useState("");
   const [questNames, setQuestNames] = useState("");
@@ -139,14 +143,44 @@ const QuestGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
+  };
+  //*****Added new stuff
+  const divRef = useRef();
+  const genItem = "";
+  //Info content
+  const infoContent = (
+    <div className={style.infoContent}>
+      <p>This is a tool to help you generate Monsters for your games.</p>
+      <p>
+        You can use the Generate button in the top left to randomly set all
+        fields to random values.
+      </p>
+      <p>
+        You can also use the Generate button in each section to randomly set the
+        fields in that section.
+      </p>
+      <p>You can also manually set the fields to whatever you want.</p>
+      <p>
+        Once a value has been set you can click on the field in the display to
+        edit it.
+      </p>
+      <p>
+        Once you have set all the fields to your liking, you can click the
+        Export button to export the NPC to file of your choice.
+      </p>
+    </div>
+  );
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Quest Generator</h1>
-        <div>
+        <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
-            <GenerateButton />
+            {/* <GenerateButton /> */}
             <ClearButton
               setSingluar={[
                 setQuestName,
@@ -168,6 +202,28 @@ const QuestGen = () => {
                 setReward,
               ]}
             />
+            <h1>
+              Export
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef}  data={genItem}/>
+              </div>
+            </h1>
+            {/* ToolTip */}
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="How To Use Guide"
+                />
+                <InfoModal
+                  header={"Monster Generator Info"}
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -232,7 +288,7 @@ const QuestGen = () => {
                 valueOptions={rewardOptions}
               />
               <CustomDropDown
-                tableName={"itemTypes"}
+                tableName={"itemsTypes"}
                 setSingular={setLocation}
                 setPlural={setLocations}
                 setOptions={setLocationOptions}
@@ -242,7 +298,7 @@ const QuestGen = () => {
                 valueOptions={locationOptions}
               />
               <CustomDropDown
-                tableName={"itemTypes"}
+                tableName={"itemsTypes"}
                 setSingular={setMotive}
                 setPlural={setMotives}
                 setOptions={setMotiveOptions}
@@ -252,7 +308,7 @@ const QuestGen = () => {
                 valueOptions={motiveOptions}
               />
               <CustomDropDown
-                tableName={"itemTypes"}
+                tableName={"itemsTypes"}
                 setSingular={setTwist}
                 setPlural={setTwists}
                 setOptions={setTwistOptions}

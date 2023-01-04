@@ -117,7 +117,7 @@ $btn-blue: #2196f3;
   font-size: 2rem;
   color: $secondary-grey;
   background-color: rgba(0, 128, 0, 0.75);
-  border-radius: 0.5rem;
+  border-radius: 5rem;
   border: 0px;
   padding: 1rem;
   transition: 0.5s;
@@ -315,6 +315,30 @@ $btn-blue: #2196f3;
     justify-content: left;
   }
 }
+
+.subsection2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  & div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    align-items: left;
+    justify-content: left;
+    flex: 0 0 33.333%;
+    // & span{
+      
+    //   flex-wrap: wrap;
+    // }
+    // & button{
+    //   // flex: 0 0 33.333%;
+    //   flex-wrap: wrap;
+    // }
+  }
+
+  }
+
 
 .hidden {
   display: none;

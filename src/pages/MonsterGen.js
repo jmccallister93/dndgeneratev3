@@ -600,8 +600,8 @@ const MonsterGen = () => {
                 setSingular={setSize}
                 setPlural={setSizes}
                 setOptions={setSizeOptions}
-                h1Title={"Type"}
-                placeholder={"Set Type"}
+                h1Title={"Size"}
+                placeholder={"Set Size"}
                 value={size}
                 valueOptions={sizeOptions}
               />
