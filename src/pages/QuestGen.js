@@ -27,6 +27,10 @@ import MultipleDisplay from "../components/MultipleDisplay";
 import ExportButtons from "../components/ExportButtons";
 import { Tooltip } from "primereact/tooltip";
 import InfoModal from "../components/InfoModal";
+import SectionRandom from "../components/SectionRandom";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
+import RandomHooks from "../components/RandomHooks";
 
 const QuestGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -232,9 +236,17 @@ const QuestGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>Quest Options</h1>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
+            Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom />
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputText
@@ -255,7 +267,7 @@ const QuestGen = () => {
               />
              
               {/* Need to make this into a regular single select table */}
-              <CustomDataTable
+              {/* <CustomDataTable
                 tableName={"itemsTypes"}
                 setSingular={setQuest}
                 setPlural={setQuests}
@@ -269,12 +281,20 @@ const QuestGen = () => {
                 selectedItem={selectedQuest}
                 setSelectedItem={setSelectedQuest}
                 options={questOptions}
-              />
+              /> */}
             </div>
           </div>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showDetails}>
-            Quest Details
+            Quest Details{" "}
+              {isDetailActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom />
+          </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
             <CustomDropDown
@@ -322,25 +342,31 @@ const QuestGen = () => {
         </div>
 
         {/* Main Display */}
-        <div className={style.display}>
-          <h1>{questName}</h1>
+        <div className={style.display} ref={divRef}>
+        <NameDisplay value={questName} setNewValue={setQuestName} />
           <h2>
-            Quest Type <span className={style.minorText2}>{questType}</span>
+            Quest Type{" "}
+            <SingleDisplayText value={questType} setNewValue={setQuestType} />
           </h2>
           <h2>
-            Quest <span className={style.minorText2}>{quest}</span>
+            Quest{" "}
+            <RandomHooks type={questType} value={quest} setValue={setQuest} />
           </h2>
           <h2>
-            Reward <span className={style.minorText2}>{reward}</span>
+            Reward{" "}
+            <SingleDisplayText value={reward} setNewValue={setReward} />
           </h2>
           <h2>
-            Location <span className={style.minorText2}>{location}</span>
+            Location{" "}
+            <SingleDisplayText value={location} setNewValue={setLocation} />
           </h2>
           <h2>
-            Motive <span className={style.minorText2}>{motive}</span>
+            Motive{" "}
+            <SingleDisplayText value={motive} setNewValue={setMotive} />
           </h2>
           <h2>
-            Twist <span className={style.minorText2}>{twist}</span>
+            Twist{" "}
+            <SingleDisplayText value={twist} setNewValue={setTwist} />
           </h2>
         </div>
       </div>
