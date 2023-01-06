@@ -185,21 +185,33 @@ const QuestGen = () => {
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             {/* <GenerateButton /> */}
-            <ClearButton
-              setSingluar={[
-                setQuestName,
+            <GenerateButton
+              generateItems={[
+                questType,
+                reward,
+                location,
+                motive,
+                twist,
+              ]}
+              itemOptions={[
+                questTypeOptions,
+                rewardOptions,
+                locationOptions,
+                motiveOptions,
+                twistOptions,
+              ]}
+              setItem={[
                 setQuestType,
-                setBounty,
-                setCapture,
-                setDelivery,
-                setEscort,
-                setExploration,
-                setGather,
-                setInvestigate,
-                setKill,
-                setNegotiate,
-                setProtect,
-                setRescue,
+                setReward,
+                setLocation,
+                setMotive,
+                setTwist,
+              ]}
+            />
+            <ClearButton
+              setStringState={[
+                setQuestType,
+                setQuest,
                 setMotive,
                 setTwist,
                 setLocation,
@@ -245,7 +257,11 @@ const QuestGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
           </h1>
-          <SectionRandom />
+          <SectionRandom 
+          value={[questType]}
+          valueOptions={[questTypeOptions]}
+          setValue={[setQuestType]}
+          />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
@@ -293,7 +309,11 @@ const QuestGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
           </h1>
-          <SectionRandom />
+          <SectionRandom 
+          value={[reward, location, motive, twist]}
+          valueOptions={[rewardOptions, locationOptions, motiveOptions, twistOptions]}
+          setValue={[setReward, setLocation, setMotive, setTwist]}
+          />
           </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
