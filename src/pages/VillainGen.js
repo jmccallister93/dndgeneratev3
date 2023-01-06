@@ -221,7 +221,9 @@ const VillainGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
           </h1>
-          <SectionRandom />
+          <SectionRandom 
+          
+          />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
@@ -243,7 +245,38 @@ const VillainGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
           </h1>
-          <SectionRandom />
+          <SectionRandom 
+          value={[stronghold]}
+          setValue={[setStronghold]}
+          valueOptions={[strongholdOptions]}
+          selectedValue={[
+            selectedMotive,
+            selectedGoal,
+            selectedAffliation,
+            selectedWeakness,
+            selectedPowerSource,
+            selectedMinion,
+            selectedItem,
+          ]}
+          setSelectedValue={[
+            setSelectedMotive,
+            setSelectedGoal,
+            setSelectedAffliation,
+            setSelectedWeakness,
+            setSelectedPowerSource,
+            setSelectedMinion,
+            setSelectedItem,
+          ]}
+          selectedValueOptions={[
+            motiveOptions,
+            goalOptions,
+            affliationOptions,
+            weaknessOptions,
+            powerSourceOptions,
+            minionOptions,
+            itemOptions,
+          ]}
+          />
           </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
