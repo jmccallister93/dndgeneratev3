@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
@@ -23,10 +23,15 @@ import CustomInputText from "../components/CustomInputText";
 import CustomDataTable from "../components/CustomDataTable";
 import CustomDropDown from "../components/CustomDropDown";
 import MultipleDisplay from "../components/MultipleDisplay";
+import InfoModal from "../components/InfoModal";
+import { Tooltip } from "primereact/tooltip";
+import ExportButtons from "../components/ExportButtons";
+import SectionRandom from "../components/SectionRandom";
 
 const VillainGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [villainName, setVillainName] = useState("");
   const [villainNames, setVillainNames] = useState("");
@@ -85,26 +90,120 @@ const VillainGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
+  };
+
+    //*****Added new stuff
+    const divRef = useRef();
+    const genItem = "";
+    //Info content
+    const infoContent = (
+      <div className={style.infoContent}>
+        <p>This is a tool to help you generate Villians for your games.</p>
+        <p>
+          You can use the Generate button in the top left to randomly set all
+          fields to random values.
+        </p>
+        <p>
+          You can also use the Generate button in each section to randomly set the
+          fields in that section.
+        </p>
+        <p>You can also manually set the fields to whatever you want.</p>
+        <p>
+          Once a value has been set you can click on the field in the display to
+          edit it.
+        </p>
+        <p>
+          Once you have set all the fields to your liking, you can click the
+          Export button to export the NPC to file of your choice.
+        </p>
+      </div>
+    );
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
-        <h1 className={style.mainHeader}>Villain Generator</h1>
-        <div>
+        <h1 className={style.mainHeader}>Villian Generator</h1>
+        <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
-            <GenerateButton />
-            <ClearButton
-              setSingular={[setStronghold]}
-              setPlural={[
-                setSelectedAffliation,
-                setSelectedGoal,
+            {/* <GenerateButton /> */}
+            <GenerateButton
+              generateItems={[
+                stronghold,
+              ]}
+              itemOptions={[
+                strongholdOptions,
+              ]}
+              setItem={[
+                setStronghold,
+              ]}
+              selectedItemOptions={[
+                motiveOptions,
+                goalOptions,
+                affliationOptions,
+                weaknessOptions,
+                powerSourceOptions,
+                minionOptions,
+                itemOptions,
+              ]}
+              selectedItems={[
+                selectedMotive,
+                selectedGoal,
+                selectedAffliation,
+                selectedWeakness,
+                selectedPowerSource,
+                selectedMinion,
+                selectedItem,
+              ]}
+              setSelectedItem={[
                 setSelectedMotive,
-                setSelectedPowerSource,
+                setSelectedGoal,
+                setSelectedAffliation,
                 setSelectedWeakness,
+                setSelectedPowerSource,
+                setSelectedMinion,
+                setSelectedItem,
+               
+              ]}
+            />
+            <ClearButton
+              setStringState={[
+                setStronghold,
+              
+              ]}
+              setArrayState={[
+                setSelectedMotive,
+                setSelectedGoal,
+                setSelectedAffliation,
+                setSelectedWeakness,
+                setSelectedPowerSource,
                 setSelectedMinion,
                 setSelectedItem,
               ]}
             />
+            <h1>
+              Export
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef}  data={genItem}/>
+              </div>
+            </h1>
+            {/* ToolTip */}
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="How To Use Guide"
+                />
+                <InfoModal
+                  header={"Monster Generator Info"}
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -113,9 +212,17 @@ const VillainGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>Villain Options</h1>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
+            Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom />
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputText
@@ -127,9 +234,17 @@ const VillainGen = () => {
               <h1>NPC components</h1>
             </div>
           </div>
+          <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showDetails}>
-            Villian Details
+            Villian Details{" "}
+              {isDetailActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
           </h1>
+          <SectionRandom />
+          </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
