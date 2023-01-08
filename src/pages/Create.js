@@ -270,7 +270,7 @@ const Create = () => {
           </Link> */}
         </div>
         </h1>
-        <h1 className={style.subHeader} onClick={showModule}>
+        <h1 className={style.subHeader2} onClick={showModule}>
           Module{" "}
           {isModuleActive ? (
             <i className="pi pi-chevron-down"></i>

@@ -41,7 +41,7 @@ const CustomDropDown = (props) => {
         );
       }
     };
-    fetchData();
+    fetchData(); 
   }, []);
 
   //On Custom Change

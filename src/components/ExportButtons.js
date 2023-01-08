@@ -3,6 +3,7 @@ import { jsPDF } from "jspdf";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
 import PDF, { Text, AddPage, Line, Image, Table, Html } from "jspdf-react";
+import supabase from "../config/supabaseClient";
 
 const ExportButtons = (props) => {
   //Create compnent that references to a props.div element and export it's content to a text file and pdf file
@@ -16,6 +17,7 @@ const ExportButtons = (props) => {
   const [data, setData] = useState([]);
   const [isDataReady, setIsDataReady] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [fetchError, setFetchError] = useState(null);
 
   const divRef = useRef(null);
 
@@ -83,15 +85,57 @@ const ExportButtons = (props) => {
     }
   };
 
+  const saveToDb = () => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from(props.tableName)
+        .insert({
+          name: props.name,
+        });
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        // props.setSingular(null);
+      }
+      if (dataName) {
+        // props.setPlural(dataName);
+        setFetchError(null);
+        // props.setOptions(
+        //   dataName.map((r) => ({ name: r.name, value: r.value }))
+        // );
+      }
+    };
+    fetchData(); 
+  };
+
   return (
     <>
-      <button className={style.btnName} onClick={exportToPdf} title="Export PDF">
+      <button
+        className={style.btnExport}
+        onClick={saveToDb}
+        title="Export PDF"
+      >
+        SAVE
+      </button>
+      <button
+        className={style.btnExport}
+        onClick={exportToPdf}
+        title="Export PDF"
+      >
         PDF
       </button>
-      <button className={style.btnName} onClick={exportToText} title="Export TXT">
+      <button
+        className={style.btnExport}
+        onClick={exportToText}
+        title="Export TXT"
+      >
         TXT
       </button>
-      <button className={style.btnName} onClick={exportToExcel} title="Export XLSX">
+      <button
+        className={style.btnExport}
+        onClick={exportToExcel}
+        title="Export XLSX"
+      >
         XLSX
       </button>
     </>
