@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import style from "../stylesheets/BuildingGen.module.scss";
+import style from "../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
@@ -23,10 +23,15 @@ import CustomInputText from "../components/CustomInputText";
 import CustomDropDown from "../components/CustomDropDown";
 import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
+import InfoModal from "../components/InfoModal";
+import { Tooltip } from "primereact/tooltip";
+import ExportButtons from "../components/ExportButtons";
+import SectionRandom from "../components/SectionRandom";
 
 const PantheonGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
+  const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [pantheonName, setPantheonName] = useState("");
   const [pantheonNames, setPantheonNames] = useState("");
@@ -95,37 +100,133 @@ const PantheonGen = () => {
   const showDetails = (e) => {
     setIsDetailActive((current) => !current);
   };
+  const showInfo = (e) => {
+    setIsInfoActive((current) => !current);
+  };
+  //*****Added new stuff
+  const divRef = useRef();
+  const genItem = "";
+  //Info content
+  const infoContent = (
+    <div className={style.infoContent}>
+      <p>This is a tool to help you generate Pantheons for your games.</p>
+      <p>
+        You can use the Generate button in the top left to randomly set all
+        fields to random values.
+      </p>
+      <p>
+        You can also use the Generate button in each section to randomly set the
+        fields in that section.
+      </p>
+      <p>You can also manually set the fields to whatever you want.</p>
+      <p>
+        Once a value has been set you can click on the field in the display to
+        edit it.
+      </p>
+      <p>
+        Once you have set all the fields to your liking, you can click the
+        Export button to export the NPC to file of your choice.
+      </p>
+    </div>
+  );
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Pantheon Generator</h1>
-        <div>
+        <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
-            <GenerateButton />
-            <ClearButton
-              setSingular={[
-                setPantheonName,
+            {/* <GenerateButton /> */}
+            <GenerateButton
+              generateItems={[
+                deityType,
+                alignment,
+                size,
+                attribute,
+                plane,
+                domain,
+                symbol,
+                history,
+              ]}
+              itemOptions={[
+                deityTypeOptions,
+                alignmentOptions,
+                sizeOptions,
+                attributeOptions,
+                planeOptions,
+                domainOptions,
+                symbolOptions,
+                historyOptions,
+              ]}
+              setItem={[
                 setDeityType,
                 setAlignment,
                 setSize,
+                setAttribute,
                 setPlane,
                 setDomain,
                 setSymbol,
-                setAttribute,
                 setHistory,
-                setMotive,
-                setProvide,
-                setArtifact,
-                setShrine,
               ]}
-              setPlural={[
-                setMotiveList,
-                setProvideList,
-                setArtifactList,
-                setShrineList,
+              selectedItemOptions={[
+                motiveOptions,
+                provideOptions,
+                artifactOptions,
+                shrineOptions,
+              ]}
+              selectedItems={[
+                selectedMotive,
+                selectedProvide,
+                selectedArtifact,
+                selectedShrine,
+              ]}
+              setSelectedItem={[
+                setSelectedMotive,
+                setSelectedProvide,
+                setSelectedArtifact,
+                setSelectedShrine,
               ]}
             />
+            <ClearButton
+              setStringState={[
+                setDeityType,
+                setAlignment,
+                setSize,
+                setAttribute,
+                setPlane,
+                setDomain,
+                setSymbol,
+                setHistory,
+              ]}
+              setArrayState={[
+                setSelectedMotive,
+                setSelectedProvide,
+                setSelectedArtifact,
+                setSelectedShrine,
+              ]}
+            />
+            <h1>
+              Export
+              <div className={style.exportBtns}>
+                <ExportButtons div={divRef} data={genItem} />
+              </div>
+            </h1>
+            {/* ToolTip */}
+            <div className={style.infoCircle}>
+              <i className="pi pi-info-circle" onClick={showInfo}>
+                <Tooltip
+                  target=".pi-info-circle"
+                  position="bottom"
+                  content="How To Use Guide"
+                />
+                <InfoModal
+                  header={"Monster Generator Info"}
+                  content={infoContent}
+                  visible={isInfoActive}
+                  setVisible={setIsInfoActive}
+                />
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -134,9 +235,26 @@ const PantheonGen = () => {
       <div className={style.body}>
         <div className={style.optionsWrapper}>
           <h1>Pantheon Options</h1>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
+              {isBasicActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[deityType, alignment, size, attribute]}
+              setValue={[setDeityType, setAlignment, setSize, setAttribute]}
+              valueOptions={[
+                deityTypeOptions,
+                alignmentOptions,
+                sizeOptions,
+                attributeOptions,
+              ]}
+            />
+          </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputText
@@ -187,9 +305,44 @@ const PantheonGen = () => {
               />
             </div>
           </div>
-          <h1 className={style.subHeader} onClick={showDetails}>
-            Patheon Details
-          </h1>
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showDetails}>
+              Details{" "}
+              {isDetailActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[plane, domain, symbol, history]}
+              setValue={[setPlane, setDomain, setSymbol, setHistory]}
+              valueOptions={[
+                planeOptions,
+                domainOptions,
+                symbolOptions,
+                historyOptions,
+              ]}
+              selectedValue={[
+                selectedMotive,
+                selectedProvide,
+                selectedArtifact,
+                selectedShrine,
+              ]}
+              setSelectedValue={[
+                setSelectedMotive,
+                setSelectedProvide,
+                setSelectedArtifact,
+                setSelectedShrine,
+              ]}
+              selectedValueOptions={[
+                motiveOptions,
+                provideOptions,
+                artifactOptions,
+                shrineOptions,
+              ]}
+            />
+          </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
@@ -330,21 +483,21 @@ const PantheonGen = () => {
             </span>
           </h2>
           <h2>
-            Provides{" "} 
+            Provides{" "}
             <span className={style.minorText2}>
-            <MultipleDisplay selectedItem={selectedProvide} />
+              <MultipleDisplay selectedItem={selectedProvide} />
             </span>
           </h2>
           <h2>
-          Artifacts{" "}
-          <span className={style.minorText2}>
-             <MultipleDisplay selectedItem={selectedArtifact} />
+            Artifacts{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay selectedItem={selectedArtifact} />
             </span>
           </h2>
           <h2>
-          Shrines {" "}
+            Shrines{" "}
             <span className={style.minorText2}>
-             <MultipleDisplay selectedItem={selectedShrine} />
+              <MultipleDisplay selectedItem={selectedShrine} />
             </span>
           </h2>
         </div>
