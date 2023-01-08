@@ -87,10 +87,16 @@ const ExportButtons = (props) => {
 
   const saveToDb = () => {
     const fetchData = async () => {
+      const saveObj = Object.enteries(props.data).map(([key, value]) => {
+        return { key, value };
+      });
+      console.log(saveObj)
       const { data: dataName, error: errorName } = await supabase
         .from(props.tableName)
         .insert({
-          name: props.name,
+          // name: props.data.name,
+          // race: props.data.race,
+          // sex: props.data.sex,
         });
       if (errorName) {
         setFetchError("Could not fetch the data");
@@ -105,16 +111,12 @@ const ExportButtons = (props) => {
         // );
       }
     };
-    fetchData(); 
+    fetchData();
   };
 
   return (
     <>
-      <button
-        className={style.btnExport}
-        onClick={saveToDb}
-        title="Export PDF"
-      >
+      <button className={style.btnExport} onClick={saveToDb} title="Export PDF">
         SAVE
       </button>
       <button
