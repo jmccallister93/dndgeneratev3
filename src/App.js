@@ -28,6 +28,7 @@ import PantheonGen from "./pages/PantheonGen";
 import Campaign from "./pages/Campaign";
 import ModuleGen from "./pages/ModuleGen";
 import NotePage from "./notes/pages/NotePage";
+import CollectionPage from "./collections/CollectionPage";
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Home />} />
           <Route path="/create" element={<Create />} />
-          <Route path="/collections" element={<Collections />} />
+          <Route path="/collectionpage" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
