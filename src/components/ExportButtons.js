@@ -87,17 +87,9 @@ const ExportButtons = (props) => {
 
   const saveToDb = () => {
     const fetchData = async () => {
-      const saveObj = Object.enteries(props.data).map(([key, value]) => {
-        return { key, value };
-      });
-      console.log(saveObj)
       const { data: dataName, error: errorName } = await supabase
         .from(props.tableName)
-        .insert({
-          // name: props.data.name,
-          // race: props.data.race,
-          // sex: props.data.sex,
-        });
+        .insert(props.data);
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);

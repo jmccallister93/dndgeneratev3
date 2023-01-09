@@ -280,7 +280,7 @@ const NpcGen = () => {
       race: race,
       sex: sex,
       age: age,
-      height: [heightFt, heightIn],
+      height: (heightFt + " " + heightIn),
       weight: weight,
       align: align,
       prof: prof,
