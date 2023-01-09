@@ -90,6 +90,7 @@ const ExportButtons = (props) => {
       const { data: dataName, error: errorName } = await supabase
         .from(props.tableName)
         .insert(props.data);
+        console.log("Added to DB")
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);

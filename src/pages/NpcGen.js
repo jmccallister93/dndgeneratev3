@@ -275,6 +275,9 @@ const NpcGen = () => {
 
   //Create npc object to be exported
   useEffect(() => {
+
+    const itemNames = selectedItem.map((item) => item.name);
+    const itemString = itemNames.join(", ");
     const npc = {
       name: name,
       race: race,
@@ -291,12 +294,20 @@ const NpcGen = () => {
       bond: bond,
       questType: questType,
       hook: hook,
-      str: str,
-      dex: dex,
-      con: con,
-      int: int,
-      wis: wis,
-      cha: cha,
+      hp: hp,
+      ac: ac,
+      speed: speed,
+      str: (str + " " + setMod(str)),
+      dex: (dex + " " + setMod(dex)),
+      con: (con + " " + setMod(con)),
+      int: (int + " " + setMod(int)),
+      wis: (wis + " " + setMod(wis)),
+      cha: (cha + " " + setMod(cha)),
+      action: action,
+      weaponBonus: weaponBonus,
+      weaponDamage: weaponDamage,
+      weaponProperties: weaponProperties,
+      inventory: itemString,
     };
     setNpc(npc);
   }, [
@@ -318,6 +329,14 @@ const NpcGen = () => {
     int,
     wis,
     cha,
+    action,
+    weaponBonus,
+    weaponDamage,
+    weaponProperties,
+    selectedItem,
+    ac,
+    hp,
+    speed,
   ]);
 
   //Pull damage field from itemsWeapons table in database
