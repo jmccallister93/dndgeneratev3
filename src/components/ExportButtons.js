@@ -90,7 +90,7 @@ const ExportButtons = (props) => {
       const { data: dataName, error: errorName } = await supabase
         .from(props.tableName)
         .insert(props.data);
-        console.log("Added to DB")
+      console.log("Added to DB");
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);
@@ -109,8 +109,12 @@ const ExportButtons = (props) => {
 
   return (
     <>
-      <button className={style.btnExport} onClick={saveToDb} title="Export PDF">
-        SAVE
+      <button
+        className={style.btnExport}
+        onClick={saveToDb}
+        title="Save to Database"
+      >
+        SAVE <i className="pi pi-cloud-upload"></i>
       </button>
       <button
         className={style.btnExport}
@@ -118,13 +122,14 @@ const ExportButtons = (props) => {
         title="Export PDF"
       >
         PDF
+        <i className="pi pi-file-pdf"></i>
       </button>
       <button
         className={style.btnExport}
         onClick={exportToText}
         title="Export TXT"
       >
-        TXT
+        TXT <i className="pi pi-file-o"></i>
       </button>
       <button
         className={style.btnExport}
@@ -132,6 +137,7 @@ const ExportButtons = (props) => {
         title="Export XLSX"
       >
         XLSX
+        <i className="pi pi-file-excel"></i>
       </button>
     </>
   );

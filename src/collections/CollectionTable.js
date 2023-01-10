@@ -28,9 +28,11 @@ const CollectionTable = (props) => {
     fetchData();
   }, []);
 
+  const piInfo = <i className="pi pi-info-circle"></i>
+
   useEffect(() => {
     setDisplay(
-      object.map((i) => {
+      object.map((item) => {
         return (
           <span
             className="editText"
@@ -38,7 +40,8 @@ const CollectionTable = (props) => {
             suppressContentEditableWarning={true}
           >
             <span className={style.minorText3}>
-              {i === undefined ? null : `${i}`}
+              {item === undefined ? null : `${item} ` }
+              {piInfo}
               <br></br>
             </span>
           </span>

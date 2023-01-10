@@ -585,12 +585,9 @@ const NpcGen = () => {
               setArrayState={[setSelectedItem]}
             />
             {/* Export Btns */}
-            <h1>
-              Export
               <div className={style.exportBtns}>
                 <ExportButtons div={divRef} data={npc} tableName={"test"}/>
               </div>
-            </h1>
             {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
