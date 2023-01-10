@@ -28,7 +28,7 @@ const CollectionTable = (props) => {
     fetchData();
   }, []);
 
-  const piInfo = <i className="pi pi-info-circle"></i>
+  const piInfo = <i className="pi pi-info-circle"></i>;
 
   useEffect(() => {
     setDisplay(
@@ -40,7 +40,7 @@ const CollectionTable = (props) => {
             suppressContentEditableWarning={true}
           >
             <span className={style.minorText3}>
-              {item === undefined ? null : `${item} ` }
+              {item === undefined ? null : `${item} `}
               {piInfo}
               <br></br>
             </span>
@@ -50,10 +50,16 @@ const CollectionTable = (props) => {
     );
   }, [object]);
 
+  const setActive = () => {
+    props.active(!props.active);
+    };
+
   return (
     <>
       <Card>
-        <h1>NPC Collection</h1>
+        <h1 onClick={setActive}>
+          NPC Collection<i className="pi pi-chevron-down"></i>
+        </h1>
         <h3>{display}</h3>
       </Card>
     </>

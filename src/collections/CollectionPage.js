@@ -15,7 +15,7 @@ const CollectionPage = () => {
 
   const cardNpc = (
     <Card className={style.collectionCard} onClick={onNpcClick}>
-      <h3>NPC Collection</h3>
+      <h3>NPC Collection<i className="pi pi-chevron-right"></i></h3>
       <p>Collection of all your NPCs!</p>
     </Card>
   );
@@ -25,7 +25,9 @@ const CollectionPage = () => {
       <Navbar />
       <h1 className={style.collectionHeader}>Collections</h1>
       <div className={style.collectionCardWrapper}>
-        {isNpcActive ? <CollectionTable tableName={"test"} /> : cardNpc}
+        {isNpcActive ? 
+        <CollectionTable tableName={"test"} active={setIsNpcActive}/> : 
+        cardNpc }
       </div>
     </div>
   );
