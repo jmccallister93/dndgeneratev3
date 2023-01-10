@@ -14,7 +14,6 @@ const InfoModal = (props) => {
         visible={props.visible}
         modal={true}
         onHide={() => props.setVisible(true)}
-        //Inline style to set rounded corners and width 50vw and background color to blue
         style={{ width: "50vw"}}
       >
         {props.content}

@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 import supabase from "../config/supabaseClient";
 import { Card } from "primereact/card";
+import CollectionItem from "./CollectionItem";
+import InfoModal from "../components/InfoModal";
+import { Dialog } from "primereact/dialog";
 
 const CollectionTable = (props) => {
   const [fetchError, setFetchError] = useState(null);
   const [object, setObject] = useState([]);
   const [display, setDisplay] = useState([]);
   const [multipleDisplay, setMultipleDisplay] = useState([]);
+  const [isItemActive, setIsItemActive] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +33,9 @@ const CollectionTable = (props) => {
     fetchData();
   }, []);
 
-  const piInfo = <i className="pi pi-info-circle"></i>;
+  const showPopup = () => {
+    setIsItemActive((current) => !current);
+  };
 
   useEffect(() => {
     setDisplay(
@@ -38,10 +45,11 @@ const CollectionTable = (props) => {
             className="editText"
             contentEditable="false"
             suppressContentEditableWarning={true}
+            onClick={() => setSelectedItem(item)}
           >
-            <span className={style.minorText3}>
-              {item === undefined ? null : `${item} `}
-              {piInfo}
+            <span className={style.minorText3} onClick={showPopup}>
+              {item === undefined ? null : `${item}`}
+              <i className="pi pi-info-circle"></i>
               <br></br>
             </span>
           </span>
@@ -50,18 +58,28 @@ const CollectionTable = (props) => {
     );
   }, [object]);
 
-  const setActive = () => {
+  const setPropActive = () => {
     props.active(!props.active);
-    };
+  };
 
   return (
     <>
       <Card>
-        <h1 onClick={setActive}>
+        <h1 onClick={setPropActive}>
           NPC Collection<i className="pi pi-chevron-down"></i>
         </h1>
         <h3>{display}</h3>
       </Card>
+      <Dialog
+        className={style.infoModal}
+        header={"NPC Info"}
+        visible={isItemActive}
+        modal={true}
+        onHide={() => setIsItemActive(false)}
+        style={{ width: "50vw"}}
+      >
+        {selectedItem}
+      </Dialog>
     </>
   );
 };
