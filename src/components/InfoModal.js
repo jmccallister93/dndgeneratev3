@@ -3,9 +3,6 @@ import { useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const InfoModal = (props) => {
-  //Set visible to true to display the modal
-
-  //Set visible to false to hide the modal
   return (
     <div>
       <Dialog

@@ -70,7 +70,7 @@ const CollectionTable = (props) => {
         </h1>
         <h3>{display}</h3>
       </Card>
-      <Dialog
+      {/* <Dialog
         className={style.infoModal}
         header={"NPC Info"}
         visible={isItemActive}
@@ -79,7 +79,12 @@ const CollectionTable = (props) => {
         style={{ width: "50vw"}}
       >
         {selectedItem}
-      </Dialog>
+      </Dialog> */}
+      <CollectionItem
+      visible={isItemActive}
+      setVisible={setIsItemActive}
+      selectedItem={selectedItem}
+      />
     </>
   );
 };
