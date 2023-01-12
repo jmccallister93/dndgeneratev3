@@ -8,12 +8,12 @@ import { Dialog } from "primereact/dialog";
 
 const CollectionTable = (props) => {
   const [fetchError, setFetchError] = useState(null);
-  const [object, setObject] = useState([]);
+  const [objectDetails, setObjectDetails] = useState([]);
   const [display, setDisplay] = useState([]);
-  const [multipleDisplay, setMultipleDisplay] = useState([]);
   const [isItemActive, setIsItemActive] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
+  //Get Details
   useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -22,12 +22,38 @@ const CollectionTable = (props) => {
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);
-        setObject(null);
+        setObjectDetails(null);
       }
       if (dataName) {
-        // console.log(dataName.map((r) => [r.name, r.age]));
         setFetchError(null);
-        setObject(dataName.map((r) => r.name));
+        setObjectDetails(dataName.map((r) => [
+          r.name, 
+          r.race,
+          r.sex,
+          r.align,
+          r.prof,
+          r.feature,
+          r.talent,
+          r.mannerism,
+          r.interaction,
+          r.bond,
+          r.questType,
+          r.hook,
+          r.str,
+          r.dex,
+          r.con,
+          r.int,
+          r.wis,
+          r.cha,
+          r.action,
+          r.weaponBonus,
+          r.weaponDamage,
+          r.weaponProperties,
+          r.selectedItem,
+          r.ac,
+          r.hp,
+          r.speed,
+        ]));
       }
     };
     fetchData();
@@ -39,7 +65,7 @@ const CollectionTable = (props) => {
 
   useEffect(() => {
     setDisplay(
-      object.map((item) => {
+      objectDetails.map((item) => {
         return (
           <span
             className="editText"
@@ -48,7 +74,7 @@ const CollectionTable = (props) => {
             onClick={() => setSelectedItem(item)}
           >
             <span className={style.minorText3} onClick={showPopup}>
-              {item === undefined ? null : `${item}`}
+              {item === undefined ? null : `${item[0]}`}
               <i className="pi pi-info-circle"></i>
               <br></br>
             </span>
@@ -56,7 +82,7 @@ const CollectionTable = (props) => {
         );
       })
     );
-  }, [object]);
+  }, [objectDetails]);
 
   const setPropActive = () => {
     props.active(!props.active);
@@ -70,20 +96,10 @@ const CollectionTable = (props) => {
         </h1>
         <h3>{display}</h3>
       </Card>
-      {/* <Dialog
-        className={style.infoModal}
-        header={"NPC Info"}
-        visible={isItemActive}
-        modal={true}
-        onHide={() => setIsItemActive(false)}
-        style={{ width: "50vw"}}
-      >
-        {selectedItem}
-      </Dialog> */}
       <CollectionItem
-      visible={isItemActive}
-      setVisible={setIsItemActive}
-      selectedItem={selectedItem}
+        visible={isItemActive}
+        setVisible={setIsItemActive}
+        selectedItem={selectedItem}
       />
     </>
   );
