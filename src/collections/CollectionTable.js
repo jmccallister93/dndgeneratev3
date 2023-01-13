@@ -26,34 +26,36 @@ const CollectionTable = (props) => {
       }
       if (dataName) {
         setFetchError(null);
-        setObjectDetails(dataName.map((r) => [
-          r.name, 
-          r.race,
-          r.sex,
-          r.align,
-          r.prof,
-          r.feature,
-          r.talent,
-          r.mannerism,
-          r.interaction,
-          r.bond,
-          r.questType,
-          r.hook,
-          r.str,
-          r.dex,
-          r.con,
-          r.int,
-          r.wis,
-          r.cha,
-          r.action,
-          r.weaponBonus,
-          r.weaponDamage,
-          r.weaponProperties,
-          r.selectedItem,
-          r.ac,
-          r.hp,
-          r.speed,
-        ]));
+        setObjectDetails(
+          dataName.map((r) => ({
+            name: r.name,
+            race: r.race,
+            sex: r.sex,
+            align: r.align,
+            prof: r.prof,
+            feature: r.feature,
+            talent: r.talent,
+            mannerism: r.mannerism,
+            interaction: r.interaction,
+            bond: r.bond,
+            questType: r.questType,
+            hook: r.hook,
+            str: r.str,
+            dex: r.dex,
+            con: r.con,
+            int: r.int,
+            wis: r.wis,
+            cha: r.cha,
+            action: r.action,
+            weaponBonus: r.weaponBonus,
+            weaponDamage: r.weaponDamage,
+            weaponProperties: r.weaponProperties,
+            selectedItem: r.selectedItem,
+            ac: r.ac,
+            hp: r.hp,
+            speed: r.speed,
+          }))
+        );
       }
     };
     fetchData();
@@ -67,18 +69,21 @@ const CollectionTable = (props) => {
     setDisplay(
       objectDetails.map((item) => {
         return (
+          <>
           <span
             className="editText"
             contentEditable="false"
             suppressContentEditableWarning={true}
-            onClick={() => setSelectedItem(item)}
+            onClick={() => setSelectedItem(Object.entries(item))}
           >
             <span className={style.minorText3} onClick={showPopup}>
-              {item === undefined ? null : `${item[0]}`}
+              {item === undefined ? null : `${item.name}`}
               <i className="pi pi-info-circle"></i>
               <br></br>
             </span>
           </span>
+          
+          </>
         );
       })
     );
@@ -99,7 +104,7 @@ const CollectionTable = (props) => {
       <CollectionItem
         visible={isItemActive}
         setVisible={setIsItemActive}
-        selectedItem={selectedItem}
+        selectedItem={[selectedItem]}
       />
     </>
   );
