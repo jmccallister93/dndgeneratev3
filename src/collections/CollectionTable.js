@@ -77,7 +77,7 @@ const CollectionTable = (props) => {
             onClick={() => setSelectedItem(Object.entries(item))}
           >
             <span className={style.minorText3} onClick={showPopup}>
-              {item === undefined ? null : `${item.name}`}
+              {item === undefined ? null : `${item.name} `}
               <i className="pi pi-info-circle"></i>
               <br></br>
             </span>
@@ -104,7 +104,7 @@ const CollectionTable = (props) => {
       <CollectionItem
         visible={isItemActive}
         setVisible={setIsItemActive}
-        selectedItem={[selectedItem]}
+        selectedItem={selectedItem}
       />
     </>
   );
