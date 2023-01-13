@@ -96,7 +96,7 @@ const CollectionTable = (props) => {
     <>
       <Card>
         <h1 onClick={setPropActive}>
-          NPC Collection<i className="pi pi-chevron-down"></i>
+          {props.collectionTitle} Collection<i className="pi pi-chevron-down"></i>
         </h1>
         <h3>{display}</h3>
       </Card>

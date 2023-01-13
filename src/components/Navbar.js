@@ -8,11 +8,11 @@ const Navbar = () => {
         <Link to="/">
           <li className={style.navbarLi}>Home</li>
         </Link>
-        <Link to="/create">
-          <li className={style.navbarLi}>Create</li>
-        </Link>
         <Link to="/notes">
           <li className={style.navbarLi}>Campaign</li>
+        </Link>
+        <Link to="/create">
+          <li className={style.navbarLi}>Create</li>
         </Link>
         <Link to="/collectionpage">
           <li className={style.navbarLi}>Collections</li>
