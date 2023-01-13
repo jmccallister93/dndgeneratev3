@@ -70,19 +70,18 @@ const CollectionTable = (props) => {
       objectDetails.map((item) => {
         return (
           <>
-          <span
-            className="editText"
-            contentEditable="false"
-            suppressContentEditableWarning={true}
-            onClick={() => setSelectedItem(Object.entries(item))}
-          >
-            <span className={style.minorText3} onClick={showPopup}>
-              {item === undefined ? null : `${item.name} `}
-              <i className="pi pi-info-circle"></i>
-              <br></br>
+            <span
+              className="editText"
+              contentEditable="false"
+              suppressContentEditableWarning={true}
+              onClick={() => setSelectedItem(Object.entries(item))}
+            >
+              <span className={style.minorText3} onClick={showPopup}>
+                {item === undefined ? null : `${item.name} `}
+                <i className="pi pi-info-circle"></i>
+                <br></br>
+              </span>
             </span>
-          </span>
-          
           </>
         );
       })
@@ -101,11 +100,13 @@ const CollectionTable = (props) => {
         </h1>
         <h3>{display}</h3>
       </Card>
-      <CollectionItem
-        visible={isItemActive}
-        setVisible={setIsItemActive}
-        selectedItem={selectedItem}
-      />
+      {isItemActive === true ? (
+        <CollectionItem
+          visible={isItemActive}
+          setVisible={setIsItemActive}
+          selectedItem={selectedItem}
+        />
+      ) : null}
     </>
   );
 };
