@@ -457,6 +457,13 @@ $btn-blue: #2196f3;
     color: black;
     text-decoration: none;
 }
+
+// Note seciton
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+}
   
   @keyframes spin {
     0% { transform: rotate(0deg); }
