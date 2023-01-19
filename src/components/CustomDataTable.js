@@ -132,7 +132,7 @@ const CustomDataTable = (props) => {
         transitionOptions
       >
         <DataTable
-          value={props.valueOptions}
+          value={props.valueOptions} 
           scrollable
           scrollHeight="60vh"
           rows={20}

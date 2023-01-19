@@ -68,10 +68,13 @@ function NotePage() {
     ])
   }, []);
 
-  const onSelectedKey = (e) => {
-    // setSelectedKey(e.value);
-    console.log(e.label)
+  const onSelectedItem = (e) => {
+    console.log(e)
   };
+
+  useEffect(() => {
+    console.log(selectedKey)
+  }, [selectedKey])
 
   return (
     <div className={style.mainWrapper}>
@@ -80,7 +83,7 @@ function NotePage() {
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
       <div className={ns.grid3}>
-        <NoteTree/>
+        <NoteTree onSelectedItem={setSelectedKey}/>
         <Note title="test" content={selectedKey}/>
       </div>
     </div>

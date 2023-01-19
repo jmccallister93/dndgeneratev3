@@ -6,6 +6,8 @@ import { useState } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 
 const TreeTable = (props) => {
+
+    const [select, setSelect] = useState(null);
   //DataTable filters
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -53,7 +55,6 @@ const TreeTable = (props) => {
           scrollHeight="60vh"
           rows={20}
           dataKey="name"
-          selection={props.selection}
           filters={filters}
           filterDisplay="row"
           responsiveLayout="scroll"
@@ -65,14 +66,16 @@ const TreeTable = (props) => {
           resizableColumns
           reorderableColumns
           reorderableRows
+          selection={props.selection}
+          onSelectionChange={(e) => props.onSelectedItem(e.value)}
         >
-          <Column
+         <Column
             selectionMode="multiple"
             selectionAriaLabel="name"
             headerStyle={{ width: "6em" }}
           ></Column>
           <Column
-            header={props.h1Title}
+            header={props.header}
             field="name"
             sortable
             filter
