@@ -3,20 +3,19 @@ import { useParams } from "react-router-dom";
 import supabase from "../../config/supabaseClient"; // import the supabase client
 import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
+import ns from "../../stylesheets/Note.module.scss";
 import NewNote from "../components/NewNote";
 import NoteList from "../components/NoteList";
-import { Note } from "@react-pdf/renderer";
+import Note from "../components/Note";
 import { Tree } from "primereact/tree";
 import { NodeService } from "../components/NodeService";
+import NoteTree from "../components/NoteTree";
 
 function NotePage() {
   const { id } = useParams();
   const [note, setNote] = useState({});
   const [nodes, setNodes] = useState(null);
-  const [selectedKey, setSelectedKey] = useState(null);
-  const [selectedKeys1, setSelectedKeys1] = useState(null);
-  const [selectedKeys2, setSelectedKeys2] = useState(null);
-  const [selectedKeys3, setSelectedKeys3] = useState(null);
+  const [selectedKey, setSelectedKey] = useState();
   const toast = useRef(null);
   const nodeService = new NodeService();
 
@@ -69,21 +68,23 @@ function NotePage() {
     ])
   }, []);
 
+  const onSelectedKey = (e) => {
+    // setSelectedKey(e.value);
+    console.log(e.label)
+  };
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
-      <div className={style.grid3}>
-        <h5>Multiple Selection without MetaKey</h5>
-        <Tree
-          value={nodes}
-          selectionMode="multiple"
-          metaKeySelection={false}
-          selectionKeys={selectedKeys2}
-          onSelectionChange={(e) => setSelectedKeys2(e.value)}
+      <div className={ns.grid2}>
+        <NoteTree
         />
+        <div className={ns.display}>
+        <Note title="test" content={selectedKey}/>
+        </div>
       </div>
     </div>
   );
