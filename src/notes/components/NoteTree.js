@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 import { DataTable } from 'primereact/datatable';
+import TreeTable from "./TreeTable";
 
 const NoteTree = (props) => {
     const testClick = (e) => {
@@ -10,13 +11,11 @@ const NoteTree = (props) => {
   return (
     <>
       <div className={ns.noteTree}>
-        <div className={ns.noteTreeCategory}>
-        </div>
-       
-       <DataTable />
-       <DataTable />
-       <DataTable />
-       <DataTable />
+       <TreeTable />
+       <TreeTable />
+       <TreeTable />
+       <TreeTable />
+       <TreeTable />
       </div>
     </>
   );

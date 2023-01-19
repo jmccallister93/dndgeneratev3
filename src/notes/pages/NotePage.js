@@ -80,11 +80,8 @@ function NotePage() {
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
       <div className={ns.grid3}>
-        <NoteTree
-        />
-        <div className={ns.display}>
+        <NoteTree/>
         <Note title="test" content={selectedKey}/>
-        </div>
       </div>
     </div>
   );
