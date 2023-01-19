@@ -79,7 +79,7 @@ function NotePage() {
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
-      <div className={ns.grid2}>
+      <div className={ns.grid3}>
         <NoteTree
         />
         <div className={ns.display}>

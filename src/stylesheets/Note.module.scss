@@ -38,6 +38,7 @@
 }
 
 .noteTree {
+  grid-column: span 2;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   background-color: white;
@@ -46,7 +47,7 @@
 }
 
 .noteTreeCategory {
-    
+    border-left: 1px solid black;
   & h1 {
     text-decoration: underline;
   }
