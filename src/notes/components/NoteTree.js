@@ -6,11 +6,14 @@ import TreeTable from "./TreeTable";
 const NoteTree = (props) => {
   const [list, setList] = useState([]);
   const test = [
+    { name: "Place", data: "place stuff" },
+    { name: "Place2", data: "place2 stuff" },
+  ];
+  const test2 = [
     { name: "Ting", data: "test" },
     { name: "Ting2", data: "test2" },
   ];
-
-  const data = test.map((item) => ({ name: item.name, data: item.data }));
+  
 
   return (
     <>
@@ -19,7 +22,7 @@ const NoteTree = (props) => {
           {" "}
           <TreeTable
             header="Locations"
-            value={data}
+            value={test}
             onSelectedItem={(value) => props.onSelectedItem(value)}
           />
         </div>

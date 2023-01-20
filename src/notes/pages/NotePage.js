@@ -15,7 +15,7 @@ function NotePage() {
   const { id } = useParams();
   const [note, setNote] = useState({});
   const [nodes, setNodes] = useState(null);
-  const [selectedKey, setSelectedKey] = useState();
+  const [selectedKey, setSelectedKey] = useState({});
   const toast = useRef(null);
   const nodeService = new NodeService();
 
@@ -68,14 +68,6 @@ function NotePage() {
     ])
   }, []);
 
-  const onSelectedItem = (e) => {
-    console.log(e)
-  };
-
-  useEffect(() => {
-    console.log(selectedKey)
-  }, [selectedKey])
-
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -84,7 +76,7 @@ function NotePage() {
       </div>
       <div className={ns.flex1}>
         <NoteTree onSelectedItem={setSelectedKey}/>
-        <Note title="test" content={selectedKey}/>
+        <Note name={selectedKey.name} data={selectedKey.data}/>
       </div>
     </div>
   );

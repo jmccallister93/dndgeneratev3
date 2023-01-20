@@ -5,8 +5,8 @@ function Note(props) {
   return (
     <>
     <div className={ns.display}>
-      <h3>{props.title}</h3>
-      <p>{props.content}</p>
+      <h3>{props.name}</h3>
+      <p>{props.data}</p>
       </div>
     </>
   );
