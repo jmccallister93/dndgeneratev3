@@ -4,18 +4,20 @@ import { DataTable } from "primereact/datatable";
 import TreeTable from "./TreeTable";
 
 const NoteTree = (props) => {
-  const testClick = (e) => {
-    console.log(e.target);
-  };
+  const [list, setList] = useState([]);
+  const test = [
+    { name: "Ting", data: "test" },
+    { name: "Ting2", data: "test2" },
+  ];
 
-  const test = { name: "test", data: "test" };
+const data = test.map(item => ({ name: item.name, data: item.data }));
 
   return (
     <>
       <div className={ns.noteTree}>
         <TreeTable
           header="Locations"
-          value={[test.name]}
+          value={data}
           onSelectedItem={(value) => props.onSelectedItem(value)}
         />
         <TreeTable header="Organizations" />

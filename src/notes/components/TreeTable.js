@@ -66,14 +66,10 @@ const TreeTable = (props) => {
           resizableColumns
           reorderableColumns
           reorderableRows
+          selectionMode="multiple"
           selection={props.selection}
-          onSelectionChange={(e) => props.onSelectedItem(e.value)}
+          onSelectionChange={(e) => props.onSelectedItem(e.value.map(item => item.name))}
         >
-         <Column
-            selectionMode="multiple"
-            selectionAriaLabel="name"
-            headerStyle={{ width: "6em" }}
-          ></Column>
           <Column
             header={props.header}
             field="name"
