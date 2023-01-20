@@ -68,7 +68,10 @@ const TreeTable = (props) => {
           selectionMode="multiple"
           selection={props.selection}
           onSelectionChange={(e) =>
-            props.onSelectedItem({name: e.value.map((item) => item.name), data: e.value.map((item) => item.data)})
+            props.onSelectedItem({
+              name: e.value.map((item) => item.name),
+              data: e.value.map((item) => item.data),
+            })
           }
         >
           <Column
