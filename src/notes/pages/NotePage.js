@@ -12,61 +12,7 @@ import { NodeService } from "../components/NodeService";
 import NoteTree from "../components/NoteTree";
 
 function NotePage() {
-  const { id } = useParams();
-  const [note, setNote] = useState({});
-  const [nodes, setNodes] = useState(null);
   const [selectedKey, setSelectedKey] = useState({});
-  const toast = useRef(null);
-  const nodeService = new NodeService();
-
-  // useEffect(() => {
-  //   const getNote = async () => {
-  //     const { body } = await supabase.from("notes").select("*").where({ id }); // fetch the note with the matching id
-  //     setNote(body[0]);
-  //   };
-  //   getNote();
-  // }, [id]);
-
-  // useEffect(() => {
-  //   nodeService.getTreeNodes().then((data) => setNodes(data));
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const onNodeSelect = (node) => {
-    toast.current.show({
-      severity: "success",
-      summary: "Node Selected",
-      detail: node.label,
-      life: 3000,
-    });
-  };
-
-  const onNodeUnselect = (node) => {
-    toast.current.show({
-      severity: "success",
-      summary: "Node Unselected",
-      detail: node.label,
-      life: 3000,
-    });
-  };
-
-  useEffect(() => {
-   setNodes([
-      {
-        label: "Documents",
-        data: "Documents Folder",
-        expandedIcon: "pi pi-folder-open",
-        collapsedIcon: "pi pi-folder",
-        children: [
-          {
-            label: "Work",
-            data: "Work Folder",
-            expandedIcon: "pi pi-folder-open",
-            collapsedIcon: "pi pi-folder",
-          },
-        ],
-      },
-    ])
-  }, []);
 
   return (
     <div className={style.mainWrapper}>

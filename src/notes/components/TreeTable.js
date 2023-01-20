@@ -1,12 +1,12 @@
-import { Column } from "primereact/column";
+import { Column } from 'primereact/column';
 import { FilterMatchMode } from "primereact/api";
 import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ns from "../../stylesheets/Note.module.scss";
+import { TreeTable } from "primereact/treetable";
 
-const TreeTable = (props) => {
-  const [select, setSelect] = useState(null);
+const NoteTreeTable = (props) => {
   //DataTable filters
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -48,25 +48,8 @@ const TreeTable = (props) => {
   return (
     <>
       <div className={ns.noteTreeCategory}>
-        <DataTable
+        <TreeTable
           value={props.value}
-          scrollable
-          scrollHeight="60vh"
-          rows={20}
-          dataKey="name"
-          filters={filters}
-          filterDisplay="row"
-          responsiveLayout="scroll"
-          globalFilterFields={["name"]}
-          header={header}
-          emptyMessage="No items found."
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-          rowHover
-          resizableColumns
-          reorderableColumns
-          reorderableRows
-          selectionMode="multiple"
-          selection={props.selection}
           onSelectionChange={(e) =>
             props.onSelectedItem({
               name: e.value.map((item) => item.name),
@@ -75,16 +58,20 @@ const TreeTable = (props) => {
           }
         >
           <Column
-            header={props.header}
-            field="name"
             sortable
             filter
+            filterMatchMode={filters}
             filterPlaceholder="Search"
+            field="name"
+            header="Name"
+            expander
+            reorderable
+            keyField="id"
           ></Column>
-        </DataTable>
+        </TreeTable>
       </div>
     </>
   );
 };
 
-export default TreeTable;
+export default NoteTreeTable;
