@@ -50,19 +50,22 @@ const NoteTreeTable = (props) => {
       <div className={ns.noteTreeCategory}>
         <TreeTable
           value={props.value}
+          selectionMode="single"
           onSelectionChange={(e) =>
             props.onSelectedItem({
-              name: e.value.map((item) => item.name),
+              name: e.value.map((item) => item.label),
               data: e.value.map((item) => item.data),
-            })
-          }
+              key: e.value.map((item) => item.key),
+          })}
+          className="tree-table"
+          style={{ width: "15rem" }}
         >
           <Column
             sortable
             filter
             filterMatchMode={filters}
             filterPlaceholder="Search"
-            field="name"
+            field="name" 
             header="Name"
             expander
             reorderable
