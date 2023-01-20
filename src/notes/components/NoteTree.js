@@ -23,11 +23,18 @@ const NoteTree = (props) => {
             onSelectedItem={(value) => props.onSelectedItem(value)}
           />
         </div>
-
-        <TreeTable header="Organizations" />
-        <TreeTable header="NPCs" />
-        <TreeTable header="Quests" />
-        <TreeTable header="Items" />
+        <div className={ns.TreeTable}>
+          <TreeTable header="Organizations" />
+        </div>
+        <div className={ns.TreeTable}>
+          <TreeTable header="NPCs" />
+        </div>
+        <div className={ns.TreeTable}>
+          <TreeTable header="Quests" />
+        </div>
+        <div className={ns.TreeTable}>
+          <TreeTable header="Items" />
+        </div>
       </div>
     </>
   );

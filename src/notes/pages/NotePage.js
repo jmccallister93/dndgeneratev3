@@ -82,7 +82,7 @@ function NotePage() {
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
-      <div className={ns.grid3}>
+      <div className={ns.flex1}>
         <NoteTree onSelectedItem={setSelectedKey}/>
         <Note title="test" content={selectedKey}/>
       </div>

@@ -8,13 +8,17 @@
   grid-template-columns: repeat(3, 1fr);
   padding: 10px;
 }
+
+.flex1{
+  display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .display {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   background-color: white;
-  //Create a black flecked background effect
-
   width: 50%;
   padding: 10px;
   margin: 0;
@@ -39,15 +43,15 @@
 
 .noteTree {
   grid-column: span 2;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-flow: row;
+  // display: grid;
+  // grid-template-columns: repeat(5, 1fr);
+  // grid-auto-flow: row;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   background-color: white;
   max-width: max-content;
-  // min-width: max-content;
+  min-width: fit-content;
   height: 80vh;
 }
 
@@ -67,4 +71,5 @@
   min-width: 200px;
   max-width: 600px;
   overflow: auto;
+  height: 100%;
 }
