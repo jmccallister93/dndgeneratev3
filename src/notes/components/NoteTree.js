@@ -10,16 +10,20 @@ const NoteTree = (props) => {
     { name: "Ting2", data: "test2" },
   ];
 
-const data = test.map(item => ({ name: item.name, data: item.data }));
+  const data = test.map((item) => ({ name: item.name, data: item.data }));
 
   return (
     <>
       <div className={ns.noteTree}>
-        <TreeTable
-          header="Locations"
-          value={data}
-          onSelectedItem={(value) => props.onSelectedItem(value)}
-        />
+        <div className={ns.TreeTable}>
+          {" "}
+          <TreeTable
+            header="Locations"
+            value={data}
+            onSelectedItem={(value) => props.onSelectedItem(value)}
+          />
+        </div>
+
         <TreeTable header="Organizations" />
         <TreeTable header="NPCs" />
         <TreeTable header="Quests" />

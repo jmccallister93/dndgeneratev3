@@ -6,8 +6,7 @@ import { useState } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 
 const TreeTable = (props) => {
-
-    const [select, setSelect] = useState(null);
+  const [select, setSelect] = useState(null);
   //DataTable filters
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -68,7 +67,9 @@ const TreeTable = (props) => {
           reorderableRows
           selectionMode="multiple"
           selection={props.selection}
-          onSelectionChange={(e) => props.onSelectedItem(e.value.map(item => item.name))}
+          onSelectionChange={(e) =>
+            props.onSelectedItem(e.value.map((item) => item.name))
+          }
         >
           <Column
             header={props.header}
