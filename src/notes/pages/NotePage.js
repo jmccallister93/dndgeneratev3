@@ -14,10 +14,6 @@ import NoteTree from "../components/NoteTree";
 function NotePage() {
   const [selectedKey, setSelectedKey] = useState({});
 
-  useEffect(() => {
-    console.log(selectedKey);
-  }, [selectedKey]);
-
   return (
     <div className={style.mainWrapper}>
       <Navbar />

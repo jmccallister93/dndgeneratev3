@@ -53,32 +53,37 @@ const NoteTree = (props) => {
       },
     },
   ];
-  const test2 = [
+const test2 =[
     {
+      key: "0",
       data: {
         name: "Parent Node 1",
         additionalData: "value",
       },
       children: [
         {
+          key: "0-0",
           data: {
             name: "Child Node 1",
             additionalData: "value",
           },
         },
         {
+          key: "0-1",
           data: {
             name: "Child Node 2",
             additionalData: "value",
           },
           children: [
             {
+              key: "0-1-0",
               data: {
                 name: "Grandchild Node 1",
                 additionalData: "value",
               },
             },
             {
+              key: "0-1-1",
               data: {
                 name: "Grandchild Node 2",
                 additionalData: "value",
@@ -89,6 +94,7 @@ const NoteTree = (props) => {
       ],
     },
     {
+      key: "1",
       data: {
         name: "Parent Node 2",
         additionalData: "value",

@@ -31,6 +31,15 @@ function Note(props) {
         <p>{props.data}</p>
         {/* <input type="file" onChange={handleFileSelect} />
         <img src={image} alt="Uploaded Image" /> */}
+        {props.name !== undefined ? (
+          <>
+          <button>Link</button>
+          <button>Generate</button>
+          </>
+        ) : (
+          null
+        )}
+            
       </div>
     </>
   );
