@@ -12,7 +12,11 @@ import { NodeService } from "../components/NodeService";
 import NoteTree from "../components/NoteTree";
 
 function NotePage() {
-  const [selectedKey, setSelectedKey] = useState({});
+  const [selectedKey, setSelectedKey] = useState({ name: "", data: "" });
+
+  useEffect(() => {
+    console.log(typeof selectedKey);
+  }, [selectedKey]);
 
   return (
     <div className={style.mainWrapper}>

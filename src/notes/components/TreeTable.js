@@ -1,4 +1,4 @@
-import { Column } from 'primereact/column';
+import { Column } from "primereact/column";
 import { FilterMatchMode } from "primereact/api";
 import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
@@ -45,18 +45,26 @@ const NoteTreeTable = (props) => {
     <div className="flex justify-content-between">{renderHeader()}</div>
   );
 
+
+const [selectedNodeKey, setSelectedNodeKey] = useState(null);
+// useEffect(() => {
+//     console.log(selectedNodeKey);
+//     }, [selectedNodeKey]);
+
   return (
     <>
       <div className={ns.noteTreeCategory}>
         <TreeTable
           value={props.value}
           selectionMode="single"
-          onSelectionChange={(e) =>
+          onSelect= {e => 
             props.onSelectedItem({
-              name: e.value.map((item) => item.label),
-              data: e.value.map((item) => item.data),
-              key: e.value.map((item) => item.key),
-          })}
+                name: e.node.name,
+                data: e.node.additionalData,
+                key: e.node.key,
+              })
+            }
+
           className="tree-table"
           style={{ width: "15rem" }}
         >
@@ -65,7 +73,7 @@ const NoteTreeTable = (props) => {
             filter
             filterMatchMode={filters}
             filterPlaceholder="Search"
-            field="name" 
+            field="name"
             header="Name"
             expander
             reorderable

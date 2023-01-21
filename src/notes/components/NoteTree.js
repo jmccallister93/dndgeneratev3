@@ -8,35 +8,34 @@ const NoteTree = (props) => {
   const test = [
     {
       key: "0",
-      label: "Parent Node 1",
       data: {
         name: "Parent Node 1",
         additionalData: "value",
       },
       children: [
         {
-          label: "Child Node 1",
+          key: "0-0",
           data: {
             name: "Child Node 1",
             additionalData: "value",
           },
         },
         {
-          label: "Child Node 2",
+          key: "0-1",
           data: {
             name: "Child Node 2",
             additionalData: "value",
           },
           children: [
             {
-              label: "Grandchild Node 1",
+              key: "0-1-0",
               data: {
                 name: "Grandchild Node 1",
                 additionalData: "value",
               },
             },
             {
-              label: "Grandchild Node 2",
+              key: "0-1-1",
               data: {
                 name: "Grandchild Node 2",
                 additionalData: "value",
@@ -47,7 +46,7 @@ const NoteTree = (props) => {
       ],
     },
     {
-      label: "Parent Node 2",
+      key: "1",
       data: {
         name: "Parent Node 2",
         additionalData: "value",
@@ -56,35 +55,30 @@ const NoteTree = (props) => {
   ];
   const test2 = [
     {
-      label: "Parent Node 1",
       data: {
         name: "Parent Node 1",
         additionalData: "value",
       },
       children: [
         {
-          label: "Child Node 1",
           data: {
             name: "Child Node 1",
             additionalData: "value",
           },
         },
         {
-          label: "Child Node 2",
           data: {
             name: "Child Node 2",
             additionalData: "value",
           },
           children: [
             {
-              label: "Grandchild Node 1",
               data: {
                 name: "Grandchild Node 1",
                 additionalData: "value",
               },
             },
             {
-              label: "Grandchild Node 2",
               data: {
                 name: "Grandchild Node 2",
                 additionalData: "value",
@@ -95,7 +89,6 @@ const NoteTree = (props) => {
       ],
     },
     {
-      label: "Parent Node 2",
       data: {
         name: "Parent Node 2",
         additionalData: "value",
