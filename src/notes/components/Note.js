@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 
 function Note(props) {
@@ -18,6 +18,7 @@ function Note(props) {
   // function handleDragOver(e) {
   //   e.preventDefault();
   // }
+
 
   return (
     <>

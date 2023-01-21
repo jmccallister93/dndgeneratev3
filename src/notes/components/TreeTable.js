@@ -46,11 +46,6 @@ const NoteTreeTable = (props) => {
   );
 
 
-const [selectedNodeKey, setSelectedNodeKey] = useState(null);
-// useEffect(() => {
-//     console.log(selectedNodeKey);
-//     }, [selectedNodeKey]);
-
   return (
     <>
       <div className={ns.noteTreeCategory}>
@@ -59,8 +54,8 @@ const [selectedNodeKey, setSelectedNodeKey] = useState(null);
           selectionMode="single"
           onSelect= {e => 
             props.onSelectedItem({
-                name: e.node.name,
-                data: e.node.additionalData,
+                name: e.node.data.name,
+                data: e.node.data.additionalData,
                 key: e.node.key,
               })
             }

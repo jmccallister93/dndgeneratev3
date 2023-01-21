@@ -12,10 +12,10 @@ import { NodeService } from "../components/NodeService";
 import NoteTree from "../components/NoteTree";
 
 function NotePage() {
-  const [selectedKey, setSelectedKey] = useState({ name: "", data: "" });
+  const [selectedKey, setSelectedKey] = useState({});
 
   useEffect(() => {
-    console.log(typeof selectedKey);
+    console.log(selectedKey);
   }, [selectedKey]);
 
   return (
