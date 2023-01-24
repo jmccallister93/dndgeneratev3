@@ -7,38 +7,43 @@ import NoteTreeTable from "./TreeTable";
 const NoteTree = (props) => {
   const test = [
     {
-      key: "0",
+      key: "loc0",
       data: {
-        name: "Parent Node 1",
+        name: "Main Location 1",
         additionalData: "value",
+        links: ["loc0-0", "loc0-1"],
       },
       children: [
         {
-          key: "0-0",
+          key: "loc0-0",
           data: {
-            name: "Child Node 1",
+            name: "Side Location 1",
             additionalData: "value",
+            links: ["loc0", "org0-0"]
           },
         },
         {
-          key: "0-1",
+          key: "loc0-1",
           data: {
-            name: "Child Node 2",
+            name: "Side Location 2",
             additionalData: "value",
+            links: ["loc0", "org0-1"]
           },
           children: [
             {
-              key: "0-1-0",
+              key: "loc0-1-0",
               data: {
-                name: "Grandchild Node 1",
+                name: "Small Location 1",
                 additionalData: "value",
+                links: ["loc0", "org0-1"]
               },
             },
             {
-              key: "0-1-1",
+              key: "loc0-1-1",
               data: {
-                name: "Grandchild Node 2",
+                name: "Small Location 2",
                 additionalData: "value",
+                links: []
               },
             },
           ],
@@ -46,44 +51,45 @@ const NoteTree = (props) => {
       ],
     },
     {
-      key: "1",
+      key: "loc1",
       data: {
-        name: "Parent Node 2",
+        name: "Main Location 2",
         additionalData: "value",
+        links: ["loc1-0", "loc1-1"]
       },
     },
   ];
 const test2 =[
     {
-      key: "0",
+      key: "o0",
       data: {
         name: "Parent Node 1",
         additionalData: "value",
       },
       children: [
         {
-          key: "0-0",
+          key: "o0-0",
           data: {
             name: "Child Node 1",
             additionalData: "value",
           },
         },
         {
-          key: "0-1",
+          key: "o0-1",
           data: {
             name: "Child Node 2",
             additionalData: "value",
           },
           children: [
             {
-              key: "0-1-0",
+              key: "o0-1-0",
               data: {
                 name: "Grandchild Node 1",
                 additionalData: "value",
               },
             },
             {
-              key: "0-1-1",
+              key: "o0-1-1",
               data: {
                 name: "Grandchild Node 2",
                 additionalData: "value",
@@ -94,7 +100,7 @@ const test2 =[
       ],
     },
     {
-      key: "1",
+      key: "o1",
       data: {
         name: "Parent Node 2",
         additionalData: "value",

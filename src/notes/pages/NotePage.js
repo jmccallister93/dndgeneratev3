@@ -21,8 +21,12 @@ function NotePage() {
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
       <div className={ns.flex1}>
-        <NoteTree onSelectedItem={setSelectedKey}/>
-        <Note name={selectedKey.name} data={selectedKey.data}/>
+        <NoteTree onSelectedItem={setSelectedKey} />
+        <Note
+          name={selectedKey.name}
+          data={selectedKey.data}
+          links={selectedKey.links}
+        />
       </div>
     </div>
   );

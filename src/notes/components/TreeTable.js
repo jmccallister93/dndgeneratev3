@@ -7,6 +7,7 @@ import ns from "../../stylesheets/Note.module.scss";
 import { TreeTable } from "primereact/treetable";
 
 const NoteTreeTable = (props) => {
+  const [selectedItemKey, setSelectedItemKey] = useState(null);
   //DataTable filters
   const [globalFilterValue, setGlobalFilterValue] = useState("");
   const [filters, setFilters] = useState({
@@ -45,6 +46,33 @@ const NoteTreeTable = (props) => {
     <div className="flex justify-content-between">{renderHeader()}</div>
   );
 
+  //Selection change
+  const handleSelectionChange = (e) => {
+    setSelectedItemKey(e.node.key);
+    props.onSelectedItem({
+      name: e.node.data.name,
+      data: e.node.data.additionalData,
+      key: e.node.key,
+      links: e.node.data.links,
+    });
+    function getLinks(node, links= []) {
+        if (!node) return links;
+        if (!node.data) return links;
+        links.push(...node.data.links);
+        if (!node.children) return links;
+        for (const child of node.children) {
+            getLinks(child, links);
+        }
+        return links;
+    }
+    const links = getLinks(e.node);
+    console.log(selectedItemKey, "is linked to, ", links);
+    // if (e.node.data.links.includes(selectedItemKey)) {
+    //     console.log("Hooray! A Match!")
+    //   } else {
+    //     console.log("Boo! No Match!");  
+    //   }
+  };
 
   return (
     <>
@@ -52,24 +80,18 @@ const NoteTreeTable = (props) => {
         <TreeTable
           value={props.value}
           selectionMode="single"
-          onSelect= {e => 
-            props.onSelectedItem({
-                name: e.node.data.name,
-                data: e.node.data.additionalData,
-                key: e.node.key,
-              })
-            }
-
+          onSelect={handleSelectionChange}
           className="tree-table"
           style={{ width: "15rem" }}
         >
           <Column
             sortable
             filter
+            draggable={true}
             filterMatchMode={filters}
             filterPlaceholder="Search"
             field="name"
-            header="Name"
+            header={props.header}
             expander
             reorderable
             keyField="id"
