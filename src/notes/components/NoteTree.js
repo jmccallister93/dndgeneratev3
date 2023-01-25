@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 import { DataTable } from "primereact/datatable";
-import TreeTable from "./TreeTable";
-import NoteTreeTable from "./TreeTable";
+import TreeTable from "./NoteTreeTable";
+import NoteTreeTable from "./NoteTreeTable";
+
 
 const NoteTree = (props) => {
   const test = [
@@ -111,29 +112,30 @@ const test2 =[
   return (
     <>
       <div className={ns.noteTree}>
-        <div className={ns.TreeTable}>
+        <div className={ns.TreeTable}> 
           {" "}
           <NoteTreeTable
             header="Locations"
-            value={test}
+            object={test}
+            objectKey={test.key}
             onSelectedItem={(value) => props.onSelectedItem(value)}
           />
         </div>
         <div className={ns.TreeTable}>
-          <NoteTreeTable
+          {/* <NoteTreeTable
             header="Organizations"
             value={test2}
             onSelectedItem={(value) => props.onSelectedItem(value)}
-          />
+          /> */}
         </div>
         <div className={ns.TreeTable}>
-          <NoteTreeTable header="NPCs" />
+          {/* <NoteTreeTable header="NPCs" /> */}
         </div>
         <div className={ns.TreeTable}>
-          <NoteTreeTable header="Quests" />
+          {/* <NoteTreeTable header="Quests" /> */}
         </div>
         <div className={ns.TreeTable}>
-          <NoteTreeTable header="Items" />
+          {/* <NoteTreeTable header="Items" /> */}
         </div>
       </div>
     </>

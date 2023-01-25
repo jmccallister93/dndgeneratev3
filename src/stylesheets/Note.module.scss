@@ -87,3 +87,30 @@
 .linked-item {
   background-color: yellow;
 }
+
+#tree {
+  list-style: none;
+}
+
+#tree ul {
+  display: none;
+}
+
+#tree li {
+  position: relative;
+}
+
+#tree li > span {
+  padding-left: 20px;
+}
+
+#tree li > span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid;
+}
