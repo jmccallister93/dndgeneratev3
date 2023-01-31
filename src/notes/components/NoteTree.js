@@ -59,6 +59,24 @@ const NoteTree = (props) => {
         links: ["loc1-0", "loc1-1"]
       },
     },
+    {
+        key: "loc2",
+        data: {
+            name: "Main Location 3",
+            additionalData: "value",
+            links: ["loc1"]
+        },
+        children: [
+            {
+                key: "loc2-0",
+                data: {
+                    name: "Side Location 3",
+                    additionalData: "value",
+                    links: ["loc2"]
+                },
+            },
+        ],
+    },
   ];
 const test2 =[
     {
