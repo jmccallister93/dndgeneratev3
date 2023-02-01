@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 
 function Note(props) {
-  console.log(props)
-
+useEffect(() => {
+    console.log(props.selectedNode);
+  }, [props.selectedNode]);
   return (
     <>
       <div className={ns.display}>
         {props.selectedNode !== undefined ? (
           <>
-            <h3>{props.selectedNode.data && props.selectedNode.data.name}</h3>
-            <div>{props.selectedNode.data && props.selectedNode.data.additionalData}</div>
-            <div>{props.selectedNode.data && props.selectedNode.data.links}</div>
+            <h3>{props.selectedNode.name}</h3>
+          
             <button>Link</button>
             <button>Generate</button>
           </>
-        ) : null}
+         ) : null} 
       </div>
     </>
   );

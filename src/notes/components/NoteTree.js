@@ -7,56 +7,6 @@ import supabase from "../../config/supabaseClient";
 
 
 const NoteTree = (props) => {
-  const [fetchError, setFetchError] = useState(null);
-  const [objectDetails, setObjectDetails] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data: dataName, error: errorName } = await supabase
-        .from(props.tableName)
-        .select();
-      if (errorName) {
-        setFetchError("Could not fetch the data");
-        console.log(errorName);
-        setObjectDetails(null);
-      }
-      if (dataName) {
-        setFetchError(null);
-        setObjectDetails(
-          dataName.map((r) => ({
-            name: r.name,
-            race: r.race,
-            sex: r.sex,
-            align: r.align,
-            prof: r.prof,
-            feature: r.feature,
-            talent: r.talent,
-            mannerism: r.mannerism,
-            interaction: r.interaction,
-            bond: r.bond,
-            questType: r.questType,
-            hook: r.hook,
-            str: r.str,
-            dex: r.dex,
-            con: r.con,
-            int: r.int,
-            wis: r.wis,
-            cha: r.cha,
-            action: r.action,
-            weaponBonus: r.weaponBonus,
-            weaponDamage: r.weaponDamage,
-            weaponProperties: r.weaponProperties,
-            selectedItem: r.selectedItem,
-            ac: r.ac,
-            hp: r.hp,
-            speed: r.speed,
-          }))
-        );
-      }
-    };
-    fetchData();
-    console.log(objectDetails)
-  }, []);
 
   return (
     <>
@@ -65,8 +15,7 @@ const NoteTree = (props) => {
           {" "}
           <NoteTreeTable
             header="Locations"
-            object={objectDetails}
-            // objectKey={props.test.key}
+            object={props.object}
             onSelectedItem={(value) => props.onSelectedItem(value)}
           />
         </div>
