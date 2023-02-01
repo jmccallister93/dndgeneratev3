@@ -5,35 +5,42 @@ import TreeTable from "./NoteTreeTable";
 import NoteTreeTable from "./NoteTreeTable";
 import supabase from "../../config/supabaseClient";
 
-
 const NoteTree = (props) => {
-
   return (
     <>
       <div className={ns.noteTree}>
-        <div className={ns.TreeTable}> 
+        <div className={ns.TreeTable}>
           {" "}
           <NoteTreeTable
             header="Locations"
+            // object={null}
+            onSelectedItem={(value) => props.onSelectedItem(value)}
+          />
+        </div>
+        <div className={ns.TreeTable}>
+          <NoteTreeTable
+            header="NPCs"
             object={props.object}
             onSelectedItem={(value) => props.onSelectedItem(value)}
           />
         </div>
         <div className={ns.TreeTable}>
-          {/* <NoteTreeTable
+          <NoteTreeTable
             header="Organizations"
-            value={test2}
             onSelectedItem={(value) => props.onSelectedItem(value)}
-          /> */}
+          />
         </div>
         <div className={ns.TreeTable}>
-          {/* <NoteTreeTable header="NPCs" /> */}
+          <NoteTreeTable
+            header="Quests"
+            onSelectedItem={(value) => props.onSelectedItem(value)}
+          />
         </div>
         <div className={ns.TreeTable}>
-          {/* <NoteTreeTable header="Quests" /> */}
-        </div>
-        <div className={ns.TreeTable}>
-          {/* <NoteTreeTable header="Items" /> */}
+          <NoteTreeTable
+            header="Items"
+            onSelectedItem={(value) => props.onSelectedItem(value)}
+          />
         </div>
       </div>
     </>

@@ -66,6 +66,18 @@
   }
 }
 
+.noteTreeCategoryItem {
+  padding: 0.5rem;
+  margin: 0.25rem;
+  border: 1px solid black;
+  transition: 0.3s;
+  &:hover {
+    background-color: #f2f2f298;
+    cursor: pointer;
+    scale: 1.1;
+  }
+}
+
 .TreeTable {
   resize: horizontal;
   min-width: 200px;

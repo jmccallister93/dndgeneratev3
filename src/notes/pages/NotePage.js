@@ -28,6 +28,9 @@ function NotePage() {
           dataName.map((r) => ({
             id: r.id,
             name: r.name,
+            age: r.age,
+            height: r.height,
+            weight: r.weight,
             race: r.race,
             sex: r.sex,
             align: r.align,
@@ -59,9 +62,6 @@ function NotePage() {
     };
     fetchData();
   }, []);
-
-  // const selectedNode = objectDetails.find((item) => item.id === selectedId);
-  // setSelectedNode(selectedNode || {});
 
   useEffect(() => {
     setSelectedNode(objectDetails.find(r => r.id === selectedId));
