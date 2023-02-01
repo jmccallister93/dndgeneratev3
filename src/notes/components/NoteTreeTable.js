@@ -5,7 +5,7 @@ const NoteTreeTable = (props) => {
   function extractNames(objectArray) {
     let names = [];
     for (let obj of objectArray) {
-      names.push({name: obj.data.name, key: obj.key});
+      names.push({ name: obj.data.name, key: obj.key });
       if (obj.children) {
         names = names.concat(extractNames(obj.children));
       }
@@ -14,18 +14,17 @@ const NoteTreeTable = (props) => {
   }
   const names = extractNames(props.object);
 
-  const handleClick = (obj) => {
-    props.onSelectedItem(obj);
+  const handleClick = (key) => {
+    props.onSelectedItem(key);
   };
-
 
   return (
     <>
       <div className={ns.noteTreeCategory}>
         {names.map((obj, index) => (
-          <div 
-          key={index} 
-          onClick={() => handleClick(obj)}>{obj.name}</div>
+          <div key={index} onClick={() => handleClick(obj.key)}>
+            {obj.name}
+          </div>
         ))}
       </div>
     </>

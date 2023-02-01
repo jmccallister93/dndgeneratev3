@@ -2,45 +2,20 @@ import React, { useEffect, useState } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 
 function Note(props) {
-  //HANDLE IMAGE UPLOAD
-  // const [image, setImage] = useState(null);
-
-  // const handleFileSelect = (event) => {
-  //   setImage(event.target.files[0]);
-  // };
-
-  // function handleDrop(e) {
-  //   e.preventDefault();
-  //   var file = e.dataTransfer.files[0];
-  //   setImage(file);
-  // }
-
-  // function handleDragOver(e) {
-  //   e.preventDefault();
-  // }
-
+  console.log(props)
 
   return (
     <>
-      <div
-        className={ns.display}
-        // onDrop={handleDrop}
-        // onDragOver={handleDragOver}
-      >
-        <h3>{props.name}</h3>
-        <p>{props.data}</p>
-        <p>{props.links}</p>
-        {/* <input type="file" onChange={handleFileSelect} />
-        <img src={image} alt="Uploaded Image" /> */}
-        {props.name !== undefined ? (
+      <div className={ns.display}>
+        {props.selectedNode !== undefined ? (
           <>
-          <button>Link</button>
-          <button>Generate</button>
+            <h3>{props.selectedNode.data && props.selectedNode.data.name}</h3>
+            <div>{props.selectedNode.data && props.selectedNode.data.additionalData}</div>
+            <div>{props.selectedNode.data && props.selectedNode.data.links}</div>
+            <button>Link</button>
+            <button>Generate</button>
           </>
-        ) : (
-          null
-        )}
-            
+        ) : null}
       </div>
     </>
   );
