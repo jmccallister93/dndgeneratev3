@@ -1,98 +1,68 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
 import supabase from "../../config/supabaseClient"; // import the supabase client
 import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import ns from "../../stylesheets/Note.module.scss";
-import NewNote from "../components/NewNote";
-import NoteList from "../components/NoteList";
 import Note from "../components/Note";
-import { Tree } from "primereact/tree";
-import { NodeService } from "../components/NodeService";
 import NoteTree from "../components/NoteTree";
 
 function NotePage() {
   const [selectedKey, setSelectedKey] = useState({});
   const [selectedNode, setSelectedNode] = useState({});
+  const [fetchError, setFetchError] = useState(null);
+  const [objectDetails, setObjectDetails] = useState([]);
 
-  const test = [
-    {
-      key: "loc0",
-      data: {
-        name: "Main Location 1",
-        additionalData: "value",
-        links: ["loc0-0", "loc0-1"],
-      },
-      children: [
-        {
-          key: "loc0-0",
-          data: {
-            name: "Side Location 1",
-            additionalData: "value",
-            links: ["loc0", "org0-0"]
-          },
-        },
-        {
-          key: "loc0-1",
-          data: {
-            name: "Side Location 2",
-            additionalData: "value",
-            links: ["loc0", "org0-1"]
-          },
-          children: [
-            {
-              key: "loc0-1-0",
-              data: {
-                name: "Small Location 1",
-                additionalData: "value",
-                links: ["loc0", "org0-1"]
-              },
-            },
-            {
-              key: "loc0-1-1",
-              data: {
-                name: "Small Location 2",
-                additionalData: "value",
-                links: []
-              },
-            },
-          ],
-        },
-      ],
-    },
-    {
-      key: "loc1",
-      data: {
-        name: "Main Location 2",
-        additionalData: "value",
-        links: ["loc1-0", "loc1-1"]
-      },
-    },
-    {
-        key: "loc2",
-        data: {
-            name: "Main Location 3",
-            additionalData: "value",
-            links: ["loc1"]
-        },
-        children: [
-            {
-                key: "loc2-0",
-                data: {
-                    name: "Side Location 3",
-                    additionalData: "value",
-                    links: ["loc2"]
-                },
-            },
-        ],
-    },
-  ];
+  // useEffect(() => {
+  //   const fetchData = async (tableName) => {
+  //     const { data: dataName, error: errorName } = await supabase
+  //       .from(tableName)
+  //       .select();
+  //     if (errorName) {
+  //       setFetchError("Could not fetch the data");
+  //       console.log(errorName);
+  //       setObjectDetails(null);
+  //     }
+  //     if (dataName) {
+  //       setFetchError(null);
+  //       setObjectDetails(
+  //         dataName.map((r) => ({
+  //           name: r.name,
+  //           race: r.race,
+  //           sex: r.sex,
+  //           align: r.align,
+  //           prof: r.prof,
+  //           feature: r.feature,
+  //           talent: r.talent,
+  //           mannerism: r.mannerism,
+  //           interaction: r.interaction,
+  //           bond: r.bond,
+  //           questType: r.questType,
+  //           hook: r.hook,
+  //           str: r.str,
+  //           dex: r.dex,
+  //           con: r.con,
+  //           int: r.int,
+  //           wis: r.wis,
+  //           cha: r.cha,
+  //           action: r.action,
+  //           weaponBonus: r.weaponBonus,
+  //           weaponDamage: r.weaponDamage,
+  //           weaponProperties: r.weaponProperties,
+  //           selectedItem: r.selectedItem,
+  //           ac: r.ac,
+  //           hp: r.hp,
+  //           speed: r.speed,
+  //         }))
+  //       );
+  //     }
+  //   };
+  //   fetchData("test");
+  //   console.log(objectDetails)
+  // }, []);
 
-  useEffect(() => {
-    setSelectedNode(
-      test.find((node) => node.key === selectedKey) || {}
-    );
-  }, [selectedKey]);
+  // useEffect(() => {
+  //   setSelectedNode(test.find((node) => node.key === selectedKey) || {});
+  // }, [selectedKey]);
 
   return (
     <div className={style.mainWrapper}>
@@ -101,16 +71,12 @@ function NotePage() {
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
       <div className={ns.flex1}>
-        <NoteTree 
-        test={test}
-        onSelectedItem={setSelectedKey} 
+        <NoteTree
+          tableName={"test"}
+          objs={objectDetails}
+          onSelectedItem={setSelectedKey}
         />
-        <Note
-          // name={selectedKey.name}
-          // data={selectedKey.data}
-          // links={selectedKey.links}
-          selectedNode={selectedNode}
-        />
+        <Note selectedNode={selectedNode} />
       </div>
     </div>
   );

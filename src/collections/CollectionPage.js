@@ -68,7 +68,7 @@ const CollectionPage = () => {
       </h3>
       <p>Collection of all your Items!</p>
     </Card>
-  );
+  ); 
 
   return (
     <div className={style.collectionWrapper}>

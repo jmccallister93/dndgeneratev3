@@ -3,12 +3,10 @@ import ns from "../../stylesheets/Note.module.scss";
 
 const NoteTreeTable = (props) => {
   function extractNames(objectArray) {
+    console.log(props.object[0])
     let names = [];
     for (let obj of objectArray) {
-      names.push({ name: obj.data.name, key: obj.key });
-      if (obj.children) {
-        names = names.concat(extractNames(obj.children));
-      }
+      names.push(obj.name);
     }
     return names;
   }
@@ -23,7 +21,7 @@ const NoteTreeTable = (props) => {
       <div className={ns.noteTreeCategory}>
         {names.map((obj, index) => (
           <div key={index} onClick={() => handleClick(obj.key)}>
-            {obj.name}
+            {obj}
           </div>
         ))}
       </div>
@@ -33,11 +31,4 @@ const NoteTreeTable = (props) => {
 
 export default NoteTreeTable;
 
-{
-  /* <div>{props.object[0].data.name}</div>
-        <div>{props.object[0].children[0].data.name}</div>
-        <div>{props.object[0].children[1].data.name}</div>
-        <div>{props.object[0].children[1].children[0].data.name}</div>
-        <div>{props.object[0].children[1].children[1].data.name}</div>
-        <div>{props.object[1].data.name}</div> */
-}
+

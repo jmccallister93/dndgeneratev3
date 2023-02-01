@@ -3,58 +3,60 @@ import ns from "../../stylesheets/Note.module.scss";
 import { DataTable } from "primereact/datatable";
 import TreeTable from "./NoteTreeTable";
 import NoteTreeTable from "./NoteTreeTable";
+import supabase from "../../config/supabaseClient";
 
 
 const NoteTree = (props) => {
+  const [fetchError, setFetchError] = useState(null);
+  const [objectDetails, setObjectDetails] = useState([]);
 
-const test2 =[
-    {
-      key: "o0",
-      data: {
-        name: "Parent Node 1",
-        additionalData: "value",
-      },
-      children: [
-        {
-          key: "o0-0",
-          data: {
-            name: "Child Node 1",
-            additionalData: "value",
-          },
-        },
-        {
-          key: "o0-1",
-          data: {
-            name: "Child Node 2",
-            additionalData: "value",
-          },
-          children: [
-            {
-              key: "o0-1-0",
-              data: {
-                name: "Grandchild Node 1",
-                additionalData: "value",
-              },
-            },
-            {
-              key: "o0-1-1",
-              data: {
-                name: "Grandchild Node 2",
-                additionalData: "value",
-              },
-            },
-          ],
-        },
-      ],
-    },
-    {
-      key: "o1",
-      data: {
-        name: "Parent Node 2",
-        additionalData: "value",
-      },
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from(props.tableName)
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setObjectDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setObjectDetails(
+          dataName.map((r) => ({
+            name: r.name,
+            race: r.race,
+            sex: r.sex,
+            align: r.align,
+            prof: r.prof,
+            feature: r.feature,
+            talent: r.talent,
+            mannerism: r.mannerism,
+            interaction: r.interaction,
+            bond: r.bond,
+            questType: r.questType,
+            hook: r.hook,
+            str: r.str,
+            dex: r.dex,
+            con: r.con,
+            int: r.int,
+            wis: r.wis,
+            cha: r.cha,
+            action: r.action,
+            weaponBonus: r.weaponBonus,
+            weaponDamage: r.weaponDamage,
+            weaponProperties: r.weaponProperties,
+            selectedItem: r.selectedItem,
+            ac: r.ac,
+            hp: r.hp,
+            speed: r.speed,
+          }))
+        );
+      }
+    };
+    fetchData();
+    console.log(objectDetails)
+  }, []);
 
   return (
     <>
@@ -63,8 +65,8 @@ const test2 =[
           {" "}
           <NoteTreeTable
             header="Locations"
-            object={props.test}
-            objectKey={props.test.key}
+            object={objectDetails}
+            // objectKey={props.test.key}
             onSelectedItem={(value) => props.onSelectedItem(value)}
           />
         </div>
