@@ -22,11 +22,13 @@ function Note(props) {
     console.log(props.selectedNode);
   }, []);
 
-  useEffect(() => {
-    if (props.selectedNode && props.selectedNode.notes) {
-      setNotesArray(props.selectedNode.notes.split("\n"))
-    }
-  }, [props.selectedNode]);
+//THIS IS NOT FIRING
+  // useEffect(() => {
+  //   if (props.selectedNode && props.selectedNode.notes) {
+  //     setNotesArray(props.selectedNode.notes.split("\n"))
+  //   }
+  // }, [props.selectedNode]);
+//THIS IS NOT FIRING
 
   return (
     <>
@@ -51,13 +53,14 @@ function Note(props) {
               return null;
             })}
             <h2>Notes</h2>
-            {props.selectedNode && Object.keys(props.selectedNode).length ? (
+            <p>{props.selectedNode.notes}</p>
+            {/* {props.selectedNode && Object.keys(props.selectedNode).length ? (
               <ul>
                 {notesArray.map((note, index) => (
                   <li key={index}>{note}</li>
                 ))}
               </ul>
-            ) : null}
+            ) : null} */}
             <textarea value={notes} onChange={handleNotesChange}></textarea>
             <button onClick={handleAddNotes}>Save Notes</button>
           </>
