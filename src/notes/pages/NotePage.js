@@ -12,6 +12,18 @@ function NotePage() {
   const [fetchError, setFetchError] = useState(null);
   const [objectDetails, setObjectDetails] = useState([]);
 
+  const updateNote = async (noteText) => {
+    try {
+      const response = await supabase
+        .from("test")
+        // .where({ id: selectedId })
+        .update({ note: noteText })
+      console.log("Note updated successfully: " + noteText);
+    } catch (error) {
+      console.error("Error updating note:");
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -56,6 +68,7 @@ function NotePage() {
             ac: r.ac,
             hp: r.hp,
             speed: r.speed,
+            note: r.note,
           }))
         );
       }
@@ -64,7 +77,7 @@ function NotePage() {
   }, []);
 
   useEffect(() => {
-    setSelectedNode(objectDetails.find(r => r.id === selectedId));
+    setSelectedNode(objectDetails.find((r) => r.id === selectedId));
   }, [selectedId, objectDetails]);
 
   return (
@@ -75,7 +88,11 @@ function NotePage() {
       </div>
       <div className={ns.flex1}>
         <NoteTree object={objectDetails} onSelectedItem={setSelectedId} />
-        <Note selectedNode={selectedNode} />
+        <Note
+          selectedNode={selectedNode}
+          setSelectedNode={setSelectedNode}
+          updateNote={updateNote}
+        />
       </div>
     </div>
   );

@@ -24,17 +24,17 @@ const NoteTreeTable = (props) => {
   function handleMouseMove() {
     console.log("mouse move");
   }
-  useEffect(() => {
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mousemove', handleMouseMove);
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleMouseDown);
+  //   document.addEventListener('mouseup', handleMouseUp);
+  //   document.addEventListener('mousemove', handleMouseMove);
 
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleMouseDown);
+  //     document.removeEventListener('mouseup', handleMouseUp);
+  //     document.removeEventListener('mousemove', handleMouseMove);
+  //   };
+  // }, []);
 
   return (
     <>
