@@ -3,14 +3,30 @@ import ns from "../../stylesheets/Note.module.scss";
 
 function Note(props) {
   const [notes, setNotes] = useState("");
+  const [allNotes, setAllNotes] = useState([]);
+  const [notesArray, setNotesArray] = useState([]);
 
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
   };
 
-  const updateNote = (notes) => {
-    props.updateNotes(notes)
+  const handleAddNotes = () => {
+    setAllNotes([...allNotes, notes]);
   };
+
+  useEffect(() => {
+    props.updateNote(allNotes);
+  }, [allNotes]);
+
+  useEffect(() => {
+    console.log(props.selectedNode);
+  }, []);
+
+  useEffect(() => {
+    if (props.selectedNode && props.selectedNode.notes) {
+      setNotesArray(props.selectedNode.notes.split("\n"))
+    }
+  }, [props.selectedNode]);
 
   return (
     <>
@@ -19,7 +35,12 @@ function Note(props) {
           <>
             <h2>{props.selectedNode.name}</h2>
             {Object.keys(props.selectedNode).map((prop) => {
-              if (prop !== "id" && prop !== "name" && prop !== "selectedItem") {
+              if (
+                prop !== "id" &&
+                prop !== "name" &&
+                prop !== "selectedItem" &&
+                prop !== "notes"
+              ) {
                 return (
                   <p>
                     {prop.charAt(0).toUpperCase() + prop.slice(1)}:{" "}
@@ -30,11 +51,15 @@ function Note(props) {
               return null;
             })}
             <h2>Notes</h2>
-            <textarea
-              value={notes}
-              onChange={handleNotesChange}
-            ></textarea>
-            <button onClick={() => props.updateNote(notes)}>Save Notes</button>
+            {props.selectedNode && Object.keys(props.selectedNode).length ? (
+              <ul>
+                {notesArray.map((note, index) => (
+                  <li key={index}>{note}</li>
+                ))}
+              </ul>
+            ) : null}
+            <textarea value={notes} onChange={handleNotesChange}></textarea>
+            <button onClick={handleAddNotes}>Save Notes</button>
           </>
         ) : null}
       </div>
