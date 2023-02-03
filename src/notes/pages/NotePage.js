@@ -16,11 +16,11 @@ function NotePage() {
     try {
       const response = await supabase
         .from("test")
-        // .where({ id: selectedId })
-        .update({ note: noteText })
+        .update({ notes: noteText })
+        .eq("id", selectedId)
       console.log("Note updated successfully: " + noteText);
     } catch (error) {
-      console.error("Error updating note:");
+      console.error("Error updating note:" + error);
     }
   };
 
@@ -68,7 +68,7 @@ function NotePage() {
             ac: r.ac,
             hp: r.hp,
             speed: r.speed,
-            note: r.note,
+            notes: r.notes,
           }))
         );
       }
