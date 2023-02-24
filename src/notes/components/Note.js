@@ -9,7 +9,7 @@ function Note(props) {
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.notes) {
       setNotes(props.selectedNode.notes);
-      console.log(notes)
+      setNotes("")
     } else {
       setNotes("");
     }
@@ -21,6 +21,7 @@ function Note(props) {
 
   const handleAddNotes = () => {
     props.updateNote([...allNotes, notes].join("\n"));
+    setNotes("");
   };
 
   useEffect(() => {
