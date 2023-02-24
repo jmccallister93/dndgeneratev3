@@ -6,29 +6,30 @@ function Note(props) {
   const [allNotes, setAllNotes] = useState([]);
   const [notesArray, setNotesArray] = useState([]);
 
+  useEffect(() => {
+    if (props.selectedNode && props.selectedNode.notes) {
+      setNotes(props.selectedNode.notes);
+      console.log(notes)
+    } else {
+      setNotes("");
+    }
+  }, [props.selectedNode]);
+
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
   };
 
   const handleAddNotes = () => {
-    setAllNotes([...allNotes, notes]);
+    props.updateNote([...allNotes, notes].join("\n"));
   };
 
   useEffect(() => {
-    props.updateNote(allNotes);
-  }, [allNotes]);
-
-  useEffect(() => {
-    console.log(props.selectedNode);
-  }, []);
-
-//THIS IS NOT FIRING
-  // useEffect(() => {
-  //   if (props.selectedNode && props.selectedNode.notes) {
-  //     setNotesArray(props.selectedNode.notes.split("\n"))
-  //   }
-  // }, [props.selectedNode]);
-//THIS IS NOT FIRING
+    if (props.selectedNode?.notes) {
+      setAllNotes(props.selectedNode.notes.split("\n"));
+    } else {
+      setAllNotes([]);
+    }
+  }, [props.selectedNode]);
 
   return (
     <>
@@ -54,13 +55,13 @@ function Note(props) {
             })}
             <h2>Notes</h2>
             <p>{props.selectedNode.notes}</p>
-            {/* {props.selectedNode && Object.keys(props.selectedNode).length ? (
+            {props.selectedNode && Object.keys(props.selectedNode).length ? (
               <ul>
                 {notesArray.map((note, index) => (
                   <li key={index}>{note}</li>
                 ))}
               </ul>
-            ) : null} */}
+            ) : null}
             <textarea value={notes} onChange={handleNotesChange}></textarea>
             <button onClick={handleAddNotes}>Save Notes</button>
           </>

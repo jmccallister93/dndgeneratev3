@@ -18,7 +18,8 @@ function NotePage() {
         .from("test")
         .update({ notes: noteText })
         .eq("id", selectedId)
-      console.log("Note updated successfully: " + noteText);
+
+      // console.log("Note updated successfully: " + noteText);
     } catch (error) {
       console.error("Error updating note:" + error);
     }
