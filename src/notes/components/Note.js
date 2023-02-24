@@ -19,8 +19,17 @@ function Note(props) {
     setNotes(e.target.value);
   };
 
+  // const handleAddNotes = () => {
+  //   const newNotesArray = [...allNotes, ...notes.split("\n")];
+  //   props.updateNote(newNotesArray.join("\n"));
+  //   setAllNotes(newNotesArray);
+  //   setNotes("");
+  // };
+
   const handleAddNotes = () => {
-    props.updateNote([...allNotes, notes].join("\n"));
+    const newNotesArray = notes.split("\n").filter((note) => note.trim() !== "");
+    setAllNotes([...allNotes, ...newNotesArray]);
+    props.updateNote([...allNotes, ...newNotesArray].join("\n"));
     setNotes("");
   };
 
