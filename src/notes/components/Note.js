@@ -83,6 +83,7 @@ function Note(props) {
                   <li key={index}>
                     {selectedNoteIndex === index ? (
                       <input
+                        className={ns.editNote}
                         type="text"
                         value={note}
                         onChange={(e) => {
@@ -101,12 +102,14 @@ function Note(props) {
                       <>
                         <span>- {note} </span>
                         <button
+                        className={ns.editButton}
                           onClick={() => setSelectedNoteIndex(index)}
                           title="Edit"
                         >
                           <i class="pi pi-pencil"></i>
                         </button>
                         <button
+                        className={ns.deleteButton}
                           onClick={() => handleDeleteNote(index)}
                           title="Delete"
                         >
@@ -118,12 +121,18 @@ function Note(props) {
                 ))}
               </ul>
             ) : null}
-            <textarea
-              value={notes}
-              onChange={handleNotesChange}
-              onKeyDown={handleEnterDown}
-            ></textarea>
-            <button onClick={handleAddNotes}>Save Notes</button>
+            <div className={ns.notesWrapper}>
+              <textarea
+                className={ns.notesTextArea}
+                placeholder="Add notes here..."
+                value={notes}
+                onChange={handleNotesChange}
+                onKeyDown={handleEnterDown}
+              ></textarea>
+              <button class={ns.saveButton} onClick={handleAddNotes}>
+                Save Notes
+              </button>
+            </div>
           </>
         ) : null}
       </div>
