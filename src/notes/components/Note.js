@@ -6,6 +6,8 @@ function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
+  const [editablePropertyIndex, setEditablePropertyIndex] = useState(-1);
+  const [editableProperty, setEditableProperty] = useState("");
 
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
@@ -25,8 +27,8 @@ function Note(props) {
   const handleEnterDown = (event) => {
     if (event.key === "Enter") {
       if (event.target.tagName === "TEXTAREA") {
-        event.preventDefault(); // prevent adding a new line to the textarea
-        handleAddNotes(); // call handleAddNotes function
+        event.preventDefault();
+        handleAddNotes();
       } else {
         setSelectedNoteIndex(-1);
         setAllNotes(
@@ -37,6 +39,7 @@ function Note(props) {
         props.updateNote(allNotes.join("\n"));
       }
     }
+    
   };
 
   const handleDeleteNote = (index) => {
@@ -60,7 +63,7 @@ function Note(props) {
         {props.selectedNode !== undefined ? (
           <>
             <h2>{props.selectedNode.name}</h2>
-            {Object.keys(props.selectedNode).map((prop) => {
+            {Object.keys(props.selectedNode).map((prop, index) => {
               if (
                 prop !== "id" &&
                 prop !== "name" &&
@@ -68,10 +71,37 @@ function Note(props) {
                 prop !== "notes"
               ) {
                 return (
-                  <p>
-                    {prop.charAt(0).toUpperCase() + prop.slice(1)}:{" "}
-                    {props.selectedNode[prop]}
-                  </p>
+                  <div key={index}>
+                    {editablePropertyIndex === index ? (
+                      
+                      <input
+                        className={ns.editNote}
+                        type="text"
+                        value={props.selectedNode[prop]}
+                        onChange={(e) => {
+                          const newValue = e.target.value;
+                          props.setEditableProperty(() => ({
+                            [prop]: newValue,
+                          }));
+                        }}
+                        onBlur={() => {
+                          setEditablePropertyIndex(-1);
+                        }}
+                        onKeyDown={handleEnterDown}
+                        autoFocus
+                      />
+                    ) : (
+                      <p
+                        className={ns.objectProperty}
+                        onClick={() => {
+                          setEditablePropertyIndex(index);
+                        }}
+                      >
+                        {prop.charAt(0).toUpperCase() + prop.slice(1)}:{" "}
+                        {props.selectedNode[prop]}
+                      </p>
+                    )}
+                  </div>
                 );
               }
               return null;
@@ -102,14 +132,14 @@ function Note(props) {
                       <>
                         <span>- {note} </span>
                         <button
-                        className={ns.editButton}
+                          className={ns.editButton}
                           onClick={() => setSelectedNoteIndex(index)}
                           title="Edit"
                         >
                           <i class="pi pi-pencil"></i>
                         </button>
                         <button
-                        className={ns.deleteButton}
+                          className={ns.deleteButton}
                           onClick={() => handleDeleteNote(index)}
                           title="Delete"
                         >
