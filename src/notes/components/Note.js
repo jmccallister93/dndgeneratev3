@@ -7,7 +7,7 @@ function Note(props) {
   const [allNotes, setAllNotes] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
-  const [editableProperty, setEditableProperty] = useState("");
+  const [selectedProperty, setSelectedProperty] = useState("");
 
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
@@ -24,12 +24,26 @@ function Note(props) {
     setSelectedNoteIndex(-1);
   };
 
+  const updateProperty = async (property, value) => {
+    try {
+      const updatedNode = { ...props.selectedNode, [property]: value };
+      await props.updateSelectedNode(updatedNode); // call the function
+      props.setPropertyValue(value);
+    } catch (error) {
+      console.error("Error updating note:" + error);
+    }
+  };
+
   const handleEnterDown = (event) => {
     if (event.key === "Enter") {
       if (event.target.tagName === "TEXTAREA") {
         event.preventDefault();
         handleAddNotes();
-      } else {
+      } else if(event.target.tagName === "INPUT"){
+        event.preventDefault();
+        updateProperty();
+        setSelectedPropertyIndex(-1);
+      }else {
         setSelectedNoteIndex(-1);
         setAllNotes(
           allNotes.map((note, index) =>
@@ -49,6 +63,8 @@ function Note(props) {
     props.updateNote(newNotes.join("\n"));
   };
 
+
+
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.notes) {
       setAllNotes(props.selectedNode.notes.split("\n"));
@@ -58,7 +74,7 @@ function Note(props) {
   }, [props.selectedNode]);
 
   useEffect(() => {
-    console.log();
+    console.log(props.selectedNode);
   }, [selectedPropertyIndex]);
 
   return (
@@ -83,12 +99,14 @@ function Note(props) {
                         value={props.selectedNode[prop]}
                         onChange={(e) => {
                           const newValue = e.target.value;
-                          props.updateProperty(() => ({
+                          props.setSelectedNode((prev) => ({
+                            ...prev,
                             [prop]: newValue,
                           }));
                         }}
                         onBlur={() => {
                           setSelectedPropertyIndex(-1);
+                          updateProperty(prop, props.selectedNode[prop]);
                         }}
                         onKeyDown={handleEnterDown}
                         autoFocus

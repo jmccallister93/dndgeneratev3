@@ -29,17 +29,18 @@ function NotePage() {
     }
   };
 
-  const updateProperty = async (prop, propertyValue ) => {
+  const updateSelectedNode = async (updatedNode) => {
     try {
       const response = await supabase
         .from("test")
-        .update({ prop: propertyValue })
-        .eq("id", selectedId)
-
-        setPropertyValue(propertyValue);
-
+        .update(updatedNode)
+        .eq("id", selectedId);
+      // update the objectDetails state with the updated node
+      setObjectDetails((prev) =>
+        prev.map((node) => (node.id === selectedId ? updatedNode : node))
+      );
     } catch (error) {
-      console.error("Error updating property:" + error);
+      console.error("Error updating note:" + error);
     }
   };
 
@@ -111,7 +112,8 @@ function NotePage() {
           selectedNode={selectedNode}
           setSelectedNode={setSelectedNode}
           updateNote={updateNote}
-          updateProperty = {updateProperty}
+          updateSelectedNode={updateSelectedNode}
+          setPropertyValue={setPropertyValue}
         />
       </div>
     </div>
