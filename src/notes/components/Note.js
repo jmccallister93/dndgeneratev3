@@ -24,17 +24,27 @@ function Note(props) {
 
   const handleEnterDown = (event) => {
     if (event.key === "Enter") {
-      setSelectedNoteIndex(-1);
-      setAllNotes(allNotes.map((note, index) => index === selectedNoteIndex ? event.target.value : note));
-      props.updateNote(allNotes.join("\n"));
+      if (event.target.tagName === "TEXTAREA") {
+        event.preventDefault(); // prevent adding a new line to the textarea
+        handleAddNotes(); // call handleAddNotes function
+      } else {
+        setSelectedNoteIndex(-1);
+        setAllNotes(allNotes.map((note, index) => index === selectedNoteIndex ? event.target.value : note));
+        props.updateNote(allNotes.join("\n"));
+      }
     }
+  };
+
+  const handleDeleteNote = (index) => {
+    const newNotes = [...allNotes];
+    newNotes.splice(index, 1);
+    setAllNotes(newNotes);
+    props.updateNote(newNotes.join("\n"));
   };
 
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.notes) {
       setAllNotes(props.selectedNode.notes.split("\n"));
-      console.log(allNotes)
-      console.log(props.selectedNode.notes)
     } else {
       setAllNotes([]);
     }
@@ -89,13 +99,20 @@ function Note(props) {
                         <button onClick={() => setSelectedNoteIndex(index)}>
                           Edit
                         </button>
+                        <button onClick={() => handleDeleteNote(index)}>
+                          Delete
+                        </button>
                       </>
                     )}
                   </li>
                 ))}
               </ul>
             ) : null}
-            <textarea value={notes} onChange={handleNotesChange}></textarea>
+            <textarea
+              value={notes}
+              onChange={handleNotesChange}
+              onKeyDown={handleEnterDown}
+            ></textarea>
             <button onClick={handleAddNotes}>Save Notes</button>
           </>
         ) : null}

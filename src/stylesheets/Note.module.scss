@@ -126,3 +126,18 @@
   border-bottom: 5px solid transparent;
   border-left: 5px solid;
 }
+
+textarea {
+  padding: 5px;
+  caret-color: black; /* set the color of the text cursor */
+  animation: blink-caret 1s step-end infinite; /* create a blinking effect */
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent; /* make the border transparent */
+  }
+  50% {
+    border-color: black; /* set the border color to black */
+  }
+}
