@@ -4,6 +4,7 @@ import ns from "../../stylesheets/Note.module.scss";
 function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
+  const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
 
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.notes) {
@@ -25,6 +26,7 @@ function Note(props) {
   const handleAddNotes = () => {
     const newNotesArray = notes.split("\n").filter((note) => note.trim() !== "");
     setAllNotes([...allNotes, ...newNotesArray]);
+    setSelectedNoteIndex(allNotes.length);
     props.updateNote([...allNotes, ...newNotesArray].join("\n"));
     setNotes("");
   };
@@ -60,11 +62,33 @@ function Note(props) {
               return null;
             })}
             <h2>Notes</h2>
-            {/* <p>{props.selectedNode.notes}</p> */}
             {props.selectedNode && Object.keys(props.selectedNode).length ? (
               <ul>
                 {allNotes.map((note, index) => (
-                  <li key={index}>{note}</li>
+                  // <li key={index}>- {note}</li>
+                  <li key={index}>
+                  {selectedNoteIndex === index ? (
+                    <input
+                      type="text"
+                      value={note}
+                      onChange={(e) => {
+                        const newNotes = [...allNotes];
+                        newNotes[index] = e.target.value;
+                        setAllNotes(newNotes);
+                      }}
+                      onBlur={() => {
+                        setSelectedNoteIndex(-1)
+                        props.updateNote(allNotes.join("\n"));
+                      }}
+                      autoFocus
+                    />
+                  ) : (
+                    <>
+                      <span>- {note}</span>
+                      <button onClick={() => setSelectedNoteIndex(index)}>Edit</button>
+                    </>
+                  )}
+                </li>
                 ))}
               </ul>
             ) : null}
