@@ -11,7 +11,7 @@ function Note(props) {
     setNotes(e.target.value);
   };
 
-  const handleAddNotes = useCallback(() => {
+  const handleAddNotes = () => {
     const newNotesArray = notes
       .split("\n")
       .filter((note) => note.trim() !== "");
@@ -20,7 +20,7 @@ function Note(props) {
     props.updateNote([...allNotes, ...newNotesArray].join("\n"));
     setNotes("");
     setSelectedNoteIndex(-1);
-  });
+  };
 
   const handleEnterDown = (event) => {
     if (event.key === "Enter") {
@@ -29,7 +29,11 @@ function Note(props) {
         handleAddNotes(); // call handleAddNotes function
       } else {
         setSelectedNoteIndex(-1);
-        setAllNotes(allNotes.map((note, index) => index === selectedNoteIndex ? event.target.value : note));
+        setAllNotes(
+          allNotes.map((note, index) =>
+            index === selectedNoteIndex ? event.target.value : note
+          )
+        );
         props.updateNote(allNotes.join("\n"));
       }
     }
@@ -95,12 +99,18 @@ function Note(props) {
                       />
                     ) : (
                       <>
-                        <span>- {note}</span>
-                        <button onClick={() => setSelectedNoteIndex(index)}>
-                          Edit
+                        <span>- {note} </span>
+                        <button
+                          onClick={() => setSelectedNoteIndex(index)}
+                          title="Edit"
+                        >
+                          <i class="pi pi-pencil"></i>
                         </button>
-                        <button onClick={() => handleDeleteNote(index)}>
-                          Delete
+                        <button
+                          onClick={() => handleDeleteNote(index)}
+                          title="Delete"
+                        >
+                          <i class="pi pi-trash"></i>
                         </button>
                       </>
                     )}
