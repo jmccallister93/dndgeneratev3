@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import supabase from "../../config/supabaseClient"; // import the supabase client
+import supabase from "../../config/supabaseClient";
 import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import ns from "../../stylesheets/Note.module.scss";
@@ -11,6 +11,7 @@ function NotePage() {
   const [selectedNode, setSelectedNode] = useState({});
   const [fetchError, setFetchError] = useState(null);
   const [objectDetails, setObjectDetails] = useState([]);
+  const [noteText, setNoteText] = useState("");
 
   const updateNote = async (noteText) => {
     try {
@@ -19,7 +20,8 @@ function NotePage() {
         .update({ notes: noteText })
         .eq("id", selectedId)
 
-      // console.log("Note updated successfully: " + noteText);
+        setNoteText(noteText);
+
     } catch (error) {
       console.error("Error updating note:" + error);
     }
@@ -75,7 +77,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, []);
+  }, [noteText]);
 
   useEffect(() => {
     setSelectedNode(objectDetails.find((r) => r.id === selectedId));

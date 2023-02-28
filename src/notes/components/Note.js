@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCallback } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 
 function Note(props) {
@@ -6,24 +7,11 @@ function Note(props) {
   const [allNotes, setAllNotes] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
 
-  useEffect(() => {
-    if (props.selectedNode && props.selectedNode.notes) {
-      setAllNotes(props.selectedNode.notes.split("\n"));
-    } else {
-      setAllNotes([]);
-    }
-    console.log("props")
-  }, [props.selectedNode]);
-
-  useEffect(() => {
-    console.log("fired")
-  }, [props.updateNote])
-
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
   };
 
-  const handleAddNotes = () => {
+  const handleAddNotes = useCallback(() => {
     const newNotesArray = notes
       .split("\n")
       .filter((note) => note.trim() !== "");
@@ -32,7 +20,7 @@ function Note(props) {
     props.updateNote([...allNotes, ...newNotesArray].join("\n"));
     setNotes("");
     setSelectedNoteIndex(-1);
-  };
+  });
 
   const handleEnterDown = (event) => {
     if (event.key === "Enter") {
@@ -41,6 +29,16 @@ function Note(props) {
       props.updateNote(allNotes.join("\n"));
     }
   };
+
+  useEffect(() => {
+    if (props.selectedNode && props.selectedNode.notes) {
+      setAllNotes(props.selectedNode.notes.split("\n"));
+      console.log(allNotes)
+      console.log(props.selectedNode.notes)
+    } else {
+      setAllNotes([]);
+    }
+  }, [props.selectedNode]);
 
   return (
     <>
