@@ -4,7 +4,6 @@ import ns from "../../stylesheets/Note.module.scss";
 function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
-  const [notesArray, setNotesArray] = useState([]);
 
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.notes) {
@@ -19,12 +18,9 @@ function Note(props) {
     setNotes(e.target.value);
   };
 
-  // const handleAddNotes = () => {
-  //   const newNotesArray = [...allNotes, ...notes.split("\n")];
-  //   props.updateNote(newNotesArray.join("\n"));
-  //   setAllNotes(newNotesArray);
-  //   setNotes("");
-  // };
+ useEffect(() => {
+      console.log()
+ }, [notes])
 
   const handleAddNotes = () => {
     const newNotesArray = notes.split("\n").filter((note) => note.trim() !== "");
@@ -64,10 +60,10 @@ function Note(props) {
               return null;
             })}
             <h2>Notes</h2>
-            <p>{props.selectedNode.notes}</p>
+            {/* <p>{props.selectedNode.notes}</p> */}
             {props.selectedNode && Object.keys(props.selectedNode).length ? (
               <ul>
-                {notesArray.map((note, index) => (
+                {allNotes.map((note, index) => (
                   <li key={index}>{note}</li>
                 ))}
               </ul>
