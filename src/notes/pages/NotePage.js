@@ -12,6 +12,8 @@ function NotePage() {
   const [fetchError, setFetchError] = useState(null);
   const [objectDetails, setObjectDetails] = useState([]);
   const [noteText, setNoteText] = useState("");
+  const [property, setProperty] = useState("");
+  const [propertyValue, setPropertyValue] = useState("");
 
   const updateNote = async (noteText) => {
     try {
@@ -24,6 +26,20 @@ function NotePage() {
 
     } catch (error) {
       console.error("Error updating note:" + error);
+    }
+  };
+
+  const updateProperty = async (prop, propertyValue ) => {
+    try {
+      const response = await supabase
+        .from("test")
+        .update({ prop: propertyValue })
+        .eq("id", selectedId)
+
+        setPropertyValue(propertyValue);
+
+    } catch (error) {
+      console.error("Error updating property:" + error);
     }
   };
 
@@ -77,7 +93,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText]);
+  }, [noteText, propertyValue]);
 
   useEffect(() => {
     setSelectedNode(objectDetails.find((r) => r.id === selectedId));
@@ -95,6 +111,7 @@ function NotePage() {
           selectedNode={selectedNode}
           setSelectedNode={setSelectedNode}
           updateNote={updateNote}
+          updateProperty = {updateProperty}
         />
       </div>
     </div>

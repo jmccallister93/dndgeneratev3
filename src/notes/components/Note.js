@@ -6,7 +6,7 @@ function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
-  const [editablePropertyIndex, setEditablePropertyIndex] = useState(-1);
+  const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
   const [editableProperty, setEditableProperty] = useState("");
 
   const handleNotesChange = (e) => {
@@ -57,6 +57,10 @@ function Note(props) {
     }
   }, [props.selectedNode]);
 
+  useEffect(() => {
+    console.log();
+  }, [selectedPropertyIndex]);
+
   return (
     <>
       <div className={ns.display}>
@@ -72,20 +76,19 @@ function Note(props) {
               ) {
                 return (
                   <div key={index}>
-                    {editablePropertyIndex === index ? (
-                      
+                    {selectedPropertyIndex === index ? (
                       <input
                         className={ns.editNote}
                         type="text"
                         value={props.selectedNode[prop]}
                         onChange={(e) => {
                           const newValue = e.target.value;
-                          props.setEditableProperty(() => ({
+                          props.updateProperty(() => ({
                             [prop]: newValue,
                           }));
                         }}
                         onBlur={() => {
-                          setEditablePropertyIndex(-1);
+                          setSelectedPropertyIndex(-1);
                         }}
                         onKeyDown={handleEnterDown}
                         autoFocus
@@ -94,7 +97,7 @@ function Note(props) {
                       <p
                         className={ns.objectProperty}
                         onClick={() => {
-                          setEditablePropertyIndex(index);
+                          setSelectedPropertyIndex(index);
                         }}
                       >
                         {prop.charAt(0).toUpperCase() + prop.slice(1)}:{" "}
