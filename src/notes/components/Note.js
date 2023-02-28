@@ -7,7 +7,6 @@ function Note(props) {
   const [allNotes, setAllNotes] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
-  const [selectedProperty, setSelectedProperty] = useState("");
 
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
@@ -63,8 +62,6 @@ function Note(props) {
     props.updateNote(newNotes.join("\n"));
   };
 
-
-
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.notes) {
       setAllNotes(props.selectedNode.notes.split("\n"));
@@ -73,9 +70,9 @@ function Note(props) {
     }
   }, [props.selectedNode]);
 
-  useEffect(() => {
-    console.log(props.selectedNode);
-  }, [selectedPropertyIndex]);
+  // useEffect(() => {
+  //   console.log(props.selectedNode);
+  // }, [selectedPropertyIndex]);
 
   return (
     <>
@@ -181,7 +178,7 @@ function Note(props) {
                 onKeyDown={handleEnterDown}
               ></textarea>
               <button class={ns.saveButton} onClick={handleAddNotes}>
-                Save Notes
+                Add Notes
               </button>
             </div>
           </>

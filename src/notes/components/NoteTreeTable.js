@@ -15,31 +15,13 @@ const NoteTreeTable = (props) => {
   const handleClick = (id) => {
     props.onSelectedItem(id);
   };
-  function handleMouseDown(e, index) {
-    console.log("Mouse down")
-  }
-  function handleMouseUp() {
-    console.log("mouse up");
-  }
-  function handleMouseMove() {
-    console.log("mouse move");
-  }
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', handleMouseDown);
-  //   document.addEventListener('mouseup', handleMouseUp);
-  //   document.addEventListener('mousemove', handleMouseMove);
-
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleMouseDown);
-  //     document.removeEventListener('mouseup', handleMouseUp);
-  //     document.removeEventListener('mousemove', handleMouseMove);
-  //   };
-  // }, []);
 
   return (
     <>
       <div className={ns.noteTreeCategory}>
         <h3>{props.header}</h3>
+        <button className={ns.greenButton}>Create</button>
+        <button className={ns.greenButton}>Generate</button>
         {names.map((obj, index) => (
           <div
             className={ns.noteTreeCategoryItem}
