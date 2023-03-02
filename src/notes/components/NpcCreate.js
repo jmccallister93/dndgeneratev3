@@ -28,6 +28,7 @@ import { Tooltip } from "primereact/tooltip";
 import InfoModal from "../../components/InfoModal";
 import NameGenerator from "../../components/NameGenerator";
 import SectionRandom from "../../components/SectionRandom";
+import ns from "../../stylesheets/Note.module.scss";
 
 const NpcCreate = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -418,8 +419,7 @@ const NpcCreate = () => {
   );
 
   return (
-    <div className={style.mainWrapper}>
-      
+    <div className={ns.mainWrapper}>
       <div className={style.topHeader}> 
         <h1 className={style.mainHeader}>NPC Generator</h1>
         <div className={style.topWrapper}>
@@ -1160,7 +1160,7 @@ const NpcCreate = () => {
               )}
             </div>
           </h2>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h2>
             Hair{" "}
             <span className={style.minorText2}>
@@ -1196,7 +1196,7 @@ const NpcCreate = () => {
               <SingleDisplayText value={skinColor} setNewValue={setSkinColor} />
             </span>
           </h2>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h2>
             Profession{" "}
             <span className={style.minorText2}>
@@ -1264,7 +1264,7 @@ const NpcCreate = () => {
               {speed === "" ? "" : " ft."}
             </span>
           </h2>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h3 className={style.abilityScores}>
             <div>
               <h3>STR</h3>
@@ -1353,7 +1353,7 @@ const NpcCreate = () => {
               </div>
             </div>
           </h3>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h2>Action </h2>
           <h2 className={style.abilityScores}>
             <div>
@@ -1380,7 +1380,7 @@ const NpcCreate = () => {
               </span>
             </div>
           </h2>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h2>
             Inventory{" "}
             <span className={style.minorText2}>

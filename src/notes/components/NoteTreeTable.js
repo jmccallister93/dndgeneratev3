@@ -42,13 +42,11 @@ const NoteTreeTable = (props) => {
            <div className={ns.popupHeader}>
              <h2>Create NPC</h2>
              <button className={ns.closeButton} onClick={handleClose}>X</button>
-             
            </div>
            <NpcCreate />
          </div>
        </div>
         )}
-        <button className={ns.greenButton}>Generate</button>
         {names.map((obj, index) => (
           <div
             className={ns.noteTreeCategoryItem}
