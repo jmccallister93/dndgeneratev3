@@ -275,7 +275,7 @@ textarea {
   height: 80%;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  overflow-y: scroll; /* add vertical scroll */
+  // overflow-y: scroll; /* add vertical scroll */
   overflow-x: hidden; /* hide horizontal scroll */
   background-color: #393e46;
   border-radius: 10px;
@@ -307,4 +307,15 @@ textarea {
 .closeButton:hover {
   background-color: #555;
   scale: 1.2;
+}
+
+.selected {
+  background-color: green;
+  color: white;
+  &:hover{
+    background-color:rgb(0, 128, 0, .5);
+    cursor: pointer;
+    scale: 1.05;
+    color: white;
+  }
 }

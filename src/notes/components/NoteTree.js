@@ -22,6 +22,7 @@ const NoteTree = (props) => {
             header="NPCs"
             object={props.object}
             setShowPopup={props.setShowPopup}
+            selectedItem={props.selectedItem}
             onSelectedItem={(value) => props.onSelectedItem(value)}
           />
         </div>

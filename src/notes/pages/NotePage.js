@@ -109,6 +109,7 @@ function NotePage() {
         <NoteTree
           object={objectDetails}
           onSelectedItem={setSelectedId}
+          selectedItem={selectedId}
           setShowPopup={setShowPopup}
         />
         <Note
