@@ -12,18 +12,26 @@ function NotePage() {
   const [fetchError, setFetchError] = useState(null);
   const [objectDetails, setObjectDetails] = useState([]);
   const [noteText, setNoteText] = useState("");
-  const [property, setProperty] = useState("");
   const [propertyValue, setPropertyValue] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleShowPopup = () => {
+    
+    console.log(showPopup)
+  };
+
+  useEffect(() => {
+    console.log("showPopup", showPopup);
+  }, [showPopup]);
 
   const updateNote = async (noteText) => {
     try {
       const response = await supabase
         .from("test")
         .update({ notes: noteText })
-        .eq("id", selectedId)
+        .eq("id", selectedId);
 
-        setNoteText(noteText);
-
+      setNoteText(noteText);
     } catch (error) {
       console.error("Error updating note:" + error);
     }
@@ -94,7 +102,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText, propertyValue]);
+  }, [noteText, propertyValue, showPopup]);
 
   useEffect(() => {
     setSelectedNode(objectDetails.find((r) => r.id === selectedId));
@@ -107,7 +115,12 @@ function NotePage() {
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>
       <div className={ns.grid2}>
-        <NoteTree object={objectDetails} onSelectedItem={setSelectedId} />
+        <NoteTree
+          object={objectDetails}
+          onSelectedItem={setSelectedId}
+          // handleShowPopup={handleShowPopup}
+          setShowPopup={setShowPopup}
+        />
         <Note
           selectedNode={selectedNode}
           setSelectedNode={setSelectedNode}

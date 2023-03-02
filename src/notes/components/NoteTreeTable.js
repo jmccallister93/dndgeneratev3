@@ -8,11 +8,14 @@ const NoteTreeTable = (props) => {
 
   const handleCreate = () => {
     setShowPopup(!showPopup);
-    document.body.classList.toggle('popup-open');
+    // props.handleShowPopup(true)
+    props.setShowPopup(true)
   };
 
   const handleClose = () => {
     setShowPopup(false);
+    // props.handleShowPopup(false)
+    props.setShowPopup(false)
   };
 
   const extractNames = (objectArray) => {
