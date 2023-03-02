@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import NpcGen from "../../pages/NpcGen";
 import ns from "../../stylesheets/Note.module.scss";
+import ItemCreate from "./ItemCreate";
 import LocationCreate from "./LocationCreate";
 import NpcCreate from "./NpcCreate";
 import OrganizationCreate from "./OrganizationCreate";
+import QuestCreate from "./QuestCreate";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -82,7 +84,7 @@ const NoteTreeTable = (props) => {
               <h2>Create Quests</h2>
               <button className={ns.closeButton} onClick={handleClose}>X</button>
             </div>
-            <NpcCreate />
+            <QuestCreate />
           </div>
         </div>)
         }
@@ -92,7 +94,7 @@ const NoteTreeTable = (props) => {
               <h2>Create Items</h2>
               <button className={ns.closeButton} onClick={handleClose}>X</button>
             </div>
-            <NpcCreate />
+            <ItemCreate />
           </div>
         </div>)
         }
