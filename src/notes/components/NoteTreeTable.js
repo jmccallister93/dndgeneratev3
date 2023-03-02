@@ -6,6 +6,7 @@ import LocationCreate from "./LocationCreate";
 import NpcCreate from "./NpcCreate";
 import OrganizationCreate from "./OrganizationCreate";
 import QuestCreate from "./QuestCreate";
+import supabase from "../../config/supabaseClient";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -33,12 +34,11 @@ const NoteTreeTable = (props) => {
 
   const handleSelect = (id) => {
     props.onSelectedItem(id);
-    // props.onSelectedItem(id === props.selectedItem ? null : id);
-    console.log(props.selectedItem)
-
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    props.deleteSelectedNode();
+  };
 
   return (
     <>

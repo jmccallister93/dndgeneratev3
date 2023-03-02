@@ -14,6 +14,7 @@ function NotePage() {
   const [noteText, setNoteText] = useState("");
   const [propertyValue, setPropertyValue] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [deletedNode, setDeletedNode] = useState(null);
 
   const updateNote = async (noteText) => {
     try {
@@ -38,6 +39,19 @@ function NotePage() {
       setObjectDetails((prev) =>
         prev.map((node) => (node.id === selectedId ? updatedNode : node))
       );
+    } catch (error) {
+      console.error("Error updating note:" + error);
+    }
+  };
+
+  const deleteSelectedNode = async () => {
+    try {
+      const response = await supabase
+        .from("test")
+        .delete()
+        .eq("id", selectedId);
+
+        setDeletedNode(selectedId);
     } catch (error) {
       console.error("Error updating note:" + error);
     }
@@ -93,7 +107,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, showPopup]);
+  }, [noteText, propertyValue, showPopup, deletedNode]);
 
   useEffect(() => {
     setSelectedNode(objectDetails.find((r) => r.id === selectedId));
@@ -110,6 +124,7 @@ function NotePage() {
           object={objectDetails}
           onSelectedItem={setSelectedId}
           selectedItem={selectedId}
+          deleteSelectedNode={deleteSelectedNode}
           setShowPopup={setShowPopup}
         />
         <Note

@@ -24,6 +24,7 @@ const NoteTree = (props) => {
             setShowPopup={props.setShowPopup}
             selectedItem={props.selectedItem}
             onSelectedItem={(value) => props.onSelectedItem(value)}
+            deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
         <div className={ns.TreeTable}>
