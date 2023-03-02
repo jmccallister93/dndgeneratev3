@@ -1,20 +1,20 @@
 import { useEffect, useState, useRef } from "react";
 import NpcGen from "../../pages/NpcGen";
 import ns from "../../stylesheets/Note.module.scss";
+import LocationCreate from "./LocationCreate";
 import NpcCreate from "./NpcCreate";
+import OrganizationCreate from "./OrganizationCreate";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleCreate = () => {
     setShowPopup(!showPopup);
-    // props.handleShowPopup(true)
     props.setShowPopup(true)
   };
 
   const handleClose = () => {
     setShowPopup(false);
-    // props.handleShowPopup(false)
     props.setShowPopup(false)
   };
 
@@ -31,6 +31,9 @@ const NoteTreeTable = (props) => {
   const handleSelect = (id) => {
     props.onSelectedItem(id);
   };
+  const handleDelete = () => {
+    
+  };
 
   return (
     <>
@@ -39,7 +42,10 @@ const NoteTreeTable = (props) => {
         <button className={ns.greenButton} onClick={handleCreate}>
           Create
         </button>
-        {showPopup && (
+        <button className={ns.redButton} onClick={handleDelete}>
+          Delete
+        </button>
+        {showPopup && props.header === "NPCs" && (
          <div className={ns.popupContainer}>
          <div className={ns.popup}>
            <div className={ns.popupHeader}>
@@ -50,6 +56,46 @@ const NoteTreeTable = (props) => {
          </div>
        </div>
         )}
+        {showPopup && props.header === "Locations" && (  <div className={ns.popupContainer}>
+          <div className={ns.popup}>
+            <div className={ns.popupHeader}>
+              <h2>Create Location</h2>
+              <button className={ns.closeButton} onClick={handleClose}>X</button>
+            </div>
+            <LocationCreate />
+          </div>
+        </div>)
+        }
+          {showPopup && props.header === "Organizations" && (  <div className={ns.popupContainer}>
+          <div className={ns.popup}>
+            <div className={ns.popupHeader}>
+              <h2>Create Organizations</h2>
+              <button className={ns.closeButton} onClick={handleClose}>X</button>
+            </div>
+            <OrganizationCreate />
+          </div>
+        </div>)
+        }
+          {showPopup && props.header === "Quests" && (  <div className={ns.popupContainer}>
+          <div className={ns.popup}>
+            <div className={ns.popupHeader}>
+              <h2>Create Quests</h2>
+              <button className={ns.closeButton} onClick={handleClose}>X</button>
+            </div>
+            <NpcCreate />
+          </div>
+        </div>)
+        }
+          {showPopup && props.header === "Items" && (  <div className={ns.popupContainer}>
+          <div className={ns.popup}>
+            <div className={ns.popupHeader}>
+              <h2>Create Items</h2>
+              <button className={ns.closeButton} onClick={handleClose}>X</button>
+            </div>
+            <NpcCreate />
+          </div>
+        </div>)
+        }
         {names.map((obj, index) => (
           <div
             className={ns.noteTreeCategoryItem}

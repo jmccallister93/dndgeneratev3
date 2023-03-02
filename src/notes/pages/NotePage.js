@@ -15,15 +15,6 @@ function NotePage() {
   const [propertyValue, setPropertyValue] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleShowPopup = () => {
-    
-    console.log(showPopup)
-  };
-
-  useEffect(() => {
-    console.log("showPopup", showPopup);
-  }, [showPopup]);
-
   const updateNote = async (noteText) => {
     try {
       const response = await supabase
@@ -118,7 +109,6 @@ function NotePage() {
         <NoteTree
           object={objectDetails}
           onSelectedItem={setSelectedId}
-          // handleShowPopup={handleShowPopup}
           setShowPopup={setShowPopup}
         />
         <Note
