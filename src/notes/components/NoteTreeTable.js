@@ -7,10 +7,11 @@ import NpcCreate from "./NpcCreate";
 import OrganizationCreate from "./OrganizationCreate";
 import QuestCreate from "./QuestCreate";
 import supabase from "../../config/supabaseClient";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const handleCreate = () => {
     setShowPopup(!showPopup);
@@ -36,8 +37,17 @@ const NoteTreeTable = (props) => {
     props.onSelectedItem(id);
   };
 
+  const handleDeleteConfirmation = () => {
+    setShowDeleteConfirmation(!showDeleteConfirmation);
+  };
+
   const handleDelete = () => {
+    handleDeleteConfirmation();
+  };
+
+  const handleConfirmedDelete = () => {
     props.deleteSelectedNode();
+    setShowDeleteConfirmation(false);
   };
 
   return (
@@ -50,6 +60,12 @@ const NoteTreeTable = (props) => {
         <button className={ns.redButton} onClick={handleDelete}>
           Delete
         </button>
+        {showDeleteConfirmation && (
+          <DeleteConfirmation
+            handleDeleteConfirmation={handleDeleteConfirmation}
+            deleteSelectedNode={handleConfirmedDelete}
+          />
+        )}
         {showPopup && props.header === "NPCs" && (
           <div className={ns.popupContainer}>
             <div className={ns.popup}>

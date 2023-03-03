@@ -436,7 +436,7 @@ const OrganizationCreate = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} />
+                <ExportButtons div={divRef} tableName={"DBorganization"}/>
               </div>
             </h1>
             <div className={style.infoCircle}>

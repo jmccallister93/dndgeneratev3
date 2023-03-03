@@ -117,6 +117,7 @@ const LocationCreate = () => {
   const [numberSize, setNumebrSize] = useState("");
 
   const divRef = useRef(null);
+  const [location, setLocation] = useState({});
 
   //Show Options
   const showBasics = (e) => {
@@ -134,6 +135,55 @@ const LocationCreate = () => {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
+
+    //Create location object to be exported
+    useEffect(() => {
+      const guildNames = selectedGuild.map((item) => item.name);
+      const guildString = guildNames.join(", ");
+      const eventNames = selectedEvent.map((item) => item.name);
+      const eventString = eventNames.join(", ");
+      const factionNames = selectedFaction.map((item) => item.name);
+      const factionString = factionNames.join(", ");
+      const npcNames = selectedNpc.map((item) => item.name);
+      const npcString = npcNames.join(", ");
+      const buildingNames = selectedBuilding.map((item) => item.name);
+      const buildingString = buildingNames.join(", ");
+      const districtNames = selectedDistrict.map((item) => item.name);
+      const districtString = districtNames.join(", ");
+
+      const location = {
+        name: cityName,
+        type: type,
+        size: size,
+        population: population,
+        atmosphere: atmosphere,
+        culture: culture,
+        terrain: terrain,
+        landmark: landmark,
+        govern: govern,
+        guild: guildString,
+        event: eventString,
+        faction: factionString,
+        npc: npcString,
+        building: buildingString,
+        district: districtString,
+      };
+      setLocation(location);
+    }, [
+      type,
+      size,
+      atmosphere,
+      culture,
+      terrain,
+      landmark,
+      govern,
+      selectedGuild,
+      selectedFaction,
+      selectedEvent,
+      selectedNpc,
+      selectedDistrict,
+      selectedBuilding,
+    ]);
 
   //Info content
   const infoContent = (
@@ -247,7 +297,7 @@ const LocationCreate = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={npc} />
+                <ExportButtons div={divRef} data={location} tableName={"DBlocation"}/>
               </div>
             </h1>
             {/* ToolTip */}

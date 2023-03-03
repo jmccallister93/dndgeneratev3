@@ -60,7 +60,7 @@ function NotePage() {
   useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
-        .from("test")
+        .from("DBnpc")
         .select();
       if (errorName) {
         setFetchError("Could not fetch the data");

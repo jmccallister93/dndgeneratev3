@@ -248,7 +248,7 @@ const CityGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={npc} />
+                <ExportButtons div={divRef} data={npc} tableName={"DBlocation"}/>
               </div>
             </h1>
             {/* ToolTip */}

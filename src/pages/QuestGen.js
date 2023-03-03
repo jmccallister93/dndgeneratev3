@@ -221,7 +221,7 @@ const QuestGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef}  data={genItem}/>
+                <ExportButtons div={divRef}  data={genItem} tableName={"DBquest"}/>
               </div>
             </h1>
             {/* ToolTip */}

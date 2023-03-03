@@ -350,7 +350,7 @@ const ItemGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={genItem} />
+                <ExportButtons div={divRef} data={genItem} tableName={"DBitem"}/>
               </div>
             </h1>
             {/* ToolTip */}

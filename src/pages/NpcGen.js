@@ -586,7 +586,7 @@ const NpcGen = () => {
             />
             {/* Export Btns */}
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={npc} tableName={"test"}/>
+                <ExportButtons div={divRef} data={npc} tableName={"DBnpc"}/>
               </div>
             {/* ToolTip */}
             <div className={style.infoCircle}>
