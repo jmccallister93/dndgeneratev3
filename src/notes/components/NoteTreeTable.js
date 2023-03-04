@@ -37,8 +37,9 @@ const NoteTreeTable = (props) => {
   const quest = extractNames(props.quest);
   const item = extractNames(props.item);
 
-  const handleSelect = (id) => {
-    props.onSelectedItem(id);
+  const handleSelect = (id, name) => {
+    props.onSelectedId(id);
+    props.onSelectedName(name)
   };
 
   const handleDeleteConfirmation = () => {
@@ -138,58 +139,68 @@ const NoteTreeTable = (props) => {
         {location.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${
-              props.selectedItem === obj.id ? ns.selected : ""
+              props.selectedId === obj.id && props.selectedName === obj.name
+                ? ns.selected
+                : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id)}
+            onClick={() => handleSelect(obj.id, obj.name)}
           >
             {obj.name}
           </div>
         ))}
         {npc.map((obj, index) => (
-          <div
+            <div
             className={`${ns.noteTreeCategoryItem} ${
-              props.selectedItem === obj.id ? ns.selected : ""
+              props.selectedId === obj.id && props.selectedName === obj.name
+                ? ns.selected
+                : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id)}
+            onClick={() => handleSelect(obj.id, obj.name)}
           >
             {obj.name}
           </div>
         ))}
         {organization.map((obj, index) => (
-          <div
+            <div
             className={`${ns.noteTreeCategoryItem} ${
-              props.selectedItem === obj.id ? ns.selected : ""
+              props.selectedId === obj.id && props.selectedName === obj.name
+                ? ns.selected
+                : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id)}
+            onClick={() => handleSelect(obj.id, obj.name)}
           >
             {obj.name}
           </div>
         ))}
         {quest.map((obj, index) => (
-          <div
-            className={`${ns.noteTreeCategoryItem} ${
-              props.selectedItem === obj.id ? ns.selected : ""
-            }`}
-            key={index}
-            onClick={() => handleSelect(obj.id)}
-          >
-            {obj.name}
-          </div>
-        ))}
+             <div
+             className={`${ns.noteTreeCategoryItem} ${
+               props.selectedId === obj.id && props.selectedName === obj.name
+                 ? ns.selected
+                 : ""
+             }`}
+             key={index}
+             onClick={() => handleSelect(obj.id, obj.name)}
+           >
+             {obj.name}
+           </div>
+         ))}
         {item.map((obj, index) => (
-          <div
-            className={`${ns.noteTreeCategoryItem} ${
-              props.selectedItem === obj.id ? ns.selected : ""
-            }`}
-            key={index}
-            onClick={() => handleSelect(obj.id)}
-          >
-            {obj.name}
-          </div>
-        ))}
+           <div
+           className={`${ns.noteTreeCategoryItem} ${
+             props.selectedId === obj.id && props.selectedName === obj.name
+               ? ns.selected
+               : ""
+           }`}
+           key={index}
+           onClick={() => handleSelect(obj.id, obj.name)}
+         >
+           {obj.name}
+         </div>
+       ))}
       </div>
     </>
   );

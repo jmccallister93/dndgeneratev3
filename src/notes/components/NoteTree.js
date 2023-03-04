@@ -15,8 +15,10 @@ const NoteTree = (props) => {
             header="Locations"
             location={props.location}
             setShowPopup={props.setShowPopup}
-            selectedItem={props.selectedItem}
-            onSelectedItem={(value) => props.onSelectedItem(value)}
+            selectedId={props.selectedId}
+            selectedName={props.selectedName}
+            onSelectedId={(value) => props.onSelectedId(value)}
+            onSelectedName={(value) => props.onSelectedName(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -25,8 +27,10 @@ const NoteTree = (props) => {
             header="NPCs"
             npc={props.npc}
             setShowPopup={props.setShowPopup}
-            selectedItem={props.selectedItem}
-            onSelectedItem={(value) => props.onSelectedItem(value)}
+            selectedId={props.selectedId}
+            selectedName={props.selectedName}
+            onSelectedId={(value) => props.onSelectedId(value)}
+            onSelectedName={(value) => props.onSelectedName(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -35,8 +39,10 @@ const NoteTree = (props) => {
             header="Organizations"
             organization={props.organization}
             setShowPopup={props.setShowPopup}
-            selectedItem={props.selectedItem}
-            onSelectedItem={(value) => props.onSelectedItem(value)}
+            selectedId={props.selectedId}
+            selectedName={props.selectedName}
+            onSelectedId={(value) => props.onSelectedId(value)}
+            onSelectedName={(value) => props.onSelectedName(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -45,8 +51,10 @@ const NoteTree = (props) => {
             header="Quests"
             quest={props.quest}
             setShowPopup={props.setShowPopup}
-            selectedItem={props.selectedItem}
-            onSelectedItem={(value) => props.onSelectedItem(value)}
+            selectedId={props.selectedId}
+            selectedName={props.selectedName}
+            onSelectedId={(value) => props.onSelectedId(value)}
+            onSelectedName={(value) => props.onSelectedName(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -55,8 +63,10 @@ const NoteTree = (props) => {
             header="Items"
             item={props.item}
             setShowPopup={props.setShowPopup}
-            selectedItem={props.selectedItem}
-            onSelectedItem={(value) => props.onSelectedItem(value)}
+            selectedId={props.selectedId}
+            selectedName={props.selectedName}
+            onSelectedId={(value) => props.onSelectedId(value)}
+            onSelectedName={(value) => props.onSelectedName(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>

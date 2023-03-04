@@ -8,6 +8,7 @@ import NoteTree from "../components/NoteTree";
 
 function NotePage() {
   const [selectedId, setSelectedId] = useState({});
+  const [selectedName, setSelectedName] = useState({});
   const [selectedNode, setSelectedNode] = useState({});
   const [fetchError, setFetchError] = useState(null);
 
@@ -28,6 +29,7 @@ function NotePage() {
         .from("test")
         .update({ notes: noteText })
         .eq("id", selectedId);
+        
 
       setNoteText(noteText);
     } catch (error) {
@@ -41,6 +43,7 @@ function NotePage() {
         .from("test")
         .update(updatedNode)
         .eq("id", selectedId);
+      
       // update the objectDetails state with the updated node
       setNpcDetails((prev) =>
         prev.map((node) => (node.id === selectedId ? updatedNode : node))
@@ -268,8 +271,26 @@ function NotePage() {
   }, [noteText, propertyValue, showPopup, deletedNode]);
 
   useEffect(() => {
-    setSelectedNode(npcDetails.find((r) => r.id === selectedId));
-  }, [selectedId, npcDetails]);
+    const allDetails = npcDetails.concat(
+      locationDetails,
+      organizationDetails,
+      questDetails,
+      itemDetails
+    );
+    setSelectedNode(
+      
+      allDetails.find((r) => r.id === selectedId && r.name === selectedName)
+    );
+    // setSelectedNode(npcDetails.find((r) => r.id === selectedId));
+  }, [
+    selectedId,
+    selectedName,
+    npcDetails,
+    locationDetails,
+    organizationDetails,
+    questDetails,
+    itemDetails,
+  ]);
 
   return (
     <div className={style.mainWrapper}>
@@ -284,8 +305,10 @@ function NotePage() {
           organization={organizationDetails}
           quest={questDetails}
           item={itemDetails}
-          onSelectedItem={setSelectedId}
-          selectedItem={selectedId}
+          onSelectedId={setSelectedId}
+          selectedId={selectedId}
+          onSelectedName={setSelectedName}
+          selectedName={selectedName}
           deleteSelectedNode={deleteSelectedNode}
           setShowPopup={setShowPopup}
         />
