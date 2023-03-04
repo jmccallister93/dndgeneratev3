@@ -31,7 +31,11 @@ const NoteTreeTable = (props) => {
     }
     return names;
   };
-  const names = extractNames(props.object);
+  const npc = extractNames(props.npc);
+  const location = extractNames(props.location);
+  const organization = extractNames(props.organization);
+  const quest = extractNames(props.quest);
+  const item = extractNames(props.item);
 
   const handleSelect = (id) => {
     props.onSelectedItem(id);
@@ -131,7 +135,51 @@ const NoteTreeTable = (props) => {
             </div>
           </div>
         )}
-        {names.map((obj, index) => (
+        {location.map((obj, index) => (
+          <div
+            className={`${ns.noteTreeCategoryItem} ${
+              props.selectedItem === obj.id ? ns.selected : ""
+            }`}
+            key={index}
+            onClick={() => handleSelect(obj.id)}
+          >
+            {obj.name}
+          </div>
+        ))}
+        {npc.map((obj, index) => (
+          <div
+            className={`${ns.noteTreeCategoryItem} ${
+              props.selectedItem === obj.id ? ns.selected : ""
+            }`}
+            key={index}
+            onClick={() => handleSelect(obj.id)}
+          >
+            {obj.name}
+          </div>
+        ))}
+        {organization.map((obj, index) => (
+          <div
+            className={`${ns.noteTreeCategoryItem} ${
+              props.selectedItem === obj.id ? ns.selected : ""
+            }`}
+            key={index}
+            onClick={() => handleSelect(obj.id)}
+          >
+            {obj.name}
+          </div>
+        ))}
+        {quest.map((obj, index) => (
+          <div
+            className={`${ns.noteTreeCategoryItem} ${
+              props.selectedItem === obj.id ? ns.selected : ""
+            }`}
+            key={index}
+            onClick={() => handleSelect(obj.id)}
+          >
+            {obj.name}
+          </div>
+        ))}
+        {item.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${
               props.selectedItem === obj.id ? ns.selected : ""

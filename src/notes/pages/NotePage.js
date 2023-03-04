@@ -10,7 +10,13 @@ function NotePage() {
   const [selectedId, setSelectedId] = useState({});
   const [selectedNode, setSelectedNode] = useState({});
   const [fetchError, setFetchError] = useState(null);
-  const [objectDetails, setObjectDetails] = useState([]);
+  
+  const [locationDetails, setLocationDetails] = useState([]);
+  const [npcDetails, setNpcDetails] = useState([]);
+  const [organizationDetails, setOrganizationDetails] = useState([]);
+  const [questDetails, setQuestDetails] = useState([]);
+  const [itemDetails, setItemDetails] = useState([]);
+
   const [noteText, setNoteText] = useState("");
   const [propertyValue, setPropertyValue] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -36,7 +42,7 @@ function NotePage() {
         .update(updatedNode)
         .eq("id", selectedId);
       // update the objectDetails state with the updated node
-      setObjectDetails((prev) =>
+      setNpcDetails((prev) =>
         prev.map((node) => (node.id === selectedId ? updatedNode : node))
       );
     } catch (error) {
@@ -57,6 +63,45 @@ function NotePage() {
     }
   };
 
+//Get Locations
+useEffect(() => {
+  const fetchData = async () => {
+    const { data: dataName, error: errorName } = await supabase
+      .from("DBlocation")
+      .select();
+    if (errorName) {
+      setFetchError("Could not fetch the data");
+      console.log(errorName);
+      setLocationDetails(null);
+    }
+    if (dataName) {
+      setFetchError(null);
+      setLocationDetails(
+        dataName.map((r) => ({
+          id: r.id,
+          name: r.name,
+          type: r.type,
+          size: r.size,
+          population: r.population,
+          atmosphere: r.atmosphere,
+          culture: r.culture,
+          terrain: r.terrain,
+          landmark: r.landmark,
+          govern: r.govern,
+          guild: r.guild,
+          event: r.event,
+          faction: r.faction,
+          npc: r.npc,
+          building: r.building,
+          district: r.district,
+        }))
+      );
+    }
+  };
+  fetchData();
+}, [noteText, propertyValue, showPopup, deletedNode]);
+
+  //Get NPCs
   useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -65,11 +110,11 @@ function NotePage() {
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);
-        setObjectDetails(null);
+        setNpcDetails(null);
       }
       if (dataName) {
         setFetchError(null);
-        setObjectDetails(
+        setNpcDetails(
           dataName.map((r) => ({
             id: r.id,
             name: r.name,
@@ -110,8 +155,8 @@ function NotePage() {
   }, [noteText, propertyValue, showPopup, deletedNode]);
 
   useEffect(() => {
-    setSelectedNode(objectDetails.find((r) => r.id === selectedId));
-  }, [selectedId, objectDetails]);
+    setSelectedNode(npcDetails.find((r) => r.id === selectedId));
+  }, [selectedId, npcDetails]);
 
   return (
     <div className={style.mainWrapper}>
@@ -121,7 +166,11 @@ function NotePage() {
       </div>
       <div className={ns.grid2}>
         <NoteTree
-          object={objectDetails}
+          location={locationDetails}
+          npc={npcDetails}
+          organization={organizationDetails}
+          quest={questDetails}
+          item={itemDetails}
           onSelectedItem={setSelectedId}
           selectedItem={selectedId}
           deleteSelectedNode={deleteSelectedNode}

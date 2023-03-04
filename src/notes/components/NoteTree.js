@@ -13,14 +13,17 @@ const NoteTree = (props) => {
           {" "}
           <NoteTreeTable
             header="Locations"
-            // object={null}
+            location={props.location}
+            setShowPopup={props.setShowPopup}
+            selectedItem={props.selectedItem}
             onSelectedItem={(value) => props.onSelectedItem(value)}
+            deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
         <div className={ns.TreeTable}>
           <NoteTreeTable
             header="NPCs"
-            object={props.object}
+            npc={props.npc}
             setShowPopup={props.setShowPopup}
             selectedItem={props.selectedItem}
             onSelectedItem={(value) => props.onSelectedItem(value)}
@@ -30,19 +33,31 @@ const NoteTree = (props) => {
         <div className={ns.TreeTable}>
           <NoteTreeTable
             header="Organizations"
+            organization={props.organization}
+            setShowPopup={props.setShowPopup}
+            selectedItem={props.selectedItem}
             onSelectedItem={(value) => props.onSelectedItem(value)}
+            deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
         <div className={ns.TreeTable}>
           <NoteTreeTable
             header="Quests"
+            quest={props.quest}
+            setShowPopup={props.setShowPopup}
+            selectedItem={props.selectedItem}
             onSelectedItem={(value) => props.onSelectedItem(value)}
+            deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
         <div className={ns.TreeTable}>
           <NoteTreeTable
             header="Items"
+            item={props.item}
+            setShowPopup={props.setShowPopup}
+            selectedItem={props.selectedItem}
             onSelectedItem={(value) => props.onSelectedItem(value)}
+            deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
       </div>
