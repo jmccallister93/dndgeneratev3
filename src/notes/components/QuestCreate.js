@@ -111,7 +111,9 @@ const QuestCreate = () => {
   const [rewards, setRewards] = useState("");
   const [rewardOptions, setRewardOptions] = useState("");
 
-  const [quest, setQuest] = useState({});
+  const [quest, setQuest] = useState("");
+
+  const [questData, setQuestData] = useState({});
 
   //useeffect to set the values for datatable based on questype state
   useEffect(() => {
@@ -164,7 +166,7 @@ const QuestCreate = () => {
       motive: motive,
       twist: twist,    
     };
-    setQuest(quest);
+    setQuestData(quest);
   }, [
     questName,
     questType,
@@ -240,7 +242,7 @@ const QuestCreate = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef}  data={quest} tableName={"DBquest"}/>
+                <ExportButtons div={divRef}  data={questData} tableName={"DBquest"}/>
               </div>
             </h1>
             {/* ToolTip */}

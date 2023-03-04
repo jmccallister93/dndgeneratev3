@@ -10,7 +10,7 @@ function NotePage() {
   const [selectedId, setSelectedId] = useState({});
   const [selectedNode, setSelectedNode] = useState({});
   const [fetchError, setFetchError] = useState(null);
-  
+
   const [locationDetails, setLocationDetails] = useState([]);
   const [npcDetails, setNpcDetails] = useState([]);
   const [organizationDetails, setOrganizationDetails] = useState([]);
@@ -57,49 +57,49 @@ function NotePage() {
         .delete()
         .eq("id", selectedId);
 
-        setDeletedNode(selectedId);
+      setDeletedNode(selectedId);
     } catch (error) {
       console.error("Error updating note:" + error);
     }
   };
 
-//Get Locations
-useEffect(() => {
-  const fetchData = async () => {
-    const { data: dataName, error: errorName } = await supabase
-      .from("DBlocation")
-      .select();
-    if (errorName) {
-      setFetchError("Could not fetch the data");
-      console.log(errorName);
-      setLocationDetails(null);
-    }
-    if (dataName) {
-      setFetchError(null);
-      setLocationDetails(
-        dataName.map((r) => ({
-          id: r.id,
-          name: r.name,
-          type: r.type,
-          size: r.size,
-          population: r.population,
-          atmosphere: r.atmosphere,
-          culture: r.culture,
-          terrain: r.terrain,
-          landmark: r.landmark,
-          govern: r.govern,
-          guild: r.guild,
-          event: r.event,
-          faction: r.faction,
-          npc: r.npc,
-          building: r.building,
-          district: r.district,
-        }))
-      );
-    }
-  };
-  fetchData();
-}, [noteText, propertyValue, showPopup, deletedNode]);
+  //Get Locations
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBlocation")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setLocationDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setLocationDetails(
+          dataName.map((r) => ({
+            id: r.id,
+            name: r.name,
+            type: r.type,
+            size: r.size,
+            population: r.population,
+            atmosphere: r.atmosphere,
+            culture: r.culture,
+            terrain: r.terrain,
+            landmark: r.landmark,
+            govern: r.govern,
+            guild: r.guild,
+            event: r.event,
+            faction: r.faction,
+            npc: r.npc,
+            building: r.building,
+            district: r.district,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, [noteText, propertyValue, showPopup, deletedNode]);
 
   //Get NPCs
   useEffect(() => {
@@ -147,6 +147,119 @@ useEffect(() => {
             hp: r.hp,
             speed: r.speed,
             notes: r.notes,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, [noteText, propertyValue, showPopup, deletedNode]);
+
+  //Get Organizations
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBorganization")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setOrganizationDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setOrganizationDetails(
+          dataName.map((r) => ({
+            id: r.id,
+            name: r.name,
+            wealth: r.wealth,
+            influence: r.influence,
+            structure: r.structure,
+            defence: r.defence,
+            origin: r.origin,
+            logo: r.logo,
+            leader: r.leader,
+            income: r.income,
+            item: r.item,
+            influenceTactic: r.influenceTactic,
+            favored: r.favored,
+            positive: r.positive,
+            neutral: r.neutral,
+            unwelcome: r.unwelcome,
+            intolerant: r.intolerant,
+            service: r.service,
+            initiation: r.initiation,
+            lowRole: r.lowRole,
+            mediumRole: r.mediumRole,
+            highRole: r.highRole,
+            quest: r.quest,
+            advance: r.advance,
+            belief: r.belief,
+            orgType: r.orgType,
+            headquarter: r.headquarter,
+            building: r.building,
+            location: r.location,
+            stronghold: r.stronghold,
+            resource: r.resource,
+            motive: r.motive,
+            power: r.power,
+            specialty: r.specialty,
+            weakness: r.weakness,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, [noteText, propertyValue, showPopup, deletedNode]);
+
+  //Get Quests
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBquest")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setQuestDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setQuestDetails(
+          dataName.map((r) => ({
+            name: r.name,
+            questType: r.questType,
+            reward: r.reward,
+            location: r.location,
+            motive: r.motive,
+            twist: r.twist,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, [noteText, propertyValue, showPopup, deletedNode]);
+
+  //Get Items
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBitem")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setItemDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setItemDetails(
+          dataName.map((r) => ({
+            name: r.name,
+            type: r.type,
+            rarity: r.rarity,
+            cost: r.cost,
+            weight: r.weight,
+            description: r.description,
           }))
         );
       }

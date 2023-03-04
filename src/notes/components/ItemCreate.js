@@ -224,6 +224,7 @@ const ItemCreate = () => {
     };
     setGenItem(genItem);
   }, [itemName, type, rarity, cost, weight, description]);
+
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
@@ -349,7 +350,11 @@ const ItemCreate = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={genItem} />
+                <ExportButtons
+                  div={divRef}
+                  data={genItem}
+                  tableName={"DBitem"}
+                />
               </div>
             </h1>
             {/* ToolTip */}
