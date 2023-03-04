@@ -228,6 +228,8 @@ const OrganizationCreate = () => {
   const [leader, setLeader] = useState("");
   const [leaders, setLeaders] = useState("");
   const [leaderOptions, setLeaderOptions] = useState("");
+
+  const [organization, setOrganization] = useState({});
   const divRef = useRef(null);
 
   //Show Options
@@ -252,6 +254,136 @@ const OrganizationCreate = () => {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
+
+  //Create location object to be exported
+  useEffect(() => {
+    const itemNames = selectedItem.map((item) => item.name);
+    const itemString = itemNames.join(", ");
+    const influenceTacticNames = selectedInfluenceTactic.map(
+      (influenceTactic) => influenceTactic.name
+    );
+    const influenceTacticString = influenceTacticNames.join(", ");
+    const favoredNames = selectedFavored.map((favored) => favored.name);
+    const favoredString = favoredNames.join(", ");
+    const positiveNames = selectedPositive.map((positive) => positive.name);
+    const positiveString = positiveNames.join(", ");
+    const neutralNames = selectedNeutral.map((neutral) => neutral.name);
+    const neutralString = neutralNames.join(", ");
+    const unwelcomeNames = selectedUnwelcome.map((unwelcome) => unwelcome.name);
+    const unwelcomeString = unwelcomeNames.join(", ");
+    const intolerantNames = selectedIntolerant.map((intolerant) => intolerant.name);
+    const intolerantString = intolerantNames.join(", ");
+    const serviceNames = selectedService.map((service) => service.name);
+    const serviceString = serviceNames.join(", ");
+    const initiationNames = selectedInitiation.map((initiation) => initiation.name);
+    const initiationString = initiationNames.join(", ");
+    const lowRoleNames = selectedLowRole.map((lowRole) => lowRole.name);
+    const lowRoleString = lowRoleNames.join(", ");
+    const mediumRoleNames = selectedMediumRole.map((mediumRole) => mediumRole.name);
+    const mediumRoleString = mediumRoleNames.join(", ");
+    const highRoleNames = selectedHighRole.map((highRole) => highRole.name);
+    const highRoleString = highRoleNames.join(", ");
+    const questNames = selectedQuest.map((quest) => quest.name);
+    const questString = questNames.join(", ");
+    const advanceNames = selectedAdvance.map((advance) => advance.name);
+    const advanceString = advanceNames.join(", ");
+    const beliefNames = selectedBelief.map((belief) => belief.name);
+    const beliefString = beliefNames.join(", ");
+    const orgTypeNames = selectedOrgType.map((orgType) => orgType.name);
+    const orgTypeString = orgTypeNames.join(", ");
+    const headquarterNames = selectedHeadquarter.map((headquarter) => headquarter.name);
+    const headquarterString = headquarterNames.join(", ");
+    const buildingNames = selectedBuilding.map((building) => building.name);
+    const buildingString = buildingNames.join(", ");
+    const locationNames = selectedLocation.map((location) => location.name);
+    const locationString = locationNames.join(", ");
+    const strongholdNames = selectedStronghold.map((stronghold) => stronghold.name);
+    const strongholdString = strongholdNames.join(", ");
+    const resourceNames = selectedResource.map((resource) => resource.name);
+    const resourceString = resourceNames.join(", ");
+    const motiveNames = selectedMotive.map((motive) => motive.name);
+    const motiveString = motiveNames.join(", ");
+    const powerNames = selectedPower.map((power) => power.name);
+    const powerString = powerNames.join(", ");
+    const specialtyNames = selectedSpecialty.map((specialty) => specialty.name);
+    const specialtyString = specialtyNames.join(", ");
+    const weaknessNames = selectedWeakness.map((weakness) => weakness.name);
+    const weaknessString = weaknessNames.join(", ");
+
+
+    const organization = {
+      name: factionName,
+      wealth: wealth,
+      influence: influence,
+      structure: structure,
+      defence: defence,
+      origin: origin,
+      logo: logo,
+      leader: leader,
+      income: income,
+      item: itemString,
+      influenceTactic: influenceTacticString,
+      favored: favoredString,
+      positive: positiveString,
+      neutral: neutralString,
+      unwelcome: unwelcomeString,
+      intolerant: intolerantString,
+      service: serviceString,
+      initiation: initiationString,
+      lowRole: lowRoleString,
+      mediumRole: mediumRoleString,
+      highRole: highRoleString,
+      quest: questString,
+      advance: advanceString,
+      belief: beliefString,
+      orgType: orgTypeString,
+      headquarter: headquarterString,
+      building: buildingString,
+      location: locationString,
+      stronghold: strongholdString,
+      resource: resourceString,
+      motive: motiveString,
+      power: powerString,
+      specialty: specialtyString,
+      weakness: weaknessString,
+    };
+    setOrganization(organization);
+  }, [
+    factionName,
+    wealth,
+    influence,
+    structure,
+    defence,
+    origin,
+    logo,
+    leader,
+    selectedIncome,
+    selectedItem,
+    selectedInfluenceTactic,
+    selectedFavored,
+    selectedPositive,
+    selectedNeutral,
+    selectedUnwelcome,
+    selectedIntolerant,
+    selectedService,
+    selectedInitiation,
+    selectedLowRole,
+    selectedMediumRole,
+    selectedHighRole,
+    selectedQuest,
+    selectedAdvance,
+    selectedBelief,
+    selectedOrgType,
+    selectedHeadquarter,
+    selectedBuilding,
+    selectedLocation,
+    selectedStronghold,
+    selectedResource,
+    selectedMotive,
+    selectedPower,
+    selectedSpecialty,
+    selectedWeakness,
+  ]);
 
   //Info content
   const infoContent = (
@@ -436,7 +568,11 @@ const OrganizationCreate = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} tableName={"DBorganization"}/>
+                <ExportButtons
+                  div={divRef}
+                  data={organization}
+                  tableName={"DBorganization"}
+                />
               </div>
             </h1>
             <div className={style.infoCircle}>
@@ -862,44 +998,44 @@ const OrganizationCreate = () => {
               />
             </div>
           </div>
-            <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showFeature}>
-            Features{" "}
-            {isFeatureActive ? (
-               <i className="pi pi-chevron-down"></i>
-               ) : (
-                 <i className="pi pi-chevron-right"></i>
-               )}
-          </h1>
-          <SectionRandom 
-            value={[influence,]}
-            setValue={[setInfluence,]}
-            valueOptions={[influenceOptions,]}
-            selectedValue={[
-              selectedInfluenceTactic,
-              selectedService,
-              selectedQuest,
-              selectedPower,
-              selectedSpecialty,
-              selectedWeakness
-            ]}
-            setSelectedValue={[
-              setSelectedInfluenceTactic,
-              setSelectedService,
-              setSelectedQuest,
-              setSelectedPower,
-              setSelectedSpecialty,
-              setSelectedWeakness
-            ]}
-            selectedValueOptions={[
-              influenceTacticOptions,
-              serviceOptions,
-              questOptions,
-              powerOptions,
-              specialtyOptions,
-              weaknessOptions
-            ]}
-          />
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showFeature}>
+              Features{" "}
+              {isFeatureActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[influence]}
+              setValue={[setInfluence]}
+              valueOptions={[influenceOptions]}
+              selectedValue={[
+                selectedInfluenceTactic,
+                selectedService,
+                selectedQuest,
+                selectedPower,
+                selectedSpecialty,
+                selectedWeakness,
+              ]}
+              setSelectedValue={[
+                setSelectedInfluenceTactic,
+                setSelectedService,
+                setSelectedQuest,
+                setSelectedPower,
+                setSelectedSpecialty,
+                setSelectedWeakness,
+              ]}
+              selectedValueOptions={[
+                influenceTacticOptions,
+                serviceOptions,
+                questOptions,
+                powerOptions,
+                specialtyOptions,
+                weaknessOptions,
+              ]}
+            />
           </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
@@ -995,37 +1131,37 @@ const OrganizationCreate = () => {
             </div>
           </div>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showBuildings}>
-            Buildings{" "}
-            {isBuildingActive ? (
+            <h1 className={style.subHeader} onClick={showBuildings}>
+              Buildings{" "}
+              {isBuildingActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
                 <i className="pi pi-chevron-right"></i>
               )}
-          </h1>
-          <SectionRandom
-            value={[defence,]}
-            setValue={[setDefence,]}
-            valueOptions={[defenceOptions,]}
-            selectedValue={[
-              selectedHeadquarter,
-              selectedBuilding,
-              selectedLocation,
-              selectedStronghold,
-            ]}
-            setSelectedValue={[
-              setSelectedHeadquarter,
-              setSelectedBuilding,
-              setSelectedLocation,
-              setSelectedStronghold,
-            ]}
-            selectedValueOptions={[
-              headquarterOptions,
-              buildingOptions,
-              locationOptions,
-              strongholdOptions,
-            ]}
-          />
+            </h1>
+            <SectionRandom
+              value={[defence]}
+              setValue={[setDefence]}
+              valueOptions={[defenceOptions]}
+              selectedValue={[
+                selectedHeadquarter,
+                selectedBuilding,
+                selectedLocation,
+                selectedStronghold,
+              ]}
+              setSelectedValue={[
+                setSelectedHeadquarter,
+                setSelectedBuilding,
+                setSelectedLocation,
+                setSelectedStronghold,
+              ]}
+              selectedValueOptions={[
+                headquarterOptions,
+                buildingOptions,
+                locationOptions,
+                strongholdOptions,
+              ]}
+            />
           </div>
           <div className={isBuildingActive ? style.subsection : style.hidden}>
             <div>
@@ -1098,27 +1234,16 @@ const OrganizationCreate = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-        <NameDisplay value={factionName} setNewValue={setFactionName} />
+          <NameDisplay value={factionName} setNewValue={setFactionName} />
           <h2>
             Org. Structure{" "}
-            <SingleDisplayText
-              value={structure}
-              setNewValue={setStructure}
-            />
+            <SingleDisplayText value={structure} setNewValue={setStructure} />
           </h2>
           <h2>
-            Origin{" "}
-            <SingleDisplayText
-              value={origin}
-              setNewValue={setOrigin}
-            />
+            Origin <SingleDisplayText value={origin} setNewValue={setOrigin} />
           </h2>
           <h2>
-            Logo{" "}
-            <SingleDisplayText
-              value={logo}
-              setNewValue={setLogo}
-            />
+            Logo <SingleDisplayText value={logo} setNewValue={setLogo} />
           </h2>
           <h2>
             Org. Type{" "}
@@ -1182,11 +1307,7 @@ const OrganizationCreate = () => {
           <h1>Members</h1>
           <hr className={ns.lineBreak} />
           <h2>
-            Leader{" "}
-            <SingleDisplayText
-              value={leader}
-              setNewValue={setLeader}
-            />
+            Leader <SingleDisplayText value={leader} setNewValue={setLeader} />
           </h2>
           <h2>
             Important Members <span className={style.minorText2}></span>
@@ -1287,10 +1408,7 @@ const OrganizationCreate = () => {
           <hr className={ns.lineBreak} />
           <h2>
             Influence Level{" "}
-            <SingleDisplayText
-              value={influence}
-              setNewValue={setInfluence}
-            />
+            <SingleDisplayText value={influence} setNewValue={setInfluence} />
           </h2>
           <h2>
             Influence Tactics{" "}
@@ -1350,10 +1468,7 @@ const OrganizationCreate = () => {
           <hr className={ns.lineBreak} />
           <h2>
             Defence Level{" "}
-            <SingleDisplayText
-              value={defence}
-              setNewValue={setDefence}
-            />
+            <SingleDisplayText value={defence} setNewValue={setDefence} />
           </h2>
           <h2>
             Headquarters{" "}

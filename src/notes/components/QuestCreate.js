@@ -46,7 +46,6 @@ const QuestCreate = () => {
   const [questTypes, setQuestTypes] = useState("");
   const [questTypeOptions, setQuestTypeOptions] = useState("");
 
-  const [quest, setQuest] = useState("");
   const [quests, setQuests] = useState([]);
   const [questOptions, setQuestOptions] = useState([]);
   const [questList, setQuestList] = useState([]);
@@ -112,6 +111,8 @@ const QuestCreate = () => {
   const [rewards, setRewards] = useState("");
   const [rewardOptions, setRewardOptions] = useState("");
 
+  const [quest, setQuest] = useState({});
+
   //useeffect to set the values for datatable based on questype state
   useEffect(() => {
     if (questType === "Bounty") {
@@ -151,9 +152,28 @@ const QuestCreate = () => {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
-  //*****Added new stuff
+
+  //Creating the quest object
   const divRef = useRef();
-  const genItem = "";
+  useEffect(() => {
+    const quest = {
+      name: questName,
+      questType: questType,
+      reward: reward,
+      location: location,
+      motive: motive,
+      twist: twist,    
+    };
+    setQuest(quest);
+  }, [
+    questName,
+    questType,
+    reward,
+    location,
+    motive,
+    twist    
+  ]);
+
   //Info content
   const infoContent = (
     <div className={style.infoContent}>
@@ -220,7 +240,7 @@ const QuestCreate = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef}  data={genItem} tableName={"DBquest"}/>
+                <ExportButtons div={divRef}  data={quest} tableName={"DBquest"}/>
               </div>
             </h1>
             {/* ToolTip */}
