@@ -167,6 +167,7 @@ const LocationCreate = () => {
         npc: npcString,
         building: buildingString,
         district: districtString,
+        db: "DBlocation"
       };
       setLocation(location);
     }, [

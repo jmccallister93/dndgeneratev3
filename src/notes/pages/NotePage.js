@@ -23,13 +23,15 @@ function NotePage() {
   const [showPopup, setShowPopup] = useState(false);
   const [deletedNode, setDeletedNode] = useState(null);
 
+  const [dbTable, setDbTable] = useState("");
+
   const updateNote = async (noteText) => {
     try {
       const response = await supabase
-        .from("test")
+        .from(dbTable)
         .update({ notes: noteText })
-        .eq("id", selectedId);
-        
+        .eq("id", selectedId)
+        .eq("name", selectedName);
 
       setNoteText(noteText);
     } catch (error) {
@@ -40,14 +42,33 @@ function NotePage() {
   const updateSelectedNode = async (updatedNode) => {
     try {
       const response = await supabase
-        .from("test")
+      console.log(updatedNode)
+        .from(dbTable)
         .update(updatedNode)
-        .eq("id", selectedId);
-      
-      // update the objectDetails state with the updated node
-      setNpcDetails((prev) =>
-        prev.map((node) => (node.id === selectedId ? updatedNode : node))
-      );
+        .eq("id", selectedId)
+        .eq("name", selectedName);
+
+      if (dbTable === "DBlocation") {
+        setLocationDetails((prev) =>
+          prev.map((node) => (node.id === selectedId ? updatedNode : node))
+        );
+      } else if (dbTable === "DBnpc") {
+        setNpcDetails((prev) =>
+          prev.map((node) => (node.id === selectedId ? updatedNode : node))
+        );
+      } else if (dbTable === "DBorganization") {
+        setOrganizationDetails((prev) =>
+          prev.map((node) => (node.id === selectedId ? updatedNode : node))
+        );
+      } else if (dbTable === "DBquest") {
+        setQuestDetails((prev) =>
+          prev.map((node) => (node.id === selectedId ? updatedNode : node))
+        );
+      } else if (dbTable === "DBitem") {
+        setItemDetails((prev) =>
+          prev.map((node) => (node.id === selectedId ? updatedNode : node))
+        );
+      }
     } catch (error) {
       console.error("Error updating note:" + error);
     }
@@ -56,9 +77,10 @@ function NotePage() {
   const deleteSelectedNode = async () => {
     try {
       const response = await supabase
-        .from("test")
+        .from(dbTable)
         .delete()
-        .eq("id", selectedId);
+        .eq("id", selectedId)
+        .eq("name", selectedName);
 
       setDeletedNode(selectedId);
     } catch (error) {
@@ -97,6 +119,8 @@ function NotePage() {
             npc: r.npc,
             building: r.building,
             district: r.district,
+            notes: r.notes,
+            db: r.db,
           }))
         );
       }
@@ -150,6 +174,7 @@ function NotePage() {
             hp: r.hp,
             speed: r.speed,
             notes: r.notes,
+            db: r.db,
           }))
         );
       }
@@ -207,6 +232,8 @@ function NotePage() {
             power: r.power,
             specialty: r.specialty,
             weakness: r.weakness,
+            notes: r.notes,
+            db: r.db,
           }))
         );
       }
@@ -229,12 +256,15 @@ function NotePage() {
         setFetchError(null);
         setQuestDetails(
           dataName.map((r) => ({
+            id: r.id,
             name: r.name,
             questType: r.questType,
             reward: r.reward,
             location: r.location,
             motive: r.motive,
             twist: r.twist,
+            notes: r.notes,
+            db: r.db,
           }))
         );
       }
@@ -257,12 +287,15 @@ function NotePage() {
         setFetchError(null);
         setItemDetails(
           dataName.map((r) => ({
+            id: r.id,
             name: r.name,
             type: r.type,
             rarity: r.rarity,
             cost: r.cost,
             weight: r.weight,
             description: r.description,
+            notes: r.notes,
+            db: r.db,
           }))
         );
       }
@@ -278,10 +311,8 @@ function NotePage() {
       itemDetails
     );
     setSelectedNode(
-      
       allDetails.find((r) => r.id === selectedId && r.name === selectedName)
     );
-    // setSelectedNode(npcDetails.find((r) => r.id === selectedId));
   }, [
     selectedId,
     selectedName,
@@ -305,12 +336,13 @@ function NotePage() {
           organization={organizationDetails}
           quest={questDetails}
           item={itemDetails}
-          onSelectedId={setSelectedId}
+          setSelectedId={setSelectedId}
           selectedId={selectedId}
-          onSelectedName={setSelectedName}
+          setSelectedName={setSelectedName}
           selectedName={selectedName}
           deleteSelectedNode={deleteSelectedNode}
           setShowPopup={setShowPopup}
+          setDbTable={setDbTable}
         />
         <Note
           selectedNode={selectedNode}

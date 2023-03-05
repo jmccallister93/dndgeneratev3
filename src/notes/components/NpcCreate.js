@@ -303,6 +303,7 @@ const NpcCreate = () => {
       weaponDamage: weaponDamage,
       weaponProperties: weaponProperties,
       inventory: itemString,
+      db: "DBnpc"
     };
     setNpc(npc);
   }, [

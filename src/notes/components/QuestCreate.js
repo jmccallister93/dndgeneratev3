@@ -164,7 +164,8 @@ const QuestCreate = () => {
       reward: reward,
       location: location,
       motive: motive,
-      twist: twist,    
+      twist: twist,
+      db: "DBquest"    
     };
     setQuestData(quest);
   }, [

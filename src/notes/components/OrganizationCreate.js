@@ -346,6 +346,7 @@ const OrganizationCreate = () => {
       power: powerString,
       specialty: specialtyString,
       weakness: weaknessString,
+      db: "DBorganization"
     };
     setOrganization(organization);
   }, [

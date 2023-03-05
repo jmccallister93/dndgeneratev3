@@ -27,7 +27,7 @@ const NoteTreeTable = (props) => {
     if (!Array.isArray(objectArray)) return [];
     let names = [];
     for (let obj of objectArray) {
-      names.push({ name: obj.name, id: obj.id });
+      names.push({ name: obj.name, id: obj.id, db: obj.db });
     }
     return names;
   };
@@ -37,9 +37,10 @@ const NoteTreeTable = (props) => {
   const quest = extractNames(props.quest);
   const item = extractNames(props.item);
 
-  const handleSelect = (id, name) => {
-    props.onSelectedId(id);
-    props.onSelectedName(name)
+  const handleSelect = (id, name, db) => {
+    props.setSelectedId(id);
+    props.setSelectedName(name);
+    props.setDbTable(db);
   };
 
   const handleDeleteConfirmation = () => {
@@ -144,7 +145,7 @@ const NoteTreeTable = (props) => {
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id, obj.name)}
+            onClick={() => handleSelect(obj.id, obj.name, obj.db)}
           >
             {obj.name}
           </div>
@@ -157,7 +158,7 @@ const NoteTreeTable = (props) => {
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id, obj.name)}
+            onClick={() => handleSelect(obj.id, obj.name, obj.db)}
           >
             {obj.name}
           </div>
@@ -170,7 +171,7 @@ const NoteTreeTable = (props) => {
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id, obj.name)}
+            onClick={() => handleSelect(obj.id, obj.name, obj.db)}
           >
             {obj.name}
           </div>
@@ -183,8 +184,9 @@ const NoteTreeTable = (props) => {
                  : ""
              }`}
              key={index}
-             onClick={() => handleSelect(obj.id, obj.name)}
+             onClick={() => handleSelect(obj.id, obj.name, obj.db)}
            >
+            
              {obj.name}
            </div>
          ))}
@@ -196,7 +198,7 @@ const NoteTreeTable = (props) => {
                : ""
            }`}
            key={index}
-           onClick={() => handleSelect(obj.id, obj.name)}
+           onClick={() => handleSelect(obj.id, obj.name, obj.db)}
          >
            {obj.name}
          </div>

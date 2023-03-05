@@ -17,8 +17,9 @@ const NoteTree = (props) => {
             setShowPopup={props.setShowPopup}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
-            onSelectedId={(value) => props.onSelectedId(value)}
-            onSelectedName={(value) => props.onSelectedName(value)}
+            setSelectedId={(value) => props.setSelectedId(value)}
+            setSelectedName={(value) => props.setSelectedName(value)}
+            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -29,8 +30,9 @@ const NoteTree = (props) => {
             setShowPopup={props.setShowPopup}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
-            onSelectedId={(value) => props.onSelectedId(value)}
-            onSelectedName={(value) => props.onSelectedName(value)}
+            setSelectedId={(value) => props.setSelectedId(value)}
+            setSelectedName={(value) => props.setSelectedName(value)}
+            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -41,8 +43,9 @@ const NoteTree = (props) => {
             setShowPopup={props.setShowPopup}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
-            onSelectedId={(value) => props.onSelectedId(value)}
-            onSelectedName={(value) => props.onSelectedName(value)}
+            setSelectedId={(value) => props.setSelectedId(value)}
+            setSelectedName={(value) => props.setSelectedName(value)}
+            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -53,8 +56,9 @@ const NoteTree = (props) => {
             setShowPopup={props.setShowPopup}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
-            onSelectedId={(value) => props.onSelectedId(value)}
-            onSelectedName={(value) => props.onSelectedName(value)}
+            setSelectedId={(value) => props.setSelectedId(value)}
+            setSelectedName={(value) => props.setSelectedName(value)}
+            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -65,8 +69,9 @@ const NoteTree = (props) => {
             setShowPopup={props.setShowPopup}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
-            onSelectedId={(value) => props.onSelectedId(value)}
-            onSelectedName={(value) => props.onSelectedName(value)}
+            setSelectedId={(value) => props.setSelectedId(value)}
+            setSelectedName={(value) => props.setSelectedName(value)}
+            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>

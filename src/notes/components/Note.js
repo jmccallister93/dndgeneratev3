@@ -85,7 +85,8 @@ function Note(props) {
                 prop !== "id" &&
                 prop !== "name" &&
                 prop !== "selectedItem" &&
-                prop !== "notes"
+                prop !== "notes" &&
+                prop !== "db"
               ) {
                 return (
                   <div key={index}>
