@@ -32,6 +32,7 @@ import NameDisplay from "../../components/NameDisplay";
 import SingleDisplayText from "../../components/SingleDisplayText";
 import RandomHooks from "../../components/RandomHooks";
 import ns from "../../stylesheets/Note.module.scss";
+import { v4 as uuidv4 } from 'uuid';
 
 const QuestCreate = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -164,8 +165,7 @@ const QuestCreate = () => {
       reward: reward,
       location: location,
       motive: motive,
-      twist: twist,
-      db: "DBquest"    
+      twist: twist,    
     };
     setQuestData(quest);
   }, [

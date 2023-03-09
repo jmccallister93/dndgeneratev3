@@ -19,7 +19,6 @@ const NoteTree = (props) => {
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
             setSelectedName={(value) => props.setSelectedName(value)}
-            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -32,7 +31,6 @@ const NoteTree = (props) => {
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
             setSelectedName={(value) => props.setSelectedName(value)}
-            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -45,7 +43,6 @@ const NoteTree = (props) => {
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
             setSelectedName={(value) => props.setSelectedName(value)}
-            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -58,7 +55,6 @@ const NoteTree = (props) => {
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
             setSelectedName={(value) => props.setSelectedName(value)}
-            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>
@@ -71,7 +67,6 @@ const NoteTree = (props) => {
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
             setSelectedName={(value) => props.setSelectedName(value)}
-            setDbTable={(value) => props.setDbTable(value)}
             deleteSelectedNode={props.deleteSelectedNode}
           />
         </div>

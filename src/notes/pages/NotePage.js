@@ -25,13 +25,58 @@ function NotePage() {
 
   const [dbTable, setDbTable] = useState("");
 
+  //Get Table Names
+  useEffect(() => {
+  const fetchUuidsAndTableNames = async () => {
+    try {
+      //Select all uuids from tables
+      const npcResponse = await supabase.from("DBnpc").select("uuid");
+      const locationResponse = await supabase.from("DBlocation").select("uuid");
+      const organizationResponse = await supabase
+        .from("DBorganization")
+        .select("uuid");
+      const questResponse = await supabase.from("DBquest").select("uuid");
+      const itemResponse = await supabase.from("DBitem").select("uuid");
+
+      //Create arrays of uuids
+      const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
+      const locationUuids = [].concat(
+        locationResponse.data.map((location) => location.uuid)
+      );
+      const organizationUuids = [].concat(
+        organizationResponse.data.map((organization) => organization.uuid)
+      );
+      const questUuids = [].concat(
+        questResponse.data.map((quest) => quest.uuid)
+      );
+      const itemUuids = [].concat(itemResponse.data.map((item) => item.uuid));
+
+      //Compare selectedId to uuids to determine which table to update
+      if (npcUuids.includes(selectedId)) {
+        setDbTable("DBnpc");
+      } else if (locationUuids.includes(selectedId)) {
+        setDbTable("DBlocation");
+      } else if (organizationUuids.includes(selectedId)) {
+        setDbTable("DBorganization");
+      } else if (questUuids.includes(selectedId)) {
+        setDbTable("DBquest");
+      } else if (itemUuids.includes(selectedId)) {
+        setDbTable("DBitem");
+      }
+    } catch (error) {
+      console.error("Error fetching tables:", error);
+    }
+  }
+  fetchUuidsAndTableNames();
+  }, [selectedId]);
+
+  //Update Note from NoteText
   const updateNote = async (noteText) => {
     try {
       const response = await supabase
         .from(dbTable)
         .update({ notes: noteText })
-        .eq("id", selectedId)
-        .eq("name", selectedName);
+        .eq("uuid", selectedId);
 
       setNoteText(noteText);
     } catch (error) {
@@ -39,48 +84,49 @@ function NotePage() {
     }
   };
 
+  //Update Property from Property Value
   const updateSelectedNode = async (updatedNode) => {
     try {
-      const response = await supabase
-      console.log(updatedNode)
+      const response = await supabase;
+      console
+        .log(updatedNode)
         .from(dbTable)
         .update(updatedNode)
-        .eq("id", selectedId)
-        .eq("name", selectedName);
+        .eq("uuid", selectedId);
 
-      if (dbTable === "DBlocation") {
-        setLocationDetails((prev) =>
-          prev.map((node) => (node.id === selectedId ? updatedNode : node))
-        );
-      } else if (dbTable === "DBnpc") {
-        setNpcDetails((prev) =>
-          prev.map((node) => (node.id === selectedId ? updatedNode : node))
-        );
-      } else if (dbTable === "DBorganization") {
-        setOrganizationDetails((prev) =>
-          prev.map((node) => (node.id === selectedId ? updatedNode : node))
-        );
-      } else if (dbTable === "DBquest") {
-        setQuestDetails((prev) =>
-          prev.map((node) => (node.id === selectedId ? updatedNode : node))
-        );
-      } else if (dbTable === "DBitem") {
-        setItemDetails((prev) =>
-          prev.map((node) => (node.id === selectedId ? updatedNode : node))
-        );
-      }
+      // if (dbTable === "DBlocation") {
+      //   setLocationDetails((prev) =>
+      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
+      //   );
+      // } else if (dbTable === "DBnpc") {
+      //   setNpcDetails((prev) =>
+      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
+      //   );
+      // } else if (dbTable === "DBorganization") {
+      //   setOrganizationDetails((prev) =>
+      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
+      //   );
+      // } else if (dbTable === "DBquest") {
+      //   setQuestDetails((prev) =>
+      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
+      //   );
+      // } else if (dbTable === "DBitem") {
+      //   setItemDetails((prev) =>
+      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
+      //   );
+      // }
     } catch (error) {
       console.error("Error updating note:" + error);
     }
   };
 
+  //Delete Node
   const deleteSelectedNode = async () => {
     try {
       const response = await supabase
         .from(dbTable)
         .delete()
-        .eq("id", selectedId)
-        .eq("name", selectedName);
+        .eq("uuid", selectedId);
 
       setDeletedNode(selectedId);
     } catch (error) {
@@ -103,7 +149,7 @@ function NotePage() {
         setFetchError(null);
         setLocationDetails(
           dataName.map((r) => ({
-            id: r.id,
+            uuid: r.uuid,
             name: r.name,
             type: r.type,
             size: r.size,
@@ -120,7 +166,6 @@ function NotePage() {
             building: r.building,
             district: r.district,
             notes: r.notes,
-            db: r.db,
           }))
         );
       }
@@ -143,7 +188,7 @@ function NotePage() {
         setFetchError(null);
         setNpcDetails(
           dataName.map((r) => ({
-            id: r.id,
+            uuid: r.uuid,
             name: r.name,
             age: r.age,
             height: r.height,
@@ -174,7 +219,6 @@ function NotePage() {
             hp: r.hp,
             speed: r.speed,
             notes: r.notes,
-            db: r.db,
           }))
         );
       }
@@ -197,7 +241,7 @@ function NotePage() {
         setFetchError(null);
         setOrganizationDetails(
           dataName.map((r) => ({
-            id: r.id,
+            uuid: r.uuid,
             name: r.name,
             wealth: r.wealth,
             influence: r.influence,
@@ -233,7 +277,6 @@ function NotePage() {
             specialty: r.specialty,
             weakness: r.weakness,
             notes: r.notes,
-            db: r.db,
           }))
         );
       }
@@ -256,7 +299,7 @@ function NotePage() {
         setFetchError(null);
         setQuestDetails(
           dataName.map((r) => ({
-            id: r.id,
+            uuid: r.uuid,
             name: r.name,
             questType: r.questType,
             reward: r.reward,
@@ -264,7 +307,6 @@ function NotePage() {
             motive: r.motive,
             twist: r.twist,
             notes: r.notes,
-            db: r.db,
           }))
         );
       }
@@ -287,7 +329,7 @@ function NotePage() {
         setFetchError(null);
         setItemDetails(
           dataName.map((r) => ({
-            id: r.id,
+            uuid: r.uuid,
             name: r.name,
             type: r.type,
             rarity: r.rarity,
@@ -295,7 +337,6 @@ function NotePage() {
             weight: r.weight,
             description: r.description,
             notes: r.notes,
-            db: r.db,
           }))
         );
       }
@@ -303,6 +344,7 @@ function NotePage() {
     fetchData();
   }, [noteText, propertyValue, showPopup, deletedNode]);
 
+  //Get Selected node based on uuid
   useEffect(() => {
     const allDetails = npcDetails.concat(
       locationDetails,
@@ -310,12 +352,9 @@ function NotePage() {
       questDetails,
       itemDetails
     );
-    setSelectedNode(
-      allDetails.find((r) => r.id === selectedId && r.name === selectedName)
-    );
+    setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
   }, [
     selectedId,
-    selectedName,
     npcDetails,
     locationDetails,
     organizationDetails,
@@ -342,7 +381,6 @@ function NotePage() {
           selectedName={selectedName}
           deleteSelectedNode={deleteSelectedNode}
           setShowPopup={setShowPopup}
-          setDbTable={setDbTable}
         />
         <Note
           selectedNode={selectedNode}

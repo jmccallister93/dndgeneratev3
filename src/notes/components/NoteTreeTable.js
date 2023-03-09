@@ -27,7 +27,7 @@ const NoteTreeTable = (props) => {
     if (!Array.isArray(objectArray)) return [];
     let names = [];
     for (let obj of objectArray) {
-      names.push({ name: obj.name, id: obj.id, db: obj.db });
+      names.push({ name: obj.name, uuid: obj.uuid, db: obj.db });
     }
     return names;
   };
@@ -37,10 +37,9 @@ const NoteTreeTable = (props) => {
   const quest = extractNames(props.quest);
   const item = extractNames(props.item);
 
-  const handleSelect = (id, name, db) => {
-    props.setSelectedId(id);
+  const handleSelect = (uuid, name) => {
+    props.setSelectedId(uuid);
     props.setSelectedName(name);
-    props.setDbTable(db);
   };
 
   const handleDeleteConfirmation = () => {
@@ -140,12 +139,12 @@ const NoteTreeTable = (props) => {
         {location.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${
-              props.selectedId === obj.id && props.selectedName === obj.name
+              props.selectedId === obj.uuid && props.selectedName === obj.name
                 ? ns.selected
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id, obj.name, obj.db)}
+            onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
           >
             {obj.name}
           </div>
@@ -153,12 +152,12 @@ const NoteTreeTable = (props) => {
         {npc.map((obj, index) => (
             <div
             className={`${ns.noteTreeCategoryItem} ${
-              props.selectedId === obj.id && props.selectedName === obj.name
+              props.selectedId === obj.uuid && props.selectedName === obj.name
                 ? ns.selected
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id, obj.name, obj.db)}
+            onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
           >
             {obj.name}
           </div>
@@ -166,12 +165,12 @@ const NoteTreeTable = (props) => {
         {organization.map((obj, index) => (
             <div
             className={`${ns.noteTreeCategoryItem} ${
-              props.selectedId === obj.id && props.selectedName === obj.name
+              props.selectedId === obj.uuid && props.selectedName === obj.name
                 ? ns.selected
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.id, obj.name, obj.db)}
+            onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
           >
             {obj.name}
           </div>
@@ -179,12 +178,12 @@ const NoteTreeTable = (props) => {
         {quest.map((obj, index) => (
              <div
              className={`${ns.noteTreeCategoryItem} ${
-               props.selectedId === obj.id && props.selectedName === obj.name
+               props.selectedId === obj.uuid && props.selectedName === obj.name
                  ? ns.selected
                  : ""
              }`}
              key={index}
-             onClick={() => handleSelect(obj.id, obj.name, obj.db)}
+             onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
            >
             
              {obj.name}
@@ -193,12 +192,12 @@ const NoteTreeTable = (props) => {
         {item.map((obj, index) => (
            <div
            className={`${ns.noteTreeCategoryItem} ${
-             props.selectedId === obj.id && props.selectedName === obj.name
+             props.selectedId === obj.uuid && props.selectedName === obj.name
                ? ns.selected
                : ""
            }`}
            key={index}
-           onClick={() => handleSelect(obj.id, obj.name, obj.db)}
+           onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
          >
            {obj.name}
          </div>

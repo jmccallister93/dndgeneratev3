@@ -82,11 +82,10 @@ function Note(props) {
             <h2>{props.selectedNode.name}</h2>
             {Object.keys(props.selectedNode).map((prop, index) => {
               if (
-                prop !== "id" &&
+                prop !== "uuid" &&
                 prop !== "name" &&
                 prop !== "selectedItem" &&
-                prop !== "notes" &&
-                prop !== "db"
+                prop !== "notes" 
               ) {
                 return (
                   <div key={index}>

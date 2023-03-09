@@ -29,6 +29,7 @@ import InfoModal from "../../components/InfoModal";
 import NameGenerator from "../../components/NameGenerator";
 import SectionRandom from "../../components/SectionRandom";
 import ns from "../../stylesheets/Note.module.scss";
+import { v4 as uuidv4 } from 'uuid';
 
 const NpcCreate = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -185,27 +186,6 @@ const NpcCreate = () => {
 
   const [isInfoActive, setIsInfoActive] = useState(false);
 
-  // useEffect((tableName, setSingular, setPlural, setOptions) => {
-  //   const fetchData = async () => {
-  //     const { data: dataName, error: errorName } = await supabase
-  //       .from(tableName)
-  //       .select();
-  //     if (errorName) {
-  //       setFetchError("Could not fetch the data");
-  //       console.log(errorName);
-  //       setSingular(null);
-  //     }
-  //     if (dataName) {
-  //       setPlural(dataName);
-  //       setFetchError(null);
-  //       setOptions(
-  //         dataName.map((r) => ({ name: r.name, value: r.value }))
-  //       );
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
@@ -303,7 +283,6 @@ const NpcCreate = () => {
       weaponDamage: weaponDamage,
       weaponProperties: weaponProperties,
       inventory: itemString,
-      db: "DBnpc"
     };
     setNpc(npc);
   }, [

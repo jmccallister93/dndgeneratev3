@@ -221,7 +221,6 @@ const ItemCreate = () => {
       cost: cost,
       weight: weight,
       description: description,
-      db: "DBitem"
     };
     setGenItem(genItem);
   }, [itemName, type, rarity, cost, weight, description]);
