@@ -138,7 +138,6 @@ const LocationCreate = () => {
 
     //Create location object to be exported
     useEffect(() => {
-      console.log(cityName)
       const guildNames = selectedGuild.map((item) => item.name);
       const guildString = guildNames.join(", ");
       const eventNames = selectedEvent.map((item) => item.name);

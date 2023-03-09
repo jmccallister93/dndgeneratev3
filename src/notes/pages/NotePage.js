@@ -87,34 +87,11 @@ function NotePage() {
   //Update Property from Property Value
   const updateSelectedNode = async (updatedNode) => {
     try {
-      const response = await supabase;
-      console
-        .log(updatedNode)
+      const response = await supabase
         .from(dbTable)
         .update(updatedNode)
         .eq("uuid", selectedId);
 
-      // if (dbTable === "DBlocation") {
-      //   setLocationDetails((prev) =>
-      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
-      //   );
-      // } else if (dbTable === "DBnpc") {
-      //   setNpcDetails((prev) =>
-      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
-      //   );
-      // } else if (dbTable === "DBorganization") {
-      //   setOrganizationDetails((prev) =>
-      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
-      //   );
-      // } else if (dbTable === "DBquest") {
-      //   setQuestDetails((prev) =>
-      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
-      //   );
-      // } else if (dbTable === "DBitem") {
-      //   setItemDetails((prev) =>
-      //     prev.map((node) => (node.id === selectedId ? updatedNode : node))
-      //   );
-      // }
     } catch (error) {
       console.error("Error updating note:" + error);
     }

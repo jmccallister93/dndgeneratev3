@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
 import PDF, { Text, AddPage, Line, Image, Table, Html } from "jspdf-react";
 import supabase from "../config/supabaseClient";
+import { Toast } from "primereact/toast";
 
 const ExportButtons = (props) => {
   //Create compnent that references to a props.div element and export it's content to a text file and pdf file
@@ -20,6 +21,16 @@ const ExportButtons = (props) => {
   const [fetchError, setFetchError] = useState(null);
 
   const divRef = useRef(null);
+
+  const toast = useRef(null);
+
+  const show = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: "Saved to Database",
+    });
+  };
 
   useEffect(() => {
     if (props.div && props.div.current) {
@@ -100,10 +111,12 @@ const ExportButtons = (props) => {
       }
     };
     fetchData();
+    show();
   };
 
   return (
     <>
+      <Toast ref={toast} />
       <button
         className={style.btnExport}
         onClick={saveToDb}
