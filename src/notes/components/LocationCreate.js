@@ -357,7 +357,7 @@ const LocationCreate = () => {
                 placeholder={"Set Name"}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationType"}
                 setSingular={setType}
                 setPlural={setTypes}
                 setOptions={setTypeOptions}
@@ -417,7 +417,7 @@ const LocationCreate = () => {
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationAtmosphere"}
                 setSingular={setAtmosphere}
                 setPlural={setAtmospheres}
                 setOptions={setAtmosphereOptions}
@@ -428,7 +428,7 @@ const LocationCreate = () => {
                 valueOptions={atmosphereOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationCulture"}
                 setSingular={setCulture}
                 setPlural={setCultures}
                 setOptions={setCultureOptions}
@@ -439,7 +439,7 @@ const LocationCreate = () => {
                 valueOptions={cultureOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationTerrain"}
                 setSingular={setTerrain}
                 setPlural={setTerrains}
                 setOptions={setTerrainOptions}
@@ -450,7 +450,7 @@ const LocationCreate = () => {
                 valueOptions={terrainOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationLandmark"}
                 setSingular={setLandmark}
                 setPlural={setLandmarks}
                 setOptions={setLandmarkOptions}
@@ -498,7 +498,7 @@ const LocationCreate = () => {
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationGovernment"}
                 setSingular={setGovern}
                 setPlural={setGoverns}
                 setOptions={setGovernOptions}
@@ -536,7 +536,7 @@ const LocationCreate = () => {
                 valueOptions={factionOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"locationEvents"}
                 setSingular={setEvent}
                 setPlural={setEvents}
                 setOptions={setEventOptions}
@@ -566,7 +566,7 @@ const LocationCreate = () => {
           <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showLayout}>
             Layout{" "}
-            {isBasicActive ? (
+            {isLayoutActive ? (
               <i className="pi pi-chevron-down"></i>
             ) : (
               <i className="pi pi-chevron-right"></i>
@@ -590,7 +590,7 @@ const LocationCreate = () => {
           <div className={isLayoutActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"locationDistricts"}
                 setSingular={setDistrict}
                 setPlural={setDistricts}
                 setOptions={setDistrictOptions}
@@ -603,7 +603,7 @@ const LocationCreate = () => {
                 valueOptions={districtOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"locationBuildings"}
                 setSingular={setBuilding}
                 setPlural={setBuildings}
                 setOptions={setBuildingOptions}

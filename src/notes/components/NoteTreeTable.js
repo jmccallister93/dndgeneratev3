@@ -13,6 +13,7 @@ const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
+
   const handleCreate = () => {
     setShowPopup(!showPopup);
     props.setShowPopup(true);
@@ -27,7 +28,7 @@ const NoteTreeTable = (props) => {
     if (!Array.isArray(objectArray)) return [];
     let names = [];
     for (let obj of objectArray) {
-      names.push({ name: obj.name, uuid: obj.uuid, db: obj.db });
+      names.push({ name: obj.name, uuid: obj.uuid});
     }
     return names;
   };
@@ -54,6 +55,24 @@ const NoteTreeTable = (props) => {
     props.deleteSelectedNode();
     setShowDeleteConfirmation(false);
   };
+
+  // const [npcOrder, setNpcOrder] = useState(npc.map((obj) => obj.uuid));
+
+  // const handleMoveUp = (index) => {
+  //   if (index > 0) {
+  //     const newOrder = [...npcOrder];
+  //     [newOrder[index - 1], newOrder[index]] = [newOrder[index], newOrder[index - 1]];
+  //     setNpcOrder(newOrder);
+  //   }
+  // };
+
+  // const handleMoveDown = (index) => {
+  //   if (index < npcOrder.length - 1) {
+  //     const newOrder = [...npcOrder];
+  //     [newOrder[index], newOrder[index + 1]] = [newOrder[index + 1], newOrder[index]];
+  //     setNpcOrder(newOrder);
+  //   }
+  // };
 
   return (
     <>
@@ -144,7 +163,7 @@ const NoteTreeTable = (props) => {
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
+            onClick={() => handleSelect(obj.uuid, obj.name)}
           >
             {obj.name}
           </div>
@@ -156,8 +175,8 @@ const NoteTreeTable = (props) => {
                 ? ns.selected
                 : ""
             }`}
-            key={index}
-            onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
+            key={obj.uuid}
+            onClick={() => handleSelect(obj.uuid, obj.name)}
           >
             {obj.name}
           </div>
@@ -170,7 +189,7 @@ const NoteTreeTable = (props) => {
                 : ""
             }`}
             key={index}
-            onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
+            onClick={() => handleSelect(obj.uuid, obj.name)}
           >
             {obj.name}
           </div>
@@ -183,7 +202,7 @@ const NoteTreeTable = (props) => {
                  : ""
              }`}
              key={index}
-             onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
+             onClick={() => handleSelect(obj.uuid, obj.name)}
            >
             
              {obj.name}
@@ -197,7 +216,7 @@ const NoteTreeTable = (props) => {
                : ""
            }`}
            key={index}
-           onClick={() => handleSelect(obj.uuid, obj.name, obj.db)}
+           onClick={() => handleSelect(obj.uuid, obj.name)}
          >
            {obj.name}
          </div>
