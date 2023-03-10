@@ -8,10 +8,12 @@ function Note(props) {
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
 
+  //Handles the change in the notes
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
   };
 
+  //Adds the notes to the array
   const handleAddNotes = () => {
     const newNotesArray = notes
       .split("\n")
@@ -23,6 +25,7 @@ function Note(props) {
     setSelectedNoteIndex(-1);
   };
 
+  //Passed the updated node to the parent component
   const updateProperty = async (property, value) => {
     try {
       const updatedNode = { ...props.selectedNode, [property]: value };
@@ -33,16 +36,17 @@ function Note(props) {
     }
   };
 
+  //Handles the enter key
   const handleEnterDown = (event) => {
     if (event.key === "Enter") {
       if (event.target.tagName === "TEXTAREA") {
         event.preventDefault();
         handleAddNotes();
-      } else if(event.target.tagName === "INPUT"){
+      } else if (event.target.tagName === "INPUT") {
         event.preventDefault();
         updateProperty();
         setSelectedPropertyIndex(-1);
-      }else {
+      } else {
         setSelectedNoteIndex(-1);
         setAllNotes(
           allNotes.map((note, index) =>
@@ -52,9 +56,9 @@ function Note(props) {
         props.updateNote(allNotes.join("\n"));
       }
     }
-    
   };
 
+  //Handles the delete of a note
   const handleDeleteNote = (index) => {
     const newNotes = [...allNotes];
     newNotes.splice(index, 1);
@@ -62,6 +66,7 @@ function Note(props) {
     props.updateNote(newNotes.join("\n"));
   };
 
+  //Handles the edit of a note
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.notes) {
       setAllNotes(props.selectedNode.notes.split("\n"));
@@ -69,10 +74,6 @@ function Note(props) {
       setAllNotes([]);
     }
   }, [props.selectedNode]);
-
-  // useEffect(() => {
-  //   console.log(props.selectedNode);
-  // }, [selectedPropertyIndex]);
 
   return (
     <>
@@ -83,12 +84,13 @@ function Note(props) {
             {Object.keys(props.selectedNode).map((prop, index) => {
               if (
                 prop !== "uuid" &&
-                prop !== "name" &&
+                // prop !== "name" &&
                 prop !== "selectedItem" &&
-                prop !== "notes" 
+                prop !== "notes"
               ) {
                 return (
                   <div key={index}>
+                    {prop.charAt(0).toUpperCase() + prop.slice(1)}:{" "}
                     {selectedPropertyIndex === index ? (
                       <input
                         className={ns.editNote}
@@ -109,15 +111,14 @@ function Note(props) {
                         autoFocus
                       />
                     ) : (
-                      <p
+                      <span
                         className={ns.objectProperty}
                         onClick={() => {
                           setSelectedPropertyIndex(index);
                         }}
                       >
-                        {prop.charAt(0).toUpperCase() + prop.slice(1)}:{" "}
                         {props.selectedNode[prop]}
-                      </p>
+                      </span>
                     )}
                   </div>
                 );
