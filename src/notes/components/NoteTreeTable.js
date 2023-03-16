@@ -77,10 +77,10 @@ const NoteTreeTable = (props) => {
   }, []);
 
   // Handle the click on the location item
-const handleLocationItemClick = useCallback((index) => {
-  setClickedIndex(index);
-  handleSelect(location[index].uuid, location[index].name);
-}, [location, handleSelect]);
+// const handleLocationItemClick = useCallback((index) => {
+//   setClickedIndex(index);
+//   handleSelect(location[index].uuid, location[index].name);
+// }, [location, handleSelect]);
 
   // Handle the context menu
   const handleContextMenu = useCallback((e, index) => {
@@ -94,7 +94,7 @@ const handleLocationItemClick = useCallback((index) => {
   // Handle the click on the context menu item
   const handleMenuItemClick = useCallback(
     (e) => {
-      console.log("You clicked menu item", e.target.textContent);
+      // console.log("You clicked menu item", e.target.textContent);
       clickedMenuItem.current = true;
       hideContextMenu();
     },
@@ -118,6 +118,10 @@ const handleLocationItemClick = useCallback((index) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [contextMenuRef, hideContextMenu]);
+
+  useEffect(() => {
+    console.log(contextMenuPosition.x, contextMenuPosition.y);
+  }, [contextMenuPosition]);
 
   return (
     <>
@@ -215,14 +219,17 @@ const handleLocationItemClick = useCallback((index) => {
               <div
                 ref={contextMenuRef}
                 style={{
-                  position: "absolute",
+                  borderRadius: "0.5rem",
                   left: contextMenuPosition.x,
                   top: contextMenuPosition.y,
                   backgroundColor: "white",
+                  color: "black",
                   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
-                  padding: "0.5rem",
+                  padding: "0",
+                  margin: "0.5rem",
                   zIndex: 1,
                 }}
+                className={ns.contextMenu}
                 onClick={handleMenuItemClick}
               >
                 <div className={ns.menuItem}>
@@ -231,6 +238,12 @@ const handleLocationItemClick = useCallback((index) => {
                 </div>
                 <div className={ns.menuItem}>
                   <i class="pi pi-link"></i> Link
+                </div>
+                <div className={ns.menuItem}>
+                  <i class="pi pi-angle-double-up"></i> Move Up
+                </div>
+                <div className={ns.menuItem}>
+                  <i class="pi pi-angle-double-down"></i> Move Down
                 </div>
               </div>
             )}
