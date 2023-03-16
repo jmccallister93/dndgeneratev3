@@ -9,7 +9,7 @@ const DeleteConfirmation = (props) => {
     <div className={ns.popupContainerDelete}>
       <div className={ns.popupDelete}>
         <div className={ns.popupHeader}>
-          <h2>Are you sure you want to delete this item?</h2>
+          <h2>Are you sure you want to delete {props.node}?</h2>
         </div>
         <div className={ns.popupBodyDelete}>
           <button

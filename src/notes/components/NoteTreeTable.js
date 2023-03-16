@@ -8,13 +8,19 @@ import OrganizationCreate from "./OrganizationCreate";
 import QuestCreate from "./QuestCreate";
 import supabase from "../../config/supabaseClient";
 import DeleteConfirmation from "./DeleteConfirmation";
+import { useCallback } from "react";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const contextMenuRef = useRef(null);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
-  const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
+  const [contextMenuPosition, setContextMenuPosition] = useState({
+    x: 0,
+    y: 0,
+  });
+  const clickedMenuItem = useRef(false);
+  const [clickedIndex, setClickedIndex] = useState(null);
 
   //Handle the create new button
   const handleCreate = () => {
@@ -65,24 +71,53 @@ const NoteTreeTable = (props) => {
     setShowDeleteConfirmation(false);
   };
 
-  //Handle the context menu
-  const handleContextMenu = (e) => {
-    e.preventDefault(); 
+  //Handle the click outside the context menu
+  const hideContextMenu = useCallback(() => {
+    setContextMenuVisible(false);
+  }, []);
+
+  // Handle the click on the location item
+const handleLocationItemClick = useCallback((index) => {
+  setClickedIndex(index);
+  handleSelect(location[index].uuid, location[index].name);
+}, [location, handleSelect]);
+
+  // Handle the context menu
+  const handleContextMenu = useCallback((e, index) => {
+    e.preventDefault();
+    setClickedIndex(index);
     setContextMenuVisible(true);
     setContextMenuPosition({ x: e.clientX, y: e.clientY });
-  };
+    clickedMenuItem.current = false;
+  }, []);
+
+  // Handle the click on the context menu item
+  const handleMenuItemClick = useCallback(
+    (e) => {
+      console.log("You clicked menu item", e.target.textContent);
+      clickedMenuItem.current = true;
+      hideContextMenu();
+    },
+    [hideContextMenu]
+  );
 
   //Handle the click outside the context menu
-  const hideContextMenu = () => {
-    setContextMenuVisible(false);
-  }
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        contextMenuRef.current &&
+        !contextMenuRef.current.contains(e.target)
+      ) {
+        hideContextMenu();
+      }
+    };
 
-  //Handle the click on the context menu item
-  const handleMenuItemClick = (e) => {
-    console.log("You clicked menu item", e.target.textContent);
-    hideContextMenu();
-    // Your custom functionality goes here
-  }
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [contextMenuRef, hideContextMenu]);
 
   return (
     <>
@@ -96,6 +131,7 @@ const NoteTreeTable = (props) => {
         </button>
         {showDeleteConfirmation && (
           <DeleteConfirmation
+            node={props.selectedName}
             handleDeleteConfirmation={handleDeleteConfirmation}
             deleteSelectedNode={handleConfirmedDelete}
           />
@@ -172,10 +208,10 @@ const NoteTreeTable = (props) => {
             }`}
             key={index}
             onClick={() => handleSelect(obj.uuid, obj.name)}
-            onContextMenu={handleContextMenu}
+            onContextMenu={(e) => handleContextMenu(e, index)}
           >
             {obj.name}
-            {contextMenuVisible && (
+            {clickedIndex === index && contextMenuVisible && (
               <div
                 ref={contextMenuRef}
                 style={{
@@ -189,13 +225,16 @@ const NoteTreeTable = (props) => {
                 }}
                 onClick={handleMenuItemClick}
               >
-                <div>Menu Item 1</div>
-                <div>Menu Item 2</div>
-                <div>Menu Item 3</div>
+                <div className={ns.menuItem}>
+                  {" "}
+                  <i class="pi pi-plus"></i> Add Child
+                </div>
+                <div className={ns.menuItem}>
+                  <i class="pi pi-link"></i> Link
+                </div>
               </div>
-              )}
+            )}
           </div>
-          
         ))}
         {npc.map((obj, index) => (
           <div
