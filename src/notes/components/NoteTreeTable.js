@@ -9,6 +9,7 @@ import QuestCreate from "./QuestCreate";
 import supabase from "../../config/supabaseClient";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { useCallback } from "react";
+import ContextMenu from "./ContextMenu";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -71,57 +72,30 @@ const NoteTreeTable = (props) => {
     setShowDeleteConfirmation(false);
   };
 
-  //Handle the click outside the context menu
-  const hideContextMenu = useCallback(() => {
-    setContextMenuVisible(false);
-  }, []);
-
-  // Handle the click on the location item
-// const handleLocationItemClick = useCallback((index) => {
-//   setClickedIndex(index);
-//   handleSelect(location[index].uuid, location[index].name);
-// }, [location, handleSelect]);
-
-  // Handle the context menu
-  const handleContextMenu = useCallback((e, index) => {
-    e.preventDefault();
+  //Handle context menu button
+  const handleContextMenuButton = (e, index) => {
     setClickedIndex(index);
     setContextMenuVisible(true);
     setContextMenuPosition({ x: e.clientX, y: e.clientY });
     clickedMenuItem.current = false;
-  }, []);
+    if (contextMenuVisible) {
+      setContextMenuVisible(false);
+    }
+  };
 
-  // Handle the click on the context menu item
-  const handleMenuItemClick = useCallback(
-    (e) => {
-      // console.log("You clicked menu item", e.target.textContent);
-      clickedMenuItem.current = true;
-      hideContextMenu();
-    },
-    [hideContextMenu]
-  );
+  //  //Handle the click outside the context menu
+  //  const hideContextMenu = useCallback(() => {
+  //   setContextMenuVisible(false);
+  // }, []);
 
-  //Handle the click outside the context menu
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        contextMenuRef.current &&
-        !contextMenuRef.current.contains(e.target)
-      ) {
-        hideContextMenu();
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [contextMenuRef, hideContextMenu]);
-
-  useEffect(() => {
-    console.log(contextMenuPosition.x, contextMenuPosition.y);
-  }, [contextMenuPosition]);
+  // // Handle the click on the context menu item
+  // const handleMenuItemClick = useCallback(
+  //   (e) => {
+  //     clickedMenuItem.current = true;
+  //     hideContextMenu();
+  //   },
+  //   [hideContextMenu]
+  // );
 
   return (
     <>
@@ -212,41 +186,20 @@ const NoteTreeTable = (props) => {
             }`}
             key={index}
             onClick={() => handleSelect(obj.uuid, obj.name)}
-            onContextMenu={(e) => handleContextMenu(e, index)}
           >
             {obj.name}
+            <button
+              className={ns.contextButton}
+              onClick={(e) => handleContextMenuButton(e, index)}
+            >
+              <i className="pi pi-ellipsis-v"></i>
+            </button>
             {clickedIndex === index && contextMenuVisible && (
-              <div
-                ref={contextMenuRef}
-                style={{
-                  borderRadius: "0.5rem",
-                  left: contextMenuPosition.x,
-                  top: contextMenuPosition.y,
-                  backgroundColor: "white",
-                  color: "black",
-                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
-                  padding: "0",
-                  margin: "0.5rem",
-                  zIndex: 1,
-                }}
-                className={ns.contextMenu}
-                onClick={handleMenuItemClick}
-              >
-                <div className={ns.menuItem}>
-                  {" "}
-                  <i class="pi pi-plus"></i> Add Child
-                </div>
-                <div className={ns.menuItem}>
-                  <i class="pi pi-link"></i> Link
-                </div>
-                <div className={ns.menuItem}>
-                  <i class="pi pi-angle-double-up"></i> Move Up
-                </div>
-                <div className={ns.menuItem}>
-                  <i class="pi pi-angle-double-down"></i> Move Down
-                </div>
-              </div>
-            )}
+            <ContextMenu
+              index={index}
+              contextMenuVisible={contextMenuVisible}
+              setContextMenuVisible={setContextMenuVisible}
+            />)}
           </div>
         ))}
         {npc.map((obj, index) => (
@@ -256,7 +209,6 @@ const NoteTreeTable = (props) => {
             }`}
             key={obj.uuid}
             onClick={() => handleSelect(obj.uuid, obj.name)}
-            onContextMenu={handleContextMenu}
           >
             {obj.name}
           </div>
@@ -268,7 +220,6 @@ const NoteTreeTable = (props) => {
             }`}
             key={index}
             onClick={() => handleSelect(obj.uuid, obj.name)}
-            onContextMenu={handleContextMenu}
           >
             {obj.name}
           </div>
@@ -280,7 +231,6 @@ const NoteTreeTable = (props) => {
             }`}
             key={index}
             onClick={() => handleSelect(obj.uuid, obj.name)}
-            onContextMenu={handleContextMenu}
           >
             {obj.name}
           </div>
@@ -292,7 +242,6 @@ const NoteTreeTable = (props) => {
             }`}
             key={index}
             onClick={() => handleSelect(obj.uuid, obj.name)}
-            onContextMenu={handleContextMenu}
           >
             {obj.name}
           </div>

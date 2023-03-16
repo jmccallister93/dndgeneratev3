@@ -175,6 +175,27 @@
   }
 }
 
+.contextMenu{
+  border-radius: 0.5rem;
+  background-color: white;
+  color: black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  margin: 0.5rem;
+}
+
+.contextButton{
+  background: transparent;
+  border: none;
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  &:hover{
+    cursor: pointer;
+    background-color: white;
+  }
+}
 
 //NOTE SPECIFIC
 
