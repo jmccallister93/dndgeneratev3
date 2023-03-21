@@ -10,6 +10,7 @@ import supabase from "../../config/supabaseClient";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { useCallback } from "react";
 import ContextMenu from "./ContextMenu";
+import userEvent from "@testing-library/user-event";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -35,6 +36,8 @@ const NoteTreeTable = (props) => {
     props.setShowPopup(false);
   };
 
+  useEffect(() => {}, [props.location]);
+
   //Extract the names and uuids from the props
   const extractNames = (objectArray) => {
     if (!Array.isArray(objectArray)) return [];
@@ -44,11 +47,39 @@ const NoteTreeTable = (props) => {
     }
     return names;
   };
+
+  // const location = extractNames(props.location);
   const npc = extractNames(props.npc);
-  const location = extractNames(props.location);
   const organization = extractNames(props.organization);
   const quest = extractNames(props.quest);
   const item = extractNames(props.item);
+
+  const extractNames2 = (objectArray) => {
+    if (!Array.isArray(objectArray)) return {};
+    let namesByFolder = {};
+    for (let obj of objectArray) {
+      const folder = obj.folder;
+      if (!namesByFolder[folder]) {
+        namesByFolder[folder] = [];
+      }
+      namesByFolder[folder].push({ name: obj.name, uuid: obj.uuid });
+    }
+    return namesByFolder;
+  };
+  const location = extractNames2(props.location);
+
+  const [visibleFolders, setVisibleFolders] = useState({});
+
+  const toggleFolderVisibility = (folder) => {
+    setVisibleFolders((prevState) => ({
+      ...prevState,
+      [folder]: !prevState[folder],
+    }));
+  };
+
+  // useEffect(() => {
+  //   console.log(location)
+  // }, [location])
 
   //Handle the selection of a node
   const handleSelect = (uuid, name) => {
@@ -82,20 +113,6 @@ const NoteTreeTable = (props) => {
       setContextMenuVisible(false);
     }
   };
-
-  //  //Handle the click outside the context menu
-  //  const hideContextMenu = useCallback(() => {
-  //   setContextMenuVisible(false);
-  // }, []);
-
-  // // Handle the click on the context menu item
-  // const handleMenuItemClick = useCallback(
-  //   (e) => {
-  //     clickedMenuItem.current = true;
-  //     hideContextMenu();
-  //   },
-  //   [hideContextMenu]
-  // );
 
   return (
     <>
@@ -179,7 +196,60 @@ const NoteTreeTable = (props) => {
             </div>
           </div>
         )}
-        {location.map((obj, index) => (
+        {Object.entries(location).map(([folder, objects], folderIndex) => (
+          <div key={folderIndex}>
+            <div
+              className={`${ns.noteTreeFolder} ${
+                visibleFolders[folder] ? ns.selected : ""
+              }`}
+              onClick={() => toggleFolderVisibility(folder)}
+            >
+              <h2>
+                {folder}
+                <button className={ns.contextButton}>
+                  <i
+                    className={`pi ${
+                      visibleFolders[folder]
+                        ? "pi-angle-double-down"
+                        : "pi-angle-double-right"
+                    }`}
+                  ></i>
+                </button>
+              </h2>
+            </div>
+            {visibleFolders[folder] &&
+              Array.isArray(objects) &&
+              objects.map((obj, index) => (
+                <div
+                  className={`${ns.noteTreeCategoryItem} ${
+                    props.selectedId === obj.uuid ? ns.selected : ""
+                  }`}
+                  key={index}
+                  onClick={() => handleSelect(obj.uuid, obj.name)}
+                >
+                  <button className={ns.contextButton}>
+                    <i className="pi pi-angle-right"></i>
+                  </button>
+                  {obj.name}
+                  <button
+                    className={ns.contextButton}
+                    onClick={(e) => handleContextMenuButton(e, index)}
+                  >
+                    <i className="pi pi-ellipsis-v"></i>
+                  </button>
+                  {clickedIndex === index && contextMenuVisible && (
+                    <ContextMenu
+                      index={index}
+                      contextMenuVisible={contextMenuVisible}
+                      setContextMenuVisible={setContextMenuVisible}
+                    />
+                  )}
+                </div>
+              ))}
+          </div>
+        ))}
+
+        {/* {location.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${
               props.selectedId === obj.uuid ? ns.selected : ""
@@ -187,6 +257,12 @@ const NoteTreeTable = (props) => {
             key={index}
             onClick={() => handleSelect(obj.uuid, obj.name)}
           >
+            <button
+              className={ns.contextButton}
+            >
+              <i className="pi pi-angle-right"></i>
+            </button>
+
             {obj.name}
             <button
               className={ns.contextButton}
@@ -195,13 +271,14 @@ const NoteTreeTable = (props) => {
               <i className="pi pi-ellipsis-v"></i>
             </button>
             {clickedIndex === index && contextMenuVisible && (
-            <ContextMenu
-              index={index}
-              contextMenuVisible={contextMenuVisible}
-              setContextMenuVisible={setContextMenuVisible}
-            />)}
+              <ContextMenu
+                index={index}
+                contextMenuVisible={contextMenuVisible}
+                setContextMenuVisible={setContextMenuVisible}
+              />
+            )}
           </div>
-        ))}
+        ))} */}
         {npc.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${

@@ -143,6 +143,7 @@ function NotePage() {
             building: r.building,
             district: r.district,
             notes: r.notes,
+            folder: r.folder,
           }))
         );
       }
