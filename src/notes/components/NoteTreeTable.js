@@ -200,13 +200,22 @@ const NoteTreeTable = (props) => {
           <div key={folderIndex}>
             <div
               className={`${ns.noteTreeFolder} ${
-                visibleFolders[folder] ? ns.selected : ""
+                visibleFolders[folder] ? ns.selectedFolder : ""
               }`}
-              onClick={() => toggleFolderVisibility(folder)}
             >
-              <h2>
-                {folder}
-                <button className={ns.contextButton}>
+              <h3>
+                
+                {folder === "null" ? "No Folder" : folder}
+                <button
+                  className={ns.folderButton}
+                  onClick={() => toggleFolderVisibility(folder)}
+                >
+                  <i className={`pi ${
+                      visibleFolders[folder]
+                        ? "pi-folder-open"
+                        : "pi-folder"
+                    }`}></i>
+                  {" "}
                   <i
                     className={`pi ${
                       visibleFolders[folder]
@@ -215,7 +224,7 @@ const NoteTreeTable = (props) => {
                     }`}
                   ></i>
                 </button>
-              </h2>
+              </h3>
             </div>
             {visibleFolders[folder] &&
               Array.isArray(objects) &&
@@ -227,11 +236,8 @@ const NoteTreeTable = (props) => {
                   key={index}
                   onClick={() => handleSelect(obj.uuid, obj.name)}
                 >
-                  <button className={ns.contextButton}>
-                    <i className="pi pi-angle-right"></i>
-                  </button>
                   {obj.name}
-                  <button
+                  {/* <button
                     className={ns.contextButton}
                     onClick={(e) => handleContextMenuButton(e, index)}
                   >
@@ -243,7 +249,7 @@ const NoteTreeTable = (props) => {
                       contextMenuVisible={contextMenuVisible}
                       setContextMenuVisible={setContextMenuVisible}
                     />
-                  )}
+                  )} */}
                 </div>
               ))}
           </div>

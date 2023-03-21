@@ -126,6 +126,7 @@ function NotePage() {
         setFetchError(null);
         setLocationDetails(
           dataName.map((r) => ({
+            folder: r.folder,
             uuid: r.uuid,
             name: r.name,
             type: r.type,
@@ -143,7 +144,7 @@ function NotePage() {
             building: r.building,
             district: r.district,
             notes: r.notes,
-            folder: r.folder,
+            
           }))
         );
       }
