@@ -25,6 +25,7 @@ function NotePage() {
 
   const [dbTable, setDbTable] = useState("");
 
+
   //Get Table Names
   useEffect(() => {
   const fetchUuidsAndTableNames = async () => {
@@ -111,6 +112,7 @@ function NotePage() {
     }
   };
 
+
   //Get Locations
   useEffect(() => {
     const fetchData = async () => {
@@ -144,7 +146,7 @@ function NotePage() {
             building: r.building,
             district: r.district,
             notes: r.notes,
-            
+            links: r.links,
           }))
         );
       }
@@ -367,6 +369,11 @@ function NotePage() {
           updateNote={updateNote}
           updateSelectedNode={updateSelectedNode}
           setPropertyValue={setPropertyValue}
+          location={locationDetails}
+          npc={npcDetails}
+          organization={organizationDetails}
+          quest={questDetails}
+          item={itemDetails}
         />
       </div>
     </div>

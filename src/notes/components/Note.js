@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
 import ns from "../../stylesheets/Note.module.scss";
+import NodeList from "./NodeList";
 
 function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
+  const [showNodesList, setShowNodesList] = useState(false);
 
   //Handles the change in the notes
   const handleNotesChange = (e) => {
@@ -75,11 +77,46 @@ function Note(props) {
     }
   }, [props.selectedNode]);
 
+  //Handles the linking of a selected node
+  const handleLink = () => {
+    setShowNodesList(!showNodesList);
+  };
+
+  //Handle the close button
+  const handleClose = () => {
+    setShowNodesList(false);
+    props.setShowNodesList(false);
+  };
+
   return (
     <>
       {props.selectedNode !== undefined ? (
         <div className={ns.display}>
-          <h2 className={ns.noteTitle}>{props.selectedNode.name}</h2>
+          <h2 className={ns.noteTitle}>
+            {props.selectedNode.name}
+            <button className={ns.contextButton} onClick={handleLink}>
+              <i className="pi pi-link"></i>
+            </button>
+            {showNodesList && (
+              <div className={ns.popupContainer}>
+                <div className={ns.popup}>
+                  <div className={ns.popupHeader}>
+                    <h2>Create Link</h2>
+                    <button className={ns.closeButton} onClick={handleClose}>
+                      X
+                    </button>
+                  </div>
+                  <NodeList
+                    location={props.location}
+                    npc={props.npc}
+                    organization={props.organization}
+                    quest={props.quest}
+                    item={props.item}
+                  />
+                </div>
+              </div>
+            )}
+          </h2>
           {Object.keys(props.selectedNode).map((prop, index) => {
             if (
               prop !== "uuid" &&
