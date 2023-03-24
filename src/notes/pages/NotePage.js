@@ -342,6 +342,17 @@ function NotePage() {
     itemDetails,
   ]);
 
+  //  //Filter for linked nodes based on the selected node
+  //  useEffect(() => {
+  //   if (selectedNode && selectedNode.links) {
+  //     // const containedLinks = props.selectedNode.links.map((link) => link.trim())
+  //     console.log(selectedNode.links)
+      
+  //   } else {
+      
+  //   }
+  // }, [selectedId])
+
   return (
     <div className={style.mainWrapper}>
       <Navbar />
@@ -355,6 +366,7 @@ function NotePage() {
           organization={organizationDetails}
           quest={questDetails}
           item={itemDetails}
+          selectedNode={selectedNode}
           setSelectedId={setSelectedId}
           selectedId={selectedId}
           setSelectedName={setSelectedName}

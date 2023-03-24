@@ -16,15 +16,8 @@ import NodeList from "./NodeList";
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const contextMenuRef = useRef(null);
-  const [contextMenuVisible, setContextMenuVisible] = useState(false);
-  const [contextMenuPosition, setContextMenuPosition] = useState({
-    x: 0,
-    y: 0,
-  });
-  const clickedMenuItem = useRef(false);
-  const [clickedIndex, setClickedIndex] = useState(null);
-  const [showNodesList, setShowNodesList] = useState(false);
+  const [activeLinks, setActiveLinks] = useState(false);
+
 
   //Handle the create new button
   const handleCreate = () => {
@@ -70,6 +63,7 @@ const NoteTreeTable = (props) => {
   };
   const location = extractNames2(props.location);
 
+  // Show folders
   const [visibleFolders, setVisibleFolders] = useState({});
 
   const toggleFolderVisibility = (folder) => {
@@ -79,9 +73,6 @@ const NoteTreeTable = (props) => {
     }));
   };
 
-  // useEffect(() => {
-  //   console.log(location)
-  // }, [location])
 
   //Handle the selection of a node
   const handleSelect = (uuid, name) => {
@@ -105,31 +96,25 @@ const NoteTreeTable = (props) => {
     setShowDeleteConfirmation(false);
   };
 
-  //Handle context menu button
-  const handleContextMenuButton = (e, index) => {
-    setClickedIndex(index);
-    setContextMenuVisible(true);
-    setContextMenuPosition({ x: e.clientX, y: e.clientY });
-    clickedMenuItem.current = false;
-    if (contextMenuVisible) {
-      setContextMenuVisible(false);
-    }
-  };
-
-  //Handles the linking of a selected node
-  const handleLink = () => {
-    setShowNodesList(!showNodesList);
-  };
-
-  //Handle the close button
-  const handleCloseLink = () => {
-    setShowNodesList(false);
-    props.setShowNodesList(false);
-  };
-
+  // //Filter for linked nodes based on the selected node
   // useEffect(() => {
-  //   console.log(props.npc)
-  // }, [props.npc]) 
+  //   if (props.selectedNode && props.selectedNode.links) {
+  //     // const containedLinks = props.selectedNode.links.map((link) => link.trim())
+  //     console.log(props.selectedNode.links)
+  //     setActiveLinks(true)
+  //   } else {
+  //     setActiveLinks(false)
+  //   }
+  // }, [props.selectedId])
+
+  useEffect(() => {
+    if(props.selectedNode && props.selectedNode.links) {
+    const linkedNames = props.selectedNode.links
+    const namesArray = linkedNames.split(', ').filter(name => name.trim() !== '')
+    console.log(namesArray)
+    }
+  }, [props.selectedNode])
+
 
   return (
     <>
@@ -248,36 +233,12 @@ const NoteTreeTable = (props) => {
                 <div
                   className={`${ns.noteTreeCategoryItem} ${
                     props.selectedId === obj.uuid ? ns.selected : ""
-                  }`}
+                  } ${activeLinks ? ns.activeLinks : ""
+                }`}
                   key={index}
                   onClick={() => handleSelect(obj.uuid, obj.name)}
                 >
                   {obj.name}
-                  {/* <button className={ns.contextButton} onClick={handleLink}>
-                    <i className="pi pi-link"></i>
-                  </button>
-                  {showNodesList && (
-                    <div className={ns.popupContainer}>
-                      <div className={ns.popup}>
-                        <div className={ns.popupHeader}>
-                          <h2>Create Link</h2>
-                          <button
-                            className={ns.closeButton}
-                            onClick={handleCloseLink}
-                          >
-                            X
-                          </button>
-                        </div> 
-                        <NodeList
-                          location={props.location}
-                          npc={props.npc}
-                          organization={props.organization}
-                          quest={props.quest}
-                          item={props.item}
-                        />
-                      </div>
-                    </div>
-                  )} */}
                 </div>
               ))}
              
@@ -295,6 +256,7 @@ const NoteTreeTable = (props) => {
             {obj.name}
           </div>
         ))}
+        {/* Organization */}
         {organization.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${
@@ -306,6 +268,7 @@ const NoteTreeTable = (props) => {
             {obj.name}
           </div>
         ))}
+        {/* Quest */}
         {quest.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${
@@ -317,6 +280,7 @@ const NoteTreeTable = (props) => {
             {obj.name}
           </div>
         ))}
+        {/* Item */}
         {item.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${

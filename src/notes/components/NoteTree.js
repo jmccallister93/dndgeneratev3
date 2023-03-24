@@ -15,6 +15,7 @@ const NoteTree = (props) => {
             header="Locations"
             location={props.location}
             setShowPopup={props.setShowPopup}
+            selectedNode={props.selectedNode}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
@@ -27,6 +28,7 @@ const NoteTree = (props) => {
             header="NPCs"
             npc={props.npc}
             setShowPopup={props.setShowPopup}
+            selectedNode={props.selectedNode}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
@@ -39,6 +41,7 @@ const NoteTree = (props) => {
             header="Organizations"
             organization={props.organization}
             setShowPopup={props.setShowPopup}
+            selectedNode={props.selectedNode}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
@@ -51,6 +54,7 @@ const NoteTree = (props) => {
             header="Quests"
             quest={props.quest}
             setShowPopup={props.setShowPopup}
+            selectedNode={props.selectedNode}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}
@@ -63,6 +67,7 @@ const NoteTree = (props) => {
             header="Items"
             item={props.item}
             setShowPopup={props.setShowPopup}
+            selectedNode={props.selectedNode}
             selectedId={props.selectedId}
             selectedName={props.selectedName}
             setSelectedId={(value) => props.setSelectedId(value)}

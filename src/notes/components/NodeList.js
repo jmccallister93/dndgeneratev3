@@ -5,7 +5,7 @@ import style from "../../stylesheets/PageStyle.module.scss";
 const NodeList = (props) => {
   const [allLinks, setAllLinks] = useState([]);
 
-  const handleLinkNode = (nodeName) => {
+  const handleLinkNode = (nodeName, nodeUuid) => {
     setAllLinks((prevLinks) => [...prevLinks, nodeName]);
   };
 
@@ -23,7 +23,7 @@ const NodeList = (props) => {
           <div
             className={ns.linkItem}
             key={node.uuid}
-            onClick={() => handleLinkNode(node.name)}
+            onClick={() => handleLinkNode(node.name, node.uuid)}
           >
             {node.name}
           </div>
@@ -35,7 +35,7 @@ const NodeList = (props) => {
           <div
             className={ns.linkItem}
             key={node.uuid}
-            onClick={() => handleLinkNode(node.name)}
+            onClick={() => handleLinkNode(node.name, node.uuid)}
           >
             {node.name}
           </div>
@@ -47,7 +47,7 @@ const NodeList = (props) => {
           <div
             className={ns.linkItem}
             key={node.uuid}
-            onClick={() => handleLinkNode(node.name)}
+            onClick={() => handleLinkNode(node.name, node.uuid)}
           >
             {node.name}
           </div>
@@ -59,7 +59,7 @@ const NodeList = (props) => {
           <div
             className={ns.linkItem}
             key={node.uuid}
-            onClick={() => handleLinkNode(node.name)}
+            onClick={() => handleLinkNode(node.name, node.uuid)}
           >
             {node.name}
           </div>
@@ -71,7 +71,7 @@ const NodeList = (props) => {
           <div
             className={ns.linkItem}
             key={node.uuid}
-            onClick={() => handleLinkNode(node.name)}
+            onClick={() => handleLinkNode(node.name, node.uuid)}
           >
             {node.name}
           </div>
