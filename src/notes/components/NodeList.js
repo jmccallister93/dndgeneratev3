@@ -7,25 +7,32 @@ const NodeList = (props) => {
   const [allLinks, setAllLinks] = useState([]);
   const [linkedNode, setLinkedNode] = useState("");
 
-  const handleLinkNode = async (nodeName) => {
-    try {
-      setLinks([props.selectedNode.links]);
-      setAllLinks([...allLinks, nodeName]);
-      const newLinksArray = allLinks.join(", ");
-      const updatedNode = { ...props.selectedNode, links: newLinksArray };
-      await props.updateSelectedNode(updatedNode);
-      props.setPropertyValue(nodeName);
-    } catch (error) {
-      console.error("Error updating note:" + error);
-    }
+  //   const handleLinkNode = async (nodeName) => {
+  //     try {
+  //       setLinks([props.selectedNode.links]);
+  //       setAllLinks([...allLinks, nodeName]);
+  //       const newLinksArray = allLinks.join(", ");
+  //       const updatedNode = { ...props.selectedNode, links: newLinksArray };
+  //       await props.updateSelectedNode(updatedNode);
+  //       props.setPropertyValue(nodeName);
+  //     } catch (error) {
+  //       console.error("Error updating note:" + error);
+  //     }
+  //   };
+
+  useEffect(() => {
+    setAllLinks([props.selectedNode.links]);
+  }, [props.selectedNode.links])
+
+  const handleLinkNode = (nodeName) => {
+    setAllLinks([...allLinks, nodeName]);
+    const newLinksArray = allLinks.join(", ");
+    props.updateSelectedNode({ ...props.selectedNode, links: newLinksArray });
+    props.setPropertyValue(newLinksArray);
+    console.log(newLinksArray);
   };
 
-  //   const handleLinkNode = (nodeName) => {
-  //     setLinks([props.selectedNode.links])
-  //     setAllLinks([...allLinks, nodeName])
-  //     const newLinksArray = allLinks.join(",")
-  //     console.log(newArray)
-  //   }
+;
 
   return (
     <div className={ns.nodeListWrapper}>
