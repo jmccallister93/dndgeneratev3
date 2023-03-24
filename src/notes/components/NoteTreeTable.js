@@ -18,7 +18,6 @@ const NoteTreeTable = (props) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [activeLinks, setActiveLinks] = useState(false);
 
-
   //Handle the create new button
   const handleCreate = () => {
     setShowPopup(!showPopup);
@@ -73,7 +72,6 @@ const NoteTreeTable = (props) => {
     }));
   };
 
-
   //Handle the selection of a node
   const handleSelect = (uuid, name) => {
     props.setSelectedId(uuid);
@@ -108,13 +106,14 @@ const NoteTreeTable = (props) => {
   // }, [props.selectedId])
 
   useEffect(() => {
-    if(props.selectedNode && props.selectedNode.links) {
-    const linkedNames = props.selectedNode.links
-    const namesArray = linkedNames.split(', ').filter(name => name.trim() !== '')
-    setActiveLinks(namesArray)
+    if (props.selectedNode && props.selectedNode.links) {
+      const linkedNames = props.selectedNode.links;
+      const namesArray = linkedNames
+        .split(", ")
+        .filter((name) => name.trim() !== "");
+      setActiveLinks(namesArray);
     }
-  }, [props.selectedNode])
-
+  }, [props.selectedNode]);
 
   return (
     <>
@@ -199,7 +198,7 @@ const NoteTreeTable = (props) => {
           </div>
         )}
         {/* Locations */}
-        {Object.entries(location).map(([folder, objects], folderIndex) => (
+        {/* {Object.entries(location).map(([folder, objects], folderIndex) => (
           <div key={folderIndex}>
             <div
               className={`${ns.noteTreeFolder} ${
@@ -241,7 +240,56 @@ const NoteTreeTable = (props) => {
                 </div>
               ))}
           </div>
-        ))}
+        ))} */}
+        {Object.entries(location).map(([folder, objects], folderIndex) => {
+          const hasActiveLink = objects.some((obj) =>
+            activeLinks.includes(obj.name)
+          ); // check if any child object has the activeLink class
+          return (
+            <div key={folderIndex}>
+              <div
+                className={`${ns.noteTreeFolder} ${
+                  visibleFolders[folder] ? ns.selectedFolder : ""
+                } ${hasActiveLink ? ns.activeLink : ""}`} // add activeLink class if any child object has it
+              >
+                <h3>
+                  {folder === "null" ? "No Folder" : folder}
+                  <button
+                    className={ns.folderButton}
+                    onClick={() => toggleFolderVisibility(folder)}
+                  >
+                    <i
+                      className={`pi ${
+                        visibleFolders[folder] ? "pi-folder-open" : "pi-folder"
+                      }`}
+                    ></i>{" "}
+                    <i
+                      className={`pi ${
+                        visibleFolders[folder]
+                          ? "pi-angle-double-down"
+                          : "pi-angle-double-right"
+                      }`}
+                    ></i>
+                  </button>
+                </h3>
+              </div>
+              {visibleFolders[folder] &&
+                Array.isArray(objects) &&
+                objects.map((obj, index) => (
+                  <div
+                    className={`${ns.noteTreeCategoryItem} ${
+                      props.selectedId === obj.uuid ? ns.selected : ""
+                    } ${activeLinks.includes(obj.name) ? ns.activeLink : ""}`}
+                    key={index}
+                    onClick={() => handleSelect(obj.uuid, obj.name)}
+                  >
+                    {obj.name}
+                  </div>
+                ))}
+            </div>
+          );
+        })}
+
         {/* NPCs */}
         {npc.map((obj, index) => (
           <div
