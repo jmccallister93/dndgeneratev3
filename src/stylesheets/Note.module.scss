@@ -464,3 +464,11 @@ textarea {
   background-color: #393e46;
   color: white;
 }
+
+.linkItem{
+  &:hover{
+    cursor: pointer;
+    scale: 1.05;
+    color: white;
+  }
+}

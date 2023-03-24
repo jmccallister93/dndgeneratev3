@@ -11,6 +11,7 @@ import DeleteConfirmation from "./DeleteConfirmation";
 import { useCallback } from "react";
 import ContextMenu from "./ContextMenu";
 import userEvent from "@testing-library/user-event";
+import NodeList from "./NodeList";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -23,6 +24,7 @@ const NoteTreeTable = (props) => {
   });
   const clickedMenuItem = useRef(false);
   const [clickedIndex, setClickedIndex] = useState(null);
+  const [showNodesList, setShowNodesList] = useState(false);
 
   //Handle the create new button
   const handleCreate = () => {
@@ -114,6 +116,21 @@ const NoteTreeTable = (props) => {
     }
   };
 
+  //Handles the linking of a selected node
+  const handleLink = () => {
+    setShowNodesList(!showNodesList);
+  };
+
+  //Handle the close button
+  const handleCloseLink = () => {
+    setShowNodesList(false);
+    props.setShowNodesList(false);
+  };
+
+  // useEffect(() => {
+  //   console.log(props.npc)
+  // }, [props.npc]) 
+
   return (
     <>
       <div className={ns.noteTreeCategory}>
@@ -196,6 +213,7 @@ const NoteTreeTable = (props) => {
             </div>
           </div>
         )}
+        {/* Locations */}
         {Object.entries(location).map(([folder, objects], folderIndex) => (
           <div key={folderIndex}>
             <div
@@ -204,18 +222,16 @@ const NoteTreeTable = (props) => {
               }`}
             >
               <h3>
-                
                 {folder === "null" ? "No Folder" : folder}
                 <button
                   className={ns.folderButton}
                   onClick={() => toggleFolderVisibility(folder)}
                 >
-                  <i className={`pi ${
-                      visibleFolders[folder]
-                        ? "pi-folder-open"
-                        : "pi-folder"
-                    }`}></i>
-                  {" "}
+                  <i
+                    className={`pi ${
+                      visibleFolders[folder] ? "pi-folder-open" : "pi-folder"
+                    }`}
+                  ></i>{" "}
                   <i
                     className={`pi ${
                       visibleFolders[folder]
@@ -237,54 +253,37 @@ const NoteTreeTable = (props) => {
                   onClick={() => handleSelect(obj.uuid, obj.name)}
                 >
                   {obj.name}
-                  {/* <button
-                    className={ns.contextButton}
-                    onClick={(e) => handleContextMenuButton(e, index)}
-                  >
-                    <i className="pi pi-ellipsis-v"></i>
+                  {/* <button className={ns.contextButton} onClick={handleLink}>
+                    <i className="pi pi-link"></i>
                   </button>
-                  {clickedIndex === index && contextMenuVisible && (
-                    <ContextMenu
-                      index={index}
-                      contextMenuVisible={contextMenuVisible}
-                      setContextMenuVisible={setContextMenuVisible}
-                    />
+                  {showNodesList && (
+                    <div className={ns.popupContainer}>
+                      <div className={ns.popup}>
+                        <div className={ns.popupHeader}>
+                          <h2>Create Link</h2>
+                          <button
+                            className={ns.closeButton}
+                            onClick={handleCloseLink}
+                          >
+                            X
+                          </button>
+                        </div> 
+                        <NodeList
+                          location={props.location}
+                          npc={props.npc}
+                          organization={props.organization}
+                          quest={props.quest}
+                          item={props.item}
+                        />
+                      </div>
+                    </div>
                   )} */}
                 </div>
               ))}
+             
           </div>
         ))}
-
-        {/* {location.map((obj, index) => (
-          <div
-            className={`${ns.noteTreeCategoryItem} ${
-              props.selectedId === obj.uuid ? ns.selected : ""
-            }`}
-            key={index}
-            onClick={() => handleSelect(obj.uuid, obj.name)}
-          >
-            <button
-              className={ns.contextButton}
-            >
-              <i className="pi pi-angle-right"></i>
-            </button>
-
-            {obj.name}
-            <button
-              className={ns.contextButton}
-              onClick={(e) => handleContextMenuButton(e, index)}
-            >
-              <i className="pi pi-ellipsis-v"></i>
-            </button>
-            {clickedIndex === index && contextMenuVisible && (
-              <ContextMenu
-                index={index}
-                contextMenuVisible={contextMenuVisible}
-                setContextMenuVisible={setContextMenuVisible}
-              />
-            )}
-          </div>
-        ))} */}
+        {/* NPCs */}
         {npc.map((obj, index) => (
           <div
             className={`${ns.noteTreeCategoryItem} ${

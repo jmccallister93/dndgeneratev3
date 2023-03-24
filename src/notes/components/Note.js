@@ -83,7 +83,7 @@ function Note(props) {
   };
 
   //Handle the close button
-  const handleClose = () => {
+  const handleCloseLink = () => {
     setShowNodesList(false);
     props.setShowNodesList(false);
   };
@@ -101,8 +101,8 @@ function Note(props) {
               <div className={ns.popupContainer}>
                 <div className={ns.popup}>
                   <div className={ns.popupHeader}>
-                    <h2>Create Link</h2>
-                    <button className={ns.closeButton} onClick={handleClose}>
+                    <h2>Create Link for {props.selectedNode.name}</h2>
+                    <button className={ns.closeButton} onClick={handleCloseLink}>
                       X
                     </button>
                   </div>
@@ -112,6 +112,7 @@ function Note(props) {
                     organization={props.organization}
                     quest={props.quest}
                     item={props.item}
+                    updateProperty={updateProperty}
                   />
                 </div>
               </div>

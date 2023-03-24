@@ -25,50 +25,51 @@ function NotePage() {
 
   const [dbTable, setDbTable] = useState("");
 
-
   //Get Table Names
   useEffect(() => {
-  const fetchUuidsAndTableNames = async () => {
-    try {
-      //Select all uuids from tables
-      const npcResponse = await supabase.from("DBnpc").select("uuid");
-      const locationResponse = await supabase.from("DBlocation").select("uuid");
-      const organizationResponse = await supabase
-        .from("DBorganization")
-        .select("uuid");
-      const questResponse = await supabase.from("DBquest").select("uuid");
-      const itemResponse = await supabase.from("DBitem").select("uuid");
+    const fetchUuidsAndTableNames = async () => {
+      try {
+        //Select all uuids from tables
+        const npcResponse = await supabase.from("DBnpc").select("uuid");
+        const locationResponse = await supabase
+          .from("DBlocation")
+          .select("uuid");
+        const organizationResponse = await supabase
+          .from("DBorganization")
+          .select("uuid");
+        const questResponse = await supabase.from("DBquest").select("uuid");
+        const itemResponse = await supabase.from("DBitem").select("uuid");
 
-      //Create arrays of uuids
-      const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
-      const locationUuids = [].concat(
-        locationResponse.data.map((location) => location.uuid)
-      );
-      const organizationUuids = [].concat(
-        organizationResponse.data.map((organization) => organization.uuid)
-      );
-      const questUuids = [].concat(
-        questResponse.data.map((quest) => quest.uuid)
-      );
-      const itemUuids = [].concat(itemResponse.data.map((item) => item.uuid));
+        //Create arrays of uuids
+        const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
+        const locationUuids = [].concat(
+          locationResponse.data.map((location) => location.uuid)
+        );
+        const organizationUuids = [].concat(
+          organizationResponse.data.map((organization) => organization.uuid)
+        );
+        const questUuids = [].concat(
+          questResponse.data.map((quest) => quest.uuid)
+        );
+        const itemUuids = [].concat(itemResponse.data.map((item) => item.uuid));
 
-      //Compare selectedId to uuids to determine which table to update
-      if (npcUuids.includes(selectedId)) {
-        setDbTable("DBnpc");
-      } else if (locationUuids.includes(selectedId)) {
-        setDbTable("DBlocation");
-      } else if (organizationUuids.includes(selectedId)) {
-        setDbTable("DBorganization");
-      } else if (questUuids.includes(selectedId)) {
-        setDbTable("DBquest");
-      } else if (itemUuids.includes(selectedId)) {
-        setDbTable("DBitem");
+        //Compare selectedId to uuids to determine which table to update
+        if (npcUuids.includes(selectedId)) {
+          setDbTable("DBnpc");
+        } else if (locationUuids.includes(selectedId)) {
+          setDbTable("DBlocation");
+        } else if (organizationUuids.includes(selectedId)) {
+          setDbTable("DBorganization");
+        } else if (questUuids.includes(selectedId)) {
+          setDbTable("DBquest");
+        } else if (itemUuids.includes(selectedId)) {
+          setDbTable("DBitem");
+        }
+      } catch (error) {
+        console.error("Error fetching tables:", error);
       }
-    } catch (error) {
-      console.error("Error fetching tables:", error);
-    }
-  }
-  fetchUuidsAndTableNames();
+    };
+    fetchUuidsAndTableNames();
   }, [selectedId]);
 
   //Update Note from NoteText
@@ -92,7 +93,6 @@ function NotePage() {
         .from(dbTable)
         .update(updatedNode)
         .eq("uuid", selectedId);
-
     } catch (error) {
       console.error("Error updating note:" + error);
     }
@@ -111,7 +111,6 @@ function NotePage() {
       console.error("Error updating note:" + error);
     }
   };
-
 
   //Get Locations
   useEffect(() => {
@@ -364,16 +363,16 @@ function NotePage() {
           setShowPopup={setShowPopup}
         />
         <Note
-          selectedNode={selectedNode}
-          setSelectedNode={setSelectedNode}
-          updateNote={updateNote}
-          updateSelectedNode={updateSelectedNode}
-          setPropertyValue={setPropertyValue}
           location={locationDetails}
           npc={npcDetails}
           organization={organizationDetails}
           quest={questDetails}
           item={itemDetails}
+          selectedNode={selectedNode}
+          setSelectedNode={setSelectedNode}
+          updateNote={updateNote}
+          updateSelectedNode={updateSelectedNode}
+          setPropertyValue={setPropertyValue}
         />
       </div>
     </div>
