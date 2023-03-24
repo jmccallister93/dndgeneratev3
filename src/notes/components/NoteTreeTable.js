@@ -111,7 +111,7 @@ const NoteTreeTable = (props) => {
     if(props.selectedNode && props.selectedNode.links) {
     const linkedNames = props.selectedNode.links
     const namesArray = linkedNames.split(', ').filter(name => name.trim() !== '')
-    console.log(namesArray)
+    setActiveLinks(namesArray)
     }
   }, [props.selectedNode])
 
@@ -231,17 +231,15 @@ const NoteTreeTable = (props) => {
               Array.isArray(objects) &&
               objects.map((obj, index) => (
                 <div
-                  className={`${ns.noteTreeCategoryItem} ${
-                    props.selectedId === obj.uuid ? ns.selected : ""
-                  } ${activeLinks ? ns.activeLinks : ""
-                }`}
+                className={`${ns.noteTreeCategoryItem} ${
+                  props.selectedId === obj.uuid ? ns.selected : ""
+                } ${activeLinks.includes(obj.name) ? ns.activeLink : ""}`}
                   key={index}
                   onClick={() => handleSelect(obj.uuid, obj.name)}
                 >
                   {obj.name}
                 </div>
               ))}
-             
           </div>
         ))}
         {/* NPCs */}
