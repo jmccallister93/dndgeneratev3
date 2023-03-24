@@ -5,17 +5,15 @@ import style from "../../stylesheets/PageStyle.module.scss";
 const NodeList = (props) => {
   const [allLinks, setAllLinks] = useState([]);
 
-  useEffect(() => {
-    setAllLinks([props.selectedNode.links]);
-  }, [props.selectedNode.links]);
-
   const handleLinkNode = (nodeName) => {
-    setAllLinks([...allLinks, nodeName]);
+    setAllLinks((prevLinks) => [...prevLinks, nodeName]);
+  };
+
+  useEffect(() => {
     const newLinksArray = allLinks.join(", ");
     props.updateSelectedNode({ ...props.selectedNode, links: newLinksArray });
     props.setPropertyValue(newLinksArray);
-    console.log(newLinksArray);
-  };
+  }, [allLinks, props.selectedNode, props.setPropertyValue, props.updateSelectedNode]);
 
   return (
     <div className={ns.nodeListWrapper}>
