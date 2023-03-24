@@ -451,6 +451,8 @@ textarea {
 
 .nodeListWrapper{
   display: flex;
+  // overflow-y: hidden;
+  // overflow-x: scroll;
 }
 
 .nodeList{

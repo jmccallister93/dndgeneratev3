@@ -102,9 +102,15 @@ function Note(props) {
                 <div className={ns.popup}>
                   <div className={ns.popupHeader}>
                     <h2>Create Link for {props.selectedNode.name}</h2>
-                    <button className={ns.closeButton} onClick={handleCloseLink}>
+                    <button
+                      className={ns.closeButton}
+                      onClick={handleCloseLink}
+                    >
                       X
                     </button>
+                  </div>
+                  <div className={ns.popupHeader}>
+                    <h3>Current Links: {props.selectedNode.links}</h3>
                   </div>
                   <NodeList
                     location={props.location}
@@ -113,6 +119,9 @@ function Note(props) {
                     quest={props.quest}
                     item={props.item}
                     updateProperty={updateProperty}
+                    setPropertyValue={props.setPropertyValue}
+                    selectedNode={props.selectedNode}
+                    updateSelectedNode={props.updateSelectedNode}
                   />
                 </div>
               </div>
