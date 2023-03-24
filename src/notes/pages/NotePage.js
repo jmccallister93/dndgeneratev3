@@ -168,6 +168,7 @@ function NotePage() {
         setFetchError(null);
         setNpcDetails(
           dataName.map((r) => ({
+            folder: r.folder,
             uuid: r.uuid,
             name: r.name,
             age: r.age,
@@ -199,6 +200,7 @@ function NotePage() {
             hp: r.hp,
             speed: r.speed,
             notes: r.notes,
+            links: r.links,
           }))
         );
       }
@@ -221,6 +223,7 @@ function NotePage() {
         setFetchError(null);
         setOrganizationDetails(
           dataName.map((r) => ({
+            folder: r.folder,
             uuid: r.uuid,
             name: r.name,
             wealth: r.wealth,
@@ -257,6 +260,7 @@ function NotePage() {
             specialty: r.specialty,
             weakness: r.weakness,
             notes: r.notes,
+            links: r.links,
           }))
         );
       }
@@ -279,6 +283,7 @@ function NotePage() {
         setFetchError(null);
         setQuestDetails(
           dataName.map((r) => ({
+            folder: r.folder,
             uuid: r.uuid,
             name: r.name,
             questType: r.questType,
@@ -287,6 +292,7 @@ function NotePage() {
             motive: r.motive,
             twist: r.twist,
             notes: r.notes,
+            links: r.links,
           }))
         );
       }
@@ -309,6 +315,7 @@ function NotePage() {
         setFetchError(null);
         setItemDetails(
           dataName.map((r) => ({
+            folder: r.folder,
             uuid: r.uuid,
             name: r.name,
             type: r.type,
@@ -317,6 +324,7 @@ function NotePage() {
             weight: r.weight,
             description: r.description,
             notes: r.notes,
+            links: r.links,
           }))
         );
       }
@@ -341,17 +349,6 @@ function NotePage() {
     questDetails,
     itemDetails,
   ]);
-
-  //  //Filter for linked nodes based on the selected node
-  //  useEffect(() => {
-  //   if (selectedNode && selectedNode.links) {
-  //     // const containedLinks = props.selectedNode.links.map((link) => link.trim())
-  //     console.log(selectedNode.links)
-      
-  //   } else {
-      
-  //   }
-  // }, [selectedId])
 
   return (
     <div className={style.mainWrapper}>
