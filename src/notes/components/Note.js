@@ -7,7 +7,10 @@ function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [allLinks, setAllLinks] = useState([]);
+  const [allFolders, setAllFolders] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
+  const [selectedLinkIndex, setSelectedLinkIndex] = useState(-1);
+  const [selectedFolderIndex, setSelectedFolderIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
   const [showNodesList, setShowNodesList] = useState(false);
 
@@ -78,6 +81,22 @@ function Note(props) {
     }
   }, [props.selectedNode]);
 
+  //Update folder
+  useEffect(() => {
+    if (props.selectedNode && props.selectedNode.folder) {
+      setAllFolders(props.selectedNode.folder.split(","));
+    } else {
+      setAllFolders([]);
+    }
+  }, [props.selectedNode]);
+
+  //Handle Delete of a folder
+  const handleDeleteFolder = (index) => {
+    const newFolder = [...allFolders];
+    allFolders.splice(index, 1);
+    setAllFolders(newFolder);
+    props.updateFolder(newFolder.join("\n"));
+  };
 
   //Update links
   useEffect(() => {
@@ -146,12 +165,14 @@ function Note(props) {
               </div>
             )}
           </h2>
+          <h2>Details</h2>
           {Object.keys(props.selectedNode).map((prop, index) => {
             if (
               prop !== "uuid" &&
               prop !== "selectedItem" &&
               prop !== "notes" &&
-              prop !== "links"
+              prop !== "links" &&
+              prop !== "folder"
             ) {
               return (
                 <div key={index}>
@@ -190,22 +211,100 @@ function Note(props) {
             }
             return null;
           })}
-          <h2>Links</h2>
+          <h2>Folder</h2>
           {props.selectedNode && Object.keys(props.selectedNode).length ? (
             <ul>
-              {allLinks.map((links, index) => (
-                <li key={index}>
-                  <span>- {links} </span>
-                  {/* <button
-                    className={ns.deleteButton}
-                    onClick={() => handleDeleteLink(index)}
-                    title="Delete"
-                  >
-                    <i className="pi pi-trash"></i>
-                  </button> */}
-                </li>
-              ))}
-            </ul>
+            {allFolders.map((folder, index) => (
+              <li key={index}>
+                {selectedFolderIndex === index ? (
+                  <input
+                    className={ns.editNote}
+                    type="text"
+                    value={folder}
+                    onChange={(e) => {
+                      const newFolder = [...allFolders];
+                      newFolder[index] = e.target.value;
+                      setAllFolders(newFolder);
+                    }}
+                    onBlur={() => {
+                      setSelectedFolderIndex(-1);
+                      props.updateProperty(allFolders.join("\n"));
+                    }}
+                    onKeyDown={handleEnterDown}
+                    autoFocus
+                  />
+                ) : (
+                  <>
+                    <span>- {folder} </span>
+                    <button
+                      className={ns.editButton}
+                      onClick={() => setSelectedFolderIndex(index)}
+                      title="Edit"
+                    >
+                      <i class="pi pi-pencil"></i>
+                    </button>
+                    <button
+                      className={ns.deleteButton}
+                      onClick={() => handleDeleteFolder(index)}
+                      title="Delete"
+                    >
+                      <i class="pi pi-trash"></i>
+                    </button>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+          ) : null}
+          <h2>
+            Links
+            <button className={ns.contextButton} onClick={handleLink}>
+              <i className="pi pi-link"></i>
+            </button>
+          </h2>
+          {props.selectedNode && Object.keys(props.selectedNode).length ? (
+             <ul>
+             {allLinks.map((links, index) => (
+               <li key={index}>
+                 {selectedLinkIndex === index ? (
+                   <input
+                     className={ns.editNote}
+                     type="text"
+                     value={links}
+                     onChange={(e) => {
+                       const newLink = [...allLinks];
+                       newLink[index] = e.target.value;
+                       setAllLinks(newLink);
+                     }}
+                     onBlur={() => {
+                       setSelectedLinkIndex(-1);
+                       props.updateProperty(allLinks.join("\n"));
+                     }}
+                     onKeyDown={handleEnterDown}
+                     autoFocus
+                   />
+                 ) : (
+                   <>
+                     <span>- {links} </span>
+                     <button
+                       className={ns.editButton}
+                       onClick={() => setSelectedLinkIndex(index)}
+                       title="Edit"
+                     >
+                       <i class="pi pi-pencil"></i>
+                     </button>
+                     <button
+                       className={ns.deleteButton}
+                       onClick={() => handleDeleteLink(index)}
+                       title="Delete"
+                     >
+                       <i class="pi pi-trash"></i>
+                     </button>
+                   </>
+                 )}
+               </li>
+             ))}
+           </ul>
           ) : null}
           <h2>Notes</h2>
           {props.selectedNode && Object.keys(props.selectedNode).length ? (

@@ -103,6 +103,8 @@ const NoteTreeTable = (props) => {
         .split(", ")
         .filter((name) => name.trim() !== "");
       setActiveLinks(namesArray);
+    } else {
+      setActiveLinks([]);
     }
   }, [props.selectedNode]);
 
@@ -387,7 +389,7 @@ const NoteTreeTable = (props) => {
             </div>
           );
         })}
-        
+
         {/* Item */}
         {Object.entries(item).map(([folder, objects], folderIndex) => {
           const hasActiveLink = objects.some((obj) =>
