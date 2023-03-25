@@ -165,6 +165,8 @@ function Note(props) {
               </div>
             )}
           </h2>
+
+          {/* Details */}
           <h2>Details</h2>
           {Object.keys(props.selectedNode).map((prop, index) => {
             if (
@@ -211,51 +213,51 @@ function Note(props) {
             }
             return null;
           })}
+
+          {/* Folder */}
           <h2>Folder</h2>
-          {props.selectedNode && Object.keys(props.selectedNode).length ? (
-            <ul>
-            {allFolders.map((folder, index) => (
-              <li key={index}>
-                {selectedFolderIndex === index ? (
-                  <input
-                    className={ns.editNote}
-                    type="text"
-                    value={folder}
-                    onChange={(e) => {
-                      const newFolder = [...allFolders];
-                      newFolder[index] = e.target.value;
-                      setAllFolders(newFolder);
-                    }}
-                    onBlur={() => {
-                      setSelectedFolderIndex(-1);
-                      props.updateProperty(allFolders.join("\n"));
-                    }}
-                    onKeyDown={handleEnterDown}
-                    autoFocus
-                  />
-                ) : (
-                  <>
-                    <span>- {folder} </span>
-                    <button
-                      className={ns.editButton}
-                      onClick={() => setSelectedFolderIndex(index)}
-                      title="Edit"
+          {Object.keys(props.selectedNode).map((prop, index) => {
+            if (prop === "folder") {
+              return (
+                <div key={index}>
+                  {selectedPropertyIndex === index ? (
+                    <input
+                      className={ns.editNote}
+                      type="text"
+                      value={props.selectedNode[prop]}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        props.setSelectedNode((prev) => ({
+                          ...prev,
+                          [prop]: newValue,
+                        }));
+                      }}
+                      onBlur={() => {
+                        setSelectedPropertyIndex(-1);
+                        updateProperty(prop, props.selectedNode[prop]);
+                      }}
+                      onKeyDown={handleEnterDown}
+                      autoFocus
+                    />
+                  ) : (
+                    <span
+                      className={ns.objectProperty}
+                      onClick={() => {
+                        setSelectedPropertyIndex(index);
+                      }}
                     >
-                      <i class="pi pi-pencil"></i>
-                    </button>
-                    <button
-                      className={ns.deleteButton}
-                      onClick={() => handleDeleteFolder(index)}
-                      title="Delete"
-                    >
-                      <i class="pi pi-trash"></i>
-                    </button>
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-          ) : null}
+                      {props.selectedNode[prop] === null
+                        ? "No Folder"
+                        : props.selectedNode[prop]}
+                    </span>
+                  )}
+                </div>
+              );
+            }
+            return null;
+          })}
+
+          {/* Links */}
           <h2>
             Links
             <button className={ns.contextButton} onClick={handleLink}>
@@ -263,48 +265,41 @@ function Note(props) {
             </button>
           </h2>
           {props.selectedNode && Object.keys(props.selectedNode).length ? (
-             <ul>
-             {allLinks.map((links, index) => (
-               <li key={index}>
-                 {selectedLinkIndex === index ? (
-                   <input
-                     className={ns.editNote}
-                     type="text"
-                     value={links}
-                     onChange={(e) => {
-                       const newLink = [...allLinks];
-                       newLink[index] = e.target.value;
-                       setAllLinks(newLink);
-                     }}
-                     onBlur={() => {
-                       setSelectedLinkIndex(-1);
-                       props.updateProperty(allLinks.join("\n"));
-                     }}
-                     onKeyDown={handleEnterDown}
-                     autoFocus
-                   />
-                 ) : (
-                   <>
-                     <span>- {links} </span>
-                     <button
-                       className={ns.editButton}
-                       onClick={() => setSelectedLinkIndex(index)}
-                       title="Edit"
-                     >
-                       <i class="pi pi-pencil"></i>
-                     </button>
-                     <button
-                       className={ns.deleteButton}
-                       onClick={() => handleDeleteLink(index)}
-                       title="Delete"
-                     >
-                       <i class="pi pi-trash"></i>
-                     </button>
-                   </>
-                 )}
-               </li>
-             ))}
-           </ul>
+            <ul>
+              {allLinks.map((links, index) => (
+                <li key={index}>
+                  {selectedLinkIndex === index ? (
+                    <input
+                      className={ns.editNote}
+                      type="text"
+                      value={links}
+                      onChange={(e) => {
+                        const newLink = [...allLinks];
+                        newLink[index] = e.target.value;
+                        setAllLinks(newLink);
+                      }}
+                      onBlur={() => {
+                        setSelectedLinkIndex(-1);
+                        props.updateProperty(allLinks.join("\n"));
+                      }}
+                      onKeyDown={handleEnterDown}
+                      autoFocus
+                    />
+                  ) : (
+                    <>
+                      <span>- {links} </span>
+                      <button
+                        className={ns.deleteButton}
+                        onClick={() => handleDeleteLink(index)}
+                        title="Delete"
+                      >
+                        <i class="pi pi-trash"></i>
+                      </button>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
           ) : null}
           <h2>Notes</h2>
           {props.selectedNode && Object.keys(props.selectedNode).length ? (

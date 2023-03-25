@@ -93,6 +93,8 @@ function NotePage() {
         .from(dbTable)
         .update(updatedNode)
         .eq("uuid", selectedId);
+
+      setPropertyValue(updatedNode);
     } catch (error) {
       console.error("Error updating note:" + error);
     }
