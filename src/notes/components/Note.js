@@ -123,7 +123,6 @@ function Note(props) {
   //Handle the close button
   const handleCloseLink = () => {
     setShowNodesList(false);
-    props.setShowNodesList(false);
   };
 
   return (

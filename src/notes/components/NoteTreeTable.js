@@ -17,11 +17,11 @@ const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [activeLinks, setActiveLinks] = useState([]);
-  const [location, setLocation] = useState({});
-  const [npc, setNpc] = useState({});
-  const [organization, setOrganization] = useState({});
-  const [quest, setQuest] = useState({});
-  const [item, setItem] = useState({});
+  // const [location, setLocation] = useState({});
+  // const [npc, setNpc] = useState({});
+  // const [organization, setOrganization] = useState({});
+  // const [quest, setQuest] = useState({});
+  // const [item, setItem] = useState({});
 
   //Handle the create new button
   const handleCreate = () => {
@@ -61,11 +61,11 @@ const NoteTreeTable = (props) => {
     }
     return namesByFolder;
   };
-  const locationNames = extractNames(props.location);
-  const npcNames = extractNames(props.npc);
-  const organizationNames = extractNames(props.organization);
-  const questNames = extractNames(props.quest);
-  const itemNames = extractNames(props.item);
+  const location = extractNames(props.location);
+  const npc = extractNames(props.npc);
+  const organization = extractNames(props.organization);
+  const quest = extractNames(props.quest);
+  const item = extractNames(props.item);
 
   // Show folders
   const [visibleFolders, setVisibleFolders] = useState({});
@@ -100,21 +100,26 @@ const NoteTreeTable = (props) => {
   };
 
   //Re-render after update
-  useEffect(() => {
-    setLocation(locationNames);
-    setNpc(npcNames);
-    setOrganization(organizationNames);
-    setQuest(questNames);
-    setItem(itemNames);
-  }, [
-    props.location,
-    props.npc,
-    props.organization,
-    props.quest,
-    props.item,
-    props.updateProperty,
-    props.selectedNode
-  ]);
+  // useEffect(() => {
+  //   setLocation(locationNames);
+  //   setNpc(npcNames);
+  //   setOrganization(organizationNames);
+  //   setQuest(questNames);
+  //   setItem(itemNames);
+  // }, [
+  //   // props.location,
+  //   // props.npc,
+  //   // props.organization,
+  //   // props.quest,
+  //   // props.item,
+  //   // props.updateProperty,
+  //   // props.selectedNode,
+  //   // locationNames,
+  //   // npcNames,
+  //   // organizationNames,
+  //   // questNames,
+  //   // itemNames,
+  // ]);
 
   //Update Links
   useEffect(() => {

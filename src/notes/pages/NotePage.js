@@ -350,6 +350,7 @@ function NotePage() {
     organizationDetails,
     questDetails,
     itemDetails,
+    propertyValue
   ]);
 
   return (
