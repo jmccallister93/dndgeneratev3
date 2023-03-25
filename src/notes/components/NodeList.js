@@ -9,6 +9,10 @@ const NodeList = (props) => {
     setAllLinks((prevLinks) => [...prevLinks, nodeName]);
   };
 
+  const handleRemoveLink = () => {
+    
+  }
+
   useEffect(() => {
     const newLinksArray = allLinks.join(", ");
     props.updateSelectedNode({ ...props.selectedNode, links: newLinksArray });

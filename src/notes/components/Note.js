@@ -6,6 +6,7 @@ import NodeList from "./NodeList";
 function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
+  const [allLinks, setAllLinks] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
   const [showNodesList, setShowNodesList] = useState(false);
@@ -77,6 +78,24 @@ function Note(props) {
     }
   }, [props.selectedNode]);
 
+
+  //Update links
+  useEffect(() => {
+    if (props.selectedNode && props.selectedNode.links) {
+      setAllLinks(props.selectedNode.links.split(","));
+    } else {
+      setAllLinks([]);
+    }
+  }, [props.selectedNode]);
+
+  //Handle Delete of a link
+  const handleDeleteLink = (index) => {
+    const newLink = [...allLinks];
+    allLinks.splice(index, 1);
+    setAllLinks(newLink);
+    props.updateLink(newLink.join("\n"));
+  };
+
   //Handles the linking of a selected node
   const handleLink = () => {
     setShowNodesList(!showNodesList);
@@ -131,7 +150,8 @@ function Note(props) {
             if (
               prop !== "uuid" &&
               prop !== "selectedItem" &&
-              prop !== "notes"
+              prop !== "notes" &&
+              prop !== "links"
             ) {
               return (
                 <div key={index}>
@@ -170,6 +190,23 @@ function Note(props) {
             }
             return null;
           })}
+          <h2>Links</h2>
+          {props.selectedNode && Object.keys(props.selectedNode).length ? (
+            <ul>
+              {allLinks.map((links, index) => (
+                <li key={index}>
+                  <span>- {links} </span>
+                  {/* <button
+                    className={ns.deleteButton}
+                    onClick={() => handleDeleteLink(index)}
+                    title="Delete"
+                  >
+                    <i className="pi pi-trash"></i>
+                  </button> */}
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <h2>Notes</h2>
           {props.selectedNode && Object.keys(props.selectedNode).length ? (
             <ul>
