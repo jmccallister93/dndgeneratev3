@@ -125,6 +125,7 @@ function Note(props) {
     setShowNodesList(false);
   };
 
+
   return (
     <>
       {props.selectedNode !== undefined ? (

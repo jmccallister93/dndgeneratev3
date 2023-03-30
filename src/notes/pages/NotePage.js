@@ -94,7 +94,7 @@ function NotePage() {
         .update(updatedNode)
         .eq("uuid", selectedId);
 
-      setPropertyValue(updatedNode);
+      // setPropertyValue(updatedNode);
     } catch (error) {
       console.error("Error updating note:" + error);
     }
