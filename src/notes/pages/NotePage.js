@@ -25,6 +25,7 @@ function NotePage() {
 
   const [dbTable, setDbTable] = useState("");
 
+
   //Get Table Names
   useEffect(() => {
     const fetchUuidsAndTableNames = async () => {
@@ -72,6 +73,7 @@ function NotePage() {
     fetchUuidsAndTableNames();
   }, [selectedId]);
 
+//RENDERS PER CHARCTER TYPED
   //Update Note from NoteText
   const updateNote = async (noteText) => {
     try {
@@ -93,11 +95,11 @@ function NotePage() {
         .from(dbTable)
         .update(updatedNode)
         .eq("uuid", selectedId);
-
-      // setPropertyValue(updatedNode);
     } catch (error) {
       console.error("Error updating note:" + error);
     }
+    // setPropertyValue(updatedNode);
+    
   };
 
   //Delete Node
@@ -114,6 +116,7 @@ function NotePage() {
     }
   };
 
+  //RENDERING PROPERLY 
   //Get Locations
   useEffect(() => {
     const fetchData = async () => {
@@ -153,7 +156,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, showPopup, deletedNode]);
+  }, [noteText, propertyValue, deletedNode]);
 
   //Get NPCs
   useEffect(() => {
@@ -208,7 +211,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, showPopup, deletedNode]);
+  }, [noteText, propertyValue, deletedNode]);
 
   //Get Organizations
   useEffect(() => {
@@ -268,7 +271,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, showPopup, deletedNode]);
+  }, [noteText, propertyValue, deletedNode]);
 
   //Get Quests
   useEffect(() => {
@@ -300,7 +303,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, showPopup, deletedNode]);
+  }, [noteText, propertyValue, deletedNode]);
 
   //Get Items
   useEffect(() => {
@@ -332,7 +335,7 @@ function NotePage() {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, showPopup, deletedNode]);
+  }, [noteText, propertyValue, deletedNode]);
 
   //Get Selected node based on uuid
   useEffect(() => {
@@ -350,7 +353,6 @@ function NotePage() {
     organizationDetails,
     questDetails,
     itemDetails,
-    propertyValue
   ]);
 
   return (

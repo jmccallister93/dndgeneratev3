@@ -17,6 +17,7 @@ function Note(props) {
   //Handles the change in the notes
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
+    
   };
 
   //Adds the notes to the array
@@ -29,6 +30,7 @@ function Note(props) {
     props.updateNote([...allNotes, ...newNotesArray].join("\n"));
     setNotes("");
     setSelectedNoteIndex(-1);
+    
   };
 
   //Passed the updated node to the parent component
@@ -40,6 +42,7 @@ function Note(props) {
     } catch (error) {
       console.error("Error updating note:" + error);
     }
+    
   };
 
   //Handles the enter key
@@ -79,7 +82,7 @@ function Note(props) {
     } else {
       setAllNotes([]);
     }
-  }, [props.selectedNode]);
+  }, [props]);
 
   //Update folder
   useEffect(() => {
@@ -88,7 +91,7 @@ function Note(props) {
     } else {
       setAllFolders([]);
     }
-  }, [props.selectedNode]);
+  }, [props]);
 
   //Handle Delete of a folder
   const handleDeleteFolder = (index) => {
@@ -99,21 +102,29 @@ function Note(props) {
   };
 
   //Update links
-  useEffect(() => {
-    if (props.selectedNode && props.selectedNode.links) {
-      setAllLinks(props.selectedNode.links.split(","));
-    } else {
-      setAllLinks([]);
-    }
-  }, [props.selectedNode]);
+  // useEffect(() => {
+  //   if (props.selectedNode && props.selectedNode.links) {
+  //     setAllLinks(props.selectedNode.links.split(", "));
+  //   }
+  // }, [props]);
 
   //Handle Delete of a link
   const handleDeleteLink = (index) => {
-    const newLink = [...allLinks];
     allLinks.splice(index, 1);
-    setAllLinks(newLink);
-    props.updateLink(newLink.join("\n"));
+    props.updateSelectedNode({
+      ...props.selectedNode,
+      links: allLinks.join(", "),
+    });
+    props.setPropertyValue(allLinks.join(", "));
+    // setAllLinks([])
   };
+
+  useEffect(() => {
+    // console.log(props.selectedNode.links);
+    console.log(allLinks);
+  }, [props]);
+  
+  
 
   //Handles the linking of a selected node
   const handleLink = () => {
@@ -124,7 +135,6 @@ function Note(props) {
   const handleCloseLink = () => {
     setShowNodesList(false);
   };
-
 
   return (
     <>
@@ -148,7 +158,7 @@ function Note(props) {
                     </button>
                   </div>
                   <div className={ns.popupHeader}>
-                    <h3>Current Links: {props.selectedNode.links}</h3>
+                    <h3>Current Links: {allLinks}</h3>
                   </div>
                   <NodeList
                     location={props.location}
@@ -160,6 +170,8 @@ function Note(props) {
                     setPropertyValue={props.setPropertyValue}
                     selectedNode={props.selectedNode}
                     updateSelectedNode={props.updateSelectedNode}
+                    allLinks={allLinks}
+                    setAllLinks={setAllLinks}
                   />
                 </div>
               </div>
@@ -268,35 +280,14 @@ function Note(props) {
             <ul>
               {allLinks.map((links, index) => (
                 <li key={index}>
-                  {selectedLinkIndex === index ? (
-                    <input
-                      className={ns.editNote}
-                      type="text"
-                      value={links}
-                      onChange={(e) => {
-                        const newLink = [...allLinks];
-                        newLink[index] = e.target.value;
-                        setAllLinks(newLink);
-                      }}
-                      onBlur={() => {
-                        setSelectedLinkIndex(-1);
-                        props.updateProperty(allLinks.join("\n"));
-                      }}
-                      onKeyDown={handleEnterDown}
-                      autoFocus
-                    />
-                  ) : (
-                    <>
-                      <span>- {links} </span>
-                      <button
-                        className={ns.deleteButton}
-                        onClick={() => handleDeleteLink(index)}
-                        title="Delete"
-                      >
-                        <i class="pi pi-trash"></i>
-                      </button>
-                    </>
-                  )}
+                  <span>- {links} </span>
+                  <button
+                    className={ns.deleteButton}
+                    onClick={() => handleDeleteLink(index)}
+                    title="Delete"
+                  >
+                    <i className="pi pi-trash"></i>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -306,42 +297,21 @@ function Note(props) {
             <ul>
               {allNotes.map((note, index) => (
                 <li key={index}>
-                  {selectedNoteIndex === index ? (
-                    <input
-                      className={ns.editNote}
-                      type="text"
-                      value={note}
-                      onChange={(e) => {
-                        const newNotes = [...allNotes];
-                        newNotes[index] = e.target.value;
-                        setAllNotes(newNotes);
-                      }}
-                      onBlur={() => {
-                        setSelectedNoteIndex(-1);
-                        props.updateNote(allNotes.join("\n"));
-                      }}
-                      onKeyDown={handleEnterDown}
-                      autoFocus
-                    />
-                  ) : (
-                    <>
-                      <span>- {note} </span>
-                      <button
-                        className={ns.editButton}
-                        onClick={() => setSelectedNoteIndex(index)}
-                        title="Edit"
-                      >
-                        <i class="pi pi-pencil"></i>
-                      </button>
-                      <button
-                        className={ns.deleteButton}
-                        onClick={() => handleDeleteNote(index)}
-                        title="Delete"
-                      >
-                        <i class="pi pi-trash"></i>
-                      </button>
-                    </>
-                  )}
+                  <span>- {note} </span>
+                  <button
+                    className={ns.editButton}
+                    onClick={() => setSelectedNoteIndex(index)}
+                    title="Edit"
+                  >
+                    <i className="pi pi-pencil"></i>
+                  </button>
+                  <button
+                    className={ns.deleteButton}
+                    onClick={() => handleDeleteNote(index)}
+                    title="Delete"
+                  >
+                    <i className="pi pi-trash"></i>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -354,7 +324,7 @@ function Note(props) {
               onChange={handleNotesChange}
               onKeyDown={handleEnterDown}
             ></textarea>
-            <button class={ns.saveButton} onClick={handleAddNotes}>
+            <button className={ns.saveButton} onClick={handleAddNotes}>
               Add Notes
             </button>
           </div>
@@ -364,4 +334,4 @@ function Note(props) {
   );
 }
 
-export default Note;
+export default React.memo(Note);

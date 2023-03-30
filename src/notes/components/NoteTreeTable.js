@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import React from "react";
 import NpcGen from "../../pages/NpcGen";
 import ns from "../../stylesheets/Note.module.scss";
 import ItemCreate from "./ItemCreate";
@@ -132,7 +133,7 @@ const NoteTreeTable = (props) => {
     } else {
       setActiveLinks([]);
     }
-  }, [props.selectedNode]);
+  }, [props]);
 
   return (
     <>
@@ -470,4 +471,4 @@ const NoteTreeTable = (props) => {
   );
 };
 
-export default NoteTreeTable;
+export default React.memo(NoteTreeTable);

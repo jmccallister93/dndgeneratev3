@@ -1,5 +1,6 @@
 import style from "../stylesheets/Navbar.module.scss";
 import { Link } from "react-router-dom";
+import React from "react";
 
 const Navbar = () => {
   return (
@@ -38,4 +39,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);
