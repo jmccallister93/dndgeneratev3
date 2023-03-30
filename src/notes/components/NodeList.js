@@ -7,34 +7,38 @@ const NodeList = (props) => {
 
   //Hanlde linking the nodes by node name
   const handleLinkNode = (nodeName, nodeUuid) => {
-    console.log(allLinks)
+    if (props.selectedNode.links.includes(nodeName)) {
+        return;
+    }
     setAllLinks((prevLinks) => [...prevLinks, nodeName]);
-    console.log(nodeName)
-  };
+};
 
   //Update the all links state with the selected node's links
   useEffect(() => {
-    setAllLinks([props.selectedNode.links])
+    setAllLinks([props.selectedNode.links]);
     // console.log(allLinks)
-  }, [props.selectedNode])
+  }, [props.selectedNode]);
 
   //Add the selected node's links to the all links state
   useEffect(() => {
     let newLinksArray = "";
-    if (allLinks && allLinks.length > 0 && allLinks.some(link => link !== null)) {
-        newLinksArray = allLinks.filter(link => link !== null).join(", ");
+    if (
+      allLinks &&
+      allLinks.length > 0 &&
+      allLinks.some((link) => link !== null)
+    ) {
+      newLinksArray = allLinks.filter((link) => link !== null).join(", ");
     } else if (allLinks) {
-        newLinksArray = allLinks.join("");
+      newLinksArray = allLinks.join("");
     }
     props.updateSelectedNode({ ...props.selectedNode, links: newLinksArray });
     props.setPropertyValue(newLinksArray);
-}, [allLinks, props.selectedNode, props.setPropertyValue, props.updateSelectedNode]);
-
-  // useEffect(() => {
-  //   const newLinksArray = allLinks.join(", ");
-  //   props.updateSelectedNode({ ...props.selectedNode, links: newLinksArray });
-  //   props.setPropertyValue(newLinksArray);
-  // }, [allLinks, props.selectedNode, props.setPropertyValue, props.updateSelectedNode]);
+  }, [
+    allLinks,
+    props.selectedNode,
+    props.setPropertyValue,
+    props.updateSelectedNode,
+  ]);
 
   return (
     <div className={ns.nodeListWrapper}>
