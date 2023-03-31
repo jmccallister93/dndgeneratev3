@@ -17,7 +17,6 @@ function Note(props) {
   //Handles the change in the notes
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
-    
   };
 
   //Adds the notes to the array
@@ -30,7 +29,6 @@ function Note(props) {
     props.updateNote([...allNotes, ...newNotesArray].join("\n"));
     setNotes("");
     setSelectedNoteIndex(-1);
-    
   };
 
   //Passed the updated node to the parent component
@@ -42,7 +40,6 @@ function Note(props) {
     } catch (error) {
       console.error("Error updating note:" + error);
     }
-    
   };
 
   //Handles the enter key
@@ -119,12 +116,10 @@ function Note(props) {
     // setAllLinks([])
   };
 
-  useEffect(() => {
-    // console.log(props.selectedNode.links);
-    console.log(allLinks);
-  }, [props]);
-  
-  
+  // useEffect(() => {
+  //   // console.log(props.selectedNode.links);
+  //   console.log(allLinks);
+  // }, [props]);
 
   //Handles the linking of a selected node
   const handleLink = () => {
@@ -158,7 +153,7 @@ function Note(props) {
                     </button>
                   </div>
                   <div className={ns.popupHeader}>
-                    <h3>Current Links: {allLinks}</h3>
+                    <h3>Current Links: {props.selectedNode.links}</h3>
                   </div>
                   <NodeList
                     location={props.location}
