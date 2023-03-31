@@ -4,8 +4,9 @@ import style from "../../stylesheets/PageStyle.module.scss";
 
 const NodeList = (props) => {
   const [allLinks, setAllLinks] = useState(
-    props.selectedNode.links.split(",").map((link) => link.trim())
-  ).filter(Boolean);
+    props.selectedNode.links.trim() === [] ? null : 
+    props.selectedNode.links.split(",").map((link) => link.trim()).filter(Boolean)
+  );
 
   //Hanlde linking the nodes by node name
   const handleLinkNode = (nodeName, nodeUuid) => {
@@ -18,28 +19,16 @@ const NodeList = (props) => {
   useEffect(() => {
     props.updateProperty(
       "links",
-      allLinks.filter((link) => link !== null).join(", ")
+      allLinks.length === 0
+        ? props.selectedNode.links
+        : allLinks.filter((link) => link !== null).join(", ")
     );
     props.setAllLinks(allLinks);
-  }, [allLinks, props.updateProperty]);
+  }, [allLinks, props.selectedNode.links, props.updateProperty]);
 
-  useEffect(() => {
-    console.log("allLinks", allLinks);
-  }, [allLinks, props]);
-
-  //Add the selected node's links to the all links state
-  // useEffect(() => {
-  //   props.updateProperty(
-  //     "links",
-  //     allLinks.filter((link) => link !== null).join(", ")
-  //   );
-  // }, [allLinks, props]);
 
   return (
     <>
-      <div className={ns.popupHeader}>
-        <h3>Current Links: {props.selectedNode.links}</h3>
-      </div>
       <div className={ns.nodeListWrapper}>
         <div className={ns.nodeList}>
           <h2>Locations:</h2>

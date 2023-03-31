@@ -131,6 +131,16 @@ function Note(props) {
     setShowNodesList(false);
   };
 
+  //HERHERHERHERHEREHERHERHERHERH
+  //Either use this to display alllinks or map out directly from props.selectedNode.links
+  useEffect(() => {
+    if (props.selectedNode && props.selectedNode.links) {
+      setAllLinks(props.selectedNode.links.split(", "));
+    } else {
+      return
+    }
+  }, [props]);
+
   return (
     <>
       {props.selectedNode !== undefined ? (
