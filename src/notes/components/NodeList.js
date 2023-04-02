@@ -12,8 +12,9 @@ const NodeList = (props) => {
   const handleLinkNode = (nodeName, nodeUuid) => {
     if (props.selectedNode.links.includes(nodeName)) {
       return;
-    }
+    } else {
     setAllLinks((prevLinks) => [...prevLinks, nodeName]);
+    }
   };
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const NodeList = (props) => {
         : allLinks.filter((link) => link !== null).join(", ")
     );
     props.setAllLinks(allLinks);
-  }, [allLinks, props.selectedNode.links, props.updateProperty]);
+  }, [allLinks, props]);
 
 
   return (

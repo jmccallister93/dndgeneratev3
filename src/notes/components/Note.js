@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useCallback } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 import NodeList from "./NodeList";
@@ -98,28 +98,25 @@ function Note(props) {
     props.updateFolder(newFolder.join("\n"));
   };
 
-  //Update links
-  // useEffect(() => {
-  //   if (props.selectedNode && props.selectedNode.links) {
-  //     setAllLinks(props.selectedNode.links.split(", "));
-  //   }
-  // }, [props]);
-
   //Handle Delete of a link
   const handleDeleteLink = (index) => {
-    allLinks.splice(index, 1);
+    const newLinks = allLinks.filter((_, i) => i !== index);
+    setAllLinks(newLinks);
     props.updateSelectedNode({
       ...props.selectedNode,
-      links: allLinks.join(", "),
+      links: newLinks.join(", "),
     });
-    props.setPropertyValue(allLinks.join(", "));
-    // setAllLinks([])
+    props.setPropertyValue(newLinks.join(", "));
   };
 
-  // useEffect(() => {
-  //   // console.log(props.selectedNode.links);
-  //   console.log(allLinks);
-  // }, [props]);
+  //Either use this to display alllinks or map out directly from props.selectedNode.links
+  useEffect(() => {
+    if (props.selectedNode && props.selectedNode.links) {
+      setAllLinks(props.selectedNode.links.split(", "));
+    } else {
+      setAllLinks([]);
+    }
+  }, [props]);
 
   //Handles the linking of a selected node
   const handleLink = () => {
@@ -130,16 +127,6 @@ function Note(props) {
   const handleCloseLink = () => {
     setShowNodesList(false);
   };
-
-  //HERHERHERHERHEREHERHERHERHERH
-  //Either use this to display alllinks or map out directly from props.selectedNode.links
-  useEffect(() => {
-    if (props.selectedNode && props.selectedNode.links) {
-      setAllLinks(props.selectedNode.links.split(", "));
-    } else {
-      return
-    }
-  }, [props]);
 
   return (
     <>
@@ -281,11 +268,31 @@ function Note(props) {
               <i className="pi pi-link"></i>
             </button>
           </h2>
-          {props.selectedNode && Object.keys(props.selectedNode).length ? (
+
+          {/* Mapped from the alllinks state */}
+          {/* {props.selectedNode && Object.keys(props.selectedNode).length ? (
             <ul>
               {allLinks.map((links, index) => (
                 <li key={index}>
                   <span>- {links} </span>
+                  <button
+                    className={ns.deleteButton}
+                    onClick={() => handleDeleteLink(index)}
+                    title="Delete"
+                  >
+                    <i className="pi pi-trash"></i>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : null} */}
+
+          {/* Directly from property of object */}
+          {props.selectedNode && props.selectedNode.links ? (
+            <ul>
+              {props.selectedNode.links.split(",").map((link, index) => (
+                <li key={index}>
+                  <span>- {link.trim()}</span>
                   <button
                     className={ns.deleteButton}
                     onClick={() => handleDeleteLink(index)}
