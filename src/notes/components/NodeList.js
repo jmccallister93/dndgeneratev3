@@ -3,13 +3,9 @@ import ns from "../../stylesheets/Note.module.scss";
 import style from "../../stylesheets/PageStyle.module.scss";
 
 const NodeList = (props) => {
-  const [allLinks, setAllLinks] = useState(
-    // props.selectedNode.links.trim() === [] ? null :
-    // props.selectedNode.links.split(",").map((link) => link.trim()).filter(Boolean)
-    props.allLinks
-  );
-    const [testNode, setTestNode] = useState(props.selectedNode.name);
-    
+  const [allLinks, setAllLinks] = useState(props.allLinks);
+  const [testNode, setTestNode] = useState(props.selectedNode.name);
+
   //Hanlde linking the nodes by node name
   const handleLinkNode = (nodeName, nodeUuid) => {
     if (
@@ -37,7 +33,7 @@ const NodeList = (props) => {
 
   //Update the links property of the second node
   useEffect(() => {
-      props.updateLinkedProperty( "links", testNode );
+    props.updateLinkedProperty("links", testNode);
   }, [props, testNode]);
 
   return (

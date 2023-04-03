@@ -120,18 +120,16 @@ function NotePage() {
   };
 
   //Updating the linked nodes
-//Updating the linked nodes
-const updateLinkNode = async (linkNode) => {
-  // console.log("Fired from parent")
-  try {
-    const response = await supabase
-      .from(linkDbTable)
-      .update(linkNode) // extract the 'links' property from the argument
-      .eq("uuid", idToLink);
-  } catch (error) {
-    console.error("Error updating note:" + error);
-  }
-};
+  const updateLinkNode = async (linkNode) => {
+    try {
+      const response = await supabase
+        .from(linkDbTable)
+        .update(linkNode)
+        .eq("uuid", idToLink);
+    } catch (error) {
+      console.error("Error updating note:" + error);
+    }
+  };
 
   //Delete Node
   const deleteSelectedNode = async () => {
@@ -378,6 +376,7 @@ const updateLinkNode = async (linkNode) => {
     );
     setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
     setNodeToLink(allDetails.find((r) => r.uuid === idToLink));
+    console.log("going crazy")
   }, [
     selectedId,
     idToLink,
@@ -387,13 +386,6 @@ const updateLinkNode = async (linkNode) => {
     questDetails,
     itemDetails,
   ]);
-
-
-
-  //Firing for testing
-  // useEffect(() => {
-  //   updateLinkNode();
-  // }, [selectedNode, idToLink, nodeToLink, linkDbTable]);
 
   return (
     <div className={style.mainWrapper}>

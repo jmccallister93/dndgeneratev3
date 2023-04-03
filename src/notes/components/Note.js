@@ -44,7 +44,6 @@ function Note(props) {
 
   //Passed the updated Link Node to parent component
   const updateLinkedProperty = async (property, value) => {
-    console.log("Fired from child")
     try {
       const updatedLinkNode = { ...props.nodeToLink, [property]: value };
       await props.updateLinkNode(updatedLinkNode); // call the function
@@ -123,7 +122,6 @@ function Note(props) {
    
   };
 
-  // console.log(allLinks[index])
   //Either use this to display alllinks or map out directly from props.selectedNode.links
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.links) {
