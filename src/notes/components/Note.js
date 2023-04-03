@@ -35,7 +35,7 @@ function Note(props) {
   const updateProperty = async (property, value) => {
     try {
       const updatedNode = { ...props.selectedNode, [property]: value };
-      await props.updateSelectedNode(updatedNode); // call the function
+      await props.updateSelectedNode(updatedNode);
       props.setPropertyValue(value);
     } catch (error) {
       console.error("Error updating note:" + error);
@@ -43,10 +43,22 @@ function Note(props) {
   };
 
   //Passed the updated Link Node to parent component
+  // const updateLinkedProperty = async (property, value) => {
+  //   try {
+  //     const updatedLinkNode = { ...props.nodeToLink, [property]: value };
+  //     await props.updateLinkNode(updatedLinkNode);
+  //     // props.setPropertyValue(value);
+  //   } catch (error) {
+  //     console.error("Error updating note:" + error);
+  //   }
+  // };
+
+//ISSUES with THIS
+
   const updateLinkedProperty = async (property, value) => {
     try {
-      const updatedLinkNode = { ...props.nodeToLink, [property]: value };
-      await props.updateLinkNode(updatedLinkNode); // call the function
+      const updatedLinkNode = { ...(props.nodeToLink || {}), [property]: value };
+      await props.updateLinkNode(updatedLinkNode);
       props.setPropertyValue(value);
     } catch (error) {
       console.error("Error updating note:" + error);

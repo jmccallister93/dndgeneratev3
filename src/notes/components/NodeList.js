@@ -4,7 +4,7 @@ import style from "../../stylesheets/PageStyle.module.scss";
 
 const NodeList = (props) => {
   const [allLinks, setAllLinks] = useState(props.allLinks);
-  const [testNode, setTestNode] = useState(props.selectedNode.name);
+  const [testNode, setTestNode] = useState("");
 
   //Hanlde linking the nodes by node name
   const handleLinkNode = (nodeName, nodeUuid) => {
@@ -17,7 +17,7 @@ const NodeList = (props) => {
       setAllLinks((prevLinks) => [...prevLinks, nodeName]);
     }
     props.setIdToLink(nodeUuid);
-    // setTestNode(props.selectedNode.name);
+    setTestNode(props.selectedNode.name);
   };
 
   //Update the links property of the selected node
@@ -31,9 +31,14 @@ const NodeList = (props) => {
     props.setAllLinks(allLinks);
   }, [allLinks, props]);
 
+
+//ISSUES with THIS
+
   //Update the links property of the second node
   useEffect(() => {
-    props.updateLinkedProperty("links", testNode);
+    if (testNode !== "") {
+      props.updateLinkedProperty("links", testNode);
+    }
   }, [props, testNode]);
 
   return (
