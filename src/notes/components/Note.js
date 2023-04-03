@@ -100,15 +100,19 @@ function Note(props) {
 
   //Handle Delete of a link
   const handleDeleteLink = (index) => {
-    const newLinks = allLinks.filter((_, i) => i !== index);
+    // const newLinks = allLinks.filter((_, i) => i !== index);
+    const newLinks = [...allLinks];
+    newLinks.splice(index, 1);
     setAllLinks(newLinks);
     props.updateSelectedNode({
       ...props.selectedNode,
       links: newLinks.join(", "),
     });
     props.setPropertyValue(newLinks.join(", "));
+   
   };
 
+  // console.log(allLinks[index])
   //Either use this to display alllinks or map out directly from props.selectedNode.links
   useEffect(() => {
     if (props.selectedNode && props.selectedNode.links) {
@@ -270,7 +274,7 @@ function Note(props) {
           </h2>
 
           {/* Mapped from the alllinks state */}
-          {/* {props.selectedNode && Object.keys(props.selectedNode).length ? (
+          {props.selectedNode && Object.keys(props.selectedNode).length ? (
             <ul>
               {allLinks.map((links, index) => (
                 <li key={index}>
@@ -285,10 +289,10 @@ function Note(props) {
                 </li>
               ))}
             </ul>
-          ) : null} */}
+          ) : null}
 
           {/* Directly from property of object */}
-          {props.selectedNode && props.selectedNode.links ? (
+          {/* {props.selectedNode && props.selectedNode.links ? (
             <ul>
               {props.selectedNode.links.split(",").map((link, index) => (
                 <li key={index}>
@@ -303,7 +307,7 @@ function Note(props) {
                 </li>
               ))}
             </ul>
-          ) : null}
+          ) : null} */}
           <h2>Notes</h2>
           {props.selectedNode && Object.keys(props.selectedNode).length ? (
             <ul>

@@ -98,8 +98,7 @@ function NotePage() {
     } catch (error) {
       console.error("Error updating note:" + error);
     }
-    // setPropertyValue(updatedNode);
-    
+    setPropertyValue(updatedNode);
   };
 
   //Delete Node
