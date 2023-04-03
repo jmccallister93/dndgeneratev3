@@ -42,6 +42,18 @@ function Note(props) {
     }
   };
 
+  //Passed the updated Link Node to parent component
+  const updateLinkedProperty = async (property, value) => {
+    console.log("Fired from child")
+    try {
+      const updatedLinkNode = { ...props.nodeToLink, [property]: value };
+      await props.updateLinkNode(updatedLinkNode); // call the function
+      props.setPropertyValue(value);
+    } catch (error) {
+      console.error("Error updating note:" + error);
+    }
+  };
+
   //Handles the enter key
   const handleEnterDown = (event) => {
     if (event.key === "Enter") {
@@ -100,7 +112,6 @@ function Note(props) {
 
   //Handle Delete of a link
   const handleDeleteLink = (index) => {
-    // const newLinks = allLinks.filter((_, i) => i !== index);
     const newLinks = [...allLinks];
     newLinks.splice(index, 1);
     setAllLinks(newLinks);
@@ -130,6 +141,7 @@ function Note(props) {
   //Handle the close button
   const handleCloseLink = () => {
     setShowNodesList(false);
+    props.setIdToLink("");
   };
 
   return (
@@ -168,6 +180,10 @@ function Note(props) {
                     updateSelectedNode={props.updateSelectedNode}
                     allLinks={allLinks}
                     setAllLinks={setAllLinks}
+                    setIdToLink={props.setIdToLink}
+                    idToLink={props.idToLink}
+                    updateLinkNode={props.updateLinkNode}
+                    updateLinkedProperty={updateLinkedProperty}
                   />
                 </div>
               </div>

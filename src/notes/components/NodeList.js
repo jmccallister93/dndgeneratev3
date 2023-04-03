@@ -4,19 +4,27 @@ import style from "../../stylesheets/PageStyle.module.scss";
 
 const NodeList = (props) => {
   const [allLinks, setAllLinks] = useState(
-    props.selectedNode.links.trim() === [] ? null : 
-    props.selectedNode.links.split(",").map((link) => link.trim()).filter(Boolean)
+    // props.selectedNode.links.trim() === [] ? null :
+    // props.selectedNode.links.split(",").map((link) => link.trim()).filter(Boolean)
+    props.allLinks
   );
-
+    const [testNode, setTestNode] = useState(props.selectedNode.name);
+    
   //Hanlde linking the nodes by node name
   const handleLinkNode = (nodeName, nodeUuid) => {
-    if (props.selectedNode.links.includes(nodeName)) {
+    if (
+      props.selectedNode.links &&
+      props.selectedNode.links.includes(nodeName)
+    ) {
       return;
     } else {
-    setAllLinks((prevLinks) => [...prevLinks, nodeName]);
+      setAllLinks((prevLinks) => [...prevLinks, nodeName]);
     }
+    props.setIdToLink(nodeUuid);
+    // setTestNode(props.selectedNode.name);
   };
 
+  //Update the links property of the selected node
   useEffect(() => {
     props.updateProperty(
       "links",
@@ -27,6 +35,10 @@ const NodeList = (props) => {
     props.setAllLinks(allLinks);
   }, [allLinks, props]);
 
+  //Update the links property of the second node
+  useEffect(() => {
+      props.updateLinkedProperty( "links", testNode );
+  }, [props, testNode]);
 
   return (
     <>
