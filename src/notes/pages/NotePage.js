@@ -72,23 +72,23 @@ function NotePage() {
 
         //Linked DB Table
 
-        if (npcUuids.includes(idToLink)) {
-          setLinkDbTable("DBnpc");
-        } else if (locationUuids.includes(idToLink)) {
-          setLinkDbTable("DBlocation");
-        } else if (organizationUuids.includes(idToLink)) {
-          setLinkDbTable("DBorganization");
-        } else if (questUuids.includes(idToLink)) {
-          setLinkDbTable("DBquest");
-        } else if (itemUuids.includes(idToLink)) {
-          setLinkDbTable("DBitem");
-        }
+        // if (npcUuids.includes(idToLink)) {
+        //   setLinkDbTable("DBnpc");
+        // } else if (locationUuids.includes(idToLink)) {
+        //   setLinkDbTable("DBlocation");
+        // } else if (organizationUuids.includes(idToLink)) {
+        //   setLinkDbTable("DBorganization");
+        // } else if (questUuids.includes(idToLink)) {
+        //   setLinkDbTable("DBquest");
+        // } else if (itemUuids.includes(idToLink)) {
+        //   setLinkDbTable("DBitem");
+        // }
       } catch (error) {
         console.error("Error fetching tables:", error);
       }
     };
     fetchUuidsAndTableNames();
-  }, [selectedId, idToLink]);
+  }, [selectedId]);
 
   //RENDERS PER CHARCTER TYPED
   //Update Note from NoteText
@@ -121,16 +121,16 @@ function NotePage() {
   //ISSUES with THIS
 
   //Updating the linked nodes
-  const updateLinkNode = async (linkNode) => {
-    try {
-      const response = await supabase
-        .from(linkDbTable)
-        .update(linkNode)
-        .eq("uuid", idToLink);
-    } catch (error) {
-      console.error("Error updating note:" + error);
-    }
-  };
+  // const updateLinkNode = async (linkNode) => {
+  //   try {
+  //     const response = await supabase
+  //       .from(linkDbTable)
+  //       .update(linkNode)
+  //       .eq("uuid", idToLink);
+  //   } catch (error) {
+  //     console.error("Error updating note:" + error);
+  //   }
+  // };
 
   //Delete Node
   const deleteSelectedNode = async () => {
@@ -389,7 +389,7 @@ function NotePage() {
 
 
   //ISSUES with THIS
-  
+
   const handleSelectedNode = useCallback(() => {
     const allDetails = npcDetails.concat(
       locationDetails,
@@ -398,10 +398,10 @@ function NotePage() {
       itemDetails
     );
     setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
-    setNodeToLink(allDetails.find((r) => r.uuid === idToLink));
+    // setNodeToLink(allDetails.find((r) => r.uuid === idToLink));
   }, [
     selectedId,
-    idToLink,
+    // idToLink,
     npcDetails,
     locationDetails,
     organizationDetails,
@@ -445,9 +445,9 @@ function NotePage() {
           updateNote={updateNote}
           updateSelectedNode={updateSelectedNode}
           setPropertyValue={setPropertyValue}
-          setIdToLink={setIdToLink}
-          idToLink={idToLink}
-          updateLinkNode={updateLinkNode}
+          // setIdToLink={setIdToLink}
+          // idToLink={idToLink}
+          // updateLinkNode={updateLinkNode}
         />
       </div>
     </div>

@@ -55,15 +55,15 @@ function Note(props) {
 
 //ISSUES with THIS
 
-  const updateLinkedProperty = async (property, value) => {
-    try {
-      const updatedLinkNode = { ...(props.nodeToLink || {}), [property]: value };
-      await props.updateLinkNode(updatedLinkNode);
-      props.setPropertyValue(value);
-    } catch (error) {
-      console.error("Error updating note:" + error);
-    }
-  };
+  // const updateLinkedProperty = async (property, value) => {
+  //   try {
+  //     const updatedLinkNode = { ...(props.nodeToLink || {}), [property]: value };
+  //     await props.updateLinkNode(updatedLinkNode);
+  //     props.setPropertyValue(value);
+  //   } catch (error) {
+  //     console.error("Error updating note:" + error);
+  //   }
+  // };
 
   //Handles the enter key
   const handleEnterDown = (event) => {
@@ -151,7 +151,7 @@ function Note(props) {
   //Handle the close button
   const handleCloseLink = () => {
     setShowNodesList(false);
-    props.setIdToLink("");
+    // props.setIdToLink("");
   };
 
   return (
@@ -190,10 +190,10 @@ function Note(props) {
                     updateSelectedNode={props.updateSelectedNode}
                     allLinks={allLinks}
                     setAllLinks={setAllLinks}
-                    setIdToLink={props.setIdToLink}
-                    idToLink={props.idToLink}
-                    updateLinkNode={props.updateLinkNode}
-                    updateLinkedProperty={updateLinkedProperty}
+                    // setIdToLink={props.setIdToLink}
+                    // idToLink={props.idToLink}
+                    // updateLinkNode={props.updateLinkNode}
+                    // updateLinkedProperty={updateLinkedProperty}
                   />
                 </div>
               </div>

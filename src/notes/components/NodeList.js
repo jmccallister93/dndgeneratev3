@@ -16,8 +16,8 @@ const NodeList = (props) => {
     } else {
       setAllLinks((prevLinks) => [...prevLinks, nodeName]);
     }
-    props.setIdToLink(nodeUuid);
-    setTestNode(props.selectedNode.name);
+    // props.setIdToLink(nodeUuid);
+    // setTestNode(props.selectedNode.name);
   };
 
   //Update the links property of the selected node
@@ -35,11 +35,11 @@ const NodeList = (props) => {
 //ISSUES with THIS
 
   //Update the links property of the second node
-  useEffect(() => {
-    if (testNode !== "") {
-      props.updateLinkedProperty("links", testNode);
-    }
-  }, [props, testNode]);
+  // useEffect(() => {
+  //   if (testNode !== "") {
+  //     props.updateLinkedProperty("links", testNode);
+  //   }
+  // }, [props, testNode]);
 
   return (
     <>
