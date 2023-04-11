@@ -22,7 +22,6 @@ const SignUp = () => {
       console.log(user);
     }
   }
-
  
 
   //handle form submit

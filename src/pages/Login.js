@@ -1,15 +1,14 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase } from "../config/supabaseClient";
 import { useState } from "react";
 
 const Login = () => {
 
-   const auth = supabase.auth
 
   //login function
   async function handleLogin(email, password) {
-    const { user, error } = await auth.signIn({
+    const { user, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
