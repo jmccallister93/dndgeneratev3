@@ -1,32 +1,30 @@
 import style from "../stylesheets/Navbar.module.scss";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { supabase } from "../config/supabaseClient";
+import { SessionContext } from "../config/SessionContext";
 
-const Navbar = () => {
-  const [loggedUser, setLoggedUser] = useState(null);
 
-  const [session, setSession] = useState(null);
+const Navbar = (props) => {
+  const session = useContext(SessionContext);
+  // const [session, setSession] = useState(null);
 
+  //Checks if user is logged in
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+      // setSession(session);
+      props.updateSessionContext(session);
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+      // setSession(session);
+      props.updateSessionContext(session);
     });
 
     return () => subscription.unsubscribe();
   }, []);
-
-  // //Checks if user is logged in
-  // useEffect(() => {
-  //   const currentUser = supabase.auth.user();
-  //   setLoggedUser(currentUser);
-  // }, []);
 
   //Logs in using Google Auth
   async function handleLogin() {
@@ -44,10 +42,9 @@ const Navbar = () => {
   //Signs out
   async function handleLogout() {
     await supabase.auth.signOut();
-    setLoggedUser(null);
+    // setSession(null);
+    props.updateSessionContext(null);
   }
-
-  console.log(session);
 
   return (
     <div className={style.navbarWrapper}>
@@ -55,18 +52,15 @@ const Navbar = () => {
         <Link to="/">
           <li className={style.navbarLi}>Home</li>
         </Link>
-        <Link to="/notes">
+        <Link to="/notes" session={session}>
           <li className={style.navbarLi}>Campaign</li>
         </Link>
-        <Link to="/create">
+        <Link to="/create" session={session}>
           <li className={style.navbarLi}>Create</li>
         </Link>
-        <Link to="/collectionpage">
+        <Link to="/collectionpage" session={session}>
           <li className={style.navbarLi}>Collections</li>
         </Link>
-        {/* <Link to="/about">
-          <li className={style.navbarLi}>About</li>
-        </Link> */}
       </ul>
 
       {session ? (
@@ -82,7 +76,7 @@ const Navbar = () => {
         <div className={style.navbarLoginWrapper}>
           <div className={style.navbarBtnWrapper}>
             <button className={style.navbarLoginBtn} onClick={handleLogin}>
-              Login with Google
+              Login with Google <i className="pi pi-google"></i>
             </button>
           </div>
         </div>

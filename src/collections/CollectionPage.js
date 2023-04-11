@@ -72,7 +72,7 @@ const CollectionPage = () => {
 
   return (
     <div className={style.collectionWrapper}>
-      <Navbar />
+      {/* <Navbar /> */}
       <h1 className={style.collectionHeader}>Collections</h1>
       <div className={style.collectionCardWrapper}>
         {isNpcActive ? (

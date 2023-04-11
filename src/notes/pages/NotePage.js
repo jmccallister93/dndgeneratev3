@@ -6,7 +6,7 @@ import ns from "../../stylesheets/Note.module.scss";
 import Note from "../components/Note";
 import NoteTree from "../components/NoteTree";
 
-function NotePage() {
+function NotePage(props) {
   const [selectedId, setSelectedId] = useState({});
   const [selectedName, setSelectedName] = useState({});
   const [selectedNode, setSelectedNode] = useState({});
@@ -361,7 +361,11 @@ function NotePage() {
 
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
+      {/* <Navbar /> */}
+      {props.session === null ? (
+        <p>Test</p> ) : 
+          (<p>Testing</p>
+      ) }
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Campaign Notes</h1>
       </div>

@@ -5,7 +5,7 @@ import NotePage from "../notes/pages/NotePage";
 import ns from "../stylesheets/Note.module.scss";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
   const createDescription =
     "Generate and customize random characters, monsters, items, and more!";
 
@@ -41,7 +41,7 @@ const Home = () => {
 
   return (
     <div className={style.homeWrapper}>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className={style.homeHeader}>Welcome to DnD Generate</div>
       <div className={style.homeCardWrapper}>
         <BasicCard

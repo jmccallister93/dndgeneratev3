@@ -1,12 +1,14 @@
 import { Card } from "primereact/card";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
+import { SessionContext } from "../config/SessionContext";
 
 const Create = () => {
   const [isIndividualActive, setIsIndividualActive] = useState(false);
   const [isModuleActive, setIsModuleActive] = useState(false);
+  const session = useContext(SessionContext);
 
   const cardNpcGen = (
     <Card className={style.createCard}>
@@ -196,8 +198,9 @@ const Create = () => {
   };
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
+      {/* <Navbar /> */}
       <h1 className={style.createHeader}>Create</h1>
+      {session === null ? (<p>Please Login to continue</p>) : (
       <div className={style.createCardWrapper}>
           <Link className={style.createLink} to="/npcgen">
             {cardNpcGen}
@@ -238,7 +241,7 @@ const Create = () => {
           {/* <Link className={style.createLink} to="/spellgen">
             {cardSpellGen}
           </Link> */}
-        </div>
+        </div>)}
     </div>
   );
 };
