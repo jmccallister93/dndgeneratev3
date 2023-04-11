@@ -346,6 +346,19 @@ textarea {
   
 }
 
+.popupLogin {
+  position: relative;
+  width: 30%;
+  height: 30%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  // overflow-y: scroll; /* add vertical scroll */
+  overflow-x: hidden; /* hide horizontal scroll */
+  background-color: #393e46;
+  border-radius: 10px;
+  
+}
+
 
 .popupHeader {
   display: flex;

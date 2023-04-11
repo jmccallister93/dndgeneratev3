@@ -3,59 +3,41 @@ import style from "../stylesheets/PageStyle.module.scss";
 import { supabase } from "../config/supabaseClient";
 import { useState } from "react";
 
-const Login = () => {
-
-
+const Login = (props) => {
   //login function
-  async function handleLogin(email, password) {
-    const { user, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+  async function handleLogin() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
     });
 
     if (error) {
       console.log(error.message);
     } else {
-      console.log(user);
+      console.log(data);
     }
   }
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  async function signout() {
+    const { error } = await supabase.auth.signOut();
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleLogin(email, password);
+    handleLogin();
   };
 
   return (
-    <div className={style.mainWrapper}>
-      <Navbar />
+    <>
       <div>
-        <h1 className={style.mainHeader}>Login</h1>
-      </div>
-      <form className={style.form} onSubmit={handleSubmit}>
-      <h3 className={style.formHeader}>Email: </h3>
-        <input
-          className={style.formInput}
-          type="email"
-          value={email}
-          placeholder="123abc@gmail.com"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <h3 className={style.formHeader}>Password: </h3>
-        <input
-          className={style.formInput}
-          placeholder="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className={style.formButton} type="submit">
-          Login
+        <button
+          className={style.formButton}
+          type="submit"
+          onClick={handleSubmit}
+        >
+          Login with Google <i className="pi pi-google"></i>
         </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 

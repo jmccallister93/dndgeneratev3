@@ -34,10 +34,12 @@ import CollectionPage from "./collections/CollectionPage";
 function App() {
   return (
     <div className="app">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Home />} />
+          <Route path="/dndgeneratev3" element={<Home />} />
           <Route path="/create" element={<Create />} />
           <Route path="/collectionpage" element={<CollectionPage />} />
           <Route path="/about" element={<About />} />

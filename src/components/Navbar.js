@@ -1,8 +1,38 @@
 import style from "../stylesheets/Navbar.module.scss";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { supabase } from "../config/supabaseClient";
 
 const Navbar = () => {
+  const [loggedUser, setLoggedUser] = useState(null);
+
+  // ISSUE IS BELOW
+
+  //Checks if user is logged in
+  // useEffect(() => {
+  //   const currentUser = supabase.auth.user();
+  //   setLoggedUser(currentUser);
+  // }, []);
+
+  //Logs in using Google Auth
+  async function handleLogin() {
+    const { user, session, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+
+    if (error) {
+      console.log(error.message);
+    } else {
+      console.log(user);
+    }
+  }
+
+  //Signs out
+  async function handleLogout() {
+    await supabase.auth.signOut();
+    setLoggedUser(null);
+  }
+
   return (
     <div className={style.navbarWrapper}>
       <ul className={style.navbarUl}>
@@ -21,20 +51,33 @@ const Navbar = () => {
         {/* <Link to="/about">
           <li className={style.navbarLi}>About</li>
         </Link> */}
-        
       </ul>
 
-      <div className={style.navbarLoginWrapper}>
+      {/* <div className={style.navbarLoginWrapper}>
         <div className={style.navbarBtnWrapper}>
-          <Link to="/login">
-            <button className={style.navbarLoginBtn}>Login</button>
-          </Link>
-          <p>OR</p>
-          <Link to="/signup">
-            <button className={style.navbarSignupBtn}>Sign Up</button>
-          </Link>
+          <button className={style.navbarLoginBtn} onClick={handleSubmit}>
+            Login with Google
+          </button>
         </div>
-      </div>
+      </div> */}
+      {loggedUser ? (
+        <div className={style.navbarLoginWrapper}>
+          <div className={style.navbarBtnWrapper}>
+            <button className={style.navbarLoginBtn} onClick={handleLogout}>
+              Logout
+            </button>
+            <div className={style.navbarEmail}>{loggedUser.email}</div>
+          </div>
+        </div>
+      ) : (
+        <div className={style.navbarLoginWrapper}>
+          <div className={style.navbarBtnWrapper}>
+            <button className={style.navbarLoginBtn} onClick={handleLogin}>
+              Login with Google
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
