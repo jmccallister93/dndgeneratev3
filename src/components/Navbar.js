@@ -6,9 +6,23 @@ import { supabase } from "../config/supabaseClient";
 const Navbar = () => {
   const [loggedUser, setLoggedUser] = useState(null);
 
-  // ISSUE IS BELOW
+  const [session, setSession] = useState(null);
 
-  //Checks if user is logged in
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // //Checks if user is logged in
   // useEffect(() => {
   //   const currentUser = supabase.auth.user();
   //   setLoggedUser(currentUser);
@@ -33,6 +47,8 @@ const Navbar = () => {
     setLoggedUser(null);
   }
 
+  console.log(session);
+
   return (
     <div className={style.navbarWrapper}>
       <ul className={style.navbarUl}>
@@ -53,20 +69,13 @@ const Navbar = () => {
         </Link> */}
       </ul>
 
-      {/* <div className={style.navbarLoginWrapper}>
-        <div className={style.navbarBtnWrapper}>
-          <button className={style.navbarLoginBtn} onClick={handleSubmit}>
-            Login with Google
-          </button>
-        </div>
-      </div> */}
-      {loggedUser ? (
+      {session ? (
         <div className={style.navbarLoginWrapper}>
+          <div className={style.navbarEmail}>{session.user.email}</div>
           <div className={style.navbarBtnWrapper}>
             <button className={style.navbarLoginBtn} onClick={handleLogout}>
               Logout
             </button>
-            <div className={style.navbarEmail}>{loggedUser.email}</div>
           </div>
         </div>
       ) : (

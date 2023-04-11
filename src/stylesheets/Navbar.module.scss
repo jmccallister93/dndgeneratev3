@@ -36,7 +36,7 @@ $primary-light: #d6e4e5;
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 0.5rem;
   color: $primary-light;
   & p {
     padding-left: 1rem;
@@ -51,13 +51,24 @@ $primary-light: #d6e4e5;
     color: $primary-light;
     &:hover {
       color: white;
-     background-color: rgba(8, 119, 223, 0.75);
+      background-color: rgba(8, 119, 223, 0.75);
       cursor: pointer;
     }
   }
 }
 
+.navbarLoginWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.navbarEmail {
+  font-size: 1.2rem;
+  color: white;
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+}
 
 // .navbarLoginWrapper {
 //   color: $primary-light;
@@ -74,4 +85,3 @@ $primary-light: #d6e4e5;
 //     width: 25%;
 //   }
 // }
-
