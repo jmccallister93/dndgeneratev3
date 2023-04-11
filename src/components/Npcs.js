@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import supabase from "../config/supabaseClient";
+import { supabase, auth } from "../config/supabaseClient";
 import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Column } from "jspdf-autotable";

@@ -22,13 +22,13 @@ $secondary-grey: #d6e4e5;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   place-items: center;
+  
 }
 
 .createCard {
   width: 25rem;
   margin-bottom: 2rem;
-  background-color: $secondary-grey;
-  border-radius: 10px;
+  border-radius: 1rem;
   padding: 1rem;
   transition: 0.3s;
   & h3 {

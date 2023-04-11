@@ -1,8 +1,9 @@
+import style from "../stylesheets/PageStyle.module.scss";
 import Navbar from "../components/Navbar";
 
 const About = () => {
     return ( 
-        <div className="about">
+        <div className={style.mainWrapper}>
             <Navbar />
         </div>
      );

@@ -18,9 +18,9 @@ const Navbar = () => {
         <Link to="/collectionpage">
           <li className={style.navbarLi}>Collections</li>
         </Link>
-        <Link to="/about">
+        {/* <Link to="/about">
           <li className={style.navbarLi}>About</li>
-        </Link>
+        </Link> */}
         
       </ul>
 

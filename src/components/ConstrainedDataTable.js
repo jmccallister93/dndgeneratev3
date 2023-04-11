@@ -2,7 +2,7 @@ import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import MultipleRandomButton from "./MultipleRandomButton";
 import { useEffect, useState } from "react";
-import supabase from "../config/supabaseClient";
+import { supabase, auth } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";

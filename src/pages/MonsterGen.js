@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import supabase from "../config/supabaseClient";
 import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";

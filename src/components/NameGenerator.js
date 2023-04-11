@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import supabase from "../config/supabaseClient";
+import { supabase, auth } from "../config/supabaseClient";
 
 const NameGenerator = (props) => {
   const [fetchError, setFetchError] = useState(null);

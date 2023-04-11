@@ -3,7 +3,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import supabase from "../config/supabaseClient";
+import { supabase, auth } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 import SingleRandomButton from "./SingleRandomButton";
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import supabase from "../../config/supabaseClient";
+import { supabase, auth } from "../../config/supabaseClient";
 import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import ns from "../../stylesheets/Note.module.scss";
@@ -24,10 +24,6 @@ function NotePage() {
   const [deletedNode, setDeletedNode] = useState(null);
 
   const [dbTable, setDbTable] = useState("");
-
-  const [idToLink, setIdToLink] = useState("");
-  const [nodeToLink, setNodeToLink] = useState("");
-  const [linkDbTable, setLinkDbTable] = useState("");
 
   //Get Table Names
   useEffect(() => {
@@ -70,19 +66,6 @@ function NotePage() {
           setDbTable("DBitem");
         }
 
-        //Linked DB Table
-
-        // if (npcUuids.includes(idToLink)) {
-        //   setLinkDbTable("DBnpc");
-        // } else if (locationUuids.includes(idToLink)) {
-        //   setLinkDbTable("DBlocation");
-        // } else if (organizationUuids.includes(idToLink)) {
-        //   setLinkDbTable("DBorganization");
-        // } else if (questUuids.includes(idToLink)) {
-        //   setLinkDbTable("DBquest");
-        // } else if (itemUuids.includes(idToLink)) {
-        //   setLinkDbTable("DBitem");
-        // }
       } catch (error) {
         console.error("Error fetching tables:", error);
       }
@@ -117,20 +100,6 @@ function NotePage() {
     }
     setPropertyValue(updatedNode);
   };
-
-  //ISSUES with THIS
-
-  //Updating the linked nodes
-  // const updateLinkNode = async (linkNode) => {
-  //   try {
-  //     const response = await supabase
-  //       .from(linkDbTable)
-  //       .update(linkNode)
-  //       .eq("uuid", idToLink);
-  //   } catch (error) {
-  //     console.error("Error updating note:" + error);
-  //   }
-  // };
 
   //Delete Node
   const deleteSelectedNode = async () => {
@@ -367,29 +336,8 @@ function NotePage() {
     fetchData();
   }, [noteText, propertyValue, deletedNode]);
 
-  //Get Selected node based on uuid
-  // useEffect(() => {
-  //   const allDetails = npcDetails.concat(
-  //     locationDetails,
-  //     organizationDetails,
-  //     questDetails,
-  //     itemDetails
-  //   );
-  //   setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
-  //   setNodeToLink(allDetails.find((r) => r.uuid === idToLink));
-  // }, [
-  //   selectedId,
-  //   idToLink,
-  //   npcDetails,
-  //   locationDetails,
-  //   organizationDetails,
-  //   questDetails,
-  //   itemDetails,
-  // ]);
 
-
-  //ISSUES with THIS
-
+  //Gets details of selected node
   const handleSelectedNode = useCallback(() => {
     const allDetails = npcDetails.concat(
       locationDetails,
@@ -398,10 +346,8 @@ function NotePage() {
       itemDetails
     );
     setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
-    // setNodeToLink(allDetails.find((r) => r.uuid === idToLink));
   }, [
     selectedId,
-    // idToLink,
     npcDetails,
     locationDetails,
     organizationDetails,
@@ -445,9 +391,6 @@ function NotePage() {
           updateNote={updateNote}
           updateSelectedNode={updateSelectedNode}
           setPropertyValue={setPropertyValue}
-          // setIdToLink={setIdToLink}
-          // idToLink={idToLink}
-          // updateLinkNode={updateLinkNode}
         />
       </div>
     </div>

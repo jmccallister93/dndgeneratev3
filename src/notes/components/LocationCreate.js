@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import supabase from "../../config/supabaseClient";
 import { Button } from "primereact/button";
 import { e, i, number } from "mathjs";
 import { DataTable } from "primereact/datatable";

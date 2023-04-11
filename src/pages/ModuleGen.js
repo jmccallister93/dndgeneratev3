@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import supabase from "../config/supabaseClient";
 import { Button } from "primereact/button";
 import ClearButton from "../components/ClearButton";
 import Npcs from "../components/Npcs";

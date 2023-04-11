@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
 import styleB from "../stylesheets/BuildingGen.module.scss";
-import supabase from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";

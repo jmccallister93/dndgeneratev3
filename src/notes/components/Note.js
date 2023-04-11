@@ -9,8 +9,6 @@ function Note(props) {
   const [allLinks, setAllLinks] = useState([]);
   const [allFolders, setAllFolders] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
-  const [selectedLinkIndex, setSelectedLinkIndex] = useState(-1);
-  const [selectedFolderIndex, setSelectedFolderIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
   const [showNodesList, setShowNodesList] = useState(false);
 
@@ -41,29 +39,6 @@ function Note(props) {
       console.error("Error updating note:" + error);
     }
   };
-
-  //Passed the updated Link Node to parent component
-  // const updateLinkedProperty = async (property, value) => {
-  //   try {
-  //     const updatedLinkNode = { ...props.nodeToLink, [property]: value };
-  //     await props.updateLinkNode(updatedLinkNode);
-  //     // props.setPropertyValue(value);
-  //   } catch (error) {
-  //     console.error("Error updating note:" + error);
-  //   }
-  // };
-
-//ISSUES with THIS
-
-  // const updateLinkedProperty = async (property, value) => {
-  //   try {
-  //     const updatedLinkNode = { ...(props.nodeToLink || {}), [property]: value };
-  //     await props.updateLinkNode(updatedLinkNode);
-  //     props.setPropertyValue(value);
-  //   } catch (error) {
-  //     console.error("Error updating note:" + error);
-  //   }
-  // };
 
   //Handles the enter key
   const handleEnterDown = (event) => {
@@ -151,7 +126,6 @@ function Note(props) {
   //Handle the close button
   const handleCloseLink = () => {
     setShowNodesList(false);
-    // props.setIdToLink("");
   };
 
   return (

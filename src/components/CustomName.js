@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import supabase from "../config/supabaseClient";
+import { supabase, auth } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const CustomName = (props) => {

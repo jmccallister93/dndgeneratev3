@@ -13,7 +13,7 @@ const Create = () => {
       <h3>NPC Generator</h3>
       <p>
         Generate NPC's with the click of a button or customize and hand pick
-        your own!
+        your own! 
       </p>
     </Card>
   );
@@ -198,19 +198,7 @@ const Create = () => {
     <div className={style.mainWrapper}>
       <Navbar />
       <h1 className={style.createHeader}>Create</h1>
-      <div className={style.createWrapper}>
-        <h1 className={style.subHeader2} onClick={showIndividual}>
-          Individual Items{" "}
-          {isIndividualActive ? (
-            <i className="pi pi-chevron-down"></i>
-          ) : (
-            <i className="pi pi-chevron-right"></i>
-          )}
-          <div
-          className={
-            isIndividualActive ? style.createCardWrapper : style.hidden
-          }
-        >
+      <div className={style.createCardWrapper}>
           <Link className={style.createLink} to="/npcgen">
             {cardNpcGen}
           </Link>
@@ -249,45 +237,8 @@ const Create = () => {
           </Link>
           {/* <Link className={style.createLink} to="/spellgen">
             {cardSpellGen}
-          </Link>
-          <Link className={style.createLink} to="/dungeongen">
-            {cardDungeonGen}
-          </Link>
-          <Link className={style.createLink} to="/trapgen">
-            {cardTrapGen}
-          </Link>
-          <Link className={style.createLink} to="/puzzlegen">
-            {cardPuzzleGen}
-          </Link>
-          <Link className={style.createLink} to="/encountergen">
-            {cardEncounterGen}
-          </Link>
-          <Link className={style.createLink} to="/classgen">
-            {cardClassGen}
-          </Link>
-          <Link className={style.createLink} to="/racegen">
-            {cardRaceGen}
           </Link> */}
         </div>
-        </h1>
-        <h1 className={style.subHeader2} onClick={showModule}>
-          Module{" "}
-          {isModuleActive ? (
-            <i className="pi pi-chevron-down"></i>
-          ) : (
-            <i className="pi pi-chevron-right"></i>
-          )}
-        </h1>
-        <div
-          className={
-            isModuleActive ? style.createCardWrapper : style.hidden
-          }
-        >
-          <Link className={style.createLink} to="/modulegen">
-            {cardModuleGen}
-          </Link>
-        </div>
-      </div>
     </div>
   );
 };

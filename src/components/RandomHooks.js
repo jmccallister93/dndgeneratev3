@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SingleDisplayText from "./SingleDisplayText";
-import supabase from "../config/supabaseClient";
+import { supabase, auth } from "../config/supabaseClient";
 import CustomName from "./CustomName";
 import { prodDependencies } from "mathjs";
 import NameGenerator from "./NameGenerator";

@@ -7,7 +7,6 @@ import LocationCreate from "./LocationCreate";
 import NpcCreate from "./NpcCreate";
 import OrganizationCreate from "./OrganizationCreate";
 import QuestCreate from "./QuestCreate";
-import supabase from "../../config/supabaseClient";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { useCallback } from "react";
 import ContextMenu from "./ContextMenu";
@@ -18,11 +17,6 @@ const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [activeLinks, setActiveLinks] = useState([]);
-  // const [location, setLocation] = useState({});
-  // const [npc, setNpc] = useState({});
-  // const [organization, setOrganization] = useState({});
-  // const [quest, setQuest] = useState({});
-  // const [item, setItem] = useState({});
 
   //Handle the create new button
   const handleCreate = () => {
@@ -37,18 +31,6 @@ const NoteTreeTable = (props) => {
   };
 
   useEffect(() => {}, [props.location]);
-
-  //Extract the names and uuids from the props
-  // const extractNames = (objectArray) => {
-  //   if (!Array.isArray(objectArray)) return [];
-  //   let names = [];
-  //   for (let obj of objectArray) {
-  //     names.push({ name: obj.name, uuid: obj.uuid });
-  //   }
-  //   return names;
-  // };
-
-  // const location = extractNames(props.location);
 
   const extractNames = (objectArray) => {
     if (!Array.isArray(objectArray)) return {};
@@ -99,28 +81,6 @@ const NoteTreeTable = (props) => {
     props.deleteSelectedNode();
     setShowDeleteConfirmation(false);
   };
-
-  //Re-render after update
-  // useEffect(() => {
-  //   setLocation(locationNames);
-  //   setNpc(npcNames);
-  //   setOrganization(organizationNames);
-  //   setQuest(questNames);
-  //   setItem(itemNames);
-  // }, [
-  //   // props.location,
-  //   // props.npc,
-  //   // props.organization,
-  //   // props.quest,
-  //   // props.item,
-  //   // props.updateProperty,
-  //   // props.selectedNode,
-  //   // locationNames,
-  //   // npcNames,
-  //   // organizationNames,
-  //   // questNames,
-  //   // itemNames,
-  // ]);
 
   //Update Links
   useEffect(() => {

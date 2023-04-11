@@ -3,7 +3,7 @@ import { jsPDF } from "jspdf";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "primereact/button";
 import PDF, { Text, AddPage, Line, Image, Table, Html } from "jspdf-react";
-import supabase from "../config/supabaseClient";
+import { supabase, auth } from "../config/supabaseClient";
 import { Toast } from "primereact/toast";
 
 const ExportButtons = (props) => {

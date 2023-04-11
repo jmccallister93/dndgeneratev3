@@ -1,8 +1,8 @@
-$primary-grey: #393E46;
-$secondary-grey: #d6e4e5;
+$primary-grey: #313439;
+$secondary-grey: #d6e4e5; 
 
 .collectionWrapper {
-  background: linear-gradient(135deg, $primary-grey 25%, white);
+  background: $primary-grey;
   height: 100vh;
   width: 100vw;
   display: inline-block;
@@ -27,8 +27,7 @@ $secondary-grey: #d6e4e5;
 .collectionCard {
   width: 25rem;
   margin-bottom: 2rem;
-  background-color: $secondary-grey;
-  border-radius: 10px;
+  border-radius: 2px;
   padding: 1rem;
   transition: 0.3s;
   & h3 {
@@ -39,7 +38,7 @@ $secondary-grey: #d6e4e5;
   }
   &:hover {
     /* offset-x | offset-y | blur-radius | spread-radius | color */
-    box-shadow: 1px 1px 5px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 5px 10px green;
     scale: 1.05;
     cursor: pointer;
   }
