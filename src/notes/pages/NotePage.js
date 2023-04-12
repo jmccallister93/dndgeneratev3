@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useContext } from "react";
 import { supabase, auth } from "../../config/supabaseClient";
 import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import ns from "../../stylesheets/Note.module.scss";
 import Note from "../components/Note";
 import NoteTree from "../components/NoteTree";
+import { SessionContext } from "../../config/SessionContext";
 
 function NotePage(props) {
+  const session = useContext(SessionContext);
+
   const [selectedId, setSelectedId] = useState({});
   const [selectedName, setSelectedName] = useState({});
   const [selectedNode, setSelectedNode] = useState({});
@@ -65,7 +68,6 @@ function NotePage(props) {
         } else if (itemUuids.includes(selectedId)) {
           setDbTable("DBitem");
         }
-
       } catch (error) {
         console.error("Error fetching tables:", error);
       }
@@ -336,7 +338,6 @@ function NotePage(props) {
     fetchData();
   }, [noteText, propertyValue, deletedNode]);
 
-
   //Gets details of selected node
   const handleSelectedNode = useCallback(() => {
     const allDetails = npcDetails.concat(
@@ -362,41 +363,43 @@ function NotePage(props) {
   return (
     <div className={style.mainWrapper}>
       {/* <Navbar /> */}
-      {props.session === null ? (
-        <p>Test</p> ) : 
-          (<p>Testing</p>
-      ) }
-      <div className={style.topHeader}>
-        <h1 className={style.mainHeader}>Campaign Notes</h1>
-      </div>
-      <div className={ns.grid2}>
-        <NoteTree
-          location={locationDetails}
-          npc={npcDetails}
-          organization={organizationDetails}
-          quest={questDetails}
-          item={itemDetails}
-          selectedNode={selectedNode}
-          setSelectedId={setSelectedId}
-          selectedId={selectedId}
-          setSelectedName={setSelectedName}
-          selectedName={selectedName}
-          deleteSelectedNode={deleteSelectedNode}
-          setShowPopup={setShowPopup}
-        />
-        <Note
-          location={locationDetails}
-          npc={npcDetails}
-          organization={organizationDetails}
-          quest={questDetails}
-          item={itemDetails}
-          selectedNode={selectedNode}
-          setSelectedNode={setSelectedNode}
-          updateNote={updateNote}
-          updateSelectedNode={updateSelectedNode}
-          setPropertyValue={setPropertyValue}
-        />
-      </div>
+      {session === null ? (
+        <p className={style.loginMessage}>Please Login to continue</p>
+      ) : (
+        <>
+          <div className={style.topHeader}>
+            <h1 className={style.mainHeader}>Campaign Notes</h1>
+          </div>
+          <div className={ns.grid2}>
+            <NoteTree
+              location={locationDetails}
+              npc={npcDetails}
+              organization={organizationDetails}
+              quest={questDetails}
+              item={itemDetails}
+              selectedNode={selectedNode}
+              setSelectedId={setSelectedId}
+              selectedId={selectedId}
+              setSelectedName={setSelectedName}
+              selectedName={selectedName}
+              deleteSelectedNode={deleteSelectedNode}
+              setShowPopup={setShowPopup}
+            />
+            <Note
+              location={locationDetails}
+              npc={npcDetails}
+              organization={organizationDetails}
+              quest={questDetails}
+              item={itemDetails}
+              selectedNode={selectedNode}
+              setSelectedNode={setSelectedNode}
+              updateNote={updateNote}
+              updateSelectedNode={updateSelectedNode}
+              setPropertyValue={setPropertyValue}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

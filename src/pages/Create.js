@@ -200,7 +200,6 @@ const Create = () => {
     <div className={style.mainWrapper}>
       {/* <Navbar /> */}
       <h1 className={style.createHeader}>Create</h1>
-      {session === null ? (<p>Please Login to continue</p>) : (
       <div className={style.createCardWrapper}>
           <Link className={style.createLink} to="/npcgen">
             {cardNpcGen}
@@ -241,7 +240,7 @@ const Create = () => {
           {/* <Link className={style.createLink} to="/spellgen">
             {cardSpellGen}
           </Link> */}
-        </div>)}
+        </div>
     </div>
   );
 };
