@@ -51,9 +51,11 @@ function App() {
     <div className="app">
       <SessionContext.Provider value={session}>
         {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
-        
         <BrowserRouter>
-        <Navbar updateSessionContext={updateSessionContext}/>
+          <Navbar
+            session={session}
+            updateSessionContext={updateSessionContext}
+          />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="*" element={<Home />} />

@@ -364,7 +364,7 @@ function NotePage(props) {
     <div className={style.mainWrapper}>
       {/* <Navbar /> */}
       {session === null ? (
-        <p className={style.loginMessage}>Please Login to continue</p>
+        <p className={style.loginMessage}>Please Login to continue to the Campaign Page.</p>
       ) : (
         <>
           <div className={style.topHeader}>

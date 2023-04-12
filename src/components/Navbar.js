@@ -7,24 +7,6 @@ import { SessionContext } from "../config/SessionContext";
 
 const Navbar = (props) => {
   const session = useContext(SessionContext);
-  // const [session, setSession] = useState(null);
-
-  //Checks if user is logged in
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      // setSession(session);
-      props.updateSessionContext(session);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      // setSession(session);
-      props.updateSessionContext(session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   //Logs in using Google Auth
   async function handleLogin() {
@@ -36,14 +18,14 @@ const Navbar = (props) => {
       console.log(error.message);
     } else {
       console.log(user);
+      const authWindow = window.open('', 'auth', 'height=800,width=600');
+    authWindow.location.href = session.provider_token.url;
     }
   }
 
   //Signs out
   async function handleLogout() {
     await supabase.auth.signOut();
-    // setSession(null);
-    props.updateSessionContext(null);
   }
 
   return (

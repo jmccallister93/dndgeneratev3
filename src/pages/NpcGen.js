@@ -425,7 +425,6 @@ const NpcGen = () => {
 
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}> 
         <h1 className={style.mainHeader}>NPC Generator</h1>
         <div className={style.topWrapper}>

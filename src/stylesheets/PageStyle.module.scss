@@ -514,9 +514,19 @@ $btn-blue: #2196f3;
   }
 
 .loginMessage{
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: $secondary-grey;
   margin-top: 2rem;
   justify-self: center;
   text-align: center;
+}
+
+.loginMessageSmall{
+  font-size: 1rem;
+  color: white;
+  justify-self: center;
+  text-align: center;
+  border-radius: 10px;
+  padding: 0.25rem;
+  background-color: rgb(0, 46, 252);
 }

@@ -1,12 +1,14 @@
 import style from "../stylesheets/PageStyle.module.scss";
 import { jsPDF } from "jspdf";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { Button } from "primereact/button";
 import PDF, { Text, AddPage, Line, Image, Table, Html } from "jspdf-react";
 import { supabase, auth } from "../config/supabaseClient";
 import { Toast } from "primereact/toast";
+import { SessionContext } from "../config/SessionContext";
 
 const ExportButtons = (props) => {
+  const session = useContext(SessionContext);
   //Create compnent that references to a props.div element and export it's content to a text file and pdf file
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
@@ -117,13 +119,21 @@ const ExportButtons = (props) => {
   return (
     <>
       <Toast ref={toast} />
-      <button
-        className={style.btnExport}
-        onClick={saveToDb}
-        title="Save to Database"
-      >
-        SAVE <i className="pi pi-cloud-upload"></i>
-      </button>
+      {session === null ? (
+        <p className={style.loginMessageSmall}>
+          Please Login to save to Database
+        </p>
+      ) : (
+        <>
+          <button
+            className={style.btnExport}
+            onClick={saveToDb}
+            title="Save to Database"
+          >
+            SAVE <i className="pi pi-cloud-upload"></i>
+          </button>
+        </>
+      )}
       <button
         className={style.btnExport}
         onClick={exportToPdf}
