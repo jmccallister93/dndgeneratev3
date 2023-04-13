@@ -60,33 +60,33 @@ const ExportButtons = (props) => {
     }
   }, [isHtmlReady, isDataReady]);
 
-//Create PDF
-useEffect(() => {
-  if (isReady) {
-    const doc = new jsPDF();
-    const css = {style}
-    const link = document.createElement("link");
-    link.href = "../stylesheets/PageStyle.module.css"; // specify the path to your compiled CSS file
-    link.rel = "stylesheet";
+  //Create PDF
+  useEffect(() => {
+    if (isReady) {
+      const doc = new jsPDF();
+      const css = { style };
+      const link = document.createElement("link");
+      link.href = "../stylesheets/PageStyle.module.css"; // specify the path to your compiled CSS file
+      link.rel = "stylesheet";
 
-    document.head.appendChild(link);
+      document.head.appendChild(link);
 
-    doc.html(html, {
-      callback: (pdf) => {
-        setPdf(pdf);
-        setIsPdfReady(true);
-      },
-      x: 1,
-      y: 1,
-      html2canvas: { scale: 0.1 },
-      useCORS: true,
-      margin: [5, 5, 5, 5],
-      padding: [10, 10, 10, 10],
-      pageSize: "A4",
-      css: compiledStyle,
-    });
-  }
-}, [isReady, html]);
+      doc.html(html, {
+        callback: (pdf) => {
+          setPdf(pdf);
+          setIsPdfReady(true);
+        },
+        x: 1,
+        y: 1,
+        html2canvas: { scale: 0.1 },
+        useCORS: true,
+        margin: [5, 5, 5, 5],
+        padding: [10, 10, 10, 10],
+        pageSize: "A4",
+        css: compiledStyle,
+      });
+    }
+  }, [isReady, html]);
 
   //Export PDF function
   const exportToPdf = () => {
@@ -144,7 +144,10 @@ useEffect(() => {
     <>
       <Toast ref={toast} />
       {session === null ? (
-        <></>
+        <p className={style.loginMessageSmall}>
+          <div>Login to Save to DataBase.</div>
+          <div>Will be redirected to Home Page.</div>
+        </p>
       ) : (
         <>
           <button

@@ -163,7 +163,7 @@ function NotePage(props) {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, deletedNode]);
+  }, [noteText, propertyValue, deletedNode, showPopup]);
 
   //Get NPCs
   useEffect(() => {
@@ -218,7 +218,7 @@ function NotePage(props) {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, deletedNode]);
+  }, [noteText, propertyValue, deletedNode, showPopup]);
 
   //Get Organizations
   useEffect(() => {
@@ -278,7 +278,7 @@ function NotePage(props) {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, deletedNode]);
+  }, [noteText, propertyValue, deletedNode, showPopup]);
 
   //Get Quests
   useEffect(() => {
@@ -310,7 +310,7 @@ function NotePage(props) {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, deletedNode]);
+  }, [noteText, propertyValue, deletedNode, showPopup]);
 
   //Get Items
   useEffect(() => {
@@ -342,7 +342,7 @@ function NotePage(props) {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, deletedNode]);
+  }, [noteText, propertyValue, deletedNode, showPopup]);
 
   //Gets details of selected node
   const handleSelectedNode = useCallback(() => {

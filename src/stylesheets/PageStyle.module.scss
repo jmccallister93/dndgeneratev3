@@ -522,11 +522,15 @@ $btn-blue: #2196f3;
 }
 
 .loginMessageSmall{
-  font-size: 1rem;
+  font-size: 0.75rem;
   color: white;
   justify-self: center;
   text-align: center;
   border-radius: 10px;
   padding: 0.25rem;
   background-color: rgb(0, 46, 252);
+  transition: 0.3s;
+  &:hover{
+    scale: 1.5;
+  }
 }
