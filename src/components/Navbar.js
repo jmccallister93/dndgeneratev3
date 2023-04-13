@@ -1,5 +1,5 @@
 import style from "../stylesheets/Navbar.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { supabase } from "../config/supabaseClient";
 import { SessionContext } from "../config/SessionContext";
@@ -7,6 +7,13 @@ import { SessionContext } from "../config/SessionContext";
 
 const Navbar = (props) => {
   const session = useContext(SessionContext);
+
+  const location = useLocation()
+
+  useEffect(() => {
+    console.log(window.location.origin + location.pathname)
+  }, [location])
+
 
   //Logs in using Google Auth
   async function handleLogin() {
