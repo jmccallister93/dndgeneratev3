@@ -23,8 +23,8 @@ const CollectionTable = (props) => {
 
   return (
     <>
-      <Card>
-        <h1 onClick={setPropActive}>
+      <Card >
+        <h1 onClick={setPropActive} className={style.collectionTitle}>
           {props.collectionTitle} <i className="pi pi-chevron-down"></i>
         </h1>
         {props.data.map((item, index) => (

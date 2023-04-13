@@ -49,8 +49,8 @@ const CollectionPage = () => {
     setIsItemActive(!isItemActive);
   };
 
-   //Get Locations
-   useEffect(() => {
+  //Get Locations
+  useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
         .from("DBlocation")
@@ -269,7 +269,6 @@ const CollectionPage = () => {
     fetchData();
   }, []);
 
-
   //Show popup of details
   const showPopup = () => {
     setIsItemActive((current) => !current);
@@ -397,7 +396,11 @@ const CollectionPage = () => {
 
   //Create Cards
   const cardNpc = (
-    <Card className={style.collectionCard} onClick={onNpcClick}>
+    <Card
+      className={style.collectionCard}
+      onClick={onNpcClick}
+      style={{ borderRadius: "10px" }}
+    >
       <h3>
         NPC's <i className="pi pi-chevron-right"></i>
       </h3>
@@ -405,7 +408,11 @@ const CollectionPage = () => {
     </Card>
   );
   const cardLocation = (
-    <Card className={style.collectionCard} onClick={onLocationClick}>
+    <Card
+      className={style.collectionCard}
+      onClick={onLocationClick}
+      style={{ borderRadius: "10px" }}
+    >
       <h3>
         Locations <i className="pi pi-chevron-right"></i>
       </h3>
@@ -413,7 +420,11 @@ const CollectionPage = () => {
     </Card>
   );
   const cardQuest = (
-    <Card className={style.collectionCard} onClick={onQuestClick}>
+    <Card
+      className={style.collectionCard}
+      onClick={onQuestClick}
+      style={{ borderRadius: "10px" }}
+    >
       <h3>
         Quests <i className="pi pi-chevron-right"></i>
       </h3>
@@ -421,7 +432,11 @@ const CollectionPage = () => {
     </Card>
   );
   const cardOrganisation = (
-    <Card className={style.collectionCard} onClick={onOrganisationClick}>
+    <Card
+      className={style.collectionCard}
+      onClick={onOrganisationClick}
+      style={{ borderRadius: "10px" }}
+    >
       <h3>
         Organizations <i className="pi pi-chevron-right"></i>
       </h3>
@@ -429,18 +444,22 @@ const CollectionPage = () => {
     </Card>
   );
   const cardItem = (
-    <Card className={style.collectionCard} onClick={onItemClick}>
+    <Card
+      className={style.collectionCard}
+      onClick={onItemClick}
+      style={{ borderRadius: "10px" }}
+    >
       <h3>
         Items <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Items!</p>
     </Card>
-  ); 
+  );
 
   return (
     <div className={style.collectionWrapper}>
       <h1 className={style.collectionHeader}>Collections</h1>
-      {session === null? (
+      {session === null ? (
         <>
           <p className={style.loginMessage}>
             Please Login to continue to the Collections Page.
@@ -450,63 +469,63 @@ const CollectionPage = () => {
           </p>
         </>
       ) : (
-      <div className={style.collectionCardWrapper}>
-        {isNpcActive ? (
-          <CollectionTable
-            data={npcDetails}
-            active={setIsNpcActive}
-            collectionTitle={"NPC"}
-            isItemActive={isItemActive}
-            setIsItemActive={setIsItemActive}
-          />
-        ) : (
-          cardNpc
-        )}
-        {isLocationActive ? (
-          <CollectionTable
-            data={locationDetails}
-            active={setIsLocationActive}
-            collectionTitle={"Locations"}
-            isItemActive={isItemActive}
-            setIsItemActive={setIsItemActive}
-          />
-        ) : (
-          cardLocation
-        )}
-        {isQuestActive ? (
-          <CollectionTable
-            data={questDetails}
-            active={setIsQuestActive}
-            collectionTitle={"Quests"}
-            isItemActive={isItemActive}
-            setIsItemActive={setIsItemActive}
-          />
-        ) : (
-          cardQuest
-        )}
-        {isOrganizationActive ? (
-          <CollectionTable
-            data={organizationDetails}
-            active={setIsOrganizationActive}
-            collectionTitle={"Organizations"}
-            isItemActive={isItemActive}
-            setIsItemActive={setIsItemActive}
-          />
-        ) : (
-          cardOrganisation
-        )}
-        {isItemActive ? (
-          <CollectionTable
-            data={itemDetails}
-            active={setIsItemActive}
-            collectionTitle={"Items"}
-            isItemActive={isItemActive}
-            setIsItemActive={setIsItemActive}
-          />
-        ) : (
-          cardItem
-        )}
-      </div>
+        <div className={style.collectionCardWrapper}>
+          {isNpcActive ? (
+            <CollectionTable
+              data={npcDetails}
+              active={setIsNpcActive}
+              collectionTitle={"NPC"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardNpc
+          )}
+          {isLocationActive ? (
+            <CollectionTable
+              data={locationDetails}
+              active={setIsLocationActive}
+              collectionTitle={"Locations"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardLocation
+          )}
+          {isQuestActive ? (
+            <CollectionTable
+              data={questDetails}
+              active={setIsQuestActive}
+              collectionTitle={"Quests"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardQuest
+          )}
+          {isOrganizationActive ? (
+            <CollectionTable
+              data={organizationDetails}
+              active={setIsOrganizationActive}
+              collectionTitle={"Organizations"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardOrganisation
+          )}
+          {isItemActive ? (
+            <CollectionTable
+              data={itemDetails}
+              active={setIsItemActive}
+              collectionTitle={"Items"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardItem
+          )}
+        </div>
       )}
     </div>
   );
