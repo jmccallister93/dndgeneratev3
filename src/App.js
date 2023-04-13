@@ -1,4 +1,8 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Create from "./pages/Create";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -33,21 +37,11 @@ import { useState, useEffect } from "react";
 import { SessionContext } from "./config/SessionContext";
 import { supabase } from "./config/supabaseClient";
 import Navbar from "./components/Navbar";
-import SessionProvider from "./config/SessionProvider";
+
 
 function App() {
   const [session, setSession] = useState(null);
 
-  // useEffect(() => {
-  //   supabase.auth.onAuthStateChange((_event, session) => {
-  //     setSession(session);
-  //   });
-  // }, []);
-
-  // const updateSessionContext = (newSession) => {
-  //   setSession(newSession);
-  //   console.log(session)
-  // };
 
   useEffect(() => {
     // Check for session data in cookie or local storage
@@ -57,15 +51,17 @@ function App() {
     }
 
     // Listen for changes to session state and update the context and storage
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, newSession) => {
-      setSession(newSession);
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, newSession) => {
+        setSession(newSession);
 
-      if (event === "SIGNED_IN") {
-        localStorage.setItem("session", JSON.stringify(newSession));
-      } else if (event === "SIGNED_OUT") {
-        localStorage.removeItem("session");
+        if (event === "SIGNED_IN") {
+          localStorage.setItem("session", JSON.stringify(newSession));
+        } else if (event === "SIGNED_OUT") {
+          localStorage.removeItem("session");
+        }
       }
-    });
+    );
 
     // Clean up the listener when the component unmounts
     return () => {
@@ -74,7 +70,13 @@ function App() {
       }
     };
   }, []);
-  
+
+  const [redirectPath, setRedirectPath] = useState("");
+
+  function updateRedirectPath(path) {
+    // console.log(path)
+    setRedirectPath(path);
+  }
 
   return (
     <div className="app">
@@ -83,7 +85,7 @@ function App() {
         <BrowserRouter>
           <Navbar
             session={session}
-            // updateSessionContext={updateSessionContext}
+            updateRedirectPath={updateRedirectPath}
           />
           <Routes>
             <Route path="/" element={<Home />} />
