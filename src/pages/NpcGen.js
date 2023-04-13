@@ -582,7 +582,7 @@ const NpcGen = () => {
                 setWeightMin,
               ]}
               setArrayState={[setSelectedItem]}
-            />
+            /> 
             {/* Export Btns */}
               <div className={style.exportBtns}>
                 <ExportButtons div={divRef} data={npc} tableName={"DBnpc"}/>

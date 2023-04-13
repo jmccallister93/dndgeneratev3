@@ -5,6 +5,7 @@ import { Button } from "primereact/button";
 import { supabase, auth } from "../config/supabaseClient";
 import { Toast } from "primereact/toast";
 import { SessionContext } from "../config/SessionContext";
+import compiledStyle from "../stylesheets/PageStyle.module.scss";
 
 const ExportButtons = (props) => {
   const session = useContext(SessionContext);
@@ -25,6 +26,7 @@ const ExportButtons = (props) => {
 
   const toast = useRef(null);
 
+  //Show toast
   const show = () => {
     toast.current.show({
       severity: "success",
@@ -33,6 +35,7 @@ const ExportButtons = (props) => {
     });
   };
 
+  //Check if html is ready
   useEffect(() => {
     if (props.div && props.div.current) {
       const div = props.div.current;
@@ -42,6 +45,7 @@ const ExportButtons = (props) => {
     }
   }, [props.div]);
 
+  //Check if data is ready
   useEffect(() => {
     if (props.data) {
       setData(props.data);
@@ -49,30 +53,49 @@ const ExportButtons = (props) => {
     }
   }, [props.data]);
 
+  //Check if html and data are ready
   useEffect(() => {
     if (isHtmlReady && isDataReady) {
       setIsReady(true);
     }
   }, [isHtmlReady, isDataReady]);
 
-  useEffect(() => {
-    if (isReady) {
-      const doc = new jsPDF();
-      doc.html(html, {
-        callback: (pdf) => {
-          setPdf(pdf);
-          setIsPdfReady(true);
-        },
-      });
-    }
-  }, [isReady, html]);
+//Create PDF
+useEffect(() => {
+  if (isReady) {
+    const doc = new jsPDF();
+    const css = {style}
+    const link = document.createElement("link");
+    link.href = "../stylesheets/PageStyle.module.css"; // specify the path to your compiled CSS file
+    link.rel = "stylesheet";
 
+    document.head.appendChild(link);
+
+    doc.html(html, {
+      callback: (pdf) => {
+        setPdf(pdf);
+        setIsPdfReady(true);
+      },
+      x: 1,
+      y: 1,
+      html2canvas: { scale: 0.1 },
+      useCORS: true,
+      margin: [5, 5, 5, 5],
+      padding: [10, 10, 10, 10],
+      pageSize: "A4",
+      css: compiledStyle,
+    });
+  }
+}, [isReady, html]);
+
+  //Export PDF function
   const exportToPdf = () => {
     if (isPdfReady) {
       pdf.save(`${props.data.name}.pdf`);
     }
   };
 
+  //Export text function
   const exportToText = () => {
     if (props.div && props.div.current) {
       const div = props.div.current;
@@ -86,6 +109,7 @@ const ExportButtons = (props) => {
     }
   };
 
+  //Export Excel function
   const exportToExcel = () => {
     if (data) {
       const element = document.createElement("a");
@@ -97,6 +121,7 @@ const ExportButtons = (props) => {
     }
   };
 
+  //Save to DB function
   const saveToDb = () => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
@@ -119,9 +144,7 @@ const ExportButtons = (props) => {
     <>
       <Toast ref={toast} />
       {session === null ? (
-        <p className={style.loginMessageSmall}>
-          Please Login to save to Database
-        </p>
+        <></>
       ) : (
         <>
           <button
@@ -133,14 +156,14 @@ const ExportButtons = (props) => {
           </button>
         </>
       )}
-      <button
+      {/* <button
         className={style.btnExport}
         onClick={exportToPdf}
         title="Export PDF"
       >
         PDF
         <i className="pi pi-file-pdf"></i>
-      </button>
+      </button> */}
       <button
         className={style.btnExport}
         onClick={exportToText}
@@ -148,14 +171,14 @@ const ExportButtons = (props) => {
       >
         TXT <i className="pi pi-file-o"></i>
       </button>
-      <button
+      {/* <button
         className={style.btnExport}
         onClick={exportToExcel}
         title="Export XLSX"
       >
         XLSX
         <i className="pi pi-file-excel"></i>
-      </button>
+      </button> */}
     </>
   );
 };

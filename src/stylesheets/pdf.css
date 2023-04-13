@@ -1,0 +1,78 @@
+.topHeader {
+    display: inline-block;
+    align-items: center;
+  }
+  
+  .display {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #f7f1cf;
+    width: 50%;
+    padding: 10px;
+    margin: 0;
+    margin-left: 1%;
+    text-align: left;
+    align-items: left;
+    align-self: flex-start;
+    justify-content: end;
+    border-radius: 0.5rem;
+    color: #9a2818;
+    box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.25);
+  }
+  .display h1 {
+    padding: 5px;
+  }
+  .display h2 {
+    padding: 5px;
+  }
+  .display h3 {
+    padding: 5px;
+  }
+  
+  .minorText2 {
+    font-weight: 350;
+    color: black;
+  }
+  .minorText3 {
+    font-weight: 350;
+  }
+  .minorText3:hover {
+    background-color: white;
+    cursor: pointer;
+  }
+  .nameText {
+    font-weight: 500;
+  }
+  .nameText:hover {
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .abilityScores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px;
+  }
+  
+  .lineBreak {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 48vw solid #9a2818;
+  }
+  
+  .subLineBreak {
+    border-bottom: 1px solid #9a2818;
+    width: 98%;
+    margin-left: 2px;
+  }
+  
+  .detesContainer {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .detesContainer h4 {
+    font-weight: 300;
+  }
+  

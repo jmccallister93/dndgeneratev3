@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback, useContext } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useContext,
+} from "react";
 import { supabase, auth } from "../../config/supabaseClient";
 import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
@@ -364,7 +370,14 @@ function NotePage(props) {
     <div className={style.mainWrapper}>
       {/* <Navbar /> */}
       {session === null ? (
-        <p className={style.loginMessage}>Please Login to continue to the Campaign Page.</p>
+        <>
+          <p className={style.loginMessage}>
+            Please Login to continue to the Campaign Page.
+          </p>
+          <p className={style.loginMessage}>
+            Logging in will redirect you to the Home Page.
+          </p>
+        </>
       ) : (
         <>
           <div className={style.topHeader}>

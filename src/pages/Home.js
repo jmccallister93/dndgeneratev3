@@ -18,7 +18,7 @@ const Home = (props) => {
   const createButton = (
     <>
       <Link to="/create">
-        <button className={style.homeButton}>Go to Create</button>
+        <button className={style.homeButton}>Click to Create</button>
       </Link>
     </>
   );
@@ -34,7 +34,7 @@ const Home = (props) => {
   const collectButton = (
     <>
       <Link to="/collectionpage">
-        <button className={style.homeButton}>Go to Collections</button>
+        <button className={style.homeButton}>View Collections</button>
       </Link>
     </>
   );
@@ -45,7 +45,7 @@ const Home = (props) => {
       <div className={style.homeHeader}>Welcome to DnD Generate</div>
       <div className={style.homeCardWrapper}>
         <BasicCard
-          title={"Create"}
+          title={"Generate"}
           description={createDescription}
           button={createButton}
         />
