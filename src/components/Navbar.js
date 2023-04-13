@@ -1,32 +1,48 @@
 import style from "../stylesheets/Navbar.module.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { supabase } from "../config/supabaseClient";
 import { SessionContext } from "../config/SessionContext";
-
+// import Cookies from "js-cookie";
 
 const Navbar = (props) => {
   const session = useContext(SessionContext);
 
-  const location = useLocation()
+  //Set location and redirect path variables
+  const location = useLocation();
+  // const [redirectPath, setRedirectPath] = useState();
 
+  //create navigate function
+  const navigate = useNavigate()
+
+  //Set redirect path on page load
   useEffect(() => {
-    console.log(window.location.origin + location.pathname)
-  }, [location])
-
+    sessionStorage.setItem('redirectPath', window.location.origin + location.pathname);
+  }, [location]);
 
   //Logs in using Google Auth
   async function handleLogin() {
-    const { user, session, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-
+    const { user, session, error } = await supabase.auth.signInWithOAuth(
+      {
+        provider: "google",
+      },
+      // { redirectTo: window.location.origin + location.pathname }
+    );
     if (error) {
       console.log(error.message);
     } else {
       console.log(user);
+      const redirectPath = sessionStorage.getItem('redirectPath');
+      if (redirectPath) {
+        navigate(redirectPath);
+      }
     }
   }
+
+  // useEffect(() => {
+  //   console.log(window.location.origin + location.pathname)
+  //     navigate(redirectPath)
+  // }, [session])
 
   //Signs out
   async function handleLogout() {
