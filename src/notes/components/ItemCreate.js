@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import styleB from "../../stylesheets/BuildingGen.module.scss";
@@ -39,8 +39,11 @@ import InfoModal from "../../components/InfoModal";
 import ExportButtons from "../../components/ExportButtons";
 import SectionRandom from "../../components/SectionRandom";
 import ns from "../../stylesheets/Note.module.scss";
+import { SessionContext } from "../../config/SessionContext";
 
 const ItemCreate = () => {
+  const session = useContext(SessionContext);
+
   // Set state variables
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -220,9 +223,10 @@ const ItemCreate = () => {
       cost: cost,
       weight: weight,
       description: description,
+      email: session.user.email,
     };
     setGenItem(genItem);
-  }, [itemName, type, rarity, cost, weight, description]);
+  }, [itemName, type, rarity, cost, weight, description, session]);
 
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);

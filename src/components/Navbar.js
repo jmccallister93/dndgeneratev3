@@ -18,8 +18,6 @@ const Navbar = (props) => {
       console.log(error.message);
     } else {
       console.log(user);
-      const authWindow = window.open('', 'auth', 'height=800,width=600');
-    authWindow.location.href = session.provider_token.url;
     }
   }
 

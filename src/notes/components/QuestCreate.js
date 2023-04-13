@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -32,8 +32,11 @@ import SingleDisplayText from "../../components/SingleDisplayText";
 import RandomHooks from "../../components/RandomHooks";
 import ns from "../../stylesheets/Note.module.scss";
 import { v4 as uuidv4 } from 'uuid';
+import { SessionContext } from "../../config/SessionContext";
 
 const QuestCreate = () => {
+  const session = useContext(SessionContext);
+
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
@@ -164,7 +167,8 @@ const QuestCreate = () => {
       reward: reward,
       location: location,
       motive: motive,
-      twist: twist,    
+      twist: twist,
+      email: session.user.email,    
     };
     setQuestData(quest);
   }, [
@@ -173,7 +177,8 @@ const QuestCreate = () => {
     reward,
     location,
     motive,
-    twist    
+    twist,
+    session,    
   ]);
 
   //Info content

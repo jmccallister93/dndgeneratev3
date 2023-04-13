@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -33,8 +33,11 @@ import CustomName from "../../components/CustomName";
 import NameDisplay from "../../components/NameDisplay";
 import SingleDisplayNumber from "../../components/SingleDisplayNumber";
 import ns from "../../stylesheets/Note.module.scss";
+import { SessionContext } from "../../config/SessionContext";
 
 const LocationCreate = () => {
+  const session = useContext(SessionContext);
+
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -166,6 +169,7 @@ const LocationCreate = () => {
         npc: npcString,
         building: buildingString,
         district: districtString,
+        email: session.user.email,
       };
       setLocation(location);
     }, [
@@ -173,6 +177,7 @@ const LocationCreate = () => {
       type,
       size,
       atmosphere,
+      population,
       culture,
       terrain,
       landmark,
@@ -183,6 +188,7 @@ const LocationCreate = () => {
       selectedNpc,
       selectedDistrict,
       selectedBuilding,
+      session,
     ]);
 
   //Info content

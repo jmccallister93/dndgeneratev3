@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -29,8 +29,11 @@ import SectionRandom from "../../components/SectionRandom";
 import NameDisplay from "../../components/NameDisplay";
 import SingleDisplayText from "../../components/SingleDisplayText";
 import ns from "../../stylesheets/Note.module.scss";
+import { SessionContext } from "../../config/SessionContext";
 
 const OrganizationCreate = () => {
+  const session = useContext(SessionContext);
+
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isResourceActive, setIsResourceActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -345,6 +348,7 @@ const OrganizationCreate = () => {
       power: powerString,
       specialty: specialtyString,
       weakness: weaknessString,
+      email: session.user.email,
     };
     setOrganization(organization);
   }, [
@@ -382,6 +386,8 @@ const OrganizationCreate = () => {
     selectedPower,
     selectedSpecialty,
     selectedWeakness,
+    income,
+    session,
   ]);
 
   //Info content

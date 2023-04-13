@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -30,8 +30,11 @@ import NameGenerator from "../../components/NameGenerator";
 import SectionRandom from "../../components/SectionRandom";
 import ns from "../../stylesheets/Note.module.scss";
 import { v4 as uuidv4 } from 'uuid';
+import { SessionContext } from "../../config/SessionContext";
 
 const NpcCreate = () => {
+  const session = useContext(SessionContext);
+
   const [isButtonsActive, setIsButtonsActive] = useState(false);
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -283,6 +286,7 @@ const NpcCreate = () => {
       weaponDamage: weaponDamage,
       weaponProperties: weaponProperties,
       inventory: itemString,
+      email: session.user.email,
     };
     setNpc(npc);
   }, [
@@ -312,6 +316,11 @@ const NpcCreate = () => {
     ac,
     hp,
     speed,
+    heightFt,
+    heightIn,
+    weight,
+    age,
+    session,
   ]);
 
   //Pull damage field from itemsWeapons table in database
