@@ -123,7 +123,6 @@ function NotePage(props) {
     }
   };
 
-  //RENDERING PROPERLY
   //Get Locations
   useEffect(() => {
     const fetchData = async () => {
