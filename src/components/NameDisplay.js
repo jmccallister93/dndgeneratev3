@@ -27,7 +27,13 @@ const NameDisplay = (props) => {
       contentEditable="false"
       suppressContentEditableWarning={true}
     >
-      <span className={style.nameText}>{props.value}</span>
+      <span className={style.nameText}>
+        {props.value ? (
+          <span className={style.nameText}>{props.value}</span>
+        ) : (
+          <span className={style.nameText}>Name</span>
+        )}
+      </span>
     </h1>
   );
 };
