@@ -534,3 +534,13 @@ $btn-blue: #2196f3;
     scale: 1.5;
   }
 }
+
+.collectionItem{
+  transition: 0.3s;
+  border-radius: 10px;
+  &:hover{
+    background-color: $secondary-grey;
+    scale:1.1;
+    cursor: pointer;
+  }
+}

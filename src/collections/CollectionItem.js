@@ -7,21 +7,29 @@ const CollectionItem = (props) => {
   return (
     <Dialog
       className={style.infoModal}
-      header={"Info"}
+      header={"Details"}
       visible={props.visible}
       modal={true}
       onHide={() => props.setVisible(false)}
       style={{ width: "50vw" }}
     >
-      {props.selectedItem === null
-        ? null
-        : Object.entries(props.selectedItem).map(([key, value]) => (
+      {Object.entries(props.selectedItem).map(([key, value]) => {
+        if (
+          key !== "uuid" &&
+          key !== "selectedItem" &&
+          key !== "notes" &&
+          key !== "links"
+        ) {
+          return (
             <>
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{" "}
               {value}
               <br />
             </>
-          ))}
+          );
+        }
+        return null;
+      })}
     </Dialog>
   );
 };

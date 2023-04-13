@@ -21,7 +21,6 @@ const CollectionTable = (props) => {
     props.active(!props.active);
   };
 
-
   return (
     <>
       <Card>
@@ -30,7 +29,11 @@ const CollectionTable = (props) => {
         </h1>
         {props.data.map((item, index) => (
           <>
-            <p key={index} onClick={() => showPopup(item)}>
+            <p
+              className={style.collectionItem}
+              key={index}
+              onClick={() => showPopup(item)}
+            >
               {item.name} <i className="pi pi-info-circle"></i>
             </p>
           </>
