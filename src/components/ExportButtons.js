@@ -2,7 +2,6 @@ import style from "../stylesheets/PageStyle.module.scss";
 import { jsPDF } from "jspdf";
 import { useEffect, useRef, useState, useContext } from "react";
 import { Button } from "primereact/button";
-import PDF, { Text, AddPage, Line, Image, Table, Html } from "jspdf-react";
 import { supabase, auth } from "../config/supabaseClient";
 import { Toast } from "primereact/toast";
 import { SessionContext } from "../config/SessionContext";
