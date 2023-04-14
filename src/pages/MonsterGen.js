@@ -377,12 +377,6 @@ const MonsterGen = () => {
               numberItem={[
                 ac,
                 hp,
-                baseSpeed,
-                burrowSpeed,
-                climbSpeed,
-                flySpeed,
-                swimSpeed,
-                hoverSpeed,
                 str,
                 dex,
                 con,
@@ -399,12 +393,6 @@ const MonsterGen = () => {
               setNumberItem={[
                 setAc,
                 setHp,
-                setBaseSpeed,
-                setBurrowSpeed,
-                setClimbSpeed,
-                setFlySpeed,
-                setSwimSpeed,
-                setHoverSpeed,
                 setStr,
                 setDex,
                 setCon,
@@ -419,12 +407,30 @@ const MonsterGen = () => {
                 setChaSave,
               ]}
               maxNumber={[
-                30, 300, 120, 120, 120, 120, 120, 120, 30, 30, 30, 30, 30, 30,
+                30, 300, 30, 30, 30, 30, 30, 30,
                 20, 20, 20, 20, 20, 20,
               ]}
               minNumber={[
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
               ]}
+              speedItem={[
+                baseSpeed,
+                flySpeed,
+                swimSpeed,
+                climbSpeed,
+                burrowSpeed,
+                hoverSpeed,
+              ]}
+              setSpeedItem={[
+                setBaseSpeed,
+                setFlySpeed,
+                setSwimSpeed,
+                setClimbSpeed,
+                setBurrowSpeed,
+                setHoverSpeed,
+              ]}
+              speedMax={[120, 120, 120, 120, 120, 120]}
+              speedMin={[1, 1, 1, 1, 1, 1]}
             />
             <ClearButton
               setStringState={[
@@ -614,7 +620,7 @@ const MonsterGen = () => {
               )}
             </h1>
             <SectionRandom
-              numberItem={[
+              speedItem={[
                 baseSpeed,
                 flySpeed,
                 swimSpeed,
@@ -622,7 +628,7 @@ const MonsterGen = () => {
                 burrowSpeed,
                 hoverSpeed,
               ]}
-              setNumberItem={[
+              setSpeedItem={[
                 setBaseSpeed,
                 setFlySpeed,
                 setSwimSpeed,
@@ -630,8 +636,8 @@ const MonsterGen = () => {
                 setBurrowSpeed,
                 setHoverSpeed,
               ]}
-              numberMax={[120, 120, 120, 120, 120, 120]}
-              numberMin={[1, 1, 1, 1, 1, 1]}
+              speedMax={[120, 120, 120, 120, 120, 120]}
+              speedMin={[1, 1, 1, 1, 1, 1]}
             />
           </div>
           <div className={isMovementActive ? style.subsection : style.hidden}>

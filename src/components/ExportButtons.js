@@ -144,10 +144,10 @@ const ExportButtons = (props) => {
     <>
       <Toast ref={toast} />
       {session === null ? (
-        <p className={style.loginMessageSmall}>
+        <div className={style.loginMessageSmall}>
           <div>Login to Save to DataBase.</div>
           <div>Will be redirected to Home Page.</div>
-        </p>
+        </div>
       ) : (
         <>
           <button

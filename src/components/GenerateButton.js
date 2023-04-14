@@ -118,15 +118,12 @@ const GenerateButton = (props) => {
   const numberGenerateSpeed = (e) => {
     if (props.speedItem) {
       for (let i = 0; i < props.speedItem.length; i++) {
-        if (props.speedItem[i] === "" || props.speedItem[i] === undefined) {
-          //set speed to a random number between the min and max that is a multiple of 5
-          let r = Math.floor(
-            Math.random() * (props.speedMax - props.speedMin) + props.speedMin
-          );
-          r = r * 5;
-          r = r.toString();
-          props.setSpeedItem[i](r);
-        }
+        let r = Math.floor(
+          Math.random() * (props.speedMax[i] - props.speedMin[i]) + props.speedMin[i]
+        );
+        r = r * 5;
+        r = r.toString();
+        props.setSpeedItem[i](r);
       }
     }
   };
