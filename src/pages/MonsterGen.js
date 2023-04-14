@@ -430,7 +430,7 @@ const MonsterGen = () => {
                 setHoverSpeed,
               ]}
               speedMax={[120, 120, 120, 120, 120, 120]}
-              speedMin={[1, 1, 1, 1, 1, 1]}
+              speedMin={[0, 0, 0, 0, 0, 0]}
             />
             <ClearButton
               setStringState={[
@@ -637,7 +637,7 @@ const MonsterGen = () => {
                 setHoverSpeed,
               ]}
               speedMax={[120, 120, 120, 120, 120, 120]}
-              speedMin={[1, 1, 1, 1, 1, 1]}
+              speedMin={[0, 0, 0, 0, 0, 0]}
             />
           </div>
           <div className={isMovementActive ? style.subsection : style.hidden}>
