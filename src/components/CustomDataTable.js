@@ -3,15 +3,12 @@ import { FilterMatchMode } from "primereact/api";
 import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Dialog } from "primereact/dialog";
-import { Dropdown } from "primereact/dropdown";
-import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import { supabase, auth } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
-import MultipleDisplay from "./MultipleDisplay";
 import MultipleRandomButton from "./MultipleRandomButton";
-import SingleRandomButton from "./SingleRandomButton";
+
 
 const CustomDataTable = (props) => {
   //-----SAMPLE PROPS-------
@@ -85,7 +82,7 @@ const CustomDataTable = (props) => {
         props.setPlural(dataName);
         setFetchError(null);
         props.setOptions(
-          dataName.map((r) => ({ name: r.name, value: r.value }))
+          dataName.map((r) => ({ name: r.name, value: r.value, desc: r.desc }))
         );
       }
     };

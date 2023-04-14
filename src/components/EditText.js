@@ -11,6 +11,12 @@ const EditText = (props) => {
                 props.setNewValue(e.target.innerText);
             }
         };
+        // Allow the user to press enter to save the new value
+        // e.target.addEventListener("keydown", (event) => {
+        //     if (event.key === "Enter") {
+        //       e.target.blur(); // Trigger the onblur event
+        //     }
+        //   });
     };
     return (
         <div

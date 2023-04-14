@@ -1,21 +1,10 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import styled from "../stylesheets/styledComponents.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { InputNumber } from "primereact/inputnumber";
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
 import { Tooltip } from "primereact/tooltip";
-import { Document, Page } from "react-pdf";
-import AbilityModifier from "../components/AbilityModifier";
 import ClearButton from "../components/ClearButton";
 import GenerateButton from "../components/GenerateButton";
 import ExportButtons from "../components/ExportButtons";
@@ -31,6 +20,7 @@ import SingleDisplayNumber from "../components/SingleDisplayNumber";
 import MultipleDisplay from "../components/MultipleDisplay";
 import NameDisplay from "../components/NameDisplay";
 import CustomModifier from "../components/CustomModifier";
+import MultipleDisplayDesc from "../components/MultipleDisplayDesc";
 
 const MonsterGen = () => {
   //Set States
@@ -325,7 +315,6 @@ const MonsterGen = () => {
   );
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Monster Generator</h1>
         <div className={style.topWrapper}>
@@ -430,48 +419,11 @@ const MonsterGen = () => {
                 setChaSave,
               ]}
               maxNumber={[
-                30,
-                300,
-                120,
-                120,
-                120,
-                120,
-                120,
-                120,
-                30,
-                30,
-                30,
-                30,
-                30,
-                30,
-                20,
-                20,
-                20,
-                20,
-                20,
-                20,
+                30, 300, 120, 120, 120, 120, 120, 120, 30, 30, 30, 30, 30, 30,
+                20, 20, 20, 20, 20, 20,
               ]}
               minNumber={[
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
-                1,
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
               ]}
             />
             <ClearButton
@@ -1384,16 +1336,18 @@ const MonsterGen = () => {
             )}
           </h2>
           <hr className={style.lineBreak} />
+          <h1>Abilities</h1>
+          <hr className={style.subLineBreak} />
           <h2>
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedSpecial} />
+              <MultipleDisplayDesc selectedItem={selectedSpecial} />
             </span>
           </h2>
           <h1>Actions</h1>
           <hr className={style.subLineBreak} />
           <h2>
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedAction} />
+              <MultipleDisplayDesc selectedItem={selectedAction} />
             </span>
           </h2>
           {selectedLegend.length === 0 ? null : (
@@ -1401,7 +1355,9 @@ const MonsterGen = () => {
               <h1>Legendary Actions</h1>
               <hr className={style.subLineBreak} />
               <h2>
-                <MultipleDisplay selectedItem={selectedLegend} />
+                <span className={style.minorText2}>
+                  <MultipleDisplayDesc selectedItem={selectedLegend} />
+                </span>
               </h2>
             </>
           )}
@@ -1410,7 +1366,10 @@ const MonsterGen = () => {
               <h1>Lair Actions</h1>
               <hr className={style.subLineBreak} />
               <h2>
-                <MultipleDisplay selectedItem={selectedLair} />
+                <span className={style.minorText2}>
+                  <MultipleDisplayDesc selectedItem={selectedLair} />
+                  
+                </span>
               </h2>
             </>
           )}

@@ -20,6 +20,7 @@ import MultipleDisplay from "../components/MultipleDisplay";
 import InfoModal from "../components/InfoModal";
 import ExportButtons from "../components/ExportButtons";
 import SectionRandom from "../components/SectionRandom";
+import EditText from "../components/EditText";
 
 const ItemGen = () => {
   // Set state variables
@@ -232,7 +233,6 @@ const ItemGen = () => {
 
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Item Generator</h1>
         <div className={style.topWrapper}>
@@ -331,7 +331,11 @@ const ItemGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={genItem} tableName={"DBitem"}/>
+                <ExportButtons
+                  div={divRef}
+                  data={genItem}
+                  tableName={"DBitem"}
+                />
               </div>
             </h1>
             {/* ToolTip */}
@@ -818,9 +822,10 @@ const ItemGen = () => {
             >
               <div>
                 <h1>Description</h1>
-                <InputTextarea
+                <textarea
                   value={itemDesc}
                   placeholder="Item Description"
+                  onChange={(e) => setItemDesc(e.target.value)}
                 />
               </div>
             </div>
@@ -969,7 +974,9 @@ const ItemGen = () => {
           <h2>
             Description
             <div>
-              <span className={style.minorText2}>{itemDesc}</span>
+              <span className={style.minorText2}>
+                <EditText value={itemDesc} setNewValue={setItemDesc}></EditText>
+              </span>
             </div>
           </h2>
         </div>
