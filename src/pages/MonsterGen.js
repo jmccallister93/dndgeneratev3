@@ -69,6 +69,7 @@ const MonsterGen = () => {
   const [saveOptions, setSaveOptions] = useState();
   const [saveList, setSaveList] = useState([]);
   const [selectedSave, setSelectedSave] = useState([]);
+  const [selectedSaveList, setSelectedSaveList] = useState([]);
   const [strSave, setStrSave] = useState("");
   const [dexSave, setDexSave] = useState("");
   const [conSave, setConSave] = useState("");
@@ -242,6 +243,14 @@ const MonsterGen = () => {
       </p>
     </div>
   );
+
+  // NEED TO ADD SELECTED SAVES TO BE DISPLAYED AS WELL AS THEIR MODIFIERS
+  useEffect(() => {
+    selectedSave.map((i) => {
+      setSelectedSaveList([...selectedSaveList, i.name]);
+    });
+  }, [selectedSave]);
+
   return (
     <div className={style.mainWrapper}>
       <div className={style.topHeader}>
@@ -449,11 +458,11 @@ const MonsterGen = () => {
               )}
             </h1>
             <SectionRandom
-             monsterName={[name]}
-             monsterNameOptions={[nameOptions]}
-             setMonsterName={[setName]}
-              value={[size, type, align, armorType,]}
-              setValue={[setSize, setType, setAlign, setArmorType,]}
+              monsterName={[name]}
+              monsterNameOptions={[nameOptions]}
+              setMonsterName={[setName]}
+              value={[size, type, align, armorType]}
+              setValue={[setSize, setType, setAlign, setArmorType]}
               valueOptions={[
                 sizeOptions,
                 typeOptions,
@@ -732,6 +741,7 @@ const MonsterGen = () => {
                 setList={setSaveList}
                 valueOptions={saveOptions}
               />
+              {selectedSaveList}
               {/*Working on adding there modifiers  */}
               <CustomModifier
                 selectedValue={[selectedSave]}
