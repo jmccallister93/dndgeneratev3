@@ -420,8 +420,7 @@ const SectionRandom = (props) => {
       for (let i = 0; i < speedItem.length; i++) {
         if (selectedIndexes.includes(i)) {
           const r =
-            Math.floor(Math.random() * (speedMax - speedMin + 1)) +
-            speedMin;
+            Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
           const rMultipleOf5 = Math.floor(r / 5) * 5;
           setSpeedItem[i](rMultipleOf5.toString());
         } else {
@@ -463,6 +462,48 @@ const SectionRandom = (props) => {
     }
   };
 
+  const monsterNameGenerate = (e) => {
+    if (props.monsterName) {
+      for (let i = 0; i < props.monsterName.length; i++) {
+        let a = Math.floor(Math.random() * 83);
+        let adjective = [props.monsterNameOptions[i][a].adjective];
+        let n = Math.floor(Math.random() * 69);
+        let noun = [props.monsterNameOptions[i][n].noun];
+        let an = Math.floor(Math.random() * 100);
+        let animal = [props.monsterNameOptions[i][an].animal];
+
+        let random = Math.round(Math.random() * 2);
+
+        if (random === 0) {
+          props.setMonsterName[0](
+            adjective.toString().charAt(0).toUpperCase() +
+              adjective.toString().slice(1) +
+              " " +
+              noun.toString().charAt(0).toUpperCase() +
+              noun.toString().slice(1)
+          );
+        } else if (random === 1) {
+          props.setMonsterName[0](
+            adjective.toString().charAt(0).toUpperCase() +
+              adjective.toString().slice(1) +
+              " " +
+              animal
+          );
+        } else {
+          props.setMonsterName[0](
+            adjective.toString().charAt(0).toUpperCase() +
+              adjective.toString().slice(1) +
+              " " +
+              noun.toString().charAt(0).toUpperCase() +
+              noun.toString().slice(1) +
+              " " +
+              animal
+          );
+        }
+      }
+    }
+  };
+
   const onRandomClick = (e) => {
     onRandomClickSingle();
     onRandomClickMultiple();
@@ -472,6 +513,7 @@ const SectionRandom = (props) => {
     randomSpeedIndex(props.speedItem, props.setSpeedItem, 1, 120);
     // numberGenerateSpeed();
     npcNameGenerate();
+    monsterNameGenerate();
     numberGenerate();
   };
 

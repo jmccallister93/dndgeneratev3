@@ -183,40 +183,42 @@ const GenerateButton = (props) => {
   const monsterNameGenerate = (e) => {
     if (props.monsterName) {
       for (let i = 0; i < props.monsterName.length; i++) {
-        let a = Math.floor(Math.random() * 83);
-        let adjective = [props.monsterNameOptions[i][a].adjective];
-        let n = Math.floor(Math.random() * 69);
-        let noun = [props.monsterNameOptions[i][n].noun];
-        let an = Math.floor(Math.random() * 100);
-        let animal = [props.monsterNameOptions[i][an].animal];
+        if (props.monsterName[i] === "" || props.monsterName[i] === undefined) {
+          let a = Math.floor(Math.random() * 83);
+          let adjective = [props.monsterNameOptions[i][a].adjective];
+          let n = Math.floor(Math.random() * 69);
+          let noun = [props.monsterNameOptions[i][n].noun];
+          let an = Math.floor(Math.random() * 100);
+          let animal = [props.monsterNameOptions[i][an].animal];
 
-        let random = Math.round(Math.random() * 2);
+          let random = Math.round(Math.random() * 2);
 
-        if (random === 0) {
-          props.setMonsterName(
-            adjective.toString().charAt(0).toUpperCase() +
-              adjective.toString().slice(1) +
-              " " +
-              noun.toString().charAt(0).toUpperCase() +
-              noun.toString().slice(1)
-          );
-        } else if (random === 1) {
-          props.setMonsterName(
-            adjective.toString().charAt(0).toUpperCase() +
-              adjective.toString().slice(1) +
-              " " +
-              animal
-          );
-        } else {
-          props.setMonsterName(
-            adjective.toString().charAt(0).toUpperCase() +
-              adjective.toString().slice(1) +
-              " " +
-              noun.toString().charAt(0).toUpperCase() +
-              noun.toString().slice(1) +
-              " " +
-              animal
-          );
+          if (random === 0) {
+            props.setMonsterName[0](
+              adjective.toString().charAt(0).toUpperCase() +
+                adjective.toString().slice(1) +
+                " " +
+                noun.toString().charAt(0).toUpperCase() +
+                noun.toString().slice(1)
+            );
+          } else if (random === 1) {
+            props.setMonsterName[0](
+              adjective.toString().charAt(0).toUpperCase() +
+                adjective.toString().slice(1) +
+                " " +
+                animal
+            );
+          } else {
+            props.setMonsterName[0](
+              adjective.toString().charAt(0).toUpperCase() +
+                adjective.toString().slice(1) +
+                " " +
+                noun.toString().charAt(0).toUpperCase() +
+                noun.toString().slice(1) +
+                " " +
+                animal
+            );
+          }
         }
       }
     }

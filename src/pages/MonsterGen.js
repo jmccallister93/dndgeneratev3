@@ -14,7 +14,6 @@ import CustomName from "../components/CustomName";
 import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
 import CustomDataTable from "../components/CustomDataTable";
-import Items from "../components/Items";
 import SingleDisplayText from "../components/SingleDisplayText";
 import SingleDisplayNumber from "../components/SingleDisplayNumber";
 import MultipleDisplay from "../components/MultipleDisplay";
@@ -149,78 +148,13 @@ const MonsterGen = () => {
   const [lairList, setLairList] = useState([]);
   const [selectedLair, setSelectedLair] = useState([]);
 
-  const [gear, setGear] = useState("");
-  const [gears, setGears] = useState("");
-  const [gearOptions, setGearOptions] = useState();
-  const [gearList, setGearList] = useState([]);
-  const [selectedGear, setSelectedGear] = useState([]);
-
   const [isAAActive, setIsAAActive] = useState(false);
   const [isAbilityActive, setIsAbilityActive] = useState(false);
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isSSDActive, setIsSSDActive] = useState(false);
   const [isDTActive, setIsDTActive] = useState(false);
-  const [isGearActive, setIsGearActive] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [isMovementActive, setIsMovementActive] = useState(false);
-
-  //OnChanges
-  const onNameChange = (e) => {
-    // setMonster((prev) => {
-    //   return {...prev,name: e.target.value}
-    // });
-    setName(e.target.value);
-  };
-  const onRandomName = (e) => {
-    const a = Math.round(Math.random() * (139 - 0));
-    const ad = Math.round(Math.random() * (83 - 0));
-    const n = Math.round(Math.random() * (69 - 0));
-    const x = Math.round(Math.random() * (4 - 0));
-    if (x === 0) {
-      setName(
-        nameOptions[n].noun.charAt(0).toUpperCase() +
-          nameOptions[n].noun.slice(1) +
-          " " +
-          nameOptions[ad].adjective.charAt(0).toUpperCase() +
-          nameOptions[ad].adjective.slice(1) +
-          " " +
-          nameOptions[a].animal
-      );
-    }
-    if (x === 1) {
-      setName(
-        nameOptions[ad].adjective.charAt(0).toUpperCase() +
-          nameOptions[ad].adjective.slice(1) +
-          " " +
-          nameOptions[a].animal
-      );
-    }
-    if (x === 2) {
-      setName(
-        nameOptions[n].noun.charAt(0).toUpperCase() +
-          nameOptions[n].noun.slice(1) +
-          " " +
-          nameOptions[a].animal
-      );
-    }
-    if (x === 3) {
-      setName(
-        nameOptions[ad].adjective.charAt(0).toUpperCase() +
-          nameOptions[ad].adjective.slice(1) +
-          " " +
-          nameOptions[n].noun.charAt(0).toUpperCase() +
-          nameOptions[n].noun.slice(1)
-      );
-    }
-    if (x === 4) {
-      setName(
-        nameOptions[a].animal +
-          " " +
-          nameOptions[n].noun.charAt(0).toUpperCase() +
-          nameOptions[n].noun.slice(1)
-      );
-    }
-  };
 
   //Showoptions
   const showBasics = (e) => {
@@ -237,9 +171,6 @@ const MonsterGen = () => {
   };
   const showDT = (e) => {
     setIsDTActive((current) => !current);
-  };
-  const showGear = (e) => {
-    setIsGearActive((current) => !current);
   };
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
@@ -461,7 +392,6 @@ const MonsterGen = () => {
                 // setReaction,
                 setLegend,
                 setLair,
-                setGear,
               ]}
               setArrayState={[
                 setSaveList,
@@ -477,7 +407,6 @@ const MonsterGen = () => {
                 // setReactionList,
                 setLegendList,
                 setLairList,
-                setGearList,
               ]}
             />
             {/* Export Btns */}
@@ -520,8 +449,11 @@ const MonsterGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[size, type, align, armorType]}
-              setValue={[setSize, setType, setAlign, setArmorType]}
+             monsterName={[name]}
+             monsterNameOptions={[nameOptions]}
+             setMonsterName={[setName]}
+              value={[size, type, align, armorType,]}
+              setValue={[setSize, setType, setAlign, setArmorType,]}
               valueOptions={[
                 sizeOptions,
                 typeOptions,
