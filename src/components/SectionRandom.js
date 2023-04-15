@@ -321,6 +321,7 @@ const SectionRandom = (props) => {
   //     }
   //   };
 
+  //Single Random Options
   const onRandomClickSingle = (e) => {
     if (props.value) {
       for (let i = 0; i < props.value.length; i++) {
@@ -331,8 +332,10 @@ const SectionRandom = (props) => {
     }
   };
 
+  //Multiple Random Options
   const onRandomClickMultiple = (e) => {
     if (props.selectedValue) {
+      const usedIndexes = [];
       for (let i = 0; i < props.selectedValue.length; i++) {
         props.setSelectedValue[i]([]);
         let n = Math.floor(Math.random() * (6 - 0));
@@ -340,16 +343,15 @@ const SectionRandom = (props) => {
           let r = Math.floor(
             Math.random() * props.selectedValueOptions[i].length
           );
-          props.setSelectedValue[i]((oldArray) => [
-            ...oldArray,
-            props.selectedValueOptions[i][r],
-          ]);
+          const option = props.selectedValueOptions[i][r];
+          if (!usedIndexes.includes(r)) {
+            usedIndexes.push(r);
+            props.setSelectedValue[i]((oldArray) => [...oldArray, option]);
+          }
         }
       }
     }
   };
-
-  
 
   const abilityScoreGenerate = (e) => {
     if (props.statValue) {
@@ -399,10 +401,9 @@ const SectionRandom = (props) => {
     }
   };
 
-
   //Number Generate Speed randomnly
-  const randomSpeedIndex = (speedItem, setSpeedItem, min, max) => {
-    if (speedItem) {
+  const randomSpeedIndex = (speedItem, setSpeedItem, speedMin, speedMax) => {
+    if (props.speedItem) {
       const indexArray = [0, 1, 2, 3, 4, 5];
       let numItems = Math.floor(Math.random() * (indexArray.length + 1));
       if (numItems === 0) {
@@ -418,8 +419,11 @@ const SectionRandom = (props) => {
 
       for (let i = 0; i < speedItem.length; i++) {
         if (selectedIndexes.includes(i)) {
-          const r = Math.floor(Math.random() * (max - min) + min) * 5;
-          setSpeedItem[i](r.toString());
+          const r =
+            Math.floor(Math.random() * (speedMax - speedMin + 1)) +
+            speedMin;
+          const rMultipleOf5 = Math.floor(r / 5) * 5;
+          setSpeedItem[i](rMultipleOf5.toString());
         } else {
           setSpeedItem[i]("");
         }

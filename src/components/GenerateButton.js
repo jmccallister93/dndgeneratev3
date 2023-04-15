@@ -50,23 +50,25 @@ const GenerateButton = (props) => {
   };
   //Datatable Generate
   const dataTableGenerate = (e) => {
-    //----PROPS----
-    // selectedItemOptions={[itemOptions]}
-    // selectedItems={[selectedItem]}
-    // setSelectedItem={[setSelectedItem]}
-    if (props.selectedItems) {
-      for (let i = 0; i < props.selectedItems.length; i++) {
-        if (props.selectedItems[i].length <= 0) {
-          let n = Math.floor(Math.random() * (6 - 0));
-          for (let x = 0; x <= n; x++) {
-            let r = Math.floor(
-              Math.random() * props.selectedItemOptions[i].length
-            );
-            if (props.selectedItems[i].length <= 0) {
-              props.setSelectedItem[i]((oldArray) => [
-                ...oldArray,
-                props.selectedItemOptions[i][r],
-              ]);
+    const allItemsSelected = props.selectedItems.every(
+      (item) => item.length > 0
+    );
+
+    if (!allItemsSelected) {
+      if (props.selectedItems) {
+        const usedIndexes = [];
+        for (let i = 0; i < props.selectedItems.length; i++) {
+          if (props.selectedItems[i].length <= 0) {
+            let n = Math.floor(Math.random() * (6 - 0));
+            for (let x = 0; x <= n; x++) {
+              let r = Math.floor(
+                Math.random() * props.selectedItemOptions[i].length
+              );
+              const option = props.selectedItemOptions[i][r];
+              if (!usedIndexes.includes(r)) {
+                usedIndexes.push(r);
+                props.setSelectedItem[i]((oldArray) => [...oldArray, option]);
+              }
             }
           }
         }
@@ -113,33 +115,38 @@ const GenerateButton = (props) => {
       }
     }
   };
- 
- //Number Generate Speed randomnly
- const randomSpeedIndex = (speedItem, setSpeedItem, min, max) => {
-  if (speedItem) {
-    const indexArray = [0, 1, 2, 3, 4, 5];
-    let numItems = Math.floor(Math.random() * (indexArray.length + 1));
-    if (numItems === 0) {
-      numItems = 1;
-    }
-    const selectedIndexes = [];
 
-    for (let i = 0; i < numItems; i++) {
-      const randomIndex = Math.floor(Math.random() * indexArray.length);
-      selectedIndexes.push(indexArray[randomIndex]);
-      indexArray.splice(randomIndex, 1);
+  //Number Generate Speed randomnly
+  const randomSpeedIndex = (speedItem, setSpeedItem, speedMin, speedMax) => {
+    if (speedItem.some((value) => value)) {
+      return;
     }
+    if (props.speedItem) {
+      const indexArray = [0, 1, 2, 3, 4, 5];
+      let numItems = Math.floor(Math.random() * (indexArray.length + 1));
+      if (numItems === 0) {
+        numItems = 1;
+      }
+      const selectedIndexes = [];
 
-    for (let i = 0; i < speedItem.length; i++) {
-      if (selectedIndexes.includes(i)) {
-        const r = Math.floor(Math.random() * (max - min) + min) * 5;
-        setSpeedItem[i](r.toString());
-      } else {
-        setSpeedItem[i]("");
+      for (let i = 0; i < numItems; i++) {
+        const randomIndex = Math.floor(Math.random() * indexArray.length);
+        selectedIndexes.push(indexArray[randomIndex]);
+        indexArray.splice(randomIndex, 1);
+      }
+
+      for (let i = 0; i < speedItem.length; i++) {
+        if (selectedIndexes.includes(i)) {
+          const r =
+            Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
+          const rMultipleOf5 = Math.floor(r / 5) * 5;
+          setSpeedItem[i](rMultipleOf5.toString());
+        } else {
+          setSpeedItem[i]("");
+        }
       }
     }
-  }
-};
+  };
 
   //NPC Name Generate
   const npcNameGenerate = (e) => {
@@ -172,6 +179,49 @@ const GenerateButton = (props) => {
       }
     }
   };
+
+  const monsterNameGenerate = (e) => {
+    if (props.monsterName) {
+      for (let i = 0; i < props.monsterName.length; i++) {
+        let a = Math.floor(Math.random() * 83);
+        let adjective = [props.monsterNameOptions[i][a].adjective];
+        let n = Math.floor(Math.random() * 69);
+        let noun = [props.monsterNameOptions[i][n].noun];
+        let an = Math.floor(Math.random() * 100);
+        let animal = [props.monsterNameOptions[i][an].animal];
+
+        let random = Math.round(Math.random() * 2);
+
+        if (random === 0) {
+          props.setMonsterName(
+            adjective.toString().charAt(0).toUpperCase() +
+              adjective.toString().slice(1) +
+              " " +
+              noun.toString().charAt(0).toUpperCase() +
+              noun.toString().slice(1)
+          );
+        } else if (random === 1) {
+          props.setMonsterName(
+            adjective.toString().charAt(0).toUpperCase() +
+              adjective.toString().slice(1) +
+              " " +
+              animal
+          );
+        } else {
+          props.setMonsterName(
+            adjective.toString().charAt(0).toUpperCase() +
+              adjective.toString().slice(1) +
+              " " +
+              noun.toString().charAt(0).toUpperCase() +
+              noun.toString().slice(1) +
+              " " +
+              animal
+          );
+        }
+      }
+    }
+  };
+  //Height Age Weight
   const setHeightAgeWeight = (e) => {
     if (props.generateItems[0] === "Aasimar") {
       let ageMin = 20;
@@ -517,8 +567,8 @@ const GenerateButton = (props) => {
   //General Number generate
   const numberGenerate = () => {
     if (props.numberItem) {
-        for (let i = 0; i < props.numberItem.length; i++) {
-          if (props.numberItem[i] === "" || props.numberItem[i] === undefined){
+      for (let i = 0; i < props.numberItem.length; i++) {
+        if (props.numberItem[i] === "" || props.numberItem[i] === undefined) {
           let r = Math.floor(
             Math.random() * (props.maxNumber[i] - props.minNumber[i]) +
               props.minNumber[i]
@@ -539,8 +589,8 @@ const GenerateButton = (props) => {
     randomSpeedIndex(props.speedItem, props.setSpeedItem, 1, 120);
     // numberGenerateSpeed();
     npcNameGenerate();
-
     numberGenerate();
+    monsterNameGenerate();
   };
 
   return (

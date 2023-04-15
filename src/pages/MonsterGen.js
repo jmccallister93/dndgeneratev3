@@ -30,9 +30,6 @@ const MonsterGen = () => {
   const [name, setName] = useState("");
   const [names, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
-  const [nameAnimal, setNameAnimal] = useState();
-  const [nameAdejctive, setNameAdjective] = useState();
-  const [nameNoun, setNameNoun] = useState();
 
   const [size, setSize] = useState("");
   const [sizes, setSizes] = useState();
@@ -322,6 +319,9 @@ const MonsterGen = () => {
           <div className={style.btnWrapper}>
             {/* Generate Btns */}
             <GenerateButton
+              monsterName={[name]}
+              monsterNameOptions={[nameOptions]}
+              setMonsterName={[setName]}
               generateItems={[size, type, align, armorType]}
               itemOptions={[
                 sizeOptions,
@@ -343,7 +343,6 @@ const MonsterGen = () => {
                 actionOptions,
                 legendOptions,
                 lairOptions,
-                gearOptions,
               ]}
               selectedItems={[
                 selectedSave,
@@ -358,7 +357,6 @@ const MonsterGen = () => {
                 selectedAction,
                 selectedLegend,
                 selectedLair,
-                selectedGear,
               ]}
               setSelectedItem={[
                 setSelectedSave,
@@ -373,7 +371,6 @@ const MonsterGen = () => {
                 setSelectedAction,
                 setSelectedLegend,
                 setSelectedLair,
-                setSelectedGear,
               ]}
               numberItem={[
                 ac,
@@ -408,12 +405,9 @@ const MonsterGen = () => {
                 setChaSave,
               ]}
               maxNumber={[
-                30, 300, 30, 30, 30, 30, 30, 30,
-                20, 20, 20, 20, 20, 20,
+                30, 300, 30, 30, 30, 30, 30, 30, 20, 20, 20, 20, 20, 20,
               ]}
-              minNumber={[
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-              ]}
+              minNumber={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
               speedItem={[
                 baseSpeed,
                 flySpeed,
@@ -430,8 +424,8 @@ const MonsterGen = () => {
                 setBurrowSpeed,
                 setHoverSpeed,
               ]}
-              speedMax={[120, 120, 120, 120, 120, 120]}
-              speedMin={[0, 0, 0, 0, 0, 0]}
+              speedMax={[120]}
+              speedMin={[0]}
             />
             <ClearButton
               setStringState={[
@@ -464,7 +458,7 @@ const MonsterGen = () => {
                 setLang,
                 setSpecial,
                 setAction,
-                setReaction,
+                // setReaction,
                 setLegend,
                 setLair,
                 setGear,
@@ -480,18 +474,18 @@ const MonsterGen = () => {
                 setLangList,
                 setSpecialList,
                 setActionList,
-                setReactionList,
+                // setReactionList,
                 setLegendList,
                 setLairList,
                 setGearList,
               ]}
             />
             {/* Export Btns */}
-           
-              <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={genItem} />
-              </div>
-           
+
+            <div className={style.exportBtns}>
+              <ExportButtons div={divRef} data={genItem} />
+            </div>
+
             {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
@@ -543,7 +537,7 @@ const MonsterGen = () => {
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
-                tableName={"names"}
+                tableName={"monsterNames"}
                 name={name}
                 setName={setName}
                 setNames={setNames}
@@ -636,8 +630,8 @@ const MonsterGen = () => {
                 setBurrowSpeed,
                 setHoverSpeed,
               ]}
-              speedMax={[120, 120, 120, 120, 120, 120]}
-              speedMin={[0, 0, 0, 0, 0, 0]}
+              speedMax={[120]}
+              speedMin={[0]}
             />
           </div>
           <div className={isMovementActive ? style.subsection : style.hidden}>
@@ -1083,7 +1077,7 @@ const MonsterGen = () => {
           <h2>
             Speed{" "}
             {baseSpeed !== "" ? (
-                <>
+              <>
                 <span className={style.minorText2}>Walk </span>
                 <SingleDisplayNumber
                   value={baseSpeed}
