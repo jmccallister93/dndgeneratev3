@@ -366,6 +366,15 @@ $btn-blue: #2196f3;
   }
 }
 
+.minorText3Chunks{
+  font-weight: 350;
+  margin-bottom: 0.5rem;
+  &:hover{
+    background-color: white;
+    cursor: pointer;
+  }
+}
+
 .minorText3Break {
   font-weight: 350;
   margin-bottom: 0.5rem;

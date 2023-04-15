@@ -21,6 +21,7 @@ import MultipleDisplay from "../components/MultipleDisplay";
 import NameDisplay from "../components/NameDisplay";
 import CustomModifier from "../components/CustomModifier";
 import MultipleDisplayDesc from "../components/MultipleDisplayDesc";
+import MultipleDisplayChunks from "../components/MultipleDisplayChunks";
 
 const MonsterGen = () => {
   //Set States
@@ -971,35 +972,35 @@ const MonsterGen = () => {
               selectedValue={[
                 selectedSpecial,
                 selectedAction,
-                selectedReaction,
+                // selectedReaction,
                 selectedLegend,
                 selectedLair,
               ]}
               selectedValueOptions={[
                 specialOptions,
                 actionOptions,
-                reactionOptions,
+                // reactionOptions,
                 legendOptions,
                 lairOptions,
               ]}
               setSelectedValue={[
                 setSelectedSpecial,
                 setSelectedAction,
-                setSelectedReaction,
+                // setSelectedReaction,
                 setSelectedLegend,
                 setSelectedLair,
               ]}
               selectedValueList={[
                 specialList,
                 actionList,
-                reactionList,
+                // reactionList,
                 legendList,
                 lairList,
               ]}
               setSelectedValueList={[
                 setSpecialList,
                 setActionList,
-                setReactionList,
+                // setReactionList,
                 setLegendList,
                 setLairList,
               ]}
@@ -1112,9 +1113,15 @@ const MonsterGen = () => {
           </h2>
           <h2>
             Speed{" "}
-            <SingleDisplayNumber value={baseSpeed} setNewValue={setBaseSpeed} />
             {baseSpeed !== "" ? (
-              <span className={style.minorText2}> ft. </span>
+                <>
+                <span className={style.minorText2}>Walk </span>
+                <SingleDisplayNumber
+                  value={baseSpeed}
+                  setNewValue={setBaseSpeed}
+                />
+                <span className={style.minorText2}> ft. </span>
+              </>
             ) : null}
             {flySpeed !== "" ? (
               <>
@@ -1373,8 +1380,7 @@ const MonsterGen = () => {
               <hr className={style.subLineBreak} />
               <h2>
                 <span className={style.minorText2}>
-                  <MultipleDisplayDesc selectedItem={selectedLair} />
-                  
+                  <MultipleDisplayChunks selectedItem={selectedLair} />
                 </span>
               </h2>
             </>

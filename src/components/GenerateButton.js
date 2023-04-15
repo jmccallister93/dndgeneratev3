@@ -62,7 +62,6 @@ const GenerateButton = (props) => {
             let r = Math.floor(
               Math.random() * props.selectedItemOptions[i].length
             );
-            // console.log("Selected" , props.selectedItemOptions[i].length, r)
             if (props.selectedItems[i].length <= 0) {
               props.setSelectedItem[i]((oldArray) => [
                 ...oldArray,
@@ -114,45 +113,33 @@ const GenerateButton = (props) => {
       }
     }
   };
-  //number Generate Speed
-  // const numberGenerateSpeed = (e) => {
-  //   if (props.speedItem) {
-  //     for (let i = 0; i < props.speedItem.length; i++) {
-  //       let r = Math.floor(
-  //         Math.random() * (props.speedMax[i] - props.speedMin[i]) + props.speedMin[i]
-  //       );
-  //       r = r * 5;
-  //       r = r.toString();
-  //       props.setSpeedItem[i](r);
-  //     }
-  //   }
-  // };
  
-    //Number Generate Speed randomnly
-    const randomSpeedIndex = (speedItem, setSpeedItem, min, max) => {
-      const indexArray = [0, 1, 2, 3, 4, 5];
-      let numItems = Math.floor(Math.random() * (indexArray.length + 1));
-      if (numItems === 0) {
-        numItems = 1;
-      }
-      const selectedIndexes = [];
-    
-      for (let i = 0; i < numItems; i++) {
-        const randomIndex = Math.floor(Math.random() * indexArray.length);
-        selectedIndexes.push(indexArray[randomIndex]);
-        indexArray.splice(randomIndex, 1);
-      }
-    
-      for (let i = 0; i < speedItem.length; i++) {
-        if (selectedIndexes.includes(i)) {
-          const r = Math.floor(Math.random() * (max - min) + min) * 5;
-          setSpeedItem[i](r.toString());
-        } else {
-          setSpeedItem[i]("");
-        }
-      }
-    };
+ //Number Generate Speed randomnly
+ const randomSpeedIndex = (speedItem, setSpeedItem, min, max) => {
+  if (speedItem) {
+    const indexArray = [0, 1, 2, 3, 4, 5];
+    let numItems = Math.floor(Math.random() * (indexArray.length + 1));
+    if (numItems === 0) {
+      numItems = 1;
+    }
+    const selectedIndexes = [];
 
+    for (let i = 0; i < numItems; i++) {
+      const randomIndex = Math.floor(Math.random() * indexArray.length);
+      selectedIndexes.push(indexArray[randomIndex]);
+      indexArray.splice(randomIndex, 1);
+    }
+
+    for (let i = 0; i < speedItem.length; i++) {
+      if (selectedIndexes.includes(i)) {
+        const r = Math.floor(Math.random() * (max - min) + min) * 5;
+        setSpeedItem[i](r.toString());
+      } else {
+        setSpeedItem[i]("");
+      }
+    }
+  }
+};
 
   //NPC Name Generate
   const npcNameGenerate = (e) => {

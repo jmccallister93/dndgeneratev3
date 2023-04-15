@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
-const MultipleDisplay = (props) => {
+const MultipleDisplayChunks = (props) => {
   //---PROPS NEEDED---
   //selectedItem
   //---PROPS NEEDED---
@@ -38,6 +38,7 @@ const MultipleDisplay = (props) => {
       setDisplay(
         multipleDisplay.map((i) => {
           return (
+            <div className={style.minorText3Break}>
             <span
               className="editText"
               onClick={onClick}
@@ -45,9 +46,10 @@ const MultipleDisplay = (props) => {
               suppressContentEditableWarning={true}
             >
               <span className={style.minorText3}>
-                {i === undefined ? null:(`${i.name}, `)}
+                {i === undefined ? null:(`${i.name}`)}
                 </span>
             </span>
+            </div>
           );
         })
       );
@@ -56,4 +58,4 @@ const MultipleDisplay = (props) => {
   return <>{display}</>;
 };
 
-export default MultipleDisplay;
+export default MultipleDisplayChunks;
