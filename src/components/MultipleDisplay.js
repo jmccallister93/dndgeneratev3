@@ -36,7 +36,8 @@ const MultipleDisplay = (props) => {
 
   useEffect(() => {
       setDisplay(
-        multipleDisplay.map((i) => {
+        multipleDisplay.map((i, index) => {
+          const isLastElement = index === multipleDisplay.length - 1;
           return (
             <span
               className="editText"
@@ -45,7 +46,7 @@ const MultipleDisplay = (props) => {
               suppressContentEditableWarning={true}
             >
               <span className={style.minorText3}>
-                {i === undefined ? null:(`${i.name}, `)}
+              {i === undefined ? null : `${i.name}${isLastElement ? "" : ", "}`}
                 </span>
             </span>
           );

@@ -332,7 +332,6 @@ const SectionRandom = (props) => {
   };
 
   const onRandomClickMultiple = (e) => {
-    console.log(props.selectedValueOptions)
     if (props.selectedValue) {
       for (let i = 0; i < props.selectedValue.length; i++) {
         props.setSelectedValue[i]([]);

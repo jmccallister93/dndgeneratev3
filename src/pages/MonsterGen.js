@@ -487,12 +487,11 @@ const MonsterGen = () => {
               ]}
             />
             {/* Export Btns */}
-            <h1>
-              Export
+           
               <div className={style.exportBtns}>
                 <ExportButtons div={divRef} data={genItem} />
               </div>
-            </h1>
+           
             {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
@@ -1061,36 +1060,6 @@ const MonsterGen = () => {
                 valueOptions={lairOptions}
               />
             </div>
-          </div>
-          <div className={style.sectionOption}>
-            <h1 className={style.subHeader} onClick={showGear}>
-              Equipment{" "}
-              {isGearActive ? (
-                <i className="pi pi-chevron-down"></i>
-              ) : (
-                <i className="pi pi-chevron-right"></i>
-              )}
-            </h1>
-            <SectionRandom
-              selectedValue={[selectedGear]}
-              selectedValueOptions={[gearOptions]}
-              setSelectedValue={[setSelectedGear]}
-              selectedValueList={[gearList]}
-              setSelectedValueList={[setGearList]}
-            />
-          </div>
-          <div className={isGearActive ? style.subsection : style.hidden}>
-            <Items
-              h1Title={"Inventory"}
-              dialogHeader={"Items"}
-              selectedItem={selectedGear}
-              setSelectedItem={setSelectedGear}
-              itemList={gearList}
-              setItemList={setGearList}
-              valueOptions={gearOptions}
-              setItemOptions={setGearOptions}
-              options={gearOptions}
-            />
           </div>
         </div>
 
