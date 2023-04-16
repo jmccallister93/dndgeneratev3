@@ -22,6 +22,7 @@ import CustomModifier from "../components/CustomModifier";
 import MultipleDisplayDesc from "../components/MultipleDisplayDesc";
 import MultipleDisplayChunks from "../components/MultipleDisplayChunks";
 import MultipleDisplayMod from "../components/MultipleDisplayMod";
+import CustomDataTableMod from "../components/CustomDataTableMod";
 
 const MonsterGen = () => {
   //Set States
@@ -746,7 +747,8 @@ const MonsterGen = () => {
           </div>
           <div className={isSSDActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDataTable
+              
+              <CustomDataTableMod
                 tableName={"abilities"}
                 setSingular={setSave}
                 setPlural={setSaves}
@@ -758,6 +760,19 @@ const MonsterGen = () => {
                 list={saveList}
                 setList={setSaveList}
                 valueOptions={saveOptions}
+
+                value={selectedSaveModifiers}
+                setValue={setSelectedSaveModifiers}
+                setMod={[
+                  setStrSave,
+                  setDexSave,
+                  setConSave,
+                  setIntSave,
+                  setWisSave,
+                  setChaSave,
+                ]}
+                mod={[strSave, dexSave, conSave, intSave, wisSave, chaSave]}
+                maxNumber={30}
               />
               {selectedSaveList}
               {/*Working on adding there modifiers  */}
