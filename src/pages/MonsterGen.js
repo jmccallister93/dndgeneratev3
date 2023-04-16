@@ -77,13 +77,14 @@ const MonsterGen = () => {
   const [intSave, setIntSave] = useState("");
   const [wisSave, setWisSave] = useState("");
   const [chaSave, setChaSave] = useState("");
-  const [selectedModifiers, setSelectedModifiers] = useState([]);
+  const [selectedSaveModifiers, setSelectedSaveModifiers] = useState([]);
 
   const [skill, setSkill] = useState("");
   const [skills, setSkills] = useState("");
   const [skillOptions, setSkillOptions] = useState();
   const [skillList, setSkillList] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
+  const [selectedSkillModifiers, setSelectedSkillModifiers] = useState([]);
 
   const [vuln, setVuln] = useState("");
   const [vulns, setVulns] = useState("");
@@ -114,6 +115,7 @@ const MonsterGen = () => {
   const [senseOptions, setSenseOptions] = useState();
   const [senseList, setSenseList] = useState([]);
   const [selectedSense, setSelectedSense] = useState([]);
+  const [selectedSenseModifiers, setSelectedSenseModifiers] = useState([]);
 
   const [lang, setLang] = useState("");
   const [langs, setLangs] = useState("");
@@ -258,7 +260,7 @@ const MonsterGen = () => {
       Wisdom: wisSave,
       Charisma: chaSave,
     };
-    setSelectedModifiers(
+    setSelectedSaveModifiers(
       selectedSave.map((save) => {
         const modifier = saveModMap[save.name];
         return { name: save.name, modifier };
@@ -760,8 +762,8 @@ const MonsterGen = () => {
               {selectedSaveList}
               {/*Working on adding there modifiers  */}
               <CustomModifier
-                value={selectedModifiers}
-                setValue={setSelectedModifiers}
+                value={selectedSaveModifiers}
+                setValue={setSelectedSaveModifiers}
                 setMod={[
                   setStrSave,
                   setDexSave,
@@ -771,6 +773,7 @@ const MonsterGen = () => {
                   setChaSave,
                 ]}
                 mod={[strSave, dexSave, conSave, intSave, wisSave, chaSave]}
+                maxNumber={30}
               />
               <CustomDataTable
                 tableName={"skills"}
@@ -1193,15 +1196,7 @@ const MonsterGen = () => {
                 Saving Throws{" "}
                 <span className={style.minorText2}>
                   <MultipleDisplayMod
-                    selectedItem={selectedModifiers}
-                    modifier={[
-                      strSave,
-                      dexSave,
-                      conSave,
-                      wisSave,
-                      chaSave,
-                      intSave,
-                    ]}
+                    selectedItem={selectedSaveModifiers}
                   />
                 </span>
               </h2>

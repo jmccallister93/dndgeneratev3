@@ -34,8 +34,6 @@ const MultipleDisplayMod = (props) => {
     };
   };
 
-  console.log(multipleDisplay)
-
   useEffect(() => {
       setDisplay(
         multipleDisplay.map((i, index) => {

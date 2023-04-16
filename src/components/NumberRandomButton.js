@@ -11,6 +11,7 @@ const NumberRandomButton = (props) => {
     //Convert r to a string
     r = r.toString();
     props.setSingular(r);
+    
   };
   return (
     <button

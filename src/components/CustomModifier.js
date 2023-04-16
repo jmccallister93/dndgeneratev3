@@ -15,13 +15,18 @@ const CustomModifier = (props) => {
     // Get the corresponding setMod function using the index
     const setModFunction = props.setMod[index];
 
-    // // Call the setMod function with the new value
+    // Call the setMod function with the new value
     setModFunction(value);
 
-    // // Update the value in the props.value array
+    // Update the value in the props.value array
     const newValue = [...props.value];
     newValue[index].modifier = value;
     props.setValue(newValue);
+  };
+
+  const onRandomClick = (index) => {
+    let r = Math.floor(Math.random() * (props.maxNumber - 0));
+    handleModifierChange(index, r)
   };
 
   useEffect(() => {
@@ -33,7 +38,6 @@ const CustomModifier = (props) => {
       }))
     );
   }, [props.value]);
-
 
   useEffect(() => {
     if (props.value !== undefined) {
@@ -59,6 +63,13 @@ const CustomModifier = (props) => {
                   max={30}
                   onChange={(e) => handleModifierChange(index, e.value)}
                 />
+                <button
+                  className={style.diceBtn}
+                  onClick={() => onRandomClick(index)}
+                  title="Generate Random Value"
+                >
+                  <span className={style.diceBtnText}>Random</span>
+                </button>
               </span>
             </span>
           </div>
