@@ -11,32 +11,29 @@ const CustomModifier = (props) => {
   const [saves, setSaves] = useState([]);
   const [saveName, setSaveName] = useState([]);
 
-  useEffect(() => {
-    console.log(props.value);
-  }, [props.value]);
+  const handleModifierChange = (index, value) => {
+    // Get the corresponding setMod function using the index
+    const setModFunction = props.setMod[index];
+
+    // // Call the setMod function with the new value
+    setModFunction(value);
+
+    // // Update the value in the props.value array
+    const newValue = [...props.value];
+    newValue[index].modifier = value;
+    props.setValue(newValue);
+  };
 
   useEffect(() => {
-    const names = props.value.map((save) => save.name);
-    setSaveName(names);
-    if (saveName.length > 0) {
-      saveName.forEach((name, index) => {
-        // console.log(index)
-        if (name === "Strength") {
-          setSaves(name + " " + modifier[index]);
-        } else if (name === "Dexterity") {
-          setSaves(saveName[index]);
-        } else if (name === "Constitution") {
-          setSaves(saveName[index]);
-        } else if (name === "Intelligence") {
-          setSaves(saveName[index]);
-        } else if (name === "Wisdom") {
-          setSaves(saveName[index]);
-        } else if (name === "Charisma") {
-          setSaves(saveName[index]);
-        }
-      });
-    }
-  }, [props.value, props.mod, modifier]);
+    setSaves(
+      props.value.map((save, index) => ({
+        name: save.name,
+        modifier: save.modifier,
+        index: index,
+      }))
+    );
+  }, [props.value]);
+
 
   useEffect(() => {
     if (props.value !== undefined) {
@@ -47,7 +44,7 @@ const CustomModifier = (props) => {
               {save.name}{" "}
               <span>
                 <InputNumber
-                  value={modifier[index]}
+                  value={save.modifier}
                   placeholder={"Set Modifier"}
                   mode="decimal"
                   showButtons
@@ -60,11 +57,7 @@ const CustomModifier = (props) => {
                   maxFractionDigits={2}
                   min={0}
                   max={30}
-                  // onChange={(e) => {
-                  //   const newModifier = [...modifier]; // make a copy of the modifier array
-                  //   dex] = e.value; // set the new value for the current index
-                  //   setModifier(newModifier); // update the modifier state
-                  // }}
+                  onChange={(e) => handleModifierChange(index, e.value)}
                 />
               </span>
             </span>

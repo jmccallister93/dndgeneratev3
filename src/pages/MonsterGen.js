@@ -266,6 +266,7 @@ const MonsterGen = () => {
     );
   }, [selectedSave]);
 
+
   return (
     <div className={style.mainWrapper}>
       <div className={style.topHeader}>
@@ -760,6 +761,7 @@ const MonsterGen = () => {
               {/*Working on adding there modifiers  */}
               <CustomModifier
                 value={selectedModifiers}
+                setValue={setSelectedModifiers}
                 setMod={[
                   setStrSave,
                   setDexSave,
@@ -1191,7 +1193,7 @@ const MonsterGen = () => {
                 Saving Throws{" "}
                 <span className={style.minorText2}>
                   <MultipleDisplayMod
-                    selectedItem={selectedSave}
+                    selectedItem={selectedModifiers}
                     modifier={[
                       strSave,
                       dexSave,

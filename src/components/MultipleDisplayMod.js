@@ -34,6 +34,8 @@ const MultipleDisplayMod = (props) => {
     };
   };
 
+  console.log(multipleDisplay)
+
   useEffect(() => {
       setDisplay(
         multipleDisplay.map((i, index) => {
@@ -46,7 +48,7 @@ const MultipleDisplayMod = (props) => {
               suppressContentEditableWarning={true}
             >
               <span className={style.minorText3}>
-              {i === undefined ? null : `${i.name}${props.modifier}${isLastElement ? "" : ", "}`}
+              {i === undefined ? null : `${i.name} +${i.modifier}${isLastElement ? "" : ", "}`}
                 </span>
             </span>
           );
