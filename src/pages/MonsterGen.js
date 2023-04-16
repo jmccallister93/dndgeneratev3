@@ -745,7 +745,7 @@ const MonsterGen = () => {
               {/*Working on adding there modifiers  */}
               <CustomModifier
                 value={selectedSave}
-                setValue={[
+                setMod={[
                   setStrSave,
                   setDexSave,
                   setConSave,
@@ -1168,13 +1168,14 @@ const MonsterGen = () => {
             </div>
           </h3>
           <hr className={style.lineBreak} />
+          {/* HERE IS ISSUES WITH DISPLAY */}
           {selectedSave.length === 0 ? null : (
             <>
               <h2>
                 Saving Throws{" "}
-                
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedSave} />{wisSave}
+                  <MultipleDisplay selectedItem={selectedSave} />
+                  {wisSave}
                 </span>
               </h2>
             </>
