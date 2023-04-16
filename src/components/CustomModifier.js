@@ -11,58 +11,32 @@ const CustomModifier = (props) => {
   const [saves, setSaves] = useState([]);
   const [saveName, setSaveName] = useState([]);
 
-     // const saveSetters = {
-    //   Strength: props.setMod[0],
-    //   Dexterity: props.setMod[1],
-    //   Constitution: props.setMod[2],
-    //   Intelligence: props.setMod[3],
-    //   Wisdom: props.setMod[4],
-    //   Charisma: props.setMod[5]
-    // };
+  useEffect(() => {
+    console.log(props.value);
+  }, [props.value]);
 
   useEffect(() => {
     const names = props.value.map((save) => save.name);
     setSaveName(names);
-  }, [props.value]);
-
-  //ISSUE THAT THIS FIRES EVERYTIME ONE OF THESE IS CORRECT
-  //NEED TO ADJUST IT SO THAT IT ONLY FIRES WHEN THE CORRECT ONE IS CHANGED
-  useEffect(() => {
     if (saveName.length > 0) {
-      for (let i = 0; i < saveName.length; i++) {
-        if (saveName[i] === "Strength") {
-          props.setMod[0](modifier);
-        } else if (saveName[i] === "Dexterity") {
-          props.setMod[1](modifier);
-        } else if (saveName[i] === "Constitution") {
-          props.setMod[2](modifier);
-        } else if (saveName[i] === "Intelligence") {
-          props.setMod[3](modifier);
-        } else if (saveName[i] === "Wisdom") {
-          props.setMod[4](modifier);
-        } else if (saveName[i] === "Charisma") {
-          props.setMod[5](modifier);
+      saveName.forEach((name, index) => {
+        // console.log(index)
+        if (name === "Strength") {
+          setSaves(name + " " + modifier[index]);
+        } else if (name === "Dexterity") {
+          setSaves(saveName[index]);
+        } else if (name === "Constitution") {
+          setSaves(saveName[index]);
+        } else if (name === "Intelligence") {
+          setSaves(saveName[index]);
+        } else if (name === "Wisdom") {
+          setSaves(saveName[index]);
+        } else if (name === "Charisma") {
+          setSaves(saveName[index]);
         }
-      }
+      });
     }
-  }, [modifier,saveName,props.setMod]);
-
-  // useEffect(() => {
-  //   console.log(modifier)
-  // }, [modifier])
-
-  // useEffect(() => {
-  //   if (saveName.length > 0) {
-  //     saveName.forEach((name) => {
-  //       if (props.setMod[name.toLowerCase()]) {
-  //         setModifier((prevState) => ({
-  //           ...prevState,
-  //           [name]: props.setMod[name.toLowerCase()]
-  //         }));
-  //       }
-  //     });
-  //   }
-  // }, [props.setMod, saveName]);
+  }, [props.value, props.mod, modifier]);
 
   useEffect(() => {
     if (props.value !== undefined) {
@@ -73,7 +47,7 @@ const CustomModifier = (props) => {
               {save.name}{" "}
               <span>
                 <InputNumber
-                  // value={modifier}
+                  value={modifier[index]}
                   placeholder={"Set Modifier"}
                   mode="decimal"
                   showButtons
@@ -86,20 +60,13 @@ const CustomModifier = (props) => {
                   maxFractionDigits={2}
                   min={0}
                   max={30}
-                  onChange={(e) =>
-                    setModifier(e.value)
-                  }
+                  // onChange={(e) => {
+                  //   const newModifier = [...modifier]; // make a copy of the modifier array
+                  //   dex] = e.value; // set the new value for the current index
+                  //   setModifier(newModifier); // update the modifier state
+                  // }}
                 />
               </span>
-              {/* <NumberRandomButton
-                setSingular={(value) =>
-                  setModifier({
-                    ...modifier,
-                    [save.name]: value,
-                  })
-                }
-                maxNumber={30}
-              /> */}
             </span>
           </div>
         ))
