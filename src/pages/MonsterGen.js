@@ -79,6 +79,7 @@ const MonsterGen = () => {
   const [wisSave, setWisSave] = useState("");
   const [chaSave, setChaSave] = useState("");
   const [selectedSaveModifiers, setSelectedSaveModifiers] = useState([]);
+  const [saveModMap, setSaveModMap] = useState([]);
 
   const [skill, setSkill] = useState("");
   const [skills, setSkills] = useState("");
@@ -261,6 +262,7 @@ const MonsterGen = () => {
       Wisdom: wisSave,
       Charisma: chaSave,
     };
+    setSaveModMap(saveModMap);
     setSelectedSaveModifiers(
       selectedSave.map((save) => {
         const modifier = saveModMap[save.name];
@@ -269,6 +271,9 @@ const MonsterGen = () => {
     );
   }, [selectedSave]);
 
+  // useEffect(() => {
+  //   console.log(selectedSaveModifiers)
+  // }, [selectedSaveModifiers])
 
   return (
     <div className={style.mainWrapper}>
@@ -435,6 +440,7 @@ const MonsterGen = () => {
                 // setReactionList,
                 setLegendList,
                 setLairList,
+                setSelectedSaveModifiers,
               ]}
             />
             {/* Export Btns */}
@@ -747,7 +753,6 @@ const MonsterGen = () => {
           </div>
           <div className={isSSDActive ? style.subsection : style.hidden}>
             <div>
-              
               <CustomDataTableMod
                 tableName={"abilities"}
                 setSingular={setSave}
@@ -760,7 +765,6 @@ const MonsterGen = () => {
                 list={saveList}
                 setList={setSaveList}
                 valueOptions={saveOptions}
-
                 value={selectedSaveModifiers}
                 setValue={setSelectedSaveModifiers}
                 setMod={[

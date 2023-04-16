@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
+import CustomModifier from "./CustomModifier";
 
 const MultipleRandomButtonMod = (props) => {
   const [modifier, setModifier] = useState([]);
@@ -15,8 +16,7 @@ const MultipleRandomButtonMod = (props) => {
     );
   }, [props.value]);
 
-
-  const onRandomClick = (e) => {
+  const handleSelectedItem = (e) => {
     props.setSelectedItem([]);
     let n = Math.round(Math.random() * (6 - 0));
     let usedIndexes = [];
@@ -33,16 +33,25 @@ const MultipleRandomButtonMod = (props) => {
         usedIndexes.push(r);
       }
     }
+
     if (props.value) {
-        let newValue = [...props.value]; 
+        let newValue = [...props.value];
         newValue.forEach((value, index) => {
-            let r = Math.floor(Math.random() * (30 - 0));
-            newValue[index] = { ...value, modifier: r };
-          }); 
+          let r = Math.floor(Math.random() * (30 - 0));
+          newValue[index] = { ...value, modifier: r };
+        });
         props.setValue(newValue);
     }
   };
 
+
+  const onRandomClick = (e) => {
+    handleSelectedItem(e);
+  };
+
+//   useEffect(() => {
+//     console.log(props.selectedItem);
+//   }, [props.selectedItem, props.value]);
 
   return (
     <>
