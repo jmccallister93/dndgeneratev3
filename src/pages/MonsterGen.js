@@ -245,11 +245,11 @@ const MonsterGen = () => {
   );
 
   // NEED TO ADD SELECTED SAVES TO BE DISPLAYED AS WELL AS THEIR MODIFIERS
-  useEffect(() => {
-    selectedSave.map((i) => {
-      setSelectedSaveList([...selectedSaveList, i.name]);
-    });
-  }, [selectedSave]);
+  const [modifier, setModifier] = useState([]);
+
+  const handleModifierChange = (newModifier) => {
+    setModifier(newModifier);
+  };
 
   return (
     <div className={style.mainWrapper}>
@@ -744,8 +744,7 @@ const MonsterGen = () => {
               {selectedSaveList}
               {/*Working on adding there modifiers  */}
               <CustomModifier
-                selectedValue={[selectedSave]}
-                value={[strSave, dexSave, conSave, intSave, wisSave, chaSave]}
+                value={selectedSave}
                 setValue={[
                   setStrSave,
                   setDexSave,
@@ -1173,8 +1172,9 @@ const MonsterGen = () => {
             <>
               <h2>
                 Saving Throws{" "}
+                
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedSave} />
+                  <MultipleDisplay selectedItem={selectedSave} />{wisSave}
                 </span>
               </h2>
             </>

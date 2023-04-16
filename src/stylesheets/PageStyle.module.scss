@@ -384,6 +384,21 @@ $btn-blue: #2196f3;
   }
 }
 
+.modText{
+  font-size: 1.25rem;  
+}
+
+.modLayout{
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+}
+
+#mod{
+  width: 25%;
+}
+
+
 .nameText {
   font-weight: 500;
   &:hover{
