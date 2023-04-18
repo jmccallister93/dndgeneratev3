@@ -1,21 +1,9 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { Button } from "primereact/button";
-import { e, i } from "mathjs";
-import { DataTable } from "primereact/datatable";
-import { Column } from "jspdf-autotable";
-import { Dialog } from "primereact/dialog";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { InputNumber } from "primereact/inputnumber";
-import Items from "../components/Items";
-import { Toast } from "primereact/toast";
-import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import ExportButtons from "../components/ExportButtons";
@@ -221,7 +209,6 @@ const BuildingGen = () => {
 
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Building Generator</h1>
         <div className={style.topWrapper}>
@@ -500,19 +487,19 @@ const BuildingGen = () => {
           </div>
           <div className={isNpcActive ? style.subsection : style.hidden}>
             <div>
-              {/* <Npcs
-              onNameChangeProp={nameChangeProp}
-              onRaceChangeProp={raceChangeProp}
-              onSexChangeProp={sexChangeProp}
-              onAlignChangeProp={alignChangeProp}
-              onProfChangeProp={profChangeProp}
-              onFeatureChangeProp={featureChangeProp}
-              onTalentChangeProp={talentChangeProp}
-              onMannerismChangeProp={mannerismChangeProp}
-              onInteractionChangeProp={interactionChangeProp}
-              onBondChangeProp={bondChangeProp}
-              onDescChangeProp={descChangeProp}
-            /> */}
+            <CustomDataTable
+                tableName={"DBnpc"}
+                setSingular={setNpc}
+                setPlural={setNpcs}
+                setOptions={setNpcOptions}
+                h1Title={"NPCs"}
+                dialogHeader={"NPCs"}
+                selectedItem={selectedNpc}
+                setSelectedItem={setSelectedNpc}
+                list={npcList}
+                setList={setNpcList}
+                valueOptions={npcOptions}
+              />
             </div>
           </div>
           <div className={style.sectionOption}>
@@ -528,24 +515,26 @@ const BuildingGen = () => {
           </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
-              {/* <Items
-              h1Title={"Items"}
-              dialogHeader={"Items"}
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-              // header={header}
-              itemList={itemList}
-              setItemList={setItemList}
-              valueOptions={itemOptions}
-              options={itemOptions}
-            /> */}
+            <CustomDataTable
+                tableName={"DBitem"}
+                setSingular={setItem}
+                setPlural={setItems}
+                setOptions={setItemOptions}
+                h1Title={"Items"}
+                dialogHeader={"Items"}
+                selectedItem={selectedItem}
+                setSelectedItem={setSelectedItem}
+                list={itemList}
+                setList={setItemList}
+                valueOptions={itemOptions}
+              />
             </div>
           </div>
         </div>
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-          <NameDisplay value={buildingName} setNewValue={setBuildingName} />
+        <NameDisplay value={buildingName} setNewValue={setBuildingName} />
           <h2>
             Category{" "}
             <SingleDisplayText
@@ -626,14 +615,14 @@ const BuildingGen = () => {
           <h2>
             NPCs{" "}
             <span className={style.minorText2}>
-              {/* <MultipleDisplay selectedItem={selectedNpc} /> */}
+              <MultipleDisplay selectedItem={selectedNpc} />
             </span>
           </h2>
           <hr className={style.lineBreak} />
           <h2>
             Items{" "}
             <span className={style.minorText2}>
-              {/* <MultipleDisplay selectedItem={selectedItem} /> */}
+              <MultipleDisplay selectedItem={selectedItem} />
             </span>
           </h2>
         </div>

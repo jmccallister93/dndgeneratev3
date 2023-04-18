@@ -159,7 +159,6 @@ const CityGen = () => {
 
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>City Generator</h1>
         <div>
