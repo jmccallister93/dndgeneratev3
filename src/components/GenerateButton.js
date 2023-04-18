@@ -582,6 +582,7 @@ const GenerateButton = (props) => {
     }
   };
 
+  //Sense Generator
   const senseGenerate = () => {
     if (props.senseItem) {
       for (let i = 0; i < props.senseItem.length; i++) {

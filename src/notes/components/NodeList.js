@@ -69,6 +69,18 @@ const NodeList = (props) => {
           ))}
         </div>
         <div className={ns.nodeList}>
+          <h2>Monsters:</h2>
+          {props.monster.map((node) => (
+            <div
+              className={ns.linkItem}
+              key={node.uuid}
+              onClick={() => handleLinkNode(node.name, node.uuid)}
+            >
+              {node.name}
+            </div>
+          ))}
+        </div>
+        <div className={ns.nodeList}>
           <h2>Quests:</h2>
           {props.quest.map((node) => (
             <div

@@ -51,6 +51,19 @@ const NoteTree = (props) => {
         </div>
         <div className={ns.TreeTable}>
           <NoteTreeTable
+            header="Monsters"
+            monster={props.monster}
+            setShowPopup={props.setShowPopup}
+            selectedNode={props.selectedNode}
+            selectedId={props.selectedId}
+            selectedName={props.selectedName}
+            setSelectedId={(value) => props.setSelectedId(value)}
+            setSelectedName={(value) => props.setSelectedName(value)}
+            deleteSelectedNode={props.deleteSelectedNode}
+          />
+        </div>
+        <div className={ns.TreeTable}>
+          <NoteTreeTable
             header="Quests"
             quest={props.quest}
             setShowPopup={props.setShowPopup}

@@ -1,32 +1,32 @@
-import Navbar from "../components/Navbar";
-import style from "../stylesheets/PageStyle.module.scss";
+import style from "../../stylesheets/PageStyle.module.scss";
 import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { Tooltip } from "primereact/tooltip";
-import ClearButton from "../components/ClearButton";
-import GenerateButton from "../components/GenerateButton";
-import ExportButtons from "../components/ExportButtons";
-import InfoModal from "../components/InfoModal";
-import SectionRandom from "../components/SectionRandom";
-import CustomName from "../components/CustomName";
-import CustomDropDown from "../components/CustomDropDown";
-import CustomInputNumber from "../components/CustomInputNumber";
-import CustomDataTable from "../components/CustomDataTable";
-import SingleDisplayText from "../components/SingleDisplayText";
-import SingleDisplayNumber from "../components/SingleDisplayNumber";
-import MultipleDisplay from "../components/MultipleDisplay";
-import NameDisplay from "../components/NameDisplay";
-import CustomModifier from "../components/CustomModifier";
-import MultipleDisplayDesc from "../components/MultipleDisplayDesc";
-import MultipleDisplayChunks from "../components/MultipleDisplayChunks";
-import MultipleDisplayMod from "../components/MultipleDisplayMod";
-import CustomDataTableMod from "../components/CustomDataTableMod";
-import { SessionContext } from "../config/SessionContext";
-import { supabase, auth } from "../config/supabaseClient";
+import ClearButton from "../../components/ClearButton";
+import GenerateButton from "../../components/GenerateButton";
+import ExportButtons from "../../components/ExportButtons";
+import InfoModal from "../../components/InfoModal";
+import SectionRandom from "../../components/SectionRandom";
+import CustomName from "../../components/CustomName";
+import CustomDropDown from "../../components/CustomDropDown";
+import CustomInputNumber from "../../components/CustomInputNumber";
+import CustomDataTable from "../../components/CustomDataTable";
+import SingleDisplayText from "../../components/SingleDisplayText";
+import SingleDisplayNumber from "../../components/SingleDisplayNumber";
+import MultipleDisplay from "../../components/MultipleDisplay";
+import NameDisplay from "../../components/NameDisplay";
+import CustomModifier from "../../components/CustomModifier";
+import MultipleDisplayDesc from "../../components/MultipleDisplayDesc";
+import MultipleDisplayChunks from "../../components/MultipleDisplayChunks";
+import MultipleDisplayMod from "../../components/MultipleDisplayMod";
+import CustomDataTableMod from "../../components/CustomDataTableMod";
+import { SessionContext } from "../../config/SessionContext";
+import { supabase, auth } from "../../config/supabaseClient";
+import ns from "../../stylesheets/Note.module.scss";
 
-const MonsterGen = () => {
+const MonsterCreate = () => {
   const session = useContext(SessionContext);
 
   //Set States
@@ -192,6 +192,7 @@ const MonsterGen = () => {
   const [isMovementActive, setIsMovementActive] = useState(false);
 
   const [monster, setMonster] = useState({});
+  const [selectedItemString, setSelectedItemString] = useState("");
 
   //Showoptions
   const showBasics = (e) => {
@@ -256,11 +257,17 @@ const MonsterGen = () => {
   //Getting div ref
   const divRef = useRef();
   useEffect(() => {
-    const saveNames = selectedSaveModifiers.map((item) => `${item.name}  +${item.modifier}`);
+    const saveNames = selectedSaveModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
     const saveString = saveNames.join(", ");
-    const senseNames = selectedSenseModifiers.map((item) => `${item.name}  +${item.modifier}`);
+    const senseNames = selectedSenseModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
     const senseString = senseNames.join(", ");
-    const skillNames = selectedSkillModifiers.map((item) => `${item.name}  +${item.modifier}`);
+    const skillNames = selectedSkillModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
     const skillString = skillNames.join(", ");
     const languageNames = selectedLang.map((item) => item.name);
     const languageString = languageNames.join(", ");
@@ -272,14 +279,20 @@ const MonsterGen = () => {
     const immuneString = immuneNames.join(", ");
     const conditionNames = selectedCondition.map((item) => item.name);
     const conditionString = conditionNames.join(", ");
-    const specialNames = selectedSpecial.map((item) => `-${item.name}: ${item.desc}`);
-const specialString = specialNames.join("\n");
-
-const actionNames = selectedAction.map((item) => `-${item.name}: ${item.desc}`);
-const actionString = actionNames.join("\n");
-
-const legendNames = selectedLegend.map((item) => `-${item.name}: ${item.desc}`);
-const legendString = legendNames.join("\n");
+    const specialNames = selectedSpecial.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const specialString = specialNames.join("");
+    
+    const actionNames = selectedAction.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const actionString = actionNames.join("");
+    
+    const legendNames = selectedLegend.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const legendString = legendNames.join("");
     const lairNames = selectedLair.map((item) => item.name);
     const lairString = lairNames.join(", ");
 
@@ -350,7 +363,6 @@ const legendString = legendNames.join("\n");
     selectedAction,
     selectedLegend,
     selectedLair,
-    selectedSkillModifiers,
   ]);
   //Info content
   const infoContent = (
@@ -1771,4 +1783,4 @@ const legendString = legendNames.join("\n");
   );
 };
 
-export default MonsterGen;
+export default MonsterCreate;

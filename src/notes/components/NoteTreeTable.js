@@ -12,6 +12,7 @@ import { useCallback } from "react";
 import ContextMenu from "./ContextMenu";
 import userEvent from "@testing-library/user-event";
 import NodeList from "./NodeList";
+import MonsterCreate from "./MonsterCreate";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -49,6 +50,7 @@ const NoteTreeTable = (props) => {
   const organization = extractNames(props.organization);
   const quest = extractNames(props.quest);
   const item = extractNames(props.item);
+  const monster = extractNames(props.monster);
 
   // Show folders
   const [visibleFolders, setVisibleFolders] = useState({});
@@ -148,6 +150,19 @@ const NoteTreeTable = (props) => {
                 </button>
               </div>
               <OrganizationCreate />
+            </div>
+          </div>
+        )}
+        {showPopup && props.header === "Monsters" && (
+          <div className={ns.popupContainer}>
+            <div className={ns.popup}>
+              <div className={ns.popupHeader}>
+                <h2>Create Monster</h2>
+                <button className={ns.closeButton} onClick={handleClose}>
+                  X
+                </button>
+              </div>
+              <MonsterCreate />
             </div>
           </div>
         )}
@@ -279,6 +294,56 @@ const NoteTreeTable = (props) => {
 
         {/* Organization */}
         {Object.entries(organization).map(([folder, objects], folderIndex) => {
+          const hasActiveLink = objects.some((obj) =>
+            activeLinks.includes(obj.name)
+          );
+          return (
+            <div key={folderIndex}>
+              <div
+                className={`${ns.noteTreeFolder} ${
+                  visibleFolders[folder] ? ns.selectedFolder : ""
+                } ${hasActiveLink ? ns.activeLink : ""}`}
+              >
+                <h3>
+                  {folder === "null" ? "No Folder" : folder}
+                  <button
+                    className={ns.folderButton}
+                    onClick={() => toggleFolderVisibility(folder)}
+                  >
+                    <i
+                      className={`pi ${
+                        visibleFolders[folder] ? "pi-folder-open" : "pi-folder"
+                      }`}
+                    ></i>{" "}
+                    <i
+                      className={`pi ${
+                        visibleFolders[folder]
+                          ? "pi-angle-double-down"
+                          : "pi-angle-double-right"
+                      }`}
+                    ></i>
+                  </button>
+                </h3>
+              </div>
+              {visibleFolders[folder] &&
+                Array.isArray(objects) &&
+                objects.map((obj, index) => (
+                  <div
+                    className={`${ns.noteTreeCategoryItem} ${
+                      props.selectedId === obj.uuid ? ns.selected : ""
+                    } ${activeLinks.includes(obj.name) ? ns.activeLink : ""}`}
+                    key={index}
+                    onClick={() => handleSelect(obj.uuid, obj.name)}
+                  >
+                    {obj.name}
+                  </div>
+                ))}
+            </div>
+          );
+        })}
+
+        {/* Monster */}
+        {Object.entries(monster).map(([folder, objects], folderIndex) => {
           const hasActiveLink = objects.some((obj) =>
             activeLinks.includes(obj.name)
           );

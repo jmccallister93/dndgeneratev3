@@ -44,7 +44,7 @@
 
 .noteTree {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-auto-flow: row;
   align-items: flex-start;
   background-color: white;
@@ -238,6 +238,7 @@
   padding: 0.1rem;
   transition: 0.3s;
   width: fit-content;
+  // padding-bottom: 8px;
   &:hover{
     cursor: pointer;
     scale: 1.01;
@@ -286,10 +287,18 @@ textarea {
   }
 }
 
+// .inputWrapper {
+//   display: inline-block;
+//   height: auto;
+//   width: 100%;
+// }
+
 .editNote{
   font-size: 1rem;
   padding: 0.25rem;
   background-color: rgb(255, 255, 0, 0.25);
+  height: 100%;
+  width: 100%;
 }
 
 .notesWrapper{

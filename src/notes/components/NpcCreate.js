@@ -280,7 +280,7 @@ const NpcCreate = () => {
       con: (con + " " + setMod(con)),
       int: (int + " " + setMod(int)),
       wis: (wis + " " + setMod(wis)),
-      cha: (cha + " " + setMod(cha)),
+      cha: (cha + " " + setMod(cha)), 
       action: action,
       weaponBonus: weaponBonus,
       weaponDamage: weaponDamage,

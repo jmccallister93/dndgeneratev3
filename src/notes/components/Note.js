@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useCallback } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 import NodeList from "./NodeList";
+import { hash } from 'object-hash'
 
 function Note(props) {
   const [notes, setNotes] = useState("");
@@ -106,7 +107,6 @@ function Note(props) {
       links: newLinks.join(", "),
     });
     props.setPropertyValue(newLinks.join(", "));
-   
   };
 
   //Either use this to display alllinks or map out directly from props.selectedNode.links
@@ -127,6 +127,7 @@ function Note(props) {
   const handleCloseLink = () => {
     setShowNodesList(false);
   };
+
 
   return (
     <>
@@ -158,6 +159,7 @@ function Note(props) {
                     organization={props.organization}
                     quest={props.quest}
                     item={props.item}
+                    monster={props.monster}
                     updateProperty={updateProperty}
                     setPropertyValue={props.setPropertyValue}
                     selectedNode={props.selectedNode}
@@ -182,7 +184,12 @@ function Note(props) {
               prop !== "selectedItem" &&
               prop !== "notes" &&
               prop !== "links" &&
-              prop !== "folder"
+              prop !== "folder" &&
+              prop !== "email" &&
+              prop !== "ability" &&
+              prop !== "action" &&
+              prop !== "legendary" &&
+              prop !== "lair"
             ) {
               return (
                 <div key={index}>
@@ -221,6 +228,64 @@ function Note(props) {
             }
             return null;
           })}
+
+          {/* Ability */}
+          <h2>Abilities</h2>
+          {Object.keys(props.selectedNode).map((prop, index) => {
+            if (prop === "ability") {
+              const abilityText = props.selectedNode[prop];
+              const abilities = abilityText.split("\n\n");
+              return (
+                <div key={index}>
+                  {selectedPropertyIndex === index ? (
+                  
+                    <textarea
+                    rows={index}
+                      className={ns.editNote}
+                      type="text"
+                      value={props.selectedNode[prop]}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        props.setSelectedNode((prev) => ({
+                          ...prev,
+                          [prop]: newValue,
+                        }));
+                      }}
+                      onBlur={() => {
+                        setSelectedPropertyIndex(-1);
+                        updateProperty(prop, props.selectedNode[prop]);
+                      }}
+                      onKeyDown={handleEnterDown}
+                      autoFocus
+                    />
+                   
+                  ) : (
+                    <>
+                    {abilities.map((ability, i) => (
+                      <div
+                        key={i}
+                        className={ns.objectProperty}
+                        onClick={() => {
+                          setSelectedPropertyIndex(index);
+                        }}
+                      >
+                        <div className={ns.objectProperty}></div>
+                        {ability === null ? "No Folder" : ability}
+                      </div>
+                    ))}
+                  </>
+                  )}
+                </div>
+              );
+            }
+            return null;
+          })}
+
+          {/* Action */}
+
+          {/* Legendary */}
+
+          {/* Lair */}
 
           {/* Folder */}
           <h2>Folder</h2>

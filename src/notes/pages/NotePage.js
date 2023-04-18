@@ -26,6 +26,7 @@ function NotePage(props) {
   const [organizationDetails, setOrganizationDetails] = useState([]);
   const [questDetails, setQuestDetails] = useState([]);
   const [itemDetails, setItemDetails] = useState([]);
+  const [monsterDetails, setMonsterDetails] = useState([]);
 
   const [noteText, setNoteText] = useState("");
   const [propertyValue, setPropertyValue] = useState("");
@@ -48,6 +49,7 @@ function NotePage(props) {
           .select("uuid");
         const questResponse = await supabase.from("DBquest").select("uuid");
         const itemResponse = await supabase.from("DBitem").select("uuid");
+        const monsterResponse = await supabase.from("DBmonster").select("uuid");
 
         //Create arrays of uuids
         const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
@@ -61,6 +63,9 @@ function NotePage(props) {
           questResponse.data.map((quest) => quest.uuid)
         );
         const itemUuids = [].concat(itemResponse.data.map((item) => item.uuid));
+        const monsterUuids = [].concat(
+          monsterResponse.data.map((monster) => monster.uuid)
+        );
 
         //Compare selectedId to uuids to determine which table to update
         if (npcUuids.includes(selectedId)) {
@@ -73,6 +78,8 @@ function NotePage(props) {
           setDbTable("DBquest");
         } else if (itemUuids.includes(selectedId)) {
           setDbTable("DBitem");
+        } else if (monsterUuids.includes(selectedId)) {
+          setDbTable("DBmonster");
         }
       } catch (error) {
         console.error("Error fetching tables:", error);
@@ -343,13 +350,71 @@ function NotePage(props) {
     fetchData();
   }, [noteText, propertyValue, deletedNode, showPopup]);
 
+  //Get Monsters
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBmonster")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setMonsterDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setMonsterDetails(
+          dataName.map((r) => ({
+            email: r.email,
+            links: r.links,
+            folder: r.folder,
+            uuid: r.uuid,
+            name: r.name,
+            size: r.size,
+            type: r.type,
+            alignment: r.alignment,
+            ac: r.ac,
+            armorType: r.armorType,
+            hp: r.hp,
+            speed: r.speed,
+            fly: r.fly,
+            swim: r.swim,
+            climb: r.climb,
+            burrow: r.burrow,
+            hover: r.hover,
+            str: r.str,
+            dex: r.dex,
+            con: r.con,
+            int: r.int,
+            wis: r.wis,
+            cha: r.cha,
+            save: r.save,
+            skill: r.skill,
+            sense: r.sense,
+            language: r.language,
+            vuln: r.vuln,
+            resist: r.resist,
+            immune: r.immune,
+            condition: r.condition,
+            ability: r.ability,
+            action: r.action,
+            legendary: r.legendary,
+            lair: r.lair,
+            
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, [noteText, propertyValue, deletedNode, showPopup]);
   //Gets details of selected node
   const handleSelectedNode = useCallback(() => {
     const allDetails = npcDetails.concat(
       locationDetails,
       organizationDetails,
       questDetails,
-      itemDetails
+      itemDetails,
+      monsterDetails,
     );
     setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
   }, [
@@ -359,6 +424,7 @@ function NotePage(props) {
     organizationDetails,
     questDetails,
     itemDetails,
+    monsterDetails,
   ]);
 
   useEffect(() => {
@@ -389,6 +455,7 @@ function NotePage(props) {
               organization={organizationDetails}
               quest={questDetails}
               item={itemDetails}
+              monster={monsterDetails}
               selectedNode={selectedNode}
               setSelectedId={setSelectedId}
               selectedId={selectedId}
@@ -403,6 +470,7 @@ function NotePage(props) {
               organization={organizationDetails}
               quest={questDetails}
               item={itemDetails}
+              monster={monsterDetails}
               selectedNode={selectedNode}
               setSelectedNode={setSelectedNode}
               updateNote={updateNote}
