@@ -172,6 +172,8 @@ const CustomDataTableMod = (props) => {
           setMod={props.setMod}
           mod={props.mod}
           maxNumber={props.maxNumber}
+          setSenseMod={props.setSenseMod}
+          senseMod={props.senseMod}
         />
     </>
   );

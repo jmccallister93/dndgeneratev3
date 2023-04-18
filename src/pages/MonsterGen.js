@@ -107,6 +107,18 @@ const MonsterGen = () => {
   const [skillModMap, setSkillModMap] = useState([]);
   const [selectedSkillModifiers, setSelectedSkillModifiers] = useState([]);
 
+  const [sense, setSense] = useState("");
+  const [senses, setSenses] = useState("");
+  const [senseOptions, setSenseOptions] = useState();
+  const [senseList, setSenseList] = useState([]);
+  const [selectedSense, setSelectedSense] = useState([]);
+  const [blindsightSense, setBlindsightSense] = useState("");
+  const [darkvisionSense, setDarkvisionSense] = useState("");
+  const [tremorsenseSense, setTremorsenseSense] = useState("");
+  const [truesightSense, setTruesightSense] = useState("");
+  const [senseModMap, setSenseModMap] = useState([]);
+  const [selectedSenseModifiers, setSelectedSenseModifiers] = useState([]);
+
   const [vuln, setVuln] = useState("");
   const [vulns, setVulns] = useState("");
   const [vulnOptions, setVulnOptions] = useState();
@@ -130,13 +142,6 @@ const MonsterGen = () => {
   const [conditionOptions, setConditionOptions] = useState();
   const [conditionList, setConditionList] = useState([]);
   const [selectedCondition, setSelectedCondition] = useState([]);
-
-  const [sense, setSense] = useState("");
-  const [senses, setSenses] = useState("");
-  const [senseOptions, setSenseOptions] = useState();
-  const [senseList, setSenseList] = useState([]);
-  const [selectedSense, setSelectedSense] = useState([]);
-  const [selectedSenseModifiers, setSelectedSenseModifiers] = useState([]);
 
   const [lang, setLang] = useState("");
   const [langs, setLangs] = useState("");
@@ -319,9 +324,22 @@ const MonsterGen = () => {
     );
   }, [selectedSkill]);
 
-  // useEffect(() => {
-  //   console.log(selectedSaveModifiers)
-  // }, [selectedSaveModifiers])
+  //Sense modifiers
+  useEffect(() => {
+    const senseModMap = {
+      Blindsight: blindsightSense,
+      Darkvision: darkvisionSense,
+      Tremorsense: tremorsenseSense,
+      Truesight: truesightSense,
+    };
+    setSenseModMap(senseModMap);
+    setSelectedSenseModifiers(
+      selectedSense.map((sense) => {
+        const modifier = senseModMap[sense.name];
+        return { name: sense.name, modifier };
+      })
+    );
+  }, [selectedSense]);
 
   return (
     <div className={style.mainWrapper}>
@@ -417,6 +435,10 @@ const MonsterGen = () => {
                 slSkill,
                 stSkill,
                 surSkill,
+                blindsightSense,
+                darkvisionSense,
+                tremorsenseSense,
+                truesightSense,
               ]}
               setNumberItem={[
                 setAc,
@@ -451,14 +473,19 @@ const MonsterGen = () => {
                 setSlSkill,
                 setStSkill,
                 setSurSkill,
+                setBlindsightSense,
+                setDarkvisionSense,
+                setTremorsenseSense,
+                setTruesightSense,
               ]}
               maxNumber={[
                 30, 300, 30, 30, 30, 30, 30, 30, 20, 20, 20, 20, 20, 20, 10, 10,
                 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+                120, 120, 120, 120,
               ]}
               minNumber={[
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5,
               ]}
               speedItem={[
                 baseSpeed,
@@ -531,6 +558,10 @@ const MonsterGen = () => {
                 setSlSkill,
                 setStSkill,
                 setSurSkill,
+                setBlindsightSense,
+                setDarkvisionSense,
+                setTremorsenseSense,
+                setTruesightSense,
               ]}
               setArrayState={[
                 setSaveList,
@@ -855,6 +886,20 @@ const MonsterGen = () => {
                 setSenseList,
                 setLangList,
               ]}
+              senseItem={[
+                blindsightSense,
+                darkvisionSense,
+                tremorsenseSense,
+                truesightSense,
+              ]}
+              setSenseItem={[
+                setBlindsightSense,
+                setDarkvisionSense,
+                setTremorsenseSense,
+                setTruesightSense,
+              ]}
+              senseMax={[120, 120, 120, 120]}
+              senseMin={[5, 5, 5, 5]}
               numberItem={[
                 strSave,
                 dexSave,
@@ -1057,7 +1102,7 @@ const MonsterGen = () => {
                 ]}
                 maxNumber={10}
               />
-              <CustomDataTable
+              <CustomDataTableMod
                 tableName={"senses"}
                 setSingular={setSense}
                 setPlural={setSenses}
@@ -1069,6 +1114,36 @@ const MonsterGen = () => {
                 list={senseList}
                 setList={setSenseList}
                 valueOptions={senseOptions}
+                setSenseMod={[
+                  setBlindsightSense,
+                  setDarkvisionSense,
+                  setTremorsenseSense,
+                  setTruesightSense,
+                ]}
+                senseMod={[
+                  blindsightSense,
+                  darkvisionSense,
+                  tremorsenseSense,
+                  truesightSense,
+                ]}
+                maxNumber={120}
+              />
+              <CustomModifier
+                value={selectedSenseModifiers}
+                setValue={setSelectedSenseModifiers}
+                setSense={[
+                  setBlindsightSense,
+                  setDarkvisionSense,
+                  setTremorsenseSense,
+                  setTruesightSense,
+                ]}
+                sense={[
+                  blindsightSense,
+                  darkvisionSense,
+                  tremorsenseSense,
+                  truesightSense,
+                ]}
+                maxNumber={120}
               />
               <CustomDataTable
                 tableName={"languages"}
@@ -1528,7 +1603,7 @@ const MonsterGen = () => {
               <h2>
                 Senses{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedSense} />
+                  <MultipleDisplayMod selectedItem={selectedSenseModifiers} />
                 </span>
               </h2>
             </>

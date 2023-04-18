@@ -376,6 +376,22 @@ const SectionRandom = (props) => {
       }
     }
   };
+
+  //Sense Distance Generate
+  const senseGenerate = (e) => {
+    if (props.senseItem) {
+      for (let i = 0; i < props.senseItem.length; i++) {
+        let r = Math.floor(
+          Math.random() * (props.senseMax[i] - props.senseMin[i]) +
+            props.senseMin[i]
+        );
+        r = Math.floor(r / 5) * 5;
+        r = r.toString();
+        props.setSenseItem[i](r);
+      }
+    }
+  };
+
   //Number Generate HP
   const numberGenerateHP = (e) => {
     if (props.hpItem) {
@@ -515,6 +531,7 @@ const SectionRandom = (props) => {
     npcNameGenerate();
     monsterNameGenerate();
     numberGenerate();
+    senseGenerate();
   };
 
   return (

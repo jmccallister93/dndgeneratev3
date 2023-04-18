@@ -32,6 +32,13 @@ const MultipleRandomButtonMod = (props) => {
           props.setMod[index](n);
         });
       }
+
+      if (props.senseMod) {
+        props.senseMod.forEach((mod, index) => {
+            let n = Math.floor(Math.random() * (props.maxNumber / 5 - 1)) * 5;
+          props.setSenseMod[index](n);
+        });
+      }
   };
 
   //Fires click event on random button

@@ -12,21 +12,18 @@ const CustomModifier = (props) => {
   const [saveName, setSaveName] = useState([]);
 
   const handleModifierChange = (index, value) => {
-    // Get the corresponding setMod function using the index
-    const setModFunction = props.setMod[index];
-
-    // Call the setMod function with the new value
+    const setModFunction = props.setMod ? props.setMod[index] : props.setSense[index]; 
     setModFunction(value);
-
-    // Update the value in the props.value array
     const newValue = [...props.value];
     newValue[index].modifier = value;
     props.setValue(newValue);
   };
 
   const onRandomClick = (index) => {
-    let r = Math.floor(Math.random() * (props.maxNumber - 0));
-    handleModifierChange(index, r)
+    let r = props.setMod
+      ? Math.floor(Math.random() * (props.maxNumber - 0))
+      : Math.floor(Math.random() * (props.senseMax - 5) / 5) * 5 + 5;
+    handleModifierChange(index, r);
   };
 
   useEffect(() => {
@@ -60,16 +57,19 @@ const CustomModifier = (props) => {
                   minFractionDigits={0}
                   maxFractionDigits={2}
                   min={0}
-                  max={30}
+                  max={props.setMod ? 30 : 120}
+                  step={props.sense ? 5 : 1}
                   onChange={(e) => handleModifierChange(index, e.value)}
                 />
-                <button
-                  className={style.diceBtn}
-                  onClick={() => onRandomClick(index)}
-                  title="Generate Random Value"
-                >
-                  <span className={style.diceBtnText}>Random</span>
-                </button>
+                 {props.setMod || !props.setSense ? (
+                  <button
+                    className={style.diceBtn}
+                    onClick={() => onRandomClick(index)}
+                    title="Generate Random Value"
+                  >
+                    <span className={style.diceBtnText}>Random</span>
+                  </button>
+                ) : null}
               </span>
             </span>
           </div>
