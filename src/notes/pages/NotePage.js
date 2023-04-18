@@ -400,7 +400,7 @@ function NotePage(props) {
             action: r.action,
             legendary: r.legendary,
             lair: r.lair,
-            
+            notes: r.notes,
           }))
         );
       }
