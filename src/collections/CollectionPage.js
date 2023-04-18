@@ -15,12 +15,14 @@ const CollectionPage = () => {
   const [locationDetails, setLocationDetails] = useState([]);
   const [npcDetails, setNpcDetails] = useState([]);
   const [organizationDetails, setOrganizationDetails] = useState([]);
+  const [monsterDetails, setMonsterDetails] = useState([]);
   const [questDetails, setQuestDetails] = useState([]);
   const [itemDetails, setItemDetails] = useState([]);
 
   const [displayLocation, setDisplayLocation] = useState([]);
   const [displayNpc, setDisplayNpc] = useState([]);
   const [displayOrganization, setDisplayOrganization] = useState([]);
+  const [displayMonster, setDisplayMonster] = useState([]);
   const [displayQuest, setDisplayQuest] = useState([]);
   const [displayItem, setDisplayItem] = useState([]);
 
@@ -29,6 +31,7 @@ const CollectionPage = () => {
   const [isLocationActive, setIsLocationActive] = useState(false);
   const [isQuestActive, setIsQuestActive] = useState(false);
   const [isOrganizationActive, setIsOrganizationActive] = useState(false);
+  const [isMonsterActive, setIsMonsterActive] = useState(false);
   const [isItemActive, setIsItemActive] = useState(false);
 
   const [selectedItem, setSelectedItem] = useState(null);
@@ -42,8 +45,11 @@ const CollectionPage = () => {
   const onQuestClick = () => {
     setIsQuestActive(!isQuestActive);
   };
-  const onOrganisationClick = () => {
+  const onOrganizationClick = () => {
     setIsOrganizationActive(!isOrganizationActive);
+  };
+  const onMonsterClick = () => {
+    setIsMonsterActive(!isMonsterActive);
   };
   const onItemClick = () => {
     setIsItemActive(!isItemActive);
@@ -196,6 +202,61 @@ const CollectionPage = () => {
             power: r.power,
             specialty: r.specialty,
             weakness: r.weakness,
+            notes: r.notes,
+            links: r.links,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+
+   //Get Monsters
+   useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBmonster")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setOrganizationDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setMonsterDetails(
+          dataName.map((r) => ({
+            folder: r.folder,
+            uuid: r.uuid,
+            name: r.name,
+            size: r.size,
+            type: r.type,
+            alignment: r.alignment,
+            ac: r.ac,
+            armorType: r.armorType,
+            hp: r.hp,
+            speed: r.speed,
+            fly: r.fly,
+            swim: r.swim,
+            climb: r.climb,
+            str: r.str,
+            dex: r.dex,
+            con: r.con,
+            int: r.int,
+            wis: r.wis,
+            cha: r.cha,
+            save: r.save,
+            skill: r.skill,
+            sense: r.sense,
+            language: r.language,
+            vuln: r.vuln,
+            resist: r.resist,
+            immune: r.immune,
+            condition: r.condition,
+            ability: r.ability,
+            action: r.action,
+            legendary: r.legendary,
+            lair: r.lair,
             notes: r.notes,
             links: r.links,
           }))
@@ -370,6 +431,30 @@ const CollectionPage = () => {
     );
   }, [organizationDetails]);
 
+   //Set Selected Monsters
+   useEffect(() => {
+    setDisplayMonster(
+      monsterDetails.map((item) => {
+        return (
+          <>
+            <span
+              className="editText"
+              contentEditable="false"
+              suppressContentEditableWarning={true}
+              onClick={() => setSelectedItem(Object.entries(item))}
+            >
+              <span className={style.minorText3} onClick={showPopup}>
+                {item === undefined ? null : `${item.name} `}
+                <i className="pi pi-info-circle"></i>
+                <br></br>
+              </span>
+            </span>
+          </>
+        );
+      })
+    );
+  }, [monsterDetails]);
+
   //Set Selected Items
   useEffect(() => {
     setDisplayItem(
@@ -431,10 +516,10 @@ const CollectionPage = () => {
       <p>Collection of all your Quests!</p>
     </Card>
   );
-  const cardOrganisation = (
+  const cardOrganization = (
     <Card
       className={style.collectionCard}
-      onClick={onOrganisationClick}
+      onClick={onOrganizationClick}
       style={{ borderRadius: "10px" }}
     >
       <h3>
@@ -443,6 +528,19 @@ const CollectionPage = () => {
       <p>Collection of all your Organizations!</p>
     </Card>
   );
+  const cardMonster = (
+    <Card
+      className={style.collectionCard}
+      onClick={onMonsterClick}
+      style={{ borderRadius: "10px" }}
+    >
+      <h3>
+        Monsters <i className="pi pi-chevron-right"></i>
+      </h3>
+      <p>Collection of all your Monsters!</p>
+    </Card>
+  );
+
   const cardItem = (
     <Card
       className={style.collectionCard}
@@ -512,7 +610,18 @@ const CollectionPage = () => {
               setIsItemActive={setIsItemActive}
             />
           ) : (
-            cardOrganisation
+            cardOrganization
+          )}
+          {isMonsterActive ? (
+            <CollectionTable
+              data={monsterDetails}
+              active={setIsMonsterActive}
+              collectionTitle={"Monsters"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardMonster
           )}
           {isItemActive ? (
             <CollectionTable

@@ -272,14 +272,20 @@ const MonsterGen = () => {
     const immuneString = immuneNames.join(", ");
     const conditionNames = selectedCondition.map((item) => item.name);
     const conditionString = conditionNames.join(", ");
-    const specialNames = selectedSpecial.map((item) => `-${item.name}: ${item.desc}`);
-const specialString = specialNames.join("\n");
-
-const actionNames = selectedAction.map((item) => `-${item.name}: ${item.desc}`);
-const actionString = actionNames.join("\n");
-
-const legendNames = selectedLegend.map((item) => `-${item.name}: ${item.desc}`);
-const legendString = legendNames.join("\n");
+    const specialNames = selectedSpecial.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const specialString = specialNames.join("");
+    
+    const actionNames = selectedAction.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const actionString = actionNames.join("");
+    
+    const legendNames = selectedLegend.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const legendString = legendNames.join("");
     const lairNames = selectedLair.map((item) => item.name);
     const lairString = lairNames.join(", ");
 

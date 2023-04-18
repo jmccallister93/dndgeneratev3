@@ -456,7 +456,7 @@ const MonsterCreate = () => {
   }, [selectedSense]);
 
   return (
-    <div className={style.mainWrapper}>
+    <div className={ns.mainWrapper}>
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Monster Generator</h1>
         <div className={style.topWrapper}>
@@ -1495,7 +1495,7 @@ const MonsterCreate = () => {
             {type !== "" ? <span className={style.minorText2}>, </span> : null}
             <SingleDisplayText value={align} setNewValue={setAlign} />
           </h2>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h2>
             Armor Class <SingleDisplayNumber value={ac} setNewValue={setAc} />{" "}
             <SingleDisplayText value={armorType} setNewValue={setArmorType} />
@@ -1566,7 +1566,7 @@ const MonsterCreate = () => {
               </>
             ) : null}
           </h2>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h3 className={style.abilityScores}>
             <div>
               <h3>STR</h3>
@@ -1655,7 +1655,7 @@ const MonsterCreate = () => {
               </div>
             </div>
           </h3>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           {selectedSave.length === 0 ? null : (
             <>
               <h2>
@@ -1740,16 +1740,16 @@ const MonsterCreate = () => {
               </span>
             )}
           </h2>
-          <hr className={style.lineBreak} />
+          <hr className={ns.lineBreak} />
           <h1>Abilities</h1>
-          <hr className={style.subLineBreak} />
+          <hr className={ns.subLineBreak} />
           <h2>
             <span className={style.minorText2}>
               <MultipleDisplayDesc selectedItem={selectedSpecial} />
             </span>
           </h2>
           <h1>Actions</h1>
-          <hr className={style.subLineBreak} />
+          <hr className={ns.subLineBreak} />
           <h2>
             <span className={style.minorText2}>
               <MultipleDisplayDesc selectedItem={selectedAction} />
@@ -1758,7 +1758,7 @@ const MonsterCreate = () => {
           {selectedLegend.length === 0 ? null : (
             <>
               <h1>Legendary Actions</h1>
-              <hr className={style.subLineBreak} />
+              <hr className={ns.subLineBreak} />
               <h2>
                 <span className={style.minorText2}>
                   <MultipleDisplayDesc selectedItem={selectedLegend} />
@@ -1769,7 +1769,7 @@ const MonsterCreate = () => {
           {selectedLair.length === 0 ? null : (
             <>
               <h1>Lair Actions</h1>
-              <hr className={style.subLineBreak} />
+              <hr className={ns.subLineBreak} />
               <h2>
                 <span className={style.minorText2}>
                   <MultipleDisplayChunks selectedItem={selectedLair} />
