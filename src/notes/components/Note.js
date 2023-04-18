@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useCallback } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 import NodeList from "./NodeList";
-import { hash } from 'object-hash'
+import { hash } from "object-hash";
 
 function Note(props) {
   const [notes, setNotes] = useState("");
@@ -128,7 +128,6 @@ function Note(props) {
     setShowNodesList(false);
   };
 
-
   return (
     <>
       {props.selectedNode !== undefined ? (
@@ -230,62 +229,220 @@ function Note(props) {
           })}
 
           {/* Ability */}
-          <h2>Abilities</h2>
-          {Object.keys(props.selectedNode).map((prop, index) => {
-            if (prop === "ability") {
-              const abilityText = props.selectedNode[prop];
-              const abilities = abilityText.split("\n\n");
-              return (
-                <div key={index}>
-                  {selectedPropertyIndex === index ? (
-                  
-                    <textarea
-                    rows={index}
-                      className={ns.editNote}
-                      type="text"
-                      value={props.selectedNode[prop]}
-                      onChange={(e) => {
-                        const newValue = e.target.value;
-                        props.setSelectedNode((prev) => ({
-                          ...prev,
-                          [prop]: newValue,
-                        }));
-                      }}
-                      onBlur={() => {
-                        setSelectedPropertyIndex(-1);
-                        updateProperty(prop, props.selectedNode[prop]);
-                      }}
-                      onKeyDown={handleEnterDown}
-                      autoFocus
-                    />
-                   
-                  ) : (
-                    <>
-                    {abilities.map((ability, i) => (
-                      <div
-                        key={i}
-                        className={ns.objectProperty}
-                        onClick={() => {
-                          setSelectedPropertyIndex(index);
-                        }}
-                      >
-                        <div className={ns.objectProperty}></div>
-                        {ability === null ? "No Folder" : ability}
-                      </div>
-                    ))}
-                  </>
-                  )}
-                </div>
-              );
-            }
-            return null;
-          })}
+          {props.selectedNode.ability && (
+            <>
+              <h2>Abilities</h2>
+              {Object.keys(props.selectedNode).map((prop, index) => {
+                if (prop === "ability") {
+                  const abilityText = props.selectedNode[prop];
+                  const abilities = abilityText.split("\n\n");
+                  return (
+                    <div key={index}>
+                      {selectedPropertyIndex === index ? (
+                        <textarea
+                          rows={index}
+                          className={ns.editNote}
+                          type="text"
+                          value={props.selectedNode[prop]}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            props.setSelectedNode((prev) => ({
+                              ...prev,
+                              [prop]: newValue,
+                            }));
+                          }}
+                          onBlur={() => {
+                            setSelectedPropertyIndex(-1);
+                            updateProperty(prop, props.selectedNode[prop]);
+                          }}
+                          onKeyDown={handleEnterDown}
+                          autoFocus
+                        />
+                      ) : (
+                        <>
+                          {abilities.map((ability, i) => (
+                            <div
+                              key={i}
+                              className={ns.objectProperty}
+                              onClick={() => {
+                                setSelectedPropertyIndex(index);
+                              }}
+                            >
+                              {ability === null ? "No Folder" : ability}
+                              <div className={ns.spacing}></div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </>
+          )}
 
           {/* Action */}
+          {props.selectedNode.action && (
+            <>
+              <h2>Actions</h2>
+              {Object.keys(props.selectedNode).map((prop, index) => {
+                if (prop === "action") {
+                  const abilityText = props.selectedNode[prop];
+                  const abilities = abilityText.split("\n\n");
+                  return (
+                    <div key={index}>
+                      {selectedPropertyIndex === index ? (
+                        <textarea
+                          rows={index}
+                          className={ns.editNote}
+                          type="text"
+                          value={props.selectedNode[prop]}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            props.setSelectedNode((prev) => ({
+                              ...prev,
+                              [prop]: newValue,
+                            }));
+                          }}
+                          onBlur={() => {
+                            setSelectedPropertyIndex(-1);
+                            updateProperty(prop, props.selectedNode[prop]);
+                          }}
+                          onKeyDown={handleEnterDown}
+                          autoFocus
+                        />
+                      ) : (
+                        <>
+                          {abilities.map((ability, i) => (
+                            <div
+                              key={i}
+                              className={ns.objectProperty}
+                              onClick={() => {
+                                setSelectedPropertyIndex(index);
+                              }}
+                            >
+                              {ability === null ? "No Folder" : ability}
+                              <div className={ns.spacing}></div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </>
+          )}
 
           {/* Legendary */}
+          {props.selectedNode.legendary && (
+            <>
+              <h2>Legendary Actions</h2>
+              {Object.keys(props.selectedNode).map((prop, index) => {
+                if (prop === "legendary") {
+                  const abilityText = props.selectedNode[prop];
+                  const abilities = abilityText.split("\n\n");
+                  return (
+                    <div key={index}>
+                      {selectedPropertyIndex === index ? (
+                        <textarea
+                          rows={index}
+                          className={ns.editNote}
+                          type="text"
+                          value={props.selectedNode[prop]}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            props.setSelectedNode((prev) => ({
+                              ...prev,
+                              [prop]: newValue,
+                            }));
+                          }}
+                          onBlur={() => {
+                            setSelectedPropertyIndex(-1);
+                            updateProperty(prop, props.selectedNode[prop]);
+                          }}
+                          onKeyDown={handleEnterDown}
+                          autoFocus
+                        />
+                      ) : (
+                        <>
+                          {abilities.map((ability, i) => (
+                            <div
+                              key={i}
+                              className={ns.objectProperty}
+                              onClick={() => {
+                                setSelectedPropertyIndex(index);
+                              }}
+                            >
+                              {ability === null ? "No Folder" : ability}
+                              <div className={ns.spacing}></div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </>
+          )}
 
           {/* Lair */}
+          {props.selectedNode.lair && (
+            <>
+              <h2>Lair Actions</h2>
+              {Object.keys(props.selectedNode).map((prop, index) => {
+                if (prop === "lair") {
+                  const abilityText = props.selectedNode[prop];
+                  const abilities = abilityText.split("\n\n");
+                  return (
+                    <div key={index}>
+                      {selectedPropertyIndex === index ? (
+                        <textarea
+                          rows={index}
+                          className={ns.editNote}
+                          type="text"
+                          value={props.selectedNode[prop]}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            props.setSelectedNode((prev) => ({
+                              ...prev,
+                              [prop]: newValue,
+                            }));
+                          }}
+                          onBlur={() => {
+                            setSelectedPropertyIndex(-1);
+                            updateProperty(prop, props.selectedNode[prop]);
+                          }}
+                          onKeyDown={handleEnterDown}
+                          autoFocus
+                        />
+                      ) : (
+                        <>
+                          {abilities.map((ability, i) => (
+                            <div
+                              key={i}
+                              className={ns.objectProperty}
+                              onClick={() => {
+                                setSelectedPropertyIndex(index);
+                              }}
+                            >
+                              {ability === null ? "No Folder" : ability}
+                              <div className={ns.spacing}></div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+            </>
+          )}
 
           {/* Folder */}
           <h2>Folder</h2>
