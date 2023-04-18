@@ -582,6 +582,24 @@ const GenerateButton = (props) => {
     }
   };
 
+  const senseGenerate = () => {
+    if (props.senseItem) {
+      for (let i = 0; i < props.senseItem.length; i++) {
+        if (props.senseItem[i] === "" || props.senseItem[i] === undefined) {
+          let r = Math.floor(
+            Math.floor(
+              (Math.random() * (props.maxSense[i] - props.minSense[i])) / 5
+            ) *
+              5 +
+              (props.minSense[i] / 5) * 5
+          );
+          r = r.toString();
+          props.setSenseItem[i](r);
+        }
+      }
+    }
+  };
+
   const onGenerate = (e) => {
     dropDownGenerate();
     dataTableGenerate();
@@ -593,6 +611,7 @@ const GenerateButton = (props) => {
     npcNameGenerate();
     numberGenerate();
     monsterNameGenerate();
+    senseGenerate();
   };
 
   return (

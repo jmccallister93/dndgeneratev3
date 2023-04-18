@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -23,8 +23,12 @@ import MultipleDisplayDesc from "../components/MultipleDisplayDesc";
 import MultipleDisplayChunks from "../components/MultipleDisplayChunks";
 import MultipleDisplayMod from "../components/MultipleDisplayMod";
 import CustomDataTableMod from "../components/CustomDataTableMod";
+import { SessionContext } from "../config/SessionContext";
+import { supabase, auth } from "../config/supabaseClient";
 
 const MonsterGen = () => {
+  const session = useContext(SessionContext);
+
   //Set States
   const [fetchError, setFetchError] = useState();
 
@@ -187,6 +191,8 @@ const MonsterGen = () => {
   const [isInfoActive, setIsInfoActive] = useState(false);
   const [isMovementActive, setIsMovementActive] = useState(false);
 
+  const [monster, setMonster] = useState({});
+
   //Showoptions
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -247,9 +253,75 @@ const MonsterGen = () => {
     }
   };
 
-  //*****Added new stuff
+  //Getting div ref
   const divRef = useRef();
-  const genItem = "";
+  useEffect(() => {
+    const monster = {
+      name: name,
+      size: size,
+      type: type,
+      alignment: align,
+      ac: ac,
+      armorType: armorType,
+      hp: hp,
+      speed: baseSpeed,
+      fly: flySpeed,
+      swim: swimSpeed,
+      climb: climbSpeed,
+      burrow: burrowSpeed,
+      hover: hoverSpeed,
+      str: str + " " + setMod(str),
+      dex: dex + " " + setMod(dex),
+      con: con + " " + setMod(con),
+      int: int + " " + setMod(int),
+      wis: wis + " " + setMod(wis),
+      cha: cha + " " + setMod(cha),
+      save: selectedSaveModifiers,
+      sense: selectedSenseModifiers,
+      languages: selectedLang,
+      vuln: selectedVuln,
+      resist: selectedResist,
+      immune: selectedImmune,
+      condition: selectedImmune,
+      ability: selectedSpecial,
+      action: selectedAction,
+      legendary: selectedLegend,
+      lair: selectedLair,
+      email: session.user.email,
+    };
+    setMonster(monster);
+  }, [
+    name,
+    size,
+    type,
+    align,
+    ac,
+    armorType,
+    hp,
+    baseSpeed,
+    flySpeed,
+    swimSpeed,
+    climbSpeed,
+    burrowSpeed,
+    hoverSpeed,
+    str,
+    dex,
+    con,
+    int,
+    wis,
+    cha,
+    selectedSaveModifiers,
+    selectedSenseModifiers,
+    selectedLang,
+    selectedVuln,
+    selectedResist,
+    selectedImmune,
+    selectedCondition,
+    selectedSpecial,
+    selectedAction,
+    selectedLegend,
+    selectedLair,
+  ]);
   //Info content
   const infoContent = (
     <div className={style.infoContent}>
@@ -435,10 +507,6 @@ const MonsterGen = () => {
                 slSkill,
                 stSkill,
                 surSkill,
-                blindsightSense,
-                darkvisionSense,
-                tremorsenseSense,
-                truesightSense,
               ]}
               setNumberItem={[
                 setAc,
@@ -473,20 +541,29 @@ const MonsterGen = () => {
                 setSlSkill,
                 setStSkill,
                 setSurSkill,
+              ]}
+              maxNumber={[
+                30, 300, 30, 30, 30, 30, 30, 30, 20, 20, 20, 20, 20, 20, 10, 10,
+                10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+              ]}
+              minNumber={[
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+              ]}
+              senseItem={[
+                blindsightSense,
+                darkvisionSense,
+                tremorsenseSense,
+                truesightSense,
+              ]}
+              setSenseItem={[
                 setBlindsightSense,
                 setDarkvisionSense,
                 setTremorsenseSense,
                 setTruesightSense,
               ]}
-              maxNumber={[
-                30, 300, 30, 30, 30, 30, 30, 30, 20, 20, 20, 20, 20, 20, 10, 10,
-                10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-                120, 120, 120, 120,
-              ]}
-              minNumber={[
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5,
-              ]}
+              maxSense={[120, 120, 120, 120]}
+              minSense={[5, 5, 5, 5]}
               speedItem={[
                 baseSpeed,
                 flySpeed,
@@ -583,7 +660,11 @@ const MonsterGen = () => {
             {/* Export Btns */}
 
             <div className={style.exportBtns}>
-              <ExportButtons div={divRef} data={genItem} />
+              <ExportButtons
+                div={divRef}
+                data={monster}
+                tableName={"DBmonster"}
+              />
             </div>
 
             {/* ToolTip */}
@@ -1533,7 +1614,6 @@ const MonsterGen = () => {
             </div>
           </h3>
           <hr className={style.lineBreak} />
-          {/* HERE IS ISSUES WITH DISPLAY */}
           {selectedSave.length === 0 ? null : (
             <>
               <h2>
