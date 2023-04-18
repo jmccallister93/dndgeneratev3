@@ -118,46 +118,13 @@ const BuildingGen = () => {
   const [selectedItem, setSelectedItem] = useState([]);
   const [dialogVisibleItem, setDialogVisibleItem] = useState(false);
   const [itemList, setItemList] = useState([]);
-  //   const [itemDisplay, setItemDisplay] = useState();
+  //   const [itemDisplay, setItemDisplay] = useState()
 
-  const [housingOptions, setHousingOptions] = useState("");
-  const [tradeOptions, setTradeOptions] = useState("");
-  const [religiousOptions, setReligiousOptions] = useState("");
-  const [farmOptions, setFarmOptions] = useState("");
-  const [recreationalOptions, setRecreationalOptions] = useState("");
-  const [educationOptions, setEducationOptions] = useState("");
-  const [militaryOptions, setMilitaryOptions] = useState("");
-  const [institutionalOptions, setInstitutionalOptions] = useState("");
-  const [mineOptions, setMineOptions] = useState("");
-  const [agricultureOptions, setAgricultureOptions] = useState("");
-
-  const [align, setAlign] = useState("");
-  const [bond, setBond] = useState("");
-  const [feature, setFeature] = useState("");
-  const [interaction, setInteraction] = useState("");
-  const [prof, setProf] = useState("");
-  const [mannerism, setMannerism] = useState("");
-  const [race, setRace] = useState("");
-  const [sex, setSex] = useState("");
-  const [talent, setTalent] = useState("");
-  const [name, setName] = useState("");
-  const [str, setStr] = useState("");
-  const [strMod, setStrMod] = useState("");
-  const [dex, setDex] = useState("");
-  const [dexMod, setDexMod] = useState("");
-  const [con, setCon] = useState("");
-  const [conMod, setConMod] = useState("");
-  const [int, setInt] = useState("");
-  const [intMod, setIntMod] = useState("");
-  const [wis, setWis] = useState("");
-  const [wisMod, setWisMod] = useState("");
-  const [cha, setCha] = useState("");
-  const [chaMod, setChaMod] = useState("");
-  const [hook, setHook] = useState("");
-  const [desc, setDesc] = useState("");
 
   const [isInfoActive, setIsInfoActive] = useState(false);
   const divRef = useRef(null);
+
+  const [building, setBuilding] = useState({});
 
   //Show Options
   const showBasics = (e) => {
@@ -207,6 +174,46 @@ const BuildingGen = () => {
     </div>
   );
 
+  //Export Buildings
+  //Create npc object to be exported
+  useEffect(() => {
+    const roomNames = selectedRoomType.map((item) => item.name);
+    const roomString = roomNames.join(", ");
+    const npcNames = selectedNpc.map((item) => item.name);
+    const npcString = npcNames.join(", ");
+    const itemNames = selectedItem.map((item) => item.name);
+    const itemString = itemNames.join(", ");
+
+    const building = {
+      name: buildingName,
+      category: buildingCategory,
+      type: buildingType,
+      floors: buildingFloors,
+      eneterances: buildingEnterances,
+      windows: buildingWindows,
+      color: buildingColor,
+      style: buildingStyle,
+      sound: buildingSound,
+      roomType: roomString,
+      npcs: npcString,
+      items: itemString,
+    };
+    setBuilding(building);
+  }, [
+    buildingName,
+    buildingCategory,
+    buildingType,
+    buildingFloors,
+    buildingEnterances,
+    buildingWindows,
+    buildingColor,
+    buildingStyle,
+    buildingSound,
+    selectedRoomType,
+    selectedNpc,
+    selectedItem,
+  ]);
+
   return (
     <div className={style.mainWrapper}>
       <div className={style.topHeader}>
@@ -235,9 +242,13 @@ const BuildingGen = () => {
                 setBuildingStyle,
                 setBuildingSound,
               ]}
-              selectedItemOptions={[roomTypeOptions]}
-              selectedItems={[selectedRoomType]}
-              setSelectedItem={[setSelectedRoomType]}
+              selectedItemOptions={[roomTypeOptions, npcOptions, itemOptions]}
+              selectedItems={[selectedRoomType, selectedNpc, selectedItem]}
+              setSelectedItem={[
+                setSelectedRoomType,
+                setSelectedNpc,
+                setSelectedItem,
+              ]}
               numberItem={[buildingFloor, buildingEnterance, buildingWindow]}
               setNumberItem={[
                 setBuildingFloor,
@@ -258,7 +269,11 @@ const BuildingGen = () => {
                 setBuildingEnterance,
                 setBuildingWindow,
               ]}
-              setArrayState={[setSelectedRoomType]}
+              setArrayState={[
+                setSelectedRoomType,
+                setSelectedNpc,
+                setSelectedItem,
+              ]}
             />
             <h1>
               Export
@@ -356,13 +371,14 @@ const BuildingGen = () => {
                 setBuildingEnterance,
                 setBuildingWindow,
               ]}
-              numberMax={[100, 100, 100]}
-              numberMin={[0, 0, 0]}
+              numberMax={[10, 10, 10]}
+              numberMin={[1, 1, 0]}
             />
           </div>
           <div className={isLayoutActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputNumber
+                h1Title={"Floors"}
                 setSingular={setBuildingFloor}
                 value={buildingFloor}
                 placeholder={"Set Count"}
@@ -370,6 +386,7 @@ const BuildingGen = () => {
                 minNumber={0}
               />
               <CustomInputNumber
+                h1Title={"Enterances"}
                 setSingular={setBuildingEnterance}
                 value={buildingEnterance}
                 placeholder={"Set Count"}
@@ -377,6 +394,7 @@ const BuildingGen = () => {
                 minNumber={0}
               />
               <CustomInputNumber
+                h1Title={"Windows"}
                 setSingular={setBuildingWindow}
                 value={buildingWindow}
                 placeholder={"Set Count"}
@@ -407,6 +425,7 @@ const BuildingGen = () => {
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
+                h1Title={"Style"}
                 tableName={"buildingStyle"}
                 setSingular={setBuildingStyle}
                 setPlural={setBuildingStyles}
@@ -416,6 +435,7 @@ const BuildingGen = () => {
                 valueOptions={buildingStyleOptions}
               />
               <CustomDropDown
+                h1Title={"Color"}
                 tableName={"buildingColors"}
                 setSingular={setBuildingColor}
                 setPlural={setBuildingColors}
@@ -425,6 +445,7 @@ const BuildingGen = () => {
                 valueOptions={buildingColorOptions}
               />
               <CustomDropDown
+                h1Title={"Sound"}
                 tableName={"buildingSound"}
                 setSingular={setBuildingSound}
                 setPlural={setBuildingSounds}
@@ -483,11 +504,15 @@ const BuildingGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
-            <SectionRandom />
+            <SectionRandom
+              selectedValue={[selectedNpc]}
+              setSelectedValue={[setSelectedNpc]}
+              selectedValueOptions={[npcOptions]}
+            />
           </div>
           <div className={isNpcActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDataTable
+              <CustomDataTable
                 tableName={"DBnpc"}
                 setSingular={setNpc}
                 setPlural={setNpcs}
@@ -511,11 +536,15 @@ const BuildingGen = () => {
                 <i className="pi pi-chevron-right"></i>
               )}
             </h1>
-            <SectionRandom />
+            <SectionRandom
+              selectedValue={[selectedItem]}
+              setSelectedValue={[setSelectedItem]}
+              selectedValueOptions={[itemOptions]}
+            />
           </div>
           <div className={isItemActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDataTable
+              <CustomDataTable
                 tableName={"DBitem"}
                 setSingular={setItem}
                 setPlural={setItems}
@@ -534,7 +563,7 @@ const BuildingGen = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-        <NameDisplay value={buildingName} setNewValue={setBuildingName} />
+          <NameDisplay value={buildingName} setNewValue={setBuildingName} />
           <h2>
             Category{" "}
             <SingleDisplayText

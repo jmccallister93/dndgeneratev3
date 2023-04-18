@@ -115,7 +115,7 @@ const CustomName = (props) => {
 
   const customInputName = (
     <div>
-      <h2 className={style.titles}>{props.title}</h2>
+      <h1 className={style.titles}>{props.title}</h1>
       <InputText
         value={props.name}
         onChange={onNameChange}

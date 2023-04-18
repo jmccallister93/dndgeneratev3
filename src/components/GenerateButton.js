@@ -118,31 +118,35 @@ const GenerateButton = (props) => {
 
   //Number Generate Speed randomnly
   const randomSpeedIndex = (speedItem, setSpeedItem, speedMin, speedMax) => {
-    if (speedItem.some((value) => value)) {
+    if (speedItem === undefined) {
       return;
-    }
-    if (props.speedItem) {
-      const indexArray = [0, 1, 2, 3, 4, 5];
-      let numItems = Math.floor(Math.random() * (indexArray.length + 1));
-      if (numItems === 0) {
-        numItems = 1;
+    } else {
+      if (speedItem.some((value) => value)) {
+        return;
       }
-      const selectedIndexes = [];
+      if (props.speedItem) {
+        const indexArray = [0, 1, 2, 3, 4, 5];
+        let numItems = Math.floor(Math.random() * (indexArray.length + 1));
+        if (numItems === 0) {
+          numItems = 1;
+        }
+        const selectedIndexes = [];
 
-      for (let i = 0; i < numItems; i++) {
-        const randomIndex = Math.floor(Math.random() * indexArray.length);
-        selectedIndexes.push(indexArray[randomIndex]);
-        indexArray.splice(randomIndex, 1);
-      }
+        for (let i = 0; i < numItems; i++) {
+          const randomIndex = Math.floor(Math.random() * indexArray.length);
+          selectedIndexes.push(indexArray[randomIndex]);
+          indexArray.splice(randomIndex, 1);
+        }
 
-      for (let i = 0; i < speedItem.length; i++) {
-        if (selectedIndexes.includes(i)) {
-          const r =
-            Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
-          const rMultipleOf5 = Math.floor(r / 5) * 5;
-          setSpeedItem[i](rMultipleOf5.toString());
-        } else {
-          setSpeedItem[i]("");
+        for (let i = 0; i < speedItem.length; i++) {
+          if (selectedIndexes.includes(i)) {
+            const r =
+              Math.floor(Math.random() * (speedMax - speedMin + 1)) + speedMin;
+            const rMultipleOf5 = Math.floor(r / 5) * 5;
+            setSpeedItem[i](rMultipleOf5.toString());
+          } else {
+            setSpeedItem[i]("");
+          }
         }
       }
     }
