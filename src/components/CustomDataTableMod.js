@@ -169,19 +169,12 @@ const CustomDataTableMod = (props) => {
           list={props.list}
           selectedItem={props.selectedItem}
           setList={props.setList}
-          
-          value={props.value}
-          setValue={props.setValue}
           setMod={props.setMod}
           mod={props.mod}
           maxNumber={30}
         />
     </>
   );
-
-  // useEffect(() => {
-  //   console.log(props.value)
-  // }, [props.value])
 
   return (
     <>

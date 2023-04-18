@@ -7,17 +7,6 @@ const MultipleRandomButtonMod = (props) => {
   const [saveNames, setSaveNames] = useState([]);
   const [saveModMap, setSaveModMap] = useState([]);
 
-  //Extract names from selectedSaves
-  //   useEffect(() => {
-  //     setSaveNames(
-  //       props.value.map((save, index) => ({
-  //         name: save.name,
-  //         modifier: save.modifier,
-  //         index: index,
-  //       }))
-  //     );
-  //   }, [props.value]);
-
   //Sets selectedItems to random number and passes to parent
   const handleSelectedItem = (e) => {
     props.setSelectedItem([]);
@@ -45,52 +34,10 @@ const MultipleRandomButtonMod = (props) => {
       }
   };
 
-  useEffect(() => {
-    const saveModMap = {
-      Strength: props.strSave,
-      Dexterity: props.dexSave,
-      Constitution: props.conSave,
-      Intelligence: props.intSave,
-      Wisdom: props.wisSave,
-      Charisma: props.chaSave,
-    };
-    setSaveNames(
-      props.selectedItem.map((save) => {
-        const modifier = saveModMap[save.name];
-        return { name: save.name, modifier };
-      })
-    );
-    // console.log(saveNames);
-  }, [props.selectedItem]);
-
-  const handleModifier = (e) => {};
-
   //Fires click event on random button
   const onRandomClick = (e) => {
     handleSelectedItem(e);
   };
-
-  //   useEffect(() => {
-  //     const saveModMap = {
-  //       Strength: props.strSave,
-  //       Dexterity: props.dexSave,
-  //       Constitution: props.conSave,
-  //       Intelligence: props.intSave,
-  //       Wisdom: props.wisSave,
-  //       Charisma: props.chaSave,
-  //     };
-  //     setSaveModMap(saveModMap);
-  //     props.value(
-  //       selectedSave.map((save) => {
-  //         const modifier = saveModMap[save.name];
-  //         return { name: save.name, modifier };
-  //       })
-  //     );
-  //   }, [selectedSave]);
-
-  //   useEffect(() => {
-  //     console.log(props.selectedItem);
-  //   }, [props.selectedItem, props.value]);
 
   return (
     <>

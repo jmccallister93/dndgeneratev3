@@ -749,6 +749,10 @@ const MonsterGen = () => {
                 setSenseList,
                 setLangList,
               ]}
+              numberItem={[strSave, dexSave, conSave, intSave, wisSave, chaSave]}
+              setNumberItem={[ setStrSave, setDexSave, setConSave, setIntSave, setWisSave, setChaSave]}
+              numberMax={[30, 30, 30, 30, 30, 30]}
+              numberMin={[1, 1, 1, 1, 1, 1]}
             />
           </div>
           <div className={isSSDActive ? style.subsection : style.hidden}>
@@ -765,8 +769,6 @@ const MonsterGen = () => {
                 list={saveList}
                 setList={setSaveList}
                 valueOptions={saveOptions}
-                value={selectedSaveModifiers}
-                setValue={setSelectedSaveModifiers}
                 setMod={[
                   setStrSave,
                   setDexSave,
