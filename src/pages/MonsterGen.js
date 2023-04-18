@@ -86,6 +86,25 @@ const MonsterGen = () => {
   const [skillOptions, setSkillOptions] = useState();
   const [skillList, setSkillList] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
+  const [abSkill, setAbSkill] = useState("");
+  const [ahSkill, setAhSkill] = useState("");
+  const [arSkill, setArSkill] = useState("");
+  const [athSkill, setAthSkill] = useState("");
+  const [deSkill, setDeSkill] = useState("");
+  const [hiSkill, setHiSkill] = useState("");
+  const [inSkill, setInSkill] = useState("");
+  const [intimiSkill, setIntimiSkill] = useState("");
+  const [invsSkill, setInvsSkill] = useState("");
+  const [medSkill, setMedSkill] = useState("");
+  const [natSkill, setNatSkill] = useState("");
+  const [pecSkill, setPecSkill] = useState("");
+  const [perSkill, setPerSkill] = useState("");
+  const [pfSkill, setPfSkill] = useState("");
+  const [relSkill, setRelSkill] = useState("");
+  const [slSkill, setSlSkill] = useState("");
+  const [stSkill, setStSkill] = useState("");
+  const [surSkill, setSurSkill] = useState("");
+  const [skillModMap, setSkillModMap] = useState([]);
   const [selectedSkillModifiers, setSelectedSkillModifiers] = useState([]);
 
   const [vuln, setVuln] = useState("");
@@ -250,9 +269,7 @@ const MonsterGen = () => {
     </div>
   );
 
-  // NEED TO ADD SELECTED SAVES TO BE DISPLAYED AS WELL AS THEIR MODIFIERS
-  
-
+  //Ability score modifiers
   useEffect(() => {
     const saveModMap = {
       Strength: strSave,
@@ -270,6 +287,37 @@ const MonsterGen = () => {
       })
     );
   }, [selectedSave]);
+
+  //Skill modifiers
+  useEffect(() => {
+    const skillModMap = {
+      Acrobatics: abSkill,
+      "Animal Handling": ahSkill,
+      Arcana: arSkill,
+      Athletics: athSkill,
+      Deception: deSkill,
+      History: hiSkill,
+      Insight: inSkill,
+      Intimidation: intimiSkill,
+      Investigation: invsSkill,
+      Medicine: medSkill,
+      Nature: natSkill,
+      Perception: pecSkill,
+      Performance: pfSkill,
+      Persuasion: perSkill,
+      Religion: relSkill,
+      "Sleight of Hand": slSkill,
+      Stealth: stSkill,
+      Survival: surSkill,
+    };
+    setSkillModMap(skillModMap);
+    setSelectedSkillModifiers(
+      selectedSkill.map((skill) => {
+        const modifier = skillModMap[skill.name];
+        return { name: skill.name, modifier };
+      })
+    );
+  }, [selectedSkill]);
 
   // useEffect(() => {
   //   console.log(selectedSaveModifiers)
@@ -351,6 +399,24 @@ const MonsterGen = () => {
                 intSave,
                 wisSave,
                 chaSave,
+                abSkill,
+                ahSkill,
+                arSkill,
+                athSkill,
+                deSkill,
+                hiSkill,
+                inSkill,
+                intimiSkill,
+                invsSkill,
+                medSkill,
+                natSkill,
+                pecSkill,
+                pfSkill,
+                perSkill,
+                relSkill,
+                slSkill,
+                stSkill,
+                surSkill,
               ]}
               setNumberItem={[
                 setAc,
@@ -367,11 +433,33 @@ const MonsterGen = () => {
                 setIntSave,
                 setWisSave,
                 setChaSave,
+                setAbSkill,
+                setAhSkill,
+                setArSkill,
+                setAthSkill,
+                setDeSkill,
+                setHiSkill,
+                setInSkill,
+                setIntimiSkill,
+                setInvsSkill,
+                setMedSkill,
+                setNatSkill,
+                setPecSkill,
+                setPfSkill,
+                setPerSkill,
+                setRelSkill,
+                setSlSkill,
+                setStSkill,
+                setSurSkill,
               ]}
               maxNumber={[
-                30, 300, 30, 30, 30, 30, 30, 30, 20, 20, 20, 20, 20, 20,
+                30, 300, 30, 30, 30, 30, 30, 30, 20, 20, 20, 20, 20, 20, 10, 10,
+                10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
               ]}
-              minNumber={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+              minNumber={[
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+              ]}
               speedItem={[
                 baseSpeed,
                 flySpeed,
@@ -425,6 +513,24 @@ const MonsterGen = () => {
                 // setReaction,
                 setLegend,
                 setLair,
+                setAbSkill,
+                setAhSkill,
+                setArSkill,
+                setAthSkill,
+                setDeSkill,
+                setHiSkill,
+                setInSkill,
+                setIntimiSkill,
+                setInvsSkill,
+                setMedSkill,
+                setNatSkill,
+                setPecSkill,
+                setPfSkill,
+                setPerSkill,
+                setRelSkill,
+                setSlSkill,
+                setStSkill,
+                setSurSkill,
               ]}
               setArrayState={[
                 setSaveList,
@@ -749,10 +855,66 @@ const MonsterGen = () => {
                 setSenseList,
                 setLangList,
               ]}
-              numberItem={[strSave, dexSave, conSave, intSave, wisSave, chaSave]}
-              setNumberItem={[ setStrSave, setDexSave, setConSave, setIntSave, setWisSave, setChaSave]}
-              numberMax={[30, 30, 30, 30, 30, 30]}
-              numberMin={[1, 1, 1, 1, 1, 1]}
+              numberItem={[
+                strSave,
+                dexSave,
+                conSave,
+                intSave,
+                wisSave,
+                chaSave,
+                abSkill,
+                ahSkill,
+                arSkill,
+                athSkill,
+                deSkill,
+                hiSkill,
+                inSkill,
+                intimiSkill,
+                invsSkill,
+                medSkill,
+                natSkill,
+                pecSkill,
+                pfSkill,
+                perSkill,
+                relSkill,
+                slSkill,
+                stSkill,
+                surSkill,
+              ]}
+              setNumberItem={[
+                setStrSave,
+                setDexSave,
+                setConSave,
+                setIntSave,
+                setWisSave,
+                setChaSave,
+                setAbSkill,
+                setAhSkill,
+                setArSkill,
+                setAthSkill,
+                setDeSkill,
+                setHiSkill,
+                setInSkill,
+                setIntimiSkill,
+                setInvsSkill,
+                setMedSkill,
+                setNatSkill,
+                setPecSkill,
+                setPfSkill,
+                setPerSkill,
+                setRelSkill,
+                setSlSkill,
+                setStSkill,
+                setSurSkill,
+              ]}
+              numberMax={[
+                30, 30, 30, 30, 30, 30, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+                10, 10, 10, 10, 10, 10, 10, 10,
+              ]}
+              numberMin={[
+                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                1, 1, 1,
+              ]}
             />
           </div>
           <div className={isSSDActive ? style.subsection : style.hidden}>
@@ -796,7 +958,7 @@ const MonsterGen = () => {
                 mod={[strSave, dexSave, conSave, intSave, wisSave, chaSave]}
                 maxNumber={30}
               />
-              <CustomDataTable
+              <CustomDataTableMod
                 tableName={"skills"}
                 setSingular={setSkill}
                 setPlural={setSkills}
@@ -808,6 +970,92 @@ const MonsterGen = () => {
                 list={skillList}
                 setList={setSkillList}
                 valueOptions={skillOptions}
+                setMod={[
+                  setAbSkill,
+                  setAhSkill,
+                  setArSkill,
+                  setAthSkill,
+                  setDeSkill,
+                  setHiSkill,
+                  setInSkill,
+                  setIntimiSkill,
+                  setInvsSkill,
+                  setMedSkill,
+                  setNatSkill,
+                  setPecSkill,
+                  setPfSkill,
+                  setPerSkill,
+                  setRelSkill,
+                  setSlSkill,
+                  setStSkill,
+                  setSurSkill,
+                ]}
+                mod={[
+                  abSkill,
+                  ahSkill,
+                  arSkill,
+                  athSkill,
+                  deSkill,
+                  hiSkill,
+                  inSkill,
+                  intimiSkill,
+                  invsSkill,
+                  medSkill,
+                  natSkill,
+                  pecSkill,
+                  pfSkill,
+                  perSkill,
+                  relSkill,
+                  slSkill,
+                  stSkill,
+                  surSkill,
+                ]}
+                maxNumber={10}
+              />
+              <CustomModifier
+                value={selectedSkillModifiers}
+                setValue={setSelectedSkillModifiers}
+                setMod={[
+                  setAbSkill,
+                  setAhSkill,
+                  setArSkill,
+                  setAthSkill,
+                  setDeSkill,
+                  setHiSkill,
+                  setInSkill,
+                  setIntimiSkill,
+                  setInvsSkill,
+                  setMedSkill,
+                  setNatSkill,
+                  setPecSkill,
+                  setPfSkill,
+                  setPerSkill,
+                  setRelSkill,
+                  setSlSkill,
+                  setStSkill,
+                  setSurSkill,
+                ]}
+                mod={[
+                  abSkill,
+                  ahSkill,
+                  arSkill,
+                  athSkill,
+                  deSkill,
+                  hiSkill,
+                  inSkill,
+                  intimiSkill,
+                  invsSkill,
+                  medSkill,
+                  natSkill,
+                  pecSkill,
+                  pfSkill,
+                  perSkill,
+                  relSkill,
+                  slSkill,
+                  stSkill,
+                  surSkill,
+                ]}
+                maxNumber={10}
               />
               <CustomDataTable
                 tableName={"senses"}
@@ -1216,9 +1464,7 @@ const MonsterGen = () => {
               <h2>
                 Saving Throws{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplayMod
-                    selectedItem={selectedSaveModifiers}
-                  />
+                  <MultipleDisplayMod selectedItem={selectedSaveModifiers} />
                 </span>
               </h2>
             </>
@@ -1229,7 +1475,7 @@ const MonsterGen = () => {
               <h2>
                 Skills{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedSkill} />
+                  <MultipleDisplayMod selectedItem={selectedSkillModifiers} />
                 </span>
               </h2>
             </>

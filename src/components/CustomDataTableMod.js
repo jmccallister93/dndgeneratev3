@@ -171,7 +171,7 @@ const CustomDataTableMod = (props) => {
           setList={props.setList}
           setMod={props.setMod}
           mod={props.mod}
-          maxNumber={30}
+          maxNumber={props.maxNumber}
         />
     </>
   );

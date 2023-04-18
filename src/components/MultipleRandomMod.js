@@ -28,7 +28,7 @@ const MultipleRandomButtonMod = (props) => {
 
     if (props.mod) {
         props.mod.forEach((mod, index) => {
-          let n = Math.round(Math.random() * (30 - 1));
+          let n = Math.round(Math.random() * (props.maxNumber - 1));
           props.setMod[index](n);
         });
       }
