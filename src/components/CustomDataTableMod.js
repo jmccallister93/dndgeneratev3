@@ -172,22 +172,8 @@ const CustomDataTableMod = (props) => {
           
           value={props.value}
           setValue={props.setValue}
-          // setMod={[
-          //   props.setStrSave,
-          //   props.setDexSave,
-          //   props.setConSave,
-          //   props.setIntSave,
-          //   props.setWisSave,
-          //   props.setChaSave,
-          // ]}
-          // mod={[
-          //   props.strSave,
-          //   props.dexSave,
-          //   props.conSave,
-          //   props.intSave,
-          //   props.wisSave,
-          //   props.chaSave,
-          // ]}
+          setMod={props.setMod}
+          mod={props.mod}
           maxNumber={30}
         />
     </>

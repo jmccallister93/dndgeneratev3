@@ -4,18 +4,21 @@ import CustomModifier from "./CustomModifier";
 
 const MultipleRandomButtonMod = (props) => {
   const [modifier, setModifier] = useState([]);
-  const [saves, setSaves] = useState([]);
+  const [saveNames, setSaveNames] = useState([]);
+  const [saveModMap, setSaveModMap] = useState([]);
 
-  useEffect(() => {
-    setSaves(
-      props.value.map((save, index) => ({
-        name: save.name,
-        modifier: save.modifier,
-        index: index,
-      }))
-    );
-  }, [props.value]);
+  //Extract names from selectedSaves
+  //   useEffect(() => {
+  //     setSaveNames(
+  //       props.value.map((save, index) => ({
+  //         name: save.name,
+  //         modifier: save.modifier,
+  //         index: index,
+  //       }))
+  //     );
+  //   }, [props.value]);
 
+  //Sets selectedItems to random number and passes to parent
   const handleSelectedItem = (e) => {
     props.setSelectedItem([]);
     let n = Math.round(Math.random() * (6 - 0));
@@ -34,24 +37,60 @@ const MultipleRandomButtonMod = (props) => {
       }
     }
 
-    if (props.value) {
-        let newValue = [...props.value];
-        newValue.forEach((value, index) => {
-          let r = Math.floor(Math.random() * (30 - 0));
-          newValue[index] = { ...value, modifier: r };
+    if (props.mod) {
+        props.mod.forEach((mod, index) => {
+          let n = Math.round(Math.random() * (30 - 1));
+          props.setMod[index](n);
         });
-        props.setValue(newValue);
-    }
+      }
   };
 
+  useEffect(() => {
+    const saveModMap = {
+      Strength: props.strSave,
+      Dexterity: props.dexSave,
+      Constitution: props.conSave,
+      Intelligence: props.intSave,
+      Wisdom: props.wisSave,
+      Charisma: props.chaSave,
+    };
+    setSaveNames(
+      props.selectedItem.map((save) => {
+        const modifier = saveModMap[save.name];
+        return { name: save.name, modifier };
+      })
+    );
+    // console.log(saveNames);
+  }, [props.selectedItem]);
 
+  const handleModifier = (e) => {};
+
+  //Fires click event on random button
   const onRandomClick = (e) => {
     handleSelectedItem(e);
   };
 
-//   useEffect(() => {
-//     console.log(props.selectedItem);
-//   }, [props.selectedItem, props.value]);
+  //   useEffect(() => {
+  //     const saveModMap = {
+  //       Strength: props.strSave,
+  //       Dexterity: props.dexSave,
+  //       Constitution: props.conSave,
+  //       Intelligence: props.intSave,
+  //       Wisdom: props.wisSave,
+  //       Charisma: props.chaSave,
+  //     };
+  //     setSaveModMap(saveModMap);
+  //     props.value(
+  //       selectedSave.map((save) => {
+  //         const modifier = saveModMap[save.name];
+  //         return { name: save.name, modifier };
+  //       })
+  //     );
+  //   }, [selectedSave]);
+
+  //   useEffect(() => {
+  //     console.log(props.selectedItem);
+  //   }, [props.selectedItem, props.value]);
 
   return (
     <>
