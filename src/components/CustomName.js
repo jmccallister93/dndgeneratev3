@@ -60,6 +60,25 @@ const CustomName = (props) => {
           );
         }
       }
+      if (props.tableName === "pantheonNames") {
+        const { data, error } = await supabase.from(props.tableName).select();
+        if (error) {
+          setFetchError("Could not fetch the data");
+          props.setName(null);
+          console.log(error);
+        }
+        if (data) {
+          props.setNames(data);
+          setFetchError(null);
+          props.setNameOptions(
+            data.map((r) => ({
+              adjective: r.adjective,
+              noun: r.noun,
+              
+            }))
+          );
+        }
+      }
     };
     fetchData();
   }, []);
@@ -100,11 +119,48 @@ const CustomName = (props) => {
       let random = Math.round(Math.random() * 2);
 
       if (random === 0) {
-        props.setName(adjective.toString().charAt(0).toUpperCase() + adjective.toString().slice(1) + " " + noun.toString().charAt(0).toUpperCase() + noun.toString().slice(1));
+        props.setName(
+          adjective.toString().charAt(0).toUpperCase() +
+            adjective.toString().slice(1) +
+            " " +
+            noun.toString().charAt(0).toUpperCase() +
+            noun.toString().slice(1)
+        );
       } else if (random === 1) {
-        props.setName(adjective.toString().charAt(0).toUpperCase() + adjective.toString().slice(1) + " " + animal);
+        props.setName(
+          adjective.toString().charAt(0).toUpperCase() +
+            adjective.toString().slice(1) +
+            " " +
+            animal
+        );
       } else {
-        props.setName(adjective.toString().charAt(0).toUpperCase() + adjective.toString().slice(1) + " " + noun.toString().charAt(0).toUpperCase() + noun.toString().slice(1) + " " + animal);
+        props.setName(
+          adjective.toString().charAt(0).toUpperCase() +
+            adjective.toString().slice(1) +
+            " " +
+            noun.toString().charAt(0).toUpperCase() +
+            noun.toString().slice(1) +
+            " " +
+            animal
+        );
+      }
+    }
+    if (props.tableName === "pantheonNames") {
+      let a = Math.floor(Math.random() * 25);
+      let adjective = [props.nameOptions[a].adjective];
+      let n = Math.floor(Math.random() * 25);
+      let noun = [props.nameOptions[n].noun];
+      let a2 = Math.floor(Math.random() * 25);
+      let adjective2 = [props.nameOptions[a2].adjective];
+
+      let random = Math.round(Math.random() * 2);
+
+      if (random === 0) {
+        props.setName(adjective + " " + noun);
+      } else if (random === 1) {
+        props.setName(adjective + " " + adjective2 + " " + noun);
+      } else {
+        props.setName(adjective + " " + noun + " " + adjective2);
       }
     }
   };

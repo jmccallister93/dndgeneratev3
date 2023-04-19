@@ -18,6 +18,7 @@ const CollectionPage = () => {
   const [monsterDetails, setMonsterDetails] = useState([]);
   const [questDetails, setQuestDetails] = useState([]);
   const [itemDetails, setItemDetails] = useState([]);
+  const [pantheonDetails, setPantheonDetails] = useState([]);
 
   const [displayLocation, setDisplayLocation] = useState([]);
   const [displayNpc, setDisplayNpc] = useState([]);
@@ -25,6 +26,7 @@ const CollectionPage = () => {
   const [displayMonster, setDisplayMonster] = useState([]);
   const [displayQuest, setDisplayQuest] = useState([]);
   const [displayItem, setDisplayItem] = useState([]);
+  const [displayPantheon, setDisplayPantheon] = useState([]);
 
   //Create onClick function for npc collection that displays all npcs in a table
   const [isNpcActive, setIsNpcActive] = useState(false);
@@ -33,6 +35,7 @@ const CollectionPage = () => {
   const [isOrganizationActive, setIsOrganizationActive] = useState(false);
   const [isMonsterActive, setIsMonsterActive] = useState(false);
   const [isItemActive, setIsItemActive] = useState(false);
+  const [isPantheonActive, setIsPantheonActive] = useState(false);
 
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -53,6 +56,10 @@ const CollectionPage = () => {
   };
   const onItemClick = () => {
     setIsItemActive(!isItemActive);
+  };
+
+  const onPantheonClick = () => {
+    setIsPantheonActive(!isPantheonActive);
   };
 
   //Get Locations
@@ -211,8 +218,8 @@ const CollectionPage = () => {
     fetchData();
   }, []);
 
-   //Get Monsters
-   useEffect(() => {
+  //Get Monsters
+  useEffect(() => {
     const fetchData = async () => {
       const { data: dataName, error: errorName } = await supabase
         .from("DBmonster")
@@ -330,6 +337,41 @@ const CollectionPage = () => {
     fetchData();
   }, []);
 
+  //Get Pantheons
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBpantheon")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setPantheonDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setPantheonDetails(
+          dataName.map((r) => ({
+            folder: r.folder,
+            uuid: r.uuid,
+            name: r.name,
+            type: r.type,
+            alignment: r.alignment,
+            size: r.size,
+            plane: r.plane,
+            domain: r.domain,
+            motive: r.motive,
+            provide: r.provide,
+            artifact: r.artifact,
+            notes: r.notes,
+            links: r.links,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+
   //Show popup of details
   const showPopup = () => {
     setIsItemActive((current) => !current);
@@ -431,8 +473,8 @@ const CollectionPage = () => {
     );
   }, [organizationDetails]);
 
-   //Set Selected Monsters
-   useEffect(() => {
+  //Set Selected Monsters
+  useEffect(() => {
     setDisplayMonster(
       monsterDetails.map((item) => {
         return (
@@ -478,6 +520,30 @@ const CollectionPage = () => {
       })
     );
   }, [itemDetails]);
+
+  //Set Selected Pantheon
+  useEffect(() => {
+    setDisplayPantheon(
+      pantheonDetails.map((item) => {
+        return (
+          <>
+            <span
+              className="editText"
+              contentEditable="false"
+              suppressContentEditableWarning={true}
+              onClick={() => setSelectedItem(Object.entries(item))}
+            >
+              <span className={style.minorText3} onClick={showPopup}>
+                {item === undefined ? null : `${item.name} `}
+                <i className="pi pi-info-circle"></i>
+                <br></br>
+              </span>
+            </span>
+          </>
+        );
+      })
+    );
+  }, [pantheonDetails]);
 
   //Create Cards
   const cardNpc = (
@@ -551,6 +617,19 @@ const CollectionPage = () => {
         Items <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Items!</p>
+    </Card>
+  );
+
+  const cardPantheon = (
+    <Card
+      className={style.collectionCard}
+      onClick={onPantheonClick}
+      style={{ borderRadius: "10px" }}
+    >
+      <h3>
+        Pantheons <i className="pi pi-chevron-right"></i>
+      </h3>
+      <p>Collection of all your Pantheons!</p>
     </Card>
   );
 
@@ -628,6 +707,17 @@ const CollectionPage = () => {
               data={itemDetails}
               active={setIsItemActive}
               collectionTitle={"Items"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardItem
+          )}
+           {isPantheonActive ? (
+            <CollectionTable
+              data={pantheonDetails}
+              active={setIsItemActive}
+              collectionTitle={"Pantheons"}
               isItemActive={isItemActive}
               setIsItemActive={setIsItemActive}
             />

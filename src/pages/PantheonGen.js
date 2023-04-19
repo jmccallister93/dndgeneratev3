@@ -1,5 +1,5 @@
 import style from "../stylesheets/PageStyle.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -16,8 +16,11 @@ import SectionRandom from "../components/SectionRandom";
 import NameDisplay from "../components/NameDisplay";
 import CustomName from "../components/CustomName";
 import MultipleDisplayChunks from "../components/MultipleDisplayChunks";
+import { SessionContext } from "../config/SessionContext";
 
 const PantheonGen = () => {
+  const session = useContext(SessionContext);
+
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
@@ -82,6 +85,8 @@ const PantheonGen = () => {
   const [shrineList, setShrineList] = useState([]);
   const [selectedShrine, setSelectedShrine] = useState([]);
 
+  const [pantheon, setPantheon] = useState({});
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -94,7 +99,42 @@ const PantheonGen = () => {
   };
   //*****Added new stuff
   const divRef = useRef();
-  const genItem = "";
+  useEffect(() => {
+    
+    const provideNames = selectedProvide.map((item) => item.name);
+    const provideString = provideNames.join(", ");
+    const motiveNames = selectedMotive.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const motiveString = motiveNames.join("");
+   
+
+    const pantheon = {
+      name: pantheonName,
+      type: deityType,
+      alignment: alignment,
+      size: size,
+      plane: plane,
+      domain: domain,
+      motive: motiveString,
+      provide: provideString,
+      artifact: selectedArtifact,
+      folder: "Pantheon",
+      email: session.user.email,
+    };
+    setPantheon(pantheon);
+  }, [
+    pantheonName,
+    size,
+    deityType,
+    alignment,
+    plane,
+    domain,
+    selectedMotive,
+    selectedProvide,
+    selectedArtifact,
+    session
+  ]);
   //Info content
   const infoContent = (
     <div className={style.infoContent}>
@@ -126,6 +166,9 @@ const PantheonGen = () => {
           <div className={style.btnWrapper}>
             {/* <GenerateButton /> */}
             <GenerateButton
+            pantheonName={[pantheonName]}
+            pantheonNameOptions={[pantheonNameOptions]}
+            setPantheonName={[setPantheonName]}
               generateItems={[deityType, alignment, size, plane, domain]}
               itemOptions={[
                 deityTypeOptions,
@@ -177,7 +220,7 @@ const PantheonGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={genItem} />
+                <ExportButtons div={divRef} data={pantheon} />
               </div>
             </h1>
             {/* ToolTip */}
@@ -226,11 +269,15 @@ const PantheonGen = () => {
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomName
-                title={"Pantheon Name"}
-                input={pantheonName}
-                setInput={setPantheonName}
-                placeholder={"Set Pantheon Name"}
+            <CustomName
+                tableName={"pantheonNames"}
+                name={pantheonName}
+                setName={setPantheonName}
+                setNames={setPantheonNames}
+                setNameOptions={setPantheonNameOptions}
+                nameOptions={pantheonNameOptions}
+                title={"Name"}
+                placeholder={"Set Name"}
               />
               <CustomDropDown
                 tableName={"pantheonDeity"}
@@ -367,7 +414,7 @@ const PantheonGen = () => {
 
         {/* Main Display */}
         <div className={style.display}>
-          <NameDisplay name={pantheonName} />
+          <NameDisplay value={pantheonName} setNewValue={setPantheonName}/>
           <h2>
             Deity Type <span className={style.minorText2}>{deityType}</span>
           </h2>
