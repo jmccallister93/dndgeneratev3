@@ -174,7 +174,6 @@ const PantheonGen = () => {
                 deityTypeOptions,
                 alignmentOptions,
                 sizeOptions,
-
                 planeOptions,
                 domainOptions,
               ]}
@@ -182,7 +181,6 @@ const PantheonGen = () => {
                 setDeityType,
                 setAlignment,
                 setSize,
-
                 setPlane,
                 setDomain,
               ]}
@@ -204,10 +202,10 @@ const PantheonGen = () => {
             />
             <ClearButton
               setStringState={[
+                setPantheonName,
                 setDeityType,
                 setAlignment,
                 setSize,
-
                 setPlane,
                 setDomain,
               ]}
@@ -257,13 +255,16 @@ const PantheonGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[deityType, alignment, size, attribute]}
-              setValue={[setDeityType, setAlignment, setSize, setAttribute]}
+             pantheonName={[pantheonName]}
+             pantheonNameOptions={[pantheonNameOptions]}
+             setPantheonName={[setPantheonName]}
+              value={[deityType, alignment, size, ]}
+              setValue={[setDeityType, setAlignment, setSize, ]}
               valueOptions={[
                 deityTypeOptions,
                 alignmentOptions,
                 sizeOptions,
-                attributeOptions,
+                
               ]}
             />
           </div>

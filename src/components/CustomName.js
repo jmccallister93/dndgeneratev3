@@ -149,7 +149,7 @@ const CustomName = (props) => {
       let a = Math.floor(Math.random() * 25);
       let adjective = [props.nameOptions[a].adjective];
       let n = Math.floor(Math.random() * 25);
-      let noun = [props.nameOptions[n].noun];
+      let noun = [props.nameOptions[n].noun]; 
       let a2 = Math.floor(Math.random() * 25);
       let adjective2 = [props.nameOptions[a2].adjective];
 

@@ -520,6 +520,30 @@ const SectionRandom = (props) => {
     }
   };
 
+  //Pantheon Generate
+  const pantheonNameGenerate = (e) => {
+    if (props.pantheonName) {
+      for (let i = 0; i < props.pantheonName.length; i++) {
+        let a = Math.floor(Math.random() * 25);
+        let adjective = [props.pantheonNameOptions[i][a].adjective];
+        let n = Math.floor(Math.random() * 25);
+        let noun = [props.pantheonNameOptions[i][n].noun];
+        let a2 = Math.floor(Math.random() * 25);
+        let adjective2 = [props.pantheonNameOptions[i][a2].adjective];
+
+        let random = Math.round(Math.random() * 2);
+
+        if (random === 0) {
+          props.setPantheonName[0](adjective + " " + noun);
+        } else if (random === 1) {
+          props.setPantheonName[0](adjective + " " + adjective2 + " " + noun);
+        } else {
+          props.setPantheonName[0](adjective + " " + noun + " " + adjective2);
+        }
+      }
+    }
+  };
+
   const onRandomClick = (e) => {
     onRandomClickSingle();
     onRandomClickMultiple();
@@ -532,6 +556,7 @@ const SectionRandom = (props) => {
     monsterNameGenerate();
     numberGenerate();
     senseGenerate();
+    pantheonNameGenerate();
   };
 
   return (
