@@ -1,51 +1,53 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const MultipleDisplay = (props) => {
-  //---PROPS NEEDED---
-  //selectedItem
-  //---PROPS NEEDED---
-  const [multipleDisplay, setMultipleDisplay] = useState([]);
+  const [displayName, setDisplayName] = useState([]);
   const [display, setDisplay] = useState();
 
   useEffect(() => {
-    if (props.selectedItem === undefined) {
-    } else {
-      setMultipleDisplay(props.selectedItem);
+    if (props.selectedItem !== undefined) {
+      setDisplayName([...props.selectedItem]);
     }
-  }, [props, display]);
+  }, [props.selectedItem]);
 
   useEffect(() => {
     setDisplay(
-      multipleDisplay.map((i, index) => {
-        const isLastElement = index === multipleDisplay.length - 1;
+      displayName.map((i, index) => {
+        const isLastElement = index === displayName.length - 1;
         return (
           <span
+          key={index}
             className="editText"
-            onClick={onClick}
             contentEditable="false"
             suppressContentEditableWarning={true}
+            index={index}
           >
-            <span className={style.minorText3}>
+            <span className={style.minorText3} onClick={(e) => onClick(e, index)}>
               {i === undefined ? null : `${i.name}${isLastElement ? "" : ", "}`}
             </span>
           </span>
         );
       })
     );
-  }, [multipleDisplay, props]);
+  }, [displayName, props]);
 
-  const onClick = (e) => {
+  const onClick = (e,index) => {
     e.target.contentEditable = true;
     e.target.focus();
+    // const index = e.target.dataset.index;
+    
     e.target.onblur = () => {
       e.target.contentEditable = false;
-      if (e.target.innerText === "") {
-        props.setNewValue("");
-      } else {
-        props.setNewValue(e.target.innerText);
-      }
+      let newDisplayName = [...displayName];
+      console.log(index)
+      newDisplayName[index] = { ...newDisplayName[index], name: e.target.innerText };
+      console.log(newDisplayName)
+      setDisplayName(newDisplayName);
+  
+      props.setNewValue(newDisplayName);
     };
+    
     //Add a listener for the enter key
     e.target.onkeypress = (e) => {
       if (e.key === "Enter") {
@@ -53,6 +55,28 @@ const MultipleDisplay = (props) => {
       }
     };
   };
+
+  // const display = useMemo(
+  //   () =>
+  //     props.selectedItem.map((i, index) => {
+  //       const isLastElement = index === multipleDisplay.length - 1;
+  //       return (
+  //         <span
+  //           key={index}
+  //           className="editText"
+  //           onClick={onClick}
+  //           contentEditable="false"
+  //           suppressContentEditableWarning={true}
+  //           data-index={index}
+  //         >
+  //           <span className={style.minorText3}>
+  //             {i === undefined ? null : `${i.name}${isLastElement ? "" : ", "}`}
+  //           </span>
+  //         </span>
+  //       );
+  //     }),
+  //   [multipleDisplay]
+  // );
 
   return <>{display}</>;
 };

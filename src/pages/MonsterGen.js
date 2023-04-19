@@ -278,20 +278,20 @@ const MonsterGen = () => {
     const immuneString = immuneNames.join(", ");
     const conditionNames = selectedCondition.map((item) => item.name);
     const conditionString = conditionNames.join(", ");
-    // const specialNames = selectedSpecial.map(
-    //   (item) => `${item.name}: ${item.desc}\n\n`
-    // );
-    // const specialString = specialNames.join("");
+    const specialNames = selectedSpecial.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const specialString = specialNames.join("");
 
-    // const actionNames = selectedAction.map(
-    //   (item) => `${item.name}: ${item.desc}\n\n`
-    // );
-    // const actionString = actionNames.join("");
+    const actionNames = selectedAction.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const actionString = actionNames.join("");
 
-    // const legendNames = selectedLegend.map(
-    //   (item) => `${item.name}: ${item.desc}\n\n`
-    // );
-    // const legendString = legendNames.join("");
+    const legendNames = selectedLegend.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const legendString = legendNames.join("");
     const lairNames = selectedLair.map((item) => item.name);
     const lairString = lairNames.join(", ");
 
@@ -324,11 +324,12 @@ const MonsterGen = () => {
       resist: resistString,
       immune: immuneString,
       condition: conditionString,
-      // ability: specialString,
-      // action: actionString,
-      // legendary: legendString,
+      ability: specialString,
+      action: actionString,
+      legendary: legendString,
       lair: lairString,
       // email: session.user.email,
+      // DSOASDFASDFASDF
     };
     setMonster(monster);
   }, [
@@ -388,6 +389,11 @@ const MonsterGen = () => {
       </p>
     </div>
   );
+
+  useEffect(() => {
+    
+    console.log(selectedVuln)
+  }, [selectedVuln])
 
   //Ability score modifiers
   useEffect(() => {
@@ -1694,6 +1700,7 @@ const MonsterGen = () => {
                     selectedItem={selectedVuln}
                     setNewValue={setSelectedVuln}
                   />
+                  
                 </span>
               </h2>
             </>
