@@ -216,17 +216,8 @@ const Create = () => {
           <Link className={style.createLink} to="/citygen">
             {cardCityGen}
           </Link>
-          <Link className={style.createLink} to="/guildgen">
-            {cardGuildGen}
-          </Link>
           <Link className={style.createLink} to="/factiongen">
             {cardFactionGen}
-          </Link>
-          <Link className={style.createLink} to="/cultgen">
-            {cardCultGen}
-          </Link>
-          <Link className={style.createLink} to="/worldgen">
-            {cardWorldGen}
           </Link>
           <Link className={style.createLink} to="/questgen">
             {cardQuestGen}
@@ -237,9 +228,9 @@ const Create = () => {
           <Link className={style.createLink} to="/pantheongen">
             {cardPantheonGen}
           </Link>
-          {/* <Link className={style.createLink} to="/spellgen">
+          <Link className={style.createLink} to="/spellgen">
             {cardSpellGen}
-          </Link> */}
+          </Link>
         </div>
     </div>
   );

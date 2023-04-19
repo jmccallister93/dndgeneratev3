@@ -1,21 +1,8 @@
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { Button } from "primereact/button";
-import { e, i } from "mathjs";
-import { DataTable } from "primereact/datatable";
-import { Column } from "jspdf-autotable";
-import { Dialog } from "primereact/dialog";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { InputNumber } from "primereact/inputnumber";
-import Items from "../components/Items";
-import { Toast } from "primereact/toast";
-import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
@@ -26,6 +13,9 @@ import InfoModal from "../components/InfoModal";
 import { Tooltip } from "primereact/tooltip";
 import ExportButtons from "../components/ExportButtons";
 import SectionRandom from "../components/SectionRandom";
+import NameDisplay from "../components/NameDisplay";
+import CustomName from "../components/CustomName";
+import MultipleDisplayChunks from "../components/MultipleDisplayChunks";
 
 const PantheonGen = () => {
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -130,60 +120,43 @@ const PantheonGen = () => {
   );
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Pantheon Generator</h1>
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             {/* <GenerateButton /> */}
             <GenerateButton
-              generateItems={[
-                deityType,
-                alignment,
-                size,
-                attribute,
-                plane,
-                domain,
-                symbol,
-                history,
-              ]}
+              generateItems={[deityType, alignment, size, plane, domain]}
               itemOptions={[
                 deityTypeOptions,
                 alignmentOptions,
                 sizeOptions,
-                attributeOptions,
+
                 planeOptions,
                 domainOptions,
-                symbolOptions,
-                historyOptions,
               ]}
               setItem={[
                 setDeityType,
                 setAlignment,
                 setSize,
-                setAttribute,
+
                 setPlane,
                 setDomain,
-                setSymbol,
-                setHistory,
               ]}
               selectedItemOptions={[
                 motiveOptions,
                 provideOptions,
                 artifactOptions,
-                shrineOptions,
               ]}
               selectedItems={[
                 selectedMotive,
                 selectedProvide,
                 selectedArtifact,
-                selectedShrine,
               ]}
               setSelectedItem={[
                 setSelectedMotive,
                 setSelectedProvide,
                 setSelectedArtifact,
-                setSelectedShrine,
               ]}
             />
             <ClearButton
@@ -191,17 +164,14 @@ const PantheonGen = () => {
                 setDeityType,
                 setAlignment,
                 setSize,
-                setAttribute,
+
                 setPlane,
                 setDomain,
-                setSymbol,
-                setHistory,
               ]}
               setArrayState={[
                 setSelectedMotive,
                 setSelectedProvide,
                 setSelectedArtifact,
-                setSelectedShrine,
               ]}
             />
             <h1>
@@ -256,14 +226,14 @@ const PantheonGen = () => {
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputText
+              <CustomName
                 title={"Pantheon Name"}
                 input={pantheonName}
                 setInput={setPantheonName}
                 placeholder={"Set Pantheon Name"}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"pantheonDeity"}
                 setSingular={setDeityType}
                 setPlural={setDeityTypes}
                 setOptions={setDeityTypeOptions}
@@ -273,7 +243,7 @@ const PantheonGen = () => {
                 valueOptions={deityTypeOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"aligns"}
                 setSingular={setAlignment}
                 setPlural={setAlignments}
                 setOptions={setAlignmentOptions}
@@ -283,7 +253,7 @@ const PantheonGen = () => {
                 valueOptions={alignmentOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"sizes"}
                 setSingular={setSize}
                 setPlural={setSizes}
                 setOptions={setSizeOptions}
@@ -291,16 +261,6 @@ const PantheonGen = () => {
                 placeholder={"Set Size"}
                 value={size}
                 valueOptions={sizeOptions}
-              />
-              <CustomDropDown
-                tableName={"itemsTypes"}
-                setSingular={setAttribute}
-                setPlural={setAttributes}
-                setOptions={setAttributeOptions}
-                h1Title={"Attribute"}
-                placeholder={"Set Attribute"}
-                value={attribute}
-                valueOptions={attributeOptions}
               />
             </div>
           </div>
@@ -314,38 +274,30 @@ const PantheonGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[plane, domain, symbol, history]}
-              setValue={[setPlane, setDomain, setSymbol, setHistory]}
-              valueOptions={[
-                planeOptions,
-                domainOptions,
-                symbolOptions,
-                historyOptions,
-              ]}
+              value={[plane, domain]}
+              setValue={[setPlane, setDomain]}
+              valueOptions={[planeOptions, domainOptions]}
               selectedValue={[
                 selectedMotive,
                 selectedProvide,
                 selectedArtifact,
-                selectedShrine,
               ]}
               setSelectedValue={[
                 setSelectedMotive,
                 setSelectedProvide,
                 setSelectedArtifact,
-                setSelectedShrine,
               ]}
               selectedValueOptions={[
                 motiveOptions,
                 provideOptions,
                 artifactOptions,
-                shrineOptions,
               ]}
             />
           </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"pantheonPlane"}
                 setSingular={setPlane}
                 setPlural={setPlanes}
                 setOptions={setPlaneOptions}
@@ -355,7 +307,7 @@ const PantheonGen = () => {
                 valueOptions={planeOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"pantheonDomain"}
                 setSingular={setDomain}
                 setPlural={setDomains}
                 setOptions={setDomainOptions}
@@ -364,28 +316,8 @@ const PantheonGen = () => {
                 value={domain}
                 valueOptions={domainOptions}
               />
-              <CustomDropDown
-                tableName={"itemsTypes"}
-                setSingular={setSymbol}
-                setPlural={setSymbols}
-                setOptions={setSymbolOptions}
-                h1Title={"Symbol"}
-                placeholder={"Set Symbol"}
-                value={symbol}
-                valueOptions={symbolOptions}
-              />
-              <CustomDropDown
-                tableName={"itemsTypes"}
-                setSingular={setHistory}
-                setPlural={setHistorys}
-                setOptions={setHistoryOptions}
-                h1Title={"History"}
-                placeholder={"Set History"}
-                value={history}
-                valueOptions={historyOptions}
-              />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"pantheonMotives"}
                 setSingular={setMotive}
                 setPlural={setMotives}
                 setOptions={setMotiveOptions}
@@ -400,7 +332,7 @@ const PantheonGen = () => {
                 options={motiveOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"pantheonProvides"}
                 setSingular={setProvide}
                 setPlural={setProvides}
                 setOptions={setProvideOptions}
@@ -415,7 +347,7 @@ const PantheonGen = () => {
                 options={provideOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"pantheonArtifacts"}
                 setSingular={setArtifact}
                 setPlural={setArtifacts}
                 setOptions={setArtifactOptions}
@@ -429,28 +361,13 @@ const PantheonGen = () => {
                 setSelectedItem={setSelectedArtifact}
                 options={artifactOptions}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
-                setSingular={setShrine}
-                setPlural={setShrines}
-                setOptions={setShrineOptions}
-                h1Title={"Shrines"}
-                dialogHeader={"Shrines"}
-                placeholder={"Set Shrine"}
-                valueOptions={shrineOptions}
-                list={shrineList}
-                setList={setShrineList}
-                selectedItem={selectedShrine}
-                setSelectedItem={setSelectedShrine}
-                options={shrineOptions}
-              />
             </div>
           </div>
         </div>
 
         {/* Main Display */}
         <div className={style.display}>
-          <h1>{pantheonName}</h1>
+          <NameDisplay name={pantheonName} />
           <h2>
             Deity Type <span className={style.minorText2}>{deityType}</span>
           </h2>
@@ -461,30 +378,21 @@ const PantheonGen = () => {
             Size <span className={style.minorText2}>{size}</span>
           </h2>
           <h2>
-            Attribute <span className={style.minorText2}>{attribute}</span>
-          </h2>
-          <h2>
             Plane <span className={style.minorText2}>{plane}</span>
           </h2>
           <h2>
             Domain <span className={style.minorText2}>{domain}</span>
           </h2>
           <h2>
-            Symbol <span className={style.minorText2}>{symbol}</span>
-          </h2>
-          <h2>
-            History <span className={style.minorText2}>{history}</span>
-          </h2>
-          <h2>
             Motives{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedMotive} />
+              <MultipleDisplayChunks selectedItem={selectedMotive} />
             </span>
           </h2>
           <h2>
             Provides{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedProvide} />
+              <MultipleDisplayChunks selectedItem={selectedProvide} />
             </span>
           </h2>
           <h2>
@@ -493,12 +401,12 @@ const PantheonGen = () => {
               <MultipleDisplay selectedItem={selectedArtifact} />
             </span>
           </h2>
-          <h2>
+          {/* <h2>
             Shrines{" "}
             <span className={style.minorText2}>
               <MultipleDisplay selectedItem={selectedShrine} />
             </span>
-          </h2>
+          </h2> */}
         </div>
       </div>
     </div>
