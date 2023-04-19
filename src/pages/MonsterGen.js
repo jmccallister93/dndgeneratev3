@@ -391,8 +391,8 @@ const MonsterGen = () => {
   );
 
   useEffect(() => {
-    console.log(selectedSpecial)
-  }, [selectedSpecial])
+    console.log(selectedLair)
+  }, [selectedLair])
 
   //Ability score modifiers
   useEffect(() => {
