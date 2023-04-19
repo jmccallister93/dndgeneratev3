@@ -696,15 +696,15 @@ const FactionGen = () => {
               value={[wealth]}
               setValue={[setWealth]}
               valueOptions={[wealthOptions]}
-              selectedValue={[selectedIncome, selectedItem, selectedResource]}
+              selectedValue={[selectedIncome , selectedResource]}
               setSelectedValue={[
                 setSelectedIncome,
-                setSelectedItem,
+                
                 setSelectedResource,
               ]}
               selectedValueOptions={[
                 incomeOptions,
-                itemOptions,
+               
                 resourceOptions,
               ]}
             />
@@ -1104,23 +1104,23 @@ const FactionGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[defense]}
-              setValue={[setDefense]}
-              valueOptions={[defenseOptions]}
+              value={[defense, headquarter]}
+              setValue={[setDefense, setHeadquarter]}
+              valueOptions={[defenseOptions, headquarterOptions]}
               selectedValue={[
-                selectedHeadquarter,
+                
                 selectedBuilding,
                 selectedLocation,
                 selectedStronghold,
               ]}
               setSelectedValue={[
-                setSelectedHeadquarter,
+                
                 setSelectedBuilding,
                 setSelectedLocation,
                 setSelectedStronghold,
               ]}
               selectedValueOptions={[
-                headquarterOptions,
+                
                 buildingOptions,
                 locationOptions,
                 strongholdOptions,
@@ -1140,17 +1140,15 @@ const FactionGen = () => {
                 value={defense}
                 valueOptions={defenseOptions}
               />
-              <CustomDataTable
+              <CustomDropdown
                 tableName={"orgHeadquarter"}
                 setSingular={setHeadquarter}
                 setPlural={setHeadquarters}
                 setOptions={setHeadquarterOptions}
+                options={headquarterOptions}
                 h1Title={"Headquarters"}
-                dialogHeader={"Headquarters"}
-                selectedItem={selectedHeadquarter}
-                setSelectedItem={setSelectedHeadquarter}
-                list={headquarterList}
-                setList={setHeadquarterList}
+                placeholder={"Set Headquarters"}
+               value={headquarter}
                 valueOptions={headquarterOptions}
               />
               <CustomDataTable
