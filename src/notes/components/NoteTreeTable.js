@@ -35,13 +35,25 @@ const NoteTreeTable = (props) => {
 
   const extractNames = (objectArray) => {
     if (!Array.isArray(objectArray)) return {};
+
     let namesByFolder = {};
+  
     for (let obj of objectArray) {
-      const folder = obj.folder;
-      if (!namesByFolder[folder]) {
-        namesByFolder[folder] = [];
+      if (Array.isArray(obj)) { // check if element is an array
+        for (let innerObj of obj) { // iterate over inner array
+          const folder = innerObj.folder;
+          if (!namesByFolder[folder]) {
+            namesByFolder[folder] = [];
+          }
+          namesByFolder[folder].push({ name: innerObj.name, uuid: innerObj.uuid });
+        }
+      } else {
+        const folder = obj.folder;
+        if (!namesByFolder[folder]) {
+          namesByFolder[folder] = [];
+        }
+        namesByFolder[folder].push({ name: obj.name, uuid: obj.uuid });
       }
-      namesByFolder[folder].push({ name: obj.name, uuid: obj.uuid });
     }
     return namesByFolder;
   };
@@ -51,6 +63,8 @@ const NoteTreeTable = (props) => {
   const quest = extractNames(props.quest);
   const item = extractNames(props.item);
   const monster = extractNames(props.monster);
+  
+  
 
   // Show folders
   const [visibleFolders, setVisibleFolders] = useState({});

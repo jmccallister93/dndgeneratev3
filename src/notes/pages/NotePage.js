@@ -27,6 +27,7 @@ function NotePage(props) {
   const [questDetails, setQuestDetails] = useState([]);
   const [itemDetails, setItemDetails] = useState([]);
   const [monsterDetails, setMonsterDetails] = useState([]);
+  const [pantheonDetails, setPantheonDetails] = useState([]);
 
   const [noteText, setNoteText] = useState("");
   const [propertyValue, setPropertyValue] = useState("");
@@ -50,6 +51,7 @@ function NotePage(props) {
         const questResponse = await supabase.from("DBquest").select("uuid");
         const itemResponse = await supabase.from("DBitem").select("uuid");
         const monsterResponse = await supabase.from("DBmonster").select("uuid");
+        const pantheonResponse = await supabase.from("DBpantheon").select("uuid");
 
         //Create arrays of uuids
         const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
@@ -66,6 +68,9 @@ function NotePage(props) {
         const monsterUuids = [].concat(
           monsterResponse.data.map((monster) => monster.uuid)
         );
+        const pantheonUuids = [].concat(
+          pantheonResponse.data.map((pantheon) => pantheon.uuid)
+        );
 
         //Compare selectedId to uuids to determine which table to update
         if (npcUuids.includes(selectedId)) {
@@ -80,6 +85,8 @@ function NotePage(props) {
           setDbTable("DBitem");
         } else if (monsterUuids.includes(selectedId)) {
           setDbTable("DBmonster");
+        } else if (pantheonUuids.includes(selectedId)) {
+          setDbTable("DBpantheon");
         }
       } catch (error) {
         console.error("Error fetching tables:", error);
@@ -145,6 +152,7 @@ function NotePage(props) {
         setFetchError(null);
         setLocationDetails(
           dataName.map((r) => ({
+            email: r.email,
             folder: r.folder,
             uuid: r.uuid,
             name: r.name,
@@ -186,6 +194,7 @@ function NotePage(props) {
         setFetchError(null);
         setNpcDetails(
           dataName.map((r) => ({
+            email: r.email,
             folder: r.folder,
             uuid: r.uuid,
             name: r.name,
@@ -241,6 +250,7 @@ function NotePage(props) {
         setFetchError(null);
         setOrganizationDetails(
           dataName.map((r) => ({
+            email: r.email,
             folder: r.folder,
             uuid: r.uuid,
             name: r.name,
@@ -301,6 +311,7 @@ function NotePage(props) {
         setFetchError(null);
         setQuestDetails(
           dataName.map((r) => ({
+            email: r.email,
             folder: r.folder,
             uuid: r.uuid,
             name: r.name,
@@ -333,6 +344,7 @@ function NotePage(props) {
         setFetchError(null);
         setItemDetails(
           dataName.map((r) => ({
+            email: r.email,
             folder: r.folder,
             uuid: r.uuid,
             name: r.name,
@@ -407,6 +419,44 @@ function NotePage(props) {
     };
     fetchData();
   }, [noteText, propertyValue, deletedNode, showPopup]);
+
+  //Get Pantheon
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBpantheon")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setPantheonDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setPantheonDetails(
+          dataName.map((r) => ({
+            folder: r.folder,
+            uuid: r.uuid,
+            name: r.name,
+            type: r.type,
+            alignment: r.alignment,
+            size: r.size,
+            plane: r.plane,
+           domain: r.domain,
+           motive: r.motive,
+           provide: r.provide,
+           artifact: r.artifact,
+            notes: r.notes,
+            links: r.links,
+            email: r.email,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, [noteText, propertyValue, deletedNode, showPopup]);
+
+
   //Gets details of selected node
   const handleSelectedNode = useCallback(() => {
     const allDetails = npcDetails.concat(
@@ -415,6 +465,7 @@ function NotePage(props) {
       questDetails,
       itemDetails,
       monsterDetails,
+      pantheonDetails,
     );
     setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
   }, [
@@ -425,6 +476,7 @@ function NotePage(props) {
     questDetails,
     itemDetails,
     monsterDetails,
+    pantheonDetails,
   ]);
 
   useEffect(() => {
@@ -456,6 +508,7 @@ function NotePage(props) {
               quest={questDetails}
               item={itemDetails}
               monster={monsterDetails}
+              pantheon={pantheonDetails}
               selectedNode={selectedNode}
               setSelectedId={setSelectedId}
               selectedId={selectedId}

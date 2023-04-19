@@ -26,7 +26,7 @@ const NoteTree = (props) => {
         <div className={ns.TreeTable}>
           <NoteTreeTable
             header="NPCs"
-            npc={props.npc}
+            npc={[props.npc, props.pantheon]}
             setShowPopup={props.setShowPopup}
             selectedNode={props.selectedNode}
             selectedId={props.selectedId}
