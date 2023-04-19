@@ -966,7 +966,7 @@ const ItemGen = () => {
               <h2>
                 Contents{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedItem} />
+                  <MultipleDisplay selectedItem={selectedItem} setNewValue={setSelectedItem}/>
                 </span>
               </h2>
             </>

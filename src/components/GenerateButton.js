@@ -50,24 +50,26 @@ const GenerateButton = (props) => {
   };
   //Datatable Generate
   const dataTableGenerate = (e) => {
-    const allItemsSelected = props.selectedItems.every(
-      (item) => item.length > 0
-    );
+    if (props.selectedItems) {
+      const allItemsSelected = props.selectedItems.every(
+        (item) => item.length > 0
+      );
 
-    if (!allItemsSelected) {
-      if (props.selectedItems) {
-        const usedIndexes = [];
-        for (let i = 0; i < props.selectedItems.length; i++) {
-          if (props.selectedItems[i].length <= 0) {
-            let n = Math.floor(Math.random() * (6 - 0));
-            for (let x = 0; x <= n; x++) {
-              let r = Math.floor(
-                Math.random() * props.selectedItemOptions[i].length
-              );
-              const option = props.selectedItemOptions[i][r];
-              if (!usedIndexes.includes(r)) {
-                usedIndexes.push(r);
-                props.setSelectedItem[i]((oldArray) => [...oldArray, option]);
+      if (!allItemsSelected) {
+        if (props.selectedItems) {
+          const usedIndexes = [];
+          for (let i = 0; i < props.selectedItems.length; i++) {
+            if (props.selectedItems[i].length <= 0) {
+              let n = Math.floor(Math.random() * (6 - 0));
+              for (let x = 0; x <= n; x++) {
+                let r = Math.floor(
+                  Math.random() * props.selectedItemOptions[i].length
+                );
+                const option = props.selectedItemOptions[i][r];
+                if (!usedIndexes.includes(r)) {
+                  usedIndexes.push(r);
+                  props.setSelectedItem[i]((oldArray) => [...oldArray, option]);
+                }
               }
             }
           }
@@ -169,7 +171,7 @@ const GenerateButton = (props) => {
           let noun_b = [props.nameItemOptions[i][nB].noun_b];
 
           let random = Math.floor(Math.random() * 3);
- 
+
           if (random === 0) {
             props.setNameItem[i](firstName + " " + epiphet_a + noun_a);
           } else if (random === 1) {

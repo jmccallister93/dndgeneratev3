@@ -1,21 +1,9 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { Button } from "primereact/button";
-import { e, i } from "mathjs";
-import { DataTable } from "primereact/datatable";
-import { Column } from "jspdf-autotable";
-import { Dialog } from "primereact/dialog";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { InputNumber } from "primereact/inputnumber";
-import Items from "../components/Items";
-import { Toast } from "primereact/toast";
-import Npcs from "../components/Npcs";
 import ClearButton from "../components/ClearButton";
 import GenerateButton from "../components/GenerateButton";
 import MultipleDisplay from "../components/MultipleDisplay";
@@ -28,8 +16,11 @@ import InfoModal from "../components/InfoModal";
 import SectionRandom from "../components/SectionRandom";
 import NameDisplay from "../components/NameDisplay";
 import SingleDisplayText from "../components/SingleDisplayText";
+import { SessionContext } from "../config/SessionContext";
 
 const FactionGen = () => {
+  const session = useContext(SessionContext);
+
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isResourceActive, setIsResourceActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -187,9 +178,9 @@ const FactionGen = () => {
   const [selectedResource, setSelectedResource] = useState([]);
   const [resourceList, setResourceList] = useState([]);
 
-  const [defence, setDefence] = useState("");
-  const [defences, setDefences] = useState("");
-  const [defenceOptions, setDefenceOptions] = useState("");
+  const [defense, setDefense] = useState("");
+  const [defenses, setDefenses] = useState("");
+  const [defenseOptions, setDefenseOptions] = useState("");
 
   const [origin, setOrigin] = useState("");
   const [origins, setOrigins] = useState("");
@@ -226,6 +217,8 @@ const FactionGen = () => {
   const [leader, setLeader] = useState("");
   const [leaders, setLeaders] = useState("");
   const [leaderOptions, setLeaderOptions] = useState("");
+
+  const [organization, setOrganization] = useState({});
   const divRef = useRef(null);
 
   //Show Options
@@ -250,6 +243,139 @@ const FactionGen = () => {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
+
+  //Create location object to be exported
+  useEffect(() => {
+    const itemNames = selectedItem.map((item) => item.name);
+    const itemString = itemNames.join(", ");
+    const influenceTacticNames = selectedInfluenceTactic.map(
+      (influenceTactic) => influenceTactic.name
+    );
+    const influenceTacticString = influenceTacticNames.join(", ");
+    const favoredNames = selectedFavored.map((favored) => favored.name);
+    const favoredString = favoredNames.join(", ");
+    const positiveNames = selectedPositive.map((positive) => positive.name);
+    const positiveString = positiveNames.join(", ");
+    const neutralNames = selectedNeutral.map((neutral) => neutral.name);
+    const neutralString = neutralNames.join(", ");
+    const unwelcomeNames = selectedUnwelcome.map((unwelcome) => unwelcome.name);
+    const unwelcomeString = unwelcomeNames.join(", ");
+    const intolerantNames = selectedIntolerant.map((intolerant) => intolerant.name);
+    const intolerantString = intolerantNames.join(", ");
+    const serviceNames = selectedService.map((service) => service.name);
+    const serviceString = serviceNames.join(", ");
+    const initiationNames = selectedInitiation.map((initiation) => initiation.name);
+    const initiationString = initiationNames.join(", ");
+    const lowRoleNames = selectedLowRole.map((lowRole) => lowRole.name);
+    const lowRoleString = lowRoleNames.join(", ");
+    const mediumRoleNames = selectedMediumRole.map((mediumRole) => mediumRole.name);
+    const mediumRoleString = mediumRoleNames.join(", ");
+    const highRoleNames = selectedHighRole.map((highRole) => highRole.name);
+    const highRoleString = highRoleNames.join(", ");
+    const questNames = selectedQuest.map((quest) => quest.name);
+    const questString = questNames.join(", ");
+    const advanceNames = selectedAdvance.map((advance) => advance.name);
+    const advanceString = advanceNames.join(", ");
+    const beliefNames = selectedBelief.map((belief) => belief.name);
+    const beliefString = beliefNames.join(", ");
+    const orgTypeNames = selectedOrgType.map((orgType) => orgType.name);
+    const orgTypeString = orgTypeNames.join(", ");
+    const headquarterNames = selectedHeadquarter.map((headquarter) => headquarter.name);
+    const headquarterString = headquarterNames.join(", ");
+    const buildingNames = selectedBuilding.map((building) => building.name);
+    const buildingString = buildingNames.join(", ");
+    const locationNames = selectedLocation.map((location) => location.name);
+    const locationString = locationNames.join(", ");
+    const strongholdNames = selectedStronghold.map((stronghold) => stronghold.name);
+    const strongholdString = strongholdNames.join(", ");
+    const resourceNames = selectedResource.map((resource) => resource.name);
+    const resourceString = resourceNames.join(", ");
+    const motiveNames = selectedMotive.map((motive) => motive.name);
+    const motiveString = motiveNames.join(", ");
+    const powerNames = selectedPower.map((power) => power.name);
+    const powerString = powerNames.join(", ");
+    const specialtyNames = selectedSpecialty.map((specialty) => specialty.name);
+    const specialtyString = specialtyNames.join(", ");
+    const weaknessNames = selectedWeakness.map((weakness) => weakness.name);
+    const weaknessString = weaknessNames.join(", ");
+
+
+    const organization = {
+      name: factionName,
+      wealth: wealth,
+      influence: influence,
+      structure: structure,
+      defense: defense,
+      origin: origin,
+      logo: logo,
+      leader: leader,
+      income: income,
+      item: itemString,
+      influenceTactic: influenceTacticString,
+      favored: favoredString,
+      positive: positiveString,
+      neutral: neutralString,
+      unwelcome: unwelcomeString,
+      intolerant: intolerantString,
+      service: serviceString,
+      initiation: initiationString,
+      lowRole: lowRoleString,
+      mediumRole: mediumRoleString,
+      highRole: highRoleString,
+      quest: questString,
+      advance: advanceString,
+      belief: beliefString,
+      orgType: orgTypeString,
+      headquarter: headquarterString,
+      building: buildingString,
+      location: locationString,
+      stronghold: strongholdString,
+      resource: resourceString,
+      motive: motiveString,
+      power: powerString,
+      specialty: specialtyString,
+      weakness: weaknessString,
+      // email: session.user.email,
+    };
+    setOrganization(organization);
+  }, [
+    factionName,
+    wealth,
+    influence,
+    structure,
+    defense,
+    origin,
+    logo,
+    leader,
+    selectedIncome,
+    selectedItem,
+    selectedInfluenceTactic,
+    selectedFavored,
+    selectedPositive,
+    selectedNeutral,
+    selectedUnwelcome,
+    selectedIntolerant,
+    selectedService,
+    selectedInitiation,
+    selectedLowRole,
+    selectedMediumRole,
+    selectedHighRole,
+    selectedQuest,
+    selectedAdvance,
+    selectedBelief,
+    selectedOrgType,
+    selectedHeadquarter,
+    selectedBuilding,
+    selectedLocation,
+    selectedStronghold,
+    selectedResource,
+    selectedMotive,
+    selectedPower,
+    selectedSpecialty,
+    selectedWeakness,
+    income,
+    session,
+  ]);
 
   //Info content
   const infoContent = (
@@ -276,9 +402,7 @@ const FactionGen = () => {
   );
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}>
-        <h1 className={style.mainHeader}>Faction Generator</h1>
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             <GenerateButton
@@ -286,8 +410,8 @@ const FactionGen = () => {
                 wealth,
                 influence,
                 structure,
-                defence,
-                origin,
+                defense,
+              
                 logo,
                 leader,
               ]}
@@ -295,8 +419,8 @@ const FactionGen = () => {
                 wealthOptions,
                 influenceOptions,
                 structureOptions,
-                defenceOptions,
-                originOptions,
+                defenseOptions,
+               
                 logoOptions,
                 leaderOptions,
               ]}
@@ -304,14 +428,14 @@ const FactionGen = () => {
                 setWealth,
                 setInfluence,
                 setStructure,
-                setDefence,
-                setOrigin,
+                setDefense,
+              
                 setLogo,
                 setLeader,
               ]}
               selectedItems={[
                 selectedIncome,
-                selectedItem,
+                // selectedItem,
                 selectedInfluenceTactic,
                 selectedFavored,
                 selectedPositive,
@@ -325,7 +449,7 @@ const FactionGen = () => {
                 selectedHighRole,
                 selectedQuest,
                 selectedAdvance,
-                selectedBelief,
+              
                 selectedOrgType,
                 selectedHeadquarter,
                 selectedBuilding,
@@ -339,7 +463,7 @@ const FactionGen = () => {
               ]}
               setSelectedItem={[
                 setSelectedIncome,
-                setSelectedItem,
+                // setSelectedItem,
                 setSelectedInfluenceTactic,
                 setSelectedFavored,
                 setSelectedPositive,
@@ -353,7 +477,7 @@ const FactionGen = () => {
                 setSelectedHighRole,
                 setSelectedQuest,
                 setSelectedAdvance,
-                setSelectedBelief,
+              
                 setSelectedOrgType,
                 setSelectedHeadquarter,
                 setSelectedBuilding,
@@ -367,7 +491,7 @@ const FactionGen = () => {
               ]}
               selectedItemOptions={[
                 incomeOptions,
-                itemOptions,
+                // itemOptions,
                 influenceTacticOptions,
                 favoredOptions,
                 positiveOptions,
@@ -381,7 +505,7 @@ const FactionGen = () => {
                 highRoleOptions,
                 questOptions,
                 advanceOptions,
-                beliefOptions,
+              
                 orgTypeOptions,
                 headquarterOptions,
                 buildingOptions,
@@ -399,14 +523,14 @@ const FactionGen = () => {
                 setWealth,
                 setInfluence,
                 setStructure,
-                setDefence,
+                setDefense,
                 setOrigin,
                 setLogo,
                 setLeader,
               ]}
               setArrayState={[
                 setSelectedIncome,
-                setSelectedItem,
+                // setSelectedItem,
                 setSelectedInfluenceTactic,
                 setSelectedFavored,
                 setSelectedPositive,
@@ -436,7 +560,11 @@ const FactionGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} />
+                <ExportButtons
+                  div={divRef}
+                  data={organization}
+                  tableName={"DBorganization"}
+                />
               </div>
             </h1>
             <div className={style.infoCircle}>
@@ -461,7 +589,7 @@ const FactionGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <h1>Faction Options</h1>
+          <h1>Orginization Options</h1>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showBasics}>
               Basic Info{" "}
@@ -472,32 +600,32 @@ const FactionGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[structure, origin, logo]}
-              setValue={[setStructure, setOrigin, setLogo]}
-              valueOptions={[structureOptions, originOptions, logoOptions]}
-              selectedValue={[selectedOrgType, selectedMotive, selectedBelief]}
+              value={[structure,  logo]}
+              setValue={[setStructure,  setLogo]}
+              valueOptions={[structureOptions,  logoOptions]}
+              selectedValue={[selectedOrgType, selectedMotive, ]}
               setSelectedValue={[
                 setSelectedOrgType,
                 setSelectedMotive,
-                setSelectedBelief,
+                
               ]}
               selectedValueOptions={[
                 orgTypeOptions,
                 motiveOptions,
-                beliefOptions,
+                
               ]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomInputText
-                title={"Faction Name"}
+                title={"Organization Name"}
                 input={factionName}
                 setInput={setFactionName}
-                placeholder={"Set Faction Name"}
+                placeholder={"Set Org. Name"}
               />
               <CustomDropdown
-                tableName={"itemsTypes"}
+                tableName={"orgStructure"}
                 setSingular={setStructure}
                 setPlural={setStructures}
                 setOptions={setStructureOptions}
@@ -507,7 +635,7 @@ const FactionGen = () => {
                 value={structure}
                 valueOptions={structureOptions}
               />
-              <CustomDropdown
+              {/* <CustomDropdown
                 tableName={"itemsTypes"}
                 setSingular={setOrigin}
                 setPlural={setOrigins}
@@ -517,9 +645,9 @@ const FactionGen = () => {
                 placeholder={"Set Origin"}
                 value={origin}
                 valueOptions={originOptions}
-              />
+              /> */}
               <CustomDropdown
-                tableName={"itemsTypes"}
+                tableName={"orgLogo"}
                 setSingular={setLogo}
                 setPlural={setLogos}
                 setOptions={setLogoOptions}
@@ -529,21 +657,19 @@ const FactionGen = () => {
                 value={logo}
                 valueOptions={logoOptions}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDropdown
+                tableName={"orgType"}
                 setSingular={setOrgType}
                 setPlural={setOrgTypes}
                 setOptions={setOrgTypeOptions}
+                options={orgTypeOptions}
                 h1Title={"Organization Type"}
-                dialogHeader={"Organization Type"}
-                selectedItem={selectedOrgType}
-                setSelectedItem={setSelectedOrgType}
-                list={orgTypeList}
-                setList={setOrgTypeList}
+                placeholder={"Set Type"}
+                value={orgType}
                 valueOptions={orgTypeOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgMotive"}
                 setSingular={setMotive}
                 setPlural={setMotives}
                 setOptions={setMotiveOptions}
@@ -554,19 +680,6 @@ const FactionGen = () => {
                 list={motiveList}
                 setList={setMotiveList}
                 valueOptions={motiveOptions}
-              />
-              <CustomDataTable
-                tableName={"itemsTypes"}
-                setSingular={setBelief}
-                setPlural={setBeliefs}
-                setOptions={setBeliefOptions}
-                h1Title={"Beliefs"}
-                dialogHeader={"Beliefs"}
-                selectedItem={selectedBelief}
-                setSelectedItem={setSelectedBelief}
-                list={beliefList}
-                setList={setBeliefList}
-                valueOptions={beliefOptions}
               />
             </div>
           </div>
@@ -599,7 +712,7 @@ const FactionGen = () => {
           <div className={isResourceActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
-                tableName={"itemsTypes"}
+                tableName={"orgWealth"}
                 setSingular={setWealth}
                 setPlural={setWealths}
                 setOptions={setWealthOptions}
@@ -610,7 +723,7 @@ const FactionGen = () => {
                 valueOptions={wealthOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgIncome"}
                 setSingular={setIncome}
                 setPlural={setIncomes}
                 setOptions={setIncomeOptions}
@@ -623,20 +736,7 @@ const FactionGen = () => {
                 valueOptions={incomeOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
-                setSingular={setItem}
-                setPlural={setItems}
-                setOptions={setItemOptions}
-                h1Title={"Items"}
-                dialogHeader={"Items"}
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-                list={itemList}
-                setList={setItemList}
-                valueOptions={itemOptions}
-              />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgResource"}
                 setSingular={setResource}
                 setPlural={setResources}
                 setOptions={setResourceOptions}
@@ -731,7 +831,7 @@ const FactionGen = () => {
           <div className={isMembershipActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"races"}
                 setSingular={setFavored}
                 setPlural={setFavoreds}
                 setOptions={setFavoredOptions}
@@ -744,7 +844,7 @@ const FactionGen = () => {
                 valueOptions={favoredOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"races"}
                 setSingular={setPositive}
                 setPlural={setPositives}
                 setOptions={setPositiveOptions}
@@ -757,7 +857,7 @@ const FactionGen = () => {
                 valueOptions={positiveOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"races"}
                 setSingular={setNeutral}
                 setPlural={setNeutrals}
                 setOptions={setNeutralOptions}
@@ -770,7 +870,7 @@ const FactionGen = () => {
                 valueOptions={neutralOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"races"}
                 setSingular={setUnwelcome}
                 setPlural={setUnwelcomes}
                 setOptions={setUnwelcomeOptions}
@@ -783,7 +883,7 @@ const FactionGen = () => {
                 valueOptions={unwelcomeOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"races"}
                 setSingular={setIntolerant}
                 setPlural={setIntolerants}
                 setOptions={setIntolerantOptions}
@@ -796,7 +896,7 @@ const FactionGen = () => {
                 valueOptions={intolerantOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgInitiation"}
                 setSingular={setInitiation}
                 setPlural={setInitiations}
                 setOptions={setInitiationOptions}
@@ -809,7 +909,7 @@ const FactionGen = () => {
                 valueOptions={initiationOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgLowRank"}
                 setSingular={setLowRole}
                 setPlural={setLowRoles}
                 setOptions={setLowRoleOptions}
@@ -822,7 +922,7 @@ const FactionGen = () => {
                 valueOptions={lowRoleOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgMediumRank"}
                 setSingular={setMediumRole}
                 setPlural={setMediumRoles}
                 setOptions={setMediumRoleOptions}
@@ -835,7 +935,7 @@ const FactionGen = () => {
                 valueOptions={mediumRoleOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgHighRank"}
                 setSingular={setHighRole}
                 setPlural={setHighRoles}
                 setOptions={setHighRoleOptions}
@@ -848,7 +948,7 @@ const FactionGen = () => {
                 valueOptions={highRoleOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgAdvancement"}
                 setSingular={setAdvance}
                 setPlural={setAdvances}
                 setOptions={setAdvanceOptions}
@@ -862,49 +962,49 @@ const FactionGen = () => {
               />
             </div>
           </div>
-            <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showFeature}>
-            Features{" "}
-            {isFeatureActive ? (
-               <i className="pi pi-chevron-down"></i>
-               ) : (
-                 <i className="pi pi-chevron-right"></i>
-               )}
-          </h1>
-          <SectionRandom 
-            value={[influence,]}
-            setValue={[setInfluence,]}
-            valueOptions={[influenceOptions,]}
-            selectedValue={[
-              selectedInfluenceTactic,
-              selectedService,
-              selectedQuest,
-              selectedPower,
-              selectedSpecialty,
-              selectedWeakness
-            ]}
-            setSelectedValue={[
-              setSelectedInfluenceTactic,
-              setSelectedService,
-              setSelectedQuest,
-              setSelectedPower,
-              setSelectedSpecialty,
-              setSelectedWeakness
-            ]}
-            selectedValueOptions={[
-              influenceTacticOptions,
-              serviceOptions,
-              questOptions,
-              powerOptions,
-              specialtyOptions,
-              weaknessOptions
-            ]}
-          />
+          <div className={style.sectionOption}>
+            <h1 className={style.subHeader} onClick={showFeature}>
+              Features{" "}
+              {isFeatureActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              value={[influence]}
+              setValue={[setInfluence]}
+              valueOptions={[influenceOptions]}
+              selectedValue={[
+                selectedInfluenceTactic,
+                selectedService,
+                selectedQuest,
+                selectedPower,
+                selectedSpecialty,
+                selectedWeakness,
+              ]}
+              setSelectedValue={[
+                setSelectedInfluenceTactic,
+                setSelectedService,
+                setSelectedQuest,
+                setSelectedPower,
+                setSelectedSpecialty,
+                setSelectedWeakness,
+              ]}
+              selectedValueOptions={[
+                influenceTacticOptions,
+                serviceOptions,
+                questOptions,
+                powerOptions,
+                specialtyOptions,
+                weaknessOptions,
+              ]}
+            />
           </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
-                tableName={"itemsTypes"}
+                tableName={"orgInfluenceLevel"}
                 setSingular={setInfluence}
                 setPlural={setInfluences}
                 setOptions={setInfluenceOptions}
@@ -915,7 +1015,7 @@ const FactionGen = () => {
                 valueOptions={influenceOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgInfluenceTactic"}
                 setSingular={setInfluenceTactic}
                 setPlural={setInfluenceTactics}
                 setOptions={setInfluenceTacticOptions}
@@ -928,7 +1028,7 @@ const FactionGen = () => {
                 valueOptions={influenceTacticOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgService"}
                 setSingular={setService}
                 setPlural={setServices}
                 setOptions={setServiceOptions}
@@ -941,7 +1041,7 @@ const FactionGen = () => {
                 valueOptions={serviceOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgQuest"}
                 setSingular={setQuest}
                 setPlural={setQuests}
                 setOptions={setQuestOptions}
@@ -954,7 +1054,7 @@ const FactionGen = () => {
                 valueOptions={questOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgPowerSource"}
                 setSingular={setPower}
                 setPlural={setPowers}
                 setOptions={setPowerOptions}
@@ -967,7 +1067,7 @@ const FactionGen = () => {
                 valueOptions={powerOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgSpecialty"}
                 setSingular={setSpecialty}
                 setPlural={setSpecialtys}
                 setOptions={setSpecialtyOptions}
@@ -980,7 +1080,7 @@ const FactionGen = () => {
                 valueOptions={specialtyOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgWeakness"}
                 setSingular={setWeakness}
                 setPlural={setWeaknesss}
                 setOptions={setWeaknessOptions}
@@ -995,53 +1095,53 @@ const FactionGen = () => {
             </div>
           </div>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showBuildings}>
-            Buildings{" "}
-            {isBuildingActive ? (
+            <h1 className={style.subHeader} onClick={showBuildings}>
+              Buildings{" "}
+              {isBuildingActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
                 <i className="pi pi-chevron-right"></i>
               )}
-          </h1>
-          <SectionRandom
-            value={[defence,]}
-            setValue={[setDefence,]}
-            valueOptions={[defenceOptions,]}
-            selectedValue={[
-              selectedHeadquarter,
-              selectedBuilding,
-              selectedLocation,
-              selectedStronghold,
-            ]}
-            setSelectedValue={[
-              setSelectedHeadquarter,
-              setSelectedBuilding,
-              setSelectedLocation,
-              setSelectedStronghold,
-            ]}
-            selectedValueOptions={[
-              headquarterOptions,
-              buildingOptions,
-              locationOptions,
-              strongholdOptions,
-            ]}
-          />
+            </h1>
+            <SectionRandom
+              value={[defense]}
+              setValue={[setDefense]}
+              valueOptions={[defenseOptions]}
+              selectedValue={[
+                selectedHeadquarter,
+                selectedBuilding,
+                selectedLocation,
+                selectedStronghold,
+              ]}
+              setSelectedValue={[
+                setSelectedHeadquarter,
+                setSelectedBuilding,
+                setSelectedLocation,
+                setSelectedStronghold,
+              ]}
+              selectedValueOptions={[
+                headquarterOptions,
+                buildingOptions,
+                locationOptions,
+                strongholdOptions,
+              ]}
+            />
           </div>
           <div className={isBuildingActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
-                tableName={"itemsTypes"}
-                setSingular={setDefence}
-                setPlural={setDefences}
-                setOptions={setDefenceOptions}
-                options={defenceOptions}
-                h1Title={"Defence Level"}
-                placeholder={"Set Defence"}
-                value={defence}
-                valueOptions={defenceOptions}
+                tableName={"orgDefense"}
+                setSingular={setDefense}
+                setPlural={setDefenses}
+                setOptions={setDefenseOptions}
+                options={defenseOptions}
+                h1Title={"Defense Level"}
+                placeholder={"Set Defense"}
+                value={defense}
+                valueOptions={defenseOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgHeadquarter"}
                 setSingular={setHeadquarter}
                 setPlural={setHeadquarters}
                 setOptions={setHeadquarterOptions}
@@ -1054,7 +1154,7 @@ const FactionGen = () => {
                 valueOptions={headquarterOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgOwnedBuilding"}
                 setSingular={setBuilding}
                 setPlural={setBuildings}
                 setOptions={setBuildingOptions}
@@ -1067,7 +1167,7 @@ const FactionGen = () => {
                 valueOptions={buildingOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgLocation"}
                 setSingular={setLocation}
                 setPlural={setLocations}
                 setOptions={setLocationOptions}
@@ -1080,7 +1180,7 @@ const FactionGen = () => {
                 valueOptions={locationOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgStronghold"}
                 setSingular={setStronghold}
                 setPlural={setStrongholds}
                 setOptions={setStrongholdOptions}
@@ -1098,34 +1198,21 @@ const FactionGen = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-        <NameDisplay value={factionName} setNewValue={setFactionName} />
+          <NameDisplay value={factionName} setNewValue={setFactionName} />
           <h2>
             Org. Structure{" "}
-            <SingleDisplayText
-              value={structure}
-              setNewValue={setStructure}
-            />
+            <SingleDisplayText value={structure} setNewValue={setStructure} />
           </h2>
+         
           <h2>
-            Origin{" "}
-            <SingleDisplayText
-              value={origin}
-              setNewValue={setOrigin}
-            />
-          </h2>
-          <h2>
-            Logo{" "}
-            <SingleDisplayText
-              value={logo}
-              setNewValue={setLogo}
-            />
+            Logo <SingleDisplayText value={logo} setNewValue={setLogo} />
           </h2>
           <h2>
             Org. Type{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedOrgType}
-                setList={setOrgTypeList}
+                setNewValue={setSelectedOrgType}
               />
             </span>
           </h2>
@@ -1134,62 +1221,42 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedMotive}
-                setList={setMotiveList}
+                setNewValue={setSelectedMotive}
               />
             </span>
           </h2>
-          <h2>
-            Beliefs{" "}
-            <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedBelief}
-                setList={setBeliefList}
-              />
-            </span>
-          </h2>
+      
           <h1>Resources</h1>
           <hr className={style.lineBreak} />
           <h2>
-            Wealth <span className={style.minorText2}>{wealth}</span>
+            Wealth <SingleDisplayText value={wealth} setNewValue={setWealth} />
           </h2>
           <h2>
             Income Source{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedIncome}
-                setList={setIncomeList}
+                setNewValue={setSelectedIncome}
               />
             </span>
           </h2>
-          <h2>
-            Items{" "}
-            <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedItem}
-                setList={setItemList}
-              />
-            </span>
-          </h2>
+          
           <h2>
             Resources{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedResource}
-                setList={setResourceList}
+                setNewValue={setSelectedResource}
               />
             </span>
           </h2>
           <h1>Members</h1>
           <hr className={style.lineBreak} />
           <h2>
-            Leader{" "}
-            <SingleDisplayText
-              value={leader}
-              setNewValue={setLeader}
-            />
+            Leader <SingleDisplayText value={leader} setNewValue={setLeader} />
           </h2>
           <h2>
-            Important Members <span className={style.minorText2}></span>
+            Important Members <SingleDisplayText  />
           </h2>
           <h1>Membership</h1>
           <hr className={style.lineBreak} />
@@ -1198,7 +1265,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedFavored}
-                setList={setFavoredList}
+                setNewValue={setSelectedFavored}
               />
             </span>
           </h2>
@@ -1207,7 +1274,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedPositive}
-                setList={setPositiveList}
+                setNewValue={setSelectedPositive}
               />
             </span>
           </h2>
@@ -1216,7 +1283,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedNeutral}
-                setList={setNeutralList}
+                setNewValue={setSelectedNeutral}
               />
             </span>
           </h2>
@@ -1225,7 +1292,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedUnwelcome}
-                setList={setUnwelcomeList}
+                setNewValue={setSelectedUnwelcome}
               />
             </span>
           </h2>
@@ -1234,7 +1301,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedIntolerant}
-                setList={setIntolerantList}
+                setNewValue={setSelectedIntolerant}
               />
             </span>
           </h2>
@@ -1243,7 +1310,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedInitiation}
-                setList={setInitiationList}
+                setNewValue={setSelectedInitiation}
               />
             </span>
           </h2>
@@ -1252,7 +1319,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedLowRole}
-                setList={setLowRoleList}
+                setNewValue={setSelectedLowRole}
               />
             </span>
           </h2>
@@ -1261,7 +1328,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedMediumRole}
-                setList={setMediumRoleList}
+                setNewValue={setSelectedMediumRole}
               />
             </span>
           </h2>
@@ -1270,7 +1337,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedHighRole}
-                setList={setHighRoleList}
+                setNewValue={setSelectedHighRole}
               />
             </span>
           </h2>
@@ -1279,7 +1346,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedAdvance}
-                setList={setAdvanceList}
+                setNewValue={setSelectedAdvance}
               />
             </span>
           </h2>
@@ -1287,17 +1354,14 @@ const FactionGen = () => {
           <hr className={style.lineBreak} />
           <h2>
             Influence Level{" "}
-            <SingleDisplayText
-              value={influence}
-              setNewValue={setInfluence}
-            />
+            <SingleDisplayText value={influence} setNewValue={setInfluence} />
           </h2>
           <h2>
             Influence Tactics{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedInfluenceTactic}
-                setList={setInfluenceTacticList}
+                setNewValue={setSelectedInfluenceTactic}
               />
             </span>
           </h2>
@@ -1306,7 +1370,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedService}
-                setList={setServiceList}
+                setNewValue={setSelectedService}
               />
             </span>
           </h2>
@@ -1315,7 +1379,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedQuest}
-                setList={setQuestList}
+                setNewValue={setSelectedQuest}
               />
             </span>
           </h2>
@@ -1324,7 +1388,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedPower}
-                setList={setPowerList}
+                setNewValue={setSelectedPower}
               />
             </span>
           </h2>
@@ -1333,7 +1397,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedSpecialty}
-                setList={setSpecialtyList}
+                setNewValue={setSelectedSpecialty}
               />
             </span>
           </h2>
@@ -1342,25 +1406,22 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedWeakness}
-                setList={setWeaknessList}
+                setNewValue={setSelectedWeakness}
               />
             </span>
           </h2>
           <h1>Buildings</h1>
           <hr className={style.lineBreak} />
           <h2>
-            Defence Level{" "}
-            <SingleDisplayText
-              value={defence}
-              setNewValue={setDefence}
-            />
+            Defense Level{" "}
+            <SingleDisplayText value={defense} setNewValue={setDefense} />
           </h2>
           <h2>
             Headquarters{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedHeadquarter}
-                setList={setHeadquarterList}
+              <SingleDisplayText
+                value={headquarter}
+                setNewValue={setHeadquarter}
               />
             </span>
           </h2>
@@ -1369,7 +1430,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedBuilding}
-                setList={setBuildingList}
+                setNewValue={setSelectedBuilding}
               />
             </span>
           </h2>
@@ -1378,7 +1439,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedLocation}
-                setList={setLocationList}
+                setNewValue={setLocationList}
               />
             </span>
           </h2>
@@ -1387,7 +1448,7 @@ const FactionGen = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedStronghold}
-                setList={setStrongholdList}
+                setNewValue={setStrongholdList}
               />
             </span>
           </h2>
