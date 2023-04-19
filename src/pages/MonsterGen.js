@@ -328,7 +328,7 @@ const MonsterGen = () => {
       action: actionString,
       legendary: legendString,
       lair: lairString,
-      // email: session.user.email,
+      email: session.user.email,
       // DSOASDFASDFASDF
     };
     setMonster(monster);
@@ -391,9 +391,8 @@ const MonsterGen = () => {
   );
 
   useEffect(() => {
-    
-    console.log(selectedVuln)
-  }, [selectedVuln])
+    console.log(selectedSpecial)
+  }, [selectedSpecial])
 
   //Ability score modifiers
   useEffect(() => {

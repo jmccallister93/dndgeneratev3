@@ -18,7 +18,7 @@ const SingleDisplayText = (props) => {
                 e.target.blur();
             }
         }
-    };
+    }; 
     return (
         <span className={style.minorText2}
             onClick={onClick}
