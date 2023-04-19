@@ -17,6 +17,7 @@ import NameDisplay from "../components/NameDisplay";
 import CustomName from "../components/CustomName";
 import MultipleDisplayChunks from "../components/MultipleDisplayChunks";
 import { SessionContext } from "../config/SessionContext";
+import SingleDisplayText from "../components/SingleDisplayText";
 
 const PantheonGen = () => {
   const session = useContext(SessionContext);
@@ -103,10 +104,10 @@ const PantheonGen = () => {
     
     const provideNames = selectedProvide.map((item) => item.name);
     const provideString = provideNames.join(", ");
-    const motiveNames = selectedMotive.map(
-      (item) => `${item.name}: ${item.desc}\n\n`
-    );
-    const motiveString = motiveNames.join("");
+    const artifactNames = selectedArtifact.map((item) => item.name);
+    const artifactString = artifactNames.join(", ");
+    const motiveNames = selectedMotive.map((item) => item.name);
+    const motiveString = motiveNames.join(", ");
    
 
     const pantheon = {
@@ -118,7 +119,7 @@ const PantheonGen = () => {
       domain: domain,
       motive: motiveString,
       provide: provideString,
-      artifact: selectedArtifact,
+      artifact: artifactString,
       folder: "Pantheon",
       email: session.user.email,
     };
@@ -218,7 +219,9 @@ const PantheonGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={pantheon} />
+                <ExportButtons div={divRef}
+                data={pantheon}
+                tableName={"DBpantheon"} />
               </div>
             </h1>
             {/* ToolTip */}
@@ -417,19 +420,39 @@ const PantheonGen = () => {
         <div className={style.display}>
           <NameDisplay value={pantheonName} setNewValue={setPantheonName}/>
           <h2>
-            Deity Type <span className={style.minorText2}>{deityType}</span>
+          Deity Type{" "}
+            <SingleDisplayText
+              value={deityType}
+              setNewValue={setDeityType}
+            />
           </h2>
           <h2>
-            Alignment <span className={style.minorText2}>{alignment}</span>
+            Alignment{" "}
+            <SingleDisplayText
+              value={alignment}
+              setNewValue={setAlignment}
+            />
           </h2>
           <h2>
-            Size <span className={style.minorText2}>{size}</span>
+            Size{" "}
+            <SingleDisplayText
+              value={size}
+              setNewValue={setSize}
+            />
           </h2>
           <h2>
-            Plane <span className={style.minorText2}>{plane}</span>
+            Plane{" "}
+            <SingleDisplayText
+              value={plane}
+              setNewValue={setPlane}
+            />
           </h2>
           <h2>
-            Domain <span className={style.minorText2}>{domain}</span>
+            Domain{" "}
+            <SingleDisplayText
+              value={domain}
+              setNewValue={setDomain}
+            />
           </h2>
           <h2>
             Motives{" "}

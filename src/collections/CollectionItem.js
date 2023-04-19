@@ -22,7 +22,8 @@ const CollectionItem = (props) => {
           key !== "ability" &&
           key !== "action" &&
           key !== "legendary" &&
-          key !== "lair"
+          key !== "lair" &&
+          key !== "artifact"
         ) {
           return (
             <>
@@ -103,6 +104,27 @@ const CollectionItem = (props) => {
           <br />
           {Object.entries(props.selectedItem).map(([key, value]) => {
             if (key === "lair") {
+              const abilities = value.split("\n\n")
+              return (
+                <>
+                  {abilities.map((ability, i) => (
+                    <div key={i} className={style.ability}>
+                      {ability}
+                    </div>
+                  ))}
+                </>
+              );
+            }
+            return null;
+          })}
+        </>
+      )}
+      {props.selectedItem.artifact && (
+        <>
+          <strong>Artifacts</strong>
+          <br />
+          {Object.entries(props.selectedItem).map(([key, value]) => {
+            if (key === "artifact") {
               const abilities = value.split("\n\n")
               return (
                 <>

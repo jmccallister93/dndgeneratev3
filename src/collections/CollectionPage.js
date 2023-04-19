@@ -722,7 +722,7 @@ const CollectionPage = () => {
               setIsItemActive={setIsItemActive}
             />
           ) : (
-            cardItem
+            cardPantheon
           )}
         </div>
       )}
