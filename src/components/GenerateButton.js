@@ -29,7 +29,7 @@ const GenerateButton = (props) => {
   //Useeffect to set height, age, weight
   useEffect(() => {
     setHeightAgeWeight();
-  }, [props.generateItems[0]]);
+  }, [props.generateItems]);
 
   //DropDown Generate
   const dropDownGenerate = (e) => {
@@ -169,7 +169,7 @@ const GenerateButton = (props) => {
           let noun_b = [props.nameItemOptions[i][nB].noun_b];
 
           let random = Math.floor(Math.random() * 3);
-
+ 
           if (random === 0) {
             props.setNameItem[i](firstName + " " + epiphet_a + noun_a);
           } else if (random === 1) {

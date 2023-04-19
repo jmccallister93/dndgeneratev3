@@ -13,7 +13,27 @@ const MultipleDisplay = (props) => {
     } else {
       setMultipleDisplay(props.selectedItem);
     }
-  }, [props.selectedItem]);
+  }, [props, display]);
+
+  useEffect(() => {
+    setDisplay(
+      multipleDisplay.map((i, index) => {
+        const isLastElement = index === multipleDisplay.length - 1;
+        return (
+          <span
+            className="editText"
+            onClick={onClick}
+            contentEditable="false"
+            suppressContentEditableWarning={true}
+          >
+            <span className={style.minorText3}>
+              {i === undefined ? null : `${i.name}${isLastElement ? "" : ", "}`}
+            </span>
+          </span>
+        );
+      })
+    );
+  }, [multipleDisplay, props]);
 
   const onClick = (e) => {
     e.target.contentEditable = true;
@@ -33,26 +53,6 @@ const MultipleDisplay = (props) => {
       }
     };
   };
-
-  useEffect(() => {
-      setDisplay(
-        multipleDisplay.map((i, index) => {
-          const isLastElement = index === multipleDisplay.length - 1;
-          return (
-            <span
-              className="editText"
-              onClick={onClick}
-              contentEditable="false"
-              suppressContentEditableWarning={true}
-            >
-              <span className={style.minorText3}>
-              {i === undefined ? null : `${i.name}${isLastElement ? "" : ", "}`}
-                </span>
-            </span>
-          );
-        })
-      );
-  }, [multipleDisplay]);
 
   return <>{display}</>;
 };

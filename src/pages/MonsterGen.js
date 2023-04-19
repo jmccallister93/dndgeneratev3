@@ -256,11 +256,17 @@ const MonsterGen = () => {
   //Getting div ref
   const divRef = useRef();
   useEffect(() => {
-    const saveNames = selectedSaveModifiers.map((item) => `${item.name}  +${item.modifier}`);
+    const saveNames = selectedSaveModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
     const saveString = saveNames.join(", ");
-    const senseNames = selectedSenseModifiers.map((item) => `${item.name}  +${item.modifier}`);
+    const senseNames = selectedSenseModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
     const senseString = senseNames.join(", ");
-    const skillNames = selectedSkillModifiers.map((item) => `${item.name}  +${item.modifier}`);
+    const skillNames = selectedSkillModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
     const skillString = skillNames.join(", ");
     const languageNames = selectedLang.map((item) => item.name);
     const languageString = languageNames.join(", ");
@@ -272,20 +278,20 @@ const MonsterGen = () => {
     const immuneString = immuneNames.join(", ");
     const conditionNames = selectedCondition.map((item) => item.name);
     const conditionString = conditionNames.join(", ");
-    const specialNames = selectedSpecial.map(
-      (item) => `${item.name}: ${item.desc}\n\n`
-    );
-    const specialString = specialNames.join("");
-    
-    const actionNames = selectedAction.map(
-      (item) => `${item.name}: ${item.desc}\n\n`
-    );
-    const actionString = actionNames.join("");
-    
-    const legendNames = selectedLegend.map(
-      (item) => `${item.name}: ${item.desc}\n\n`
-    );
-    const legendString = legendNames.join("");
+    // const specialNames = selectedSpecial.map(
+    //   (item) => `${item.name}: ${item.desc}\n\n`
+    // );
+    // const specialString = specialNames.join("");
+
+    // const actionNames = selectedAction.map(
+    //   (item) => `${item.name}: ${item.desc}\n\n`
+    // );
+    // const actionString = actionNames.join("");
+
+    // const legendNames = selectedLegend.map(
+    //   (item) => `${item.name}: ${item.desc}\n\n`
+    // );
+    // const legendString = legendNames.join("");
     const lairNames = selectedLair.map((item) => item.name);
     const lairString = lairNames.join(", ");
 
@@ -318,11 +324,11 @@ const MonsterGen = () => {
       resist: resistString,
       immune: immuneString,
       condition: conditionString,
-      ability: specialString,
-      action: actionString,
-      legendary: legendString,
+      // ability: specialString,
+      // action: actionString,
+      // legendary: legendString,
       lair: lairString,
-      email: session.user.email,
+      // email: session.user.email,
     };
     setMonster(monster);
   }, [
@@ -357,6 +363,7 @@ const MonsterGen = () => {
     selectedLegend,
     selectedLair,
     selectedSkillModifiers,
+    session,
   ]);
   //Info content
   const infoContent = (
@@ -1655,7 +1662,10 @@ const MonsterGen = () => {
               <h2>
                 Saving Throws{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplayMod selectedItem={selectedSaveModifiers} />
+                  <MultipleDisplayMod
+                    selectedItem={selectedSaveModifiers}
+                    setNewValue={setSelectedSaveModifiers}
+                  />
                 </span>
               </h2>
             </>
@@ -1666,7 +1676,10 @@ const MonsterGen = () => {
               <h2>
                 Skills{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplayMod selectedItem={selectedSkillModifiers} />
+                  <MultipleDisplayMod
+                    selectedItem={selectedSkillModifiers}
+                    setNewValue={setSelectedSkillModifiers}
+                  />
                 </span>
               </h2>
             </>
@@ -1677,7 +1690,10 @@ const MonsterGen = () => {
               <h2>
                 Damage Vulnerabilities{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedVuln} />
+                  <MultipleDisplay
+                    selectedItem={selectedVuln}
+                    setNewValue={setSelectedVuln}
+                  />
                 </span>
               </h2>
             </>
@@ -1688,7 +1704,10 @@ const MonsterGen = () => {
               <h2>
                 Damage Immunities{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedImmune} />
+                  <MultipleDisplay
+                    selectedItem={selectedImmune}
+                    setNewValue={setSelectedImmune}
+                  />
                 </span>
               </h2>
             </>
@@ -1699,7 +1718,10 @@ const MonsterGen = () => {
               <h2>
                 Damage Resistances{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedResist} />
+                  <MultipleDisplay
+                    selectedItem={selectedResist}
+                    setNewValue={setSelectedResist}
+                  />
                 </span>
               </h2>
             </>
@@ -1709,7 +1731,10 @@ const MonsterGen = () => {
               <h2>
                 Condition Immunities{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplay selectedItem={selectedCondition} />
+                  <MultipleDisplay
+                    selectedItem={selectedCondition}
+                    setNewValue={setSelectedCondition}
+                  />
                 </span>
               </h2>
             </>
@@ -1719,7 +1744,10 @@ const MonsterGen = () => {
               <h2>
                 Senses{" "}
                 <span className={style.minorText2}>
-                  <MultipleDisplayMod selectedItem={selectedSenseModifiers} />
+                  <MultipleDisplayMod
+                    selectedItem={selectedSenseModifiers}
+                    setNewValue={setSelectedSenseModifiers}
+                  />
                 </span>
               </h2>
             </>
@@ -1730,7 +1758,10 @@ const MonsterGen = () => {
               "--"
             ) : (
               <span className={style.minorText2}>
-                <MultipleDisplay selectedItem={selectedLang} />
+                <MultipleDisplay
+                  selectedItem={selectedLang}
+                  setNewValue={setSelectedLang}
+                />
               </span>
             )}
           </h2>
@@ -1739,14 +1770,20 @@ const MonsterGen = () => {
           <hr className={style.subLineBreak} />
           <h2>
             <span className={style.minorText2}>
-              <MultipleDisplayDesc selectedItem={selectedSpecial} />
+              <MultipleDisplayDesc
+                selectedItem={selectedSpecial}
+                setNewValue={setSelectedSpecial}
+              />
             </span>
           </h2>
           <h1>Actions</h1>
           <hr className={style.subLineBreak} />
           <h2>
             <span className={style.minorText2}>
-              <MultipleDisplayDesc selectedItem={selectedAction} />
+              <MultipleDisplayDesc
+                selectedItem={selectedAction}
+                setNewValue={setSelectedAction}
+              />
             </span>
           </h2>
           {selectedLegend.length === 0 ? null : (
@@ -1755,7 +1792,10 @@ const MonsterGen = () => {
               <hr className={style.subLineBreak} />
               <h2>
                 <span className={style.minorText2}>
-                  <MultipleDisplayDesc selectedItem={selectedLegend} />
+                  <MultipleDisplayDesc
+                    selectedItem={selectedLegend}
+                    setNewValue={setSelectedLegend}
+                  />
                 </span>
               </h2>
             </>
@@ -1766,7 +1806,10 @@ const MonsterGen = () => {
               <hr className={style.subLineBreak} />
               <h2>
                 <span className={style.minorText2}>
-                  <MultipleDisplayChunks selectedItem={selectedLair} />
+                  <MultipleDisplayChunks
+                    selectedItem={selectedLair}
+                    setNewValue={setSelectedLair}
+                  />
                 </span>
               </h2>
             </>

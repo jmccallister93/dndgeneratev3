@@ -457,27 +457,21 @@ const PantheonGen = () => {
           <h2>
             Motives{" "}
             <span className={style.minorText2}>
-              <MultipleDisplayChunks selectedItem={selectedMotive} />
+              <MultipleDisplayChunks selectedItem={selectedMotive} setNewValue={setSelectedMotive}/>
             </span>
           </h2>
           <h2>
             Provides{" "}
             <span className={style.minorText2}>
-              <MultipleDisplayChunks selectedItem={selectedProvide} />
+              <MultipleDisplayChunks selectedItem={selectedProvide} setNewValue={setSelectedProvide}/>
             </span>
           </h2>
           <h2>
             Artifacts{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedArtifact} />
+              <MultipleDisplay selectedItem={selectedArtifact} setNewValue={setSelectedArtifact}/>
             </span>
           </h2>
-          {/* <h2>
-            Shrines{" "}
-            <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedShrine} />
-            </span>
-          </h2> */}
         </div>
       </div>
     </div>

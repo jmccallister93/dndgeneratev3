@@ -275,7 +275,6 @@ const NpcGen = () => {
 
   //Create npc object to be exported
   useEffect(() => {
-
     const itemNames = selectedItem.map((item) => item.name);
     const itemString = itemNames.join(", ");
     const npc = {
@@ -283,7 +282,7 @@ const NpcGen = () => {
       race: race,
       sex: sex,
       age: age,
-      height: (heightFt + " " + heightIn),
+      height: heightFt + " " + heightIn,
       weight: weight,
       align: align,
       prof: prof,
@@ -297,12 +296,12 @@ const NpcGen = () => {
       hp: hp,
       ac: ac,
       speed: speed,
-      str: (str + " " + setMod(str)),
-      dex: (dex + " " + setMod(dex)),
-      con: (con + " " + setMod(con)),
-      int: (int + " " + setMod(int)),
-      wis: (wis + " " + setMod(wis)),
-      cha: (cha + " " + setMod(cha)),
+      str: str + " " + setMod(str),
+      dex: dex + " " + setMod(dex),
+      con: con + " " + setMod(con),
+      int: int + " " + setMod(int),
+      wis: wis + " " + setMod(wis),
+      cha: cha + " " + setMod(cha),
       action: action,
       weaponBonus: weaponBonus,
       weaponDamage: weaponDamage,
@@ -425,7 +424,7 @@ const NpcGen = () => {
 
   return (
     <div className={style.mainWrapper}>
-      <div className={style.topHeader}> 
+      <div className={style.topHeader}>
         <h1 className={style.mainHeader}>NPC Generator</h1>
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
@@ -582,11 +581,11 @@ const NpcGen = () => {
                 setWeightMin,
               ]}
               setArrayState={[setSelectedItem]}
-            /> 
+            />
             {/* Export Btns */}
-              <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={npc} tableName={"DBnpc"}/>
-              </div>
+            <div className={style.exportBtns}>
+              <ExportButtons div={divRef} data={npc} tableName={"DBnpc"} />
+            </div>
             {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
@@ -622,12 +621,12 @@ const NpcGen = () => {
             </h1>
             <SectionRandom
               value={[
-                race, 
-                sex, 
-                align, 
-                // age, 
-                // heightFt, 
-                // heightIn, 
+                race,
+                sex,
+                align,
+                // age,
+                // heightFt,
+                // heightIn,
                 // weight
               ]}
               valueOptions={[
@@ -1090,7 +1089,7 @@ const NpcGen = () => {
               value={[action]}
               valueOptions={[actionOptions]}
               setValue={[setAction]}
-              selectedValue={[selectedItem]} 
+              selectedValue={[selectedItem]}
               selectedValueOptions={[itemOptions]}
               setSelectedValue={[setSelectedItem]}
               selectedValueList={[itemList]}
@@ -1389,7 +1388,10 @@ const NpcGen = () => {
           <h2>
             Inventory{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedItem} />
+              <MultipleDisplay
+                selectedItem={selectedItem}
+                setNewValue={setSelectedItem}
+              />
             </span>
           </h2>
         </div>
