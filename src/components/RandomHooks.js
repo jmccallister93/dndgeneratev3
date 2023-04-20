@@ -132,10 +132,10 @@ const RandomHooks = (props) => {
 
   //set quest name to quest
   useEffect(() => {
-    if(props.setNameValue){
-      props.setNameValue(props.value)
+    if (props.setNameValue) {
+      props.setNameValue(props.value);
     }
-  }, [props])
+  }, [props]);
 
   //NPC names
   useEffect(() => {
@@ -250,7 +250,7 @@ const RandomHooks = (props) => {
         vowel[v5] +
         vowel[v6] +
         consonant[c6] +
-        consonant[c5] 
+        consonant[c5]
       );
     } else {
       return (
@@ -300,6 +300,17 @@ const RandomHooks = (props) => {
       );
     }
   };
+
+  // useEffect(() => {
+  //   onRandomName()
+  //   onRandomMonster()
+  //   onRandomItem()
+  //   onRandomBuilding()
+  //   onRandomWord()
+  //   onRandomExploreLocation()
+  //   onRandomMaterial()
+  //   onRandomFactionName()
+  // }, [])
 
   //Random Quest
   useEffect(() => {
@@ -377,9 +388,9 @@ const RandomHooks = (props) => {
         } else if (r === 1) {
           props.setValue("Investigate the Guild: " + onRandomFactionName());
         } else if (r === 2) {
-          props.setValue("Investigate the Cult: "+ onRandomFactionName());
+          props.setValue("Investigate the Cult: " + onRandomFactionName());
         } else {
-          props.setValue("Investigate the Faction: "+ onRandomFactionName());
+          props.setValue("Investigate the Faction: " + onRandomFactionName());
         }
       }
       if (props.type === "Kill") {
@@ -409,7 +420,7 @@ const RandomHooks = (props) => {
 
   return (
     <>
-       <NameDisplay value={props.value} setNewValue={props.setValue} />
+      <NameDisplay value={props.value} setNewValue={props.setValue} />
     </>
   );
 };

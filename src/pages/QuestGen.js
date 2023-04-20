@@ -187,21 +187,14 @@ const QuestGen = () => {
           <div className={style.btnWrapper}>
             {/* <GenerateButton /> */}
             <GenerateButton
-              generateItems={[questType, reward, location, motive, twist]}
+              generateItems={[questType, reward, motive, twist]}
               itemOptions={[
                 questTypeOptions,
                 rewardOptions,
-                locationOptions,
                 motiveOptions,
                 twistOptions,
               ]}
-              setItem={[
-                setQuestType,
-                setReward,
-                setLocation,
-                setMotive,
-                setTwist,
-              ]}
+              setItem={[setQuestType, setReward, setMotive, setTwist]}
             />
             <ClearButton
               setStringState={[
@@ -209,7 +202,6 @@ const QuestGen = () => {
                 setQuest,
                 setMotive,
                 setTwist,
-                setLocation,
                 setReward,
               ]}
             />
@@ -264,16 +256,6 @@ const QuestGen = () => {
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              {/* <CustomName
-                tableName={"questNames"}
-                name={questName}
-                setName={setQuestName}
-                setNames={setQuestNames}
-                setNameOptions={setQuestNameOptions}
-                nameOptions={questNameOptions}
-                title={"Name"}
-                placeholder={"Set Name"}
-              /> */}
               <CustomDropDown
                 tableName={"questTypes"}
                 setSingular={setQuestType}
@@ -284,23 +266,6 @@ const QuestGen = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-
-              {/* Need to make this into a regular single select table */}
-              {/* <CustomDataTable
-                tableName={"itemsTypes"}
-                setSingular={setQuest}
-                setPlural={setQuests}
-                setOptions={setQuestOptions}
-                h1Title={"Quest"}
-                dialogHeader={"Set Quest"}
-                placeholder={"Set Quest"}
-                valueOptions={questOptions}
-                list={questList}
-                setList={setQuestList}
-                selectedItem={selectedQuest}
-                setSelectedItem={setSelectedQuest}
-                options={questOptions}
-              /> */}
             </div>
           </div>
           <div className={style.sectionOption}>
@@ -313,13 +278,8 @@ const QuestGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[reward, location, motive, twist]}
-              valueOptions={[
-                rewardOptions,
-                locationOptions,
-                motiveOptions,
-                twistOptions,
-              ]}
+              value={[reward, motive, twist]}
+              valueOptions={[rewardOptions, motiveOptions, twistOptions]}
               setValue={[setReward, setLocation, setMotive, setTwist]}
             />
           </div>
@@ -334,16 +294,6 @@ const QuestGen = () => {
                 placeholder={"Set Reward"}
                 value={reward}
                 valueOptions={rewardOptions}
-              />
-              <CustomDropDown
-                tableName={"DBlocation"}
-                setSingular={setLocation}
-                setPlural={setLocations}
-                setOptions={setLocationOptions}
-                h1Title={"Location"}
-                placeholder={"Set Location"}
-                value={location}
-                valueOptions={locationOptions}
               />
               <CustomDropDown
                 tableName={"questMotive"}
@@ -372,15 +322,14 @@ const QuestGen = () => {
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
           {/* <NameDisplay value={questName} setNewValue={setQuestName} /> */}
-          
-          
-            <RandomHooks
-              type={questType}
-              value={quest}
-              setValue={setQuest}
-              setNameValue={setQuestName}
-            />
-          
+
+          <RandomHooks
+            type={questType}
+            value={quest}
+            setValue={setQuest}
+            setNameValue={setQuestName}
+          />
+
           <h2>
             Quest Type{" "}
             <SingleDisplayText value={questType} setNewValue={setQuestType} />
@@ -388,10 +337,7 @@ const QuestGen = () => {
           <h2>
             Reward <SingleDisplayText value={reward} setNewValue={setReward} />
           </h2>
-          <h2>
-            Location{" "}
-            <SingleDisplayText value={location} setNewValue={setLocation} />
-          </h2>
+
           <h2>
             Motive <SingleDisplayText value={motive} setNewValue={setMotive} />
           </h2>

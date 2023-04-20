@@ -374,16 +374,12 @@ const QuestCreate = () => {
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
           {/* <NameDisplay value={questName} setNewValue={setQuestName} /> */}
-          
-          <h2>
-            Quest{" "}
-            <RandomHooks
-              type={questType}
-              value={quest}
-              setValue={setQuest}
-              setNameValue={setQuestName}
-            />
-          </h2>
+          <RandomHooks
+            type={questType}
+            value={quest}
+            setValue={setQuest}
+            setNameValue={setQuestName}
+          />
           <h2>
             Quest Type{" "}
             <SingleDisplayText value={questType} setNewValue={setQuestType} />
