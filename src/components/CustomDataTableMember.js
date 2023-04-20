@@ -1,4 +1,5 @@
 import { Column } from "jspdf-autotable";
+import { filter } from "mathjs";
 import { FilterMatchMode } from "primereact/api";
 import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
@@ -28,6 +29,8 @@ const CustomDataTableMember = (props) => {
   //Set States
   const [fetchError, setFetchError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
+
+  const [filteredOptions, setFilteredOptions] = useState();
 
   //DataTable filters
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -112,21 +115,35 @@ const CustomDataTableMember = (props) => {
 
   // Set Value Options based on membership state
   useEffect(() => {
-    for (let i = 0; i < props.valueOptions.length; i++) {
-        const optionNames = props.valueOptions.map((i) => (i.name));
-    }
-    // for (let i = 0; i < props.valueOptions.length; i++) {
-    //   const filteredOptions = props.valueOptions[i].name.map((o) => {
-    //     // Check if any membership state contains the option name
-    //     for (const membershipState of Object.values(props.membershipState)) {
-    //       if (membershipState.some((m) => m.name === o.name)) {
-    //         return false;
-    //       }
-    //     }
-    //     return true;
-    //   });
-    // }
-    // props.setValueOptions(filteredOptions);
+    const optionNames = props.valueOptions.map((option) => option.name);
+    const favoredNames = props.membershipState.favored
+      ? props.membershipState.favored.map((member) => member.name)
+      : [];
+    const positiveNames = props.membershipState.positive
+      ? props.membershipState.positive.map((member) => member.name)
+      : [];
+    const neutralNames = props.membershipState.neutral
+      ? props.membershipState.neutral.map((member) => member.name)
+      : [];
+    const unwelcomeNames = props.membershipState.unwelcome
+      ? props.membershipState.unwelcome.map((member) => member.name)
+      : [];
+    const intolerantNames = props.membershipState.intolerant
+      ? props.membershipState.intolerant.map((member) => member.name)
+      : [];
+
+    setFilteredOptions(
+      props.valueOptions.filter((option) => {
+        const name = option.name;
+        return (
+          !favoredNames.includes(name) &&
+          !positiveNames.includes(name) &&
+          !neutralNames.includes(name) &&
+          !unwelcomeNames.includes(name) &&
+          !intolerantNames.includes(name)
+        );
+      })
+    );
   }, [props.membershipState, props.valueOptions]);
 
   //JSX Dialog template
@@ -146,7 +163,7 @@ const CustomDataTableMember = (props) => {
         transitionOptions
       >
         <DataTable
-          value={props.valueOptions}
+          value={filteredOptions}
           scrollable
           scrollHeight="60vh"
           rows={20}
