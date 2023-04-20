@@ -599,12 +599,12 @@ const FactionGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[structure, logo]}
-              setValue={[setStructure, setLogo]}
-              valueOptions={[structureOptions, logoOptions]}
-              selectedValue={[selectedOrgType, selectedMotive]}
-              setSelectedValue={[setSelectedOrgType, setSelectedMotive]}
-              selectedValueOptions={[orgTypeOptions, motiveOptions]}
+              value={[structure, logo, orgType]}
+              setValue={[setStructure, setLogo, setOrgType]}
+              valueOptions={[structureOptions, logoOptions, orgTypeOptions]}
+              selectedValue={[ selectedMotive]}
+              setSelectedValue={[setSelectedMotive]}
+              selectedValueOptions={[motiveOptions]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
@@ -764,39 +764,39 @@ const FactionGen = () => {
             <SectionRandom
               selectedValue={[
                 selectedFavored,
-                selectedPositive,
-                selectedNeutral,
-                selectedUnwelcome,
-                selectedIntolerant,
-                selectedInitiation,
-                selectedLowRole,
-                selectedMediumRole,
-                selectedHighRole,
-                selectedAdvance,
+                // selectedPositive,
+                // selectedNeutral,
+                // selectedUnwelcome,
+                // selectedIntolerant,
+                // selectedInitiation,
+                // selectedLowRole,
+                // selectedMediumRole,
+                // selectedHighRole,
+                // selectedAdvance,
               ]}
               setSelectedValue={[
                 setSelectedFavored,
-                setSelectedPositive,
-                setSelectedNeutral,
-                setSelectedUnwelcome,
-                setSelectedIntolerant,
-                setSelectedInitiation,
-                setSelectedLowRole,
-                setSelectedMediumRole,
-                setSelectedHighRole,
-                setSelectedAdvance,
+                // setSelectedPositive,
+                // setSelectedNeutral,
+                // setSelectedUnwelcome,
+                // setSelectedIntolerant,
+                // setSelectedInitiation,
+                // setSelectedLowRole,
+                // setSelectedMediumRole,
+                // setSelectedHighRole,
+                // setSelectedAdvance,
               ]}
               selectedValueOptions={[
                 favoredOptions,
-                positiveOptions,
-                neutralOptions,
-                unwelcomeOptions,
-                intolerantOptions,
-                initiationOptions,
-                lowRoleOptions,
-                mediumRoleOptions,
-                highRoleOptions,
-                advanceOptions,
+                // positiveOptions,
+                // neutralOptions,
+                // unwelcomeOptions,
+                // intolerantOptions,
+                // initiationOptions,
+                // lowRoleOptions,
+                // mediumRoleOptions,
+                // highRoleOptions,
+                // advanceOptions,
               ]}
             />
           </div>

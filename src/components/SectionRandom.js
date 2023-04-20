@@ -335,19 +335,19 @@ const SectionRandom = (props) => {
   //Multiple Random Options
   const onRandomClickMultiple = (e) => {
     if (props.selectedValue) {
-      const usedIndexes = [];
       for (let i = 0; i < props.selectedValue.length; i++) {
         props.setSelectedValue[i]([]);
         let n = Math.floor(Math.random() * (6 - 0));
+        let usedIndexes = {};
         for (let x = 0; x <= n; x++) {
-          let r = Math.floor(
-            Math.random() * props.selectedValueOptions[i].length
-          );
-          const option = props.selectedValueOptions[i][r];
-          if (!usedIndexes.includes(r)) {
-            usedIndexes.push(r);
-            props.setSelectedValue[i]((oldArray) => [...oldArray, option]);
+          let r = Math.floor(Math.random() * props.selectedValueOptions[i].length);
+          let value = props.selectedValueOptions[i][r];
+          while (usedIndexes[r]) {
+            r = Math.floor(Math.random() * props.selectedValueOptions[i].length);
+            value = props.selectedValueOptions[i][r];
           }
+          props.setSelectedValue[i]((oldArray) => [...oldArray, value]);
+          usedIndexes[r] = true;
         }
       }
     }
