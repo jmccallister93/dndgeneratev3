@@ -260,15 +260,21 @@ const FactionGen = () => {
     const neutralString = neutralNames.join(", ");
     const unwelcomeNames = selectedUnwelcome.map((unwelcome) => unwelcome.name);
     const unwelcomeString = unwelcomeNames.join(", ");
-    const intolerantNames = selectedIntolerant.map((intolerant) => intolerant.name);
+    const intolerantNames = selectedIntolerant.map(
+      (intolerant) => intolerant.name
+    );
     const intolerantString = intolerantNames.join(", ");
     const serviceNames = selectedService.map((service) => service.name);
     const serviceString = serviceNames.join(", ");
-    const initiationNames = selectedInitiation.map((initiation) => initiation.name);
+    const initiationNames = selectedInitiation.map(
+      (initiation) => initiation.name
+    );
     const initiationString = initiationNames.join(", ");
     const lowRoleNames = selectedLowRole.map((lowRole) => lowRole.name);
     const lowRoleString = lowRoleNames.join(", ");
-    const mediumRoleNames = selectedMediumRole.map((mediumRole) => mediumRole.name);
+    const mediumRoleNames = selectedMediumRole.map(
+      (mediumRole) => mediumRole.name
+    );
     const mediumRoleString = mediumRoleNames.join(", ");
     const highRoleNames = selectedHighRole.map((highRole) => highRole.name);
     const highRoleString = highRoleNames.join(", ");
@@ -280,13 +286,17 @@ const FactionGen = () => {
     const beliefString = beliefNames.join(", ");
     const orgTypeNames = selectedOrgType.map((orgType) => orgType.name);
     const orgTypeString = orgTypeNames.join(", ");
-    const headquarterNames = selectedHeadquarter.map((headquarter) => headquarter.name);
+    const headquarterNames = selectedHeadquarter.map(
+      (headquarter) => headquarter.name
+    );
     const headquarterString = headquarterNames.join(", ");
     const buildingNames = selectedBuilding.map((building) => building.name);
     const buildingString = buildingNames.join(", ");
     const locationNames = selectedLocation.map((location) => location.name);
     const locationString = locationNames.join(", ");
-    const strongholdNames = selectedStronghold.map((stronghold) => stronghold.name);
+    const strongholdNames = selectedStronghold.map(
+      (stronghold) => stronghold.name
+    );
     const strongholdString = strongholdNames.join(", ");
     const resourceNames = selectedResource.map((resource) => resource.name);
     const resourceString = resourceNames.join(", ");
@@ -298,7 +308,6 @@ const FactionGen = () => {
     const specialtyString = specialtyNames.join(", ");
     const weaknessNames = selectedWeakness.map((weakness) => weakness.name);
     const weaknessString = weaknessNames.join(", ");
-
 
     const organization = {
       name: factionName,
@@ -411,111 +420,102 @@ const FactionGen = () => {
                 influence,
                 structure,
                 defense,
-              
+                orgType,
                 logo,
                 leader,
+                headquarter,
               ]}
               itemOptions={[
                 wealthOptions,
                 influenceOptions,
                 structureOptions,
                 defenseOptions,
-               
+                orgTypeOptions,
                 logoOptions,
                 leaderOptions,
+                headquarterOptions,
               ]}
               setItem={[
                 setWealth,
                 setInfluence,
                 setStructure,
                 setDefense,
-              
+                setOrgType,
                 setLogo,
                 setLeader,
+                setHeadquarter,
               ]}
               selectedItems={[
+                selectedMotive,
                 selectedIncome,
-                // selectedItem,
-                selectedInfluenceTactic,
+                selectedResource,
                 selectedFavored,
                 selectedPositive,
                 selectedNeutral,
                 selectedUnwelcome,
                 selectedIntolerant,
-                selectedService,
                 selectedInitiation,
                 selectedLowRole,
                 selectedMediumRole,
                 selectedHighRole,
-                selectedQuest,
                 selectedAdvance,
-              
-                selectedOrgType,
-                selectedHeadquarter,
-                selectedBuilding,
-                selectedLocation,
-                selectedStronghold,
-                selectedResource,
-                selectedMotive,
+                selectedInfluenceTactic,
+                selectedService,
+                selectedQuest,
                 selectedPower,
                 selectedSpecialty,
                 selectedWeakness,
+                selectedBuilding,
+                selectedLocation,
+                selectedStronghold,
               ]}
               setSelectedItem={[
+                setSelectedMotive,
                 setSelectedIncome,
-                // setSelectedItem,
-                setSelectedInfluenceTactic,
+                setSelectedResource, 
                 setSelectedFavored,
                 setSelectedPositive,
                 setSelectedNeutral,
                 setSelectedUnwelcome,
                 setSelectedIntolerant,
-                setSelectedService,
-                setSelectedInitiation,
+                setSelectedInitiation, 
                 setSelectedLowRole,
                 setSelectedMediumRole,
                 setSelectedHighRole,
-                setSelectedQuest,
                 setSelectedAdvance,
-              
-                setSelectedOrgType,
-                setSelectedHeadquarter,
-                setSelectedBuilding,
-                setSelectedLocation,
-                setSelectedStronghold,
-                setSelectedResource,
-                setSelectedMotive,
+                setSelectedInfluenceTactic,
+                setSelectedService,
+                setSelectedQuest,
                 setSelectedPower,
                 setSelectedSpecialty,
                 setSelectedWeakness,
+                setSelectedBuilding,
+                setSelectedLocation,
+                setSelectedStronghold,
               ]}
               selectedItemOptions={[
+                motiveOptions,
                 incomeOptions,
-                // itemOptions,
-                influenceTacticOptions,
+                resourceOptions,  
                 favoredOptions,
                 positiveOptions,
                 neutralOptions,
                 unwelcomeOptions,
                 intolerantOptions,
-                serviceOptions,
                 initiationOptions,
                 lowRoleOptions,
                 mediumRoleOptions,
                 highRoleOptions,
-                questOptions,
                 advanceOptions,
-              
-                orgTypeOptions,
-                headquarterOptions,
-                buildingOptions,
-                locationOptions,
-                strongholdOptions,
-                resourceOptions,
-                motiveOptions,
+                influenceTacticOptions,
+                serviceOptions,
+                questOptions,
                 powerOptions,
                 specialtyOptions,
                 weaknessOptions,
+                buildingOptions,
+                locationOptions,
+                strongholdOptions, 
               ]}
             />
             <ClearButton
@@ -527,10 +527,10 @@ const FactionGen = () => {
                 setOrigin,
                 setLogo,
                 setLeader,
+                setOrgType,
               ]}
               setArrayState={[
                 setSelectedIncome,
-                // setSelectedItem,
                 setSelectedInfluenceTactic,
                 setSelectedFavored,
                 setSelectedPositive,
@@ -545,7 +545,6 @@ const FactionGen = () => {
                 setSelectedQuest,
                 setSelectedAdvance,
                 setSelectedBelief,
-                setSelectedOrgType,
                 setSelectedHeadquarter,
                 setSelectedBuilding,
                 setSelectedLocation,
@@ -600,20 +599,12 @@ const FactionGen = () => {
               )}
             </h1>
             <SectionRandom
-              value={[structure,  logo]}
-              setValue={[setStructure,  setLogo]}
-              valueOptions={[structureOptions,  logoOptions]}
-              selectedValue={[selectedOrgType, selectedMotive, ]}
-              setSelectedValue={[
-                setSelectedOrgType,
-                setSelectedMotive,
-                
-              ]}
-              selectedValueOptions={[
-                orgTypeOptions,
-                motiveOptions,
-                
-              ]}
+              value={[structure, logo]}
+              setValue={[setStructure, setLogo]}
+              valueOptions={[structureOptions, logoOptions]}
+              selectedValue={[selectedOrgType, selectedMotive]}
+              setSelectedValue={[setSelectedOrgType, setSelectedMotive]}
+              selectedValueOptions={[orgTypeOptions, motiveOptions]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
@@ -635,17 +626,6 @@ const FactionGen = () => {
                 value={structure}
                 valueOptions={structureOptions}
               />
-              {/* <CustomDropdown
-                tableName={"itemsTypes"}
-                setSingular={setOrigin}
-                setPlural={setOrigins}
-                setOptions={setOriginOptions}
-                options={originOptions}
-                h1Title={"Origin"}
-                placeholder={"Set Origin"}
-                value={origin}
-                valueOptions={originOptions}
-              /> */}
               <CustomDropdown
                 tableName={"orgLogo"}
                 setSingular={setLogo}
@@ -696,17 +676,9 @@ const FactionGen = () => {
               value={[wealth]}
               setValue={[setWealth]}
               valueOptions={[wealthOptions]}
-              selectedValue={[selectedIncome , selectedResource]}
-              setSelectedValue={[
-                setSelectedIncome,
-                
-                setSelectedResource,
-              ]}
-              selectedValueOptions={[
-                incomeOptions,
-               
-                resourceOptions,
-              ]}
+              selectedValue={[selectedIncome, selectedResource]}
+              setSelectedValue={[setSelectedIncome, setSelectedResource]}
+              selectedValueOptions={[incomeOptions, resourceOptions]}
             />
           </div>
           <div className={isResourceActive ? style.subsection : style.hidden}>
@@ -1108,19 +1080,16 @@ const FactionGen = () => {
               setValue={[setDefense, setHeadquarter]}
               valueOptions={[defenseOptions, headquarterOptions]}
               selectedValue={[
-                
                 selectedBuilding,
                 selectedLocation,
                 selectedStronghold,
               ]}
               setSelectedValue={[
-                
                 setSelectedBuilding,
                 setSelectedLocation,
                 setSelectedStronghold,
               ]}
               selectedValueOptions={[
-                
                 buildingOptions,
                 locationOptions,
                 strongholdOptions,
@@ -1148,7 +1117,7 @@ const FactionGen = () => {
                 options={headquarterOptions}
                 h1Title={"Headquarters"}
                 placeholder={"Set Headquarters"}
-               value={headquarter}
+                value={headquarter}
                 valueOptions={headquarterOptions}
               />
               <CustomDataTable
@@ -1201,15 +1170,15 @@ const FactionGen = () => {
             Org. Structure{" "}
             <SingleDisplayText value={structure} setNewValue={setStructure} />
           </h2>
-         
+
           <h2>
             Logo <SingleDisplayText value={logo} setNewValue={setLogo} />
           </h2>
           <h2>
             Org. Type{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedOrgType}
+              <SingleDisplayText
+                value={orgType}
                 setNewValue={setSelectedOrgType}
               />
             </span>
@@ -1223,7 +1192,7 @@ const FactionGen = () => {
               />
             </span>
           </h2>
-      
+
           <h1>Resources</h1>
           <hr className={style.lineBreak} />
           <h2>
@@ -1238,7 +1207,7 @@ const FactionGen = () => {
               />
             </span>
           </h2>
-          
+
           <h2>
             Resources{" "}
             <span className={style.minorText2}>
@@ -1254,7 +1223,7 @@ const FactionGen = () => {
             Leader <SingleDisplayText value={leader} setNewValue={setLeader} />
           </h2>
           <h2>
-            Important Members <SingleDisplayText  />
+            Important Members <SingleDisplayText />
           </h2>
           <h1>Membership</h1>
           <hr className={style.lineBreak} />
