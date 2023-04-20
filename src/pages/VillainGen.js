@@ -113,7 +113,6 @@ const VillainGen = () => {
     );
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>Villian Generator</h1>
         <div className={style.topWrapper}>
