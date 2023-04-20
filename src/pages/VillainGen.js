@@ -279,6 +279,8 @@ const VillainGen = () => {
   const [isMovementActive, setIsMovementActive] = useState(false);
   const [isSSDActive, setIsSSDActive] = useState(false);
 
+  const [villain, setVillain] = useState({});
+
   //Show Options
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -413,7 +415,130 @@ const VillainGen = () => {
 
   //*****Added new stuff
   const divRef = useRef();
-  const genItem = "";
+  useEffect(() => {
+    const saveNames = selectedSaveModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
+    const saveString = saveNames.join(", ");
+    const senseNames = selectedSenseModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
+    const senseString = senseNames.join(", ");
+    const skillNames = selectedSkillModifiers.map(
+      (item) => `${item.name}  +${item.modifier}`
+    );
+    const skillString = skillNames.join(", ");
+    const languageNames = selectedLang.map((item) => item.name);
+    const languageString = languageNames.join(", ");
+    const vulnNames = selectedVuln.map((item) => item.name);
+    const vulnString = vulnNames.join(", ");
+    const resistNames = selectedResist.map((item) => item.name);
+    const resistString = resistNames.join(", ");
+    const immuneNames = selectedImmune.map((item) => item.name);
+    const immuneString = immuneNames.join(", ");
+    const conditionNames = selectedCondition.map((item) => item.name);
+    const conditionString = conditionNames.join(", ");
+    const specialNames = selectedSpecial.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const specialString = specialNames.join("");
+
+    const actionNames = selectedAction.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const actionString = actionNames.join("");
+
+    const legendNames = selectedLegend.map(
+      (item) => `${item.name}: ${item.desc}\n\n`
+    );
+    const legendString = legendNames.join("");
+    const lairNames = selectedLair.map((item) => item.name);
+    const lairString = lairNames.join(", ");
+
+    const monster = {
+      name: villainName,
+      race: race,
+      sex: sex,
+      age: age,
+      height: heightFt + " " + heightIn,
+      weight: weight,
+      hairColor: hairColor,
+      hairType: hairType,
+      hairStyle: hairStyle,
+      beardStyle: beardStyle,
+      eyes: eyeColor,
+      skin: skinColor,
+      motive: motive,
+      goal: goal,
+      affliation: affliation,
+      weakness: weakness,
+      powerSource: powerSource,
+      minion: minion,
+      stronghold: stronghold,
+      ac: ac,
+      armorType: armorType,
+      hp: hp,
+      speed: baseSpeed,
+      fly: flySpeed,
+      swim: swimSpeed,
+      climb: climbSpeed,
+      burrow: burrowSpeed,
+      hover: hoverSpeed,
+      str: str + " " + setMod(str),
+      dex: dex + " " + setMod(dex),
+      con: con + " " + setMod(con),
+      int: int + " " + setMod(int),
+      wis: wis + " " + setMod(wis),
+      cha: cha + " " + setMod(cha),
+      save: saveString,
+      skill: skillString,
+      sense: senseString,
+      language: languageString,
+      vuln: vulnString,
+      resist: resistString,
+      immune: immuneString,
+      condition: conditionString,
+      ability: specialString,
+      action: actionString,
+      legendary: legendString,
+      lair: lairString,
+      email: session.user.email,
+      // DSOASDFASDFASDF
+    };
+    setVillain(monster);
+  }, [
+    villainName,
+    size,
+    ac,
+    armorType,
+    hp,
+    baseSpeed,
+    flySpeed,
+    swimSpeed,
+    climbSpeed,
+    burrowSpeed,
+    hoverSpeed,
+    str,
+    dex,
+    con,
+    int,
+    wis,
+    cha,
+    selectedSaveModifiers,
+    selectedSenseModifiers,
+    selectedLang,
+    selectedVuln,
+    selectedResist,
+    selectedImmune,
+    selectedCondition,
+    selectedSpecial,
+    selectedAction,
+    selectedLegend,
+    selectedLair,
+    selectedSkillModifiers,
+    session,
+  ]);
+
   //Info content
   const infoContent = (
     <div className={style.infoContent}>
@@ -437,6 +562,7 @@ const VillainGen = () => {
       </p>
     </div>
   );
+
   return (
     <div className={style.mainWrapper}>
       <div className={style.topHeader}>
@@ -445,10 +571,12 @@ const VillainGen = () => {
           <div className={style.btnWrapper}>
             {/* <GenerateButton /> */}
             <GenerateButton
+           
               generateItems={[
+                race,
                 stronghold,
                 armorType,
-                race,
+                
                 sex,
                 hairColor,
                 hairType,
@@ -459,9 +587,10 @@ const VillainGen = () => {
                 action,
               ]}
               itemOptions={[
+                raceOptions,
                 strongholdOptions,
                 armorTypeOptions,
-                raceOptions,
+                
                 sexOptions,
                 hairColorOptions,
                 hairTypeOptions,
@@ -472,9 +601,10 @@ const VillainGen = () => {
                 actionOptions,
               ]}
               setItem={[
+                setRace,
                 setStronghold,
                 setArmorType,
-                setRace,
+               
                 setSex,
                 setHairColor,
                 setHairType,
@@ -672,6 +802,9 @@ const VillainGen = () => {
               setWeightMax={setWeightMax}
               weightMin={weightMin}
               setWeightMin={setWeightMin}
+              nameItem={[villainName]}
+              nameItemOptions={[villainNameOptions]}
+              setNameItem={[setVillainName]}
             />
             <ClearButton
               setStringState={[
@@ -770,7 +903,7 @@ const VillainGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={genItem} />
+                <ExportButtons div={divRef} data={villain} />
               </div>
             </h1>
             {/* ToolTip */}
