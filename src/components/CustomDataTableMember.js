@@ -110,41 +110,45 @@ const CustomDataTableMember = (props) => {
   };
   //Use effect to set list
   useEffect(() => {
+    if(props.selectedItem){
     props.setSelectedItem(props.list);
+    }
   }, [props.list]);
 
   // Set Value Options based on membership state
-  useEffect(() => {
-    const optionNames = props.valueOptions.map((option) => option.name);
-    const favoredNames = props.membershipState.favored
-      ? props.membershipState.favored.map((member) => member.name)
-      : [];
-    const positiveNames = props.membershipState.positive
-      ? props.membershipState.positive.map((member) => member.name)
-      : [];
-    const neutralNames = props.membershipState.neutral
-      ? props.membershipState.neutral.map((member) => member.name)
-      : [];
-    const unwelcomeNames = props.membershipState.unwelcome
-      ? props.membershipState.unwelcome.map((member) => member.name)
-      : [];
-    const intolerantNames = props.membershipState.intolerant
-      ? props.membershipState.intolerant.map((member) => member.name)
-      : [];
+//   useEffect(() => {
+//     if (props.valueOptions) {
+//       const optionNames = props.valueOptions.map((option) => option.name);
+//       const favoredNames = props.membershipState.favored
+//         ? props.membershipState.favored.map((member) => member.name)
+//         : [];
+//       const positiveNames = props.membershipState.positive
+//         ? props.membershipState.positive.map((member) => member.name)
+//         : [];
+//       const neutralNames = props.membershipState.neutral
+//         ? props.membershipState.neutral.map((member) => member.name)
+//         : [];
+//       const unwelcomeNames = props.membershipState.unwelcome
+//         ? props.membershipState.unwelcome.map((member) => member.name)
+//         : [];
+//       const intolerantNames = props.membershipState.intolerant
+//         ? props.membershipState.intolerant.map((member) => member.name)
+//         : [];
 
-    setFilteredOptions(
-      props.valueOptions.filter((option) => {
-        const name = option.name;
-        return (
-          !favoredNames.includes(name) &&
-          !positiveNames.includes(name) &&
-          !neutralNames.includes(name) &&
-          !unwelcomeNames.includes(name) &&
-          !intolerantNames.includes(name)
-        );
-      })
-    );
-  }, [props.membershipState, props.valueOptions]);
+//       setFilteredOptions(
+//         props.valueOptions.filter((option) => {
+//           const name = option.name;
+//           return (
+//             !favoredNames.includes(name) &&
+//             !positiveNames.includes(name) &&
+//             !neutralNames.includes(name) &&
+//             !unwelcomeNames.includes(name) &&
+//             !intolerantNames.includes(name)
+//           );
+//         })
+//       );
+//     }
+//   }, [props.membershipState, props.valueOptions]);
 
   //JSX Dialog template
   const templateDatatable = (

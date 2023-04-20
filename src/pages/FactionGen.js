@@ -837,7 +837,7 @@ const FactionGen = () => {
                 valueOptions={favoredOptions}
                 membershipState={membershipState}
               />
-              <CustomDataTable
+              <CustomDataTableMember
                 tableName={"races"}
                 setSingular={setPositive}
                 setPlural={setPositives}
@@ -849,8 +849,9 @@ const FactionGen = () => {
                 list={positiveList}
                 setList={setPositiveList}
                 valueOptions={positiveOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
+              <CustomDataTableMember
                 tableName={"races"}
                 setSingular={setNeutral}
                 setPlural={setNeutrals}
@@ -862,8 +863,9 @@ const FactionGen = () => {
                 list={neutralList}
                 setList={setNeutralList}
                 valueOptions={neutralOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
+              <CustomDataTableMember
                 tableName={"races"}
                 setSingular={setUnwelcome}
                 setPlural={setUnwelcomes}
@@ -875,8 +877,9 @@ const FactionGen = () => {
                 list={unwelcomeList}
                 setList={setUnwelcomeList}
                 valueOptions={unwelcomeOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
+              <CustomDataTableMember
                 tableName={"races"}
                 setSingular={setIntolerant}
                 setPlural={setIntolerants}
@@ -888,8 +891,9 @@ const FactionGen = () => {
                 list={intolerantList}
                 setList={setIntolerantList}
                 valueOptions={intolerantOptions}
+                membershipState={membershipState}
               />
-              <CustomDropdown
+              <CustomDataTableMember
                 tableName={"orgInitiation"}
                 setSingular={setInitiation}
                 setPlural={setInitiations}
@@ -899,6 +903,7 @@ const FactionGen = () => {
                 placeholder={"Set Initiation"}
                 value={initiation}
                 valueOptions={initiationOptions}
+                membershipState={membershipState}
               />
               <CustomDataTable
                 tableName={"orgLowRank"}
