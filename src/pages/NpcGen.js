@@ -624,28 +624,16 @@ const NpcGen = () => {
                 race,
                 sex,
                 align,
-                // age,
-                // heightFt,
-                // heightIn,
-                // weight
               ]}
               valueOptions={[
                 raceOptions,
                 sexOptions,
                 alignOptions,
-                // ageOptions,
-                // heightFtOptions,
-                // heightInOptions,
-                // weightOptions,
               ]}
               setValue={[
                 setRace,
                 setSex,
                 setAlign,
-                // setAge,
-                // setHeightFt,
-                // setHeightIn,
-                // setWeight,
               ]}
               nameItem={[name]}
               nameItemOptions={[nameOptions]}
