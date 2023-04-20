@@ -225,7 +225,9 @@ const FactionGen = () => {
 
   const [membershipState, setMembershipState] = useState({});
 
-  const [selectedMembers, setSelectedMembers] = useState([]);
+  const [member, setMember] = useState("");
+  const [members, setMembers] = useState("");
+  const [selectedMember, setSelectedMember] = useState([]);
   const [memberList, setMemberList] = useState([]);
   const [memberOptions, setMemberOptions] = useState([]);
 
@@ -481,6 +483,7 @@ const FactionGen = () => {
                 selectedMotive,
                 selectedIncome,
                 selectedResource,
+                selectedMember,
                 selectedFavored,
                 selectedPositive,
                 selectedNeutral,
@@ -505,6 +508,7 @@ const FactionGen = () => {
                 setSelectedMotive,
                 setSelectedIncome,
                 setSelectedResource,
+                setSelectedMember,
                 setSelectedFavored,
                 setSelectedPositive,
                 setSelectedNeutral,
@@ -529,6 +533,7 @@ const FactionGen = () => {
                 motiveOptions,
                 incomeOptions,
                 resourceOptions,
+                memberOptions,
                 favoredOptions,
                 positiveOptions,
                 neutralOptions,
@@ -564,6 +569,7 @@ const FactionGen = () => {
               setArrayState={[
                 setSelectedIncome,
                 setSelectedInfluenceTactic,
+                setSelectedMember,
                 setSelectedFavored,
                 setSelectedPositive,
                 setSelectedNeutral,
@@ -767,6 +773,9 @@ const FactionGen = () => {
               value={[leader]}
               setValue={[setLeader]}
               valueOptions={[leaderOptions]}
+              selectedValue={[selectedMember]}
+              setSelectedValue={[setSelectedMember]}
+              selectedValueOptions={[memberOptions]}
             />
           </div>
           <div className={isMemberActive ? style.subsection : style.hidden}>
@@ -782,15 +791,18 @@ const FactionGen = () => {
                 value={leader}
                 valueOptions={leaderOptions}
               />
-              <CustomDataTableNpc
-                h1Title={"Members"}
-                dialogHeader={"Members"}
-                selectedItem={selectedMembers}
-                setSelectedItem={setSelectedMembers} 
-                list={memberList}
-                setList={setMemberList}
-                valueOptions={memberOptions}
-                setOptions={setMemberOptions}
+              <CustomDataTable
+                  tableName={"DBnpc"}
+                  setSingular={setMember}
+                  setPlural={setMembers}
+                  setOptions={setMemberOptions}
+                  h1Title={"Members"}
+                  dialogHeader={"Members"}
+                  selectedItem={selectedMember}
+                  setSelectedItem={setSelectedMember}
+                  list={memberList}
+                  setList={setMemberList}
+                  valueOptions={memberOptions}
               />
             </div>
           </div>
@@ -1269,7 +1281,13 @@ const FactionGen = () => {
             Leader <SingleDisplayText value={leader} setNewValue={setLeader} />
           </h2>
           <h2>
-            Important Members <SingleDisplayText />
+            Important Members{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedMember}
+                setNewValue={setSelectedMember}
+              />
+            </span>
           </h2>
           <h1>Membership</h1>
           <hr className={style.lineBreak} />

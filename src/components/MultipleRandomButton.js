@@ -24,7 +24,12 @@ const MultipleRandomButton = (props) => {
     props.setSelectedItem([]);
     let n = Math.round(Math.random() * (6 - 0));
     let usedIndexes = {};
+    let optionsLength = props.selectedValueOptions.length;
     for (let i = 0; i <= n; i++) {
+      if (Object.keys(usedIndexes).length === optionsLength) {
+        // All indexes have been used up, exit the loop
+        break;
+      }
       let max = props.valueOptions.length - 1;
       let r = Math.round(Math.random() * (max - 0));
       while (usedIndexes[r]) {

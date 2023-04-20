@@ -61,7 +61,12 @@ const GenerateButton = (props) => {
             if (props.selectedItems[i].length <= 0) {
               let n = Math.floor(Math.random() * (6 - 0));
               let usedIndexes = {};
+              let optionsLength = props.selectedItemOptions[i].length;
               for (let x = 0; x <= n; x++) {
+                if (Object.keys(usedIndexes).length === optionsLength) {
+                  // All indexes have been used up, exit the loop
+                  break;
+                }
                 let r = Math.floor(
                   Math.random() * props.selectedItemOptions[i].length
                 );

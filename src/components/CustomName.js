@@ -36,7 +36,7 @@ const CustomName = (props) => {
               epithet_a: r.epithet_a,
               noun_a: r.noun_a,
               epithet_b: r.epithet_b,
-              noun_b: r.noun_b,
+              noun_b: r.noun_b, 
             }))
           );
         }
