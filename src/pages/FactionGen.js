@@ -17,6 +17,7 @@ import SectionRandom from "../components/SectionRandom";
 import NameDisplay from "../components/NameDisplay";
 import SingleDisplayText from "../components/SingleDisplayText";
 import { SessionContext } from "../config/SessionContext";
+import CustomDataTableMember from "../components/CustomDataTableMember";
 
 const FactionGen = () => {
   const session = useContext(SessionContext);
@@ -218,6 +219,8 @@ const FactionGen = () => {
   const [leaders, setLeaders] = useState("");
   const [leaderOptions, setLeaderOptions] = useState("");
 
+  const [membershipState, setMembershipState] = useState({});
+
   const [organization, setOrganization] = useState({});
   const divRef = useRef(null);
 
@@ -243,6 +246,24 @@ const FactionGen = () => {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
+
+  //Handle Membership States
+  useEffect(() => {
+    const membershipStates = {
+      favored: selectedFavored,
+      positive: selectedPositive,
+      neutral: selectedNeutral,
+      unwelcome: selectedUnwelcome,
+      intolerant: selectedIntolerant,
+    };
+    setMembershipState(membershipStates);
+  }, [
+    selectedFavored,
+    selectedPositive,
+    selectedNeutral,
+    selectedUnwelcome,
+    selectedIntolerant,
+  ]);
 
   //Create location object to be exported
   useEffect(() => {
@@ -472,13 +493,13 @@ const FactionGen = () => {
               setSelectedItem={[
                 setSelectedMotive,
                 setSelectedIncome,
-                setSelectedResource, 
+                setSelectedResource,
                 setSelectedFavored,
                 setSelectedPositive,
                 setSelectedNeutral,
                 setSelectedUnwelcome,
                 setSelectedIntolerant,
-                setSelectedInitiation, 
+                setSelectedInitiation,
                 setSelectedLowRole,
                 setSelectedMediumRole,
                 setSelectedHighRole,
@@ -496,7 +517,7 @@ const FactionGen = () => {
               selectedItemOptions={[
                 motiveOptions,
                 incomeOptions,
-                resourceOptions,  
+                resourceOptions,
                 favoredOptions,
                 positiveOptions,
                 neutralOptions,
@@ -515,7 +536,7 @@ const FactionGen = () => {
                 weaknessOptions,
                 buildingOptions,
                 locationOptions,
-                strongholdOptions, 
+                strongholdOptions,
               ]}
             />
             <ClearButton
@@ -602,7 +623,7 @@ const FactionGen = () => {
               value={[structure, logo, orgType]}
               setValue={[setStructure, setLogo, setOrgType]}
               valueOptions={[structureOptions, logoOptions, orgTypeOptions]}
-              selectedValue={[ selectedMotive]}
+              selectedValue={[selectedMotive]}
               setSelectedValue={[setSelectedMotive]}
               selectedValueOptions={[motiveOptions]}
             />
@@ -762,47 +783,47 @@ const FactionGen = () => {
               )}
             </h1>
             <SectionRandom
+              value={[initiation]}
+              setValue={[setInitiation]}
+              valueOptions={[initiationOptions]}
               selectedValue={[
                 selectedFavored,
-                // selectedPositive,
-                // selectedNeutral,
-                // selectedUnwelcome,
-                // selectedIntolerant,
-                // selectedInitiation,
-                // selectedLowRole,
-                // selectedMediumRole,
-                // selectedHighRole,
-                // selectedAdvance,
+                selectedPositive,
+                selectedNeutral,
+                selectedUnwelcome,
+                selectedIntolerant,
+                selectedLowRole,
+                selectedMediumRole,
+                selectedHighRole,
+                selectedAdvance,
               ]}
               setSelectedValue={[
                 setSelectedFavored,
-                // setSelectedPositive,
-                // setSelectedNeutral,
-                // setSelectedUnwelcome,
-                // setSelectedIntolerant,
-                // setSelectedInitiation,
-                // setSelectedLowRole,
-                // setSelectedMediumRole,
-                // setSelectedHighRole,
-                // setSelectedAdvance,
+                setSelectedPositive,
+                setSelectedNeutral,
+                setSelectedUnwelcome,
+                setSelectedIntolerant,
+                setSelectedLowRole,
+                setSelectedMediumRole,
+                setSelectedHighRole,
+                setSelectedAdvance,
               ]}
               selectedValueOptions={[
                 favoredOptions,
-                // positiveOptions,
-                // neutralOptions,
-                // unwelcomeOptions,
-                // intolerantOptions,
-                // initiationOptions,
-                // lowRoleOptions,
-                // mediumRoleOptions,
-                // highRoleOptions,
-                // advanceOptions,
+                positiveOptions,
+                neutralOptions,
+                unwelcomeOptions,
+                intolerantOptions,
+                lowRoleOptions,
+                mediumRoleOptions,
+                highRoleOptions,
+                advanceOptions,
               ]}
             />
           </div>
           <div className={isMembershipActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDataTable
+              <CustomDataTableMember
                 tableName={"races"}
                 setSingular={setFavored}
                 setPlural={setFavoreds}
@@ -814,6 +835,7 @@ const FactionGen = () => {
                 list={favoredList}
                 setList={setFavoredList}
                 valueOptions={favoredOptions}
+                membershipState={membershipState}
               />
               <CustomDataTable
                 tableName={"races"}
@@ -867,17 +889,15 @@ const FactionGen = () => {
                 setList={setIntolerantList}
                 valueOptions={intolerantOptions}
               />
-              <CustomDataTable
+              <CustomDropdown
                 tableName={"orgInitiation"}
                 setSingular={setInitiation}
                 setPlural={setInitiations}
                 setOptions={setInitiationOptions}
+                options={initiationOptions}
                 h1Title={"Initiation"}
-                dialogHeader={"Initiation"}
-                selectedItem={selectedInitiation}
-                setSelectedItem={setSelectedInitiation}
-                list={initiationList}
-                setList={setInitiationList}
+                placeholder={"Set Initiation"}
+                value={initiation}
                 valueOptions={initiationOptions}
               />
               <CustomDataTable
@@ -1275,9 +1295,9 @@ const FactionGen = () => {
           <h2>
             Initiation{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedInitiation}
-                setNewValue={setSelectedInitiation}
+              <SingleDisplayText
+                value={initiation}
+                setNewValue={setInitiation}
               />
             </span>
           </h2>

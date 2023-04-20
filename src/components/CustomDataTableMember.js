@@ -1,0 +1,203 @@
+import { Column } from "jspdf-autotable";
+import { FilterMatchMode } from "primereact/api";
+import { Button } from "primereact/button";
+import { DataTable } from "primereact/datatable";
+import { Dialog } from "primereact/dialog";
+import { InputText } from "primereact/inputtext";
+import { useEffect, useState } from "react";
+import { supabase, auth } from "../config/supabaseClient";
+import style from "../stylesheets/PageStyle.module.scss";
+import MultipleRandomButton from "./MultipleRandomButton";
+
+const CustomDataTableMember = (props) => {
+  //-----SAMPLE PROPS-------
+  // tableName={"itemsTools"}
+  // setSingular={setItem}
+  // setPlural={setItems}
+  // setOptions={setItemOptions}
+  // h1Title={"Pack Contents"}
+  // dialogHeader={"Items"}
+  // selectedItem={selectedItem}
+  // setSelectedItem={setSelectedItem}
+  // list={itemList}
+  // setList={setItemList}
+  // valueOptions={itemOptions}
+  // options={itemOptions}
+  //-----SAMPLE PROPS-------
+
+  //Set States
+  const [fetchError, setFetchError] = useState(null);
+  const [dialogVisible, setDialogVisible] = useState(false);
+
+  //DataTable filters
+  const [globalFilterValue, setGlobalFilterValue] = useState("");
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    representative: { value: null, matchMode: FilterMatchMode.IN },
+    status: { value: null, matchMode: FilterMatchMode.EQUALS },
+    verified: { value: null, matchMode: FilterMatchMode.EQUALS },
+  });
+  //On filter change
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+  //Render header
+  const renderHeader = () => {
+    return (
+      <div>
+        <span className="p-input-icon-left">
+          <i className="pi pi-search mr-2" />
+          <InputText
+            value={globalFilterValue}
+            onChange={onGlobalFilterChange}
+            placeholder="Keyword Search"
+          />
+        </span>
+      </div>
+    );
+  };
+  //Set Header
+  const header = (
+    <div className="flex justify-content-between">{renderHeader()}</div>
+  );
+  //Get Data from supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from(props.tableName)
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        props.setSingular(null);
+      }
+      if (dataName) {
+        props.setPlural(dataName);
+        setFetchError(null);
+        props.setOptions(
+          dataName.map((r) => ({ name: r.name, value: r.value, desc: r.desc }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+  //Open dialog
+  const openDialog = () => {
+    setDialogVisible(true);
+  };
+  //Close Dialog
+  const closeDialog = () => {
+    setDialogVisible(false);
+    for (let i = 0; i < props.selectedItem.length; i++) {
+      if (props.list.includes(props.selectedItem[i])) {
+      } else {
+        props.setList((old) => [...old, props.selectedItem[i]]);
+      }
+    }
+  };
+  //Dialog Footer
+  const dialogFooter = () => {
+    return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
+  };
+  //Use effect to set list
+  useEffect(() => {
+    props.setSelectedItem(props.list);
+  }, [props.list]);
+
+  // Set Value Options based on membership state
+  useEffect(() => {
+    for (let i = 0; i < props.valueOptions.length; i++) {
+        const optionNames = props.valueOptions.map((i) => (i.name));
+    }
+    // for (let i = 0; i < props.valueOptions.length; i++) {
+    //   const filteredOptions = props.valueOptions[i].name.map((o) => {
+    //     // Check if any membership state contains the option name
+    //     for (const membershipState of Object.values(props.membershipState)) {
+    //       if (membershipState.some((m) => m.name === o.name)) {
+    //         return false;
+    //       }
+    //     }
+    //     return true;
+    //   });
+    // }
+    // props.setValueOptions(filteredOptions);
+  }, [props.membershipState, props.valueOptions]);
+
+  //JSX Dialog template
+  const templateDatatable = (
+    <>
+      <h1 className={style.titles}>{props.h1Title}</h1>
+      <button onClick={openDialog} className={style.btnName}>
+        Add / Remove
+      </button>
+      <Dialog
+        header={props.dialogHeader}
+        visible={dialogVisible}
+        maximizable
+        modal
+        onHide={closeDialog}
+        footer={dialogFooter}
+        transitionOptions
+      >
+        <DataTable
+          value={props.valueOptions}
+          scrollable
+          scrollHeight="60vh"
+          rows={20}
+          dataKey="name"
+          selection={props.selectedItem}
+          onSelectionChange={(e) => {
+            props.setList(e.value);
+          }}
+          filters={filters}
+          filterDisplay="row"
+          responsiveLayout="scroll"
+          globalFilterFields={["name"]}
+          header={header}
+          emptyMessage="No items found."
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          rowHover
+          resizableColumns
+          reorderableColumns
+          reorderableRows
+        >
+          <Column
+            selectionMode="multiple"
+            selectionAriaLabel="name"
+            headerStyle={{ width: "6em" }}
+          ></Column>
+          <Column
+            header={props.h1Title}
+            field="name"
+            sortable
+            filter
+            filterPlaceholder="Search"
+          ></Column>
+        </DataTable>
+      </Dialog>
+    </>
+  );
+
+  return (
+    <>
+      <div>
+        {templateDatatable}{" "}
+        <MultipleRandomButton
+          valueOptions={props.valueOptions}
+          setSelectedItem={props.setSelectedItem}
+          list={props.list}
+          selectedItem={props.selectedItem}
+          setList={props.setList}
+        />
+      </div>
+    </>
+  );
+};
+
+export default CustomDataTableMember;

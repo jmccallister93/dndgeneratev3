@@ -325,8 +325,8 @@ const SectionRandom = (props) => {
   const onRandomClickSingle = (e) => {
     if (props.value) {
       for (let i = 0; i < props.value.length; i++) {
-        let max = props.valueOptions[i].length - 1;
-        let r = Math.floor(Math.random() * (max - 0));
+        let max = props.valueOptions[i].length;
+        let r = Math.floor(Math.random() * max);
         props.setValue[i](props.valueOptions[i][r].name);
       }
     }
@@ -340,10 +340,14 @@ const SectionRandom = (props) => {
         let n = Math.floor(Math.random() * (6 - 0));
         let usedIndexes = {};
         for (let x = 0; x <= n; x++) {
-          let r = Math.floor(Math.random() * props.selectedValueOptions[i].length);
+          let r = Math.floor(
+            Math.random() * props.selectedValueOptions[i].length
+          );
           let value = props.selectedValueOptions[i][r];
           while (usedIndexes[r]) {
-            r = Math.floor(Math.random() * props.selectedValueOptions[i].length);
+            r = Math.floor(
+              Math.random() * props.selectedValueOptions[i].length
+            );
             value = props.selectedValueOptions[i][r];
           }
           props.setSelectedValue[i]((oldArray) => [...oldArray, value]);
