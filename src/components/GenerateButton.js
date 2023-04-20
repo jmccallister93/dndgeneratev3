@@ -267,6 +267,45 @@ const GenerateButton = (props) => {
       }
     }
   };
+
+  //Faction Name Generate
+  const factionNameGenerate = (e) => {
+    if (props.factionName) {
+      for (let i = 0; i < props.factionName.length; i++) {
+        if (
+          props.factionName[i] === "" ||
+          props.factionName[i] === undefined
+        ) {
+          let f = Math.floor(Math.random() * 33);
+          let first_name = [props.factionNameOptions[i][f].first_name];
+          let e = Math.floor(Math.random() * 10);
+          let epithet_a = [props.factionNameOptions[i][e].epithet_a];
+          let na = Math.floor(Math.random() * 125);
+          let noun_a = [props.factionNameOptions[i][na].noun_a];
+          let nb = Math.floor(Math.random() * 185);
+          let noun_b = [props.factionNameOptions[i][nb].noun_b];
+
+          let random = Math.round(Math.random() * 4);
+
+          if (random === 0) {
+            props.setFactionName[0](
+              first_name + " " + epithet_a + " " + noun_a + " " + noun_b
+            );
+          } else if (random === 1) {
+            props.setFactionName[0](
+              first_name + " " + epithet_a + " " + noun_b
+            );
+          } else if (random === 2) {
+            props.setFactionName[0](first_name + " " + noun_b);
+          } else if (random === 3) {
+            props.setFactionName[0](noun_a + " " + noun_b);
+          } else {
+            props.setFactionName[0](noun_b + " " + epithet_a + " " + noun_a);
+          }
+        }
+      }
+    }
+  };
   //Height Age Weight
   const setHeightAgeWeight = (e) => {
     if (props.generateItems[0] === "Aasimar") {
@@ -658,6 +697,7 @@ const GenerateButton = (props) => {
     monsterNameGenerate();
     senseGenerate();
     pantheonNameGenerate();
+    factionNameGenerate();
   };
 
   return (

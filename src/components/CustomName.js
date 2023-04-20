@@ -72,9 +72,29 @@ const CustomName = (props) => {
           setFetchError(null);
           props.setNameOptions(
             data.map((r) => ({
-              adjective: r.adjective,
+              adjective: r.adjective, 
               noun: r.noun,
               
+            }))
+          );
+        }
+      }
+      if (props.tableName === "factionNames") {
+        const { data, error } = await supabase.from(props.tableName).select();
+        if (error) {
+          setFetchError("Could not fetch the data");
+          props.setName(null);
+          console.log(error);
+        }
+        if (data) {
+          props.setNames(data);
+          setFetchError(null);
+          props.setNameOptions(
+            data.map((r) => ({
+              first_name: r.first_name,
+              epithet_a: r.epithet_a,
+              noun_a: r.noun_a,
+              noun_b: r.noun_b,
             }))
           );
         }
@@ -84,7 +104,9 @@ const CustomName = (props) => {
   }, []);
 
   const onRandomName = (e) => {
+    //NPC Name
     if (props.tableName === "names") {
+      console.log("fires")
       let f = Math.floor(Math.random() * 208);
       let firstName = [props.nameOptions[f].first_name];
       let eA = Math.floor(Math.random() * 208);
@@ -108,6 +130,7 @@ const CustomName = (props) => {
         props.setName(firstName + " " + epiphet_b + noun_a);
       }
     }
+    //Monster Name
     if (props.tableName === "monsterNames") {
       let a = Math.floor(Math.random() * 83);
       let adjective = [props.nameOptions[a].adjective];
@@ -145,6 +168,8 @@ const CustomName = (props) => {
         );
       }
     }
+
+    //Pantheon Name
     if (props.tableName === "pantheonNames") {
       let a = Math.floor(Math.random() * 25);
       let adjective = [props.nameOptions[a].adjective];
@@ -161,6 +186,32 @@ const CustomName = (props) => {
         props.setName(adjective + " " + adjective2 + " " + noun);
       } else {
         props.setName(adjective + " " + noun + " " + adjective2);
+      }
+    }
+
+    //Faction Name
+    if (props.tableName === "factionNames") {
+      let f = Math.floor(Math.random() * 33);
+      let first_name = [props.nameOptions[f].first_name];
+      let e = Math.floor(Math.random() * 10);
+      let epithet_a = [props.nameOptions[e].epithet_a]; 
+      let na = Math.floor(Math.random() * 125);
+      let noun_a = [props.nameOptions[na].noun_a];
+      let nb = Math.floor(Math.random() * 185);
+      let noun_b = [props.nameOptions[nb].noun_b];
+
+      let random = Math.round(Math.random() * 4);
+
+      if (random === 0) {
+        props.setName(first_name + " " + epithet_a + " " + noun_a + " " + noun_b);
+      } else if (random === 1) {
+        props.setName(first_name + " " + epithet_a + " " + noun_b);
+      } else if (random === 2) {
+        props.setName(first_name + " " + noun_b );
+      } else if (random === 3) {
+        props.setName(noun_a + " " + noun_b);
+      } else {
+        props.setName(noun_b + " " + epithet_a + " " + noun_a); 
       }
     }
   };

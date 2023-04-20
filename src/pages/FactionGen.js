@@ -20,6 +20,7 @@ import { SessionContext } from "../config/SessionContext";
 import CustomDataTableMember from "../components/CustomDataTableMember";
 import { supabase } from "../config/supabaseClient";
 import CustomDataTableNpc from "../components/CustomDataTableNpc";
+import CustomName from "../components/CustomName";
 
 const FactionGen = () => {
   const session = useContext(SessionContext);
@@ -375,7 +376,7 @@ const FactionGen = () => {
       power: powerString,
       specialty: specialtyString,
       weakness: weaknessString,
-      // email: session.user.email,
+      email: session.user.email,
     };
     setOrganization(organization);
   }, [
@@ -554,9 +555,13 @@ const FactionGen = () => {
                 locationOptions,
                 strongholdOptions,
               ]}
+              factionName={[factionName]}
+              factionNameOptions={[factionNameOptions]}
+              setFactionName={[setFactionName]}
             />
             <ClearButton
               setStringState={[
+                setFactionName,
                 setWealth,
                 setInfluence,
                 setStructure,
@@ -643,15 +648,22 @@ const FactionGen = () => {
               selectedValue={[selectedMotive]}
               setSelectedValue={[setSelectedMotive]}
               selectedValueOptions={[motiveOptions]}
+              factionName={[factionName]}
+              factionNameOptions={[factionNameOptions]}
+              setFactionName={[setFactionName]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputText
-                title={"Organization Name"}
-                input={factionName}
-                setInput={setFactionName}
-                placeholder={"Set Org. Name"}
+            <CustomName
+                tableName={"factionNames"} 
+                name={factionName}
+                setName={setFactionName}
+                setNames={setFactionNames}
+                setNameOptions={setFactionNameOptions}
+                nameOptions={factionNameOptions}
+                title={"Name"}
+                placeholder={"Set Name"}
               />
               <CustomDropdown
                 tableName={"orgStructure"}
@@ -659,7 +671,7 @@ const FactionGen = () => {
                 setPlural={setStructures}
                 setOptions={setStructureOptions}
                 options={structureOptions}
-                h1Title={"Organization Structure"}
+                h1Title={"Structure"}
                 placeholder={"Set Structure"}
                 value={structure}
                 valueOptions={structureOptions}
@@ -681,7 +693,7 @@ const FactionGen = () => {
                 setPlural={setOrgTypes}
                 setOptions={setOrgTypeOptions}
                 options={orgTypeOptions}
-                h1Title={"Organization Type"}
+                h1Title={"Type"}
                 placeholder={"Set Type"}
                 value={orgType}
                 valueOptions={orgTypeOptions}
@@ -1223,7 +1235,7 @@ const FactionGen = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-          <NameDisplay value={factionName} setNewValue={setFactionName} />
+        <NameDisplay value={factionName} setNewValue={setFactionName} />
           <h2>
             Org. Structure{" "}
             <SingleDisplayText value={structure} setNewValue={setStructure} />
