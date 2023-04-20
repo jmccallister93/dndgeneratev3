@@ -1,5 +1,5 @@
 import style from "../stylesheets/PageStyle.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -17,8 +17,11 @@ import SectionRandom from "../components/SectionRandom";
 import CustomName from "../components/CustomName";
 import NameDisplay from "../components/NameDisplay";
 import SingleDisplayNumber from "../components/SingleDisplayNumber";
+import { SessionContext } from "../config/SessionContext";
 
-const CityGen = () => {
+const LocationGen = () => {
+  const session = useContext(SessionContext);
+
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -100,6 +103,7 @@ const CityGen = () => {
   const [numberSize, setNumebrSize] = useState("");
 
   const divRef = useRef(null);
+  const [location, setLocation] = useState({});
 
   //Show Options
   const showBasics = (e) => {
@@ -117,6 +121,59 @@ const CityGen = () => {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
+
+    //Create location object to be exported
+    useEffect(() => {
+      const guildNames = selectedGuild.map((item) => item.name);
+      const guildString = guildNames.join(", ");
+      const eventNames = selectedEvent.map((item) => item.name);
+      const eventString = eventNames.join(", ");
+      const factionNames = selectedFaction.map((item) => item.name);
+      const factionString = factionNames.join(", ");
+      const npcNames = selectedNpc.map((item) => item.name);
+      const npcString = npcNames.join(", ");
+      const buildingNames = selectedBuilding.map((item) => item.name);
+      const buildingString = buildingNames.join(", ");
+      const districtNames = selectedDistrict.map((item) => item.name);
+      const districtString = districtNames.join(", ");
+
+      const location = {
+        name: cityName,
+        type: type,
+        size: size,
+        population: population,
+        atmosphere: atmosphere,
+        culture: culture,
+        terrain: terrain,
+        landmark: landmark,
+        govern: govern,
+        guild: guildString,
+        event: eventString,
+        faction: factionString,
+        npc: npcString,
+        building: buildingString,
+        district: districtString,
+        email: session.user.email,
+      };
+      setLocation(location);
+    }, [
+      cityName,
+      type,
+      size,
+      atmosphere,
+      population,
+      culture,
+      terrain,
+      landmark,
+      govern,
+      selectedGuild,
+      selectedFaction,
+      selectedEvent,
+      selectedNpc,
+      selectedDistrict,
+      selectedBuilding,
+      session,
+    ]);
 
   //Info content
   const infoContent = (
@@ -145,7 +202,6 @@ const CityGen = () => {
   return (
     <div className={style.mainWrapper}>
       <div className={style.topHeader}>
-        <h1 className={style.mainHeader}>City Generator</h1>
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton
@@ -231,7 +287,7 @@ const CityGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={npc} tableName={"DBlocation"}/>
+                <ExportButtons div={divRef} data={location} tableName={"DBlocation"}/>
               </div>
             </h1>
             {/* ToolTip */}
@@ -257,7 +313,7 @@ const CityGen = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <h1>City Options</h1>
+          <h1>Location Options</h1>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showBasics}>
               Basic Info{" "}
@@ -286,16 +342,16 @@ const CityGen = () => {
                 setNames={setCityNames}
                 setNameOptions={setCityNameOptions}
                 nameOptions={cityNameOptions}
-                title={"City Name"}
+                title={"Name"}
                 placeholder={"Set Name"}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationType"}
                 setSingular={setType}
                 setPlural={setTypes}
                 setOptions={setTypeOptions}
                 options={typeOptions}
-                h1Title={"City Type"}
+                h1Title={"Type"}
                 placeholder={"Set Type"}
                 value={type}
                 valueOptions={typeOptions}
@@ -306,7 +362,7 @@ const CityGen = () => {
                 setPlural={setSizes}
                 setOptions={setSizeOptions}
                 options={sizeOptions}
-                h1Title={"City Size"}
+                h1Title={"Size"}
                 placeholder={"Set Size"}
                 value={size}
                 valueOptions={sizeOptions}
@@ -322,7 +378,7 @@ const CityGen = () => {
           </div>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showFeature}>
-              City Features{" "}
+              Features{" "}
               {isFeatureActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
@@ -350,45 +406,45 @@ const CityGen = () => {
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationAtmosphere"}
                 setSingular={setAtmosphere}
                 setPlural={setAtmospheres}
                 setOptions={setAtmosphereOptions}
                 options={atmosphereOptions}
-                h1Title={"City Atmosphere"}
+                h1Title={"Atmosphere"}
                 placeholder={"Set Atmosphere"}
                 value={atmosphere}
                 valueOptions={atmosphereOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationCulture"}
                 setSingular={setCulture}
                 setPlural={setCultures}
                 setOptions={setCultureOptions}
                 options={cultureOptions}
-                h1Title={"City Culture"}
+                h1Title={"Culture"}
                 placeholder={"Set Culture"}
                 value={culture}
                 valueOptions={cultureOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationTerrain"}
                 setSingular={setTerrain}
                 setPlural={setTerrains}
                 setOptions={setTerrainOptions}
                 options={terrainOptions}
-                h1Title={"City Terrain"}
+                h1Title={"Terrain"}
                 placeholder={"Set Terrain"}
                 value={terrain}
                 valueOptions={terrainOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationLandmark"}
                 setSingular={setLandmark}
                 setPlural={setLandmarks}
                 setOptions={setLandmarkOptions}
                 options={landmarkOptions}
-                h1Title={"City Landmark"}
+                h1Title={"Landmark"}
                 placeholder={"Set Landmark"}
                 value={landmark}
                 valueOptions={landmarkOptions}
@@ -397,7 +453,7 @@ const CityGen = () => {
           </div>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showDetails}>
-              City Details{" "}
+              Details{" "}
               {isDetailActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
@@ -431,12 +487,12 @@ const CityGen = () => {
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"locationGovernment"}
                 setSingular={setGovern}
                 setPlural={setGoverns}
                 setOptions={setGovernOptions}
                 options={governOptions}
-                h1Title={"City Government"}
+                h1Title={"Government"}
                 placeholder={"Set Government"}
                 value={govern}
                 valueOptions={governOptions}
@@ -469,7 +525,7 @@ const CityGen = () => {
                 valueOptions={factionOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"locationEvents"}
                 setSingular={setEvent}
                 setPlural={setEvents}
                 setOptions={setEventOptions}
@@ -498,8 +554,8 @@ const CityGen = () => {
           </div>
           <div className={style.sectionOption}>
           <h1 className={style.subHeader} onClick={showLayout}>
-            City Layout{" "}
-            {isBasicActive ? (
+            Layout{" "}
+            {isLayoutActive ? (
               <i className="pi pi-chevron-down"></i>
             ) : (
               <i className="pi pi-chevron-right"></i>
@@ -523,7 +579,7 @@ const CityGen = () => {
           <div className={isLayoutActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"locationDistricts"}
                 setSingular={setDistrict}
                 setPlural={setDistricts}
                 setOptions={setDistrictOptions}
@@ -536,7 +592,7 @@ const CityGen = () => {
                 valueOptions={districtOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"locationBuildings"}
                 setSingular={setBuilding}
                 setPlural={setBuildings}
                 setOptions={setBuildingOptions}
@@ -592,7 +648,7 @@ const CityGen = () => {
             />
           </h2>
           <h2>
-            City Terrain{" "}
+            Terrain{" "}
             <SingleDisplayText
               value={terrain}
               setNewValue={setTerrain}
@@ -680,4 +736,4 @@ const CityGen = () => {
   );
 };
 
-export default CityGen;
+export default LocationGen;

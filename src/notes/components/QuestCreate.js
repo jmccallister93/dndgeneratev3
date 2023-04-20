@@ -1,28 +1,12 @@
-import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { useEffect, useRef, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { Button } from "primereact/button";
-import { e, i } from "mathjs";
-import { DataTable } from "primereact/datatable";
-import { Column } from "jspdf-autotable";
-import { Dialog } from "primereact/dialog";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { InputNumber } from "primereact/inputnumber";
-import Items from "../../components/Items";
-import { Toast } from "primereact/toast";
-import Npcs from "../../components/Npcs";
 import ClearButton from "../../components/ClearButton";
 import GenerateButton from "../../components/GenerateButton";
 import CustomInputText from "../../components/CustomInputText";
 import CustomDropDown from "../../components/CustomDropDown";
-import CustomInputNumber from "../../components/CustomInputNumber";
-import CustomDataTable from "../../components/CustomDataTable";
-import MultipleDisplay from "../../components/MultipleDisplay";
 import ExportButtons from "../../components/ExportButtons";
 import { Tooltip } from "primereact/tooltip";
 import InfoModal from "../../components/InfoModal";
@@ -31,8 +15,9 @@ import NameDisplay from "../../components/NameDisplay";
 import SingleDisplayText from "../../components/SingleDisplayText";
 import RandomHooks from "../../components/RandomHooks";
 import ns from "../../stylesheets/Note.module.scss";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { SessionContext } from "../../config/SessionContext";
+import CustomName from "../../components/CustomName";
 
 const QuestCreate = () => {
   const session = useContext(SessionContext);
@@ -168,18 +153,10 @@ const QuestCreate = () => {
       location: location,
       motive: motive,
       twist: twist,
-      email: session.user.email,    
+      email: session.user.email,
     };
     setQuestData(quest);
-  }, [
-    questName,
-    questType,
-    reward,
-    location,
-    motive,
-    twist,
-    session,    
-  ]);
+  }, [questName, questType, reward, location, motive, twist, session]);
 
   //Info content
   const infoContent = (
@@ -212,13 +189,7 @@ const QuestCreate = () => {
           <div className={style.btnWrapper}>
             {/* <GenerateButton /> */}
             <GenerateButton
-              generateItems={[
-                questType,
-                reward,
-                location,
-                motive,
-                twist,
-              ]}
+              generateItems={[questType, reward, location, motive, twist]}
               itemOptions={[
                 questTypeOptions,
                 rewardOptions,
@@ -247,7 +218,11 @@ const QuestCreate = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef}  data={questData} tableName={"DBquest"}/>
+                <ExportButtons
+                  div={divRef}
+                  data={questData}
+                  tableName={"DBquest"}
+                />
               </div>
             </h1>
             {/* ToolTip */}
@@ -275,28 +250,32 @@ const QuestCreate = () => {
         <div className={style.optionsWrapper}>
           <h1>Quest Options</h1>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showBasics}>
-            Basic Info{" "}
+            <h1 className={style.subHeader} onClick={showBasics}>
+              Basic Info{" "}
               {isBasicActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
                 <i className="pi pi-chevron-right"></i>
               )}
-          </h1>
-          <SectionRandom 
-          value={[questType]}
-          valueOptions={[questTypeOptions]}
-          setValue={[setQuestType]}
-          />
+            </h1>
+            <SectionRandom
+              value={[questType]}
+              valueOptions={[questTypeOptions]}
+              setValue={[setQuestType]}
+            />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputText
-                title={"Quest Name"}
-                input={questName}
-                setInput={setQuestName}
-                placeholder={"Set Quest Name"}
-              />
+              {/* <CustomName
+                tableName={"questNames"}
+                name={questName}
+                setName={setQuestName}
+                setNames={setQuestNames}
+                setNameOptions={setQuestNameOptions}
+                nameOptions={questNameOptions}
+                title={"Name"}
+                placeholder={"Set Name"}
+              /> */}
               <CustomDropDown
                 tableName={"questTypes"}
                 setSingular={setQuestType}
@@ -307,7 +286,7 @@ const QuestCreate = () => {
                 value={questType}
                 valueOptions={questTypeOptions}
               />
-             
+
               {/* Need to make this into a regular single select table */}
               {/* <CustomDataTable
                 tableName={"itemsTypes"}
@@ -327,24 +306,29 @@ const QuestCreate = () => {
             </div>
           </div>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showDetails}>
-            Quest Details{" "}
+            <h1 className={style.subHeader} onClick={showDetails}>
+              Quest Details{" "}
               {isDetailActive ? (
                 <i className="pi pi-chevron-down"></i>
               ) : (
                 <i className="pi pi-chevron-right"></i>
               )}
-          </h1>
-          <SectionRandom 
-          value={[reward, location, motive, twist]}
-          valueOptions={[rewardOptions, locationOptions, motiveOptions, twistOptions]}
-          setValue={[setReward, setLocation, setMotive, setTwist]}
-          />
+            </h1>
+            <SectionRandom
+              value={[reward, location, motive, twist]}
+              valueOptions={[
+                rewardOptions,
+                locationOptions,
+                motiveOptions,
+                twistOptions,
+              ]}
+              setValue={[setReward, setLocation, setMotive, setTwist]}
+            />
           </div>
           <div className={isDetailActive ? style.subsection : style.hidden}>
             <div>
-            <CustomDropDown
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"questReward"}
                 setSingular={setReward}
                 setPlural={setRewards}
                 setOptions={setRewardOptions}
@@ -354,7 +338,7 @@ const QuestCreate = () => {
                 valueOptions={rewardOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"DBlocation"}
                 setSingular={setLocation}
                 setPlural={setLocations}
                 setOptions={setLocationOptions}
@@ -364,7 +348,7 @@ const QuestCreate = () => {
                 valueOptions={locationOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"questMotive"}
                 setSingular={setMotive}
                 setPlural={setMotives}
                 setOptions={setMotiveOptions}
@@ -374,7 +358,7 @@ const QuestCreate = () => {
                 valueOptions={motiveOptions}
               />
               <CustomDropDown
-                tableName={"itemsTypes"}
+                tableName={"questTwist"}
                 setSingular={setTwist}
                 setPlural={setTwists}
                 setOptions={setTwistOptions}
@@ -389,30 +373,33 @@ const QuestCreate = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-        <NameDisplay value={questName} setNewValue={setQuestName} />
+          {/* <NameDisplay value={questName} setNewValue={setQuestName} /> */}
+          
+          <h2>
+            Quest{" "}
+            <RandomHooks
+              type={questType}
+              value={quest}
+              setValue={setQuest}
+              setNameValue={setQuestName}
+            />
+          </h2>
           <h2>
             Quest Type{" "}
             <SingleDisplayText value={questType} setNewValue={setQuestType} />
           </h2>
           <h2>
-            Quest{" "}
-            <RandomHooks type={questType} value={quest} setValue={setQuest} />
-          </h2>
-          <h2>
-            Reward{" "}
-            <SingleDisplayText value={reward} setNewValue={setReward} />
+            Reward <SingleDisplayText value={reward} setNewValue={setReward} />
           </h2>
           <h2>
             Location{" "}
             <SingleDisplayText value={location} setNewValue={setLocation} />
           </h2>
           <h2>
-            Motive{" "}
-            <SingleDisplayText value={motive} setNewValue={setMotive} />
+            Motive <SingleDisplayText value={motive} setNewValue={setMotive} />
           </h2>
           <h2>
-            Twist{" "}
-            <SingleDisplayText value={twist} setNewValue={setTwist} />
+            Twist <SingleDisplayText value={twist} setNewValue={setTwist} />
           </h2>
         </div>
       </div>

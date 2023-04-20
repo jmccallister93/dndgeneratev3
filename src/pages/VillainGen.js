@@ -1,22 +1,10 @@
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import supabase from "../config/supabaseClient";
-import { Button } from "primereact/button";
-import { e, i } from "mathjs";
-import { DataTable } from "primereact/datatable";
-import { Column } from "jspdf-autotable";
-import { Dialog } from "primereact/dialog";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { InputNumber } from "primereact/inputnumber";
-import Items from "../components/Items";
-import { Toast } from "primereact/toast";
-import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
 import CustomInputText from "../components/CustomInputText";
@@ -27,8 +15,11 @@ import InfoModal from "../components/InfoModal";
 import { Tooltip } from "primereact/tooltip";
 import ExportButtons from "../components/ExportButtons";
 import SectionRandom from "../components/SectionRandom";
+import { SessionContext } from "../config/SessionContext";
 
 const VillainGen = () => {
+  const session = useContext(SessionContext);
+
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);

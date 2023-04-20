@@ -4,6 +4,7 @@ import { supabase, auth } from "../config/supabaseClient";
 import CustomName from "./CustomName";
 import { prodDependencies } from "mathjs";
 import NameGenerator from "./NameGenerator";
+import NameDisplay from "./NameDisplay";
 
 const RandomHooks = (props) => {
   //Get data
@@ -128,6 +129,13 @@ const RandomHooks = (props) => {
     getData("namesC", setNameC, setNamesC, setNameCOptions);
     getData("namesD", setNameD, setNamesD, setNameDOptions);
   }, []);
+
+  //set quest name to quest
+  useEffect(() => {
+    if(props.setNameValue){
+      props.setNameValue(props.value)
+    }
+  }, [props])
 
   //NPC names
   useEffect(() => {
@@ -401,7 +409,7 @@ const RandomHooks = (props) => {
 
   return (
     <>
-      <SingleDisplayText value={props.value} setNewValue={props.setValue} />
+       <NameDisplay value={props.value} setNewValue={props.setValue} />
     </>
   );
 };
