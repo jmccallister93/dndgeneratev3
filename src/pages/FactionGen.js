@@ -19,6 +19,7 @@ import SingleDisplayText from "../components/SingleDisplayText";
 import { SessionContext } from "../config/SessionContext";
 import CustomDataTableMember from "../components/CustomDataTableMember";
 import { supabase } from "../config/supabaseClient";
+import CustomDataTableNpc from "../components/CustomDataTableNpc";
 
 const FactionGen = () => {
   const session = useContext(SessionContext);
@@ -224,6 +225,8 @@ const FactionGen = () => {
 
   const [membershipState, setMembershipState] = useState({});
 
+  const [selectedMembers, setSelectedMembers] = useState([]);
+
   const [memberName, setMemberName] = useState("");
   const [memberNames, setMemberNames] = useState("");
   const [memberNameOptions, setMemberNameOptions] = useState("");
@@ -271,62 +274,7 @@ const FactionGen = () => {
   //   selectedNeutral,
   //   selectedUnwelcome,
   //   selectedIntolerant,
-  // ]);
-
-  //Make member names
-  //Name Data
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("names").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setMemberName(null);
-        console.log(error);
-      }
-      if (data) {
-        setMemberNames(data);
-        setFetchError(null);
-        setMemberNameOptions(
-          data.map((r) => ({
-            first_name: r.first_name,
-            epithet_a: r.epithet_a,
-            noun_a: r.noun_a,
-            epithet_b: r.epithet_b,
-            noun_b: r.noun_b,
-          }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
-
-  //Create Member Names
-
-  const onRandomName = (e) => {
-    let f = Math.floor(Math.random() * 208);
-    let firstName = [memberNameOptions[f].first_name];
-    let eA = Math.floor(Math.random() * 208);
-    let epiphet_a = [memberNameOptions[eA].epithet_a];
-    let eB = Math.floor(Math.random() * 208);
-    let epiphet_b = [memberNameOptions[eB].epithet_b];
-    let nA = Math.floor(Math.random() * 208);
-    let noun_a = [memberNameOptions[nA].noun_a];
-    let nB = Math.floor(Math.random() * 208);
-    let noun_b = [memberNameOptions[nB].noun_b];
-
-    let random = Math.round(Math.random() * 3);
-
-    if (random === 0) {
-      setMemberName(firstName + " " + epiphet_a + noun_a);
-    } else if (random === 1) {
-      setMemberName(firstName + " " + epiphet_a + noun_b);
-    } else if (random === 2) {
-      setMemberName(firstName + " " + epiphet_b + noun_b);
-    } else {
-      setMemberName(firstName + " " + epiphet_b + noun_a);
-    }
-    setMemberNameList((current) => [...current, memberName]);
-  };
+  // ]);  
 
   //Create location object to be exported
   useEffect(() => {
@@ -837,19 +785,11 @@ const FactionGen = () => {
                 value={leader}
                 valueOptions={leaderOptions}
               />
-              <CustomDataTable
-                tableName={"races"}
-                setSingular={setFavored}
-                setPlural={setFavoreds}
-                setOptions={setFavoredOptions}
-                h1Title={"Favored Members"}
-                dialogHeader={"Favored Members"}
-                selectedItem={selectedFavored}
-                setSelectedItem={setSelectedFavored}
-                list={favoredList}
-                setList={setFavoredList}
-                valueOptions={favoredOptions}
-                membershipState={membershipState}
+              <CustomDataTableNpc
+                h1Title={"Members"}
+                dialogHeader={"Members"}
+                selectedItem={selectedMembers}
+                setSelectedItem={setSelectedMembers} 
               />
             </div>
           </div>
