@@ -226,11 +226,8 @@ const FactionGen = () => {
   const [membershipState, setMembershipState] = useState({});
 
   const [selectedMembers, setSelectedMembers] = useState([]);
-
-  const [memberName, setMemberName] = useState("");
-  const [memberNames, setMemberNames] = useState("");
-  const [memberNameOptions, setMemberNameOptions] = useState("");
-  const [memberNameList, setMemberNameList] = useState([]);
+  const [memberList, setMemberList] = useState([]);
+  const [memberOptions, setMemberOptions] = useState([]);
 
   const [organization, setOrganization] = useState({});
   const divRef = useRef(null);
@@ -790,6 +787,10 @@ const FactionGen = () => {
                 dialogHeader={"Members"}
                 selectedItem={selectedMembers}
                 setSelectedItem={setSelectedMembers} 
+                list={memberList}
+                setList={setMemberList}
+                valueOptions={memberOptions}
+                setOptions={setMemberOptions}
               />
             </div>
           </div>

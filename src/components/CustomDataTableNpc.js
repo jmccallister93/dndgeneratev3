@@ -80,9 +80,9 @@ const CustomDataTableNpc = (props) => {
   const closeDialog = () => {
     setDialogVisible(false);
     for (let i = 0; i < props.selectedItem.length; i++) {
-      if (memberNameList.includes(props.selectedItem[i])) {
+      if (props.list.includes(props.selectedItem[i])) {
       } else {
-        setMemberNameList((old) => [...old, props.selectedItem[i]]);
+        props.setList((old) => [...old, props.selectedItem[i]]);
       }
     }
   };
@@ -90,13 +90,6 @@ const CustomDataTableNpc = (props) => {
   const dialogFooter = () => {
     return <Button label="Ok" icon="pi pi-check" onClick={closeDialog} />;
   };
-  //Use effect to set list
-//   useEffect(() => {
-//     if (memberNameList) {
-//       props.setSelectedItem(memberNameList);
-//     }
-//   }, [memberNameList]);
-
 
   //Name Data
   useEffect(() => {
@@ -157,17 +150,22 @@ const CustomDataTableNpc = (props) => {
       const names = [];
       for (let i = 0; i < 20; i++) {
         const name = onRandomName();
-        names.push({name: name, value: name});
+        names.push({ name: name, value: name });
       }
-      console.log(names)
       setMemberNameList(names);
     }
   }, [memberNameOptions]);
 
-
-//   useEffect(() => {
-//     console.log(memberNameList)
-//     }, [memberNameList])
+  //Use effect to set list
+  useEffect(() => {
+    if (memberNameList) {
+      props.setList(memberNameList);
+    }
+    if (memberNameOptions) {
+      props.setOptions(memberNameOptions);
+    }
+    props.setSelectedItem(props.list);
+  }, [memberNameList, memberNameOptions, props]);
 
   //JSX Dialog template
   const templateDatatable = (
@@ -193,7 +191,7 @@ const CustomDataTableNpc = (props) => {
           dataKey="name"
           selection={props.selectedItem}
           onSelectionChange={(e) => {
-            setMemberNameList(e.value);
+            props.setList(e.value);
           }}
           filters={filters}
           filterDisplay="row"
