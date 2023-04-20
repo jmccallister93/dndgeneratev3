@@ -18,9 +18,12 @@ import NameDisplay from "../components/NameDisplay";
 import SingleDisplayText from "../components/SingleDisplayText";
 import { SessionContext } from "../config/SessionContext";
 import CustomDataTableMember from "../components/CustomDataTableMember";
+import { supabase } from "../config/supabaseClient";
 
 const FactionGen = () => {
   const session = useContext(SessionContext);
+
+  const [fetechError, setFetchError] = useState(null);
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isResourceActive, setIsResourceActive] = useState(false);
@@ -221,6 +224,11 @@ const FactionGen = () => {
 
   const [membershipState, setMembershipState] = useState({});
 
+  const [memberName, setMemberName] = useState("");
+  const [memberNames, setMemberNames] = useState("");
+  const [memberNameOptions, setMemberNameOptions] = useState("");
+  const [memberNameList, setMemberNameList] = useState([]);
+
   const [organization, setOrganization] = useState({});
   const divRef = useRef(null);
 
@@ -248,22 +256,77 @@ const FactionGen = () => {
   };
 
   //Handle Membership States
+  // useEffect(() => {
+  //   const membershipStates = {
+  //     favored: selectedFavored,
+  //     positive: selectedPositive,
+  //     neutral: selectedNeutral,
+  //     unwelcome: selectedUnwelcome,
+  //     intolerant: selectedIntolerant,
+  //   };
+  //   setMembershipState(membershipStates);
+  // }, [
+  //   selectedFavored,
+  //   selectedPositive,
+  //   selectedNeutral,
+  //   selectedUnwelcome,
+  //   selectedIntolerant,
+  // ]);
+
+  //Make member names
+  //Name Data
   useEffect(() => {
-    const membershipStates = {
-      favored: selectedFavored,
-      positive: selectedPositive,
-      neutral: selectedNeutral,
-      unwelcome: selectedUnwelcome,
-      intolerant: selectedIntolerant,
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("names").select();
+      if (error) {
+        setFetchError("Could not fetch the data");
+        setMemberName(null);
+        console.log(error);
+      }
+      if (data) {
+        setMemberNames(data);
+        setFetchError(null);
+        setMemberNameOptions(
+          data.map((r) => ({
+            first_name: r.first_name,
+            epithet_a: r.epithet_a,
+            noun_a: r.noun_a,
+            epithet_b: r.epithet_b,
+            noun_b: r.noun_b,
+          }))
+        );
+      }
     };
-    setMembershipState(membershipStates);
-  }, [
-    selectedFavored,
-    selectedPositive,
-    selectedNeutral,
-    selectedUnwelcome,
-    selectedIntolerant,
-  ]);
+    fetchData();
+  }, []);
+
+  //Create Member Names
+
+  const onRandomName = (e) => {
+    let f = Math.floor(Math.random() * 208);
+    let firstName = [memberNameOptions[f].first_name];
+    let eA = Math.floor(Math.random() * 208);
+    let epiphet_a = [memberNameOptions[eA].epithet_a];
+    let eB = Math.floor(Math.random() * 208);
+    let epiphet_b = [memberNameOptions[eB].epithet_b];
+    let nA = Math.floor(Math.random() * 208);
+    let noun_a = [memberNameOptions[nA].noun_a];
+    let nB = Math.floor(Math.random() * 208);
+    let noun_b = [memberNameOptions[nB].noun_b];
+
+    let random = Math.round(Math.random() * 3);
+
+    if (random === 0) {
+      setMemberName(firstName + " " + epiphet_a + noun_a);
+    } else if (random === 1) {
+      setMemberName(firstName + " " + epiphet_a + noun_b);
+    } else if (random === 2) {
+      setMemberName(firstName + " " + epiphet_b + noun_b);
+    } else {
+      setMemberName(firstName + " " + epiphet_b + noun_a);
+    }
+    setMemberNameList((current) => [...current, memberName]);
+  };
 
   //Create location object to be exported
   useEffect(() => {
@@ -444,6 +507,7 @@ const FactionGen = () => {
                 orgType,
                 logo,
                 leader,
+                initiation,
                 headquarter,
               ]}
               itemOptions={[
@@ -454,6 +518,7 @@ const FactionGen = () => {
                 orgTypeOptions,
                 logoOptions,
                 leaderOptions,
+                initiationOptions,
                 headquarterOptions,
               ]}
               setItem={[
@@ -464,6 +529,7 @@ const FactionGen = () => {
                 setOrgType,
                 setLogo,
                 setLeader,
+                setInitiation,
                 setHeadquarter,
               ]}
               selectedItems={[
@@ -475,7 +541,7 @@ const FactionGen = () => {
                 selectedNeutral,
                 selectedUnwelcome,
                 selectedIntolerant,
-                selectedInitiation,
+
                 selectedLowRole,
                 selectedMediumRole,
                 selectedHighRole,
@@ -499,7 +565,7 @@ const FactionGen = () => {
                 setSelectedNeutral,
                 setSelectedUnwelcome,
                 setSelectedIntolerant,
-                setSelectedInitiation,
+
                 setSelectedLowRole,
                 setSelectedMediumRole,
                 setSelectedHighRole,
@@ -523,7 +589,7 @@ const FactionGen = () => {
                 neutralOptions,
                 unwelcomeOptions,
                 intolerantOptions,
-                initiationOptions,
+
                 lowRoleOptions,
                 mediumRoleOptions,
                 highRoleOptions,
@@ -761,7 +827,7 @@ const FactionGen = () => {
           <div className={isMemberActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
-                tableName={"itemsTypes"}
+                tableName={"DBnpc"}
                 setSingular={setLeader}
                 setPlural={setLeaders}
                 setOptions={setLeaderOptions}
@@ -770,6 +836,20 @@ const FactionGen = () => {
                 placeholder={"Set Leader"}
                 value={leader}
                 valueOptions={leaderOptions}
+              />
+              <CustomDataTable
+                tableName={"races"}
+                setSingular={setFavored}
+                setPlural={setFavoreds}
+                setOptions={setFavoredOptions}
+                h1Title={"Favored Members"}
+                dialogHeader={"Favored Members"}
+                selectedItem={selectedFavored}
+                setSelectedItem={setSelectedFavored}
+                list={favoredList}
+                setList={setFavoredList}
+                valueOptions={favoredOptions}
+                membershipState={membershipState}
               />
             </div>
           </div>

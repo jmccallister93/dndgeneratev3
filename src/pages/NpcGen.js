@@ -655,7 +655,7 @@ const NpcGen = () => {
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
-                tableName={"names"}
+                tableName={"names"} 
                 name={name}
                 setName={setName}
                 setNames={setNames}
