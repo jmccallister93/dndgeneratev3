@@ -2,37 +2,41 @@ import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import { supabase, auth } from "../../config/supabaseClient";
 import { Button } from "primereact/button";
-import { e, i } from "mathjs";
-import { DataTable } from "primereact/datatable";
-import { Column } from "jspdf-autotable";
-import { Dialog } from "primereact/dialog";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { InputNumber } from "primereact/inputnumber";
-import Items from "../../components/Items";
-import { Toast } from "primereact/toast";
-import Npcs from "../../components/Npcs";
 import ClearButton from "../../components/ClearButton";
+import Npcs from "../../components/Npcs";
 import GenerateButton from "../../components/GenerateButton";
-import MultipleDisplay from "../../components/MultipleDisplay";
-import CustomDataTable from "../../components/CustomDataTable";
-import CustomDropdown from "../../components/CustomDropDown";
 import CustomInputText from "../../components/CustomInputText";
+import CustomDropDown from "../../components/CustomDropDown";
+import CustomInputNumber from "../../components/CustomInputNumber";
+import CustomDataTable from "../../components/CustomDataTable";
+import MultipleDisplay from "../../components/MultipleDisplay";
+import CustomName from "../../components/CustomName";
+import NameDisplay from "../../components/NameDisplay";
+import SingleDisplayText from "../../components/SingleDisplayText";
+import SingleDisplayNumber from "../../components/SingleDisplayNumber";
+import RandomHooks from "../../components/RandomHooks";
 import ExportButtons from "../../components/ExportButtons";
+import { useRef } from "react";
+import Items from "../../components/Items";
 import { Tooltip } from "primereact/tooltip";
 import InfoModal from "../../components/InfoModal";
 import SectionRandom from "../../components/SectionRandom";
-import NameDisplay from "../../components/NameDisplay";
-import SingleDisplayText from "../../components/SingleDisplayText";
 import ns from "../../stylesheets/Note.module.scss";
 import { SessionContext } from "../../config/SessionContext";
+import CustomDataTableMember from "../../components/CustomDataTableMember";
 
 const OrganizationCreate = () => {
+
+  
   const session = useContext(SessionContext);
+
+  const [fetechError, setFetchError] = useState(null);
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isResourceActive, setIsResourceActive] = useState(false);
@@ -191,9 +195,9 @@ const OrganizationCreate = () => {
   const [selectedResource, setSelectedResource] = useState([]);
   const [resourceList, setResourceList] = useState([]);
 
-  const [defence, setDefence] = useState("");
-  const [defences, setDefences] = useState("");
-  const [defenceOptions, setDefenceOptions] = useState("");
+  const [defense, setDefense] = useState("");
+  const [defenses, setDefenses] = useState("");
+  const [defenseOptions, setDefenseOptions] = useState("");
 
   const [origin, setOrigin] = useState("");
   const [origins, setOrigins] = useState("");
@@ -231,6 +235,14 @@ const OrganizationCreate = () => {
   const [leaders, setLeaders] = useState("");
   const [leaderOptions, setLeaderOptions] = useState("");
 
+  const [membershipState, setMembershipState] = useState({});
+
+  const [member, setMember] = useState("");
+  const [members, setMembers] = useState("");
+  const [selectedMember, setSelectedMember] = useState([]);
+  const [memberList, setMemberList] = useState([]);
+  const [memberOptions, setMemberOptions] = useState([]);
+
   const [organization, setOrganization] = useState({});
   const divRef = useRef(null);
 
@@ -257,6 +269,24 @@ const OrganizationCreate = () => {
     setIsInfoActive((current) => !current);
   };
 
+  //Handle Membership States
+  // useEffect(() => {
+  //   const membershipStates = {
+  //     favored: selectedFavored,
+  //     positive: selectedPositive,
+  //     neutral: selectedNeutral,
+  //     unwelcome: selectedUnwelcome,
+  //     intolerant: selectedIntolerant,
+  //   };
+  //   setMembershipState(membershipStates);
+  // }, [
+  //   selectedFavored,
+  //   selectedPositive,
+  //   selectedNeutral,
+  //   selectedUnwelcome,
+  //   selectedIntolerant,
+  // ]);  
+
   //Create location object to be exported
   useEffect(() => {
     const itemNames = selectedItem.map((item) => item.name);
@@ -273,15 +303,21 @@ const OrganizationCreate = () => {
     const neutralString = neutralNames.join(", ");
     const unwelcomeNames = selectedUnwelcome.map((unwelcome) => unwelcome.name);
     const unwelcomeString = unwelcomeNames.join(", ");
-    const intolerantNames = selectedIntolerant.map((intolerant) => intolerant.name);
+    const intolerantNames = selectedIntolerant.map(
+      (intolerant) => intolerant.name
+    );
     const intolerantString = intolerantNames.join(", ");
     const serviceNames = selectedService.map((service) => service.name);
     const serviceString = serviceNames.join(", ");
-    const initiationNames = selectedInitiation.map((initiation) => initiation.name);
+    const initiationNames = selectedInitiation.map(
+      (initiation) => initiation.name
+    );
     const initiationString = initiationNames.join(", ");
     const lowRoleNames = selectedLowRole.map((lowRole) => lowRole.name);
     const lowRoleString = lowRoleNames.join(", ");
-    const mediumRoleNames = selectedMediumRole.map((mediumRole) => mediumRole.name);
+    const mediumRoleNames = selectedMediumRole.map(
+      (mediumRole) => mediumRole.name
+    );
     const mediumRoleString = mediumRoleNames.join(", ");
     const highRoleNames = selectedHighRole.map((highRole) => highRole.name);
     const highRoleString = highRoleNames.join(", ");
@@ -293,13 +329,17 @@ const OrganizationCreate = () => {
     const beliefString = beliefNames.join(", ");
     const orgTypeNames = selectedOrgType.map((orgType) => orgType.name);
     const orgTypeString = orgTypeNames.join(", ");
-    const headquarterNames = selectedHeadquarter.map((headquarter) => headquarter.name);
+    const headquarterNames = selectedHeadquarter.map(
+      (headquarter) => headquarter.name
+    );
     const headquarterString = headquarterNames.join(", ");
     const buildingNames = selectedBuilding.map((building) => building.name);
     const buildingString = buildingNames.join(", ");
     const locationNames = selectedLocation.map((location) => location.name);
     const locationString = locationNames.join(", ");
-    const strongholdNames = selectedStronghold.map((stronghold) => stronghold.name);
+    const strongholdNames = selectedStronghold.map(
+      (stronghold) => stronghold.name
+    );
     const strongholdString = strongholdNames.join(", ");
     const resourceNames = selectedResource.map((resource) => resource.name);
     const resourceString = resourceNames.join(", ");
@@ -312,13 +352,12 @@ const OrganizationCreate = () => {
     const weaknessNames = selectedWeakness.map((weakness) => weakness.name);
     const weaknessString = weaknessNames.join(", ");
 
-
     const organization = {
       name: factionName,
       wealth: wealth,
       influence: influence,
       structure: structure,
-      defence: defence,
+      defense: defense,
       origin: origin,
       logo: logo,
       leader: leader,
@@ -356,7 +395,7 @@ const OrganizationCreate = () => {
     wealth,
     influence,
     structure,
-    defence,
+    defense,
     origin,
     logo,
     leader,
@@ -423,128 +462,130 @@ const OrganizationCreate = () => {
                 wealth,
                 influence,
                 structure,
-                defence,
-                origin,
+                defense,
+                orgType,
                 logo,
                 leader,
+                initiation,
+                headquarter,
               ]}
               itemOptions={[
                 wealthOptions,
                 influenceOptions,
                 structureOptions,
-                defenceOptions,
-                originOptions,
+                defenseOptions,
+                orgTypeOptions,
                 logoOptions,
                 leaderOptions,
+                initiationOptions,
+                headquarterOptions,
               ]}
               setItem={[
                 setWealth,
                 setInfluence,
                 setStructure,
-                setDefence,
-                setOrigin,
+                setDefense,
+                setOrgType,
                 setLogo,
                 setLeader,
+                setInitiation,
+                setHeadquarter,
               ]}
               selectedItems={[
+                selectedMotive,
                 selectedIncome,
-                selectedItem,
-                selectedInfluenceTactic,
+                selectedResource,
+                selectedMember,
                 selectedFavored,
                 selectedPositive,
                 selectedNeutral,
                 selectedUnwelcome,
                 selectedIntolerant,
-                selectedService,
-                selectedInitiation,
+
                 selectedLowRole,
                 selectedMediumRole,
                 selectedHighRole,
-                selectedQuest,
                 selectedAdvance,
-                selectedBelief,
-                selectedOrgType,
-                selectedHeadquarter,
-                selectedBuilding,
-                selectedLocation,
-                selectedStronghold,
-                selectedResource,
-                selectedMotive,
+                selectedInfluenceTactic,
+                selectedService,
+                selectedQuest,
                 selectedPower,
                 selectedSpecialty,
                 selectedWeakness,
+                selectedBuilding,
+                selectedLocation,
+                selectedStronghold,
               ]}
               setSelectedItem={[
+                setSelectedMotive,
                 setSelectedIncome,
-                setSelectedItem,
-                setSelectedInfluenceTactic,
+                setSelectedResource,
+                setSelectedMember,
                 setSelectedFavored,
                 setSelectedPositive,
                 setSelectedNeutral,
                 setSelectedUnwelcome,
                 setSelectedIntolerant,
-                setSelectedService,
-                setSelectedInitiation,
+
                 setSelectedLowRole,
                 setSelectedMediumRole,
                 setSelectedHighRole,
-                setSelectedQuest,
                 setSelectedAdvance,
-                setSelectedBelief,
-                setSelectedOrgType,
-                setSelectedHeadquarter,
-                setSelectedBuilding,
-                setSelectedLocation,
-                setSelectedStronghold,
-                setSelectedResource,
-                setSelectedMotive,
+                setSelectedInfluenceTactic,
+                setSelectedService,
+                setSelectedQuest,
                 setSelectedPower,
                 setSelectedSpecialty,
                 setSelectedWeakness,
+                setSelectedBuilding,
+                setSelectedLocation,
+                setSelectedStronghold,
               ]}
               selectedItemOptions={[
+                motiveOptions,
                 incomeOptions,
-                itemOptions,
-                influenceTacticOptions,
+                resourceOptions,
+                memberOptions,
                 favoredOptions,
                 positiveOptions,
                 neutralOptions,
                 unwelcomeOptions,
                 intolerantOptions,
-                serviceOptions,
-                initiationOptions,
+
                 lowRoleOptions,
                 mediumRoleOptions,
                 highRoleOptions,
-                questOptions,
                 advanceOptions,
-                beliefOptions,
-                orgTypeOptions,
-                headquarterOptions,
-                buildingOptions,
-                locationOptions,
-                strongholdOptions,
-                resourceOptions,
-                motiveOptions,
+                influenceTacticOptions,
+                serviceOptions,
+                questOptions,
                 powerOptions,
                 specialtyOptions,
                 weaknessOptions,
+                buildingOptions,
+                locationOptions,
+                strongholdOptions,
               ]}
+              factionName={[factionName]}
+              factionNameOptions={[factionNameOptions]}
+              setFactionName={[setFactionName]}
             />
             <ClearButton
               setStringState={[
+                setFactionName,
                 setWealth,
                 setInfluence,
                 setStructure,
-                setDefence,
+                setDefense,
                 setOrigin,
                 setLogo,
                 setLeader,
+                setOrgType,
               ]}
               setArrayState={[
                 setSelectedIncome,
-                setSelectedItem,
                 setSelectedInfluenceTactic,
+                setSelectedMember,
                 setSelectedFavored,
                 setSelectedPositive,
                 setSelectedNeutral,
@@ -558,7 +599,6 @@ const OrganizationCreate = () => {
                 setSelectedQuest,
                 setSelectedAdvance,
                 setSelectedBelief,
-                setSelectedOrgType,
                 setSelectedHeadquarter,
                 setSelectedBuilding,
                 setSelectedLocation,
@@ -613,54 +653,42 @@ const OrganizationCreate = () => {
               )}
             </h1>
             <SectionRandom
-              value={[structure, origin, logo]}
-              setValue={[setStructure, setOrigin, setLogo]}
-              valueOptions={[structureOptions, originOptions, logoOptions]}
-              selectedValue={[selectedOrgType, selectedMotive, selectedBelief]}
-              setSelectedValue={[
-                setSelectedOrgType,
-                setSelectedMotive,
-                setSelectedBelief,
-              ]}
-              selectedValueOptions={[
-                orgTypeOptions,
-                motiveOptions,
-                beliefOptions,
-              ]}
+              value={[structure, logo, orgType]}
+              setValue={[setStructure, setLogo, setOrgType]}
+              valueOptions={[structureOptions, logoOptions, orgTypeOptions]}
+              selectedValue={[selectedMotive]}
+              setSelectedValue={[setSelectedMotive]}
+              selectedValueOptions={[motiveOptions]}
+              factionName={[factionName]}
+              factionNameOptions={[factionNameOptions]}
+              setFactionName={[setFactionName]}
             />
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-              <CustomInputText
-                title={"Organization Name"}
-                input={factionName}
-                setInput={setFactionName}
-                placeholder={"Set Org. Name"}
+            <CustomName
+                tableName={"factionNames"} 
+                name={factionName}
+                setName={setFactionName}
+                setNames={setFactionNames}
+                setNameOptions={setFactionNameOptions}
+                nameOptions={factionNameOptions}
+                title={"Name"}
+                placeholder={"Set Name"}
               />
-              <CustomDropdown
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"orgStructure"}
                 setSingular={setStructure}
                 setPlural={setStructures}
                 setOptions={setStructureOptions}
                 options={structureOptions}
-                h1Title={"Organization Structure"}
+                h1Title={"Structure"}
                 placeholder={"Set Structure"}
                 value={structure}
                 valueOptions={structureOptions}
               />
-              <CustomDropdown
-                tableName={"itemsTypes"}
-                setSingular={setOrigin}
-                setPlural={setOrigins}
-                setOptions={setOriginOptions}
-                options={originOptions}
-                h1Title={"Origin"}
-                placeholder={"Set Origin"}
-                value={origin}
-                valueOptions={originOptions}
-              />
-              <CustomDropdown
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"orgLogo"}
                 setSingular={setLogo}
                 setPlural={setLogos}
                 setOptions={setLogoOptions}
@@ -670,21 +698,19 @@ const OrganizationCreate = () => {
                 value={logo}
                 valueOptions={logoOptions}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"orgType"}
                 setSingular={setOrgType}
                 setPlural={setOrgTypes}
                 setOptions={setOrgTypeOptions}
-                h1Title={"Organization Type"}
-                dialogHeader={"Organization Type"}
-                selectedItem={selectedOrgType}
-                setSelectedItem={setSelectedOrgType}
-                list={orgTypeList}
-                setList={setOrgTypeList}
+                options={orgTypeOptions}
+                h1Title={"Type"}
+                placeholder={"Set Type"}
+                value={orgType}
                 valueOptions={orgTypeOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgMotive"}
                 setSingular={setMotive}
                 setPlural={setMotives}
                 setOptions={setMotiveOptions}
@@ -695,19 +721,6 @@ const OrganizationCreate = () => {
                 list={motiveList}
                 setList={setMotiveList}
                 valueOptions={motiveOptions}
-              />
-              <CustomDataTable
-                tableName={"itemsTypes"}
-                setSingular={setBelief}
-                setPlural={setBeliefs}
-                setOptions={setBeliefOptions}
-                h1Title={"Beliefs"}
-                dialogHeader={"Beliefs"}
-                selectedItem={selectedBelief}
-                setSelectedItem={setSelectedBelief}
-                list={beliefList}
-                setList={setBeliefList}
-                valueOptions={beliefOptions}
               />
             </div>
           </div>
@@ -724,23 +737,15 @@ const OrganizationCreate = () => {
               value={[wealth]}
               setValue={[setWealth]}
               valueOptions={[wealthOptions]}
-              selectedValue={[selectedIncome, selectedItem, selectedResource]}
-              setSelectedValue={[
-                setSelectedIncome,
-                setSelectedItem,
-                setSelectedResource,
-              ]}
-              selectedValueOptions={[
-                incomeOptions,
-                itemOptions,
-                resourceOptions,
-              ]}
+              selectedValue={[selectedIncome, selectedResource]}
+              setSelectedValue={[setSelectedIncome, setSelectedResource]}
+              selectedValueOptions={[incomeOptions, resourceOptions]}
             />
           </div>
           <div className={isResourceActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropdown
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"orgWealth"}
                 setSingular={setWealth}
                 setPlural={setWealths}
                 setOptions={setWealthOptions}
@@ -751,7 +756,7 @@ const OrganizationCreate = () => {
                 valueOptions={wealthOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgIncome"}
                 setSingular={setIncome}
                 setPlural={setIncomes}
                 setOptions={setIncomeOptions}
@@ -764,20 +769,7 @@ const OrganizationCreate = () => {
                 valueOptions={incomeOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
-                setSingular={setItem}
-                setPlural={setItems}
-                setOptions={setItemOptions}
-                h1Title={"Items"}
-                dialogHeader={"Items"}
-                selectedItem={selectedItem}
-                setSelectedItem={setSelectedItem}
-                list={itemList}
-                setList={setItemList}
-                valueOptions={itemOptions}
-              />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgResource"}
                 setSingular={setResource}
                 setPlural={setResources}
                 setOptions={setResourceOptions}
@@ -804,12 +796,15 @@ const OrganizationCreate = () => {
               value={[leader]}
               setValue={[setLeader]}
               valueOptions={[leaderOptions]}
+              selectedValue={[selectedMember]}
+              setSelectedValue={[setSelectedMember]}
+              selectedValueOptions={[memberOptions]}
             />
           </div>
           <div className={isMemberActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropdown
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"DBnpc"}
                 setSingular={setLeader}
                 setPlural={setLeaders}
                 setOptions={setLeaderOptions}
@@ -818,6 +813,19 @@ const OrganizationCreate = () => {
                 placeholder={"Set Leader"}
                 value={leader}
                 valueOptions={leaderOptions}
+              />
+              <CustomDataTable
+                  tableName={"DBnpc"}
+                  setSingular={setMember}
+                  setPlural={setMembers}
+                  setOptions={setMemberOptions}
+                  h1Title={"Members"}
+                  dialogHeader={"Members"}
+                  selectedItem={selectedMember}
+                  setSelectedItem={setSelectedMember}
+                  list={memberList}
+                  setList={setMemberList}
+                  valueOptions={memberOptions}
               />
             </div>
           </div>
@@ -831,13 +839,15 @@ const OrganizationCreate = () => {
               )}
             </h1>
             <SectionRandom
+              value={[initiation]}
+              setValue={[setInitiation]}
+              valueOptions={[initiationOptions]}
               selectedValue={[
                 selectedFavored,
                 selectedPositive,
                 selectedNeutral,
                 selectedUnwelcome,
                 selectedIntolerant,
-                selectedInitiation,
                 selectedLowRole,
                 selectedMediumRole,
                 selectedHighRole,
@@ -849,7 +859,6 @@ const OrganizationCreate = () => {
                 setSelectedNeutral,
                 setSelectedUnwelcome,
                 setSelectedIntolerant,
-                setSelectedInitiation,
                 setSelectedLowRole,
                 setSelectedMediumRole,
                 setSelectedHighRole,
@@ -861,7 +870,6 @@ const OrganizationCreate = () => {
                 neutralOptions,
                 unwelcomeOptions,
                 intolerantOptions,
-                initiationOptions,
                 lowRoleOptions,
                 mediumRoleOptions,
                 highRoleOptions,
@@ -871,8 +879,8 @@ const OrganizationCreate = () => {
           </div>
           <div className={isMembershipActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDataTableMember
+                tableName={"races"}
                 setSingular={setFavored}
                 setPlural={setFavoreds}
                 setOptions={setFavoredOptions}
@@ -883,9 +891,10 @@ const OrganizationCreate = () => {
                 list={favoredList}
                 setList={setFavoredList}
                 valueOptions={favoredOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDataTableMember
+                tableName={"races"}
                 setSingular={setPositive}
                 setPlural={setPositives}
                 setOptions={setPositiveOptions}
@@ -896,9 +905,10 @@ const OrganizationCreate = () => {
                 list={positiveList}
                 setList={setPositiveList}
                 valueOptions={positiveOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDataTableMember
+                tableName={"races"}
                 setSingular={setNeutral}
                 setPlural={setNeutrals}
                 setOptions={setNeutralOptions}
@@ -909,9 +919,10 @@ const OrganizationCreate = () => {
                 list={neutralList}
                 setList={setNeutralList}
                 valueOptions={neutralOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDataTableMember
+                tableName={"races"}
                 setSingular={setUnwelcome}
                 setPlural={setUnwelcomes}
                 setOptions={setUnwelcomeOptions}
@@ -922,9 +933,10 @@ const OrganizationCreate = () => {
                 list={unwelcomeList}
                 setList={setUnwelcomeList}
                 valueOptions={unwelcomeOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDataTableMember
+                tableName={"races"}
                 setSingular={setIntolerant}
                 setPlural={setIntolerants}
                 setOptions={setIntolerantOptions}
@@ -935,22 +947,22 @@ const OrganizationCreate = () => {
                 list={intolerantList}
                 setList={setIntolerantList}
                 valueOptions={intolerantOptions}
+                membershipState={membershipState}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDataTableMember
+                tableName={"orgInitiation"}
                 setSingular={setInitiation}
                 setPlural={setInitiations}
                 setOptions={setInitiationOptions}
+                options={initiationOptions}
                 h1Title={"Initiation"}
-                dialogHeader={"Initiation"}
-                selectedItem={selectedInitiation}
-                setSelectedItem={setSelectedInitiation}
-                list={initiationList}
-                setList={setInitiationList}
+                placeholder={"Set Initiation"}
+                value={initiation}
                 valueOptions={initiationOptions}
+                membershipState={membershipState}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgLowRank"}
                 setSingular={setLowRole}
                 setPlural={setLowRoles}
                 setOptions={setLowRoleOptions}
@@ -963,7 +975,7 @@ const OrganizationCreate = () => {
                 valueOptions={lowRoleOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgMediumRank"}
                 setSingular={setMediumRole}
                 setPlural={setMediumRoles}
                 setOptions={setMediumRoleOptions}
@@ -976,7 +988,7 @@ const OrganizationCreate = () => {
                 valueOptions={mediumRoleOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgHighRank"}
                 setSingular={setHighRole}
                 setPlural={setHighRoles}
                 setOptions={setHighRoleOptions}
@@ -989,7 +1001,7 @@ const OrganizationCreate = () => {
                 valueOptions={highRoleOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgAdvancement"}
                 setSingular={setAdvance}
                 setPlural={setAdvances}
                 setOptions={setAdvanceOptions}
@@ -1044,8 +1056,8 @@ const OrganizationCreate = () => {
           </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropdown
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"orgInfluenceLevel"}
                 setSingular={setInfluence}
                 setPlural={setInfluences}
                 setOptions={setInfluenceOptions}
@@ -1056,7 +1068,7 @@ const OrganizationCreate = () => {
                 valueOptions={influenceOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgInfluenceTactic"}
                 setSingular={setInfluenceTactic}
                 setPlural={setInfluenceTactics}
                 setOptions={setInfluenceTacticOptions}
@@ -1069,7 +1081,7 @@ const OrganizationCreate = () => {
                 valueOptions={influenceTacticOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgService"}
                 setSingular={setService}
                 setPlural={setServices}
                 setOptions={setServiceOptions}
@@ -1082,7 +1094,7 @@ const OrganizationCreate = () => {
                 valueOptions={serviceOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgQuest"}
                 setSingular={setQuest}
                 setPlural={setQuests}
                 setOptions={setQuestOptions}
@@ -1095,7 +1107,7 @@ const OrganizationCreate = () => {
                 valueOptions={questOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgPowerSource"}
                 setSingular={setPower}
                 setPlural={setPowers}
                 setOptions={setPowerOptions}
@@ -1108,7 +1120,7 @@ const OrganizationCreate = () => {
                 valueOptions={powerOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgSpecialty"}
                 setSingular={setSpecialty}
                 setPlural={setSpecialtys}
                 setOptions={setSpecialtyOptions}
@@ -1121,7 +1133,7 @@ const OrganizationCreate = () => {
                 valueOptions={specialtyOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgWeakness"}
                 setSingular={setWeakness}
                 setPlural={setWeaknesss}
                 setOptions={setWeaknessOptions}
@@ -1145,23 +1157,20 @@ const OrganizationCreate = () => {
               )}
             </h1>
             <SectionRandom
-              value={[defence]}
-              setValue={[setDefence]}
-              valueOptions={[defenceOptions]}
+              value={[defense, headquarter]}
+              setValue={[setDefense, setHeadquarter]}
+              valueOptions={[defenseOptions, headquarterOptions]}
               selectedValue={[
-                selectedHeadquarter,
                 selectedBuilding,
                 selectedLocation,
                 selectedStronghold,
               ]}
               setSelectedValue={[
-                setSelectedHeadquarter,
                 setSelectedBuilding,
                 setSelectedLocation,
                 setSelectedStronghold,
               ]}
               selectedValueOptions={[
-                headquarterOptions,
                 buildingOptions,
                 locationOptions,
                 strongholdOptions,
@@ -1170,32 +1179,30 @@ const OrganizationCreate = () => {
           </div>
           <div className={isBuildingActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropdown
-                tableName={"itemsTypes"}
-                setSingular={setDefence}
-                setPlural={setDefences}
-                setOptions={setDefenceOptions}
-                options={defenceOptions}
-                h1Title={"Defence Level"}
-                placeholder={"Set Defence"}
-                value={defence}
-                valueOptions={defenceOptions}
+              <CustomDropDown
+                tableName={"orgDefense"}
+                setSingular={setDefense}
+                setPlural={setDefenses}
+                setOptions={setDefenseOptions}
+                options={defenseOptions}
+                h1Title={"Defense Level"}
+                placeholder={"Set Defense"}
+                value={defense}
+                valueOptions={defenseOptions}
               />
-              <CustomDataTable
-                tableName={"itemsTypes"}
+              <CustomDropDown
+                tableName={"orgHeadquarter"}
                 setSingular={setHeadquarter}
                 setPlural={setHeadquarters}
                 setOptions={setHeadquarterOptions}
+                options={headquarterOptions}
                 h1Title={"Headquarters"}
-                dialogHeader={"Headquarters"}
-                selectedItem={selectedHeadquarter}
-                setSelectedItem={setSelectedHeadquarter}
-                list={headquarterList}
-                setList={setHeadquarterList}
+                placeholder={"Set Headquarters"}
+                value={headquarter}
                 valueOptions={headquarterOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgOwnedBuilding"}
                 setSingular={setBuilding}
                 setPlural={setBuildings}
                 setOptions={setBuildingOptions}
@@ -1208,7 +1215,7 @@ const OrganizationCreate = () => {
                 valueOptions={buildingOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgLocation"}
                 setSingular={setLocation}
                 setPlural={setLocations}
                 setOptions={setLocationOptions}
@@ -1221,7 +1228,7 @@ const OrganizationCreate = () => {
                 valueOptions={locationOptions}
               />
               <CustomDataTable
-                tableName={"itemsTypes"}
+                tableName={"orgStronghold"}
                 setSingular={setStronghold}
                 setPlural={setStrongholds}
                 setOptions={setStrongholdOptions}
@@ -1239,23 +1246,21 @@ const OrganizationCreate = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-          <NameDisplay value={factionName} setNewValue={setFactionName} />
+        <NameDisplay value={factionName} setNewValue={setFactionName} />
           <h2>
             Org. Structure{" "}
             <SingleDisplayText value={structure} setNewValue={setStructure} />
           </h2>
-          <h2>
-            Origin <SingleDisplayText value={origin} setNewValue={setOrigin} />
-          </h2>
+
           <h2>
             Logo <SingleDisplayText value={logo} setNewValue={setLogo} />
           </h2>
           <h2>
             Org. Type{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedOrgType}
-                setList={setOrgTypeList}
+              <SingleDisplayText
+                value={orgType}
+                setNewValue={setSelectedOrgType}
               />
             </span>
           </h2>
@@ -1264,48 +1269,32 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedMotive}
-                setList={setMotiveList}
+                setNewValue={setSelectedMotive}
               />
             </span>
           </h2>
-          <h2>
-            Beliefs{" "}
-            <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedBelief}
-                setList={setBeliefList}
-              />
-            </span>
-          </h2>
+
           <h1>Resources</h1>
           <hr className={ns.lineBreak} />
           <h2>
-            Wealth <span className={style.minorText2}>{wealth}</span>
+            Wealth <SingleDisplayText value={wealth} setNewValue={setWealth} />
           </h2>
           <h2>
             Income Source{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedIncome}
-                setList={setIncomeList}
+                setNewValue={setSelectedIncome}
               />
             </span>
           </h2>
-          <h2>
-            Items{" "}
-            <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedItem}
-                setList={setItemList}
-              />
-            </span>
-          </h2>
+
           <h2>
             Resources{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedResource}
-                setList={setResourceList}
+                setNewValue={setSelectedResource}
               />
             </span>
           </h2>
@@ -1315,7 +1304,13 @@ const OrganizationCreate = () => {
             Leader <SingleDisplayText value={leader} setNewValue={setLeader} />
           </h2>
           <h2>
-            Important Members <span className={style.minorText2}></span>
+            Important Members{" "}
+            <span className={style.minorText2}>
+              <MultipleDisplay
+                selectedItem={selectedMember}
+                setNewValue={setSelectedMember}
+              />
+            </span>
           </h2>
           <h1>Membership</h1>
           <hr className={ns.lineBreak} />
@@ -1324,7 +1319,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedFavored}
-                setList={setFavoredList}
+                setNewValue={setSelectedFavored}
               />
             </span>
           </h2>
@@ -1333,7 +1328,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedPositive}
-                setList={setPositiveList}
+                setNewValue={setSelectedPositive}
               />
             </span>
           </h2>
@@ -1342,7 +1337,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedNeutral}
-                setList={setNeutralList}
+                setNewValue={setSelectedNeutral}
               />
             </span>
           </h2>
@@ -1351,7 +1346,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedUnwelcome}
-                setList={setUnwelcomeList}
+                setNewValue={setSelectedUnwelcome}
               />
             </span>
           </h2>
@@ -1360,16 +1355,16 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedIntolerant}
-                setList={setIntolerantList}
+                setNewValue={setSelectedIntolerant}
               />
             </span>
           </h2>
           <h2>
             Initiation{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedInitiation}
-                setList={setInitiationList}
+              <SingleDisplayText
+                value={initiation}
+                setNewValue={setInitiation}
               />
             </span>
           </h2>
@@ -1378,7 +1373,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedLowRole}
-                setList={setLowRoleList}
+                setNewValue={setSelectedLowRole}
               />
             </span>
           </h2>
@@ -1387,7 +1382,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedMediumRole}
-                setList={setMediumRoleList}
+                setNewValue={setSelectedMediumRole}
               />
             </span>
           </h2>
@@ -1396,7 +1391,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedHighRole}
-                setList={setHighRoleList}
+                setNewValue={setSelectedHighRole}
               />
             </span>
           </h2>
@@ -1405,7 +1400,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedAdvance}
-                setList={setAdvanceList}
+                setNewValue={setSelectedAdvance}
               />
             </span>
           </h2>
@@ -1420,7 +1415,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedInfluenceTactic}
-                setList={setInfluenceTacticList}
+                setNewValue={setSelectedInfluenceTactic}
               />
             </span>
           </h2>
@@ -1429,7 +1424,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedService}
-                setList={setServiceList}
+                setNewValue={setSelectedService}
               />
             </span>
           </h2>
@@ -1438,7 +1433,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedQuest}
-                setList={setQuestList}
+                setNewValue={setSelectedQuest}
               />
             </span>
           </h2>
@@ -1447,7 +1442,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedPower}
-                setList={setPowerList}
+                setNewValue={setSelectedPower}
               />
             </span>
           </h2>
@@ -1456,7 +1451,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedSpecialty}
-                setList={setSpecialtyList}
+                setNewValue={setSelectedSpecialty}
               />
             </span>
           </h2>
@@ -1465,22 +1460,22 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedWeakness}
-                setList={setWeaknessList}
+                setNewValue={setSelectedWeakness}
               />
             </span>
           </h2>
           <h1>Buildings</h1>
           <hr className={ns.lineBreak} />
           <h2>
-            Defence Level{" "}
-            <SingleDisplayText value={defence} setNewValue={setDefence} />
+            Defense Level{" "}
+            <SingleDisplayText value={defense} setNewValue={setDefense} />
           </h2>
           <h2>
             Headquarters{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay
-                selectedItem={selectedHeadquarter}
-                setList={setHeadquarterList}
+              <SingleDisplayText
+                value={headquarter}
+                setNewValue={setHeadquarter}
               />
             </span>
           </h2>
@@ -1489,7 +1484,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedBuilding}
-                setList={setBuildingList}
+                setNewValue={setSelectedBuilding}
               />
             </span>
           </h2>
@@ -1498,7 +1493,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedLocation}
-                setList={setLocationList}
+                setNewValue={setLocationList}
               />
             </span>
           </h2>
@@ -1507,7 +1502,7 @@ const OrganizationCreate = () => {
             <span className={style.minorText2}>
               <MultipleDisplay
                 selectedItem={selectedStronghold}
-                setList={setStrongholdList}
+                setNewValue={setStrongholdList}
               />
             </span>
           </h2>
