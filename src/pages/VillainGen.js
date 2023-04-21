@@ -413,7 +413,7 @@ const VillainGen = () => {
     );
   }, [selectedSense]);
 
-  //*****Added new stuff
+  //set Villain
   const divRef = useRef();
   useEffect(() => {
     const saveNames = selectedSaveModifiers.map(
@@ -470,7 +470,7 @@ const VillainGen = () => {
       skin: skinColor,
       motive: motive,
       goal: goal,
-      affliation: affliation,
+      affiliation: affliation,
       weakness: weakness,
       powerSource: powerSource,
       minion: minion,
@@ -503,7 +503,7 @@ const VillainGen = () => {
       legendary: legendString,
       lair: lairString,
       email: session.user.email,
-      // DSOASDFASDFASDF
+      
     };
     setVillain(monster);
   }, [
@@ -537,6 +537,30 @@ const VillainGen = () => {
     selectedLair,
     selectedSkillModifiers,
     session,
+    affliation,
+    age,
+    beardStyle,
+    burrowSpeed,
+    climbSpeed,
+    eyeColor,
+    flySpeed,
+    goal,
+    hairColor,
+    hairStyle,
+    hairType,
+    hoverSpeed,
+    motive,
+    powerSource,
+    heightFt,
+    heightIn,
+    minion,
+    race,
+    sex,
+    skinColor,
+    stronghold,
+    swimSpeed,
+    weight,
+    weakness,
   ]);
 
   //Info content
@@ -903,7 +927,7 @@ const VillainGen = () => {
             <h1>
               Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={villain} />
+                <ExportButtons div={divRef} data={villain} tableName={"DBvillain"}/>
               </div>
             </h1>
             {/* ToolTip */}

@@ -28,6 +28,7 @@ function NotePage(props) {
   const [itemDetails, setItemDetails] = useState([]);
   const [monsterDetails, setMonsterDetails] = useState([]);
   const [pantheonDetails, setPantheonDetails] = useState([]);
+  const [villainDetails, setVillainDetails] = useState([]);
 
   const [noteText, setNoteText] = useState("");
   const [propertyValue, setPropertyValue] = useState("");
@@ -456,6 +457,42 @@ function NotePage(props) {
     fetchData();
   }, [noteText, propertyValue, deletedNode, showPopup]);
 
+  //Get Villain
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBvillain")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setPantheonDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setPantheonDetails(
+          dataName.map((r) => ({
+            folder: r.folder,
+            uuid: r.uuid,
+            name: r.name,
+            type: r.type,
+            alignment: r.alignment,
+            size: r.size,
+            plane: r.plane,
+           domain: r.domain,
+           motive: r.motive,
+           provide: r.provide,
+           artifact: r.artifact,
+            notes: r.notes,
+            links: r.links,
+            email: r.email,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, [noteText, propertyValue, deletedNode, showPopup]);
+
 
   //Gets details of selected node
   const handleSelectedNode = useCallback(() => {
@@ -466,6 +503,7 @@ function NotePage(props) {
       itemDetails,
       monsterDetails,
       pantheonDetails,
+      villainDetails,
     );
     setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
   }, [
@@ -477,6 +515,7 @@ function NotePage(props) {
     itemDetails,
     monsterDetails,
     pantheonDetails,
+    villainDetails,
   ]);
 
   useEffect(() => {
@@ -509,6 +548,7 @@ function NotePage(props) {
               item={itemDetails}
               monster={monsterDetails}
               pantheon={pantheonDetails}
+              villain={villainDetails}
               selectedNode={selectedNode}
               setSelectedId={setSelectedId}
               selectedId={selectedId}
