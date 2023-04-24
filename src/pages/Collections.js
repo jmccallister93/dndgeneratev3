@@ -14,12 +14,12 @@ const Collections = () => {
   return (
     <div className={style.collectionWrapper}>
       {/* <Navbar /> */}
-      <h1 className={style.collectionHeader}>Collections</h1>
+      {/* <h1 className={style.collectionHeader}>Collections</h1>
       <div className={style.collectionCardWrapper}>
         <Link className={style.collectionLink} to="/itemcollection">
           {cardItemCollection}
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -106,11 +106,11 @@ const VillainGen = () => {
   const [goalList, setGoalList] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState([]);
 
-  const [affliation, setAffliation] = useState("");
-  const [affliations, setAffliations] = useState("");
-  const [affliationOptions, setAffliationOptions] = useState("");
-  const [affliationList, setAffliationList] = useState([]);
-  const [selectedAffliation, setSelectedAffliation] = useState([]);
+  const [affiliation, setAffiliation] = useState("");
+  const [affiliations, setAffiliations] = useState("");
+  const [affiliationOptions, setAffiliationOptions] = useState("");
+  const [affiliationList, setAffiliationList] = useState([]);
+  const [selectedAffiliation, setSelectedAffiliation] = useState([]);
 
   const [weakness, setWeakness] = useState("");
   const [weaknesses, setWeaknesses] = useState("");
@@ -454,6 +454,18 @@ const VillainGen = () => {
     const legendString = legendNames.join("");
     const lairNames = selectedLair.map((item) => item.name);
     const lairString = lairNames.join(", ");
+    const motiveString = selectedMotive.map((item) => item.name);
+    const motiveNames = motiveString.join(", ");
+    const goalString = selectedGoal.map((item) => item.name);
+    const goalNames = goalString.join(", ");
+    const affiliationString = selectedAffiliation.map((item) => item.name);
+    const affiliationNames = affiliationString.join(", ");
+    const weaknessString = selectedWeakness.map((item) => item.name);
+    const weaknessNames = weaknessString.join(", ");
+    const powerSourceString = selectedPowerSource.map((item) => item.name);
+    const powerSourceNames = powerSourceString.join(", ");
+    const minionString = selectedMinion.map((item) => item.name);
+    const minionNames = minionString.join(", ");
 
     const monster = {
       name: villainName,
@@ -468,12 +480,12 @@ const VillainGen = () => {
       beardStyle: beardStyle,
       eyes: eyeColor,
       skin: skinColor,
-      motive: motive,
-      goal: goal,
-      affiliation: affliation,
-      weakness: weakness,
-      powerSource: powerSource,
-      minion: minion,
+      motive: motiveNames,
+      goal: goalNames,
+      affiliation: affiliationNames,
+      weakness: weaknessNames,
+      powerSource: powerSourceNames,
+      minion: minionNames,
       stronghold: stronghold,
       ac: ac,
       armorType: armorType,
@@ -503,7 +515,7 @@ const VillainGen = () => {
       legendary: legendString,
       lair: lairString,
       email: session.user.email,
-      
+      folder: "Villain"
     };
     setVillain(monster);
   }, [
@@ -537,30 +549,29 @@ const VillainGen = () => {
     selectedLair,
     selectedSkillModifiers,
     session,
-    affliation,
     age,
     beardStyle,
-    burrowSpeed,
-    climbSpeed,
     eyeColor,
-    flySpeed,
     goal,
     hairColor,
     hairStyle,
     hairType,
-    hoverSpeed,
-    motive,
-    powerSource,
     heightFt,
     heightIn,
-    minion,
+    minions,
     race,
     sex,
     skinColor,
     stronghold,
-    swimSpeed,
     weight,
-    weakness,
+    selectedWeakness,
+    selectedMotive,
+    selectedAffiliation,
+    selectedPowerSource,
+    selectedMinion,
+    selectedMotive,
+    selectedGoal,
+    
   ]);
 
   //Info content
@@ -600,7 +611,6 @@ const VillainGen = () => {
                 race,
                 stronghold,
                 armorType,
-                
                 sex,
                 hairColor,
                 hairType,
@@ -614,7 +624,6 @@ const VillainGen = () => {
                 raceOptions,
                 strongholdOptions,
                 armorTypeOptions,
-                
                 sexOptions,
                 hairColorOptions,
                 hairTypeOptions,
@@ -628,7 +637,6 @@ const VillainGen = () => {
                 setRace,
                 setStronghold,
                 setArmorType,
-               
                 setSex,
                 setHairColor,
                 setHairType,
@@ -641,7 +649,7 @@ const VillainGen = () => {
               selectedItemOptions={[
                 motiveOptions,
                 goalOptions,
-                affliationOptions,
+                affiliationOptions,
                 weaknessOptions,
                 powerSourceOptions,
                 minionOptions,
@@ -661,7 +669,7 @@ const VillainGen = () => {
               selectedItems={[
                 selectedMotive,
                 selectedGoal,
-                selectedAffliation,
+                selectedAffiliation,
                 selectedWeakness,
                 selectedPowerSource,
                 selectedMinion,
@@ -681,7 +689,7 @@ const VillainGen = () => {
               setSelectedItem={[
                 setSelectedMotive,
                 setSelectedGoal,
-                setSelectedAffliation,
+                setSelectedAffiliation,
                 setSelectedWeakness,
                 setSelectedPowerSource,
                 setSelectedMinion,
@@ -905,7 +913,7 @@ const VillainGen = () => {
               setArrayState={[
                 setSelectedMotive,
                 setSelectedGoal,
-                setSelectedAffliation,
+                setSelectedAffiliation,
                 setSelectedWeakness,
                 setSelectedPowerSource,
                 setSelectedMinion,
@@ -1161,7 +1169,7 @@ const VillainGen = () => {
               selectedValue={[
                 selectedMotive,
                 selectedGoal,
-                selectedAffliation,
+                selectedAffiliation,
                 selectedWeakness,
                 selectedPowerSource,
                 selectedMinion,
@@ -1169,7 +1177,7 @@ const VillainGen = () => {
               setSelectedValue={[
                 setSelectedMotive,
                 setSelectedGoal,
-                setSelectedAffliation,
+                setSelectedAffiliation,
                 setSelectedWeakness,
                 setSelectedPowerSource,
                 setSelectedMinion,
@@ -1177,7 +1185,7 @@ const VillainGen = () => {
               selectedValueOptions={[
                 motiveOptions,
                 goalOptions,
-                affliationOptions,
+                affiliationOptions,
                 weaknessOptions,
                 powerSourceOptions,
                 minionOptions,
@@ -1218,18 +1226,18 @@ const VillainGen = () => {
               />
               <CustomDataTable
                 tableName={"DBorganization"}
-                setSingular={setAffliation}
-                setPlural={setAffliations}
-                setOptions={setAffliationOptions}
-                h1Title={"Affliations"}
-                dialogHeader={"Affliations"}
-                placeholder={"Set Affliations"}
-                valueOptions={affliationOptions}
-                list={affliationList}
-                setList={setAffliationList}
-                selectedItem={selectedAffliation}
-                setSelectedItem={setSelectedAffliation}
-                options={affliationOptions}
+                setSingular={setAffiliation}
+                setPlural={setAffiliations}
+                setOptions={setAffiliationOptions}
+                h1Title={"Affiliations"}
+                dialogHeader={"Affiliations"}
+                placeholder={"Set Affiliations"}
+                valueOptions={affiliationOptions}
+                list={affiliationList}
+                setList={setAffiliationList}
+                selectedItem={selectedAffiliation}
+                setSelectedItem={setSelectedAffiliation}
+                options={affiliationOptions}
               />
               <CustomDataTable
                 tableName={"villainWeakness"}
@@ -2072,11 +2080,11 @@ const VillainGen = () => {
             </span>
           </h2>
           <h2>
-            Affliations{" "}
+            Affiliations{" "}
             <span className={style.minorText2}>
               <MultipleDisplay
-                selectedItem={selectedAffliation}
-                setNewValue={setSelectedAffliation}
+                selectedItem={selectedAffiliation}
+                setNewValue={setSelectedAffiliation}
               />
             </span>
           </h2>

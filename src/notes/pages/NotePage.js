@@ -52,7 +52,9 @@ function NotePage(props) {
         const questResponse = await supabase.from("DBquest").select("uuid");
         const itemResponse = await supabase.from("DBitem").select("uuid");
         const monsterResponse = await supabase.from("DBmonster").select("uuid");
-        const pantheonResponse = await supabase.from("DBpantheon").select("uuid");
+        const pantheonResponse = await supabase
+          .from("DBpantheon")
+          .select("uuid");
 
         //Create arrays of uuids
         const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
@@ -443,10 +445,10 @@ function NotePage(props) {
             alignment: r.alignment,
             size: r.size,
             plane: r.plane,
-           domain: r.domain,
-           motive: r.motive,
-           provide: r.provide,
-           artifact: r.artifact,
+            domain: r.domain,
+            motive: r.motive,
+            provide: r.provide,
+            artifact: r.artifact,
             notes: r.notes,
             links: r.links,
             email: r.email,
@@ -466,33 +468,68 @@ function NotePage(props) {
       if (errorName) {
         setFetchError("Could not fetch the data");
         console.log(errorName);
-        setPantheonDetails(null);
+        setVillainDetails(null);
       }
       if (dataName) {
         setFetchError(null);
-        setPantheonDetails(
+        setVillainDetails(
           dataName.map((r) => ({
             folder: r.folder,
             uuid: r.uuid,
             name: r.name,
-            type: r.type,
-            alignment: r.alignment,
-            size: r.size,
-            plane: r.plane,
-           domain: r.domain,
-           motive: r.motive,
-           provide: r.provide,
-           artifact: r.artifact,
-            notes: r.notes,
-            links: r.links,
+            race: r.race,
+            sex: r.sex,
+            age: r.age,
+            height: r.height,
+            weight: r.weight,
+            hairColor: r.hairColor,
+            hairType: r.hairType,
+            hairStyle: r.hairStyle,
+            beardStyle: r.beardStyle,
+            eyes: r.eyeColor,
+            skin: r.skinColor,
+            motive: r.motive,
+            goal: r.goal,
+            affiliation: r.affiliation,
+            weakness: r.weakness,
+            powerSource: r.powerSource,
+            minion: r.minion,
+            stronghold: r.stronghold,
+            ac: r.ac,
+            armorType: r.armorType,
+            hp: r.hp,
+            speed: r.speed,
+            fly: r.fly,
+            swim: r.swim,
+            climb: r.climb,
+            burrow: r.burrow,
+            hover: r.hover,
+            str: r.str,
+            dex: r.dex,
+            con: r.con,
+            int: r.int,
+            wis: r.wis,
+            cha: r.cha,
+            save: r.save,
+            skill: r.skill,
+            sense: r.sense,
+            language: r.language,
+            vuln: r.vuln,
+            resist: r.resist,
+            immune: r.immune,
+            condition: r.condition,
+            ability: r.ability,
+            action: r.action,
+            legendary: r.legendary,
+            lair: r.lair,
             email: r.email,
+            notes: r.notes,
           }))
         );
       }
     };
     fetchData();
   }, [noteText, propertyValue, deletedNode, showPopup]);
-
 
   //Gets details of selected node
   const handleSelectedNode = useCallback(() => {
@@ -503,7 +540,7 @@ function NotePage(props) {
       itemDetails,
       monsterDetails,
       pantheonDetails,
-      villainDetails,
+      villainDetails
     );
     setSelectedNode(allDetails.find((r) => r.uuid === selectedId));
   }, [

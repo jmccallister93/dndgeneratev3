@@ -36,6 +36,7 @@ const CollectionPage = () => {
   const [isMonsterActive, setIsMonsterActive] = useState(false);
   const [isItemActive, setIsItemActive] = useState(false);
   const [isPantheonActive, setIsPantheonActive] = useState(false);
+  const [isVillainActive, setIsVillainActive] = useState(false);
 
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -57,9 +58,12 @@ const CollectionPage = () => {
   const onItemClick = () => {
     setIsItemActive(!isItemActive);
   };
-
   const onPantheonClick = () => {
     setIsPantheonActive(!isPantheonActive);
+  };
+
+  const onVillainClick = () => {
+    setIsVillainActive(!isVillainActive);
   };
 
   //Get Locations

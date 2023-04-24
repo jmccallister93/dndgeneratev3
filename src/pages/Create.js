@@ -228,9 +228,9 @@ const Create = () => {
         <Link className={style.createLink} to="/pantheongen">
           {cardPantheonGen}
         </Link>
-        <Link className={style.createLink} to="/spellgen">
+        {/* <Link className={style.createLink} to="/spellgen">
           {cardSpellGen}
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
