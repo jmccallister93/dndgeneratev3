@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
-import { supabase, auth } from "../config/supabaseClient";
 import { Card } from "primereact/card";
 import CollectionItem from "./CollectionItem";
-import InfoModal from "../components/InfoModal";
-import { Dialog } from "primereact/dialog";
 
 const CollectionTable = (props) => {
   const [isItemActive, setIsItemActive] = useState(false);

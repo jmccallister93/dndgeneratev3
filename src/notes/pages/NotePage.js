@@ -55,6 +55,9 @@ function NotePage(props) {
         const pantheonResponse = await supabase
           .from("DBpantheon")
           .select("uuid");
+          const villainResponse = await supabase
+          .from("DBvillain")
+          .select("uuid");
 
         //Create arrays of uuids
         const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
@@ -74,6 +77,9 @@ function NotePage(props) {
         const pantheonUuids = [].concat(
           pantheonResponse.data.map((pantheon) => pantheon.uuid)
         );
+        const villainUuids = [].concat(
+          villainResponse.data.map((villain) => villain.uuid)
+        );
 
         //Compare selectedId to uuids to determine which table to update
         if (npcUuids.includes(selectedId)) {
@@ -90,6 +96,8 @@ function NotePage(props) {
           setDbTable("DBmonster");
         } else if (pantheonUuids.includes(selectedId)) {
           setDbTable("DBpantheon");
+        } else if (villainUuids.includes(selectedId)) {
+          setDbTable("DBvillain");
         }
       } catch (error) {
         console.error("Error fetching tables:", error);
@@ -124,6 +132,8 @@ function NotePage(props) {
       console.error("Error updating note:" + error);
     }
     setPropertyValue(updatedNode);
+
+    // console.log("Fired")
   };
 
   //Delete Node
@@ -236,7 +246,7 @@ function NotePage(props) {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, deletedNode, showPopup]);
+  }, [noteText, propertyValue, deletedNode, showPopup, ]);
 
   //Get Organizations
   useEffect(() => {
@@ -522,8 +532,8 @@ function NotePage(props) {
             action: r.action,
             legendary: r.legendary,
             lair: r.lair,
-            email: r.email,
             notes: r.notes,
+            email: r.email,
           }))
         );
       }

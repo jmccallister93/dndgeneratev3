@@ -85,6 +85,7 @@ function Note(props) {
         event.preventDefault();
         updateProperty();
         setSelectedPropertyIndex(-1);
+        updateProperty(props, props.selectedNode[props]);
       } else {
         setSelectedNoteIndex(-1);
         setAllNotes(
