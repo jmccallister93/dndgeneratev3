@@ -6,36 +6,43 @@ import { supabase } from "../config/supabaseClient";
 const ResetPassword = (props) => {
   const [email, setEmail] = useState("");
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const [isResetLinkClicked, setIsResetLinkClicked] = useState(false);
 
   // Handle password reset flow
   useEffect(() => {
     const handlePasswordRecovery = async (event, session) => {
       if (event === "PASSWORD_RECOVERY") {
-        const newPassword = prompt(
-          "What would you like your new password to be?"
-        );
-        const { data, error } = await supabase.auth.update({
-          password: newPassword,
-        });
-        if (data) alert("Password updated successfully!");
-        if (error) alert("There was an error updating your password.");
+        setIsResetLinkClicked(true);
       }
     };
+    // {
+    //   if (event === "PASSWORD_RECOVERY") {
+    //     const newPassword = prompt(
+    //       "What would you like your new password to be?"
+    //     );
+    //     const { data, error } = await supabase.auth.update({
+    //       password: newPassword,
+    //     });
+    //     if (data) alert("Password updated successfully!");
+    //     if (error) alert("There was an error updating your password.");
+    //   }
+    // };
 
     supabase.auth.onAuthStateChange(handlePasswordRecovery);
 
     // Clean up event listener
     // return () => {
-    //     supabase.auth.offAuthStateChange(callback);
+    //   supabase.auth.offAuthStateChange(handlePasswordRecovery);
     // };
   }, []);
 
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { data, error } = await supabase.auth.resetPasswordForEmail(
-      email
-    );
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo:
+        "https://jmccallister93.github.io/dndgeneratev3/resetPassword",
+    });
     if (error) {
       console.log(error);
     } else {
@@ -46,21 +53,37 @@ const ResetPassword = (props) => {
   return (
     <>
       <div className={style.mainWrapper}>
-        <form className={style.form} onSubmit={handleSubmit}>
-          <h3 className={style.formHeader}>Email: </h3>
-          <input
-            className={style.formInput}
-            type="email"
-            value={email}
-            placeholder="123abc@gmail.com"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button className={style.formButton} type="submit">
-            Send Reset Email
-          </button>
-        </form>
+        {isResetLinkClicked ? (
+          <form className={style.form} onSubmit={handleSubmit}>
+            <h3 className={style.formHeader}>Reset Password for {email}</h3>
+            <input
+              className={style.formInput}
+              type="password"
+              placeholder="New password"
+            />
+            <button className={style.formButton} type="submit">
+              Set New Password
+            </button>
+          </form>
+        ) : (
+          <form className={style.form} onSubmit={handleSubmit}>
+            <h3 className={style.formHeader}>Email: </h3>
+            <input
+              className={style.formInput}
+              type="email"
+              value={email}
+              placeholder="123abc@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button className={style.formButton} type="submit">
+              Send Reset Email
+            </button>
+          </form>
+        )}
         {isEmailSent && (
-          <h3 className={style.formHeader}>Please check your email for the password reset link.</h3>
+          <h3 className={style.formHeader}>
+            Please check your email for the password reset link.
+          </h3>
         )}
       </div>
     </>
