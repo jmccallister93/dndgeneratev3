@@ -5,26 +5,43 @@ import { supabase } from "../config/supabaseClient";
 
 const ResetPassword = (props) => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
-  //Reset password function
+  // Handle password reset flow
+  useEffect(() => {
+    const handlePasswordRecovery = async (event, session) => {
+      if (event === "PASSWORD_RECOVERY") {
+        const newPassword = prompt(
+          "What would you like your new password to be?"
+        );
+        const { data, error } = await supabase.auth.update({
+          password: newPassword,
+        });
+        if (data) alert("Password updated successfully!");
+        if (error) alert("There was an error updating your password.");
+      }
+    };
+
+    supabase.auth.onAuthStateChange(handlePasswordRecovery);
+
+    // Clean up event listener
+    // return () => {
+    //     supabase.auth.offAuthStateChange(callback);
+    // };
+  }, []);
+
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { data, error } = await supabase.auth.api.resetPasswordForEmail(
-      email,
-      { redirectTo: "localhost:3000/" }
+    const { data, error } = await supabase.auth.resetPasswordForEmail(
+      email
     );
-  };
-
-  //Verify user email exists
-  useEffect(() => {
-    const getUsers = async () => {
-        const { data: users, error } = await supabase.auth.api.listUsers();
-        console.log(users);
+    if (error) {
+      console.log(error);
+    } else {
+      setIsEmailSent(true);
     }
-    getUsers();
-    
-  }, []);
+  };
 
   return (
     <>
@@ -42,6 +59,9 @@ const ResetPassword = (props) => {
             Send Reset Email
           </button>
         </form>
+        {isEmailSent && (
+          <h3 className={style.formHeader}>Please check your email for the password reset link.</h3>
+        )}
       </div>
     </>
   );
