@@ -13,6 +13,7 @@ import ContextMenu from "./ContextMenu";
 import userEvent from "@testing-library/user-event";
 import NodeList from "./NodeList";
 import MonsterCreate from "./MonsterCreate";
+import NpcOptions from "./NpcOptions";
 
 const NoteTreeTable = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -33,6 +34,7 @@ const NoteTreeTable = (props) => {
 
   useEffect(() => {}, [props.location]);
 
+  //ExtractNames
   const extractNames = (objectArray) => {
     if (!Array.isArray(objectArray)) return {};
 
@@ -63,12 +65,9 @@ const NoteTreeTable = (props) => {
   const quest = extractNames(props.quest);
   const item = extractNames(props.item);
   const monster = extractNames(props.monster);
-  
-  
 
   // Show folders
   const [visibleFolders, setVisibleFolders] = useState({});
-
   const toggleFolderVisibility = (folder) => {
     setVisibleFolders((prevState) => ({
       ...prevState,
@@ -137,7 +136,8 @@ const NoteTreeTable = (props) => {
                   X
                 </button>
               </div>
-              <NpcCreate />
+              {/* <NpcCreate /> */}
+              <NpcOptions setShowPopUp={props.setShowPopUp} showPopup={props.showPopup}/>
             </div>
           </div>
         )}

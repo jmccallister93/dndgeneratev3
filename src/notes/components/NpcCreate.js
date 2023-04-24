@@ -410,6 +410,7 @@ const NpcCreate = () => {
   return (
     <div className={ns.mainWrapper}>
       <div className={style.topHeader}> 
+      <h1 className={style.mainHeader}>NPC Generator</h1>
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             {/* Generate Clear Btns */}
