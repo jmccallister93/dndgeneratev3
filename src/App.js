@@ -37,6 +37,7 @@ import { useState, useEffect } from "react";
 import { SessionContext } from "./config/SessionContext";
 import { supabase } from "./config/supabaseClient";
 import Navbar from "./components/Navbar";
+import ResetPassword from "./pages/ResetPassword";
 
 
 function App() {
@@ -96,6 +97,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/npcgen" element={<NpcGen />} />
             <Route path="/itemcollection" element={<ItemCollection />} />
             <Route path="/itemgen" element={<ItemGen />} />

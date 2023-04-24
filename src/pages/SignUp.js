@@ -6,6 +6,7 @@ import { supabase, auth } from "../config/supabaseClient";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
 
   //signup function
   async function handleSignup(email, password) {
@@ -15,9 +16,9 @@ const SignUp = () => {
     });
 
     if (error) {
-      console.log(error.message);
+      setSuccess(false);
     } else {
-      console.log(user);
+      setSuccess(true);
     }
   }
  
@@ -33,6 +34,11 @@ const SignUp = () => {
       <div>
         <h1 className={style.mainHeader}>Signup</h1>
       </div>
+      {success ? (
+        <div className={style.formHeader}>
+          An email has been sent to your inbox, please follow the link to verify
+        </div>
+      ) : (
       <form className={style.form} onSubmit={handleSubmit}>
       <h3 className={style.formHeader}>Email: </h3>
         <input
@@ -54,6 +60,7 @@ const SignUp = () => {
           Sign up
         </button>
       </form>
+      )}
     </div>
   );
 };
