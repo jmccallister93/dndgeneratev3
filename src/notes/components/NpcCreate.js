@@ -31,6 +31,7 @@ import SectionRandom from "../../components/SectionRandom";
 import ns from "../../stylesheets/Note.module.scss";
 import { v4 as uuidv4 } from 'uuid';
 import { SessionContext } from "../../config/SessionContext";
+import RandomHookNpc from "../../components/RandomHookNpc";
 
 const NpcCreate = () => {
   const session = useContext(SessionContext);
@@ -1228,7 +1229,7 @@ const NpcCreate = () => {
           <h2>
             Hook{" "}
             <span className={style.minorText2}>
-              <RandomHooks type={questType} value={hook} setValue={setHook} />
+              <RandomHookNpc type={questType} value={hook} setValue={setHook} />
               {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
             </span>
           </h2>

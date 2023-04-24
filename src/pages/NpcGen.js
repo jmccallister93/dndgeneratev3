@@ -34,6 +34,7 @@ import InfoModal from "../components/InfoModal";
 import NameGenerator from "../components/NameGenerator";
 import AgeHeightWeight from "../components/AgeHeightWeight";
 import SectionRandom from "../components/SectionRandom";
+import RandomHookNpc from "../components/RandomHookNpc";
 
 const NpcGen = () => {
   const [isButtonsActive, setIsButtonsActive] = useState(false);
@@ -1237,7 +1238,7 @@ const NpcGen = () => {
           <h2>
             Hook{" "}
             <span className={style.minorText2}>
-              <RandomHooks type={questType} value={hook} setValue={setHook} />
+              <RandomHookNpc type={questType} value={hook} setValue={setHook} />
               {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
             </span>
           </h2>
