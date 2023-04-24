@@ -19,6 +19,7 @@ const CollectionPage = () => {
   const [questDetails, setQuestDetails] = useState([]);
   const [itemDetails, setItemDetails] = useState([]);
   const [pantheonDetails, setPantheonDetails] = useState([]);
+  const [villainDetails, setVillainDetails] = useState([]);
 
   const [displayLocation, setDisplayLocation] = useState([]);
   const [displayNpc, setDisplayNpc] = useState([]);
@@ -27,6 +28,7 @@ const CollectionPage = () => {
   const [displayQuest, setDisplayQuest] = useState([]);
   const [displayItem, setDisplayItem] = useState([]);
   const [displayPantheon, setDisplayPantheon] = useState([]);
+  const [displayVillain, setDisplayVillain] = useState([]);
 
   //Create onClick function for npc collection that displays all npcs in a table
   const [isNpcActive, setIsNpcActive] = useState(false);
@@ -61,7 +63,6 @@ const CollectionPage = () => {
   const onPantheonClick = () => {
     setIsPantheonActive(!isPantheonActive);
   };
-
   const onVillainClick = () => {
     setIsVillainActive(!isVillainActive);
   };
@@ -376,6 +377,78 @@ const CollectionPage = () => {
     fetchData();
   }, []);
 
+  //Get Villains
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: dataName, error: errorName } = await supabase
+        .from("DBvillain")
+        .select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        console.log(errorName);
+        setVillainDetails(null);
+      }
+      if (dataName) {
+        setFetchError(null);
+        setVillainDetails(
+          dataName.map((r) => ({
+            folder: r.folder,
+            uuid: r.uuid,
+            name: r.name,
+            race: r.race,
+            sex: r.sex,
+            age: r.age,
+            height: r.height,
+            weight: r.weight,
+            hairColor: r.hairColor,
+            hairType: r.hairType,
+            hairStyle: r.hairStyle,
+            beardStyle: r.beardStyle,
+            eyes: r.eyeColor,
+            skin: r.skinColor,
+            motive: r.motive,
+            goal: r.goal,
+            affiliation: r.affiliation,
+            weakness: r.weakness,
+            powerSource: r.powerSource,
+            minion: r.minion,
+            stronghold: r.stronghold,
+            ac: r.ac,
+            armorType: r.armorType,
+            hp: r.hp,
+            speed: r.speed,
+            fly: r.fly,
+            swim: r.swim,
+            climb: r.climb,
+            burrow: r.burrow,
+            hover: r.hover,
+            str: r.str,
+            dex: r.dex,
+            con: r.con,
+            int: r.int,
+            wis: r.wis,
+            cha: r.cha,
+            save: r.save,
+            skill: r.skill,
+            sense: r.sense,
+            language: r.language,
+            vuln: r.vuln,
+            resist: r.resist,
+            immune: r.immune,
+            condition: r.condition,
+            ability: r.ability,
+            action: r.action,
+            legendary: r.legendary,
+            lair: r.lair,
+            email: r.email,
+            notes: r.notes,
+          }))
+        );
+      }
+    };
+    fetchData();
+  }, []);
+
   //Show popup of details
   const showPopup = () => {
     setIsItemActive((current) => !current);
@@ -549,6 +622,30 @@ const CollectionPage = () => {
     );
   }, [pantheonDetails]);
 
+   //Set Selected Villains
+   useEffect(() => {
+    setDisplayVillain(
+      villainDetails.map((item) => {
+        return (
+          <>
+            <span
+              className="editText"
+              contentEditable="false"
+              suppressContentEditableWarning={true}
+              onClick={() => setSelectedItem(Object.entries(item))}
+            >
+              <span className={style.minorText3} onClick={showPopup}>
+                {item === undefined ? null : `${item.name} `}
+                <i className="pi pi-info-circle"></i>
+                <br></br>
+              </span>
+            </span>
+          </>
+        );
+      })
+    );
+  }, [villainDetails]);
+
   //Create Cards
   const cardNpc = (
     <Card
@@ -610,7 +707,6 @@ const CollectionPage = () => {
       <p>Collection of all your Monsters!</p>
     </Card>
   );
-
   const cardItem = (
     <Card
       className={style.collectionCard}
@@ -623,7 +719,6 @@ const CollectionPage = () => {
       <p>Collection of all your Items!</p>
     </Card>
   );
-
   const cardPantheon = (
     <Card
       className={style.collectionCard}
@@ -634,6 +729,18 @@ const CollectionPage = () => {
         Pantheons <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Pantheons!</p>
+    </Card>
+  );
+  const cardVillain = (
+    <Card
+      className={style.collectionCard}
+      onClick={onVillainClick}
+      style={{ borderRadius: "10px" }}
+    >
+      <h3>
+        Villains <i className="pi pi-chevron-right"></i>
+      </h3>
+      <p>Collection of all your Villains!</p>
     </Card>
   );
 
@@ -720,13 +827,24 @@ const CollectionPage = () => {
            {isPantheonActive ? (
             <CollectionTable
               data={pantheonDetails}
-              active={setIsItemActive}
+              active={setIsPantheonActive}
               collectionTitle={"Pantheons"}
               isItemActive={isItemActive}
               setIsItemActive={setIsItemActive}
             />
           ) : (
             cardPantheon
+          )}
+            {isVillainActive ? (
+            <CollectionTable
+              data={villainDetails}
+              active={setIsVillainActive}
+              collectionTitle={"Villains"}
+              isItemActive={isItemActive}
+              setIsItemActive={setIsItemActive}
+            />
+          ) : (
+            cardVillain
           )}
         </div>
       )}
