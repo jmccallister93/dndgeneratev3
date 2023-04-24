@@ -43,6 +43,8 @@ const CollectionPage = () => {
 
   const [selectedItem, setSelectedItem] = useState(null);
 
+  sessionStorage.setItem('lastUrl', window.location.href);
+
   const onNpcClick = () => {
     setIsNpcActive(!isNpcActive);
   };

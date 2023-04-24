@@ -37,6 +37,8 @@ function NotePage(props) {
 
   const [dbTable, setDbTable] = useState("");
 
+  sessionStorage.setItem('lastUrl', window.location.href);
+
   //Get Table Names
   useEffect(() => {
     const fetchUuidsAndTableNames = async () => {

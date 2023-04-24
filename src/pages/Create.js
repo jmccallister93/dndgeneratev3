@@ -196,6 +196,9 @@ const Create = () => {
   const showModule = () => {
     setIsModuleActive((current) => !current);
   };
+
+  sessionStorage.setItem('lastUrl', window.location.href);
+
   return (
     <div className={style.mainWrapper}>
       {/* <Navbar /> */}

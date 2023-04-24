@@ -23,14 +23,21 @@ const Login = (props) => {
 
   //login with email
   async function signInWithEmail(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: "example@email.com",
-      password: "example-password",
+    const { user, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
-  }
-
-  async function signout() {
-    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log(error.message);
+    } else {
+      const lastUrl = sessionStorage.getItem("lastUrl");
+      if (lastUrl) {
+        window.location.href = lastUrl;
+      } else {
+        // Redirect the user to the default page after login
+        window.location.href = "/";
+      }
+    }
   }
 
   const handleSubmit = (event) => {
