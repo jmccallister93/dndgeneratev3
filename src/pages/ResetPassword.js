@@ -10,22 +10,22 @@ const ResetPassword = (props) => {
 
   // Handle password reset flow
   useEffect(() => {
-    // const handlePasswordRecovery = async (event, session) => {
-    //   if (event === "PASSWORD_RECOVERY") {
-    //     setIsResetLinkClicked(true);
-    //   }
-    // };
-
     const handlePasswordRecovery = async (event, session) => {
-        if (event === "PASSWORD_RECOVERY" && window.location.pathname === "/resetPassword") {
-          const newPassword = prompt("What would you like your new password to be?");
-          const { data, error } = await supabase.auth.update({
-            password: newPassword,
-          });
-          if (data) alert("Password updated successfully!");
-          if (error) alert("There was an error updating your password.");
-        }
-      };
+      if (event === "PASSWORD_RECOVERY") {
+        setIsResetLinkClicked(true);
+      }
+    };
+
+    // const handlePasswordRecovery = async (event, session) => {
+    //     if (event === "PASSWORD_RECOVERY" && window.location.pathname === "/resetPassword") {
+    //       const newPassword = prompt("What would you like your new password to be?");
+    //       const { data, error } = await supabase.auth.update({
+    //         password: newPassword,
+    //       });
+    //       if (data) alert("Password updated successfully!");
+    //       if (error) alert("There was an error updating your password.");
+    //     }
+    //   };
     // {
     //   if (event === "PASSWORD_RECOVERY") {
     //     const newPassword = prompt(
@@ -48,8 +48,8 @@ const ResetPassword = (props) => {
     event.preventDefault();
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo:
-        // "https://jmccallister93.github.io/dndgeneratev3/resetPassword",
-        "http://localhost:3000/resetPassword",
+        "https://jmccallister93.github.io/dndgeneratev3/resetPassword",
+        // "http://localhost:3000/resetPassword",
     });
     if (error) {
       console.log(error);
