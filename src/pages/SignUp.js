@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-import { Dropdown } from "primereact/dropdown";
 import { useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 import ns from "../stylesheets/Note.module.scss";
@@ -32,7 +30,6 @@ const SignUp = () => {
 
   return (
     <div className={style.mainWrapper}>
-      <Navbar />
       <div>
         <h1 className={style.mainHeader}>Signup</h1>
       </div>

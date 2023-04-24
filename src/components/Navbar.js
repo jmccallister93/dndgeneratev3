@@ -26,19 +26,37 @@ const Navbar = (props) => {
   }, [location]);
 
   //Logs in using Google Auth
-  async function handleLogin() {
-    const { user, session, error } = await supabase.auth.signInWithOAuth(
-      {
-        provider: "google",
-      },
-      { redirectTo: window.location.origin + location.pathname }
-    )
-    if (error) {
-      console.log(error.message);
-    } else {
-      console.log("Logged in successfully");
-    }
+  // async function handleLogin() {
+  //   const { user, session, error } = await supabase.auth.signInWithOAuth(
+  //     {
+  //       provider: "google",
+  //     },
+  //     { redirectTo: window.location.origin + location.pathname }
+  //   )
+  //   if (error) {
+  //     console.log(error.message);
+  //   } else {
+  //     console.log("Logged in successfully");
+  //   }
+  // }
+
+  //Logs in using email
+  async function signInWithEmail() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: "example@email.com",
+      password: "example-password",
+    });
   }
+
+  //Signs up using email
+  async function singUpWithEmail() {
+    const { user, session, error } = await supabase.auth.signUp({
+      email: "example@email.com",
+      password: "example-password",
+    });
+  }
+
+  const handleLogin = () => {};
 
   //Signs out
   async function handleLogout() {
@@ -74,9 +92,14 @@ const Navbar = (props) => {
       ) : (
         <div className={style.navbarLoginWrapper}>
           <div className={style.navbarBtnWrapper}>
-            <button className={style.navbarLoginBtn} onClick={handleLogin}>
-              Login with Google <i className="pi pi-google"></i>
-            </button>
+            <Link to="/login" session={session}>
+              <button className={style.navbarLoginBtn}>Login</button>
+            </Link>
+
+            <p>or</p>
+            <Link to="/signup" session={session}>
+              <button className={style.navbarLoginBtn}>Signup</button>
+            </Link>
           </div>
         </div>
       )}
