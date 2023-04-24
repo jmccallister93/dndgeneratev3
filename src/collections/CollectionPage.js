@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import style from "../stylesheets/Collection.module.scss";
+import ps from "../stylesheets/PageStyle.module.scss";
 import CollectionTable from "./CollectionTable";
 import { SessionContext } from "../config/SessionContext";
 import { supabase } from "../config/supabaseClient";
@@ -746,17 +747,18 @@ const CollectionPage = () => {
 
   return (
     <div className={style.collectionWrapper}>
-      <h1 className={style.collectionHeader}>Collections</h1>
+      
       {session === null ? (
         <>
-          <p className={style.loginMessage}>
+          <p className={ps.loginMessage}>
             Please Login to continue to the Collections Page.
           </p>
-          <p className={style.loginMessage}>
+          <p className={ps.loginMessage}>
             Logging in will redirect you to the Home Page.
           </p>
         </>
-      ) : (
+      ) : (<>
+        <h1 className={style.collectionHeader}>Collections</h1> 
         <div className={style.collectionCardWrapper}>
           {isNpcActive ? (
             <CollectionTable
@@ -847,6 +849,7 @@ const CollectionPage = () => {
             cardVillain
           )}
         </div>
+        </>
       )}
     </div>
   );

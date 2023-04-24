@@ -571,7 +571,6 @@ function NotePage(props) {
 
   return (
     <div className={style.mainWrapper}>
-      {/* <Navbar /> */}
       {session === null ? (
         <>
           <p className={style.loginMessage}>
