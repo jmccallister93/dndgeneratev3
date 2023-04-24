@@ -1,31 +1,30 @@
 {
   "files": {
-    "main.css": "/dndgeneratev3/static/css/main.b9b28f70.css",
-    "main.js": "/dndgeneratev3/static/js/main.077c8109.js",
-    "static/js/498.71ebd651.chunk.js": "/dndgeneratev3/static/js/498.71ebd651.chunk.js",
-    "static/js/703.2ac36c6f.chunk.js": "/dndgeneratev3/static/js/703.2ac36c6f.chunk.js",
-    "static/js/257.68697783.chunk.js": "/dndgeneratev3/static/js/257.68697783.chunk.js",
-    "static/js/45.25b8a444.chunk.js": "/dndgeneratev3/static/js/45.25b8a444.chunk.js",
-    "static/js/802.8491365a.chunk.js": "/dndgeneratev3/static/js/802.8491365a.chunk.js",
-    "static/media/background-huge.jpg": "/dndgeneratev3/static/media/background-huge.e76d4894ef43a21eb6d6.jpg",
+    "main.css": "/dndgeneratev3/static/css/main.8c006b22.css",
+    "main.js": "/dndgeneratev3/static/js/main.489663a9.js",
+    "static/js/498.9adf1e89.chunk.js": "/dndgeneratev3/static/js/498.9adf1e89.chunk.js",
+    "static/js/703.bdf0af1d.chunk.js": "/dndgeneratev3/static/js/703.bdf0af1d.chunk.js",
+    "static/js/553.8e3a41f9.chunk.js": "/dndgeneratev3/static/js/553.8e3a41f9.chunk.js",
+    "static/js/45.d49361e0.chunk.js": "/dndgeneratev3/static/js/45.d49361e0.chunk.js",
+    "static/js/802.aeef918d.chunk.js": "/dndgeneratev3/static/js/802.aeef918d.chunk.js",
+    "static/media/d20-red.jpg": "/dndgeneratev3/static/media/d20-red.b0db439316af61496e48.jpg",
     "static/media/primeicons.svg": "/dndgeneratev3/static/media/primeicons.e1441b135b3ca9ad643c.svg",
     "static/media/primeicons.eot": "/dndgeneratev3/static/media/primeicons.d44157bdfa026dc877af.eot",
     "static/media/primeicons.woff": "/dndgeneratev3/static/media/primeicons.10d3152104f2208ac82a.woff",
     "static/media/primeicons.ttf": "/dndgeneratev3/static/media/primeicons.ea5358601d0a3fd6670b.ttf",
     "static/media/d20_2.png": "/dndgeneratev3/static/media/d20_2.9350032e64275551fc3c.png",
-    "static/media/axios.cjs": "/dndgeneratev3/static/media/axios.cbe1b8033b90ae4c8151.cjs",
     "static/media/primeicons.woff2": "/dndgeneratev3/static/media/primeicons.78172950b335ccdb94e2.woff2",
     "index.html": "/dndgeneratev3/index.html",
-    "main.b9b28f70.css.map": "/dndgeneratev3/static/css/main.b9b28f70.css.map",
-    "main.077c8109.js.map": "/dndgeneratev3/static/js/main.077c8109.js.map",
-    "498.71ebd651.chunk.js.map": "/dndgeneratev3/static/js/498.71ebd651.chunk.js.map",
-    "703.2ac36c6f.chunk.js.map": "/dndgeneratev3/static/js/703.2ac36c6f.chunk.js.map",
-    "257.68697783.chunk.js.map": "/dndgeneratev3/static/js/257.68697783.chunk.js.map",
-    "45.25b8a444.chunk.js.map": "/dndgeneratev3/static/js/45.25b8a444.chunk.js.map",
-    "802.8491365a.chunk.js.map": "/dndgeneratev3/static/js/802.8491365a.chunk.js.map"
+    "main.8c006b22.css.map": "/dndgeneratev3/static/css/main.8c006b22.css.map",
+    "main.489663a9.js.map": "/dndgeneratev3/static/js/main.489663a9.js.map",
+    "498.9adf1e89.chunk.js.map": "/dndgeneratev3/static/js/498.9adf1e89.chunk.js.map",
+    "703.bdf0af1d.chunk.js.map": "/dndgeneratev3/static/js/703.bdf0af1d.chunk.js.map",
+    "553.8e3a41f9.chunk.js.map": "/dndgeneratev3/static/js/553.8e3a41f9.chunk.js.map",
+    "45.d49361e0.chunk.js.map": "/dndgeneratev3/static/js/45.d49361e0.chunk.js.map",
+    "802.aeef918d.chunk.js.map": "/dndgeneratev3/static/js/802.aeef918d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b9b28f70.css",
-    "static/js/main.077c8109.js"
+    "static/css/main.8c006b22.css",
+    "static/js/main.489663a9.js"
   ]
 }
