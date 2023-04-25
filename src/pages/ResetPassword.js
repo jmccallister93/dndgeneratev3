@@ -7,37 +7,21 @@ const ResetPassword = (props) => {
   const [email, setEmail] = useState("");
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isResetLinkClicked, setIsResetLinkClicked] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
 
   // Handle password reset flow
   useEffect(() => {
     const handlePasswordRecovery = async (event, session) => {
       if (event === "PASSWORD_RECOVERY") {
         setIsResetLinkClicked(true);
+        const url = window.location.href;
+        const index = url.indexOf("#access_token=");
+        if (index !== -1) {
+          const token = url.substring(index + 14);
+          setAccessToken(token);
+        }
       }
     };
-
-    // const handlePasswordRecovery = async (event, session) => {
-    //     if (event === "PASSWORD_RECOVERY" && window.location.pathname === "/resetPassword") {
-    //       const newPassword = prompt("What would you like your new password to be?");
-    //       const { data, error } = await supabase.auth.update({
-    //         password: newPassword,
-    //       });
-    //       if (data) alert("Password updated successfully!");
-    //       if (error) alert("There was an error updating your password.");
-    //     }
-    //   };
-    // {
-    //   if (event === "PASSWORD_RECOVERY") {
-    //     const newPassword = prompt(
-    //       "What would you like your new password to be?"
-    //     );
-    //     const { data, error } = await supabase.auth.update({
-    //       password: newPassword,
-    //     });
-    //     if (data) alert("Password updated successfully!");
-    //     if (error) alert("There was an error updating your password.");
-    //   }
-    // };
 
     supabase.auth.onAuthStateChange(handlePasswordRecovery);
 
