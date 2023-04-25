@@ -8,6 +8,7 @@ const ResetPassword = (props) => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isResetLinkClicked, setIsResetLinkClicked] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+  const [isPasswordReset, setIsPasswordReset ] = useState(false);
 
   // Handle password reset flow
   useEffect(() => {
@@ -28,13 +29,14 @@ const ResetPassword = (props) => {
   }, []);
 
   // Handle form submission
-  const handleSubmit = async (event) => {
+  const handleSendEmail = async (event) => {
     event.preventDefault();
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo:
         "https://jmccallister93.github.io/dndgeneratev3/resetPassword",
         // "http://localhost:3000/resetPassword",
     });
+  
     if (error) {
       console.log(error);
     } else {
@@ -42,11 +44,22 @@ const ResetPassword = (props) => {
     }
   };
 
+  const handlePasswordReset = async (event) => {
+    const { data, error } = await supabase.auth.api.updateUser(accessToken, {
+        password: event.target.password.value,
+      });
+        if (error) {
+            console.log(error);
+        } else {
+            setIsPasswordReset(true);
+        }
+    }
+
   return (
     <>
       <div className={style.mainWrapper}>
         {isResetLinkClicked ? (
-          <form className={style.form} onSubmit={handleSubmit}>
+          <form className={style.form} onSubmit={handlePasswordReset}>
             <h3 className={style.formHeader}>Reset Password for {email}</h3>
             <input
               className={style.formInput}
@@ -58,7 +71,7 @@ const ResetPassword = (props) => {
             </button>
           </form>
         ) : (
-          <form className={style.form} onSubmit={handleSubmit}>
+          <form className={style.form} onSubmit={handleSendEmail}>
             <h3 className={style.formHeader}>Email: </h3>
             <input
               className={style.formInput}
