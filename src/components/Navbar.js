@@ -3,6 +3,7 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { supabase } from "../config/supabaseClient";
 import { SessionContext } from "../config/SessionContext";
+import d20 from "../assests/d20-icon.png";
 
 const Navbar = (props) => {
   const session = useContext(SessionContext);
@@ -65,6 +66,15 @@ const Navbar = (props) => {
 
   return (
     <div className={style.navbarWrapper}>
+      <div className={style.navbarLogoWrapper}>
+        <Link to="/">
+          <img
+            className={style.navbarLogo}
+            src={d20}
+            alt="logo"
+          />
+        </Link>
+      </div>
       <ul className={style.navbarUl}>
         <Link to="/">
           <li className={style.navbarLi}>Home</li>

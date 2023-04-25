@@ -38,6 +38,7 @@ import { SessionContext } from "./config/SessionContext";
 import { supabase } from "./config/supabaseClient";
 import Navbar from "./components/Navbar";
 import ResetPassword from "./pages/ResetPassword";
+import style from "./App.module.scss";
 
 
 function App() {
@@ -80,7 +81,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className={style.appWrapper}>
       <SessionContext.Provider value={session}>
         {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
         <BrowserRouter>
