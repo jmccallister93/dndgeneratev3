@@ -40,13 +40,7 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <script>
-      (function () {
-        const redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect !== location.href) {
-          history.replaceState(null, null, redirect);
-        }
-      })();
-    </script>
+        sessionStorage.redirect = location.href;
+      </script>
   </body>
 </html>
