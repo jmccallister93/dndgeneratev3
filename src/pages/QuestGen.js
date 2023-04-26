@@ -20,6 +20,10 @@ import { SessionContext } from "../config/SessionContext";
 const QuestGen = () => {
   const session = useContext(SessionContext);
   sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+if (lastUrl) {
+  window.location.href = lastUrl;
+}
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);

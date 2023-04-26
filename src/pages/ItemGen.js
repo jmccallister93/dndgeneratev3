@@ -24,6 +24,10 @@ import EditText from "../components/EditText";
 
 const ItemGen = () => {
   sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+if (lastUrl) {
+  window.location.href = lastUrl;
+}
 
   // Set state variables
   const [fetchError, setFetchError] = useState(null);

@@ -40,6 +40,10 @@ import { SessionContext } from "../config/SessionContext";
 const NpcGen = () => {
   const session = useContext(SessionContext);
   sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+if (lastUrl) {
+  window.location.href = lastUrl;
+}
   
 
   const [isButtonsActive, setIsButtonsActive] = useState(false);

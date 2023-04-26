@@ -29,6 +29,10 @@ import { supabase, auth } from "../config/supabaseClient";
 const MonsterGen = () => {
   const session = useContext(SessionContext);
   sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+if (lastUrl) {
+  window.location.href = lastUrl;
+}
 
   //Set States
   const [fetchError, setFetchError] = useState();

@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 
 const Home = (props) => {
   sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+if (lastUrl) {
+  window.location.href = lastUrl;
+}
   const createDescription =
     "Generate and customize random characters, monsters, items, and more!";
 

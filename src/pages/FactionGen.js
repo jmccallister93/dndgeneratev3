@@ -25,6 +25,10 @@ import CustomName from "../components/CustomName";
 const FactionGen = () => {
   const session = useContext(SessionContext);
   sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+if (lastUrl) {
+  window.location.href = lastUrl;
+}
 
   const [fetechError, setFetchError] = useState(null);
 
