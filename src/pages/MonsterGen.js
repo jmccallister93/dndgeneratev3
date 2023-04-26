@@ -28,6 +28,7 @@ import { supabase, auth } from "../config/supabaseClient";
 
 const MonsterGen = () => {
   const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   //Set States
   const [fetchError, setFetchError] = useState();
@@ -328,7 +329,7 @@ const MonsterGen = () => {
       action: actionString,
       legendary: legendString,
       lair: lairString,
-      email: session.user.email,
+      email: session?.user?.email,
       // DSOASDFASDFASDF
     };
     setMonster(monster);

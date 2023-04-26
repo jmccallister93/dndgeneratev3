@@ -19,6 +19,7 @@ import { SessionContext } from "../config/SessionContext";
 
 const QuestGen = () => {
   const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -151,7 +152,7 @@ const QuestGen = () => {
       location: location,
       motive: motive,
       twist: twist,
-      email: session.user.email,
+      email: session?.user?.email,
     };
     setQuestData(quest);
   }, [questName, questType, reward, location, motive, twist, session]);

@@ -751,14 +751,18 @@ const CollectionPage = () => {
     <div className={style.collectionWrapper}>
       
       {session === null ? (
-        <>
-          <p className={ps.loginMessage}>
-            Please Login to continue to the Collections Page.
-          </p>
-          <p className={ps.loginMessage}>
-            Logging in will redirect you to the Home Page.
-          </p>
-        </>
+       <>
+       <p className={ps.loginMessage}>
+         Please{" "}
+         <Link to="/login" className={ps.loginButtonText}>
+           Login
+         </Link>{" "}
+         to continue to the Collection Page.
+       </p>
+       {/* <p className={style.loginMessage}>
+         Logging in will redirect you to the Home Page.
+       </p> */}
+     </>
       ) : (<>
         <h1 className={style.collectionHeader}>Collections</h1> 
         <div className={style.collectionCardWrapper}>

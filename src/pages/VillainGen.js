@@ -29,6 +29,7 @@ import MultipleDisplayDesc from "../components/MultipleDisplayDesc";
 
 const VillainGen = () => {
   const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   const [villainName, setVillainName] = useState("");
   const [villainNames, setVillainNames] = useState("");
@@ -514,7 +515,7 @@ const VillainGen = () => {
       action: actionString,
       legendary: legendString,
       lair: lairString,
-      email: session.user.email,
+      email: session?.user?.email,
       folder: "Villain"
     };
     setVillain(monster);

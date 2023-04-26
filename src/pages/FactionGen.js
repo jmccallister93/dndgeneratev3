@@ -24,6 +24,7 @@ import CustomName from "../components/CustomName";
 
 const FactionGen = () => {
   const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   const [fetechError, setFetchError] = useState(null);
 
@@ -274,7 +275,7 @@ const FactionGen = () => {
   //   selectedNeutral,
   //   selectedUnwelcome,
   //   selectedIntolerant,
-  // ]);  
+  // ]);
 
   //Create location object to be exported
   useEffect(() => {
@@ -376,7 +377,7 @@ const FactionGen = () => {
       power: powerString,
       specialty: specialtyString,
       weakness: weaknessString,
-      email: session.user.email,
+      email: session?.user?.email,
     };
     setOrganization(organization);
   }, [
@@ -655,8 +656,8 @@ const FactionGen = () => {
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-            <CustomName
-                tableName={"factionNames"} 
+              <CustomName
+                tableName={"factionNames"}
                 name={factionName}
                 setName={setFactionName}
                 setNames={setFactionNames}
@@ -804,17 +805,17 @@ const FactionGen = () => {
                 valueOptions={leaderOptions}
               />
               <CustomDataTable
-                  tableName={"DBnpc"}
-                  setSingular={setMember}
-                  setPlural={setMembers}
-                  setOptions={setMemberOptions}
-                  h1Title={"Members"}
-                  dialogHeader={"Members"}
-                  selectedItem={selectedMember}
-                  setSelectedItem={setSelectedMember}
-                  list={memberList}
-                  setList={setMemberList}
-                  valueOptions={memberOptions}
+                tableName={"DBnpc"}
+                setSingular={setMember}
+                setPlural={setMembers}
+                setOptions={setMemberOptions}
+                h1Title={"Members"}
+                dialogHeader={"Members"}
+                selectedItem={selectedMember}
+                setSelectedItem={setSelectedMember}
+                list={memberList}
+                setList={setMemberList}
+                valueOptions={memberOptions}
               />
             </div>
           </div>
@@ -1235,7 +1236,7 @@ const FactionGen = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-        <NameDisplay value={factionName} setNewValue={setFactionName} />
+          <NameDisplay value={factionName} setNewValue={setFactionName} />
           <h2>
             Org. Structure{" "}
             <SingleDisplayText value={structure} setNewValue={setStructure} />

@@ -21,6 +21,7 @@ import SingleDisplayText from "../components/SingleDisplayText";
 
 const PantheonGen = () => {
   const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -121,7 +122,7 @@ const PantheonGen = () => {
       provide: provideString,
       artifact: artifactString,
       folder: "Pantheon",
-      email: session.user.email,
+      email: session?.user?.email,
     };
     setPantheon(pantheon);
   }, [

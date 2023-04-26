@@ -21,6 +21,7 @@ import { SessionContext } from "../config/SessionContext";
 
 const LocationGen = () => {
   const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
@@ -153,7 +154,7 @@ const LocationGen = () => {
         npc: npcString,
         building: buildingString,
         district: districtString,
-        email: session.user.email,
+        email: session?.user?.email,
       };
       setLocation(location);
     }, [

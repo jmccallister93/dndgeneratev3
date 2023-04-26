@@ -12,6 +12,7 @@ import ns from "../../stylesheets/Note.module.scss";
 import Note from "../components/Note";
 import NoteTree from "../components/NoteTree";
 import { SessionContext } from "../../config/SessionContext";
+import { Link } from "react-router-dom";
 
 function NotePage(props) {
   const session = useContext(SessionContext);
@@ -37,7 +38,7 @@ function NotePage(props) {
 
   const [dbTable, setDbTable] = useState("");
 
-  sessionStorage.setItem('lastUrl', window.location.href);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   //Get Table Names
   useEffect(() => {
@@ -57,9 +58,7 @@ function NotePage(props) {
         const pantheonResponse = await supabase
           .from("DBpantheon")
           .select("uuid");
-          const villainResponse = await supabase
-          .from("DBvillain")
-          .select("uuid");
+        const villainResponse = await supabase.from("DBvillain").select("uuid");
 
         //Create arrays of uuids
         const npcUuids = [].concat(npcResponse.data.map((npc) => npc.uuid));
@@ -248,7 +247,7 @@ function NotePage(props) {
       }
     };
     fetchData();
-  }, [noteText, propertyValue, deletedNode, showPopup, ]);
+  }, [noteText, propertyValue, deletedNode, showPopup]);
 
   //Get Organizations
   useEffect(() => {
@@ -576,11 +575,15 @@ function NotePage(props) {
       {session === null ? (
         <>
           <p className={style.loginMessage}>
-            Please Login to continue to the Campaign Page.
+            Please{" "}
+            <Link to="/login" className={style.loginButtonText}>
+              Login
+            </Link>{" "}
+            to continue to the Campaign Page.
           </p>
-          <p className={style.loginMessage}>
+          {/* <p className={style.loginMessage}>
             Logging in will redirect you to the Home Page.
-          </p>
+          </p> */}
         </>
       ) : (
         <>

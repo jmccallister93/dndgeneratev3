@@ -23,6 +23,8 @@ import SectionRandom from "../components/SectionRandom";
 import EditText from "../components/EditText";
 
 const ItemGen = () => {
+  sessionStorage.setItem("lastUrl", window.location.href);
+
   // Set state variables
   const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);

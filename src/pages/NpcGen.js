@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -35,8 +35,13 @@ import NameGenerator from "../components/NameGenerator";
 import AgeHeightWeight from "../components/AgeHeightWeight";
 import SectionRandom from "../components/SectionRandom";
 import RandomHookNpc from "../components/RandomHookNpc";
+import { SessionContext } from "../config/SessionContext";
 
 const NpcGen = () => {
+  const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
+  
+
   const [isButtonsActive, setIsButtonsActive] = useState(false);
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -314,6 +319,7 @@ const NpcGen = () => {
       weaponDamage: weaponDamage,
       weaponProperties: weaponProperties,
       inventory: itemString,
+      email: session?.user?.email,
     };
     setNpc(npc);
   }, [

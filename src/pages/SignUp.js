@@ -59,6 +59,7 @@ const SignUp = () => {
         <button className={style.formButton} type="submit">
           Sign up
         </button>
+        <p className={style.passwordHint}>*must be at least 6 characters</p>
       </form>
       )}
     </div>
