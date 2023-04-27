@@ -1,4 +1,3 @@
-
 $primary-grey: #313439;
 $secondary-grey: #d6e4e5;
 $header-color: #3e6d9c;
@@ -6,23 +5,19 @@ $display-tan: #f7f1cf;
 $display-red: #9a2818;
 $btn-blue: #2196f3;
 
-
 .mainWrapper {
-  // background: linear-gradient(135deg, $primary-grey 25%, white);
-  //Set background color to primary grey with fading out to white around the edges
-
   background-color: $primary-grey;
-  height: fit-content;
-  max-width: 100vw;
-  // height: 95.15vh;
-  // width: 100vw;
-  min-height: 92.7vh;
-  max-height: max-content;
-  display: inline-block;
+  position: absolute;
+  top: 95px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: calc(100vh - 95px);
+  max-height: fit-content;
   text-align: center;
   align-items: center;
   justify-content: center;
-  color: $primary-grey; 
+  color: $primary-grey;
 }
 
 .body {
@@ -33,14 +28,12 @@ $btn-blue: #2196f3;
   align-items: flex-start;
   justify-content: center;
   place-items: center;
-  
 }
 
 .mainHeader {
   font-size: 3rem;
   color: $secondary-grey;
   margin-top: 2rem;
-  // border-bottom: 1px solid #d6e4e5;
   justify-self: center;
   text-align: center;
 }
@@ -70,11 +63,6 @@ $btn-blue: #2196f3;
   align-items: center;
 }
 
-// .topWrapper{
-//   display: flex;
-//   width: fit-content;
-// }
-
 .btnWrapper {
   display: flex;
   align-items: center;
@@ -89,10 +77,9 @@ $btn-blue: #2196f3;
   box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.25);
 }
 
-// set infoCircle class to large font size and blue
 .infoCircle {
   color: $header-color;
-  & i{
+  & i {
     font-size: 4rem;
   }
   &:hover {
@@ -129,7 +116,6 @@ $btn-blue: #2196f3;
     cursor: pointer;
     box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
   }
-
 }
 
 .btnName {
@@ -148,10 +134,7 @@ $btn-blue: #2196f3;
   }
 }
 
-
-
 .diceBtn {
-  //use d20.png from assests images folder as background image
   background-image: url("../assests/images/d20_2.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -171,24 +154,23 @@ $btn-blue: #2196f3;
   &:hover {
     cursor: pointer;
     box-shadow: 0px 0px 5px 5px rgba(0, 128, 0, 0.5);
-    background-color: rgb(0, 128, 0, .75);
+    background-color: rgb(0, 128, 0, 0.75);
   }
 }
-.diceBtnText{
+.diceBtnText {
   color: rgb(255, 255, 255);
   font-weight: 400;
   font-size: 1rem;
-  // text-shadow: 1px 1px 10px rgb(0, 128, 0);
-  background-color: rgb(0, 128, 0, .75);
+  background-color: rgb(0, 128, 0, 0.75);
   box-shadow: 0px 0px 10px 5px rgba(0, 128, 0, 0.5);
   border-radius: 10%;
   padding: 2%;
   letter-spacing: 0.5px;
-  
+
   text-align: center;
 }
 
-.btnExport{
+.btnExport {
   display: flex;
   font-size: 1.2rem;
   color: $secondary-grey;
@@ -198,14 +180,14 @@ $btn-blue: #2196f3;
   margin-left: 0.5rem;
   padding: 1rem;
   transition: 0.5s;
-  & i{
+  & i {
     padding-left: 0.2rem;
     font-size: 1.2rem;
   }
   &:hover {
-    background-color: rgb(0, 46, 252);;
+    background-color: rgb(0, 46, 252);
     cursor: pointer;
-    box-shadow: 0px 0px 5px 5px rgb(0, 46, 252);;
+    box-shadow: 0px 0px 5px 5px rgb(0, 46, 252);
   }
 }
 
@@ -240,16 +222,13 @@ $btn-blue: #2196f3;
   }
 }
 
-.infoModal{
+.infoModal {
   border-radius: 1rem;
 }
 
-.sectionOption{
+.sectionOption {
   display: flex;
   align-items: center;
-  & button{
-    // height: 3rem;
-  }
 }
 
 .subHeader {
@@ -268,7 +247,7 @@ $btn-blue: #2196f3;
   }
 }
 
-.subHeader2{
+.subHeader2 {
   color: $primary-grey;
   background-color: white;
   margin: 1rem;
@@ -305,18 +284,8 @@ $btn-blue: #2196f3;
     align-items: left;
     justify-content: left;
     flex: 0 0 33.333%;
-    // & span{
-      
-    //   flex-wrap: wrap;
-    // }
-    // & button{
-    //   // flex: 0 0 33.333%;
-    //   flex-wrap: wrap;
-    // }
   }
-
-  }
-
+}
 
 .hidden {
   display: none;
@@ -327,8 +296,6 @@ $btn-blue: #2196f3;
   flex-direction: column;
   flex-wrap: wrap;
   background-color: $display-tan;
-  //Create a black flecked background effect
-  
   width: 50%;
   padding: 10px;
   margin: 0;
@@ -351,9 +318,9 @@ $btn-blue: #2196f3;
   }
 }
 
-.minorTextRed{
+.minorTextRed {
   font-weight: 500;
-  color:#9a2818;
+  color: #9a2818;
 }
 
 .minorText2 {
@@ -362,16 +329,16 @@ $btn-blue: #2196f3;
 }
 .minorText3 {
   font-weight: 350;
-  &:hover{
+  &:hover {
     background-color: white;
     cursor: pointer;
   }
 }
 
-.minorText3Chunks{
+.minorText3Chunks {
   font-weight: 350;
   margin-bottom: 0.5rem;
-  &:hover{
+  &:hover {
     background-color: white;
     cursor: pointer;
   }
@@ -380,38 +347,36 @@ $btn-blue: #2196f3;
 .minorText3Break {
   font-weight: 350;
   margin-bottom: 0.5rem;
-  &:hover{
+  &:hover {
     background-color: white;
     cursor: pointer;
   }
 }
 
-.modText{
-  font-size: 1.25rem;  
+.modText {
+  font-size: 1.25rem;
 }
 
-.modLayout{
+.modLayout {
   display: flex;
   grid-template-columns: repeat(3, 1fr);
   padding: 10px;
 }
 
-#mod{
+#mod {
   width: 25%;
 }
 
-
 .nameText {
   font-weight: 500;
-  &:hover{
+  &:hover {
     background-color: white;
     cursor: pointer;
   }
 }
-.ability{
+.ability {
   margin-bottom: 0.5rem;
 }
-
 
 .abilityScores {
   display: grid;
@@ -442,19 +407,19 @@ $btn-blue: #2196f3;
 }
 
 .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
 
-.exportBtns{
+.exportBtns {
   display: flex;
   padding: 5px;
 }
-.exportButtons{
+.exportButtons {
   margin: 0.25rem;
 }
 .createWrapper {
@@ -477,7 +442,7 @@ $btn-blue: #2196f3;
   place-items: center;
 }
 
-.collectionCard{
+.collectionCard {
   width: 25rem;
   margin-bottom: 2rem;
   // background-color: $secondary-grey;
@@ -498,8 +463,8 @@ $btn-blue: #2196f3;
   }
 }
 
-.collectionTitle{
-  &:hover{
+.collectionTitle {
+  &:hover {
     cursor: pointer;
   }
 }
@@ -525,66 +490,67 @@ $btn-blue: #2196f3;
   }
 }
 
-.createLink{
-    color: black;
-    text-decoration: none;
-    border-radius: 10px;
+.createLink {
+  color: black;
+  text-decoration: none;
+  border-radius: 10px;
 }
 
-
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  .dropTitle{
-    font-size: 1.5rem;
+  100% {
+    transform: rotate(360deg);
   }
+}
+.dropTitle {
+  font-size: 1.5rem;
+}
 
-  //add highlight to selected option
-  .highlight
-  {
-    background-color: $header-color;
-    // transition: 5s;
+//add highlight to selected option
+.highlight {
+  background-color: $header-color;
+  // transition: 5s;
+}
+
+// Sign up and login
+.form {
+  font-size: 1.5rem;
+}
+
+.formHeader {
+  font-size: 2rem;
+  color: $secondary-grey;
+  margin-top: 2rem;
+  // border-bottom: 1px solid #d6e4e5;
+  justify-self: center;
+  text-align: center;
+}
+
+.formInput {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.formButton {
+  font-size: 1.5rem;
+  background-color: rgb(0, 128, 0, 0.5);
+  color: white;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  transition: 0.3s;
+  &:hover {
+    scale: 1.05;
+    background-color: green;
+    cursor: pointer;
   }
+}
 
-  // Sign up and login
-  .form{
-    font-size: 1.5rem;
-  }
-
-  .formHeader{
-    font-size: 2rem;
-    color: $secondary-grey;
-    margin-top: 2rem;
-    // border-bottom: 1px solid #d6e4e5;
-    justify-self: center;
-    text-align: center;
-  }
-
-  .formInput{
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    margin: 0.5rem;
-  }
-
-  .formButton{
-    font-size: 1.5rem;
-    background-color: rgb(0, 128, 0, 0.5);
-    color: white;
-    padding: 0.5rem;
-    margin: 0.5rem;
-    border-radius: 5px;
-    border: none;
-    transition: 0.3s;
-    &:hover{
-      scale: 1.05;
-      background-color: green;
-      cursor: pointer;
-    }
-  }
-
-.loginMessage{
+.loginMessage {
   font-size: 2.5rem;
   color: $secondary-grey;
   margin-top: 2rem;
@@ -592,7 +558,7 @@ $btn-blue: #2196f3;
   text-align: center;
 }
 
-.loginButtonText{
+.loginButtonText {
   font-size: 2.5rem;
   color: $secondary-grey;
   margin-top: 2rem;
@@ -601,7 +567,7 @@ $btn-blue: #2196f3;
   text-decoration: underline;
 }
 
-.loginMessageSmall{
+.loginMessageSmall {
   font-size: 0.75rem;
   color: white;
   justify-self: center;
@@ -610,22 +576,22 @@ $btn-blue: #2196f3;
   padding: 0.25rem;
   background-color: rgb(0, 46, 252);
   transition: 0.3s;
-  &:hover{
+  &:hover {
     scale: 1.5;
   }
 }
 
-.collectionItem{
+.collectionItem {
   transition: 0.3s;
   border-radius: 10px;
-  &:hover{
+  &:hover {
     background-color: $secondary-grey;
-    scale:1.1;
+    scale: 1.1;
     cursor: pointer;
   }
 }
 
-.passwordHint{
+.passwordHint {
   font-size: 1.5rem;
   color: white;
   justify-self: center;
@@ -633,4 +599,3 @@ $btn-blue: #2196f3;
   border-radius: 10px;
   padding: 0.25rem;
 }
-

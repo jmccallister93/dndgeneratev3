@@ -1,7 +1,7 @@
 {
   "name": "dndgeneratev3",
   "version": "0.1.0",
-  "homepage": "https://main--glowing-pudding-fd50d1.netlify.app",
+  "homepage": "https://dndgenerate.netlify.app",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^3.1.9",
