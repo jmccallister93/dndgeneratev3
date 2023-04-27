@@ -350,6 +350,7 @@ const NpcCreate = () => {
       setWeaponProperties(matchProperties(action));
       setWeaponBonus(matchBonus(action));
     }
+    //eslint-disable-next-line
   }, [action,]);
 
   //Info content

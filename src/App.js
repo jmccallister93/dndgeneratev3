@@ -52,7 +52,7 @@ function App() {
     };
   }, []);
 
-  const [redirectPath, setRedirectPath] = useState("");
+  const [, setRedirectPath] = useState("");
 
   function updateRedirectPath(path) {
     // console.log(path)
