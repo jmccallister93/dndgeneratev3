@@ -4,22 +4,6 @@ import style from "../stylesheets/BasicCard.module.scss"
 
 const BasicCard = (props) => {
 
-
-    // useEffect(() => {
-    //     const cardContent = [
-    //         {title: "Create", content: "create content"},
-    //         {title: "Explore", content: "explore stuff"},
-    //         {title: "DM Tools", content: "tools and stuff"}
-    //     ]
-        
-        
-    //     cardContent.map((t) => {
-    //         setTitle([...t.title])
-    //         setContent(t.content)
-    //     } )      
-    // }, [])
-
-
     return ( 
         <div className={style.basicCardWrapper}>
             <h3 className={style.basicCardTitle}>{ props.title }</h3>

@@ -104,7 +104,7 @@ const ItemCreate = () => {
 
   const [genItem, setGenItem] = useState();
 
-  const divRef = useRef(null);
+  const divRef = useRef();
 
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -256,16 +256,11 @@ const ItemCreate = () => {
               setArrayState={[setItemList, setSelectedItem]}
             />
             {/* Export Btns */}
-            <h1>
-              Export
-              <div className={style.exportBtns}>
-                <ExportButtons
-                  div={divRef}
-                  data={genItem}
-                  tableName={"DBitem"}
-                />
-              </div>
-            </h1>
+
+            <div className={style.exportBtns}>
+              <ExportButtons div={divRef} data={genItem} tableName={"DBitem"} />
+            </div>
+
             {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
@@ -760,7 +755,7 @@ const ItemCreate = () => {
         </div>
 
         {/* Main Display */}
-        <div className={style.display}>
+        <div className={style.display} ref={divRef}>
           <NameDisplay value={itemName} setNewValue={setItemName} />
           <h2>
             Type <SingleDisplayText value={type} setNewValue={setType} />

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -19,6 +19,7 @@ import InfoModal from "../components/InfoModal";
 import ExportButtons from "../components/ExportButtons";
 import SectionRandom from "../components/SectionRandom";
 import EditText from "../components/EditText";
+import { SessionContext } from "../config/SessionContext";
 
 const ItemGen = () => {
   sessionStorage.setItem("lastUrl", window.location.href);
@@ -26,6 +27,8 @@ const ItemGen = () => {
 if (lastUrl) {
   window.location.href = lastUrl;
 }
+
+  const session = useContext(SessionContext);
 
   // Set state variables
   const [isBasicActive, setIsBasicActive] = useState(false);
@@ -104,9 +107,9 @@ if (lastUrl) {
   const [itemOptions, setItemOptions] = useState("");
   const [itemList, setItemList] = useState([]);
 
-  const [genItem, setGenItem] = useState();
+  const [item, setItem] = useState();
 
-  const divRef = useRef(null);
+  const divRef = useRef();
 
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
@@ -124,16 +127,18 @@ if (lastUrl) {
   }, [diceCount, dice, diceBonus]);
 
   useEffect(() => {
-    const genItem = {
+    const item = {
       name: itemName,
       type: type,
       rarity: rarity,
       cost: cost,
       weight: weight,
       description: description,
+      email: session?.user?.email
     };
-    setGenItem(genItem);
-  }, [itemName, type, rarity, cost, weight, description]);
+    setItem(item);
+  }, [itemName, type, rarity, cost, weight, description, session]);
+
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
@@ -257,16 +262,15 @@ if (lastUrl) {
               setArrayState={[setItemList, setSelectedItem]}
             />
             {/* Export Btns */}
-            <h1>
-              Export
+            
               <div className={style.exportBtns}>
                 <ExportButtons
                   div={divRef}
-                  data={genItem}
+                  data={item}
                   tableName={"DBitem"}
                 />
               </div>
-            </h1>
+           
             {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
@@ -762,7 +766,7 @@ if (lastUrl) {
         </div>
 
         {/* Main Display */}
-        <div className={style.display}>
+        <div className={style.display} ref={divRef}>
           <NameDisplay value={itemName} setNewValue={setItemName} />
           <h2>
             Type <SingleDisplayText value={type} setNewValue={setType} />

@@ -709,7 +709,7 @@ if (lastUrl) {
                 data={monster}
                 tableName={"DBmonster"}
               />
-            </div>
+            </div> 
 
             {/* ToolTip */}
             <div className={style.infoCircle}>
