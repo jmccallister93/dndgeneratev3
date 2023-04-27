@@ -23,8 +23,13 @@ const ResetPassword = (props) => {
       }
     };
 
+    // Add the following line to register the auth change handler
     supabase.auth.onAuthStateChange(handlePasswordRecovery);
 
+    // Add a cleanup function to unregister the auth change handler
+    return () => {
+      supabase.auth.offAuthStateChange(handlePasswordRecovery);
+    };
   }, []);
 
   // Handle form submission
