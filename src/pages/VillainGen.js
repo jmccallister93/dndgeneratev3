@@ -1,13 +1,10 @@
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
 import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import supabase from "../config/supabaseClient";
 import GenerateButton from "../components/GenerateButton";
 import ClearButton from "../components/ClearButton";
-import CustomInputText from "../components/CustomInputText";
 import CustomDataTable from "../components/CustomDataTable";
 import CustomDropDown from "../components/CustomDropDown";
 import MultipleDisplay from "../components/MultipleDisplay";
@@ -36,113 +33,101 @@ if (lastUrl) {
 }
 
   const [villainName, setVillainName] = useState("");
-  const [villainNames, setVillainNames] = useState("");
+  const [, setVillainNames] = useState("");
   const [villainNameOptions, setVillainNameOptions] = useState("");
 
-  const [size, setSize] = useState("");
-  const [sizes, setSizes] = useState();
-  const [sizeOptions, setSizeOptions] = useState();
-
   const [race, setRace] = useState("");
-  const [races, setRaces] = useState("");
+  const [, setRaces] = useState("");
   const [raceOptions, setRaceOptions] = useState("");
 
   const [sex, setSex] = useState("");
-  const [sexs, setSexs] = useState("");
+  const [, setSexs] = useState("");
   const [sexOptions, setSexOptions] = useState("");
 
   const [age, setAge] = useState("");
-  const [ages, setAges] = useState("");
-  const [ageOptions, setAgeOptions] = useState("");
   const [ageMin, setAgeMin] = useState("");
   const [ageMax, setAgeMax] = useState("");
 
   const [heightFt, setHeightFt] = useState("");
-  const [heightFts, setHeightFts] = useState("");
-  const [heightFtOptions, setHeightFtOptions] = useState("");
   const [heightFtMin, setHeightFtMin] = useState("");
   const [heightFtMax, setHeightFtMax] = useState("");
 
   const [heightIn, setHeightIn] = useState("");
-  const [heightIns, setHeightIns] = useState("");
-  const [heightInOptions, setHeightInOptions] = useState("");
-  const [heightInMin, setHeightInMin] = useState("");
-  const [heightInMax, setHeightInMax] = useState("");
+  const [, setHeightInMin] = useState("");
+  const [, setHeightInMax] = useState("");
 
   const [weight, setWeight] = useState("");
-  const [weights, setWeights] = useState("");
-  const [weightOptions, setWeightOptions] = useState("");
   const [weightMin, setWeightMin] = useState("");
   const [weightMax, setWeightMax] = useState("");
 
   const [hairColor, setHairColor] = useState("");
-  const [hairColors, setHairColors] = useState("");
+  const [, setHairColors] = useState("");
   const [hairColorOptions, setHairColorOptions] = useState("");
 
   const [hairType, setHairType] = useState("");
-  const [hairTypes, setHairTypes] = useState("");
+  const [, setHairTypes] = useState("");
   const [hairTypeOptions, setHairTypeOptions] = useState("");
 
   const [hairStyle, setHairStyle] = useState("");
-  const [hairStyles, setHairStyles] = useState("");
+  const [, setHairStyles] = useState("");
   const [hairStyleOptions, setHairStyleOptions] = useState("");
 
   const [beardStyle, setBeardStyle] = useState("");
-  const [beardStyles, setBeardStyles] = useState("");
+  const [, setBeardStyles] = useState("");
   const [beardStyleOptions, setBeardStyleOptions] = useState("");
 
   const [eyeColor, setEyeColor] = useState("");
-  const [eyeColors, setEyeColors] = useState("");
+  const [, setEyeColors] = useState("");
   const [eyeColorOptions, setEyeColorOptions] = useState("");
 
   const [skinColor, setSkinColor] = useState("");
-  const [skinColors, setSkinColors] = useState("");
+  const [, setSkinColors] = useState("");
   const [skinColorOptions, setSkinColorOptions] = useState("");
 
-  const [motive, setMotive] = useState("");
-  const [motives, setMotives] = useState("");
+  const [, setMotive] = useState("");
+  const [, setMotives] = useState("");
   const [motiveOptions, setMotiveOptions] = useState("");
   const [motiveList, setMotiveList] = useState([]);
   const [selectedMotive, setSelectedMotive] = useState([]);
 
   const [goal, setGoal] = useState("");
-  const [goals, setGoals] = useState("");
+  const [, setGoals] = useState("");
   const [goalOptions, setGoalOptions] = useState("");
   const [goalList, setGoalList] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState([]);
 
-  const [affiliation, setAffiliation] = useState("");
-  const [affiliations, setAffiliations] = useState("");
+  const [, setAffiliation] = useState("");
+  const [, setAffiliations] = useState("");
   const [affiliationOptions, setAffiliationOptions] = useState("");
   const [affiliationList, setAffiliationList] = useState([]);
   const [selectedAffiliation, setSelectedAffiliation] = useState([]);
 
-  const [weakness, setWeakness] = useState("");
-  const [weaknesses, setWeaknesses] = useState("");
+  const [, setWeakness] = useState("");
+  const [, setWeaknesses] = useState("");
   const [weaknessOptions, setWeaknessOptions] = useState("");
   const [weaknessList, setWeaknessList] = useState([]);
   const [selectedWeakness, setSelectedWeakness] = useState([]);
 
-  const [powerSource, setPowerSource] = useState("");
-  const [powerSources, setPowerSources] = useState("");
+  const [, setPowerSource] = useState("");
+  const [, setPowerSources] = useState("");
   const [powerSourceOptions, setPowerSourceOptions] = useState("");
   const [powerSourceList, setPowerSourceList] = useState([]);
   const [selectedPowerSource, setSelectedPowerSource] = useState([]);
 
-  const [minion, setMinion] = useState("");
+  const [, setMinion] = useState("");
   const [minions, setMinions] = useState("");
   const [minionOptions, setMinionOptions] = useState("");
   const [minionList, setMinionList] = useState([]);
   const [selectedMinion, setSelectedMinion] = useState([]);
 
   const [stronghold, setStronghold] = useState("");
-  const [strongholds, setStrongholds] = useState("");
+  const [, setStrongholds] = useState("");
   const [strongholdOptions, setStrongholdOptions] = useState("");
 
   const [ac, setAc] = useState("");
 
   const [armorType, setArmorType] = useState("");
-  const [armorTypes, setArmorTypes] = useState();
+  const [, setArmorTypes] = useState();
   const [armorTypeOptions, setArmorTypeOptions] = useState();
 
   const [hp, setHp] = useState("");
@@ -161,12 +146,12 @@ if (lastUrl) {
   const [wis, setWis] = useState("");
   const [cha, setCha] = useState("");
 
-  const [save, setSave] = useState("");
-  const [saves, setSaves] = useState("");
+  const [, setSave] = useState("");
+  const [, setSaves] = useState("");
   const [saveOptions, setSaveOptions] = useState();
   const [saveList, setSaveList] = useState([]);
   const [selectedSave, setSelectedSave] = useState([]);
-  const [selectedSaveList, setSelectedSaveList] = useState([]);
+  const [selectedSaveList,] = useState([]);
   const [strSave, setStrSave] = useState("");
   const [dexSave, setDexSave] = useState("");
   const [conSave, setConSave] = useState("");
@@ -174,10 +159,10 @@ if (lastUrl) {
   const [wisSave, setWisSave] = useState("");
   const [chaSave, setChaSave] = useState("");
   const [selectedSaveModifiers, setSelectedSaveModifiers] = useState([]);
-  const [saveModMap, setSaveModMap] = useState([]);
+  const [, setSaveModMap] = useState([]);
 
-  const [skill, setSkill] = useState("");
-  const [skills, setSkills] = useState("");
+  const [, setSkill] = useState("");
+  const [, setSkills] = useState("");
   const [skillOptions, setSkillOptions] = useState();
   const [skillList, setSkillList] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
@@ -199,11 +184,11 @@ if (lastUrl) {
   const [slSkill, setSlSkill] = useState("");
   const [stSkill, setStSkill] = useState("");
   const [surSkill, setSurSkill] = useState("");
-  const [skillModMap, setSkillModMap] = useState([]);
+  const [, setSkillModMap] = useState([]);
   const [selectedSkillModifiers, setSelectedSkillModifiers] = useState([]);
 
-  const [sense, setSense] = useState("");
-  const [senses, setSenses] = useState("");
+  const [, setSense] = useState("");
+  const [, setSenses] = useState("");
   const [senseOptions, setSenseOptions] = useState();
   const [senseList, setSenseList] = useState([]);
   const [selectedSense, setSelectedSense] = useState([]);
@@ -211,65 +196,59 @@ if (lastUrl) {
   const [darkvisionSense, setDarkvisionSense] = useState("");
   const [tremorsenseSense, setTremorsenseSense] = useState("");
   const [truesightSense, setTruesightSense] = useState("");
-  const [senseModMap, setSenseModMap] = useState([]);
+  const [, setSenseModMap] = useState([]);
   const [selectedSenseModifiers, setSelectedSenseModifiers] = useState([]);
 
-  const [vuln, setVuln] = useState("");
-  const [vulns, setVulns] = useState("");
+  const [, setVuln] = useState("");
+  const [, setVulns] = useState("");
   const [vulnOptions, setVulnOptions] = useState();
   const [vulnList, setVulnList] = useState([]);
   const [selectedVuln, setSelectedVuln] = useState([]);
 
-  const [immune, setImmune] = useState("");
-  const [immunes, setImmunes] = useState("");
+  const [, setImmune] = useState("");
+  const [, setImmunes] = useState("");
   const [immuneOptions, setImmuneOptions] = useState();
   const [immuneList, setImmuneList] = useState([]);
   const [selectedImmune, setSelectedImmune] = useState([]);
 
-  const [resist, setResist] = useState("");
-  const [resists, setResists] = useState("");
+  const [, setResist] = useState("");
+  const [, setResists] = useState("");
   const [resistOptions, setResistOptions] = useState();
   const [resistList, setResistList] = useState([]);
   const [selectedResist, setSelectedResist] = useState([]);
 
-  const [condition, setCondition] = useState("");
-  const [conditions, setConditions] = useState("");
+  const [, setCondition] = useState("");
+  const [, setConditions] = useState("");
   const [conditionOptions, setConditionOptions] = useState();
   const [conditionList, setConditionList] = useState([]);
   const [selectedCondition, setSelectedCondition] = useState([]);
 
-  const [lang, setLang] = useState("");
-  const [langs, setLangs] = useState("");
+  const [, setLang] = useState("");
+  const [, setLangs] = useState("");
   const [langOptions, setLangOptions] = useState();
   const [langList, setLangList] = useState([]);
   const [selectedLang, setSelectedLang] = useState([]);
 
-  const [special, setSpecial] = useState("");
-  const [Specials, setSpecials] = useState("");
+  const [, setSpecial] = useState("");
+  const [, setSpecials] = useState("");
   const [specialOptions, setSpecialOptions] = useState();
   const [specialList, setSpecialList] = useState([]);
   const [selectedSpecial, setSelectedSpecial] = useState([]);
 
   const [action, setAction] = useState("");
-  const [actions, setActions] = useState("");
+  const [, setActions] = useState("");
   const [actionOptions, setActionOptions] = useState();
   const [actionList, setActionList] = useState([]);
   const [selectedAction, setSelectedAction] = useState([]);
 
-  const [reaction, setReaction] = useState("");
-  const [reactions, setReactions] = useState("");
-  const [reactionOptions, setReactionOptions] = useState();
-  const [reactionList, setReactionList] = useState([]);
-  const [selectedReaction, setSelectedReaction] = useState([]);
-
-  const [legend, setLegend] = useState("");
-  const [legends, setLegends] = useState("");
+  const [, setLegend] = useState("");
+  const [, setLegends] = useState("");
   const [legendOptions, setLegendOptions] = useState();
   const [legendList, setLegendList] = useState([]);
   const [selectedLegend, setSelectedLegend] = useState([]);
 
-  const [lair, setLair] = useState("");
-  const [Lairs, setLairs] = useState("");
+  const [, setLair] = useState("");
+  const [, setLairs] = useState("");
   const [lairOptions, setLairOptions] = useState();
   const [lairList, setLairList] = useState([]);
   const [selectedLair, setSelectedLair] = useState([]);
@@ -368,7 +347,7 @@ if (lastUrl) {
         return { name: save.name, modifier };
       })
     );
-  }, [selectedSave]);
+  }, [selectedSave, strSave, dexSave, conSave, intSave, wisSave, chaSave]);
 
   //Skill modifiers
   useEffect(() => {
@@ -399,7 +378,7 @@ if (lastUrl) {
         return { name: skill.name, modifier };
       })
     );
-  }, [selectedSkill]);
+  }, [selectedSkill, abSkill, ahSkill, arSkill, athSkill, deSkill, hiSkill, inSkill, intimiSkill, invsSkill, medSkill, natSkill, pecSkill, pfSkill, perSkill, relSkill, slSkill, stSkill, surSkill]);
 
   //Sense modifiers
   useEffect(() => {
@@ -416,7 +395,7 @@ if (lastUrl) {
         return { name: sense.name, modifier };
       })
     );
-  }, [selectedSense]);
+  }, [selectedSense, blindsightSense, darkvisionSense, tremorsenseSense, truesightSense]);
 
   //set Villain
   const divRef = useRef();
@@ -525,7 +504,6 @@ if (lastUrl) {
     setVillain(monster);
   }, [
     villainName,
-    size,
     ac,
     armorType,
     hp,
@@ -574,7 +552,6 @@ if (lastUrl) {
     selectedAffiliation,
     selectedPowerSource,
     selectedMinion,
-    selectedMotive,
     selectedGoal,
     
   ]);

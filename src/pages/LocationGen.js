@@ -34,78 +34,74 @@ if (lastUrl) {
   const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [cityName, setCityName] = useState("");
-  const [cityNames, setCityNames] = useState("");
+  const [, setCityNames] = useState("");
   const [cityNameOptions, setCityNameOptions] = useState("");
 
   const [type, setType] = useState("");
-  const [types, setTypes] = useState("");
+  const [, setTypes] = useState("");
   const [typeOptions, setTypeOptions] = useState("");
 
   const [size, setSize] = useState("");
-  const [sizes, setSizes] = useState("");
+  const [, setSizes] = useState("");
   const [sizeOptions, setSizeOptions] = useState("");
 
   const [population, setPopulation] = useState("");
-  const [populations, setPopulations] = useState("");
-  const [populationOptions, setPopulationOptions] = useState("");
 
   const [atmosphere, setAtmosphere] = useState("");
-  const [atmospheres, setAtmospheres] = useState("");
+  const [, setAtmospheres] = useState("");
   const [atmosphereOptions, setAtmosphereOptions] = useState("");
 
   const [culture, setCulture] = useState("");
-  const [cultures, setCultures] = useState("");
+  const [, setCultures] = useState("");
   const [cultureOptions, setCultureOptions] = useState("");
 
   const [terrain, setTerrain] = useState("");
-  const [terrains, setTerrains] = useState("");
+  const [, setTerrains] = useState("");
   const [terrainOptions, setTerrainOptions] = useState("");
 
   const [landmark, setLandmark] = useState("");
-  const [landmarks, setLandmarks] = useState("");
+  const [, setLandmarks] = useState("");
   const [landmarkOptions, setLandmarkOptions] = useState("");
 
   const [govern, setGovern] = useState("");
-  const [governs, setGoverns] = useState("");
+  const [, setGoverns] = useState("");
   const [governOptions, setGovernOptions] = useState("");
 
-  const [guild, setGuild] = useState("");
-  const [guilds, setGuilds] = useState("");
+  const [, setGuild] = useState("");
+  const [, setGuilds] = useState("");
   const [guildOptions, setGuildOptions] = useState("");
   const [selectedGuild, setSelectedGuild] = useState([]);
   const [guildList, setGuildList] = useState([]);
 
-  const [event, setEvent] = useState("");
-  const [events, setEvents] = useState("");
+  const [, setEvent] = useState("");
+  const [, setEvents] = useState("");
   const [eventOptions, setEventOptions] = useState("");
   const [selectedEvent, setSelectedEvent] = useState([]);
   const [eventList, setEventList] = useState([]);
 
-  const [faction, setFaction] = useState("");
-  const [factions, setFactions] = useState("");
+  const [, setFaction] = useState("");
+  const [, setFactions] = useState("");
   const [factionOptions, setFactionOptions] = useState("");
   const [selectedFaction, setSelectedFaction] = useState([]);
   const [factionList, setFactionList] = useState([]);
 
-  const [npc, setNpc] = useState("");
-  const [npcs, setNpcs] = useState("");
+  const [, setNpc] = useState("");
+  const [, setNpcs] = useState("");
   const [npcOptions, setNpcOptions] = useState("");
   const [selectedNpc, setSelectedNpc] = useState([]);
   const [npcList, setNpcList] = useState([]);
 
-  const [building, setBuilding] = useState("");
-  const [buildings, setBuildings] = useState("");
+  const [, setBuilding] = useState("");
+  const [, setBuildings] = useState("");
   const [buildingOptions, setBuildingOptions] = useState("");
   const [selectedBuilding, setSelectedBuilding] = useState([]);
   const [buildingList, setBuildingList] = useState([]);
 
-  const [district, setDistrict] = useState("");
-  const [districts, setDistricts] = useState("");
+  const [, setDistrict] = useState("");
+  const [, setDistricts] = useState("");
   const [districtOptions, setDistrictOptions] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState([]);
   const [districtList, setDistrictList] = useState([]);
-
-  const [numberSize, setNumebrSize] = useState("");
 
   const divRef = useRef(null);
   const [location, setLocation] = useState({});

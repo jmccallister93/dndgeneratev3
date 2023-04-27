@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
 import { useEffect, useRef, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -6,11 +5,11 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import ClearButton from "../components/ClearButton";
 import GenerateButton from "../components/GenerateButton";
-import CustomInputText from "../components/CustomInputText";
+
 import CustomDropDown from "../components/CustomDropDown";
 import InfoModal from "../components/InfoModal";
 import SectionRandom from "../components/SectionRandom";
-import NameDisplay from "../components/NameDisplay";
+
 import SingleDisplayText from "../components/SingleDisplayText";
 import RandomHooks from "../components/RandomHooks";
 import ExportButtons from "../components/ExportButtons";
@@ -21,85 +20,56 @@ const QuestGen = () => {
   const session = useContext(SessionContext);
   sessionStorage.setItem("lastUrl", window.location.href);
   const lastUrl = localStorage.getItem("lastUrl");
-if (lastUrl) {
-  window.location.href = lastUrl;
-}
+  if (lastUrl) {
+    window.location.href = lastUrl;
+  }
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [questName, setQuestName] = useState("");
-  const [questNames, setQuestNames] = useState("");
-  const [questNameOptions, setQuestNameOptions] = useState("");
 
   const [questType, setQuestType] = useState("");
-  const [questTypes, setQuestTypes] = useState("");
+  const [, setQuestTypes] = useState("");
   const [questTypeOptions, setQuestTypeOptions] = useState("");
 
-  const [quests, setQuests] = useState([]);
-  const [questOptions, setQuestOptions] = useState([]);
-  const [questList, setQuestList] = useState([]);
-  const [selectedQuest, setSelectedQuest] = useState([]);
+  const [, setQuestOptions] = useState([]);
 
-  const [bounty, setBounty] = useState("");
-  const [bounties, setBounties] = useState("");
-  const [bountyOptions, setBountyOptions] = useState("");
+  const [bountyOptions] = useState("");
 
-  const [capture, setCapture] = useState("");
-  const [captures, setCaptures] = useState("");
-  const [captureOptions, setCaptureOptions] = useState("");
+  const [captureOptions] = useState("");
 
-  const [delivery, setDelivery] = useState("");
-  const [deliverys, setDeliverys] = useState("");
-  const [deliveryOptions, setDeliveryOptions] = useState("");
+  const [deliveryOptions] = useState("");
 
-  const [escort, setEscort] = useState("");
-  const [escorts, setEscorts] = useState("");
-  const [escortOptions, setEscortOptions] = useState("");
+  const [escortOptions] = useState("");
 
-  const [exploration, setExploration] = useState("");
-  const [explorations, setExplorations] = useState("");
-  const [explorationOptions, setExplorationOptions] = useState("");
+  const [explorationOptions] = useState("");
 
-  const [gather, setGather] = useState("");
-  const [gathers, setGathers] = useState("");
-  const [gatherOptions, setGatherOptions] = useState("");
+  const [gatherOptions] = useState("");
 
-  const [investigate, setInvestigate] = useState("");
-  const [investigates, setInvestigates] = useState("");
-  const [investigateOptions, setInvestigateOptions] = useState("");
+  const [investigateOptions] = useState("");
 
-  const [kill, setKill] = useState("");
-  const [kills, setKills] = useState("");
-  const [killOptions, setKillOptions] = useState("");
+  const [killOptions] = useState("");
 
-  const [negotiate, setNegotiate] = useState("");
-  const [negotiates, setNegotiates] = useState("");
-  const [negotiateOptions, setNegotiateOptions] = useState("");
+  const [negotiateOptions] = useState("");
 
-  const [protect, setProtect] = useState("");
-  const [protects, setProtects] = useState("");
-  const [protectOptions, setProtectOptions] = useState("");
+  const [protectOptions] = useState("");
 
-  const [rescue, setRescue] = useState("");
-  const [rescues, setRescues] = useState("");
-  const [rescueOptions, setRescueOptions] = useState("");
+  const [rescueOptions] = useState("");
 
   const [motive, setMotive] = useState("");
-  const [motives, setMotives] = useState("");
+  const [, setMotives] = useState("");
   const [motiveOptions, setMotiveOptions] = useState("");
 
   const [twist, setTwist] = useState("");
-  const [twists, setTwists] = useState("");
+  const [, setTwists] = useState("");
   const [twistOptions, setTwistOptions] = useState("");
 
   const [location, setLocation] = useState("");
-  const [locations, setLocations] = useState("");
-  const [locationOptions, setLocationOptions] = useState("");
 
   const [reward, setReward] = useState("");
-  const [rewards, setRewards] = useState("");
+  const [, setRewards] = useState("");
   const [rewardOptions, setRewardOptions] = useState("");
 
   const [quest, setQuest] = useState("");
@@ -133,7 +103,7 @@ if (lastUrl) {
     } else {
       setQuestOptions([]);
     }
-  }, [questType]);
+  }, [questType, bountyOptions, captureOptions, deliveryOptions, escortOptions, explorationOptions, gatherOptions, investigateOptions, killOptions, negotiateOptions, protectOptions, rescueOptions]);
 
   //Show Options
   const showBasics = (e) => {

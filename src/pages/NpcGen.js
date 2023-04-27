@@ -1,38 +1,24 @@
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { useContext, useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { supabase, auth } from "../config/supabaseClient";
-import { Button } from "primereact/button";
+import { supabase,  } from "../config/supabaseClient";
 import ClearButton from "../components/ClearButton";
-import Npcs from "../components/Npcs";
 import GenerateButton from "../components/GenerateButton";
-import CustomInputText from "../components/CustomInputText";
 import CustomDropDown from "../components/CustomDropDown";
 import CustomInputNumber from "../components/CustomInputNumber";
-import CustomDataTable from "../components/CustomDataTable";
 import MultipleDisplay from "../components/MultipleDisplay";
 import CustomName from "../components/CustomName";
-import EditText from "../components/EditText";
 import NameDisplay from "../components/NameDisplay";
 import SingleDisplayText from "../components/SingleDisplayText";
 import SingleDisplayNumber from "../components/SingleDisplayNumber";
-import RandomHooks from "../components/RandomHooks";
 import ExportButtons from "../components/ExportButtons";
 import { useRef } from "react";
-import jsPDF from "jspdf";
-import { Html2CanvasOptions } from "jspdf";
-import CustomInputDecimal from "../components/CustomInputDecimal";
 import Items from "../components/Items";
 import { Tooltip } from "primereact/tooltip";
-import ToolTip from "../components/ToolTip";
 import InfoModal from "../components/InfoModal";
 import NameGenerator from "../components/NameGenerator";
-import AgeHeightWeight from "../components/AgeHeightWeight";
 import SectionRandom from "../components/SectionRandom";
 import RandomHookNpc from "../components/RandomHookNpc";
 import { SessionContext } from "../config/SessionContext";
@@ -46,8 +32,7 @@ if (lastUrl) {
 }
   
 
-  const [isButtonsActive, setIsButtonsActive] = useState(false);
-  const [isBasicActive, setIsBasicActive] = useState(false);
+   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isHookActive, setIsHookActive] = useState(false);
   const [isStatsActive, setIsStatsActive] = useState(false);
@@ -55,107 +40,94 @@ if (lastUrl) {
   const [isFeaturesActive, setIsFeaturesActive] = useState(false);
   const [isScoresActive, setIsScoresActive] = useState(false);
 
-  const [fetchError, setFetchError] = useState(false);
+  const [, setFetchError] = useState(false);
 
   const [name, setName] = useState("");
-  const [names, setNames] = useState("");
+  const [, setNames] = useState("");
   const [nameOptions, setNameOptions] = useState("");
 
   const [race, setRace] = useState("");
-  const [races, setRaces] = useState("");
+  const [, setRaces] = useState("");
   const [raceOptions, setRaceOptions] = useState("");
 
   const [sex, setSex] = useState("");
-  const [sexs, setSexs] = useState("");
+  const [, setSexs] = useState("");
   const [sexOptions, setSexOptions] = useState("");
 
   const [age, setAge] = useState("");
-  const [ages, setAges] = useState("");
-  const [ageOptions, setAgeOptions] = useState("");
+
   const [ageMin, setAgeMin] = useState("");
   const [ageMax, setAgeMax] = useState("");
 
   const [heightFt, setHeightFt] = useState("");
-  const [heightFts, setHeightFts] = useState("");
-  const [heightFtOptions, setHeightFtOptions] = useState("");
   const [heightFtMin, setHeightFtMin] = useState("");
   const [heightFtMax, setHeightFtMax] = useState("");
 
   const [heightIn, setHeightIn] = useState("");
-  const [heightIns, setHeightIns] = useState("");
-  const [heightInOptions, setHeightInOptions] = useState("");
-  const [heightInMin, setHeightInMin] = useState("");
-  const [heightInMax, setHeightInMax] = useState("");
+  const [, setHeightInMin] = useState("");
+  const [, setHeightInMax] = useState("");
 
   const [weight, setWeight] = useState("");
-  const [weights, setWeights] = useState("");
-  const [weightOptions, setWeightOptions] = useState("");
   const [weightMin, setWeightMin] = useState("");
   const [weightMax, setWeightMax] = useState("");
 
   const [align, setAlign] = useState("");
-  const [aligns, setAligns] = useState("");
+  const [, setAligns] = useState("");
   const [alignOptions, setAlignOptions] = useState("");
 
   const [hairColor, setHairColor] = useState("");
-  const [hairColors, setHairColors] = useState("");
+  const [, setHairColors] = useState("");
   const [hairColorOptions, setHairColorOptions] = useState("");
 
   const [hairType, setHairType] = useState("");
-  const [hairTypes, setHairTypes] = useState("");
+  const [, setHairTypes] = useState("");
   const [hairTypeOptions, setHairTypeOptions] = useState("");
 
   const [hairStyle, setHairStyle] = useState("");
-  const [hairStyles, setHairStyles] = useState("");
+  const [, setHairStyles] = useState("");
   const [hairStyleOptions, setHairStyleOptions] = useState("");
 
   const [beardStyle, setBeardStyle] = useState("");
-  const [beardStyles, setBeardStyles] = useState("");
+  const [, setBeardStyles] = useState("");
   const [beardStyleOptions, setBeardStyleOptions] = useState("");
 
   const [eyeColor, setEyeColor] = useState("");
-  const [eyeColors, setEyeColors] = useState("");
+  const [, setEyeColors] = useState("");
   const [eyeColorOptions, setEyeColorOptions] = useState("");
 
   const [skinColor, setSkinColor] = useState("");
-  const [skinColors, setSkinColors] = useState("");
+  const [, setSkinColors] = useState("");
   const [skinColorOptions, setSkinColorOptions] = useState("");
 
   const [bond, setBond] = useState("");
-  const [bonds, setBonds] = useState("");
+  const [, setBonds] = useState("");
   const [bondOptions, setBondOptions] = useState("");
 
   const [feature, setFeature] = useState("");
-  const [features, setFeatures] = useState("");
+  const [, setFeatures] = useState("");
   const [featureOptions, setFeatureOptions] = useState("");
 
   const [prof, setProf] = useState("");
-  const [profs, setProfs] = useState("");
+  const [, setProfs] = useState("");
   const [profOptions, setProfOptions] = useState("");
 
   const [talent, setTalent] = useState("");
-  const [talents, setTalents] = useState("");
+  const [, setTalents] = useState("");
   const [talentOptions, setTalentOptions] = useState("");
 
   const [mannerism, setMannerism] = useState("");
-  const [mannerisms, setMannerisms] = useState("");
+  const [, setMannerisms] = useState("");
   const [mannerismOptions, setMannerismOptions] = useState("");
 
   const [interaction, setInteraction] = useState("");
-  const [interactions, setInteractions] = useState("");
+  const [, setInteractions] = useState("");
   const [interactionOptions, setInteractionOptions] = useState("");
 
   const [hp, setHp] = useState("");
-  const [hps, setHps] = useState("");
-  const [hpOptions, setHpOptions] = useState("");
 
   const [ac, setAc] = useState("");
-  const [acs, setAcs] = useState("");
-  const [acOptions, setAcOptions] = useState("");
 
   const [speed, setSpeed] = useState("");
-  const [speeds, setSpeeds] = useState("");
-  const [speedOptions, setSpeedOptions] = useState("");
 
   const [str, setStr] = useState("");
   const [dex, setDex] = useState("");
@@ -164,29 +136,23 @@ if (lastUrl) {
   const [wis, setWis] = useState("");
   const [cha, setCha] = useState("");
 
-  const [desc, setDesc] = useState("");
-
   const [questType, setQuestType] = useState("");
-  const [questTypes, setQuestTypes] = useState("");
+  const [, setQuestTypes] = useState("");
   const [questTypeOptions, setQuestTypeOptions] = useState("");
 
   const [hook, setHook] = useState("");
-  const [hooks, setHooks] = useState("");
-  const [hookOptions, setHookOptions] = useState("");
 
-  const [item, setItem] = useState("");
-  const [items, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState("");
   const [selectedItem, setSelectedItem] = useState([]);
   const [itemList, setItemList] = useState([]);
 
   const [action, setAction] = useState("");
-  const [actions, setActions] = useState("");
+  const [, setActions] = useState("");
   const [actionOptions, setActionOptions] = useState("");
 
-  const [weapon, setWeapon] = useState("");
+  const [, setWeapon] = useState("");
   const [weapons, setWeapons] = useState("");
-  const [weaponOptions, setWeaponOptions] = useState("");
+  const [, setWeaponOptions] = useState("");
 
   const [weaponDamage, setWeaponDamage] = useState("");
   const [weaponProperties, setWeaponProperties] = useState("");
@@ -195,8 +161,6 @@ if (lastUrl) {
   const [npc, setNpc] = useState("");
 
   const divRef = useRef(null);
-  const [isExported, setIsExported] = useState(false);
-  const [doc, setDoc] = useState(null);
 
   const [isInfoActive, setIsInfoActive] = useState(false);
 
@@ -353,6 +317,17 @@ if (lastUrl) {
     ac,
     hp,
     speed,
+    age,
+    beardStyle,
+    eyeColor,
+    hairColor,
+    hairStyle,
+    hairType,
+    heightFt,
+    heightIn,
+    skinColor,
+    weight,
+    session,
   ]);
 
   //Pull damage field from itemsWeapons table in database
@@ -413,7 +388,7 @@ if (lastUrl) {
       setWeaponProperties(matchProperties(action));
       setWeaponBonus(matchBonus(action));
     }
-  }, [action]);
+  }, [action, dex, str, weapons]);
 
   //Info content
   const infoContent = (

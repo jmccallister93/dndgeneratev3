@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "/node_modules/primeflex/primeflex.css";
 import { Tooltip } from "primereact/tooltip";
-import { InputTextarea } from "primereact/inputtextarea";
 import Items from "../components/Items";
 import ClearButton from "../components/ClearButton";
 import CustomInputNumber from "../components/CustomInputNumber";
@@ -30,80 +28,25 @@ if (lastUrl) {
 }
 
   // Set state variables
-  const [fetchError, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isAdditionalActive, setIsAdditionalActive] = useState(false);
-  const [isDetailActive, setIsDetailActive] = useState(false);
-  const [isLayoutActive, setIsLayoutActive] = useState(false);
-  const [isRoomActive, setIsRoomActive] = useState(false);
-  const [isItemActive, setIsItemActive] = useState(false);
   const [isInfoActive, setIsInfoActive] = useState(false);
 
-  const [allItems, setAllItems] = useState();
-
   const [itemName, setItemName] = useState("");
-  const [itemNames, setItemNames] = useState("");
+  const [, setItemNames] = useState("");
   const [itemNameOptions, setItemNameOptions] = useState();
 
-  const [adventuringGear, setAdventuringGear] = useState();
-  const [adventuringGearOptions, setAdventuringGearOptions] = useState();
-
-  const [armor, setArmor] = useState();
-  const [armorOptions, setArmorOptions] = useState();
-
-  const [art, setArt] = useState();
-  const [artOptions, setArtOptions] = useState();
-
-  const [container, setContainer] = useState();
-  const [containerOptions, setContainerOptions] = useState();
-
-  const [pack, setPack] = useState();
-  const [packOptions, setPackOptions] = useState();
-
-  const [expense, setExpense] = useState();
-  const [expenseOptions, setExpenseOptions] = useState();
-
-  const [gemstone, setGemstone] = useState();
-  const [gemstoneOptions, setGemstoneOptions] = useState();
-
-  const [magic, setMagic] = useState();
-  const [magicOptions, setMagicOptions] = useState();
-
-  const [mountItem, setMountItem] = useState();
-  const [mountItemOptions, setMountItemOptions] = useState();
-
-  const [mount, setMount] = useState();
-  const [mountOptions, setMountOptions] = useState();
-
-  const [tool, setTool] = useState();
-  const [toolOptions, setToolOptions] = useState();
-
-  const [tradeGood, setTradeGood] = useState();
-  const [tradeGoodOptions, setTradeGoodOptions] = useState();
-
-  const [trinket, setTrinket] = useState();
-  const [trinketOptions, setTrinketOptions] = useState();
-
-  const [vehicle, setVehicle] = useState();
-  const [vehicleOptions, setVehicleOptions] = useState();
-
-  const [weapon, setWeapon] = useState("");
-  const [weaponOptions, setWeaponOptions] = useState();
-
   const [type, setType] = useState("");
-  const [types, setTypes] = useState();
+  const [, setTypes] = useState();
   const [typeOptions, setTypeOptions] = useState();
-  const [showTypeInput, setShowTypeInput] = useState(false);
-
+ 
   const [rarity, setRarity] = useState("");
-  const [rarities, setRarities] = useState();
+  const [, setRarities] = useState();
   const [rarityOptions, setRarityOptions] = useState();
-  const [showRarityInput, setShowRarityInput] = useState(false);
 
   const [currency, setCurrency] = useState("");
-  const [currencies, setCurrencies] = useState();
+  const [, setCurrencies] = useState();
   const [currencyOptions, setCurrencyOptions] = useState();
-  const [showCurrencyInput, setShowCurrencyInput] = useState(false);
 
   const [currencyValue, setCurrencyValue] = useState("");
 
@@ -112,61 +55,45 @@ if (lastUrl) {
   const [weight, setWeight] = useState("");
 
   const [description, setDescription] = useState("");
-  const [descriptionOptions, setDescriptionOptions] = useState();
-
-  const [additional, setAddtional] = useState();
-  const [additionals, setAdditionals] = useState();
-  const [additionalOptions, setAdditionalOptions] = useState();
 
   const [weaponDmg, setWeaponDmg] = useState("");
 
   const [dice, setDice] = useState("");
-  const [dices, setDices] = useState("");
+  const [, setDices] = useState("");
   const [diceOptions, setDiceOptions] = useState();
 
   const [diceCount, setDiceCount] = useState("");
-  const [diceCounts, setDiceCounts] = useState("");
-  const [diceCountOptions, setDiceCountOptions] = useState();
 
   const [diceBonus, setDiceBonus] = useState("");
-  const [diceBonuses, setDiceBonuses] = useState("");
-  const [diceBonusOptions, setDiceBonusOptions] = useState();
 
   const [weaponType, setWeaponType] = useState("");
-  const [weaponTypes, setWeaponTypes] = useState("");
+  const [, setWeaponTypes] = useState("");
   const [weaponTypeOptions, setWeaponTypeOptions] = useState("");
   const [weaponProperty, setWeaponProperty] = useState("");
-  const [weaponProperties, setWeaponProperties] = useState("");
+  const [, setWeaponProperties] = useState("");
   const [weaponPropertyOptions, setWeaponPropertyOptions] = useState("");
-  const [weaponDmgType, setWeaponDmgType] = useState("");
   const [dmgType, setDmgType] = useState("");
-  const [dmgTypes, setDmgTypes] = useState("");
+  const [, setDmgTypes] = useState("");
   const [dmgTypeOptions, setDmgTypeOptions] = useState();
 
   const [vehicleSpeed, setVehicleSpeed] = useState("");
   const [vehicleCapacity, setVehicleCapacity] = useState("");
 
   const [armorAc, setArmorAc] = useState("");
-  const [armorAcs, setArmorAcs] = useState("");
-  const [armorAcOptions, setArmorAcOptions] = useState("");
+  const [, setArmorAcs] = useState("");
+  const [, setArmorAcOptions] = useState("");
 
   const [armorMod, setArmorMod] = useState("");
-  const [armorMods, setArmorMods] = useState("");
+  const [, setArmorMods] = useState("");
   const [armorModOptions, setArmorModOptions] = useState("");
 
   const [armorStr, setArmorStr] = useState("");
-  const [armorStrs, setArmorStrs] = useState("");
-  const [armorStrOptions, setArmorStrOptions] = useState("");
+  const [, setArmorStrs] = useState("");
+  const [, setArmorStrOptions] = useState("");
 
   const [stealth, setStealth] = useState("");
-  const [stealths, setStealths] = useState("");
+  const [, setStealths] = useState("");
   const [stealthOptions, setStealthOptions] = useState("");
-
-  const [abilities, setAbilities] = useState("");
-  const [abilitiesOptions, setAbilitiesOptions] = useState("");
-
-  const [abilityModOptions, setAbilityModOptions] = useState("");
-  const [abilityMods, setAbilityMods] = useState("");
 
   const [mountSpeed, setMountSpeed] = useState("");
   const [mountCapacity, setMountCapacity] = useState("");
@@ -174,16 +101,12 @@ if (lastUrl) {
   const [itemDesc, setItemDesc] = useState("");
 
   const [selectedItem, setSelectedItem] = useState([]);
-  const [item, setItem] = useState("");
-  const [items, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState("");
   const [itemList, setItemList] = useState([]);
 
   const [genItem, setGenItem] = useState();
 
   const divRef = useRef(null);
-  const [isExported, setIsExported] = useState(false);
-  const [doc, setDoc] = useState(null);
 
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);

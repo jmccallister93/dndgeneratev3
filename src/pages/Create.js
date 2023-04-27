@@ -1,15 +1,8 @@
 import { Card } from "primereact/card";
-import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
-import { SessionContext } from "../config/SessionContext";
 
 const Create = () => {
-  const [isIndividualActive, setIsIndividualActive] = useState(false);
-  const [isModuleActive, setIsModuleActive] = useState(false);
-  const session = useContext(SessionContext);
-
   const cardNpcGen = (
     <Card className={style.createCard}>
       <h3>NPC Generator</h3>
@@ -36,34 +29,18 @@ const Create = () => {
         your own!
       </p>
     </Card>
-  );
-  const cardBuildingGen = (
-    <Card className={style.createCard}>
-      <h3>Building Generator</h3>
-      <p>
-        Generate Taverns, Shops, etc. with the click of a button or customize
-        and hand pick your own!
-      </p>
-    </Card>
-  );
-  const cardCityGen = (
+  ); 
+
+  const cardLocationGen = (
     <Card className={style.createCard}>
       <h3>Location Generator</h3>
       <p>
-        Generate Cities, Castles, or Towns with the click of a button or customize
-        and hand craft your own!
+        Generate Cities, Castles, or Towns with the click of a button or
+        customize and hand craft your own!
       </p>
     </Card>
   );
-  const cardGuildGen = (
-    <Card className={style.createCard}>
-      <h3>Guild Generator</h3>
-      <p>
-        Generate Guilds with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
+
   const cardFactionGen = (
     <Card className={style.createCard}>
       <h3>Faction Generator</h3>
@@ -73,24 +50,7 @@ const Create = () => {
       </p>
     </Card>
   );
-  const cardCultGen = (
-    <Card className={style.createCard}>
-      <h3>Cult Generator</h3>
-      <p>
-        Generate Cults with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const cardWorldGen = (
-    <Card className={style.createCard}>
-      <h3>World Generator</h3>
-      <p>
-        Generate Worlds with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
+
   const cardQuestGen = (
     <Card className={style.createCard}>
       <h3>Quest Generator</h3>
@@ -118,86 +78,8 @@ const Create = () => {
       </p>
     </Card>
   );
-  const cardSpellGen = (
-    <Card className={style.createCard}>
-      <h3>Spell Generator</h3>
-      <p>
-        Generate Spells with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const cardDungeonGen = (
-    <Card className={style.createCard}>
-      <h3>Dungeon Generator</h3>
-      <p>
-        Generate Dungeons with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const cardTrapGen = (
-    <Card className={style.createCard}>
-      <h3>Trap Generator</h3>
-      <p>
-        Generate Traps with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const cardPuzzleGen = (
-    <Card className={style.createCard}>
-      <h3>Puzzle Generator</h3>
-      <p>
-        Generate Puzzles with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const cardEncounterGen = (
-    <Card className={style.createCard}>
-      <h3>Encounter Generator</h3>
-      <p>
-        Generate Encounters with the click of a button or customize and hand
-        pick your own!
-      </p>
-    </Card>
-  );
-  const cardClassGen = (
-    <Card className={style.createCard}>
-      <h3>Class Generator</h3>
-      <p>
-        Generate Classes with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const cardRaceGen = (
-    <Card className={style.createCard}>
-      <h3>Race Generator</h3>
-      <p>
-        Generate Races with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const cardModuleGen = (
-    <Card className={style.createCard}>
-      <h3>Module Generator</h3>
-      <p>
-        Generate Modules with the click of a button or customize and hand pick
-        your own!
-      </p>
-    </Card>
-  );
-  const showIndividual = () => {
-    setIsIndividualActive((current) => !current);
-  };
-  const showModule = () => {
-    setIsModuleActive((current) => !current);
-  };
 
-  sessionStorage.setItem('lastUrl', window.location.href);
+  sessionStorage.setItem("lastUrl", window.location.href);
 
   return (
     <div className={style.mainWrapper}>
@@ -213,11 +95,8 @@ const Create = () => {
         <Link className={style.createLink} to="/monstergen">
           {cardMonsterGen}
         </Link>
-        {/* <Link className={style.createLink} to="/buildinggen">
-            {cardBuildingGen}
-          </Link> */}
-        <Link className={style.createLink} to="/citygen">
-          {cardCityGen}
+        <Link className={style.createLink} to="/locationgen">
+          {cardLocationGen}
         </Link>
         <Link className={style.createLink} to="/factiongen">
           {cardFactionGen}
@@ -231,9 +110,6 @@ const Create = () => {
         <Link className={style.createLink} to="/pantheongen">
           {cardPantheonGen}
         </Link>
-        {/* <Link className={style.createLink} to="/spellgen">
-          {cardSpellGen}
-        </Link> */}
       </div>
     </div>
   );

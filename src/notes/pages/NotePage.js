@@ -1,12 +1,6 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  useContext,
-} from "react";
-import { supabase, auth } from "../../config/supabaseClient";
-import Navbar from "../../components/Navbar";
+import React, { useEffect, useState, useCallback, useContext } from "react";
+import { supabase } from "../../config/supabaseClient";
+
 import style from "../../stylesheets/PageStyle.module.scss";
 import ns from "../../stylesheets/Note.module.scss";
 import Note from "../components/Note";
@@ -20,7 +14,7 @@ function NotePage(props) {
   const [selectedId, setSelectedId] = useState({});
   const [selectedName, setSelectedName] = useState({});
   const [selectedNode, setSelectedNode] = useState({});
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
 
   const [locationDetails, setLocationDetails] = useState([]);
   const [npcDetails, setNpcDetails] = useState([]);
@@ -37,6 +31,7 @@ function NotePage(props) {
   const [deletedNode, setDeletedNode] = useState(null);
 
   const [dbTable, setDbTable] = useState("");
+
 
   sessionStorage.setItem("lastUrl", window.location.href);
 
@@ -107,7 +102,6 @@ function NotePage(props) {
     fetchUuidsAndTableNames();
   }, [selectedId]);
 
-  //RENDERS PER CHARCTER TYPED
   //Update Note from NoteText
   const updateNote = async (noteText) => {
     try {

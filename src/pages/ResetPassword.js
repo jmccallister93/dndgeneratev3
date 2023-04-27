@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
-import ns from "../stylesheets/Note.module.scss";
 import { supabase } from "../config/supabaseClient";
 
 const ResetPassword = (props) => {
@@ -8,7 +7,7 @@ const ResetPassword = (props) => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isResetLinkClicked, setIsResetLinkClicked] = useState(false);
   const [accessToken, setAccessToken] = useState("");
-  const [isPasswordReset, setIsPasswordReset ] = useState(false);
+  const [, setIsPasswordReset ] = useState(false);
 
   // Handle password reset flow
   useEffect(() => {
@@ -31,7 +30,7 @@ const ResetPassword = (props) => {
   // Handle form submission
   const handleSendEmail = async (event) => {
     event.preventDefault();
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo:
         "https://jmccallister93.github.io/dndgeneratev3/resetPassword",
         // "http://localhost:3000/resetPassword",
@@ -45,7 +44,7 @@ const ResetPassword = (props) => {
   };
 
   const handlePasswordReset = async (event) => {
-    const { data, error } = await supabase.auth.api.updateUser(accessToken, {
+    const { error } = await supabase.auth.api.updateUser(accessToken, {
         password: event.target.password.value,
       });
         if (error) {

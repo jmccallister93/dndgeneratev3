@@ -22,7 +22,7 @@ $btn-blue: #2196f3;
   text-align: center;
   align-items: center;
   justify-content: center;
-  color: $primary-grey;
+  color: $primary-grey; 
 }
 
 .body {
@@ -336,7 +336,7 @@ $btn-blue: #2196f3;
   text-align: left;
   align-items: left;
   align-self: flex-start;
-  justify-content: end;
+  justify-content: flex-end;
   border-radius: 0.5rem;
   color: $display-red;
   box-shadow: 5px 5px 5px 0px rgba(255, 255, 255, 0.25);

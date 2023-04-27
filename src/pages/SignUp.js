@@ -1,7 +1,6 @@
 import { useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
-import ns from "../stylesheets/Note.module.scss";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase } from "../config/supabaseClient";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +9,7 @@ const SignUp = () => {
 
   //signup function
   async function handleSignup(email, password) {
-    const { user, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     });
