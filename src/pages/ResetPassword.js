@@ -13,7 +13,7 @@ const ResetPassword = (props) => {
   // Handle password reset flow
   useEffect(() => {
     const handlePasswordRecovery = async (event, session) => {
-      if (event === "PASSWORD_RECOVERY") {
+      if (event === "USER_UPDATED") {
         if (isMounted.current) setIsResetLinkClicked(true);
         const url = window.location.href;
         const index = url.indexOf("#access_token=");
@@ -24,10 +24,8 @@ const ResetPassword = (props) => {
       }
     };
 
-    // Add the following line to register the auth change handler
     supabase.auth.onAuthStateChange(handlePasswordRecovery);
 
-    // Add a cleanup function to unregister the auth change handler
     return () => {
       isMounted.current = false;
     };
@@ -38,7 +36,6 @@ const ResetPassword = (props) => {
     event.preventDefault();
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: "https://dndgenerate.netlify.app/resetPassword",
-      // "http://localhost:3000/resetPassword",
     });
 
     if (error) {
@@ -48,12 +45,25 @@ const ResetPassword = (props) => {
     }
   };
 
+  //Hanlde Reset
   const handlePasswordReset = async (event) => {
-    const { error } = await supabase.auth.api.updateUser(accessToken, {
-      password: event.target.password.value,
+    event.preventDefault();
+    const newPassword = event.target.password.value;
+
+    const { data: user, error: getUserError } = await supabase.auth.api.getUser(accessToken);
+    if (getUserError) {
+      console.log(getUserError);
+      return;
+    }
+
+    const { error: updateUserError } = await supabase.auth.api.updateUser(accessToken, {
+      id: user.id,
+      email: user.email,
+      password: newPassword,
     });
-    if (error) {
-      console.log(error);
+
+    if (updateUserError) {
+      console.log(updateUserError);
     } else {
       setIsPasswordReset(true);
     }
@@ -61,19 +71,20 @@ const ResetPassword = (props) => {
 
   return (
     <>
-      <div className={style.mainWrapper}>
-        {isPasswordReset ? (
-          <h3 className={style.formHeader}>Your password has been reset.</h3>
-        ) : isResetLinkClicked ? (
-          <form className={style.form} onSubmit={handlePasswordReset}>
-            <h3 className={style.formHeader}>Reset Password for {email}</h3>
-            <input
-              className={style.formInput}
-              type="password"
-              placeholder="New password"
-            />
-            <button className={style.formButton} type="submit">
-              Set New Password
+    <div className={style.mainWrapper}>
+      {isPasswordReset ? (
+        <h3 className={style.formHeader}>Your password has been reset.</h3>
+      ) : isResetLinkClicked ? (
+        <form className={style.form} onSubmit={handlePasswordReset}>
+          <h3 className={style.formHeader}>Reset Password for {email}</h3>
+          <input
+            className={style.formInput}
+            type="password"
+            name="password"
+            placeholder="New password"
+          />
+          <button className={style.formButton} type="submit">
+            Set New Password
             </button>
           </form>
         ) : (
