@@ -59,7 +59,7 @@ const ResetPassword = (props) => {
   }
   getSession()
 
-  }, [accessToken])
+  }, [])
   
 
   // Handle Reset
