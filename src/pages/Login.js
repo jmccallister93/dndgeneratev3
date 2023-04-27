@@ -19,15 +19,23 @@ const Login = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   //login with email
   async function signInWithEmail(email, password) {
+    if (!email || !password) {
+      setErrorMessage(
+        <h2 className={style.formError}>Please fill out all fields</h2>
+      );
+      return;
+    }
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     if (error) {
       console.log(error.message);
+      setErrorMessage(<h2 className={style.formError}>{error.message}</h2>);
     } else {
       const lastUrl = sessionStorage.getItem("lastUrl");
       if (lastUrl) {
@@ -39,6 +47,7 @@ const Login = (props) => {
     }
   }
 
+  //Submit login
   const handleSubmit = (event) => {
     event.preventDefault();
     signInWithEmail(email, password);
@@ -70,6 +79,7 @@ const Login = (props) => {
           <button className={style.formButton} type="submit">
             Sign In
           </button>
+          <div className={style.errorWrapper}>{errorMessage}</div>
         </form>
         <h2 className={style.formHeader}>Forgot Password?</h2>
         <Link to="/resetPassword">

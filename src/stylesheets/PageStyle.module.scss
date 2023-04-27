@@ -519,6 +519,21 @@ $btn-blue: #2196f3;
   font-size: 1.5rem;
 }
 
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formError {
+  font-size: 1rem;
+  color: red;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: white;
+  width: fit-content;
+}
+
 .formHeader {
   font-size: 2rem;
   color: $secondary-grey;

@@ -50,25 +50,6 @@ const ResetPassword = (props) => {
     }
   };
 
-  // //Set Session
-  // useEffect(()=> {
-  //   const getSession = async () => {
-  //   const { data, error } = await supabase.auth.setSession({
-  //     access_token: accessToken,
-  //   })
-  //   if(error){
-  //     console.log(error)
-  //   }
-  // }
-  // getSession()
-
-  // }, [])
-
-  useEffect(()=> {
-    console.log(session)
-  }, [session])
-  
-
   // Handle Reset
   const handlePasswordReset = async (event) => {
     event.preventDefault();
@@ -84,21 +65,6 @@ const ResetPassword = (props) => {
       setIsPasswordReset(true);
     }
   };
-
-
-
-  // useEffect(() => {
-
-  //   const { data: { user }, error: getUserError } =
-  //   supabase.auth.getUser();
-  // if (getUserError) {
-  //   console.log(getUserError);
-  //   return;
-  // }
-  // console.log(user)
-
-    
-  // }, [email, accessToken])
 
 
   return (
