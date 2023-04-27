@@ -37,7 +37,7 @@ const ResetPassword = (props) => {
     event.preventDefault();
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo:
-        "https://jmccallister93.github.io/dndgeneratev3/resetPassword",
+        "https://dndgenerate.netlify.app/resetPassword",
         // "http://localhost:3000/resetPassword",
     });
   
