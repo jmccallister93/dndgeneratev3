@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dndgeneratev3/static/css/main.df0b7a47.css",
-    "main.js": "/dndgeneratev3/static/js/main.8bc0966a.js",
+    "main.js": "/dndgeneratev3/static/js/main.97aa93e0.js",
     "static/js/498.ed566f91.chunk.js": "/dndgeneratev3/static/js/498.ed566f91.chunk.js",
     "static/js/703.270dae26.chunk.js": "/dndgeneratev3/static/js/703.270dae26.chunk.js",
     "static/js/553.08088f9f.chunk.js": "/dndgeneratev3/static/js/553.08088f9f.chunk.js",
@@ -15,13 +15,13 @@
     "static/media/d20-icon.png": "/dndgeneratev3/static/media/d20-icon.d66e304e2fb6714055a5.png",
     "index.html": "/dndgeneratev3/index.html",
     "main.df0b7a47.css.map": "/dndgeneratev3/static/css/main.df0b7a47.css.map",
-    "main.8bc0966a.js.map": "/dndgeneratev3/static/js/main.8bc0966a.js.map",
+    "main.97aa93e0.js.map": "/dndgeneratev3/static/js/main.97aa93e0.js.map",
     "498.ed566f91.chunk.js.map": "/dndgeneratev3/static/js/498.ed566f91.chunk.js.map",
     "703.270dae26.chunk.js.map": "/dndgeneratev3/static/js/703.270dae26.chunk.js.map",
     "553.08088f9f.chunk.js.map": "/dndgeneratev3/static/js/553.08088f9f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.df0b7a47.css",
-    "static/js/main.8bc0966a.js"
+    "static/js/main.97aa93e0.js"
   ]
 }
