@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/PageStyle.module.scss";
 import { supabase, auth } from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -8,16 +7,11 @@ import "primeicons/primeicons.css";
 import "/node_modules/primeflex/primeflex.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Tooltip } from "primereact/tooltip";
-import { FileUpload } from "primereact/fileupload";
-import { jsPDF } from "jspdf";
-import { autoTable } from "jspdf-autotable";
 import { Dialog } from "primereact/dialog";
-import { Toast } from "primereact/toast";
-import { e } from "mathjs";
+
 
 
 

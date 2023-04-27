@@ -1,5 +1,4 @@
 import { Dialog } from "primereact/dialog";
-import { useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const InfoModal = (props) => {

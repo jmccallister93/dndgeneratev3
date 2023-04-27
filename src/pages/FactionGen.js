@@ -636,7 +636,7 @@ if (lastUrl) {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <h1>Orginization Options</h1>
+          <h1>Faction Options</h1>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showBasics}>
               Basic Info{" "}
