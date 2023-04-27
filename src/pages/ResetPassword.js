@@ -1,8 +1,12 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 import { supabase } from "../config/supabaseClient";
+import { SessionContext } from "../config/SessionContext";
 
 const ResetPassword = (props) => {
+
+  const session = useContext(SessionContext);
+   
   const [email, setEmail] = useState("");
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [isResetLinkClicked, setIsResetLinkClicked] = useState(false);
@@ -46,35 +50,29 @@ const ResetPassword = (props) => {
     }
   };
 
-  //Set Session
-  useEffect(()=> {
-    const getSession = async () => {
-    const { data, error } = await supabase.auth.setSession({
-      access_token: accessToken,
-    })
-    console.log("this is data from get sesion " + data)
-    if(error){
-      console.log(error)
-    }
-  }
-  getSession()
+  // //Set Session
+  // useEffect(()=> {
+  //   const getSession = async () => {
+  //   const { data, error } = await supabase.auth.setSession({
+  //     access_token: accessToken,
+  //   })
+  //   if(error){
+  //     console.log(error)
+  //   }
+  // }
+  // getSession()
 
-  }, [])
+  // }, [])
+
+  useEffect(()=> {
+    console.log(session)
+  }, [session])
   
 
   // Handle Reset
   const handlePasswordReset = async (event) => {
     event.preventDefault();
     const newPassword = event.target.password.value;
-
-    const { user, session, error } = await supabase.auth.signIn({
-      token: accessToken,
-    });
-  
-    if (error) {
-      console.log(error);
-      return;
-    }
 
     const { error: updatePasswordError } = await supabase.auth.update({
       password: newPassword,
