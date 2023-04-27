@@ -46,6 +46,22 @@ const ResetPassword = (props) => {
     }
   };
 
+  //Set Session
+  useEffect(()=> {
+    const getSession = async () => {
+    const { data, error } = await supabase.auth.setSession({
+      access_token: accessToken,
+    })
+    console.log("this is data from get sesion " + data)
+    if(error){
+      console.log(error)
+    }
+  }
+  getSession()
+
+  }, [accessToken])
+  
+
   // Handle Reset
   const handlePasswordReset = async (event) => {
     event.preventDefault();
