@@ -50,15 +50,15 @@ const ResetPassword = (props) => {
     event.preventDefault();
     const newPassword = event.target.password.value;
 
-    const { data: user, error: getUserError } =
-      await supabase.auth.getUser(accessToken);
+    const { data: {user}, error: getUserError } =
+      await supabase.auth.getUser();
     if (getUserError) {
       console.log(getUserError);
       return;
     }
     console.log("This is user " + user)
 
-    const { error: updateUserError } = await supabase.auth.api.updateUser(
+    const { error: updateUserError } = await supabase.auth.updateUser(
       accessToken,
       {
         id: user.id,
