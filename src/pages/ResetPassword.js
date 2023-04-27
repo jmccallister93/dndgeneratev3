@@ -46,69 +46,45 @@ const ResetPassword = (props) => {
     }
   };
 
-  // // Handle Reset
-  // const handlePasswordReset = async (event) => {
-  //   event.preventDefault();
-  //   const newPassword = event.target.password.value;
+  // Handle Reset
+  const handlePasswordReset = async (event) => {
+    event.preventDefault();
+    const newPassword = event.target.password.value;
 
-  //   const { data: {user}, error: getUserError } =
-  //     await supabase.auth.getUser();
-  //   if (getUserError) {
-  //     console.log(getUserError);
-  //     return;
-  //   }
-  //   console.log("This is user " + user)
-
-  //   const { error: updateUserError } = await supabase.auth.updateUser(
-  //     accessToken,
-  //     {
-  //       id: user.id,
-  //       email: user.email,
-  //       password: newPassword,
-  //     }
-  //   );
-
-  //   if (updateUserError) {
-  //     console.log(updateUserError);
-  //   } else {
-  //     setIsPasswordReset(true);
-  //   }
-  // };
-
-    // Handle password reset
-    const handlePasswordReset = async (event) => {
-      event.preventDefault();
-      const newPassword = event.target.password.value;
+    const { user, session, error } = await supabase.auth.signIn({
+      token: accessToken,
+    });
   
-      try {
-        const { data: {user}, error: getUserError } = await supabase.auth.getUser();
-        if (getUserError) {
-          console.log(getUserError);
-          return;
-        }
-  
-        const { error: updateUserError } = await supabase.auth.updateUser(
-          accessToken,
-          {
-            password: newPassword,
-          }
-        );
-  
-        if (updateUserError) {
-          console.log(updateUserError);
-        } else {
-          setIsPasswordReset(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    if (error) {
+      console.log(error);
+      return;
+    }
 
-  useEffect(() => {
-    console.log("this is email " + email)
-    console.log("this is access token " + accessToken)
+    const { error: updatePasswordError } = await supabase.auth.update({
+      password: newPassword,
+    });
+  
+    if (updatePasswordError) {
+      console.log(updatePasswordError);
+    } else {
+      setIsPasswordReset(true);
+    }
+  };
+
+
+
+  // useEffect(() => {
+
+  //   const { data: { user }, error: getUserError } =
+  //   supabase.auth.getUser();
+  // if (getUserError) {
+  //   console.log(getUserError);
+  //   return;
+  // }
+  // console.log(user)
+
     
-  }, [email, accessToken])
+  // }, [email, accessToken])
 
 
   return (
