@@ -16,7 +16,7 @@ const ResetPassword = (props) => {
       const url = window.location.href;
       const index = url.indexOf("#access_token=");
       if (index !== -1) {
-        const token = url.substring(index + 14);
+        const token = url.substring(index);
         if (isMounted.current) {
           setAccessToken(token);
           setIsResetLinkClicked(true);
@@ -46,55 +46,40 @@ const ResetPassword = (props) => {
   };
 
   // Handle Reset
-  // const handlePasswordReset = async (event) => {
-  //   event.preventDefault();
-  //   const newPassword = event.target.password.value;
-
-  //   const { data: user, error: getUserError } =
-  //     await supabase.auth.api.getUser(accessToken);
-  //   if (getUserError) {
-  //     console.log(getUserError);
-  //     return;
-  //   }
-
-  //   const { error: updateUserError } = await supabase.auth.api.updateUser(
-  //     accessToken,
-  //     {
-  //       id: user.id,
-  //       email: user.email,
-  //       password: newPassword,
-  //     }
-  //   );
-
-  //   if (updateUserError) {
-  //     console.log(updateUserError);
-  //   } else {
-  //     setIsPasswordReset(true);
-  //   }
-  // };
   const handlePasswordReset = async (event) => {
     event.preventDefault();
     const newPassword = event.target.password.value;
-  
-    const { user, session, error } = await supabase.auth.signIn({
-      token: accessToken,
-    });
-  
-    if (error) {
-      console.log(error);
+
+    const { data: user, error: getUserError } =
+      await supabase.auth.api.getUser(accessToken);
+    if (getUserError) {
+      console.log(getUserError);
       return;
     }
-  
-    const { error: updatePasswordError } = await supabase.auth.update({
-      password: newPassword,
-    });
-  
-    if (updatePasswordError) {
-      console.log(updatePasswordError);
+    console.log("This is user " + user)
+
+    const { error: updateUserError } = await supabase.auth.api.updateUser(
+      accessToken,
+      {
+        id: user.id,
+        email: user.email,
+        password: newPassword,
+      }
+    );
+
+    if (updateUserError) {
+      console.log(updateUserError);
     } else {
       setIsPasswordReset(true);
     }
   };
+
+  useEffect(() => {
+    console.log("this is email " + email)
+    console.log("this is access token " + accessToken)
+    
+  }, [email, accessToken])
+
 
   return (
     <>
