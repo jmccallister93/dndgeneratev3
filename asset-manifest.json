@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/dndgeneratev3/static/css/main.df0b7a47.css",
-    "main.js": "/dndgeneratev3/static/js/main.97aa93e0.js",
-    "static/js/498.ed566f91.chunk.js": "/dndgeneratev3/static/js/498.ed566f91.chunk.js",
-    "static/js/703.270dae26.chunk.js": "/dndgeneratev3/static/js/703.270dae26.chunk.js",
-    "static/js/553.08088f9f.chunk.js": "/dndgeneratev3/static/js/553.08088f9f.chunk.js",
-    "static/media/d20-red.jpg": "/dndgeneratev3/static/media/d20-red.b0db439316af61496e48.jpg",
-    "static/media/primeicons.svg": "/dndgeneratev3/static/media/primeicons.e1441b135b3ca9ad643c.svg",
-    "static/media/primeicons.eot": "/dndgeneratev3/static/media/primeicons.d44157bdfa026dc877af.eot",
-    "static/media/primeicons.woff": "/dndgeneratev3/static/media/primeicons.10d3152104f2208ac82a.woff",
-    "static/media/primeicons.ttf": "/dndgeneratev3/static/media/primeicons.ea5358601d0a3fd6670b.ttf",
-    "static/media/d20_2.png": "/dndgeneratev3/static/media/d20_2.9350032e64275551fc3c.png",
-    "static/media/primeicons.woff2": "/dndgeneratev3/static/media/primeicons.78172950b335ccdb94e2.woff2",
-    "static/media/d20-icon.png": "/dndgeneratev3/static/media/d20-icon.d66e304e2fb6714055a5.png",
-    "index.html": "/dndgeneratev3/index.html",
-    "main.df0b7a47.css.map": "/dndgeneratev3/static/css/main.df0b7a47.css.map",
-    "main.97aa93e0.js.map": "/dndgeneratev3/static/js/main.97aa93e0.js.map",
-    "498.ed566f91.chunk.js.map": "/dndgeneratev3/static/js/498.ed566f91.chunk.js.map",
-    "703.270dae26.chunk.js.map": "/dndgeneratev3/static/js/703.270dae26.chunk.js.map",
-    "553.08088f9f.chunk.js.map": "/dndgeneratev3/static/js/553.08088f9f.chunk.js.map"
+    "main.css": "/static/css/main.6a21554f.css",
+    "main.js": "/static/js/main.1757488a.js",
+    "static/js/498.ed566f91.chunk.js": "/static/js/498.ed566f91.chunk.js",
+    "static/js/703.270dae26.chunk.js": "/static/js/703.270dae26.chunk.js",
+    "static/js/553.08088f9f.chunk.js": "/static/js/553.08088f9f.chunk.js",
+    "static/media/d20-red.jpg": "/static/media/d20-red.b0db439316af61496e48.jpg",
+    "static/media/primeicons.svg": "/static/media/primeicons.e1441b135b3ca9ad643c.svg",
+    "static/media/primeicons.eot": "/static/media/primeicons.d44157bdfa026dc877af.eot",
+    "static/media/primeicons.woff": "/static/media/primeicons.10d3152104f2208ac82a.woff",
+    "static/media/primeicons.ttf": "/static/media/primeicons.ea5358601d0a3fd6670b.ttf",
+    "static/media/d20_2.png": "/static/media/d20_2.9350032e64275551fc3c.png",
+    "static/media/primeicons.woff2": "/static/media/primeicons.78172950b335ccdb94e2.woff2",
+    "static/media/d20-icon.png": "/static/media/d20-icon.d66e304e2fb6714055a5.png",
+    "index.html": "/index.html",
+    "main.6a21554f.css.map": "/static/css/main.6a21554f.css.map",
+    "main.1757488a.js.map": "/static/js/main.1757488a.js.map",
+    "498.ed566f91.chunk.js.map": "/static/js/498.ed566f91.chunk.js.map",
+    "703.270dae26.chunk.js.map": "/static/js/703.270dae26.chunk.js.map",
+    "553.08088f9f.chunk.js.map": "/static/js/553.08088f9f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.df0b7a47.css",
-    "static/js/main.97aa93e0.js"
+    "static/css/main.6a21554f.css",
+    "static/js/main.1757488a.js"
   ]
 }
