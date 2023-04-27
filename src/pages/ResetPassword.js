@@ -49,15 +49,15 @@ const ResetPassword = (props) => {
   const handlePasswordReset = async (event) => {
     event.preventDefault();
     const newPassword = event.target.password.value;
-
-    const { data: user, error: getUserError } = await supabase.auth.api.getUser(
+  
+    const { data: user, error: getUserError } = await supabase.auth.api.getUserByAccessToken(
       accessToken
     );
     if (getUserError) {
       console.log(getUserError);
       return;
     }
-
+  
     const { error: updateUserError } = await supabase.auth.api.updateUser(
       accessToken,
       {
@@ -66,7 +66,7 @@ const ResetPassword = (props) => {
         password: newPassword,
       }
     );
-
+  
     if (updateUserError) {
       console.log(updateUserError);
     } else {
