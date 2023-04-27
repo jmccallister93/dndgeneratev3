@@ -87,7 +87,7 @@ const ResetPassword = (props) => {
           return;
         }
   
-        const { error: updateUserError } = await supabase.auth.api.updateUser(
+        const { error: updateUserError } = await supabase.auth.updateUser(
           accessToken,
           {
             password: newPassword,
