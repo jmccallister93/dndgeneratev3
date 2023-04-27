@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { supabase, auth } from "../../config/supabaseClient"; // import the supabase client
+import { supabase,  } from "../../config/supabaseClient"; // import the supabase client
 
 function NewNote() {
   const [title, setTitle] = useState("");

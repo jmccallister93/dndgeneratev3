@@ -23,35 +23,32 @@ import MultipleDisplayChunks from "../../components/MultipleDisplayChunks";
 import MultipleDisplayMod from "../../components/MultipleDisplayMod";
 import CustomDataTableMod from "../../components/CustomDataTableMod";
 import { SessionContext } from "../../config/SessionContext";
-import { supabase, auth } from "../../config/supabaseClient";
 import ns from "../../stylesheets/Note.module.scss";
 
 const MonsterCreate = () => {
   const session = useContext(SessionContext);
 
   //Set States
-  const [fetchError, setFetchError] = useState();
-
   const [name, setName] = useState("");
-  const [names, setNames] = useState();
+  const [, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
 
   const [size, setSize] = useState("");
-  const [sizes, setSizes] = useState();
+  const [, setSizes] = useState();
   const [sizeOptions, setSizeOptions] = useState();
 
   const [type, setType] = useState("");
-  const [types, setTypes] = useState();
+  const [, setTypes] = useState();
   const [typeOptions, setTypeOptions] = useState();
 
   const [align, setAlign] = useState("");
-  const [aligns, setAligns] = useState();
+  const [, setAligns] = useState();
   const [alignOptions, setAlignOptions] = useState();
 
   const [ac, setAc] = useState("");
 
   const [armorType, setArmorType] = useState("");
-  const [armorTypes, setArmorTypes] = useState();
+  const [, setArmorTypes] = useState();
   const [armorTypeOptions, setArmorTypeOptions] = useState();
 
   const [hp, setHp] = useState("");
@@ -70,12 +67,12 @@ const MonsterCreate = () => {
   const [wis, setWis] = useState("");
   const [cha, setCha] = useState("");
 
-  const [save, setSave] = useState("");
-  const [saves, setSaves] = useState("");
+  const [, setSave] = useState("");
+  const [, setSaves] = useState("");
   const [saveOptions, setSaveOptions] = useState();
   const [saveList, setSaveList] = useState([]);
   const [selectedSave, setSelectedSave] = useState([]);
-  const [selectedSaveList, setSelectedSaveList] = useState([]);
+  const [selectedSaveList, ] = useState([]);
   const [strSave, setStrSave] = useState("");
   const [dexSave, setDexSave] = useState("");
   const [conSave, setConSave] = useState("");
@@ -83,10 +80,10 @@ const MonsterCreate = () => {
   const [wisSave, setWisSave] = useState("");
   const [chaSave, setChaSave] = useState("");
   const [selectedSaveModifiers, setSelectedSaveModifiers] = useState([]);
-  const [saveModMap, setSaveModMap] = useState([]);
+  const [, setSaveModMap] = useState([]);
 
-  const [skill, setSkill] = useState("");
-  const [skills, setSkills] = useState("");
+  const [, setSkill] = useState("");
+  const [, setSkills] = useState("");
   const [skillOptions, setSkillOptions] = useState();
   const [skillList, setSkillList] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState([]);
@@ -108,11 +105,11 @@ const MonsterCreate = () => {
   const [slSkill, setSlSkill] = useState("");
   const [stSkill, setStSkill] = useState("");
   const [surSkill, setSurSkill] = useState("");
-  const [skillModMap, setSkillModMap] = useState([]);
+  const [, setSkillModMap] = useState([]);
   const [selectedSkillModifiers, setSelectedSkillModifiers] = useState([]);
 
-  const [sense, setSense] = useState("");
-  const [senses, setSenses] = useState("");
+  const [, setSense] = useState("");
+  const [, setSenses] = useState("");
   const [senseOptions, setSenseOptions] = useState();
   const [senseList, setSenseList] = useState([]);
   const [selectedSense, setSelectedSense] = useState([]);
@@ -120,65 +117,59 @@ const MonsterCreate = () => {
   const [darkvisionSense, setDarkvisionSense] = useState("");
   const [tremorsenseSense, setTremorsenseSense] = useState("");
   const [truesightSense, setTruesightSense] = useState("");
-  const [senseModMap, setSenseModMap] = useState([]);
+  const [, setSenseModMap] = useState([]);
   const [selectedSenseModifiers, setSelectedSenseModifiers] = useState([]);
 
-  const [vuln, setVuln] = useState("");
-  const [vulns, setVulns] = useState("");
+  const [, setVuln] = useState("");
+  const [, setVulns] = useState("");
   const [vulnOptions, setVulnOptions] = useState();
   const [vulnList, setVulnList] = useState([]);
   const [selectedVuln, setSelectedVuln] = useState([]);
 
-  const [immune, setImmune] = useState("");
-  const [immunes, setImmunes] = useState("");
+  const [, setImmune] = useState("");
+  const [, setImmunes] = useState("");
   const [immuneOptions, setImmuneOptions] = useState();
   const [immuneList, setImmuneList] = useState([]);
   const [selectedImmune, setSelectedImmune] = useState([]);
 
-  const [resist, setResist] = useState("");
-  const [resists, setResists] = useState("");
+  const [, setResist] = useState("");
+  const [, setResists] = useState("");
   const [resistOptions, setResistOptions] = useState();
   const [resistList, setResistList] = useState([]);
   const [selectedResist, setSelectedResist] = useState([]);
 
-  const [condition, setCondition] = useState("");
-  const [conditions, setConditions] = useState("");
+  const [, setCondition] = useState("");
+  const [, setConditions] = useState("");
   const [conditionOptions, setConditionOptions] = useState();
   const [conditionList, setConditionList] = useState([]);
   const [selectedCondition, setSelectedCondition] = useState([]);
 
-  const [lang, setLang] = useState("");
-  const [langs, setLangs] = useState("");
+  const [, setLang] = useState("");
+  const [, setLangs] = useState("");
   const [langOptions, setLangOptions] = useState();
   const [langList, setLangList] = useState([]);
   const [selectedLang, setSelectedLang] = useState([]);
 
-  const [special, setSpecial] = useState("");
-  const [Specials, setSpecials] = useState("");
+  const [, setSpecial] = useState("");
+  const [, setSpecials] = useState("");
   const [specialOptions, setSpecialOptions] = useState();
   const [specialList, setSpecialList] = useState([]);
   const [selectedSpecial, setSelectedSpecial] = useState([]);
 
-  const [action, setAction] = useState("");
-  const [actions, setActions] = useState("");
+  const [, setAction] = useState("");
+  const [, setActions] = useState("");
   const [actionOptions, setActionOptions] = useState();
   const [actionList, setActionList] = useState([]);
   const [selectedAction, setSelectedAction] = useState([]);
 
-  const [reaction, setReaction] = useState("");
-  const [reactions, setReactions] = useState("");
-  const [reactionOptions, setReactionOptions] = useState();
-  const [reactionList, setReactionList] = useState([]);
-  const [selectedReaction, setSelectedReaction] = useState([]);
-
-  const [legend, setLegend] = useState("");
-  const [legends, setLegends] = useState("");
+  const [, setLegend] = useState("");
+  const [, setLegends] = useState("");
   const [legendOptions, setLegendOptions] = useState();
   const [legendList, setLegendList] = useState([]);
   const [selectedLegend, setSelectedLegend] = useState([]);
 
-  const [lair, setLair] = useState("");
-  const [Lairs, setLairs] = useState("");
+  const [, setLair] = useState("");
+  const [, setLairs] = useState("");
   const [lairOptions, setLairOptions] = useState();
   const [lairList, setLairList] = useState([]);
   const [selectedLair, setSelectedLair] = useState([]);
@@ -192,7 +183,6 @@ const MonsterCreate = () => {
   const [isMovementActive, setIsMovementActive] = useState(false);
 
   const [monster, setMonster] = useState({});
-  const [selectedItemString, setSelectedItemString] = useState("");
 
   //Showoptions
   const showBasics = (e) => {
@@ -363,6 +353,8 @@ const MonsterCreate = () => {
     selectedAction,
     selectedLegend,
     selectedLair,
+    selectedSkillModifiers,
+    session,
   ]);
   //Info content
   const infoContent = (
@@ -405,7 +397,7 @@ const MonsterCreate = () => {
         return { name: save.name, modifier };
       })
     );
-  }, [selectedSave]);
+  }, [selectedSave, strSave, dexSave, conSave, intSave, wisSave, chaSave]);
 
   //Skill modifiers
   useEffect(() => {
@@ -436,7 +428,7 @@ const MonsterCreate = () => {
         return { name: skill.name, modifier };
       })
     );
-  }, [selectedSkill]);
+  }, [selectedSkill, abSkill, ahSkill, arSkill, athSkill, deSkill, hiSkill, inSkill, intimiSkill, invsSkill, medSkill, natSkill, pecSkill, pfSkill, perSkill, relSkill, slSkill, stSkill, surSkill]);
 
   //Sense modifiers
   useEffect(() => {
@@ -453,7 +445,7 @@ const MonsterCreate = () => {
         return { name: sense.name, modifier };
       })
     );
-  }, [selectedSense]);
+  }, [selectedSense, blindsightSense, darkvisionSense, tremorsenseSense, truesightSense]);
 
   return (
     <div className={ns.mainWrapper}>

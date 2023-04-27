@@ -30,13 +30,6 @@ const NpcOptions = (props) => {
     // props.setShowPopupPantheon(true);
   };
 
-  //Handle the close button
-  const handleClose = () => {
-    setShowPopupNpc(false);
-    setShowPopupVillain(false);
-    setShowPopupPantheon(false);
-    props.setShowPopup(false);
-  };
 
   const buttonOptions = (
     <>

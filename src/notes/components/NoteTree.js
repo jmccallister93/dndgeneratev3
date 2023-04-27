@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
+
 import ns from "../../stylesheets/Note.module.scss";
-import { DataTable } from "primereact/datatable";
-import TreeTable from "./NoteTreeTable";
 import NoteTreeTable from "./NoteTreeTable";
 
 

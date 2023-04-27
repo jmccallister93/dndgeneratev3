@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ns from "../../stylesheets/Note.module.scss";
-import style from "../../stylesheets/PageStyle.module.scss";
 
 const NodeList = (props) => {
   const [allLinks, setAllLinks] = useState(props.allLinks);

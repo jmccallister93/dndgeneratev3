@@ -1,35 +1,22 @@
-import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { useEffect, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { supabase, auth } from "../../config/supabaseClient";
-import { Button } from "primereact/button";
 import ClearButton from "../../components/ClearButton";
-import Npcs from "../../components/Npcs";
 import GenerateButton from "../../components/GenerateButton";
-import CustomInputText from "../../components/CustomInputText";
 import CustomDropDown from "../../components/CustomDropDown";
-import CustomInputNumber from "../../components/CustomInputNumber";
 import CustomDataTable from "../../components/CustomDataTable";
 import MultipleDisplay from "../../components/MultipleDisplay";
 import CustomName from "../../components/CustomName";
 import NameDisplay from "../../components/NameDisplay";
 import SingleDisplayText from "../../components/SingleDisplayText";
-import SingleDisplayNumber from "../../components/SingleDisplayNumber";
-import RandomHooks from "../../components/RandomHooks";
 import ExportButtons from "../../components/ExportButtons";
 import { useRef } from "react";
-import Items from "../../components/Items";
 import { Tooltip } from "primereact/tooltip";
 import InfoModal from "../../components/InfoModal";
-import NameGenerator from "../../components/NameGenerator";
 import SectionRandom from "../../components/SectionRandom";
 import ns from "../../stylesheets/Note.module.scss";
-import { v4 as uuidv4 } from 'uuid';
 import { SessionContext } from "../../config/SessionContext";
 import MultipleDisplayChunks from "../../components/MultipleDisplayChunks";
 
@@ -41,64 +28,47 @@ const PantheonCreate = () => {
     const [isInfoActive, setIsInfoActive] = useState(false);
   
     const [pantheonName, setPantheonName] = useState("");
-    const [pantheonNames, setPantheonNames] = useState("");
+    const [, setPantheonNames] = useState("");
     const [pantheonNameOptions, setPantheonNameOptions] = useState("");
   
     const [deityType, setDeityType] = useState("");
-    const [deityTypes, setDeityTypes] = useState("");
+    const [, setDeityTypes] = useState("");
     const [deityTypeOptions, setDeityTypeOptions] = useState("");
   
     const [alignment, setAlignment] = useState("");
-    const [alignments, setAlignments] = useState("");
+    const [, setAlignments] = useState("");
     const [alignmentOptions, setAlignmentOptions] = useState("");
   
     const [size, setSize] = useState("");
-    const [sizes, setSizes] = useState("");
+    const [, setSizes] = useState("");
     const [sizeOptions, setSizeOptions] = useState("");
   
-    const [attribute, setAttribute] = useState("");
-    const [attributes, setAttributes] = useState("");
-    const [attributeOptions, setAttributeOptions] = useState("");
-  
     const [plane, setPlane] = useState("");
-    const [planes, setPlanes] = useState("");
+    const [, setPlanes] = useState("");
     const [planeOptions, setPlaneOptions] = useState("");
   
     const [domain, setDomain] = useState("");
-    const [domains, setDomains] = useState("");
+    const [, setDomains] = useState("");
     const [domainOptions, setDomainOptions] = useState("");
   
-    const [symbol, setSymbol] = useState("");
-    const [symbols, setSymbols] = useState("");
-    const [symbolOptions, setSymbolOptions] = useState("");
-  
-    const [history, setHistory] = useState("");
-    const [historys, setHistorys] = useState("");
-    const [historyOptions, setHistoryOptions] = useState("");
-  
-    const [motive, setMotive] = useState("");
-    const [motives, setMotives] = useState("");
+    const [, setMotive] = useState("");
+    const [, setMotives] = useState("");
     const [motiveOptions, setMotiveOptions] = useState("");
     const [motiveList, setMotiveList] = useState([]);
     const [selectedMotive, setSelectedMotive] = useState([]);
   
-    const [provide, setProvide] = useState("");
-    const [provides, setProvides] = useState("");
+    const [, setProvide] = useState("");
+    const [, setProvides] = useState("");
     const [provideOptions, setProvideOptions] = useState("");
     const [provideList, setProvideList] = useState([]);
     const [selectedProvide, setSelectedProvide] = useState([]);
   
-    const [artifact, setArtifact] = useState("");
-    const [artifacts, setArtifacts] = useState("");
+    const [, setArtifact] = useState("");
+    const [, setArtifacts] = useState("");
     const [artifactOptions, setArtifactOptions] = useState("");
     const [artifactList, setArtifactList] = useState([]);
     const [selectedArtifact, setSelectedArtifact] = useState([]);
   
-    const [shrine, setShrine] = useState("");
-    const [shrines, setShrines] = useState("");
-    const [shrineOptions, setShrineOptions] = useState("");
-    const [shrineList, setShrineList] = useState([]);
-    const [selectedShrine, setSelectedShrine] = useState([]);
   
     const [pantheon, setPantheon] = useState({});
   

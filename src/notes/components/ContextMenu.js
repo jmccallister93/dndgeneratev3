@@ -1,13 +1,13 @@
 import ns from "../../stylesheets/Note.module.scss";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 
 const ContextMenu = (props) => {
   const contextMenuRef = useRef(null);
 
   //Handle the click outside the context menu
-  const hideContextMenu = () => {
-    props.setContextMenuVisible(false);
-  };
+  // const hideContextMenu = () => {
+  //   props.setContextMenuVisible(false);
+  // };
 
   // // Handle the click on the context menu item
   // const handleMenuItemClick = useCallback(

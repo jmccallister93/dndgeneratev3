@@ -5,19 +5,16 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import ClearButton from "../../components/ClearButton";
 import GenerateButton from "../../components/GenerateButton";
-import CustomInputText from "../../components/CustomInputText";
 import CustomDropDown from "../../components/CustomDropDown";
 import ExportButtons from "../../components/ExportButtons";
 import { Tooltip } from "primereact/tooltip";
 import InfoModal from "../../components/InfoModal";
 import SectionRandom from "../../components/SectionRandom";
-import NameDisplay from "../../components/NameDisplay";
 import SingleDisplayText from "../../components/SingleDisplayText";
 import RandomHooks from "../../components/RandomHooks";
 import ns from "../../stylesheets/Note.module.scss";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { SessionContext } from "../../config/SessionContext";
-import CustomName from "../../components/CustomName";
 
 const QuestCreate = () => {
   const session = useContext(SessionContext);
@@ -27,76 +24,54 @@ const QuestCreate = () => {
   const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [questName, setQuestName] = useState("");
-  const [questNames, setQuestNames] = useState("");
-  const [questNameOptions, setQuestNameOptions] = useState("");
 
   const [questType, setQuestType] = useState("");
-  const [questTypes, setQuestTypes] = useState("");
+  const [, setQuestTypes] = useState("");
   const [questTypeOptions, setQuestTypeOptions] = useState("");
 
-  const [quests, setQuests] = useState([]);
-  const [questOptions, setQuestOptions] = useState([]);
-  const [questList, setQuestList] = useState([]);
-  const [selectedQuest, setSelectedQuest] = useState([]);
+  const [, setQuestOptions] = useState([]);
 
-  const [bounty, setBounty] = useState("");
-  const [bounties, setBounties] = useState("");
-  const [bountyOptions, setBountyOptions] = useState("");
 
-  const [capture, setCapture] = useState("");
-  const [captures, setCaptures] = useState("");
-  const [captureOptions, setCaptureOptions] = useState("");
+  const [bountyOptions, ] = useState("");
 
-  const [delivery, setDelivery] = useState("");
-  const [deliverys, setDeliverys] = useState("");
-  const [deliveryOptions, setDeliveryOptions] = useState("");
 
-  const [escort, setEscort] = useState("");
-  const [escorts, setEscorts] = useState("");
-  const [escortOptions, setEscortOptions] = useState("");
+  const [captureOptions, ] = useState("");
 
-  const [exploration, setExploration] = useState("");
-  const [explorations, setExplorations] = useState("");
-  const [explorationOptions, setExplorationOptions] = useState("");
+  const [deliveryOptions, ] = useState("");
 
-  const [gather, setGather] = useState("");
-  const [gathers, setGathers] = useState("");
-  const [gatherOptions, setGatherOptions] = useState("");
+  const [escortOptions, ] = useState("");
 
-  const [investigate, setInvestigate] = useState("");
-  const [investigates, setInvestigates] = useState("");
-  const [investigateOptions, setInvestigateOptions] = useState("");
+  const [explorationOptions, ] = useState("");
 
-  const [kill, setKill] = useState("");
-  const [kills, setKills] = useState("");
-  const [killOptions, setKillOptions] = useState("");
+  const [gatherOptions, ] = useState("");
 
-  const [negotiate, setNegotiate] = useState("");
-  const [negotiates, setNegotiates] = useState("");
-  const [negotiateOptions, setNegotiateOptions] = useState("");
+  const [investigateOptions, ] = useState("");
 
-  const [protect, setProtect] = useState("");
-  const [protects, setProtects] = useState("");
-  const [protectOptions, setProtectOptions] = useState("");
+  const [killOptions, ] = useState("");
 
-  const [rescue, setRescue] = useState("");
-  const [rescues, setRescues] = useState("");
-  const [rescueOptions, setRescueOptions] = useState("");
+
+  const [negotiateOptions, ] = useState("");
+
+
+  const [protectOptions, ] = useState("");
+
+
+  const [rescueOptions, ] = useState("");
 
   const [motive, setMotive] = useState("");
-  const [motives, setMotives] = useState("");
+  const [, setMotives] = useState("");
   const [motiveOptions, setMotiveOptions] = useState("");
 
   const [twist, setTwist] = useState("");
-  const [twists, setTwists] = useState("");
+  const [, setTwists] = useState("");
   const [twistOptions, setTwistOptions] = useState("");
 
   const [location, setLocation] = useState("");
-  const [locations, setLocations] = useState("");
+  const [, setLocations] = useState("");
   const [locationOptions, setLocationOptions] = useState("");
 
   const [reward, setReward] = useState("");
-  const [rewards, setRewards] = useState("");
+  const [, setRewards] = useState("");
   const [rewardOptions, setRewardOptions] = useState("");
 
   const [quest, setQuest] = useState("");
@@ -130,7 +105,7 @@ const QuestCreate = () => {
     } else {
       setQuestOptions([]);
     }
-  }, [questType]);
+  }, [questType, bountyOptions, captureOptions, deliveryOptions, escortOptions, explorationOptions, gatherOptions, investigateOptions, killOptions, negotiateOptions, protectOptions, rescueOptions]);
 
   //Show Options
   const showBasics = (e) => {

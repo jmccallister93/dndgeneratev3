@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useCallback } from "react";
+import React, { useEffect, useState,  } from "react";
 import ns from "../../stylesheets/Note.module.scss";
 import NodeList from "./NodeList";
-import { hash } from "object-hash";
+
 
 function Note(props) {
   const [notes, setNotes] = useState("");
   const [allNotes, setAllNotes] = useState([]);
   const [allLinks, setAllLinks] = useState([]);
-  const [allFolders, setAllFolders] = useState([]);
+  const [, setAllFolders] = useState([]);
   const [selectedNoteIndex, setSelectedNoteIndex] = useState(-1);
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(-1);
   const [showNodesList, setShowNodesList] = useState(false);
@@ -125,12 +124,12 @@ function Note(props) {
   }, [props]);
 
   //Handle Delete of a folder
-  const handleDeleteFolder = (index) => {
-    const newFolder = [...allFolders];
-    allFolders.splice(index, 1);
-    setAllFolders(newFolder);
-    props.updateFolder(newFolder.join("\n"));
-  };
+  // const handleDeleteFolder = (index) => {
+  //   const newFolder = [...allFolders];
+  //   allFolders.splice(index, 1);
+  //   setAllFolders(newFolder);
+  //   props.updateFolder(newFolder.join("\n"));
+  // };
 
   //Handle Delete of a link
   const handleDeleteLink = (index) => {

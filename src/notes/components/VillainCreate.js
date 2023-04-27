@@ -557,7 +557,7 @@ const VillainCreate = () => {
       selectedAffiliation,
       selectedPowerSource,
       selectedMinion,
-        selectedGoal,
+      selectedGoal,
       
     ]);
   

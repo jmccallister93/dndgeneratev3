@@ -1,29 +1,18 @@
-import Navbar from "../../components/Navbar";
 import style from "../../stylesheets/PageStyle.module.scss";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { useEffect, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { supabase, auth } from "../../config/supabaseClient";
-import { Button } from "primereact/button";
 import ClearButton from "../../components/ClearButton";
-import Npcs from "../../components/Npcs";
 import GenerateButton from "../../components/GenerateButton";
-import CustomInputText from "../../components/CustomInputText";
 import CustomDropDown from "../../components/CustomDropDown";
-import CustomInputNumber from "../../components/CustomInputNumber";
 import CustomDataTable from "../../components/CustomDataTable";
 import MultipleDisplay from "../../components/MultipleDisplay";
 import CustomName from "../../components/CustomName";
 import NameDisplay from "../../components/NameDisplay";
 import SingleDisplayText from "../../components/SingleDisplayText";
-import SingleDisplayNumber from "../../components/SingleDisplayNumber";
-import RandomHooks from "../../components/RandomHooks";
 import ExportButtons from "../../components/ExportButtons";
 import { useRef } from "react";
-import Items from "../../components/Items";
 import { Tooltip } from "primereact/tooltip";
 import InfoModal from "../../components/InfoModal";
 import SectionRandom from "../../components/SectionRandom";
@@ -33,14 +22,11 @@ import CustomDataTableMember from "../../components/CustomDataTableMember";
 
 const OrganizationCreate = () => {
 
-  
-  const session = useContext(SessionContext);
+    const session = useContext(SessionContext);
 
-  const [fetechError, setFetchError] = useState(null);
-
+ 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isResourceActive, setIsResourceActive] = useState(false);
-  const [isDetailActive, setIsDetailActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
   const [isBuildingActive, setIsBuildingActive] = useState(false);
   const [isMemberActive, setIsMemberActive] = useState(false);
@@ -48,197 +34,184 @@ const OrganizationCreate = () => {
   const [isInfoActive, setIsInfoActive] = useState(false);
 
   const [factionName, setFactionName] = useState("");
-  const [factionNames, setFactionNames] = useState("");
+  const [, setFactionNames] = useState("");
   const [factionNameOptions, setFactionNameOptions] = useState("");
 
   const [wealth, setWealth] = useState("");
-  const [wealths, setWealths] = useState("");
+  const [, setWealths] = useState("");
   const [wealthOptions, setWealthOptions] = useState("");
 
   const [income, setIncome] = useState("");
-  const [incomes, setIncomes] = useState("");
+  const [, setIncomes] = useState("");
   const [incomeOptions, setIncomeOptions] = useState("");
   const [selectedIncome, setSelectedIncome] = useState([]);
   const [incomeList, setIncomeList] = useState([]);
 
-  const [item, setItem] = useState("");
-  const [items, setItems] = useState("");
-  const [itemOptions, setItemOptions] = useState("");
-  const [selectedItem, setSelectedItem] = useState([]);
-  const [itemList, setItemList] = useState([]);
+  const [selectedItem, ] = useState([]);
 
   const [influence, setInfluence] = useState("");
-  const [influences, setInfluences] = useState("");
+  const [, setInfluences] = useState("");
   const [influenceOptions, setInfluenceOptions] = useState("");
 
-  const [influenceTactic, setInfluenceTactic] = useState("");
-  const [influenceTactics, setInfluenceTactics] = useState("");
+  const [, setInfluenceTactic] = useState("");
+  const [, setInfluenceTactics] = useState("");
   const [influenceTacticOptions, setInfluenceTacticOptions] = useState("");
   const [selectedInfluenceTactic, setSelectedInfluenceTactic] = useState([]);
   const [influenceTacticList, setInfluenceTacticList] = useState([]);
 
-  const [favored, setFavored] = useState("");
-  const [favoreds, setFavoreds] = useState("");
+  const [, setFavored] = useState("");
+  const [, setFavoreds] = useState("");
   const [favoredOptions, setFavoredOptions] = useState("");
   const [selectedFavored, setSelectedFavored] = useState([]);
   const [favoredList, setFavoredList] = useState([]);
 
-  const [positive, setPositive] = useState("");
-  const [positives, setPositives] = useState("");
+  const [, setPositive] = useState("");
+  const [, setPositives] = useState("");
   const [positiveOptions, setPositiveOptions] = useState("");
   const [selectedPositive, setSelectedPositive] = useState([]);
   const [positiveList, setPositiveList] = useState([]);
 
-  const [neutral, setNeutral] = useState("");
-  const [neutrals, setNeutrals] = useState("");
+  const [, setNeutral] = useState("");
+  const [, setNeutrals] = useState("");
   const [neutralOptions, setNeutralOptions] = useState("");
   const [selectedNeutral, setSelectedNeutral] = useState([]);
   const [neutralList, setNeutralList] = useState([]);
 
-  const [unwelcome, setUnwelcome] = useState("");
-  const [unwelcomes, setUnwelcomes] = useState("");
+  const [, setUnwelcome] = useState("");
+  const [, setUnwelcomes] = useState("");
   const [unwelcomeOptions, setUnwelcomeOptions] = useState("");
   const [selectedUnwelcome, setSelectedUnwelcome] = useState([]);
   const [unwelcomeList, setUnwelcomeList] = useState([]);
 
-  const [intolerant, setIntolerant] = useState("");
-  const [intolerants, setIntolerants] = useState("");
+  const [, setIntolerant] = useState("");
+  const [, setIntolerants] = useState("");
   const [intolerantOptions, setIntolerantOptions] = useState("");
   const [selectedIntolerant, setSelectedIntolerant] = useState([]);
   const [intolerantList, setIntolerantList] = useState([]);
 
-  const [service, setService] = useState("");
-  const [services, setServices] = useState("");
+  const [, setService] = useState("");
+  const [, setServices] = useState("");
   const [serviceOptions, setServiceOptions] = useState("");
   const [selectedService, setSelectedService] = useState([]);
   const [serviceList, setServiceList] = useState([]);
 
   const [structure, setStructure] = useState("");
-  const [structures, setStructures] = useState("");
+  const [, setStructures] = useState("");
   const [structureOptions, setStructureOptions] = useState("");
 
   const [initiation, setInitiation] = useState("");
-  const [initiations, setInitiations] = useState("");
+  const [, setInitiations] = useState("");
   const [initiationOptions, setInitiationOptions] = useState("");
   const [selectedInitiation, setSelectedInitiation] = useState([]);
-  const [initiationList, setInitiationList] = useState([]);
 
-  const [lowRole, setLowRole] = useState("");
-  const [lowRoles, setLowRoles] = useState("");
+  const [, setLowRole] = useState("");
+  const [, setLowRoles] = useState("");
   const [lowRoleOptions, setLowRoleOptions] = useState("");
   const [selectedLowRole, setSelectedLowRole] = useState([]);
   const [lowRoleList, setLowRoleList] = useState([]);
 
-  const [mediumRole, setMediumRole] = useState("");
-  const [mediumRoles, setMediumRoles] = useState("");
+  const [, setMediumRole] = useState("");
+  const [, setMediumRoles] = useState("");
   const [mediumRoleOptions, setMediumRoleOptions] = useState("");
   const [selectedMediumRole, setSelectedMediumRole] = useState([]);
   const [mediumRoleList, setMediumRoleList] = useState([]);
 
-  const [highRole, setHighRole] = useState("");
-  const [highRoles, setHighRoles] = useState("");
+  const [, setHighRole] = useState("");
+  const [, setHighRoles] = useState("");
   const [highRoleOptions, setHighRoleOptions] = useState("");
   const [selectedHighRole, setSelectedHighRole] = useState([]);
   const [highRoleList, setHighRoleList] = useState([]);
 
-  const [quest, setQuest] = useState("");
-  const [quests, setQuests] = useState("");
+  const [, setQuest] = useState("");
+  const [, setQuests] = useState("");
   const [questOptions, setQuestOptions] = useState("");
   const [selectedQuest, setSelectedQuest] = useState([]);
   const [questList, setQuestList] = useState([]);
 
-  const [advance, setAdvance] = useState("");
-  const [advances, setAdvances] = useState("");
+  const [, setAdvance] = useState("");
+  const [, setAdvances] = useState("");
   const [advanceOptions, setAdvanceOptions] = useState("");
   const [selectedAdvance, setSelectedAdvance] = useState([]);
   const [advanceList, setAdvanceList] = useState([]);
 
-  const [belief, setBelief] = useState("");
-  const [beliefs, setBeliefs] = useState("");
-  const [beliefOptions, setBeliefOptions] = useState("");
   const [selectedBelief, setSelectedBelief] = useState([]);
-  const [beliefList, setBeliefList] = useState([]);
 
   const [orgType, setOrgType] = useState("");
-  const [orgTypes, setOrgTypes] = useState("");
+  const [, setOrgTypes] = useState("");
   const [orgTypeOptions, setOrgTypeOptions] = useState("");
   const [selectedOrgType, setSelectedOrgType] = useState([]);
-  const [orgTypeList, setOrgTypeList] = useState([]);
 
   const [headquarter, setHeadquarter] = useState("");
-  const [headquarters, setHeadquarters] = useState("");
+  const [, setHeadquarters] = useState("");
   const [headquarterOptions, setHeadquarterOptions] = useState("");
   const [selectedHeadquarter, setSelectedHeadquarter] = useState([]);
-  const [headquarterList, setHeadquarterList] = useState([]);
 
-  const [building, setBuilding] = useState("");
-  const [buildings, setBuildings] = useState("");
+  const [, setBuilding] = useState("");
+  const [, setBuildings] = useState("");
   const [buildingOptions, setBuildingOptions] = useState("");
   const [selectedBuilding, setSelectedBuilding] = useState([]);
   const [buildingList, setBuildingList] = useState([]);
 
-  const [location, setLocation] = useState("");
-  const [locations, setLocations] = useState("");
+  const [, setLocation] = useState("");
+  const [, setLocations] = useState("");
   const [locationOptions, setLocationOptions] = useState("");
   const [selectedLocation, setSelectedLocation] = useState([]);
   const [locationList, setLocationList] = useState([]);
 
-  const [stronghold, setStronghold] = useState("");
-  const [strongholds, setStrongholds] = useState("");
+  const [, setStronghold] = useState("");
+  const [, setStrongholds] = useState("");
   const [strongholdOptions, setStrongholdOptions] = useState("");
   const [selectedStronghold, setSelectedStronghold] = useState([]);
   const [strongholdList, setStrongholdList] = useState([]);
 
-  const [resource, setResource] = useState("");
-  const [resources, setResources] = useState("");
+  const [, setResource] = useState("");
+  const [, setResources] = useState("");
   const [resourceOptions, setResourceOptions] = useState("");
   const [selectedResource, setSelectedResource] = useState([]);
   const [resourceList, setResourceList] = useState([]);
 
   const [defense, setDefense] = useState("");
-  const [defenses, setDefenses] = useState("");
+  const [, setDefenses] = useState("");
   const [defenseOptions, setDefenseOptions] = useState("");
 
   const [origin, setOrigin] = useState("");
-  const [origins, setOrigins] = useState("");
-  const [originOptions, setOriginOptions] = useState("");
 
-  const [motive, setMotive] = useState("");
-  const [motives, setMotives] = useState("");
+  const [, setMotive] = useState("");
+  const [, setMotives] = useState("");
   const [motiveOptions, setMotiveOptions] = useState("");
   const [selectedMotive, setSelectedMotive] = useState([]);
   const [motiveList, setMotiveList] = useState([]);
 
-  const [power, setPower] = useState("");
-  const [powers, setPowers] = useState("");
+  const [, setPower] = useState("");
+  const [, setPowers] = useState("");
   const [powerOptions, setPowerOptions] = useState("");
   const [selectedPower, setSelectedPower] = useState([]);
   const [powerList, setPowerList] = useState([]);
 
-  const [specialty, setSpecialty] = useState("");
-  const [specialtys, setSpecialtys] = useState("");
+  const [, setSpecialty] = useState("");
+  const [, setSpecialtys] = useState("");
   const [specialtyOptions, setSpecialtyOptions] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState([]);
   const [specialtyList, setSpecialtyList] = useState([]);
 
-  const [weakness, setWeakness] = useState("");
-  const [weaknesss, setWeaknesss] = useState("");
+  const [, setWeakness] = useState("");
+  const [, setWeaknesss] = useState("");
   const [weaknessOptions, setWeaknessOptions] = useState("");
   const [selectedWeakness, setSelectedWeakness] = useState([]);
   const [weaknessList, setWeaknessList] = useState([]);
 
   const [logo, setLogo] = useState("");
-  const [logos, setLogos] = useState("");
+  const [, setLogos] = useState("");
   const [logoOptions, setLogoOptions] = useState("");
 
   const [leader, setLeader] = useState("");
-  const [leaders, setLeaders] = useState("");
+  const [, setLeaders] = useState("");
   const [leaderOptions, setLeaderOptions] = useState("");
 
-  const [membershipState, setMembershipState] = useState({});
+  const [membershipState, ] = useState({});
 
-  const [member, setMember] = useState("");
-  const [members, setMembers] = useState("");
+  const [, setMember] = useState("");
+  const [, setMembers] = useState("");
   const [selectedMember, setSelectedMember] = useState([]);
   const [memberList, setMemberList] = useState([]);
   const [memberOptions, setMemberOptions] = useState([]);
