@@ -12,20 +12,20 @@ const ResetPassword = (props) => {
 
   // Handle password reset flow
   useEffect(() => {
-    const handlePasswordRecovery = async (event, session) => {
-      if (event === "PASSWORD_RECOVERY") {
-        if (isMounted.current) setIsResetLinkClicked(true);
-        const url = window.location.href;
-        const index = url.indexOf("#access_token=");
-        if (index !== -1) {
-          const token = url.substring(index + 14);
-          if (isMounted.current) setAccessToken(token);
+    const handlePasswordRecovery = async () => {
+      const url = window.location.href;
+      const index = url.indexOf("#access_token=");
+      if (index !== -1) {
+        const token = url.substring(index + 14);
+        if (isMounted.current) {
+          setAccessToken(token);
+          setIsResetLinkClicked(true);
         }
       }
     };
-
-    supabase.auth.onAuthStateChange(handlePasswordRecovery);
-
+  
+    handlePasswordRecovery();
+  
     return () => {
       isMounted.current = false;
     };
