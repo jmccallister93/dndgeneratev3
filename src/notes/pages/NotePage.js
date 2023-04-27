@@ -105,6 +105,7 @@ function NotePage(props) {
   //Update Note from NoteText
   const updateNote = async (noteText) => {
     try {
+      // eslint-disable-next-line 
       const response = await supabase
         .from(dbTable)
         .update({ notes: noteText })
@@ -119,6 +120,7 @@ function NotePage(props) {
   //Update Property from Property Value
   const updateSelectedNode = async (updatedNode) => {
     try {
+      // eslint-disable-next-line 
       const response = await supabase
         .from(dbTable)
         .update(updatedNode)
@@ -134,6 +136,7 @@ function NotePage(props) {
   //Delete Node
   const deleteSelectedNode = async () => {
     try {
+      // eslint-disable-next-line 
       const response = await supabase
         .from(dbTable)
         .delete()

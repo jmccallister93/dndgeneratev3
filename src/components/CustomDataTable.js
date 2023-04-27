@@ -5,7 +5,7 @@ import { DataTable } from "primereact/datatable";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 import MultipleRandomButton from "./MultipleRandomButton";
 
@@ -27,7 +27,7 @@ const CustomDataTable = (props) => {
   //-----SAMPLE PROPS-------
 
   //Set States
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
 
   //DataTable filters
@@ -87,6 +87,7 @@ const CustomDataTable = (props) => {
       }
     };
     fetchData();
+    // eslint-disable-next-line 
   }, []);
   //Open dialog
   const openDialog = () => {
@@ -109,6 +110,7 @@ const CustomDataTable = (props) => {
   //Use effect to set list
   useEffect(() => {
     props.setSelectedItem(props.list);
+    // eslint-disable-next-line 
   }, [props.list]);
 
   

@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+
 import style from "../stylesheets/BasicCard.module.scss"
 
 
 const BasicCard = (props) => {
-    const [title, setTitle] = useState('')
-    const [content, setContent] = useState('') 
+
 
     // useEffect(() => {
     //     const cardContent = [

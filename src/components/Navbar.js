@@ -1,5 +1,5 @@
 import style from "../stylesheets/Navbar.module.scss";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useLocation,  } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { supabase } from "../config/supabaseClient";
 import { SessionContext } from "../config/SessionContext";
@@ -8,10 +8,10 @@ import d20 from "../assests/d20-icon.png";
 const Navbar = (props) => {
   const session = useContext(SessionContext);
   const location = useLocation();
-  const history = useNavigate();
+  // const history = useNavigate();
 
   //Set location and redirect path variables
-  const [redirectPath, setRedirectPath] = useState(
+  const [, setRedirectPath] = useState(
     localStorage.getItem("redirectPath")
   );
 
@@ -24,6 +24,7 @@ const Navbar = (props) => {
     const newRedirectPath = localStorage.getItem("redirectPath");
     setRedirectPath(newRedirectPath);
     props.updateRedirectPath(newRedirectPath);
+    // eslint-disable-next-line 
   }, [location]);
 
   //Logs in using Google Auth
@@ -42,22 +43,22 @@ const Navbar = (props) => {
   // }
 
   //Logs in using email
-  async function signInWithEmail() {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: "example@email.com",
-      password: "example-password",
-    });
-  }
+  // async function signInWithEmail() {
+  //   const { data, error } = await supabase.auth.signInWithPassword({
+  //     email: "example@email.com",
+  //     password: "example-password",
+  //   });
+  // }
 
-  //Signs up using email
-  async function singUpWithEmail() {
-    const { user, session, error } = await supabase.auth.signUp({
-      email: "example@email.com",
-      password: "example-password",
-    });
-  }
+  // //Signs up using email
+  // async function singUpWithEmail() {
+  //   const { user, session, error } = await supabase.auth.signUp({
+  //     email: "example@email.com",
+  //     password: "example-password",
+  //   });
+  // }
 
-  const handleLogin = () => {};
+  // const handleLogin = () => {};
 
   //Signs out
   async function handleLogout() {

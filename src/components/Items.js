@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect,  useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -29,60 +29,58 @@ const Items = (props) => {
   //---SAMPLE PROPS----
   
 
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
 
-  const [allItems, setAllItems] = useState();
-
-  const [adventuringGear, setAdventuringGear] = useState();
+  const [, setAdventuringGear] = useState();
   const [adventuringGearOptions, setAdventuringGearOptions] = useState("");
 
-  const [armor, setArmor] = useState();
+  const [, setArmor] = useState();
   const [armorOptions, setArmorOptions] = useState("");
 
-  const [art, setArt] = useState();
+  const [, setArt] = useState();
   const [artOptions, setArtOptions] = useState("");
 
-  const [container, setContainer] = useState();
+  const [, setContainer] = useState();
   const [containerOptions, setContainerOptions] = useState("");
 
-  const [currency, setCurrency] = useState();
+  const [, setCurrency] = useState();
   const [currencyOptions, setCurrencyOptions] = useState("");
 
-  const [pack, setPack] = useState();
+  const [, setPack] = useState();
   const [packOptions, setPackOptions] = useState("");
 
-  const [expense, setExpense] = useState();
+  const [, setExpense] = useState();
   const [expenseOptions, setExpenseOptions] = useState("");
 
-  const [gemstone, setGemstone] = useState();
+  const [, setGemstone] = useState();
   const [gemstoneOptions, setGemstoneOptions] = useState("");
 
-  const [magic, setMagic] = useState();
+  const [, setMagic] = useState();
   const [magicOptions, setMagicOptions] = useState("");
 
-  const [mountItem, setMountItem] = useState();
+  const [, setMountItem] = useState();
   const [mountItemOptions, setMountItemOptions] = useState("");
 
-  const [mount, setMount] = useState();
+  const [, setMount] = useState();
   const [mountOptions, setMountOptions] = useState("");
 
-  const [tool, setTool] = useState();
+  const [, setTool] = useState();
   const [toolOptions, setToolOptions] = useState("");
 
-  const [tradeGood, setTradeGood] = useState();
+  const [, setTradeGood] = useState();
   const [tradeGoodOptions, setTradeGoodOptions] = useState("");
 
-  const [trinket, setTrinket] = useState();
+  const [, setTrinket] = useState();
   const [trinketOptions, setTrinketOptions] = useState("");
 
-  const [vehicle, setVehicle] = useState();
+  const [, setVehicle] = useState();
   const [vehicleOptions, setVehicleOptions] = useState("");
 
-  const [weapon, setWeapon] = useState();
+  const [, setWeapon] = useState();
   const [weaponOptions, setWeaponOptions] = useState("");
 
   const [itemOptions, setItemOptions] = useState([]);
-  const [itemList, setItemList] = useState([]);
+
 
   //Datatable settings
   //Dialog Visible State
@@ -155,6 +153,7 @@ const Items = (props) => {
   };
   useEffect(() => {
     props.setSelectedItem(props.itemList);
+    // eslint-disable-next-line 
   }, [props.itemList]);
   //Pull supabase data
   //adventure gear
@@ -573,6 +572,7 @@ const Items = (props) => {
       ...vehicleOptions,
     ]);
     props.setItemOptions(itemOptions)
+    // eslint-disable-next-line 
   }, [
     adventuringGearOptions,
     armorOptions,
@@ -602,7 +602,7 @@ const Items = (props) => {
       <span className={style.diceBtnText}>Random</span>
     </button>
   );
-  const itemOptions2 = useRef();
+  
 
   //JSX Dialog Vairable
   const itemDialog = (

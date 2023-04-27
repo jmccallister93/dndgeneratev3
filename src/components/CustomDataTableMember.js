@@ -1,12 +1,11 @@
 import { Column } from "jspdf-autotable";
-import { filter } from "mathjs";
 import { FilterMatchMode } from "primereact/api";
 import { Button } from "primereact/button";
 import { DataTable } from "primereact/datatable";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 import MultipleRandomButton from "./MultipleRandomButton";
 
@@ -27,10 +26,10 @@ const CustomDataTableMember = (props) => {
   //-----SAMPLE PROPS-------
 
   //Set States
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  const [filteredOptions, setFilteredOptions] = useState();
+  const [filteredOptions, ] = useState();
 
   //DataTable filters
   const [globalFilterValue, setGlobalFilterValue] = useState("");
@@ -89,6 +88,7 @@ const CustomDataTableMember = (props) => {
       }
     };
     fetchData();
+    // eslint-disable-next-line 
   }, []);
   //Open dialog
   const openDialog = () => {
@@ -113,6 +113,7 @@ const CustomDataTableMember = (props) => {
     if(props.selectedItem){
     props.setSelectedItem(props.list);
     }
+    // eslint-disable-next-line 
   }, [props.list]);
 
   // Set Value Options based on membership state

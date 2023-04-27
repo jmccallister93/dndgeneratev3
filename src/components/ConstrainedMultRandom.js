@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
 

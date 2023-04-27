@@ -1,10 +1,7 @@
-import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
-import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import { supabase, auth } from "../config/supabaseClient";
-import style from "../stylesheets/PageStyle.module.scss";
+import { supabase,  } from "../config/supabaseClient";
 import SingleRandomButton from "./SingleRandomButton";
 
 const CustomDropDown = (props) => {
@@ -19,7 +16,7 @@ const CustomDropDown = (props) => {
   //  valueOptions={typeOptions}
 
   //Set States
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
   const [showCustomInput, setShowCustomInput] = useState(false);
 
   //Get Data from supabase
@@ -42,6 +39,7 @@ const CustomDropDown = (props) => {
       }
     };
     fetchData(); 
+    // eslint-disable-next-line 
   }, []);
 
   //On Custom Change

@@ -1,7 +1,6 @@
-import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const CustomName = (props) => {
@@ -15,7 +14,7 @@ const CustomName = (props) => {
   //title
   //placeholder
 
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
 
   //Name Data
   useEffect(() => {
@@ -101,6 +100,7 @@ const CustomName = (props) => {
       }
     };
     fetchData();
+    // eslint-disable-next-line 
   }, []);
 
   const onRandomName = (e) => {

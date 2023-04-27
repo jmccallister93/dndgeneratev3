@@ -1,6 +1,4 @@
-import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
 
@@ -17,6 +15,7 @@ const CustomInputText = (props) => {
     const onInputChange = (e) => {
         props.setInput(e.target.value);
       }
+      // eslint-disable-next-line 
     const onRandom = (e) => {
         if(props.input === ""){
             let r = Math.round(Math.random() * (1-0))

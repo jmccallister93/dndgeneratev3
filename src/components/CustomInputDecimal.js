@@ -1,11 +1,5 @@
-import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
-import { InputText } from "primereact/inputtext";
-import { useEffect, useState } from "react";
-import style from "../stylesheets/BuildingGen.module.scss";
 import NumberRandomButton from "./NumberRandomButton";
-import SingleRandomButton from "./SingleRandomButton";
 
 const CustomInputDecimal = (props) => {
   //---PROPS---
@@ -15,7 +9,6 @@ const CustomInputDecimal = (props) => {
   //placeholder
   //maxNumber
   //---PROPS---
-  const [fetchError, setFetchError] = useState(false);
 
   //On Change
   const onChange = (e) => {

@@ -1,15 +1,9 @@
-import { forEach } from "mathjs";
 import { useEffect, useState } from "react";
-import CustomInputDecimal from "./CustomInputDecimal";
-import CustomInputNumber from "./CustomInputNumber";
 import style from "../stylesheets/PageStyle.module.scss";
 import { InputNumber } from "primereact/inputnumber";
-import NumberRandomButton from "./NumberRandomButton";
 
 const CustomModifier = (props) => {
-  const [modifier, setModifier] = useState([]);
   const [saves, setSaves] = useState([]);
-  const [saveName, setSaveName] = useState([]);
 
   const handleModifierChange = (index, value) => {
     const setModFunction = props.setMod ? props.setMod[index] : props.setSense[index]; 
@@ -76,6 +70,7 @@ const CustomModifier = (props) => {
         ))
       );
     }
+    // eslint-disable-next-line 
   }, [props.value]);
 
   return <>{saves}</>;

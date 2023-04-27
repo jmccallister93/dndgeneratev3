@@ -1,75 +1,71 @@
 import style from "../stylesheets/PageStyle.module.scss";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {  useEffect,  useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 import { Button } from "primereact/button";
-import { DataTable } from "primereact/datatable";
-import { Column } from "jspdf-autotable";
-import { Dialog } from "primereact/dialog";
-import { e } from "mathjs";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 
 const Npcs = (props) => {
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isHookActive, setIsHookActive] = useState(false);
 
   const [align, setAlign] = useState("");
-  const [aligns, setAligns] = useState();
+  const [, setAligns] = useState();
   const [alignOptions, setAlignOptions] = useState();
 
   const [bond, setBond] = useState("");
-  const [bonds, setBonds] = useState();
+  const [, setBonds] = useState();
   const [bondOptions, setBondOptions] = useState();
 
   const [feature, setFeature] = useState("");
-  const [features, setFeatures] = useState();
+  const [, setFeatures] = useState();
   const [featureOptions, setFeatureOptions] = useState();
 
   const [interaction, setInteraction] = useState("");
-  const [interactions, setInteractions] = useState();
+  const [, setInteractions] = useState();
   const [interactionOptions, setInteractionOptions] = useState();
 
   const [prof, setProf] = useState("");
-  const [profs, setProfs] = useState();
+  const [, setProfs] = useState();
   const [profOptions, setProfOptions] = useState();
 
   const [mannerism, setMannerism] = useState("");
-  const [mannerisms, setMannerisms] = useState();
+  const [, setMannerisms] = useState();
   const [mannerismOptions, setMannerismOptions] = useState();
 
   const [race, setRace] = useState("");
-  const [races, setRaces] = useState();
+  const [, setRaces] = useState();
   const [raceOptions, setRaceOptions] = useState();
 
   const [sex, setSex] = useState("");
-  const [sexes, setSexes] = useState();
+  const [, setSexes] = useState();
   const [sexOptions, setSexOptions] = useState();
 
   const [talent, setTalent] = useState("");
-  const [talents, setTalents] = useState();
+  const [, setTalents] = useState();
   const [talentOptions, setTalentOptions] = useState();
 
   const [name, setName] = useState("");
-  const [names, setNames] = useState();
+  const [, setNames] = useState();
   const [nameOptions, setNameOptions] = useState();
 
   const [str, setStr] = useState("");
-  const [strMod, setStrMod] = useState("");
+  const [, setStrMod] = useState("");
   const [dex, setDex] = useState("");
-  const [dexMod, setDexMod] = useState("");
+  const [, setDexMod] = useState("");
   const [con, setCon] = useState("");
-  const [conMod, setConMod] = useState("");
+  const [, setConMod] = useState("");
   const [int, setInt] = useState("");
-  const [intMod, setIntMod] = useState("");
+  const [, setIntMod] = useState("");
   const [wis, setWis] = useState("");
-  const [wisMod, setWisMod] = useState("");
+  const [, setWisMod] = useState("");
   const [cha, setCha] = useState("");
-  const [chaMod, setChaMod] = useState("");
+  const [, setChaMod] = useState("");
 
   const [hook, setHook] = useState("");
 
@@ -148,6 +144,7 @@ const Npcs = (props) => {
   ];
 
   //OnChange
+  // eslint-disable-next-line 
   const objectChange = (value, setObject, max, min, floor, objectOptions) => {
     setObject(value);
     if (value === "Random") {

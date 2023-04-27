@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
-import { Tooltip } from "primereact/tooltip";
-import { Button } from "primereact/button";
+
 const GenerateButton = (props) => {
   //----PROPS NEEDED----
   //generateItems
@@ -15,8 +14,8 @@ const GenerateButton = (props) => {
   //maxNumber
   //minNumber
   //---PROPS NEEDED----
-  const [multipleDisplay, setMultipleDisplay] = useState([]);
-  const [fetchError, setFetchError] = useState(null);
+  const [, setMultipleDisplay] = useState([]);
+
 
   //Set Multiple Display State
   useEffect(() => {
@@ -29,6 +28,7 @@ const GenerateButton = (props) => {
   //Useeffect to set height, age, weight
   useEffect(() => {
     setHeightAgeWeight();
+    // eslint-disable-next-line 
   }, [props.generateItems]);
 
   //DropDown Generate

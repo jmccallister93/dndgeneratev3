@@ -1,8 +1,7 @@
 import style from "../stylesheets/PageStyle.module.scss";
 import { jsPDF } from "jspdf";
 import { useEffect, useRef, useState, useContext } from "react";
-import { Button } from "primereact/button";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 import { Toast } from "primereact/toast";
 import { SessionContext } from "../config/SessionContext";
 import compiledStyle from "../stylesheets/PageStyle.module.scss";
@@ -10,19 +9,15 @@ import compiledStyle from "../stylesheets/PageStyle.module.scss";
 const ExportButtons = (props) => {
   const session = useContext(SessionContext);
   //Create compnent that references to a props.div element and export it's content to a text file and pdf file
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(1);
-  const [pdf, setPdf] = useState(null);
+  const [, setPdf] = useState(null);
   const [html, setHtml] = useState(null);
-  const [isPdfReady, setIsPdfReady] = useState(false);
+  const [, setIsPdfReady] = useState(false);
   const [isHtmlReady, setIsHtmlReady] = useState(false);
-  const doc = new jsPDF();
-  const [data, setData] = useState([]);
+  const [, setData] = useState([]);
   const [isDataReady, setIsDataReady] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
 
-  const divRef = useRef(null);
 
   const toast = useRef(null);
 
@@ -64,7 +59,7 @@ const ExportButtons = (props) => {
   useEffect(() => {
     if (isReady) {
       const doc = new jsPDF();
-      const css = { style };
+      // const css = { style };
       const link = document.createElement("link");
       link.href = "../stylesheets/PageStyle.module.css"; // specify the path to your compiled CSS file
       link.rel = "stylesheet";
@@ -88,12 +83,12 @@ const ExportButtons = (props) => {
     }
   }, [isReady, html]);
 
-  //Export PDF function
-  const exportToPdf = () => {
-    if (isPdfReady) {
-      pdf.save(`${props.data.name}.pdf`);
-    }
-  };
+  // //Export PDF function
+  // const exportToPdf = () => {
+  //   if (isPdfReady) {
+  //     pdf.save(`${props.data.name}.pdf`);
+  //   }
+  // };
 
   //Export text function
   const exportToText = () => {
@@ -109,17 +104,17 @@ const ExportButtons = (props) => {
     }
   };
 
-  //Export Excel function
-  const exportToExcel = () => {
-    if (data) {
-      const element = document.createElement("a");
-      const file = new Blob([JSON.stringify(data)], { type: "text/plain" });
-      element.href = URL.createObjectURL(file);
-      element.download = `${props.data.name}.xlsx`;
-      document.body.appendChild(element); // Required for this to work in FireFox
-      element.click();
-    }
-  };
+  // //Export Excel function
+  // const exportToExcel = () => {
+  //   if (data) {
+  //     const element = document.createElement("a");
+  //     const file = new Blob([JSON.stringify(data)], { type: "text/plain" });
+  //     element.href = URL.createObjectURL(file);
+  //     element.download = `${props.data.name}.xlsx`;
+  //     document.body.appendChild(element); // Required for this to work in FireFox
+  //     element.click();
+  //   }
+  // };
 
   //Save to DB function
   const saveToDb = () => {

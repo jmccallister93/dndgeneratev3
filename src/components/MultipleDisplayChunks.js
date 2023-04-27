@@ -34,6 +34,7 @@ const MultipleDisplayChunks = (props) => {
         );
       })
     );
+    // eslint-disable-next-line 
   }, [multipleDisplay]);
 
   const onClick = (e, index) => {

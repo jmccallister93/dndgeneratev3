@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import style from "../stylesheets/PageStyle.module.scss";
 
 const SectionRandom = (props) => {

@@ -1,4 +1,3 @@
-import { i } from "mathjs";
 import { useEffect, useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
@@ -42,6 +41,7 @@ const MultipleDisplayDesc = (props) => {
         );
       })
     );
+    // eslint-disable-next-line 
   }, [multipleDisplay]);
 
   const onClick = (e, index) => {

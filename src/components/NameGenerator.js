@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 
 const NameGenerator = (props) => {
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
   const [nameA, setNameA] = useState("");
-  const [namesA, setNamesA] = useState([]);
+  const [, setNamesA] = useState([]);
   const [nameAOptions, setNameAOptions] = useState([]);
   const [nameB, setNameB] = useState("");
-  const [namesB, setNamesB] = useState([]);
+  const [, setNamesB] = useState([]);
   const [nameBOptions, setNameBOptions] = useState([]);
   const [nameC, setNameC] = useState("");
-  const [namesC, setNamesC] = useState([]);
+  const [, setNamesC] = useState([]);
   const [nameCOptions, setNameCOptions] = useState([]);
   const [nameD, setNameD] = useState("");
-  const [namesD, setNamesD] = useState([]);
+  const [, setNamesD] = useState([]);
   const [nameDOptions, setNameDOptions] = useState([]);
   const [fullName, setFullName] = useState("");
-  const [fullNames, setFullNames] = useState([]);
-  const [fullNamesOptions, setFullNamesOptions] = useState([]);
 
   const getData = (tableName, setSingular, setPlural, setOptions) => {
     const fetchData = async () => {
@@ -42,13 +40,12 @@ const NameGenerator = (props) => {
     getData("namesB", setNameB, setNamesB, setNameBOptions);
     getData("namesC", setNameC, setNamesC, setNameCOptions);
     getData("namesD", setNameD, setNamesD, setNameDOptions);
-    let rA = Math.floor(Math.random() * nameAOptions.length);
-    let rB = Math.floor(Math.random() * nameBOptions.length);
-    let rC = Math.floor(Math.random() * nameCOptions.length);
-    let rD = Math.floor(Math.random() * nameDOptions.length);
+
+    // eslint-disable-next-line 
   }, []);
 
   //combine nameA to namB to nameC to nameD
+  // eslint-disable-next-line 
   const onGenerate = (e) => {
     let rA = Math.floor(Math.random() * nameAOptions.length);
     let rB = Math.floor(Math.random() * nameBOptions.length);

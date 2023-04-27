@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 const AgeHeightWeight = (props) => {
-    const [ageMin, setAgeMin] = useState(0);
-    const [ageMax, setAgeMax] = useState(0);
-    const [heightFtMin, setHeightFtMin] = useState(0);
-    const [heightFtMax, setHeightFtMax] = useState(0);
+    const [, setAgeMin] = useState(0);
+    const [, setAgeMax] = useState(0);
+    const [, setHeightFtMin] = useState(0);
+    const [, setHeightFtMax] = useState(0);
 
-    const [weightMin, setWeightMin] = useState(0);
-    const [weightMax, setWeightMax] = useState(0);
+    const [, setWeightMin] = useState(0);
+    const [, setWeightMax] = useState(0);
 
 
     if (props.generateItems[0]) {

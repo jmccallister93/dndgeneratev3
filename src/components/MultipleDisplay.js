@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect,  useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const MultipleDisplay = (props) => {
@@ -33,6 +33,7 @@ const MultipleDisplay = (props) => {
         );
       })
     );
+    // eslint-disable-next-line 
   }, [multipleDisplay, props]);
 
   const onClick = (e, index) => {

@@ -52,6 +52,7 @@ const MultipleDisplayMod = (props) => {
           );
         })
       );
+      // eslint-disable-next-line 
   }, [multipleDisplay]);
 
   return <>{display}</>;

@@ -26,12 +26,12 @@ const CustomDataTableNpc = (props) => {
   //-----SAMPLE PROPS-------
 
   //Set States
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
   const [dialogVisible, setDialogVisible] = useState(false);
 
   const [memberNameOptions, setMemberNameOptions] = useState([]);
-  const [memberName, setMemberName] = useState("");
-  const [memberNames, setMemberNames] = useState([]);
+  const [, setMemberName] = useState("");
+  const [, setMemberNames] = useState([]);
   const [memberNameList, setMemberNameList] = useState([]);
 
   //DataTable filters
@@ -154,6 +154,7 @@ const CustomDataTableNpc = (props) => {
       }
       setMemberNameList(names);
     }
+    // eslint-disable-next-line 
   }, [memberNameOptions]);
 
   //Use effect to set list

@@ -1,41 +1,35 @@
 import { useEffect, useState } from "react";
 import SingleDisplayText from "./SingleDisplayText";
-import { supabase, auth } from "../config/supabaseClient";
-import CustomName from "./CustomName";
-import { prodDependencies } from "mathjs";
-import NameGenerator from "./NameGenerator";
-import NameDisplay from "./NameDisplay";
+import { supabase,  } from "../config/supabaseClient";
 
 const RandomHookNpc = (props) => {
   //Get data
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
 
-  const [bountyWanted, setBountyWanted] = useState("");
-  const [bountyWanteds, setBountyWanteds] = useState("");
   const [bountyWantedOptions, setBountyWantedOptions] = useState("");
 
-  const [bountyCrime, setBountyCrime] = useState("");
-  const [bountyCrimes, setBountyCrimes] = useState("");
+  const [, setBountyCrime] = useState("");
+  const [, setBountyCrimes] = useState("");
   const [bountyCrimeOptions, setBountyCrimeOptions] = useState("");
 
-  const [monster, setMonster] = useState("");
-  const [monsters, setMonsters] = useState("");
+  const [, setMonster] = useState("");
+  const [, setMonsters] = useState("");
   const [monsterOptions, setMonsterOptions] = useState("");
 
-  const [npcName, setNpcName] = useState("");
-  const [npcNames, setNpcNames] = useState("");
+  const [, setNpcName] = useState("");
+  const [, setNpcNames] = useState("");
   const [npcNameOptions, setNpcNameOptions] = useState("");
 
-  const [item, setItem] = useState("");
-  const [items, setItems] = useState("");
+  const [, setItem] = useState("");
+  const [, setItems] = useState("");
   const [itemOptions, setItemOptions] = useState("");
 
-  const [building, setBuilding] = useState("");
-  const [buildings, setBuildings] = useState("");
+  const [, setBuilding] = useState("");
+  const [, setBuildings] = useState("");
   const [buildingOptions, setBuildingOptions] = useState("");
 
-  const [vowel, setVowel] = useState(["a", "e", "i", "o", "u", "y"]);
-  const [consonant, setConsonant] = useState([
+  const [vowel, ] = useState(["a", "e", "i", "o", "u", "y"]);
+  const [consonant, ] = useState([
     "b",
     "c",
     "d",
@@ -59,33 +53,28 @@ const RandomHookNpc = (props) => {
     "z",
   ]);
 
-  const [exploreLocation, setExploreLocation] = useState("");
-  const [exploreLocations, setExploreLocations] = useState("");
+  const [, setExploreLocation] = useState("");
+  const [, setExploreLocations] = useState("");
   const [exploreLocationOptions, setExploreLocationOptions] = useState("");
 
-  const [material, setMaterial] = useState("");
-  const [materials, setMaterials] = useState("");
+  const [, setMaterial] = useState("");
+  const [, setMaterials] = useState("");
   const [materialOptions, setMaterialOptions] = useState("");
 
-  const [faction, setFaction] = useState("");
-  const [factions, setFactions] = useState("");
-  const [factionOptions, setFactionOptions] = useState("");
-
+ 
   const [nameA, setNameA] = useState("");
-  const [namesA, setNamesA] = useState([]);
+  const [, setNamesA] = useState([]);
   const [nameAOptions, setNameAOptions] = useState([]);
   const [nameB, setNameB] = useState("");
-  const [namesB, setNamesB] = useState([]);
+  const [, setNamesB] = useState([]);
   const [nameBOptions, setNameBOptions] = useState([]);
   const [nameC, setNameC] = useState("");
-  const [namesC, setNamesC] = useState([]);
+  const [, setNamesC] = useState([]);
   const [nameCOptions, setNameCOptions] = useState([]);
   const [nameD, setNameD] = useState("");
-  const [namesD, setNamesD] = useState([]);
+  const [, setNamesD] = useState([]);
   const [nameDOptions, setNameDOptions] = useState([]);
-  const [factionName, setFactionName] = useState("");
-  const [factionNames, setFactionNames] = useState([]);
-  const [factionNamesOptions, setFactionNamesOptions] = useState([]);
+
 
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -208,9 +197,11 @@ const RandomHookNpc = (props) => {
     let v = Math.floor(Math.random() * 6);
     let c = Math.floor(Math.random() * 21);
     let v2 = Math.floor(Math.random() * 6);
+    // eslint-disable-next-line 
     let c2 = Math.floor(Math.random() * 21);
     let v3 = Math.floor(Math.random() * 6);
     let c3 = Math.floor(Math.random() * 21);
+    // eslint-disable-next-line 
     let v4 = Math.floor(Math.random() * 6);
     let c4 = Math.floor(Math.random() * 21);
     let v5 = Math.floor(Math.random() * 6);
@@ -416,6 +407,7 @@ const RandomHookNpc = (props) => {
       } else {
       }
     }
+    // eslint-disable-next-line 
   }, [props.type]);
 
   return (

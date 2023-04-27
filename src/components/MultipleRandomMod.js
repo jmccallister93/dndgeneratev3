@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+
 import style from "../stylesheets/PageStyle.module.scss";
-import CustomModifier from "./CustomModifier";
+
 
 const MultipleRandomButtonMod = (props) => {
-  const [modifier, setModifier] = useState([]);
-  const [saveNames, setSaveNames] = useState([]);
-  const [saveModMap, setSaveModMap] = useState([]);
 
   //Sets selectedItems to random number and passes to parent
   const handleSelectedItem = (e) => {

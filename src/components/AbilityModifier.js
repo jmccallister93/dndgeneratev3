@@ -1,22 +1,16 @@
 import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import style from "../stylesheets/BuildingGen.module.scss";
-import ClearButton from "./ClearButton";
+
 
 const AbilityModifier = (props) => {
   const [str, setStr] = useState("");
-  const [strMod, setStrMod] = useState("");
-  const [dex, setDex] = useState("");
-  const [dexMod, setDexMod] = useState("");
+   const [dex, setDex] = useState("");
   const [con, setCon] = useState("");
-  const [conMod, setConMod] = useState("");
   const [int, setInt] = useState("");
-  const [intMod, setIntMod] = useState("");
   const [wis, setWis] = useState("");
-  const [wisMod, setWisMod] = useState("");
   const [cha, setCha] = useState("");
-  const [chaMod, setChaMod] = useState("");
   const [isAbilityActive, setIsAbilityActive] = useState(false);
 
   //On Change function

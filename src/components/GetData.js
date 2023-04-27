@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { supabase, auth } from "../config/supabaseClient";
+import { supabase,  } from "../config/supabaseClient";
 
 const GetData = (props) => {
-    const [fetchError, setFetchError] = useState(null)
+    const [, setFetchError] = useState(null)
       //Get Data function
   
     const fetchData = async () => {
