@@ -1,6 +1,4 @@
 import { Dialog } from "primereact/dialog";
-import { useEffect } from "react";
-import { useState } from "react";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const CollectionItem = (props) => {

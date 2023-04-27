@@ -1,7 +1,6 @@
 import { Card } from "primereact/card";
 import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import style from "../stylesheets/Collection.module.scss";
 import ps from "../stylesheets/PageStyle.module.scss";
 import CollectionTable from "./CollectionTable";
@@ -11,7 +10,7 @@ import { supabase } from "../config/supabaseClient";
 const CollectionPage = () => {
   const session = useContext(SessionContext);
 
-  const [fetchError, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null);
 
   const [locationDetails, setLocationDetails] = useState([]);
   const [npcDetails, setNpcDetails] = useState([]);
@@ -22,14 +21,14 @@ const CollectionPage = () => {
   const [pantheonDetails, setPantheonDetails] = useState([]);
   const [villainDetails, setVillainDetails] = useState([]);
 
-  const [displayLocation, setDisplayLocation] = useState([]);
-  const [displayNpc, setDisplayNpc] = useState([]);
-  const [displayOrganization, setDisplayOrganization] = useState([]);
-  const [displayMonster, setDisplayMonster] = useState([]);
-  const [displayQuest, setDisplayQuest] = useState([]);
-  const [displayItem, setDisplayItem] = useState([]);
-  const [displayPantheon, setDisplayPantheon] = useState([]);
-  const [displayVillain, setDisplayVillain] = useState([]);
+  const [, setDisplayLocation] = useState([]);
+  const [, setDisplayNpc] = useState([]);
+  const [, setDisplayOrganization] = useState([]);
+  const [, setDisplayMonster] = useState([]);
+  const [, setDisplayQuest] = useState([]);
+  const [, setDisplayItem] = useState([]);
+  const [, setDisplayPantheon] = useState([]);
+  const [, setDisplayVillain] = useState([]);
 
   //Create onClick function for npc collection that displays all npcs in a table
   const [isNpcActive, setIsNpcActive] = useState(false);
@@ -41,7 +40,7 @@ const CollectionPage = () => {
   const [isPantheonActive, setIsPantheonActive] = useState(false);
   const [isVillainActive, setIsVillainActive] = useState(false);
 
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [, setSelectedItem] = useState(null);
 
   sessionStorage.setItem('lastUrl', window.location.href);
 
