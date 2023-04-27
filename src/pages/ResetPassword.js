@@ -13,7 +13,7 @@ const ResetPassword = (props) => {
   // Handle password reset flow
   useEffect(() => {
     const handlePasswordRecovery = async (event, session) => {
-      if (event === "USER_UPDATED") {
+      if (event === "PASSWORD_RECOVERY") {
         if (isMounted.current) setIsResetLinkClicked(true);
         const url = window.location.href;
         const index = url.indexOf("#access_token=");
@@ -45,22 +45,27 @@ const ResetPassword = (props) => {
     }
   };
 
-  //Hanlde Reset
+  // Handle Reset
   const handlePasswordReset = async (event) => {
     event.preventDefault();
     const newPassword = event.target.password.value;
 
-    const { data: user, error: getUserError } = await supabase.auth.api.getUser(accessToken);
+    const { data: user, error: getUserError } = await supabase.auth.api.getUser(
+      accessToken
+    );
     if (getUserError) {
       console.log(getUserError);
       return;
     }
 
-    const { error: updateUserError } = await supabase.auth.api.updateUser(accessToken, {
-      id: user.id,
-      email: user.email,
-      password: newPassword,
-    });
+    const { error: updateUserError } = await supabase.auth.api.updateUser(
+      accessToken,
+      {
+        id: user.id,
+        email: user.email,
+        password: newPassword,
+      }
+    );
 
     if (updateUserError) {
       console.log(updateUserError);
@@ -71,20 +76,20 @@ const ResetPassword = (props) => {
 
   return (
     <>
-    <div className={style.mainWrapper}>
-      {isPasswordReset ? (
-        <h3 className={style.formHeader}>Your password has been reset.</h3>
-      ) : isResetLinkClicked ? (
-        <form className={style.form} onSubmit={handlePasswordReset}>
-          <h3 className={style.formHeader}>Reset Password for {email}</h3>
-          <input
-            className={style.formInput}
-            type="password"
-            name="password"
-            placeholder="New password"
-          />
-          <button className={style.formButton} type="submit">
-            Set New Password
+      <div className={style.mainWrapper}>
+        {isPasswordReset ? (
+          <h3 className={style.formHeader}>Your password has been reset.</h3>
+        ) : accessToken ? (
+          <form className={style.form} onSubmit={handlePasswordReset}>
+            <h3 className={style.formHeader}>Reset Password for {email}</h3>
+            <input
+              className={style.formInput}
+              type="password"
+              name="password"
+              placeholder="New password"
+            />
+            <button className={style.formButton} type="submit">
+              Set New Password
             </button>
           </form>
         ) : (
