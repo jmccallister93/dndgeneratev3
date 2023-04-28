@@ -88,18 +88,20 @@ $primary-light: #d6e4e5;
 
 .bottomText{
   font-size: 1.5rem;
-  padding: 2rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
 }
 
 .sampleCampaign{
   width: 60vw;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  border-radius: 10px;
 }
 
 .sampleNPC{
   width: 40vw;
+  border-radius: 10px;
 }
 
 .bottomTextImage{
