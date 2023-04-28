@@ -1,30 +1,32 @@
-import style from "../../stylesheets/PageStyle.module.scss";
-import { useEffect, useState, useContext } from "react";
+import style from "../stylesheets/PageStyle.module.scss";
+import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import ClearButton from "../../components/ClearButton";
-import GenerateButton from "../../components/GenerateButton";
-import CustomDropDown from "../../components/CustomDropDown";
-import CustomDataTable from "../../components/CustomDataTable";
-import MultipleDisplay from "../../components/MultipleDisplay";
-import CustomName from "../../components/CustomName";
-import NameDisplay from "../../components/NameDisplay";
-import SingleDisplayText from "../../components/SingleDisplayText";
-import ExportButtons from "../../components/ExportButtons";
-import { useRef } from "react";
+import ClearButton from "../components/ClearButton";
+import GenerateButton from "../components/GenerateButton";
+import MultipleDisplay from "../components/MultipleDisplay";
+import CustomDataTable from "../components/CustomDataTable";
+import CustomDropdown from "../components/CustomDropDown";
+import ExportButtons from "../components/ExportButtons";
 import { Tooltip } from "primereact/tooltip";
-import InfoModal from "../../components/InfoModal";
-import SectionRandom from "../../components/SectionRandom";
+import InfoModal from "../components/InfoModal";
+import SectionRandom from "../components/SectionRandom";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
+import { SessionContext } from "../config/SessionContext";
+import CustomDataTableMember from "../components/CustomDataTableMember";
+import CustomName from "../components/CustomName";
 import ns from "../../stylesheets/Note.module.scss";
-import { SessionContext } from "../../config/SessionContext";
-import CustomDataTableMember from "../../components/CustomDataTableMember";
 
 const OrganizationCreate = () => {
+  const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+if (lastUrl) {
+  window.location.href = lastUrl;
+}
 
-    const session = useContext(SessionContext);
-
- 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isResourceActive, setIsResourceActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
@@ -140,6 +142,7 @@ const OrganizationCreate = () => {
   const [, setOrgTypes] = useState("");
   const [orgTypeOptions, setOrgTypeOptions] = useState("");
   const [selectedOrgType, setSelectedOrgType] = useState([]);
+ 
 
   const [headquarter, setHeadquarter] = useState("");
   const [, setHeadquarters] = useState("");
@@ -258,7 +261,7 @@ const OrganizationCreate = () => {
   //   selectedNeutral,
   //   selectedUnwelcome,
   //   selectedIntolerant,
-  // ]);  
+  // ]);
 
   //Create location object to be exported
   useEffect(() => {
@@ -360,7 +363,7 @@ const OrganizationCreate = () => {
       power: powerString,
       specialty: specialtyString,
       weakness: weaknessString,
-      email: session.user.email,
+      email: session?.user?.email,
     };
     setOrganization(organization);
   }, [
@@ -615,7 +618,7 @@ const OrganizationCreate = () => {
       {/* Options */}
       <div className={style.body}>
         <div className={style.optionsWrapper}>
-          <h1>Orginization Options</h1>
+          <h1>Faction Options</h1>
           <div className={style.sectionOption}>
             <h1 className={style.subHeader} onClick={showBasics}>
               Basic Info{" "}
@@ -639,8 +642,8 @@ const OrganizationCreate = () => {
           </div>
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
-            <CustomName
-                tableName={"factionNames"} 
+              <CustomName
+                tableName={"factionNames"}
                 name={factionName}
                 setName={setFactionName}
                 setNames={setFactionNames}
@@ -649,7 +652,7 @@ const OrganizationCreate = () => {
                 title={"Name"}
                 placeholder={"Set Name"}
               />
-              <CustomDropDown
+              <CustomDropdown
                 tableName={"orgStructure"}
                 setSingular={setStructure}
                 setPlural={setStructures}
@@ -660,7 +663,7 @@ const OrganizationCreate = () => {
                 value={structure}
                 valueOptions={structureOptions}
               />
-              <CustomDropDown
+              <CustomDropdown
                 tableName={"orgLogo"}
                 setSingular={setLogo}
                 setPlural={setLogos}
@@ -671,7 +674,7 @@ const OrganizationCreate = () => {
                 value={logo}
                 valueOptions={logoOptions}
               />
-              <CustomDropDown
+              <CustomDropdown
                 tableName={"orgType"}
                 setSingular={setOrgType}
                 setPlural={setOrgTypes}
@@ -717,7 +720,7 @@ const OrganizationCreate = () => {
           </div>
           <div className={isResourceActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropDown
+              <CustomDropdown
                 tableName={"orgWealth"}
                 setSingular={setWealth}
                 setPlural={setWealths}
@@ -776,8 +779,8 @@ const OrganizationCreate = () => {
           </div>
           <div className={isMemberActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropDown
-                tableName={"DBnpc"}
+              <CustomDropdown
+                tableName={"npcList"}
                 setSingular={setLeader}
                 setPlural={setLeaders}
                 setOptions={setLeaderOptions}
@@ -788,17 +791,17 @@ const OrganizationCreate = () => {
                 valueOptions={leaderOptions}
               />
               <CustomDataTable
-                  tableName={"DBnpc"}
-                  setSingular={setMember}
-                  setPlural={setMembers}
-                  setOptions={setMemberOptions}
-                  h1Title={"Members"}
-                  dialogHeader={"Members"}
-                  selectedItem={selectedMember}
-                  setSelectedItem={setSelectedMember}
-                  list={memberList}
-                  setList={setMemberList}
-                  valueOptions={memberOptions}
+                tableName={"npcList"}
+                setSingular={setMember}
+                setPlural={setMembers}
+                setOptions={setMemberOptions}
+                h1Title={"Members"}
+                dialogHeader={"Members"}
+                selectedItem={selectedMember}
+                setSelectedItem={setSelectedMember}
+                list={memberList}
+                setList={setMemberList}
+                valueOptions={memberOptions}
               />
             </div>
           </div>
@@ -1029,7 +1032,7 @@ const OrganizationCreate = () => {
           </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropDown
+              <CustomDropdown
                 tableName={"orgInfluenceLevel"}
                 setSingular={setInfluence}
                 setPlural={setInfluences}
@@ -1152,7 +1155,7 @@ const OrganizationCreate = () => {
           </div>
           <div className={isBuildingActive ? style.subsection : style.hidden}>
             <div>
-              <CustomDropDown
+              <CustomDropdown
                 tableName={"orgDefense"}
                 setSingular={setDefense}
                 setPlural={setDefenses}
@@ -1163,7 +1166,7 @@ const OrganizationCreate = () => {
                 value={defense}
                 valueOptions={defenseOptions}
               />
-              <CustomDropDown
+              <CustomDropdown
                 tableName={"orgHeadquarter"}
                 setSingular={setHeadquarter}
                 setPlural={setHeadquarters}
@@ -1219,7 +1222,7 @@ const OrganizationCreate = () => {
 
         {/* Main Display */}
         <div className={style.display} ref={divRef}>
-        <NameDisplay value={factionName} setNewValue={setFactionName} />
+          <NameDisplay value={factionName} setNewValue={setFactionName} />
           <h2>
             Org. Structure{" "}
             <SingleDisplayText value={structure} setNewValue={setStructure} />

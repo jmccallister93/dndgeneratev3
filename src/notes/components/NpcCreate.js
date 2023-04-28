@@ -1,31 +1,36 @@
-import style from "../../stylesheets/PageStyle.module.scss";
-import { useEffect, useState, useContext } from "react";
+import style from "../stylesheets/PageStyle.module.scss";
+import { useContext, useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { supabase,  } from "../../config/supabaseClient";
-import ClearButton from "../../components/ClearButton";
-import GenerateButton from "../../components/GenerateButton";
-import CustomDropDown from "../../components/CustomDropDown";
-import CustomInputNumber from "../../components/CustomInputNumber";
-import MultipleDisplay from "../../components/MultipleDisplay";
-import CustomName from "../../components/CustomName";
-import NameDisplay from "../../components/NameDisplay";
-import SingleDisplayText from "../../components/SingleDisplayText";
-import SingleDisplayNumber from "../../components/SingleDisplayNumber";
-import ExportButtons from "../../components/ExportButtons";
+import { supabase } from "../config/supabaseClient";
+import ClearButton from "../components/ClearButton";
+import GenerateButton from "../components/GenerateButton";
+import CustomDropDown from "../components/CustomDropDown";
+import CustomInputNumber from "../components/CustomInputNumber";
+import MultipleDisplay from "../components/MultipleDisplay";
+import CustomName from "../components/CustomName";
+import NameDisplay from "../components/NameDisplay";
+import SingleDisplayText from "../components/SingleDisplayText";
+import SingleDisplayNumber from "../components/SingleDisplayNumber";
+import ExportButtons from "../components/ExportButtons";
 import { useRef } from "react";
-import Items from "../../components/Items";
+import Items from "../components/Items";
 import { Tooltip } from "primereact/tooltip";
-import InfoModal from "../../components/InfoModal";
-import NameGenerator from "../../components/NameGenerator";
-import SectionRandom from "../../components/SectionRandom";
+import InfoModal from "../components/InfoModal";
+import NameGenerator from "../components/NameGenerator";
+import SectionRandom from "../components/SectionRandom";
+import RandomHookNpc from "../components/RandomHookNpc";
+import { SessionContext } from "../config/SessionContext";
 import ns from "../../stylesheets/Note.module.scss";
-import { SessionContext } from "../../config/SessionContext";
-import RandomHookNpc from "../../components/RandomHookNpc";
 
 const NpcCreate = () => {
   const session = useContext(SessionContext);
+  sessionStorage.setItem("lastUrl", window.location.href);
+  const lastUrl = localStorage.getItem("lastUrl");
+  if (lastUrl) {
+    window.location.href = lastUrl;
+  }
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
@@ -50,6 +55,7 @@ const NpcCreate = () => {
   const [sexOptions, setSexOptions] = useState("");
 
   const [age, setAge] = useState("");
+
   const [ageMin, setAgeMin] = useState("");
   const [ageMax, setAgeMax] = useState("");
 
@@ -158,6 +164,39 @@ const NpcCreate = () => {
 
   const [isInfoActive, setIsInfoActive] = useState(false);
 
+  const [hookNpc, setHookNpc] = useState("");
+  const [hookNpcs, setHookNpcs] = useState("");
+  const [hookNpcOptions, setHookNpcOptions] = useState("");
+
+  const [hookLocation, setHookLocation] = useState("");
+  const [hookLocations, setHookLocations] = useState("");
+  const [hookLocationOptions, setHookLocationOptions] = useState("");
+
+  const [hookFaction, setHookFaction] = useState("");
+  const [hookFactions, setHookFactions] = useState("");
+  const [hookFactionOptions, setHookFactionOptions] = useState("");
+
+  // useEffect((tableName, setSingular, setPlural, setOptions) => {
+  //   const fetchData = async () => {
+  //     const { data: dataName, error: errorName } = await supabase
+  //       .from(tableName)
+  //       .select();
+  //     if (errorName) {
+  //       setFetchError("Could not fetch the data");
+  //       console.log(errorName);
+  //       setSingular(null);
+  //     }
+  //     if (dataName) {
+  //       setPlural(dataName);
+  //       setFetchError(null);
+  //       setOptions(
+  //         dataName.map((r) => ({ name: r.name, value: r.value }))
+  //       );
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
   const showBasics = (e) => {
     setIsBasicActive((current) => !current);
   };
@@ -182,6 +221,89 @@ const NpcCreate = () => {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
+
+   //Hook NPC Names
+   useEffect(() => {
+    const fetchDataNpc = async () => {
+  const { data, errorName } = await supabase.from("names").select();
+  if (errorName) {
+    setFetchError("Could not fetch the data");
+    setHookNpc(null);
+    console.log(errorName);
+  }
+  if (data) {
+    setHookNpcs(data);
+    setFetchError(null);
+    setHookNpcOptions(
+      data.map((r) => ({
+        first_name: r.first_name,
+        epithet_a: r.epithet_a,
+        noun_a: r.noun_a,
+        epithet_b: r.epithet_b,
+        noun_b: r.noun_b,
+      }))
+    );
+  }
+};
+fetchDataNpc();
+}, []);
+
+//Hook Location Names
+useEffect(() => {
+const fetchDataLocation = async () => {
+  const { data, errorLocation } = await supabase
+    .from("locationNames")
+    .select();
+  if (errorLocation) {
+    setFetchError("Could not fetch the data");
+    setHookLocation(null);
+    console.log(errorLocation);
+  }
+  if (data) {
+    setHookLocations(data);
+    setFetchError(null);
+    setHookLocationOptions(
+      data.map((r) => ({
+        first_name: r.first_name,
+        epithet_a: r.epithet_a,
+        noun_a: r.noun_a,
+        epithet_b: r.epithet_b,
+        noun_b: r.noun_b,
+      }))
+    );
+  }
+};
+
+fetchDataLocation();
+}, []);
+
+//Hook Faction Names
+useEffect(() => {
+const fetchDataFaction = async () => {
+  const { data, errorLocation } = await supabase
+    .from("factionNames")
+    .select();
+  if (errorLocation) {
+    setFetchError("Could not fetch the data");
+    setHookFaction(null);
+    console.log(errorLocation);
+  }
+  if (data) {
+    setHookFaction(data);
+    setFetchError(null);
+    setHookFactionOptions(
+      data.map((r) => ({
+        first_name: r.first_name,
+        epithet_a: r.epithet_a,
+        noun_a: r.noun_a,
+        noun_b: r.noun_b,
+      }))
+    );
+  }
+};
+
+fetchDataFaction();
+}, []);
 
   //Function to set ability modifier based on ability score
   const setMod = (score) => {
@@ -222,7 +344,6 @@ const NpcCreate = () => {
 
   //Create npc object to be exported
   useEffect(() => {
-
     const itemNames = selectedItem.map((item) => item.name);
     const itemString = itemNames.join(", ");
     const npc = {
@@ -230,8 +351,14 @@ const NpcCreate = () => {
       race: race,
       sex: sex,
       age: age,
-      height: (heightFt + " " + heightIn),
+      height: heightFt + " " + heightIn,
       weight: weight,
+      hairColor: hairColor,
+      hairType: hairType,
+      hairStyle: hairStyle,
+      beardStyle: beardStyle,
+      eyes: eyeColor,
+      skin: skinColor,
       align: align,
       prof: prof,
       feature: feature,
@@ -244,18 +371,18 @@ const NpcCreate = () => {
       hp: hp,
       ac: ac,
       speed: speed,
-      str: (str + " " + setMod(str)),
-      dex: (dex + " " + setMod(dex)),
-      con: (con + " " + setMod(con)),
-      int: (int + " " + setMod(int)),
-      wis: (wis + " " + setMod(wis)),
-      cha: (cha + " " + setMod(cha)), 
+      str: str + " " + setMod(str),
+      dex: dex + " " + setMod(dex),
+      con: con + " " + setMod(con),
+      int: int + " " + setMod(int),
+      wis: wis + " " + setMod(wis),
+      cha: cha + " " + setMod(cha),
       action: action,
       weaponBonus: weaponBonus,
       weaponDamage: weaponDamage,
       weaponProperties: weaponProperties,
       inventory: itemString,
-      email: session.user.email,
+      email: session?.user?.email,
     };
     setNpc(npc);
   }, [
@@ -285,10 +412,16 @@ const NpcCreate = () => {
     ac,
     hp,
     speed,
+    age,
+    beardStyle,
+    eyeColor,
+    hairColor,
+    hairStyle,
+    hairType,
     heightFt,
     heightIn,
+    skinColor,
     weight,
-    age,
     session,
   ]);
 
@@ -350,8 +483,7 @@ const NpcCreate = () => {
       setWeaponProperties(matchProperties(action));
       setWeaponBonus(matchBonus(action));
     }
-    //eslint-disable-next-line
-  }, [action,]);
+  }, [action, dex, str, weapons]);
 
   //Info content
   const infoContent = (
@@ -379,8 +511,8 @@ const NpcCreate = () => {
 
   return (
     <div className={ns.mainWrapper}>
-      <div className={style.topHeader}> 
-      <h1 className={style.mainHeader}>NPC Generator</h1>
+      <div className={style.topHeader}>
+        <h1 className={style.mainHeader}>NPC Generator</h1>
         <div className={style.topWrapper}>
           <div className={style.btnWrapper}>
             {/* Generate Clear Btns */}
@@ -538,9 +670,9 @@ const NpcCreate = () => {
               setArrayState={[setSelectedItem]}
             />
             {/* Export Btns */}
-              <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={npc} tableName={"DBnpc"}/>
-              </div>
+            <div className={style.exportBtns}>
+              <ExportButtons div={divRef} data={npc} tableName={"DBnpc"} />
+            </div>
             {/* ToolTip */}
             <div className={style.infoCircle}>
               <i className="pi pi-info-circle" onClick={showInfo}>
@@ -575,33 +707,9 @@ const NpcCreate = () => {
               )}
             </h1>
             <SectionRandom
-              value={[
-                race, 
-                sex, 
-                align, 
-                // age, 
-                // heightFt, 
-                // heightIn, 
-                // weight
-              ]}
-              valueOptions={[
-                raceOptions,
-                sexOptions,
-                alignOptions,
-                // ageOptions,
-                // heightFtOptions,
-                // heightInOptions,
-                // weightOptions,
-              ]}
-              setValue={[
-                setRace,
-                setSex,
-                setAlign,
-                // setAge,
-                // setHeightFt,
-                // setHeightIn,
-                // setWeight,
-              ]}
+              value={[race, sex, align]}
+              valueOptions={[raceOptions, sexOptions, alignOptions]}
+              setValue={[setRace, setSex, setAlign]}
               nameItem={[name]}
               nameItemOptions={[nameOptions]}
               setNameItem={[setName]}
@@ -1044,7 +1152,7 @@ const NpcCreate = () => {
               value={[action]}
               valueOptions={[actionOptions]}
               setValue={[setAction]}
-              selectedValue={[selectedItem]} 
+              selectedValue={[selectedItem]}
               selectedValueOptions={[itemOptions]}
               setSelectedValue={[setSelectedItem]}
               selectedValueList={[itemList]}
@@ -1198,7 +1306,17 @@ const NpcCreate = () => {
           <h2>
             Hook{" "}
             <span className={style.minorText2}>
-              <RandomHookNpc type={questType} value={hook} setValue={setHook} />
+              <RandomHookNpc
+                type={questType}
+                value={hook}
+                setValue={setHook}
+                setNpcName={setHookNpc}
+                npcNameOptions={hookNpcOptions}
+                setLocationName={setHookLocation}
+                locationNameOptions={hookLocationOptions}
+                setFactionName={setHookFaction}
+                factionNameOptions={hookFactionOptions}
+              />
               {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
             </span>
           </h2>
@@ -1343,7 +1461,10 @@ const NpcCreate = () => {
           <h2>
             Inventory{" "}
             <span className={style.minorText2}>
-              <MultipleDisplay selectedItem={selectedItem} />
+              <MultipleDisplay
+                selectedItem={selectedItem}
+                setNewValue={setSelectedItem}
+              />
             </span>
           </h2>
         </div>
