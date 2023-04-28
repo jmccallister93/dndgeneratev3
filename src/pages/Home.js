@@ -6,6 +6,7 @@ import sampleNPC from "../assests/sampleNPC.jpg";
 
 const Home = (props) => {
   sessionStorage.setItem("lastUrl", window.location.href);
+
   const lastUrl = localStorage.getItem("lastUrl");
   if (lastUrl) {
     window.location.href = lastUrl;
@@ -88,6 +89,7 @@ const Home = (props) => {
           engaging, dynamic content.
         </p>
         <div className={style.bottomTextImage}>
+          <img className={style.sampleNPC} src={sampleNPC} alt="" />
           <p className={style.bottomText}>
             With our user-friendly interface and robust features, you can spend
             less time on the administrative aspects of your game and more time
@@ -95,7 +97,6 @@ const Home = (props) => {
             D&D 5e campaign needs. Let's roll some dice and tell some epic
             stories together!
           </p>
-          <img className={style.sampleNPC} src={sampleNPC} alt="" />
         </div>
       </div>
     </>

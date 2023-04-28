@@ -1,19 +1,41 @@
 import style from "../stylesheets/Navbar.module.scss";
-import { Link,  useLocation,  } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { supabase } from "../config/supabaseClient";
 import { SessionContext } from "../config/SessionContext";
-import d20 from "../assests/DnDGenLogo.png";
+import d20Text from "../assests/DnDGenLogo.png";
+import d20 from "../assests/LogoDice.png";
 
 const Navbar = (props) => {
   const session = useContext(SessionContext);
   const location = useLocation();
-  // const history = useNavigate();
+
+  const [logo, setLogo] = useState("");
+
+  //Meida Query
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    // Update isMobile whenever the window size changes
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
+  useEffect(() => {
+    if (isMobile) {
+      setLogo(d20);
+    } else {
+      setLogo(d20Text);
+    }
+  }, [isMobile]);
 
   //Set location and redirect path variables
-  const [, setRedirectPath] = useState(
-    localStorage.getItem("redirectPath")
-  );
+  const [, setRedirectPath] = useState(localStorage.getItem("redirectPath"));
 
   //Set redirect path on page change
   useEffect(() => {
@@ -24,41 +46,8 @@ const Navbar = (props) => {
     const newRedirectPath = localStorage.getItem("redirectPath");
     setRedirectPath(newRedirectPath);
     props.updateRedirectPath(newRedirectPath);
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [location]);
-
-  //Logs in using Google Auth
-  // async function handleLogin() {
-  //   const { user, session, error } = await supabase.auth.signInWithOAuth(
-  //     {
-  //       provider: "google",
-  //     },
-  //     { redirectTo: window.location.origin + location.pathname }
-  //   )
-  //   if (error) {
-  //     console.log(error.message);
-  //   } else {
-  //     console.log("Logged in successfully");
-  //   }
-  // }
-
-  //Logs in using email
-  // async function signInWithEmail() {
-  //   const { data, error } = await supabase.auth.signInWithPassword({
-  //     email: "example@email.com",
-  //     password: "example-password",
-  //   });
-  // }
-
-  // //Signs up using email
-  // async function singUpWithEmail() {
-  //   const { user, session, error } = await supabase.auth.signUp({
-  //     email: "example@email.com",
-  //     password: "example-password",
-  //   });
-  // }
-
-  // const handleLogin = () => {};
 
   //Signs out
   async function handleLogout() {
@@ -71,8 +60,10 @@ const Navbar = (props) => {
         <Link to="/">
           <img
             className={style.navbarLogo}
-            src={d20}
+            src={logo}
             alt="logo"
+            style={{ height: isMobile ? "5rem" : "auto", width: isMobile ? "6rem" : "auto"}}
+           
           />
         </Link>
       </div>
