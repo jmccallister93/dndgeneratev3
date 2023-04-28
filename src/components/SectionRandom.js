@@ -1,4 +1,3 @@
-
 import style from "../stylesheets/PageStyle.module.scss";
 
 const SectionRandom = (props) => {
@@ -585,6 +584,40 @@ const SectionRandom = (props) => {
     }
   };
 
+  //Location Name Generate
+  const locationNameGenerate = (e) => {
+    if (props.locationName) {
+      for (let i = 0; i < props.locationName.length; i++) {
+        let f = Math.floor(Math.random() * 60);
+        let firstName = [props.locationNameOptions[i][f].first_name];
+        let eA = Math.floor(Math.random() * 60);
+        let epiphet_a = [props.locationNameOptions[i][eA].epithet_a];
+        let nA = Math.floor(Math.random() * 60);
+        let noun_a = [props.locationNameOptions[i][nA].noun_a];
+        let nB = Math.floor(Math.random() * 60);
+        let noun_b = [props.locationNameOptions[i][nB].noun_b];
+
+        let random = Math.round(Math.random() * 6);
+
+        if (random === 0) {
+          props.setLocationName[0](firstName + " " + noun_a);
+        } else if (random === 1) {
+          props.setLocationName[0](firstName + " " + noun_b);
+        } else if (random === 2) {
+          props.setLocationName[0](firstName + " " + noun_a + " " + noun_b);
+        } else if (random === 3) {
+          props.setLocationName[0](epiphet_a + " " + noun_a);
+        } else if (random === 4) {
+          props.setLocationName[0](epiphet_a + " " + noun_a + " " + noun_b);
+        } else if (random === 5) {
+          props.setLocationName[0](epiphet_a + " " + firstName);
+        } else if (random === 6) {
+          props.setLocationName[0](noun_a + " " + noun_b);
+        }
+      }
+    }
+  };
+
   const onRandomClick = (e) => {
     onRandomClickSingle();
     onRandomClickMultiple();
@@ -599,6 +632,7 @@ const SectionRandom = (props) => {
     senseGenerate();
     pantheonNameGenerate();
     factionNameGenerate();
+    locationNameGenerate();
   };
 
   return (

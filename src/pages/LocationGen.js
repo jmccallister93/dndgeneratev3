@@ -206,9 +206,9 @@ const LocationGen = () => {
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton
-              locationName={cityName}
-              setLocationName={setCityName}
-              locationNameOptions={cityNameOptions}
+              locationName={[cityName]}
+              setLocationName={[setCityName]}
+              locationNameOptions={[cityNameOptions]}
               generateItems={[
                 type,
                 size,

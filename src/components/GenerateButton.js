@@ -16,7 +16,6 @@ const GenerateButton = (props) => {
   //---PROPS NEEDED----
   const [, setMultipleDisplay] = useState([]);
 
-
   //Set Multiple Display State
   useEffect(() => {
     if (props.selectedItem === undefined) {
@@ -28,7 +27,7 @@ const GenerateButton = (props) => {
   //Useeffect to set height, age, weight
   useEffect(() => {
     setHeightAgeWeight();
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [props.generateItems]);
 
   //DropDown Generate
@@ -188,7 +187,7 @@ const GenerateButton = (props) => {
           } else if (random === 2) {
             props.setNameItem[i](firstName + " " + epiphet_b + noun_a);
           } else if (random === 3) {
-            props.setNnameItem[i](firstName + " " + epiphet_b + noun_b);
+            props.setNameItem[i](firstName + " " + epiphet_b + noun_b);
           }
         }
       }
@@ -273,10 +272,7 @@ const GenerateButton = (props) => {
   const factionNameGenerate = (e) => {
     if (props.factionName) {
       for (let i = 0; i < props.factionName.length; i++) {
-        if (
-          props.factionName[i] === "" ||
-          props.factionName[i] === undefined
-        ) {
+        if (props.factionName[i] === "" || props.factionName[i] === undefined) {
           let f = Math.floor(Math.random() * 33);
           let first_name = [props.factionNameOptions[i][f].first_name];
           let e = Math.floor(Math.random() * 10);
@@ -310,30 +306,37 @@ const GenerateButton = (props) => {
 
   //Location Name Generate
   const locationNameGenerate = (e) => {
-    if (props.nameItem) {
-      for (let i = 0; i < props.nameItem.length; i++) {
-        if (props.nameItem[i] === "" || props.nameItem[i] === undefined) {
-          let f = Math.floor(Math.random() * 208);
-          let firstName = [props.nameItemOptions[i][f].first_name];
-          let eA = Math.floor(Math.random() * 208);
-          let epiphet_a = [props.nameItemOptions[i][eA].epithet_a];
-          let eB = Math.floor(Math.random() * 208);
-          let epiphet_b = [props.nameItemOptions[i][eB].epithet_b];
-          let nA = Math.floor(Math.random() * 208);
-          let noun_a = [props.nameItemOptions[i][nA].noun_a];
-          let nB = Math.floor(Math.random() * 208);
-          let noun_b = [props.nameItemOptions[i][nB].noun_b];
+    if (props.locationName) {
+      for (let i = 0; i < props.locationName.length; i++) {
+        if (
+          props.locationName[i] === "" ||
+          props.locationName[i] === undefined
+        ) {
+          let f = Math.floor(Math.random() * 60);
+          let firstName = [props.locationNameOptions[i][f].first_name];
+          let eA = Math.floor(Math.random() * 60);
+          let epiphet_a = [props.locationNameOptions[i][eA].epithet_a];
+          let nA = Math.floor(Math.random() * 60);
+          let noun_a = [props.locationNameOptions[i][nA].noun_a];
+          let nB = Math.floor(Math.random() * 60);
+          let noun_b = [props.locationNameOptions[i][nB].noun_b];
 
-          let random = Math.floor(Math.random() * 3);
+          let random = Math.round(Math.random() * 6);
 
           if (random === 0) {
-            props.setNameItem[i](firstName + " " + epiphet_a + noun_a);
+            props.setLocationName[0](firstName + " " + noun_a);
           } else if (random === 1) {
-            props.setNameItem[i](firstName + " " + epiphet_a + noun_b);
+            props.setLocationName[0](firstName + " " + noun_b);
           } else if (random === 2) {
-            props.setNameItem[i](firstName + " " + epiphet_b + noun_a);
+            props.setLocationName[0](firstName + " " + noun_a + " " + noun_b);
           } else if (random === 3) {
-            props.setNnameItem[i](firstName + " " + epiphet_b + noun_b);
+            props.setLocationName[0](epiphet_a + " " + noun_a);
+          } else if (random === 4) {
+            props.setLocationName[0](epiphet_a + " " + noun_a + " " + noun_b);
+          } else if (random === 5) {
+            props.setLocationName[0](epiphet_a + " " + firstName);
+          } else if (random === 6) {
+            props.setLocationName[0](noun_a + " " + noun_b);
           }
         }
       }
