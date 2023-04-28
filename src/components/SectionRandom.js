@@ -618,6 +618,40 @@ const SectionRandom = (props) => {
     }
   };
 
+   //Item Name Generate
+   const itemNameGenerate = (e) => {
+    if (props.itemName) {
+      for (let i = 0; i < props.itemName.length; i++) {
+        let f = Math.floor(Math.random() * 100);
+        let firstName = [props.itemNameOptions[i][f].first_name];
+        let eA = Math.floor(Math.random() * 100);
+        let epiphet_a = [props.itemNameOptions[i][eA].epithet_a];
+        let nA = Math.floor(Math.random() * 100);
+        let noun_a = [props.itemNameOptions[i][nA].noun_a];
+        let nB = Math.floor(Math.random() * 100);
+        let noun_b = [props.itemNameOptions[i][nB].noun_b];
+
+        let random = Math.round(Math.random() * 6);
+
+        if (random === 0) {
+          props.setItemName[0](firstName + " " + noun_a);
+        } else if (random === 1) {
+          props.setItemName[0](firstName + " " + noun_b);
+        } else if (random === 2) {
+          props.setItemName[0](firstName + " " + noun_a + " " + noun_b);
+        } else if (random === 3) {
+          props.setItemName[0](epiphet_a + " " + noun_a);
+        } else if (random === 4) {
+          props.setItemName[0](epiphet_a + " " + noun_a + " " + noun_b);
+        } else if (random === 5) {
+          props.setItemName[0](epiphet_a + " " + firstName);
+        } else if (random === 6) {
+          props.setItemName[0](noun_a + " " + noun_b);
+        }
+      }
+    }
+  };
+
   const onRandomClick = (e) => {
     onRandomClickSingle();
     onRandomClickMultiple();
@@ -633,6 +667,7 @@ const SectionRandom = (props) => {
     pantheonNameGenerate();
     factionNameGenerate();
     locationNameGenerate();
+    itemNameGenerate();
   };
 
   return (

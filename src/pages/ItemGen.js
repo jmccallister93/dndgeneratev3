@@ -173,6 +173,9 @@ if (lastUrl) {
           <div className={style.btnWrapper}>
             {/* Generate Clear Btns */}
             <GenerateButton
+            itemName={[itemName]}
+            setItemName={[setItemName]}
+            itemNameOptions={[itemNameOptions]}
               generateItems={[
                 type,
                 rarity,
@@ -304,14 +307,17 @@ if (lastUrl) {
               )}
             </h1>
             <SectionRandom
-              value={[itemName, type, rarity, currency]}
+            itemName={[itemName]}
+            setItemName={[setItemName]}
+            itemNameOptions={[itemNameOptions]}
+              value={[ type, rarity, currency]}
               valueOptions={[
-                itemNameOptions,
+                
                 typeOptions,
                 rarityOptions,
                 currencyOptions,
               ]}
-              setValue={[setItemName, setType, setRarity, setCurrency]}
+              setValue={[ setType, setRarity, setCurrency]}
               numberItem={[currencyValue, weight]}
               setNumberItem={[setCurrencyValue, setWeight]}
               numberMax={[9999, 2000]}
@@ -321,7 +327,7 @@ if (lastUrl) {
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
-                tableName={"names"}
+                tableName={"itemsNames"}
                 name={itemName}
                 setName={setItemName}
                 setNames={setItemNames}

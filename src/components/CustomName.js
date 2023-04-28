@@ -119,6 +119,28 @@ const CustomName = (props) => {
           );
         }
       }
+
+      if (props.tableName === "itemsNames") {
+        const { data, error } = await supabase.from(props.tableName).select();
+        if (error) {
+          setFetchError("Could not fetch the data");
+          props.setName(null);
+          console.log(error);
+        }
+        if (data) {
+          props.setNames(data);
+          setFetchError(null);
+          props.setNameOptions(
+            data.map((r) => ({
+              first_name: r.first_name,
+              epithet_a: r.epithet_a,
+              noun_a: r.noun_a,
+              epithet_b: r.epithet_b,
+              noun_b: r.noun_b,
+            }))
+          );
+        }
+      }
     };
 
     fetchData();
@@ -268,7 +290,39 @@ const CustomName = (props) => {
         props.setName(noun_a + " " + noun_b);
       }
     }
+
+    //Item Name
+    if (props.tableName === "itemsNames") {
+      let f = Math.floor(Math.random() * 100);
+      let firstName = [props.nameOptions[f].first_name];
+      let eA = Math.floor(Math.random() * 100);
+      let epiphet_a = [props.nameOptions[eA].epithet_a];
+      let nA = Math.floor(Math.random() * 100);
+      let noun_a = [props.nameOptions[nA].noun_a];
+      let nB = Math.floor(Math.random() * 100);
+      let noun_b = [props.nameOptions[nB].noun_b];
+
+      let random = Math.round(Math.random() * 6);
+
+      if (random === 0) {
+        props.setName(firstName + " " + noun_a);
+      } else if (random === 1) {
+        props.setName(firstName+ " " + noun_b);
+      } else if (random === 2) {
+        props.setName(firstName + " "  + noun_a + " " + noun_b);
+      } else if (random === 3) {
+        props.setName(epiphet_a + " "  + noun_a);
+      } else if (random === 4) {
+        props.setName(epiphet_a + " " + noun_a + " " + noun_b);
+      } else if (random === 5) {
+        props.setName(epiphet_a + " " + firstName);
+      } else if(random === 6) {
+        props.setName(noun_a + " " + noun_b);
+      }
+    }
   };
+
+  
 
   const onNameChange = (e) => {
     props.setName(e.target.value);

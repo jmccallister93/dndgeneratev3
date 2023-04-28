@@ -479,7 +479,7 @@ if (lastUrl) {
                 setQuestType,
                 setAction,
               ]}
-              nameItem={[name]}
+              nameItem={[name]} 
               nameItemOptions={[nameOptions]}
               setNameItem={[setName]}
               statsItem={[str, dex, con, int, wis, cha]}
