@@ -779,7 +779,7 @@ if (lastUrl) {
           <div className={isMemberActive ? style.subsection : style.hidden}>
             <div>
               <CustomDropdown
-                tableName={"DBnpc"}
+                tableName={"npcList"}
                 setSingular={setLeader}
                 setPlural={setLeaders}
                 setOptions={setLeaderOptions}
@@ -790,7 +790,7 @@ if (lastUrl) {
                 valueOptions={leaderOptions}
               />
               <CustomDataTable
-                tableName={"DBnpc"}
+                tableName={"npcList"}
                 setSingular={setMember}
                 setPlural={setMembers}
                 setOptions={setMemberOptions}
