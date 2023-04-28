@@ -12,6 +12,8 @@ const Navbar = (props) => {
 
   const [logo, setLogo] = useState("");
 
+  const [isOpen, setIsOpen] = useState(false);
+
   //Meida Query
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -25,7 +27,7 @@ const Navbar = (props) => {
     // Clean up event listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
   useEffect(() => {
     if (isMobile) {
       setLogo(d20);
@@ -54,6 +56,18 @@ const Navbar = (props) => {
     await supabase.auth.signOut();
   }
 
+  //Hamburger button
+  const hamburger = (
+    <button
+      className={style.navbarHamburger}
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  );
+
   return (
     <div className={style.navbarWrapper}>
       <div className={style.navbarLogoWrapper}>
@@ -62,11 +76,14 @@ const Navbar = (props) => {
             className={style.navbarLogo}
             src={logo}
             alt="logo"
-            style={{ height: isMobile ? "5rem" : "auto", width: isMobile ? "6rem" : "auto"}}
-           
+            style={{
+              height: isMobile ? "5rem" : "auto",
+              width: isMobile ? "6rem" : "auto",
+            }}
           />
         </Link>
       </div>
+
       <ul className={style.navbarUl}>
         <Link to="/">
           <li className={style.navbarLi}>Home</li>
@@ -82,26 +99,55 @@ const Navbar = (props) => {
         </Link>
       </ul>
 
-      {session ? (
-        <div className={style.navbarLoginWrapper}>
-          <div className={style.navbarEmail}>{session.user.email}</div>
-          <div className={style.navbarBtnWrapper}>
-            <button className={style.navbarLoginBtn} onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div className={style.navbarLoginWrapper}>
-          <div className={style.navbarBtnWrapper}>
-            <Link to="/login" session={session}>
-              <button className={style.navbarLoginBtn}>Login</button>
+      {/* Mobile rendering */}
+      {isMobile && (
+        <div>
+          {hamburger}
+          <div
+            className={style.navbarDropdown}
+            style={{ display: isOpen ? "block" : "none" }}
+          >
+            <Link to="/">
+              <div className={style.navbarDropdownLink}>Home</div>
             </Link>
+            <Link to="/notes" session={session}>
+              <div className={style.navbarDropdownLink}>Campaign</div>
+            </Link>
+            <Link to="/create" session={session}>
+              <div className={style.navbarDropdownLink}>Create</div>
+            </Link>
+            <Link to="/collectionpage" session={session}>
+              <div className={style.navbarDropdownLink}>Collections</div>
+            </Link>
+            {session ? (
+              <div className={style.navbarLoginWrapper}>
+                {isMobile ? null : (
+                  <div className={style.navbarEmail}>{session.user.email}</div>
+                )}
 
-            <p>or</p>
-            <Link to="/signup" session={session}>
-              <button className={style.navbarLoginBtn}>Signup</button>
-            </Link>
+                <div className={style.navbarBtnWrapper}>
+                  <button
+                    className={style.navbarLoginBtn}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className={style.navbarLoginWrapper}>
+                <div className={style.navbarBtnWrapper}>
+                  <Link to="/login" session={session}>
+                    <button className={style.navbarLoginBtn}>Login</button>
+                  </Link>
+
+                  <p>or</p>
+                  <Link to="/signup" session={session}>
+                    <button className={style.navbarLoginBtn}>Signup</button>
+                  </Link>
+                </div>
+              </div>
+            )}{" "}
           </div>
         </div>
       )}
