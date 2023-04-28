@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase,  } from "../config/supabaseClient";
+import { supabase } from "../config/supabaseClient";
 import NameDisplay from "./NameDisplay";
 
 const RandomHooks = (props) => {
@@ -28,8 +28,8 @@ const RandomHooks = (props) => {
   const [, setBuildings] = useState("");
   const [buildingOptions, setBuildingOptions] = useState("");
 
-  const [vowel, ] = useState(["a", "e", "i", "o", "u", "y"]);
-  const [consonant, ] = useState([
+  const [vowel] = useState(["a", "e", "i", "o", "u", "y"]);
+  const [consonant] = useState([
     "b",
     "c",
     "d",
@@ -74,6 +74,7 @@ const RandomHooks = (props) => {
   const [, setNamesD] = useState([]);
   const [nameDOptions, setNameDOptions] = useState([]);
 
+  const [locationNameOptions, setLocationNameOptions] = useState([]);
 
   //Get Data from supabase
   const getData = (tableName, setSingular, setPlural, setOptions) => {
@@ -125,43 +126,18 @@ const RandomHooks = (props) => {
     }
   }, [props]);
 
-  //NPC names
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("names").select();
-      if (error) {
-        setFetchError("Could not fetch the data");
-        setNpcName(null);
-        console.log(error);
-      }
-      if (data) {
-        setNpcNames(data);
-        setFetchError(null);
-        setNpcNameOptions(
-          data.map((r) => ({
-            first_name: r.first_name,
-            epithet_a: r.epithet_a,
-            noun_a: r.noun_a,
-            epithet_b: r.epithet_b,
-            noun_b: r.noun_b,
-          }))
-        );
-      }
-    };
-    fetchData();
-  }, []);
   //Random NPC name
   const onRandomName = (e) => {
-    let f = Math.floor(Math.random() * 208);
-    let firstName = [npcNameOptions[f].first_name];
-    let eA = Math.floor(Math.random() * 208);
-    let epiphet_a = [npcNameOptions[eA].epithet_a];
-    let eB = Math.floor(Math.random() * 208);
-    let epiphet_b = [npcNameOptions[eB].epithet_b];
-    let nA = Math.floor(Math.random() * 208);
-    let noun_a = [npcNameOptions[nA].noun_a];
-    let nB = Math.floor(Math.random() * 208);
-    let noun_b = [npcNameOptions[nB].noun_b];
+    let f = Math.floor(Math.random() * 207);
+    let firstName = [props.npcNameOptions[f].first_name];
+    let eA = Math.floor(Math.random() * 207);
+    let epiphet_a = [props.npcNameOptions[eA].epithet_a];
+    let eB = Math.floor(Math.random() * 207);
+    let epiphet_b = [props.npcNameOptions[eB].epithet_b];
+    let nA = Math.floor(Math.random() * 207);
+    let noun_a = [props.npcNameOptions[nA].noun_a];
+    let nB = Math.floor(Math.random() * 207);
+    let noun_b = [props.npcNameOptions[nB].noun_b];
 
     let random = Math.round(Math.random() * 3);
 
@@ -175,85 +151,52 @@ const RandomHooks = (props) => {
       return firstName + " " + epiphet_b + noun_a;
     }
   };
+
   //Random Monster
   const onRandomMonster = (e) => {
     let r = Math.floor(Math.random() * monsterOptions.length);
     return monsterOptions[r].name;
   };
+
   //Random Item
   const onRandomItem = (e) => {
     let r = Math.floor(Math.random() * itemOptions.length);
     return itemOptions[r].name;
   };
+
   //Random Building
   const onRandomBuilding = (e) => {
     let r = Math.floor(Math.random() * buildingOptions.length);
     return buildingOptions[r].name;
   };
+
   //Random Location
   const onRandomWord = (e) => {
-    //create random location name using vowel and consonant arrays
-    let v = Math.floor(Math.random() * 6);
-    let c = Math.floor(Math.random() * 21);
-    let v2 = Math.floor(Math.random() * 6);
-    // eslint-disable-next-line 
-    let c2 = Math.floor(Math.random() * 21);
-    let v3 = Math.floor(Math.random() * 6);
-    let c3 = Math.floor(Math.random() * 21);
-    // eslint-disable-next-line 
-    let v4 = Math.floor(Math.random() * 6);
-    let c4 = Math.floor(Math.random() * 21);
-    let v5 = Math.floor(Math.random() * 6);
-    let c5 = Math.floor(Math.random() * 21);
-    let v6 = Math.floor(Math.random() * 6);
-    let c6 = Math.floor(Math.random() * 21);
-    //set location name based on random values
-    let x = Math.round(Math.random() * 3);
-    if (x === 0) {
-      return (
-        vowel[v3].toUpperCase() +
-        consonant[c] +
-        vowel[v2] +
-        consonant[c3] +
-        consonant[c4] +
-        vowel[v5] +
-        consonant[c5] +
-        vowel[v6]
-      );
-    } else if (x === 1) {
-      return (
-        consonant[c].toUpperCase() +
-        vowel[v2] +
-        consonant[c3] +
-        vowel[v5] +
-        consonant[c4] +
-        consonant[c5] +
-        vowel[v6]
-      );
-    } else if (x === 2) {
-      return (
-        vowel[v].toUpperCase() +
-        consonant[c] +
-        consonant[c3] +
-        vowel[v2] +
-        consonant[c4] +
-        vowel[v5] +
-        vowel[v6] +
-        consonant[c6] +
-        consonant[c5]
-      );
-    } else {
-      return (
-        consonant[c].toUpperCase() +
-        vowel[v2] +
-        consonant[c3] +
-        vowel[v5] +
-        consonant[c4] +
-        consonant[c5] +
-        vowel[v6] +
-        consonant[c6] +
-        vowel[v]
-      );
+    let f = Math.floor(Math.random() * 59);
+    let firstName = [props.locationNameOptions[f].first_name];
+    let eA = Math.floor(Math.random() * 59);
+    let epiphet_a = [props.locationNameOptions[eA].epithet_a];
+    let nA = Math.floor(Math.random() * 59);
+    let noun_a = [props.locationNameOptions[nA].noun_a];
+    let nB = Math.floor(Math.random() * 59);
+    let noun_b = [props.locationNameOptions[nB].noun_b];
+
+    let random = Math.round(Math.random() * 6);
+
+    if (random === 0) {
+      return firstName + " " + noun_a;
+    } else if (random === 1) {
+      return firstName + " " + noun_b;
+    } else if (random === 2) {
+      return firstName + " " + noun_a + " " + noun_b;
+    } else if (random === 3) {
+      return epiphet_a + " " + noun_a;
+    } else if (random === 4) {
+      return epiphet_a + " " + noun_a + " " + noun_b;
+    } else if (random === 5) {
+      return epiphet_a + " " + firstName;
+    } else if (random === 6) {
+      return noun_a + " " + noun_b;
     }
   };
 
@@ -270,24 +213,27 @@ const RandomHooks = (props) => {
 
   //Random Faction Name
   const onRandomFactionName = (e) => {
-    let rA = Math.floor(Math.random() * nameAOptions.length);
-    let rB = Math.floor(Math.random() * nameBOptions.length);
-    let rC = Math.floor(Math.random() * nameCOptions.length);
-    let rD = Math.floor(Math.random() * nameDOptions.length);
-    setNameA(nameAOptions[rA].name);
-    setNameB(nameBOptions[rB].name);
-    setNameC(nameCOptions[rC].name);
-    setNameD(nameDOptions[rD].name);
-    if (nameA && nameB && nameC && nameD) {
-      return (
-        nameAOptions[rA].name +
-        " " +
-        nameBOptions[rB].name +
-        " " +
-        nameCOptions[rC].name +
-        " " +
-        nameDOptions[rD].name
-      );
+    let f = Math.floor(Math.random() * 32);
+    let first_name = [props.factionNameOptions[f].first_name];
+    let eA = Math.floor(Math.random() * 9);
+    let epithet_a = [props.factionNameOptions[eA].epithet_a];
+    let na = Math.floor(Math.random() * 124);
+    let noun_a = [props.factionNameOptions[na].noun_a];
+    let nb = Math.floor(Math.random() * 184);
+    let noun_b = [props.factionNameOptions[nb].noun_b];
+
+    let random = Math.round(Math.random() * 4);
+
+    if (random === 0) {
+      return first_name + " " + epithet_a + " " + noun_a + " " + noun_b;
+    } else if (random === 1) {
+      return first_name + " " + epithet_a + " " + noun_b;
+    } else if (random === 2) {
+      return first_name + " " + noun_b;
+    } else if (random === 3) {
+      return noun_a + " " + noun_b;
+    } else {
+      return noun_b + " " + epithet_a + " " + noun_a;
     }
   };
 
@@ -406,7 +352,7 @@ const RandomHooks = (props) => {
       } else {
       }
     }
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [props.type]);
 
   return (

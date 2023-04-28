@@ -5,16 +5,15 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import ClearButton from "../components/ClearButton";
 import GenerateButton from "../components/GenerateButton";
-
 import CustomDropDown from "../components/CustomDropDown";
 import InfoModal from "../components/InfoModal";
 import SectionRandom from "../components/SectionRandom";
-
 import SingleDisplayText from "../components/SingleDisplayText";
 import RandomHooks from "../components/RandomHooks";
 import ExportButtons from "../components/ExportButtons";
 import { Tooltip } from "primereact/tooltip";
 import { SessionContext } from "../config/SessionContext";
+import { supabase } from "../config/supabaseClient";
 
 const QuestGen = () => {
   const session = useContext(SessionContext);
@@ -76,6 +75,103 @@ const QuestGen = () => {
 
   const [questData, setQuestData] = useState({});
 
+  const [fetchError, setFetchError] = useState(null);
+
+  const [npcName, setNpcName] = useState("");
+  const [, setNpcNames] = useState("");
+  const [npcNameOptions, setNpcNameOptions] = useState("");
+
+  const [locationName, setLocationName] = useState("");
+  const [, setLocationNames] = useState("");
+  const [locationNameOptions, setLocationNameOptions] = useState("");
+
+  const [factionName, setFactionName] = useState("");
+  const [, setFactionNames] = useState("");
+  const [factionNameOptions, setFactionNameOptions] = useState("");
+
+  //NPC names
+  useEffect(() => {
+        const fetchDataNpc = async () => {
+      const { data, errorName } = await supabase.from("names").select();
+      if (errorName) {
+        setFetchError("Could not fetch the data");
+        setNpcName(null);
+        console.log(errorName);
+      }
+      if (data) {
+        setNpcNames(data);
+        setFetchError(null);
+        setNpcNameOptions(
+          data.map((r) => ({
+            first_name: r.first_name,
+            epithet_a: r.epithet_a,
+            noun_a: r.noun_a,
+            epithet_b: r.epithet_b,
+            noun_b: r.noun_b,
+          }))
+        );
+      }
+    };
+    fetchDataNpc();
+  }, []);
+
+  //Location Names
+  useEffect(() => {
+    const fetchDataLocation = async () => {
+      const { data, errorLocation } = await supabase
+        .from("locationNames")
+        .select();
+      if (errorLocation) {
+        setFetchError("Could not fetch the data");
+        setLocationName(null);
+        console.log(errorLocation);
+      }
+      if (data) {
+        setLocationNames(data);
+        setFetchError(null);
+        setLocationNameOptions(
+          data.map((r) => ({
+            first_name: r.first_name,
+            epithet_a: r.epithet_a,
+            noun_a: r.noun_a,
+            epithet_b: r.epithet_b,
+            noun_b: r.noun_b,
+          }))
+        );
+      }
+    };
+
+    fetchDataLocation();
+  }, []);
+
+  //Faction Names
+  useEffect(() => {
+    const fetchDataFaction = async () => {
+      const { data, errorLocation } = await supabase
+        .from("factionNames")
+        .select();
+      if (errorLocation) {
+        setFetchError("Could not fetch the data");
+        setFactionName(null);
+        console.log(errorLocation);
+      }
+      if (data) {
+        setFactionName(data);
+        setFetchError(null);
+        setFactionNameOptions(
+          data.map((r) => ({
+            first_name: r.first_name,
+            epithet_a: r.epithet_a,
+            noun_a: r.noun_a,
+            noun_b: r.noun_b,
+          }))
+        );
+      }
+    };
+
+    fetchDataFaction();
+  }, []);
+
   //useeffect to set the values for datatable based on questype state
   useEffect(() => {
     if (questType === "Bounty") {
@@ -103,7 +199,20 @@ const QuestGen = () => {
     } else {
       setQuestOptions([]);
     }
-  }, [questType, bountyOptions, captureOptions, deliveryOptions, escortOptions, explorationOptions, gatherOptions, investigateOptions, killOptions, negotiateOptions, protectOptions, rescueOptions]);
+  }, [
+    questType,
+    bountyOptions,
+    captureOptions,
+    deliveryOptions,
+    escortOptions,
+    explorationOptions,
+    gatherOptions,
+    investigateOptions,
+    killOptions,
+    negotiateOptions,
+    protectOptions,
+    rescueOptions,
+  ]);
 
   //Show Options
   const showBasics = (e) => {
@@ -181,7 +290,7 @@ const QuestGen = () => {
               ]}
             />
             <h1>
-              Export
+             
               <div className={style.exportBtns}>
                 <ExportButtons
                   div={divRef}
@@ -303,6 +412,12 @@ const QuestGen = () => {
             value={quest}
             setValue={setQuest}
             setNameValue={setQuestName}
+            setNpcName={setNpcName}
+            npcNameOptions={npcNameOptions}
+            setLocationName={setLocation}
+            locationNameOptions={locationNameOptions}
+            setFactionName={setFactionName}
+            factionNameOptions={factionNameOptions}
           />
 
           <h2>

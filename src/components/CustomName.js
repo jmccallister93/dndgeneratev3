@@ -261,7 +261,7 @@ const CustomName = (props) => {
       }
     }
 
-    //LocationNames
+    //Location Names
     if (props.tableName === "locationNames") {
       let f = Math.floor(Math.random() * 60);
       let firstName = [props.nameOptions[f].first_name];

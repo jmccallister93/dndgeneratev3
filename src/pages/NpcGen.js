@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import { supabase,  } from "../config/supabaseClient";
+import { supabase } from "../config/supabaseClient";
 import ClearButton from "../components/ClearButton";
 import GenerateButton from "../components/GenerateButton";
 import CustomDropDown from "../components/CustomDropDown";
@@ -27,12 +27,11 @@ const NpcGen = () => {
   const session = useContext(SessionContext);
   sessionStorage.setItem("lastUrl", window.location.href);
   const lastUrl = localStorage.getItem("lastUrl");
-if (lastUrl) {
-  window.location.href = lastUrl;
-}
-  
+  if (lastUrl) {
+    window.location.href = lastUrl;
+  }
 
-   const [isBasicActive, setIsBasicActive] = useState(false);
+  const [isBasicActive, setIsBasicActive] = useState(false);
   const [isDetailActive, setIsDetailActive] = useState(false);
   const [isHookActive, setIsHookActive] = useState(false);
   const [isStatsActive, setIsStatsActive] = useState(false);
@@ -164,6 +163,18 @@ if (lastUrl) {
 
   const [isInfoActive, setIsInfoActive] = useState(false);
 
+  const [hookNpc, setHookNpc] = useState("");
+  const [hookNpcs, setHookNpcs] = useState("");
+  const [hookNpcOptions, setHookNpcOptions] = useState("");
+
+  const [hookLocation, setHookLocation] = useState("");
+  const [hookLocations, setHookLocations] = useState("");
+  const [hookLocationOptions, setHookLocationOptions] = useState("");
+
+  const [hookFaction, setHookFaction] = useState("");
+  const [hookFactions, setHookFactions] = useState("");
+  const [hookFactionOptions, setHookFactionOptions] = useState("");
+
   // useEffect((tableName, setSingular, setPlural, setOptions) => {
   //   const fetchData = async () => {
   //     const { data: dataName, error: errorName } = await supabase
@@ -209,6 +220,89 @@ if (lastUrl) {
   const showInfo = (e) => {
     setIsInfoActive((current) => !current);
   };
+
+   //Hook NPC Names
+   useEffect(() => {
+    const fetchDataNpc = async () => {
+  const { data, errorName } = await supabase.from("names").select();
+  if (errorName) {
+    setFetchError("Could not fetch the data");
+    setHookNpc(null);
+    console.log(errorName);
+  }
+  if (data) {
+    setHookNpcs(data);
+    setFetchError(null);
+    setHookNpcOptions(
+      data.map((r) => ({
+        first_name: r.first_name,
+        epithet_a: r.epithet_a,
+        noun_a: r.noun_a,
+        epithet_b: r.epithet_b,
+        noun_b: r.noun_b,
+      }))
+    );
+  }
+};
+fetchDataNpc();
+}, []);
+
+//Hook Location Names
+useEffect(() => {
+const fetchDataLocation = async () => {
+  const { data, errorLocation } = await supabase
+    .from("locationNames")
+    .select();
+  if (errorLocation) {
+    setFetchError("Could not fetch the data");
+    setHookLocation(null);
+    console.log(errorLocation);
+  }
+  if (data) {
+    setHookLocations(data);
+    setFetchError(null);
+    setHookLocationOptions(
+      data.map((r) => ({
+        first_name: r.first_name,
+        epithet_a: r.epithet_a,
+        noun_a: r.noun_a,
+        epithet_b: r.epithet_b,
+        noun_b: r.noun_b,
+      }))
+    );
+  }
+};
+
+fetchDataLocation();
+}, []);
+
+//Hook Faction Names
+useEffect(() => {
+const fetchDataFaction = async () => {
+  const { data, errorLocation } = await supabase
+    .from("factionNames")
+    .select();
+  if (errorLocation) {
+    setFetchError("Could not fetch the data");
+    setHookFaction(null);
+    console.log(errorLocation);
+  }
+  if (data) {
+    setHookFaction(data);
+    setFetchError(null);
+    setHookFactionOptions(
+      data.map((r) => ({
+        first_name: r.first_name,
+        epithet_a: r.epithet_a,
+        noun_a: r.noun_a,
+        noun_b: r.noun_b,
+      }))
+    );
+  }
+};
+
+fetchDataFaction();
+}, []);
 
   //Function to set ability modifier based on ability score
   const setMod = (score) => {
@@ -479,7 +573,7 @@ if (lastUrl) {
                 setQuestType,
                 setAction,
               ]}
-              nameItem={[name]} 
+              nameItem={[name]}
               nameItemOptions={[nameOptions]}
               setNameItem={[setName]}
               statsItem={[str, dex, con, int, wis, cha]}
@@ -612,21 +706,9 @@ if (lastUrl) {
               )}
             </h1>
             <SectionRandom
-              value={[
-                race,
-                sex,
-                align,
-              ]}
-              valueOptions={[
-                raceOptions,
-                sexOptions,
-                alignOptions,
-              ]}
-              setValue={[
-                setRace,
-                setSex,
-                setAlign,
-              ]}
+              value={[race, sex, align]}
+              valueOptions={[raceOptions, sexOptions, alignOptions]}
+              setValue={[setRace, setSex, setAlign]}
               nameItem={[name]}
               nameItemOptions={[nameOptions]}
               setNameItem={[setName]}
@@ -635,7 +717,7 @@ if (lastUrl) {
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
-                tableName={"names"} 
+                tableName={"names"}
                 name={name}
                 setName={setName}
                 setNames={setNames}
@@ -1223,7 +1305,17 @@ if (lastUrl) {
           <h2>
             Hook{" "}
             <span className={style.minorText2}>
-              <RandomHookNpc type={questType} value={hook} setValue={setHook} />
+              <RandomHookNpc
+                type={questType}
+                value={hook}
+                setValue={setHook}
+                setNpcName={setHookNpc}
+                npcNameOptions={hookNpcOptions}
+                setLocationName={setHookLocation}
+                locationNameOptions={hookLocationOptions}
+                setFactionName={setHookFaction}
+                factionNameOptions={hookFactionOptions}
+              />
               {/* <SingleDisplayText value={hook} setNewValue={setHook} /> */}
             </span>
           </h2>
