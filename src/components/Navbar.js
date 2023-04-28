@@ -3,7 +3,7 @@ import { Link,  useLocation,  } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { supabase } from "../config/supabaseClient";
 import { SessionContext } from "../config/SessionContext";
-import d20 from "../assests/d20-icon.png";
+import d20 from "../assests/DnDGenLogo.png";
 
 const Navbar = (props) => {
   const session = useContext(SessionContext);

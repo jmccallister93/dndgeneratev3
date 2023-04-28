@@ -17,7 +17,7 @@ const Home = (props) => {
     "Manage your campaign and keep track of your campaign components!";
 
   const collectDescription =
-    "View your custom characters, monsters, items, and more!";
+    "View your custom NPCs, monsters, items, and any of your other creations!";
 
   const createButton = (
     <>
@@ -85,7 +85,7 @@ const Home = (props) => {
           platform can help you streamline your campaign management and create
           engaging, dynamic content.
         </p>
-        <div className={style.bottomTextImage}>
+        <div className={style.bottomTextImage}> 
           <p className={style.bottomText}>
             With our user-friendly interface and robust features, you can spend
             less time on the administrative aspects of your game and more time

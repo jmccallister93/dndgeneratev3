@@ -113,10 +113,6 @@ const CustomDataTable = (props) => {
     // eslint-disable-next-line 
   }, [props.list]);
 
-  useEffect(() => {
-    console.log(props.list)
-  }, [props.list])
-
   
   //JSX Dialog template
   const templateDatatable = (
