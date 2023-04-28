@@ -1,22 +1,22 @@
-import style from "../stylesheets/PageStyle.module.scss";
+import style from "../../stylesheets/PageStyle.module.scss";
 import { useContext, useEffect, useRef, useState } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import ClearButton from "../components/ClearButton";
-import GenerateButton from "../components/GenerateButton";
-import MultipleDisplay from "../components/MultipleDisplay";
-import CustomDataTable from "../components/CustomDataTable";
-import CustomDropdown from "../components/CustomDropDown";
-import ExportButtons from "../components/ExportButtons";
+import ClearButton from "../../components/ClearButton";
+import GenerateButton from "../../components/GenerateButton";
+import MultipleDisplay from "../../components/MultipleDisplay";
+import CustomDataTable from "../../components/CustomDataTable";
+import CustomDropdown from "../../components/CustomDropDown";
+import ExportButtons from "../../components/ExportButtons";
 import { Tooltip } from "primereact/tooltip";
-import InfoModal from "../components/InfoModal";
-import SectionRandom from "../components/SectionRandom";
-import NameDisplay from "../components/NameDisplay";
-import SingleDisplayText from "../components/SingleDisplayText";
-import { SessionContext } from "../config/SessionContext";
-import CustomDataTableMember from "../components/CustomDataTableMember";
-import CustomName from "../components/CustomName";
+import InfoModal from "../../components/InfoModal";
+import SectionRandom from "../../components/SectionRandom";
+import NameDisplay from "../../components/NameDisplay";
+import SingleDisplayText from "../../components/SingleDisplayText";
+import { SessionContext } from "../../config/SessionContext";
+import CustomDataTableMember from "../../components/CustomDataTableMember";
+import CustomName from "../../components/CustomName";
 import ns from "../../stylesheets/Note.module.scss";
 
 const OrganizationCreate = () => {

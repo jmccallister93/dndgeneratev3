@@ -1,23 +1,23 @@
-import style from "../stylesheets/PageStyle.module.scss";
+import style from "../../stylesheets/PageStyle.module.scss";
 import { useEffect, useRef, useState, useContext } from "react";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import GenerateButton from "../components/GenerateButton";
-import ClearButton from "../components/ClearButton";
-import SingleDisplayText from "../components/SingleDisplayText";
-import CustomDropDown from "../components/CustomDropDown";
-import CustomInputNumber from "../components/CustomInputNumber";
-import CustomDataTable from "../components/CustomDataTable";
-import MultipleDisplay from "../components/MultipleDisplay";
-import ExportButtons from "../components/ExportButtons";
+import GenerateButton from "../../components/GenerateButton";
+import ClearButton from "../../components/ClearButton";
+import SingleDisplayText from "../../components/SingleDisplayText";
+import CustomDropDown from "../../components/CustomDropDown";
+import CustomInputNumber from "../../components/CustomInputNumber";
+import CustomDataTable from "../../components/CustomDataTable";
+import MultipleDisplay from "../../components/MultipleDisplay";
+import ExportButtons from "../../components/ExportButtons";
 import { Tooltip } from "primereact/tooltip";
-import InfoModal from "../components/InfoModal";
-import SectionRandom from "../components/SectionRandom";
-import CustomName from "../components/CustomName";
-import NameDisplay from "../components/NameDisplay";
-import SingleDisplayNumber from "../components/SingleDisplayNumber";
-import { SessionContext } from "../config/SessionContext";
+import InfoModal from "../../components/InfoModal";
+import SectionRandom from "../../components/SectionRandom";
+import CustomName from "../../components/CustomName";
+import NameDisplay from "../../components/NameDisplay";
+import SingleDisplayNumber from "../../components/SingleDisplayNumber";
+import { SessionContext } from "../../config/SessionContext";
 import ns from "../../stylesheets/Note.module.scss";
 
 const LocationCreate = () => {
