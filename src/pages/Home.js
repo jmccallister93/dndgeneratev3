@@ -44,29 +44,31 @@ const Home = (props) => {
   );
 
   return (
-    <div className={style.homeWrapper}>
-      <div className={style.homeTop}>
-        <div className={style.homeHeader}>Welcome to DnD Generate</div>
-        <div className={style.homeSubHeader}>
-          A Dungeons and Dragons 5e Tool
+    <>
+      <div className={style.homeWrapper}>
+        <div className={style.homeTop}>
+          <div className={style.homeHeader}>Welcome to DnD Generate</div>
+          <div className={style.homeSubHeader}>
+            A Dungeons and Dragons 5e Tool
+          </div>
         </div>
-      </div>
-      <div className={style.homeCardWrapper}>
-        <BasicCard
-          title={"Generate"}
-          description={createDescription}
-          button={createButton}
-        />
-        <BasicCard
-          title={"Campaign Management"}
-          description={campDescription}
-          button={campButton}
-        />
-        <BasicCard
-          title={"Collections"}
-          description={collectDescription}
-          button={collectButton}
-        />
+        <div className={style.homeCardWrapper}>
+          <BasicCard
+            title={"Generate"}
+            description={createDescription}
+            button={createButton}
+          />
+          <BasicCard
+            title={"Campaign Management"}
+            description={campDescription}
+            button={campButton}
+          />
+          <BasicCard
+            title={"Collections"}
+            description={collectDescription}
+            button={collectButton}
+          />
+        </div>
       </div>
       <div className={style.homeBottom}>
         <div className={style.bottomHeader}>
@@ -85,7 +87,7 @@ const Home = (props) => {
           platform can help you streamline your campaign management and create
           engaging, dynamic content.
         </p>
-        <div className={style.bottomTextImage}> 
+        <div className={style.bottomTextImage}>
           <p className={style.bottomText}>
             With our user-friendly interface and robust features, you can spend
             less time on the administrative aspects of your game and more time
@@ -96,7 +98,7 @@ const Home = (props) => {
           <img className={style.sampleNPC} src={sampleNPC} alt="" />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
