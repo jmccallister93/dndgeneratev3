@@ -1,17 +1,8 @@
 $primary-light: #d6e4e5;
-// * {
-//   border: 1px solid red !important;
-// }
+$mobile-breakpoint: 768px;
+
 
 .homeWrapper {
-  // background-image: linear-gradient(
-  //     to left,
-  //     rgba(0, 0, 0, 0) 50%,
-  //     rgba(0, 0, 0, 1) 100%
-  //   ),
-  //   linear-gradient(to right, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
-  //   url("../assests/d20-red.jpg");
-  // background-repeat: no-repeat;
   background-color: $primary-light;
   height: 95.15vh;
   // width: 100vw;
@@ -119,5 +110,66 @@ $primary-light: #d6e4e5;
   justify-content: center;
   margin: 0;
   padding: 10rem;
-
 }
+
+@media screen and (max-width: $mobile-breakpoint) {
+  .homeTop{
+    padding-top: 5vh;
+  }
+
+  .homeWrapper {
+  height: auto;
+  // padding-top: 10vh;
+  padding-bottom: 10vh;
+  }
+  
+  .homeHeader {
+  font-size: 3rem;
+  padding-top: 5vh;
+  }
+  
+  .homeSubHeader {
+  font-size: 1.5rem;
+  padding-top: 2vh;
+  }
+  
+  .homeButton {
+  width: 60%;
+  font-size: 1.2rem;
+  margin: 2vh;
+  }
+  
+  .homeCardWrapper {
+  grid-template-columns: 1fr;
+  margin-bottom: 10vh;
+  }
+  
+  .homeCard {
+  margin-bottom: 5vh;
+  }
+  
+  .bottomHeader {
+  font-size: 2rem;
+  padding-top: 5vh;
+  }
+  
+  .bottomText {
+  font-size: 1rem;
+  padding-top: 5vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  }
+  
+  .sampleCampaign {
+  width: 80vw;
+  }
+  
+  .sampleNPC {
+  width: 60vw;
+  }
+  
+  .bottomTextImage {
+  padding: 5vh;
+  flex-direction: column;
+  }
+  }

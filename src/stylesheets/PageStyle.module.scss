@@ -1,3 +1,6 @@
+$mobile-breakpoint: 768px;
+
+
 $primary-grey: #313439;
 $secondary-grey: #d6e4e5;
 $header-color: #3e6d9c;
@@ -613,4 +616,55 @@ $btn-blue: rbg(0,123,255);
   text-align: center;
   border-radius: 10px;
   padding: 0.25rem;
+}
+
+
+@media only screen and (max-width: $mobile-breakpoint) {
+  .mainHeader {
+    font-size: 2rem;
+  }
+
+  .optionsWrapper {
+    align-items: center;
+    align-self: center;
+  }
+
+  .display {
+    width: 90%;
+  }
+
+  .createCardWrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .createCard,
+  .collectionCard {
+    width: 90%;
+  }
+
+  .modLayout {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .abilityScores {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .detesContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .formHeader {
+    font-size: 1.5rem;
+  }
+
+  .formError {
+    font-size: 0.8rem;
+  }
 }
