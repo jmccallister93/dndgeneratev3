@@ -23,9 +23,9 @@ const LocationGen = () => {
   const session = useContext(SessionContext);
   sessionStorage.setItem("lastUrl", window.location.href);
   const lastUrl = localStorage.getItem("lastUrl");
-if (lastUrl) {
-  window.location.href = lastUrl;
-}
+  if (lastUrl) {
+    window.location.href = lastUrl;
+  }
 
   const [isBasicActive, setIsBasicActive] = useState(false);
   const [isFeatureActive, setIsFeatureActive] = useState(false);
@@ -123,58 +123,58 @@ if (lastUrl) {
     setIsInfoActive((current) => !current);
   };
 
-    //Create location object to be exported
-    useEffect(() => {
-      const guildNames = selectedGuild.map((item) => item.name);
-      const guildString = guildNames.join(", ");
-      const eventNames = selectedEvent.map((item) => item.name);
-      const eventString = eventNames.join(", ");
-      const factionNames = selectedFaction.map((item) => item.name);
-      const factionString = factionNames.join(", ");
-      const npcNames = selectedNpc.map((item) => item.name);
-      const npcString = npcNames.join(", ");
-      const buildingNames = selectedBuilding.map((item) => item.name);
-      const buildingString = buildingNames.join(", ");
-      const districtNames = selectedDistrict.map((item) => item.name);
-      const districtString = districtNames.join(", ");
+  //Create location object to be exported
+  useEffect(() => {
+    const guildNames = selectedGuild.map((item) => item.name);
+    const guildString = guildNames.join(", ");
+    const eventNames = selectedEvent.map((item) => item.name);
+    const eventString = eventNames.join(", ");
+    const factionNames = selectedFaction.map((item) => item.name);
+    const factionString = factionNames.join(", ");
+    const npcNames = selectedNpc.map((item) => item.name);
+    const npcString = npcNames.join(", ");
+    const buildingNames = selectedBuilding.map((item) => item.name);
+    const buildingString = buildingNames.join(", ");
+    const districtNames = selectedDistrict.map((item) => item.name);
+    const districtString = districtNames.join(", ");
 
-      const location = {
-        name: cityName,
-        type: type,
-        size: size,
-        population: population,
-        atmosphere: atmosphere,
-        culture: culture,
-        terrain: terrain,
-        landmark: landmark,
-        govern: govern,
-        guild: guildString,
-        event: eventString,
-        faction: factionString,
-        npc: npcString,
-        building: buildingString,
-        district: districtString,
-        email: session?.user?.email,
-      };
-      setLocation(location);
-    }, [
-      cityName,
-      type,
-      size,
-      atmosphere,
-      population,
-      culture,
-      terrain,
-      landmark,
-      govern,
-      selectedGuild,
-      selectedFaction,
-      selectedEvent,
-      selectedNpc,
-      selectedDistrict,
-      selectedBuilding,
-      session,
-    ]);
+    const location = {
+      name: cityName,
+      type: type,
+      size: size,
+      population: population,
+      atmosphere: atmosphere,
+      culture: culture,
+      terrain: terrain,
+      landmark: landmark,
+      govern: govern,
+      guild: guildString,
+      event: eventString,
+      faction: factionString,
+      npc: npcString,
+      building: buildingString,
+      district: districtString,
+      email: session?.user?.email,
+    };
+    setLocation(location);
+  }, [
+    cityName,
+    type,
+    size,
+    atmosphere,
+    population,
+    culture,
+    terrain,
+    landmark,
+    govern,
+    selectedGuild,
+    selectedFaction,
+    selectedEvent,
+    selectedNpc,
+    selectedDistrict,
+    selectedBuilding,
+    session,
+  ]);
 
   //Info content
   const infoContent = (
@@ -206,6 +206,9 @@ if (lastUrl) {
         <div>
           <div className={style.btnWrapper}>
             <GenerateButton
+              locationName={cityName}
+              setLocationName={setCityName}
+              locationNameOptions={cityNameOptions}
               generateItems={[
                 type,
                 size,
@@ -257,7 +260,6 @@ if (lastUrl) {
                 setSelectedDistrict,
                 setSelectedBuilding,
               ]}
-              
               numberItem={[population]}
               setNumberItem={[setPopulation]}
               maxNumber={[100000]}
@@ -286,9 +288,12 @@ if (lastUrl) {
             />
             {/* Export Btns */}
             <h1>
-              Export
               <div className={style.exportBtns}>
-                <ExportButtons div={divRef} data={location} tableName={"DBlocation"}/>
+                <ExportButtons
+                  div={divRef}
+                  data={location}
+                  tableName={"DBlocation"}
+                />
               </div>
             </h1>
             {/* ToolTip */}
@@ -325,6 +330,9 @@ if (lastUrl) {
               )}
             </h1>
             <SectionRandom
+              locationName={[cityName]}
+              setLocationName={[setCityName]}
+              locationNameOptions={[cityNameOptions]}
               value={[type, size]}
               valueOptions={[typeOptions, sizeOptions]}
               setValue={[setType, setSize]}
@@ -337,7 +345,7 @@ if (lastUrl) {
           <div className={isBasicActive ? style.subsection : style.hidden}>
             <div>
               <CustomName
-                tableName={"names"}
+                tableName={"locationNames"}
                 name={cityName}
                 setName={setCityName}
                 setNames={setCityNames}
@@ -393,15 +401,8 @@ if (lastUrl) {
                 cultureOptions,
                 terrainOptions,
                 landmarkOptions,
-                
               ]}
-              setValue={[
-                setAtmosphere,
-                setCulture,
-                setTerrain,
-                setLandmark,
-                
-              ]}
+              setValue={[setAtmosphere, setCulture, setTerrain, setLandmark]}
             />
           </div>
           <div className={isFeatureActive ? style.subsection : style.hidden}>
@@ -554,29 +555,20 @@ if (lastUrl) {
             </div>
           </div>
           <div className={style.sectionOption}>
-          <h1 className={style.subHeader} onClick={showLayout}>
-            Layout{" "}
-            {isLayoutActive ? (
-              <i className="pi pi-chevron-down"></i>
-            ) : (
-              <i className="pi pi-chevron-right"></i>
-            )}
-          </h1>
-          <SectionRandom
-            selectedValue={[
-              selectedDistrict,
-              selectedBuilding,
-            ]}
-            setSelectedValue={[
-              setSelectedDistrict,
-              setSelectedBuilding,
-            ]}
-            selectedValueOptions={[
-              districtOptions,
-              buildingOptions,
-            ]}
-          />
-        </div>
+            <h1 className={style.subHeader} onClick={showLayout}>
+              Layout{" "}
+              {isLayoutActive ? (
+                <i className="pi pi-chevron-down"></i>
+              ) : (
+                <i className="pi pi-chevron-right"></i>
+              )}
+            </h1>
+            <SectionRandom
+              selectedValue={[selectedDistrict, selectedBuilding]}
+              setSelectedValue={[setSelectedDistrict, setSelectedBuilding]}
+              selectedValueOptions={[districtOptions, buildingOptions]}
+            />
+          </div>
           <div className={isLayoutActive ? style.subsection : style.hidden}>
             <div>
               <CustomDataTable
@@ -613,18 +605,10 @@ if (lastUrl) {
         <div ref={divRef} className={style.display}>
           <NameDisplay value={cityName} setNewValue={setCityName} />
           <h2>
-            Type{" "}
-            <SingleDisplayText
-              value={type}
-              setNewValue={setType}
-            />
+            Type <SingleDisplayText value={type} setNewValue={setType} />
           </h2>
           <h2>
-            Size{" "}
-            <SingleDisplayText
-              value={size}
-              setNewValue={setSize}
-            />
+            Size <SingleDisplayText value={size} setNewValue={setSize} />
           </h2>
           <h2>
             Population{" "}
@@ -633,42 +617,27 @@ if (lastUrl) {
               setNewValue={setPopulation}
             />
           </h2>
-          <hr className={style.lineBreak}/>
+          <hr className={style.lineBreak} />
           <h2>
             Atmosphere{" "}
-            <SingleDisplayText
-              value={atmosphere}
-              setNewValue={setAtmosphere}
-            />
+            <SingleDisplayText value={atmosphere} setNewValue={setAtmosphere} />
           </h2>
           <h2>
             Culture{" "}
-            <SingleDisplayText
-              value={culture}
-              setNewValue={setCulture}
-            />
+            <SingleDisplayText value={culture} setNewValue={setCulture} />
           </h2>
           <h2>
             Terrain{" "}
-            <SingleDisplayText
-              value={terrain}
-              setNewValue={setTerrain}
-            />
+            <SingleDisplayText value={terrain} setNewValue={setTerrain} />
           </h2>
           <h2>
             Landmark{" "}
-            <SingleDisplayText
-              value={landmark}
-              setNewValue={setLandmark}
-            />
+            <SingleDisplayText value={landmark} setNewValue={setLandmark} />
           </h2>
-          <hr className={style.lineBreak}/>
+          <hr className={style.lineBreak} />
           <h2>
             Government{" "}
-            <SingleDisplayText
-              value={govern}
-              setNewValue={setGoverns}
-            />
+            <SingleDisplayText value={govern} setNewValue={setGoverns} />
           </h2>
           <h2>
             Guilds{" "}
@@ -710,7 +679,7 @@ if (lastUrl) {
               />
             </span>
           </h2>
-          <hr className={style.lineBreak}/>
+          <hr className={style.lineBreak} />
           <h2>
             Districts{" "}
             <span className={style.minorText2}>

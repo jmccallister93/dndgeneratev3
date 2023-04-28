@@ -1,6 +1,6 @@
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import { supabase,  } from "../config/supabaseClient";
+import { supabase } from "../config/supabaseClient";
 import style from "../stylesheets/PageStyle.module.scss";
 
 const CustomName = (props) => {
@@ -35,7 +35,7 @@ const CustomName = (props) => {
               epithet_a: r.epithet_a,
               noun_a: r.noun_a,
               epithet_b: r.epithet_b,
-              noun_b: r.noun_b, 
+              noun_b: r.noun_b,
             }))
           );
         }
@@ -71,9 +71,8 @@ const CustomName = (props) => {
           setFetchError(null);
           props.setNameOptions(
             data.map((r) => ({
-              adjective: r.adjective, 
+              adjective: r.adjective,
               noun: r.noun,
-              
             }))
           );
         }
@@ -98,15 +97,38 @@ const CustomName = (props) => {
           );
         }
       }
+
+      if (props.tableName === "locationNames") {
+        const { data, error } = await supabase.from(props.tableName).select();
+        if (error) {
+          setFetchError("Could not fetch the data");
+          props.setName(null);
+          console.log(error);
+        }
+        if (data) {
+          props.setNames(data);
+          setFetchError(null);
+          props.setNameOptions(
+            data.map((r) => ({
+              first_name: r.first_name,
+              epithet_a: r.epithet_a,
+              noun_a: r.noun_a,
+              epithet_b: r.epithet_b,
+              noun_b: r.noun_b,
+            }))
+          );
+        }
+      }
     };
+
     fetchData();
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, []);
 
   const onRandomName = (e) => {
     //NPC Name
     if (props.tableName === "names") {
-      console.log("fires")
+      
       let f = Math.floor(Math.random() * 208);
       let firstName = [props.nameOptions[f].first_name];
       let eA = Math.floor(Math.random() * 208);
@@ -174,7 +196,7 @@ const CustomName = (props) => {
       let a = Math.floor(Math.random() * 25);
       let adjective = [props.nameOptions[a].adjective];
       let n = Math.floor(Math.random() * 25);
-      let noun = [props.nameOptions[n].noun]; 
+      let noun = [props.nameOptions[n].noun];
       let a2 = Math.floor(Math.random() * 25);
       let adjective2 = [props.nameOptions[a2].adjective];
 
@@ -194,7 +216,7 @@ const CustomName = (props) => {
       let f = Math.floor(Math.random() * 33);
       let first_name = [props.nameOptions[f].first_name];
       let e = Math.floor(Math.random() * 10);
-      let epithet_a = [props.nameOptions[e].epithet_a]; 
+      let epithet_a = [props.nameOptions[e].epithet_a];
       let na = Math.floor(Math.random() * 125);
       let noun_a = [props.nameOptions[na].noun_a];
       let nb = Math.floor(Math.random() * 185);
@@ -203,15 +225,47 @@ const CustomName = (props) => {
       let random = Math.round(Math.random() * 4);
 
       if (random === 0) {
-        props.setName(first_name + " " + epithet_a + " " + noun_a + " " + noun_b);
+        props.setName(
+          first_name + " " + epithet_a + " " + noun_a + " " + noun_b
+        );
       } else if (random === 1) {
         props.setName(first_name + " " + epithet_a + " " + noun_b);
       } else if (random === 2) {
-        props.setName(first_name + " " + noun_b );
+        props.setName(first_name + " " + noun_b);
       } else if (random === 3) {
         props.setName(noun_a + " " + noun_b);
       } else {
-        props.setName(noun_b + " " + epithet_a + " " + noun_a); 
+        props.setName(noun_b + " " + epithet_a + " " + noun_a);
+      }
+    }
+
+    //LocationNames
+    if (props.tableName === "locationNames") {
+      let f = Math.floor(Math.random() * 60);
+      let firstName = [props.nameOptions[f].first_name];
+      let eA = Math.floor(Math.random() * 60);
+      let epiphet_a = [props.nameOptions[eA].epithet_a];
+      let nA = Math.floor(Math.random() * 60);
+      let noun_a = [props.nameOptions[nA].noun_a];
+      let nB = Math.floor(Math.random() * 60);
+      let noun_b = [props.nameOptions[nB].noun_b];
+
+      let random = Math.round(Math.random() * 6);
+
+      if (random === 0) {
+        props.setName(firstName + " " + noun_a);
+      } else if (random === 1) {
+        props.setName(firstName+ " " + noun_b);
+      } else if (random === 2) {
+        props.setName(firstName + " "  + noun_a + " " + noun_b);
+      } else if (random === 3) {
+        props.setName(epiphet_a + " "  + noun_a);
+      } else if (random === 4) {
+        props.setName(epiphet_a + " " + noun_a + " " + noun_b);
+      } else if (random === 5) {
+        props.setName(epiphet_a + " " + firstName);
+      } else if(random === 6) {
+        props.setName(noun_a + " " + noun_b);
       }
     }
   };

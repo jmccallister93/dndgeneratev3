@@ -74,7 +74,7 @@ const ResetPassword = (props) => {
           <h3 className={style.formHeader}>Your password has been reset.</h3>
         ) : accessToken ? (
           <form className={style.form} onSubmit={handlePasswordReset}>
-            <h3 className={style.formHeader}>Reset Password for {email}</h3>
+            <h3 className={style.formHeader}>Reset Password for {session?.user?.email}</h3>
             <input
               className={style.formInput}
               type="password"

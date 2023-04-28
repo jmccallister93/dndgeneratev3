@@ -195,6 +195,7 @@ const GenerateButton = (props) => {
     }
   };
 
+  //Monster Name Generate
   const monsterNameGenerate = (e) => {
     if (props.monsterName) {
       for (let i = 0; i < props.monsterName.length; i++) {
@@ -306,6 +307,39 @@ const GenerateButton = (props) => {
       }
     }
   };
+
+  //Location Name Generate
+  const locationNameGenerate = (e) => {
+    if (props.nameItem) {
+      for (let i = 0; i < props.nameItem.length; i++) {
+        if (props.nameItem[i] === "" || props.nameItem[i] === undefined) {
+          let f = Math.floor(Math.random() * 208);
+          let firstName = [props.nameItemOptions[i][f].first_name];
+          let eA = Math.floor(Math.random() * 208);
+          let epiphet_a = [props.nameItemOptions[i][eA].epithet_a];
+          let eB = Math.floor(Math.random() * 208);
+          let epiphet_b = [props.nameItemOptions[i][eB].epithet_b];
+          let nA = Math.floor(Math.random() * 208);
+          let noun_a = [props.nameItemOptions[i][nA].noun_a];
+          let nB = Math.floor(Math.random() * 208);
+          let noun_b = [props.nameItemOptions[i][nB].noun_b];
+
+          let random = Math.floor(Math.random() * 3);
+
+          if (random === 0) {
+            props.setNameItem[i](firstName + " " + epiphet_a + noun_a);
+          } else if (random === 1) {
+            props.setNameItem[i](firstName + " " + epiphet_a + noun_b);
+          } else if (random === 2) {
+            props.setNameItem[i](firstName + " " + epiphet_b + noun_a);
+          } else if (random === 3) {
+            props.setNnameItem[i](firstName + " " + epiphet_b + noun_b);
+          }
+        }
+      }
+    }
+  };
+
   //Height Age Weight
   const setHeightAgeWeight = (e) => {
     if (props.generateItems[0] === "Aasimar") {
@@ -698,6 +732,7 @@ const GenerateButton = (props) => {
     senseGenerate();
     pantheonNameGenerate();
     factionNameGenerate();
+    locationNameGenerate();
   };
 
   return (
