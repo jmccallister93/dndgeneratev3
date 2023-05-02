@@ -68,6 +68,10 @@ const Navbar = (props) => {
     </button>
   );
 
+  useEffect(() => {
+    console.log(isMobile);
+  }, [isMobile]);
+
   return (
     <div className={style.navbarWrapper}>
       <div className={style.navbarLogoWrapper}>
@@ -140,7 +144,6 @@ const Navbar = (props) => {
                   <Link to="/login" session={session}>
                     <button className={style.navbarLoginBtn}>Login</button>
                   </Link>
-
                   <p>or</p>
                   <Link to="/signup" session={session}>
                     <button className={style.navbarLoginBtn}>Signup</button>
@@ -152,31 +155,33 @@ const Navbar = (props) => {
         </div>
       )}
 
-      {session  ? (
-        
-        <div className={style.navbarLoginWrapper}>
-          <div className={style.navbarEmail}>{session.user.email}</div>
-
-          <div className={style.navbarBtnWrapper}>
-            <button className={style.navbarLoginBtn} onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div className={style.navbarLoginWrapper}>
-          <div className={style.navbarBtnWrapper}>
-            <Link to="/login" session={session}>
-              <button className={style.navbarLoginBtn}>Login</button>
-            </Link>
-
-            <p>or</p>
-            <Link to="/signup" session={session}>
-              <button className={style.navbarLoginBtn}>Signup</button>
-            </Link>
-          </div>
-        </div>
-      )}
+      {/* Desktop rendering */}
+      {!isMobile ? (
+        <>
+          {session ? (
+            <div className={style.navbarLoginWrapper}>
+              <div className={style.navbarEmail}>{session.user.email}</div>
+              <div className={style.navbarBtnWrapper}>
+                <button className={style.navbarLoginBtn} onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className={style.navbarLoginWrapper}>
+              <div className={style.navbarBtnWrapper}>
+                <Link to="/login" session={session}>
+                  <button className={style.navbarLoginBtn}>Login</button>
+                </Link>
+                <p>or</p>
+                <Link to="/signup" session={session}>
+                  <button className={style.navbarLoginBtn}>Signup</button>
+                </Link>
+              </div>
+            </div>
+          )}
+        </>
+      ) : null}
     </div>
   );
 };
