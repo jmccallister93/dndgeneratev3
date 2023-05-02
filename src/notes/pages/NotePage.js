@@ -35,7 +35,7 @@ function NotePage(props) {
   sessionStorage.setItem("lastUrl", window.location.href);
 
   //Media Query
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1285);
 
   //Get Table Names
   useEffect(() => {
@@ -573,7 +573,7 @@ function NotePage(props) {
   useEffect(() => {
     // Update isMobile whenever the window size changes
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1285);
     };
     window.addEventListener("resize", handleResize);
 
