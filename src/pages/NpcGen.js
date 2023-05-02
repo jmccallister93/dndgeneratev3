@@ -513,7 +513,7 @@ fetchDataFaction();
       <div className={style.topHeader}>
         <h1 className={style.mainHeader}>NPC Generator</h1>
         <div className={style.topWrapper}>
-          <div className={style.btnWrapper}>
+          <div className={style.btnWrapper}> 
             {/* Generate Clear Btns */}
             <GenerateButton
               generateItems={[

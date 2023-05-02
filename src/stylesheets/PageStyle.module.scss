@@ -11,7 +11,7 @@ $btn-blue: rbg(0,123,255);
 .mainWrapper {
   background-color: $primary-grey;
   position: absolute;
-  top: 95px;
+  top: 8rem;
   bottom: 0;
   left: 0;
   right: 0;
@@ -632,6 +632,7 @@ $btn-blue: rbg(0,123,255);
 
   .display {
     width: 90%;
+    margin-bottom: 1rem;
   }
 
   .createCardWrapper {
@@ -672,5 +673,51 @@ $btn-blue: rbg(0,123,255);
 
   .formError {
     font-size: 0.8rem;
+  }
+
+  .mainWrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .topWrapper{
+    // width: 90vw;
+   
+  }
+
+  .btnWrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .btnWrapper > * {
+    margin-bottom: 0.5rem;
+  }
+
+  .body{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .optionsWrapper{
+    margin-bottom: 1rem;
+    width: 90%;
+  }
+
+  .subHeader{
+    font-size: 1.5rem;
+  }
+
+
+  .lineBreak{
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 75vw solid $display-red;
   }
 }

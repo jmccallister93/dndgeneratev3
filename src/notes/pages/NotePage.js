@@ -32,8 +32,10 @@ function NotePage(props) {
 
   const [dbTable, setDbTable] = useState("");
 
-
   sessionStorage.setItem("lastUrl", window.location.href);
+
+  //Media Query
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   //Get Table Names
   useEffect(() => {
@@ -105,7 +107,7 @@ function NotePage(props) {
   //Update Note from NoteText
   const updateNote = async (noteText) => {
     try {
-      // eslint-disable-next-line 
+      // eslint-disable-next-line
       const response = await supabase
         .from(dbTable)
         .update({ notes: noteText })
@@ -120,7 +122,7 @@ function NotePage(props) {
   //Update Property from Property Value
   const updateSelectedNode = async (updatedNode) => {
     try {
-      // eslint-disable-next-line 
+      // eslint-disable-next-line
       const response = await supabase
         .from(dbTable)
         .update(updatedNode)
@@ -136,7 +138,7 @@ function NotePage(props) {
   //Delete Node
   const deleteSelectedNode = async () => {
     try {
-      // eslint-disable-next-line 
+      // eslint-disable-next-line
       const response = await supabase
         .from(dbTable)
         .delete()
@@ -567,58 +569,85 @@ function NotePage(props) {
     handleSelectedNode();
   }, [handleSelectedNode]);
 
+  //Media UseEffect
+  useEffect(() => {
+    // Update isMobile whenever the window size changes
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className={style.mainWrapper}>
-      {session === null ? (
+      {!isMobile ? (
         <>
-          <p className={style.loginMessage}>
-            Please{" "}
-            <Link to="/login" className={style.loginButtonText}>
-              Login
-            </Link>{" "}
-            to continue to the Campaign Page.
-          </p>
-          {/* <p className={style.loginMessage}>
+          {session === null ? (
+            <>
+              <p className={style.loginMessage}>
+                Please{" "}
+                <Link to="/login" className={style.loginButtonText}>
+                  Login
+                </Link>{" "}
+                to continue to the Campaign Page.
+              </p>
+              {/* <p className={style.loginMessage}>
             Logging in will redirect you to the Home Page.
           </p> */}
+            </>
+          ) : (
+            <>
+              <div className={style.topHeader}>
+                <h1 className={style.mainHeader}>Campaign Notes</h1>
+              </div>
+              <div className={ns.grid2}>
+                <NoteTree
+                  location={locationDetails}
+                  npc={npcDetails}
+                  organization={organizationDetails}
+                  quest={questDetails}
+                  item={itemDetails}
+                  monster={monsterDetails}
+                  pantheon={pantheonDetails}
+                  villain={villainDetails}
+                  selectedNode={selectedNode}
+                  setSelectedId={setSelectedId}
+                  selectedId={selectedId}
+                  setSelectedName={setSelectedName}
+                  selectedName={selectedName}
+                  deleteSelectedNode={deleteSelectedNode}
+                  setShowPopup={setShowPopup}
+                />
+                <Note
+                  location={locationDetails}
+                  npc={npcDetails}
+                  organization={organizationDetails}
+                  quest={questDetails}
+                  item={itemDetails}
+                  monster={monsterDetails}
+                  selectedNode={selectedNode}
+                  setSelectedNode={setSelectedNode}
+                  updateNote={updateNote}
+                  updateSelectedNode={updateSelectedNode}
+                  setPropertyValue={setPropertyValue}
+                />
+              </div>
+            </>
+          )}
         </>
       ) : (
         <>
-          <div className={style.topHeader}>
-            <h1 className={style.mainHeader}>Campaign Notes</h1>
-          </div>
-          <div className={ns.grid2}>
-            <NoteTree
-              location={locationDetails}
-              npc={npcDetails}
-              organization={organizationDetails}
-              quest={questDetails}
-              item={itemDetails}
-              monster={monsterDetails}
-              pantheon={pantheonDetails}
-              villain={villainDetails}
-              selectedNode={selectedNode}
-              setSelectedId={setSelectedId}
-              selectedId={selectedId}
-              setSelectedName={setSelectedName}
-              selectedName={selectedName}
-              deleteSelectedNode={deleteSelectedNode}
-              setShowPopup={setShowPopup}
-            />
-            <Note
-              location={locationDetails}
-              npc={npcDetails}
-              organization={organizationDetails}
-              quest={questDetails}
-              item={itemDetails}
-              monster={monsterDetails}
-              selectedNode={selectedNode}
-              setSelectedNode={setSelectedNode}
-              updateNote={updateNote}
-              updateSelectedNode={updateSelectedNode}
-              setPropertyValue={setPropertyValue}
-            />
-          </div>
+          <p className={style.loginMessage}>
+            Unfortunately, Campaign Management is only supported on Desktop
+            Version of the app.
+          </p>
+          <p className={style.loginMessage}>
+            {" "}
+            Please visit us on a Desktop to use this feature.
+          </p>
         </>
       )}
     </div>

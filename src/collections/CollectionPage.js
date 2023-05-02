@@ -739,7 +739,7 @@ const CollectionPage = () => {
   );
 
   return (
-    <div className={style.collectionWrapper}>
+    <div className={ps.mainWrapper}>
       
       {session === null ? (
        <>
