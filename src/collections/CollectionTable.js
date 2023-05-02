@@ -20,7 +20,7 @@ const CollectionTable = (props) => {
 
   return (
     <>
-      <Card >
+      <div className={style.collectionCard}>
         <h1 onClick={setPropActive} className={style.collectionTitle}>
           {props.collectionTitle} <i className="pi pi-chevron-down"></i>
         </h1>
@@ -35,7 +35,7 @@ const CollectionTable = (props) => {
             </p>
           </>
         ))}
-      </Card>
+      </div>
       {isItemActive === true ? (
         <CollectionItem
           visible={isItemActive}

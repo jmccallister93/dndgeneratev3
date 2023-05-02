@@ -10,7 +10,7 @@ import { supabase } from "../config/supabaseClient";
 const CollectionPage = () => {
   const session = useContext(SessionContext);
 
-  const [, setFetchError] = useState(null);
+  const [, setFetchError] = useState(null); 
 
   const [locationDetails, setLocationDetails] = useState([]);
   const [npcDetails, setNpcDetails] = useState([]);
@@ -650,100 +650,92 @@ const CollectionPage = () => {
 
   //Create Cards
   const cardNpc = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onNpcClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         NPC's <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your NPCs!</p>
-    </Card>
+    </div>
   );
   const cardLocation = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onLocationClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         Locations <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Locations!</p>
-    </Card>
+    </div>
   );
   const cardQuest = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onQuestClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         Quests <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Quests!</p>
-    </Card>
+    </div>
   );
   const cardOrganization = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onOrganizationClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         Organizations <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Organizations!</p>
-    </Card>
+    </div>
   );
   const cardMonster = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onMonsterClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         Monsters <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Monsters!</p>
-    </Card>
+    </div>
   );
   const cardItem = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onItemClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         Items <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Items!</p>
-    </Card>
+    </div>
   );
   const cardPantheon = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onPantheonClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         Pantheons <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Pantheons!</p>
-    </Card>
+    </div>
   );
   const cardVillain = (
-    <Card
-      className={style.collectionCard}
+    <div
+      className={ps.collectionCard}
       onClick={onVillainClick}
-      style={{ borderRadius: "10px" }}
     >
       <h3>
         Villains <i className="pi pi-chevron-right"></i>
       </h3>
       <p>Collection of all your Villains!</p>
-    </Card>
+    </div>
   );
 
   return (
@@ -769,7 +761,7 @@ const CollectionPage = () => {
             <CollectionTable
               data={npcDetails}
               active={setIsNpcActive}
-              collectionTitle={"NPC"}
+              collectionTitle={"NPC's"}
               isItemActive={isItemActive}
               setIsItemActive={setIsItemActive}
             />

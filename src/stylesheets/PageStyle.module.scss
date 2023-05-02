@@ -452,6 +452,7 @@ $btn-blue: rbg(0,123,255);
   border-radius: 1rem;
   padding: 1rem;
   transition: 0.3s;
+  background-color: white;
   & h3 {
     font-size: 2rem;
   }
@@ -635,11 +636,16 @@ $btn-blue: rbg(0,123,255);
 
   .createCardWrapper {
     grid-template-columns: 1fr;
+    justify-content: center;
+    align-content: center;
+    padding-left: 10vw;
   }
 
   .createCard,
   .collectionCard {
     width: 90%;
+    justify-self: center;
+    align-self: center;
   }
 
   .modLayout {

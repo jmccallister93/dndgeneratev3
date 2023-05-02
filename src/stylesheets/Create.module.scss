@@ -1,5 +1,7 @@
 $primary-grey: #393E46;
 $secondary-grey: #d6e4e5;
+$mobile-breakpoint: 768px;
+
 
 .createWrapper {
   background: linear-gradient(135deg, $primary-grey 25%, white);
@@ -48,4 +50,9 @@ $secondary-grey: #d6e4e5;
 .createLink{
     color: black;
     text-decoration: none;
+
+    @media (max-width: $mobile-breakpoint) {
+      padding-left: 20px;
+    }
+
 }

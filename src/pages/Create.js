@@ -4,7 +4,7 @@ import style from "../stylesheets/PageStyle.module.scss";
 
 const Create = () => {
   const cardNpcGen = (
-    <Card className={style.createCard}>
+    <Card className={style.createCard}> 
       <h3>NPC Generator</h3>
       <p>
         Generate NPC's with the click of a button or customize and hand pick
