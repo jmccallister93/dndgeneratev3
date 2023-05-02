@@ -15,13 +15,13 @@ const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   //Meida Query
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1285);
 
   //Sets mobile
   useEffect(() => {
     // Update isMobile whenever the window size changes
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1285);
     };
     window.addEventListener("resize", handleResize);
 
