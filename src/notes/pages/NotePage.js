@@ -640,11 +640,11 @@ function NotePage(props) {
         </>
       ) : (
         <>
-          <p className={style.loginMessage}>
+          <p className={style.desktopMessage}>
             Unfortunately, Campaign Management is only supported on Desktop
             Version of the app.
           </p>
-          <p className={style.loginMessage}>
+          <p className={style.desktopMessage}>
             {" "}
             Please visit us on a Desktop to use this feature.
           </p>
