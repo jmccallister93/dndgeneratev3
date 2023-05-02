@@ -17,6 +17,7 @@ const Navbar = (props) => {
   //Meida Query
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  //Sets mobile
   useEffect(() => {
     // Update isMobile whenever the window size changes
     const handleResize = () => {
@@ -28,13 +29,27 @@ const Navbar = (props) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  //Set logo depending on ismobile
   useEffect(() => {
     if (isMobile) {
       setLogo(d20);
     } else {
       setLogo(d20Text);
     }
-  }, [isMobile]);
+
+    // Close the menu if the click occurred outside of the menu
+    const handleDocumentClick = (event) => {
+      if (
+        isOpen &&
+        !event.target.closest(`.${style.navbarDropdown}`) &&
+        !event.target.closest(`.${style.navbarHamburger}`)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, [isMobile, isOpen]);
 
   //Set location and redirect path variables
   const [, setRedirectPath] = useState(localStorage.getItem("redirectPath"));
@@ -67,10 +82,6 @@ const Navbar = (props) => {
       <span></span>
     </button>
   );
-
-  useEffect(() => {
-    console.log(isMobile);
-  }, [isMobile]);
 
   return (
     <div className={style.navbarWrapper}>
