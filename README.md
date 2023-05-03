@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Visit for live version of site:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://dndgenerate.netlify.app/
 
 ## Available Scripts
 
